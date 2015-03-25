@@ -1575,6 +1575,12 @@ namespace FortnoxAPILibrary
 			}
 		}
 
+        /// <remarks/>
+        public string HouseWorkHoursToReport{ get; set; }
+
+        /// <remarks/>
+        public string HouseWorkType { get; set; }
+
 	    /// <remarks/>
 	    [ReadOnly(true)]
 	    public string NoxFinans
