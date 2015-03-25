@@ -259,6 +259,10 @@ namespace FortnoxAPILibrary
 			}
 		}
 
+        /// <remarks/>
+        public string HouseWorkType { get; set; }
+
+
 		/// <remarks/>
 		public string Manufacturer
 		{
