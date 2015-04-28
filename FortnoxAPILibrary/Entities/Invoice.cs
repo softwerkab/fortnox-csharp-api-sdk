@@ -599,7 +599,7 @@ namespace FortnoxAPILibrary
 			}
 		}
 
-        /// <summary>This field is Read-Only in Fortnox</summary>
+        /// <remarks/>
         public string EUQuarterlyReport
         {
             get
