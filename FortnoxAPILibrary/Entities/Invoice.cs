@@ -599,8 +599,7 @@ namespace FortnoxAPILibrary
 			}
 		}
 
-        /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
+        /// <remarks/>
         public string EUQuarterlyReport
         {
             get
