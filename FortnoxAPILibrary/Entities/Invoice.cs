@@ -682,6 +682,14 @@ namespace FortnoxAPILibrary
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly(true)]
+        public string InvoicePeriodStart { get; set; }
+
+        /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly(true)]
+        public string InvoicePeriodEnd { get; set; }
+
+        /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly(true)]
         public string InvoiceReference { get; set; }
 
 		/// <remarks/>
