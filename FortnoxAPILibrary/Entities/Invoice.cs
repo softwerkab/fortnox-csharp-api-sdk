@@ -600,7 +600,6 @@ namespace FortnoxAPILibrary
 		}
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
         public string EUQuarterlyReport
         {
             get
