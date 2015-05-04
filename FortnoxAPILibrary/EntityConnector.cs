@@ -98,6 +98,8 @@ namespace FortnoxAPILibrary
 
             ResetProperties(entity);
 
+            AddCustomParameters();
+
             requestUriString = AddParameters(requestUriString);
 
             base.Method = "POST";
@@ -116,6 +118,8 @@ namespace FortnoxAPILibrary
             string requestUriString = this.GetUrl(searchValue);
 
             ResetProperties(entity);
+
+            AddCustomParameters();
 
             requestUriString = AddParameters(requestUriString);
 
@@ -355,6 +359,8 @@ namespace FortnoxAPILibrary
 
         private static void ResetProperties(object obj, IEnumerable<PropertyInfo> properties)
         {
+            properties = properties.Where(p => !p.PropertyType.IsEnum);
+
             foreach (PropertyInfo propertyInfo in properties)
             {
                 var a = from aa in propertyInfo.GetCustomAttributes(true)
