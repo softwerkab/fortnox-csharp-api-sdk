@@ -197,8 +197,9 @@ namespace FortnoxAPILibraryDemo
    
             if (customerConnector.HasError) 
             { 
-               Console.WriteLine(customerConnector.Error.Message);  }
+               Console.WriteLine(customerConnector.Error.Message);
             }
+         }
          catch (Exception ex) 
          { 
             Console.WriteLine(ex.Message); 
