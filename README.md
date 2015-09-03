@@ -186,18 +186,19 @@ namespace FortnoxAPILibraryDemo
    class Program 
    { 
       static void Main(string[] args) 
-   { 
-      ConnectionCredentials.AccessToken = "{Generated GUID}"; 
-      ConnectionCredentials.ClientSecret = "{Generated alphanumeric string}"; 
-
-      try 
       { 
-         CustomerConnector customerConnector = new CustomerConnector(); 
-         Customer customer = customerConnector.Get("123"); 
+         ConnectionCredentials.AccessToken = "{Generated GUID}"; 
+         ConnectionCredentials.ClientSecret = "{Generated alphanumeric string}"; 
 
-         if (customerConnector.HasError) 
+         try 
          { 
-            Console.WriteLine(customerConnector.Error.Message);  }
+            CustomerConnector customerConnector = new CustomerConnector(); 
+            Customer customer = customerConnector.Get("123"); 
+   
+            if (customerConnector.HasError) 
+            { 
+               Console.WriteLine(customerConnector.Error.Message);
+            }
          }
          catch (Exception ex) 
          { 
