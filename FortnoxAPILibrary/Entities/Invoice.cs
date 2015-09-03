@@ -178,6 +178,8 @@ namespace FortnoxAPILibrary
 
 		private string urlTaxReductionListField;
 
+        private string noxFinansField;
+
         /// <remarks/>
         public Invoice()
         {
@@ -1204,6 +1206,17 @@ namespace FortnoxAPILibrary
 				this.urlTaxReductionListField = value;
 			}
 		}
+
+        /// <remarks/>		
+        [ReadOnly(true)]
+        public string NoxFinans {
+            get {
+                return noxFinansField;
+            }
+            set {
+                noxFinansField = value;
+            }
+        }
     }
 
 	/// <remarks/>
@@ -1448,8 +1461,7 @@ namespace FortnoxAPILibrary
 
 		private string vATField;
 
-	    private string noxFinansField;
-
+	  
 	    /// <remarks/>
 		public string AccountNumber
 		{
@@ -1588,20 +1600,7 @@ namespace FortnoxAPILibrary
         /// <remarks/>
         public string HouseWorkType { get; set; }
 
-	    /// <remarks/>
-	    [ReadOnly(true)]
-	    public string NoxFinans
-	    {
-	        get
-	        {
-	            return noxFinansField;
-	        }
-	        set
-	        {
-	            noxFinansField = value;
-	        }
-	    }
-
+	   
 	    /// <remarks/>
 	    public string Price
 		{
