@@ -48,6 +48,8 @@ namespace FortnoxAPILibrary
 
 		private string commentsField;
 
+        private string contractreferenceField;
+
 		private string contributionPercentField;
 
 		private string contributionValueField;
@@ -320,6 +322,16 @@ namespace FortnoxAPILibrary
 				this.commentsField = value;
 			}
 		}
+
+        /// <remarks/>
+        public string ContractReference {
+            get {
+                return this.contractreferenceField;
+            }
+            set {
+                this.contractreferenceField = value;
+            }
+        }
 
 		/// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly(true)]
