@@ -184,7 +184,8 @@ namespace FortnoxAPILibrary
 
             if (this.LastModified != DateTime.MinValue)
             {
-                this.Parameters.Add("lastmodified", this.LastModified.ToString());
+                
+                this.Parameters.Add("lastmodified", this.LastModified.ToString("yyyy-MM-dd HH:mm:ss"));
             }
 
             if (this.SortByRealValue != null)
