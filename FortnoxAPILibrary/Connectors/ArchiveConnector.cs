@@ -115,18 +115,30 @@ namespace FortnoxAPILibrary.Connectors
 		///<param name="folderId">The folderId in Fortnox archive to save the file</param>
 		///<returns>Information of the uploaded file</returns>
 		public File UploadFile(string localPath, string folderId = "")
+		{
+		    return UploadFile(System.IO.File.ReadAllBytes(localPath), System.IO.Path.GetFileName(localPath), folderId);
+		}
+
+	    /// <summary>
+	    /// Uploads a file to Fortnox
+	    /// </summary>
+	    /// <param name="fileContents">The contents of the file to upload</param>
+	    /// <param name="fileName">The file name of the file to upload</param>
+	    /// <param name="folderId">The folderId in Fortnox archive to save the file</param>
+	    /// <returns>Information of the uploaded file</returns>
+	    public File UploadFile(byte[] fileContents, string fileName, string folderId = "")
         {
             base.Resource = "archive";
 
-			return base.BaseUploadFile(localPath, folderId);
-		}
+            return base.BaseUploadFile(fileContents, fileName, folderId);
+        }
 
-		/// <summary>
-		/// Downloads a file fron Fortnox Archive
-		/// </summary>
-		/// <param name="fileIdOrFilePath">The id or path of the file to download</param>
-		/// <param name="localPath">The local path to save the file to </param>
-		public new void DownloadFile(string fileIdOrFilePath, string localPath)
+        /// <summary>
+        /// Downloads a file fron Fortnox Archive
+        /// </summary>
+        /// <param name="fileIdOrFilePath">The id or path of the file to download</param>
+        /// <param name="localPath">The local path to save the file to </param>
+        public new void DownloadFile(string fileIdOrFilePath, string localPath)
         {
             base.Resource = "archive";
 
