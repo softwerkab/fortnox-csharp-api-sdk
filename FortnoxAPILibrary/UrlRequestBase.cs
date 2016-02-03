@@ -12,6 +12,9 @@ namespace FortnoxAPILibrary
     /// <remarks/>
     public class UrlRequestBase
     {
+        private readonly string _accessToken;
+        private readonly string _clientSecret;
+
         /// <summary>
         /// Timeout of requests sent to the Fortnox API in miliseconds
         /// </summary>
@@ -57,6 +60,15 @@ namespace FortnoxAPILibrary
         }
 
         /// <remarks />
+        public UrlRequestBase(string accessToken, string clientSecret) : this()
+        {
+            _accessToken = accessToken;
+            _clientSecret = clientSecret;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public UrlRequestBase()
         {
             this.Timeout = 300000;
@@ -92,14 +104,14 @@ namespace FortnoxAPILibrary
         internal HttpWebRequest SetupRequest(string requestUriString, string method)
         {
             Error = null;
-            if (string.IsNullOrEmpty(ConnectionCredentials.AccessToken) || string.IsNullOrEmpty(ConnectionCredentials.ClientSecret))
+            if (string.IsNullOrEmpty(_accessToken) || string.IsNullOrEmpty(_clientSecret))
             {
                 throw new Exception("Access-Token and Client-Secret must be set");
             }
 
             HttpWebRequest wr = (HttpWebRequest)HttpWebRequest.Create(requestUriString);
-            wr.Headers.Add("access-token", ConnectionCredentials.AccessToken);
-            wr.Headers.Add("client-secret", ConnectionCredentials.ClientSecret);
+            wr.Headers.Add("access-token", _accessToken);
+            wr.Headers.Add("client-secret", _clientSecret);
             wr.ContentType = "application/xml";
             wr.Accept = "application/xml";
             wr.Method = method;

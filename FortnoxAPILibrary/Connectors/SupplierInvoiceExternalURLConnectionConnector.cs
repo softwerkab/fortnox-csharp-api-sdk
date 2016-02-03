@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary.Connectors
     public class SupplierInvoiceExternalURLConnectionConnector : EntityConnector<SupplierInvoiceExternalURLConnection, SupplierInvoiceExternalURLConnection, Sort.By.SupplierInvoiceURLConnection>
     {
         /// <remarks/>
-        public SupplierInvoiceExternalURLConnectionConnector()
+        public SupplierInvoiceExternalURLConnectionConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
         {
             base.Resource = "supplierinvoiceexternalurlconnections";
         }

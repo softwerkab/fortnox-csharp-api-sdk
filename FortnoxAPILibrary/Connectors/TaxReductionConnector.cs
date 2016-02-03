@@ -50,8 +50,8 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <remarks/>
-		public TaxReductionConnector()
-		{
+		public TaxReductionConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "taxreductions";
 		}
 

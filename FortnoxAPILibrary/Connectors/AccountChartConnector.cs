@@ -5,7 +5,7 @@ namespace FortnoxAPILibrary.Connectors
 	public class AccountChartConnector : EntityConnector<AccountCharts, AccountCharts, Sort.By.AccountChart>
 	{
         /// <remarks/>
-        public AccountChartConnector()
+        public AccountChartConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
         {
             base.Resource = "accountcharts";
         }

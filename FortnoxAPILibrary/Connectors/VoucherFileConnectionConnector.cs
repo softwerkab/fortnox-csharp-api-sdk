@@ -23,8 +23,8 @@ namespace FortnoxAPILibrary.Connectors
 		public string VoucherSeries { get; set; }
 
 		/// <remarks/>
-		public VoucherFileConnectionConnector()
-		{
+		public VoucherFileConnectionConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "voucherfileconnections";
 		}
 

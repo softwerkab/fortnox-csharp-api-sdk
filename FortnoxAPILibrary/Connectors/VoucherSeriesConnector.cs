@@ -9,8 +9,8 @@ namespace FortnoxAPILibrary.Connectors
 	public class VoucherSeriesConnector : FinancialYearBasedEntityConnector<VoucherSeries, VoucherSeriesCollection, Sort.By.VoucherSeries>
 	{
 		/// <remarks/>
-		public VoucherSeriesConnector()
-		{
+		public VoucherSeriesConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "voucherseries";
 		}
 

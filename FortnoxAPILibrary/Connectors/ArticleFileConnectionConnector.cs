@@ -15,8 +15,8 @@ namespace FortnoxAPILibrary.Connectors
 		public string ArticleNumber { get; set; }
 
 		/// <remarks/>
-		public ArticleFileConnectionConnector()
-		{
+		public ArticleFileConnectionConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "articlefileconnections";
 		}
 

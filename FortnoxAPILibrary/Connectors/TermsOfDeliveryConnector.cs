@@ -12,8 +12,8 @@ namespace FortnoxAPILibrary.Connectors
 		public string Code { get; set; }
 
 		/// <remarks/>
-		public TermsOfDeliveryConnector()
-		{
+		public TermsOfDeliveryConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "termsofdeliveries";
 		}
 

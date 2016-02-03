@@ -33,8 +33,8 @@ namespace FortnoxAPILibrary.Connectors
 		public string ProjectLeader { get; set; }
 
 		/// <remarks/>
-		public ProjectConnector()
-		{
+		public ProjectConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "projects";
 		}
 

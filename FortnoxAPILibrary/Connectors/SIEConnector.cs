@@ -58,6 +58,7 @@ namespace FortnoxAPILibrary.Connectors
 	/// <remarks/>
 	public class SIEConnector : FinancialYearBasedEntityConnector<SieSummary, SieSummary, Sort.By.Sie>
 	{
+
 		/// <remarks/>
 		public enum SIEType
 		{
@@ -77,8 +78,8 @@ namespace FortnoxAPILibrary.Connectors
 		public ExportOptions ExportOptions { get; set; }
 
 		/// <remarks/>
-		public SIEConnector()
-		{
+		public SIEConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "sie";
 			ImportOptions = new ImportOptions();
 			ExportOptions = new ExportOptions();

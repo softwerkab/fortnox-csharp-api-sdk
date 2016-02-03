@@ -52,6 +52,5 @@ namespace FortnoxAPILibrary.Connectors
 			wr.Method = "GET";
 			return wr;
 		}
-
 	}
 }

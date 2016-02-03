@@ -10,8 +10,8 @@ namespace FortnoxAPILibrary.Connectors
 	public class PreDefinedVoucherSeriesConnector : FinancialYearBasedEntityConnector<PreDefinedVoucherSeries, PreDefinedVoucherSeriesCollection, Sort.By.PreDefinedVoucherSeries>
     {
 		/// <remarks/>
-		public PreDefinedVoucherSeriesConnector()
-		{
+		public PreDefinedVoucherSeriesConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "predefinedvoucherseries";
 		}
 

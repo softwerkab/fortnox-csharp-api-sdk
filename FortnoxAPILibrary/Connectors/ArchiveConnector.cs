@@ -28,8 +28,8 @@ namespace FortnoxAPILibrary.Connectors
 		public string Id { get; set; }
 
 		/// <remarks/>
-		public ArchiveConnector()
-		{
+		public ArchiveConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "archive";
 		}
 

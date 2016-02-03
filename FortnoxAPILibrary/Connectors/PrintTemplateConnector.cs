@@ -6,8 +6,8 @@ namespace FortnoxAPILibrary.Connectors
 	public class PrintTemplateConnector : EntityConnector<PrintTemplates, PrintTemplates, Sort.By.PrintTemplate>
 	{
 		/// <remarks/>
-		public PrintTemplateConnector()
-		{
+		public PrintTemplateConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "printtemplates";
 		}
 

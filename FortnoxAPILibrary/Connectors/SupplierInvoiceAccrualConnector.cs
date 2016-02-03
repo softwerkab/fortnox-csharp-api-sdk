@@ -9,8 +9,8 @@ namespace FortnoxAPILibrary.Connectors
 	public class SupplierInvoiceAccrualConnector : EntityConnector<SupplierInvoiceAccrual, SupplierInvoiceAccruals, Sort.By.SupplierInvoiceAccrual>
 	{
 		/// <remarks/>
-		public SupplierInvoiceAccrualConnector()
-		{
+		public SupplierInvoiceAccrualConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "supplierinvoiceaccruals";
 		}
 

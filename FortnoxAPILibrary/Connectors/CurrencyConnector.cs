@@ -5,8 +5,8 @@ namespace FortnoxAPILibrary.Connectors
 	public class CurrencyConnector : EntityConnector<Currency, Currencies, Sort.By.Currency>
 	{
 		/// <remarks/>
-		public CurrencyConnector()
-		{
+		public CurrencyConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "currencies";
 		}
 

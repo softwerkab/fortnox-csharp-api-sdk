@@ -46,8 +46,8 @@ namespace FortnoxAPILibrary.Connectors
 		public string SRU { get; set; }
 
 		/// <remarks/>
-		public AccountConnector()
-		{
+		public AccountConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "accounts";
 		}
 

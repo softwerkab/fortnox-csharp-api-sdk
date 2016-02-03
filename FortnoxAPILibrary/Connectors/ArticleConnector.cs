@@ -57,8 +57,8 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <remarks/>
-		public ArticleConnector()
-		{
+		public ArticleConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "articles";
 		}
 

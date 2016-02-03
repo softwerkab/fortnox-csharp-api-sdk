@@ -12,8 +12,8 @@ namespace FortnoxAPILibrary.Connectors
 		public string Date { get; set; }
 
 		/// <remarks/>
-		public FinancialYearConnector()
-		{
+		public FinancialYearConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "financialyears";
 		}
 

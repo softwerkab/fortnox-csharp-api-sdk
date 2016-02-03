@@ -108,8 +108,8 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <remarks/>
-		public OfferConnector()
-		{
+		public OfferConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "offers";
 		}
 

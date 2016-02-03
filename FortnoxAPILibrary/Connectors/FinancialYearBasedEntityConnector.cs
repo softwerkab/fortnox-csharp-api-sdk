@@ -49,5 +49,9 @@ namespace FortnoxAPILibrary.Connectors
                 this.financialYearIDSet = true;
             }
         }
+
+        public FinancialYearBasedEntityConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
+        }
     }
 }

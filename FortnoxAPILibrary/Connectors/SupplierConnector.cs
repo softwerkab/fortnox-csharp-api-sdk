@@ -49,8 +49,8 @@ namespace FortnoxAPILibrary.Connectors
 		public string ZipCode { get; set; }
 
 		/// <remarks/>
-		public SupplierConnector()
-		{
+		public SupplierConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "suppliers";
 		}
 

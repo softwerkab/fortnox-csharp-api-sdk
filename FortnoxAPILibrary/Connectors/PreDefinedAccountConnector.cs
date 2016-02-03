@@ -5,8 +5,8 @@ namespace FortnoxAPILibrary.Connectors
 	public class PreDefinedAccountConnector : FinancialYearBasedEntityConnector<PreDefinedAccount, PreDefinedAccounts, Sort.By.PreDefinedAccount>
 	{
 		/// <remarks/>
-		public PreDefinedAccountConnector()
-		{
+		public PreDefinedAccountConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "predefinedaccounts";
 		}
 
