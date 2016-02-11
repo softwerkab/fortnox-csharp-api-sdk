@@ -5,8 +5,8 @@ namespace FortnoxAPILibrary.Connectors
 	public class UnitConnector : EntityConnector<Unit, Units, Sort.By.Unit>
 	{
 		/// <remarks/>
-		public UnitConnector()
-		{
+		public UnitConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "units";
 		}
 

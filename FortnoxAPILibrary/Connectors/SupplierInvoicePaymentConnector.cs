@@ -13,8 +13,8 @@ namespace FortnoxAPILibrary.Connectors
         public string InvoiceNumber { get; set; }
 
 		/// <remarks/>
-		public SupplierInvoicePaymentConnector()
-		{
+		public SupplierInvoicePaymentConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "supplierinvoicepayments";
 		}
 

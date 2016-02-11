@@ -12,6 +12,9 @@ namespace FortnoxAPILibrary
     /// <remarks/>
     public class UrlRequestBase
     {
+        private readonly string _accessToken;
+        private readonly string _clientSecret;
+
         /// <summary>
         /// Timeout of requests sent to the Fortnox API in miliseconds
         /// </summary>
@@ -57,6 +60,15 @@ namespace FortnoxAPILibrary
         }
 
         /// <remarks />
+        public UrlRequestBase(string accessToken, string clientSecret) : this()
+        {
+            _accessToken = accessToken;
+            _clientSecret = clientSecret;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public UrlRequestBase()
         {
             this.Timeout = 300000;
@@ -92,14 +104,14 @@ namespace FortnoxAPILibrary
         internal HttpWebRequest SetupRequest(string requestUriString, string method)
         {
             Error = null;
-            if (string.IsNullOrEmpty(ConnectionCredentials.AccessToken) || string.IsNullOrEmpty(ConnectionCredentials.ClientSecret))
+            if (string.IsNullOrEmpty(_accessToken) || string.IsNullOrEmpty(_clientSecret))
             {
                 throw new Exception("Access-Token and Client-Secret must be set");
             }
 
             HttpWebRequest wr = (HttpWebRequest)HttpWebRequest.Create(requestUriString);
-            wr.Headers.Add("access-token", ConnectionCredentials.AccessToken);
-            wr.Headers.Add("client-secret", ConnectionCredentials.ClientSecret);
+            wr.Headers.Add("access-token", _accessToken ?? ConnectionCredentials.AccessToken);
+            wr.Headers.Add("client-secret", _clientSecret ?? ConnectionCredentials.ClientSecret);
             wr.ContentType = "application/xml";
             wr.Accept = "application/xml";
             wr.Method = method;
@@ -229,7 +241,7 @@ namespace FortnoxAPILibrary
             return entity;
         }
 
-        internal T UploadFile<T>(string localPath)
+        internal T UploadFile<T>(byte[] fileContents, string fileName)
         {
             this.ResponseXml = "";
 
@@ -241,7 +253,7 @@ namespace FortnoxAPILibrary
 
                 Random rand = new Random();
                 string boundary = "----boundary" + rand.Next().ToString();
-                byte[] header = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + System.IO.Path.GetFileName(localPath) + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
+                byte[] header = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + fileName + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
                 byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
 
                 HttpWebRequest request = this.SetupRequest(this.RequestUriString, "POST");
@@ -249,8 +261,7 @@ namespace FortnoxAPILibrary
 
                 Stream data_stream = request.GetRequestStream();
                 data_stream.Write(header, 0, header.Length);
-                byte[] file_bytes = System.IO.File.ReadAllBytes(localPath);
-                data_stream.Write(file_bytes, 0, file_bytes.Length);
+                data_stream.Write(fileContents, 0, fileContents.Length);
                 data_stream.Write(trailer, 0, trailer.Length);
                 data_stream.Close();
 

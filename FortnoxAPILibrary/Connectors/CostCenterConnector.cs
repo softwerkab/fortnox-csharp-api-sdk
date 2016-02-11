@@ -5,8 +5,8 @@ namespace FortnoxAPILibrary.Connectors
 	public class CostCenterConnector : EntityConnector<CostCenter, CostCenters, Sort.By.CostCenter>
 	{
 		/// <remarks/>
-		public CostCenterConnector()
-		{
+		public CostCenterConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "costcenters";
 		}
 

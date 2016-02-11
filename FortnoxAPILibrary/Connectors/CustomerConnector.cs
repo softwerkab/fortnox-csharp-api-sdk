@@ -105,8 +105,8 @@ namespace FortnoxAPILibrary.Connectors
 		public string ZipCode { get; set; }
 
 		/// <remarks/>
-		public CustomerConnector()
-		{
+		public CustomerConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "customers";
 		}
 

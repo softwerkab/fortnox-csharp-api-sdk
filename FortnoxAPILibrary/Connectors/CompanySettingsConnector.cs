@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary
     public class CompanySettingsConnector : EntityConnector<CompanySettings, CompanySettings, Sort.By.CompanySettings>
     {
         /// <remarks />
-        public CompanySettingsConnector()
+        public CompanySettingsConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
         {
             base.Resource = "settings/company";
         }

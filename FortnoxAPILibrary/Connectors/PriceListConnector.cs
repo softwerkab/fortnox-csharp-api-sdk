@@ -5,8 +5,8 @@ namespace FortnoxAPILibrary.Connectors
 	public class PriceListConnector : EntityConnector<PriceList, PriceLists, Sort.By.PriceList>
 	{
 		/// <remarks/>
-		public PriceListConnector()
-		{
+		public PriceListConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "pricelists";
 		}
 

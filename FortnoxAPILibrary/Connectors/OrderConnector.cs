@@ -125,8 +125,8 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <remarks/>
-		public OrderConnector()
-		{
+		public OrderConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "orders";
 		}
 

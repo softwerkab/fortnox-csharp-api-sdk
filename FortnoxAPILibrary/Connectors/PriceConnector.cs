@@ -23,8 +23,8 @@ namespace FortnoxAPILibrary.Connectors
 		public string FromQuantity { get; set; }
 
 		/// <remarks/>
-		public PriceConnector()
-		{
+		public PriceConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "prices";
 		}
 

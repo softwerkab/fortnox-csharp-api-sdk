@@ -12,8 +12,8 @@ namespace FortnoxAPILibrary.Connectors
 		public string SupplierInvoiceNumber { get; set; }
 
 		/// <remarks/>
-		public SupplierInvoiceFileConnectionConnector()
-		{
+		public SupplierInvoiceFileConnectionConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "supplierinvoicefileconnections";
 		}
 

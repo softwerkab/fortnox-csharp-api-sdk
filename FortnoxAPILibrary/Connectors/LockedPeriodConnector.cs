@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary
     public class LockedPeriodConnector : EntityConnector<LockedPeriod, LockedPeriod, Sort.By.LockedPeriod>
     {
         /// <remarks/>
-        public LockedPeriodConnector()
+        public LockedPeriodConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
         {
             base.Resource = "settings/lockedperiod";
         }

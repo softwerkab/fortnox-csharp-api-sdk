@@ -156,8 +156,8 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <remarks/>
-		public InvoiceConnector()
-		{
+		public InvoiceConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "invoices";
 		}
 

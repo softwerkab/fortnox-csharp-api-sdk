@@ -11,12 +11,11 @@ namespace FortnoxAPILibrary
     public abstract class EntityConnector<E, C, S> : UrlRequestBase
     {
         /// <remarks/>
-        public EntityConnector()
+        public EntityConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
         {
             LastModified = DateTime.MinValue;
 
             Error = null;
-
         }
 
         private S sortBy;
@@ -324,10 +323,10 @@ namespace FortnoxAPILibrary
             string requestUriString = this.GetUrl();
             base.RequestUriString = AddParameters(requestUriString);
 
-            return base.UploadFile<SieSummary>(localPath);
+            return base.UploadFile<SieSummary>(System.IO.File.ReadAllBytes(localPath), System.IO.Path.GetFileName(localPath));
         }
 
-        internal File BaseUploadFile(string localPath, string folderId)
+        internal File BaseUploadFile(byte[] fileContents, string fileName, string folderId)
         {
             base.RequestUriString = this.GetUrl();
 
@@ -336,7 +335,7 @@ namespace FortnoxAPILibrary
                 base.RequestUriString += "?folderid=" + Uri.EscapeDataString(folderId);
             }
 
-            return base.UploadFile<File>(localPath);
+            return base.UploadFile<File>(fileContents, fileName);
         }
 
         internal string AddParameters(string requestUriString)

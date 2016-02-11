@@ -12,8 +12,8 @@ namespace FortnoxAPILibrary.Connectors
         public string Code { get; set; }
 
 		/// <remarks/>
-		public TermsOfPaymentConnector()
-		{
+		public TermsOfPaymentConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "termsofpayments";
 		}
 

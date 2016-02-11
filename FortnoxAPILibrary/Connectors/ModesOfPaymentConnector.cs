@@ -6,8 +6,8 @@ namespace FortnoxAPILibrary.Connectors
 	public class ModesOfPaymentConnector : FinancialYearBasedEntityConnector<ModeOfPayment, ModesOfPayments, Sort.By.ModesOfPayment>
 	{
 		/// <remarks/>
-		public ModesOfPaymentConnector()
-		{
+		public ModesOfPaymentConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "modesofpayments";
 		}
 

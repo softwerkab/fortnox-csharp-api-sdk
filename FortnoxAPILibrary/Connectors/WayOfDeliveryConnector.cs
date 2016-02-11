@@ -12,8 +12,8 @@ namespace FortnoxAPILibrary.Connectors
 		public string Code { get; set; }
 
 		/// <remarks/>
-		public WayOfDeliveryConnector()
-		{
+		public WayOfDeliveryConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
 			base.Resource = "wayofdeliveries";
 		}
 

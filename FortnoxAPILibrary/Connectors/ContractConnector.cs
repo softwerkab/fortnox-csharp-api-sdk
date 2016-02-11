@@ -67,7 +67,7 @@ namespace FortnoxAPILibrary.Connectors
         }
 
         /// <remarks/>
-        public ContractConnector()
+        public ContractConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
         {
             base.Resource = "contracts";
         }

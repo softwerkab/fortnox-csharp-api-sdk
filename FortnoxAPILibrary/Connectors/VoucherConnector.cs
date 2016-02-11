@@ -49,7 +49,7 @@ namespace FortnoxAPILibrary.Connectors
         public string ToDate { get; set; }
 
         /// <remarks/>
-        public VoucherConnector()
+        public VoucherConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
         {
             base.Resource = "vouchers";
         }
