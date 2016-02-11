@@ -110,8 +110,8 @@ namespace FortnoxAPILibrary
             }
 
             HttpWebRequest wr = (HttpWebRequest)HttpWebRequest.Create(requestUriString);
-            wr.Headers.Add("access-token", _accessToken);
-            wr.Headers.Add("client-secret", _clientSecret);
+            wr.Headers.Add("access-token", _accessToken ?? ConnectionCredentials.AccessToken);
+            wr.Headers.Add("client-secret", _clientSecret ?? ConnectionCredentials.ClientSecret);
             wr.ContentType = "application/xml";
             wr.Accept = "application/xml";
             wr.Method = method;
