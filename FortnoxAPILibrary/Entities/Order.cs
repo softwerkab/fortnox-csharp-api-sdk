@@ -108,6 +108,8 @@ namespace FortnoxAPILibrary
 
 		private List<OrderRow> orderRowsField;
 
+        private List<Label> labelsField;
+
 		private string organisationNumberField;
 
 		private string ourReferenceField;
@@ -158,6 +160,7 @@ namespace FortnoxAPILibrary
         public Order()
         {
             this.OrderRows = new List<OrderRow>();
+            this.Labels = new List<Label>();
         }
 
 		/// <remarks/>
@@ -691,6 +694,16 @@ namespace FortnoxAPILibrary
 			}
 		}
 
+        /// <remarks/>
+        public List<Label> Labels {
+            get {
+                return this.labelsField;
+            }
+            set {
+                this.labelsField = value;
+            }
+        }
+        
 		/// <remarks/>
 		public string OrganisationNumber
 		{

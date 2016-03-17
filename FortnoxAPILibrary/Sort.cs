@@ -186,6 +186,16 @@ namespace FortnoxAPILibrary
 			}
 
             /// <remarks/>
+            public enum Label {
+                /// <remarks/>
+                [RealValue("id")]
+                Id,
+                /// <remarks/>
+                [RealValue("description")]
+                Description
+            }
+
+            /// <remarks/>
             public enum LockedPeriod
             {
 
@@ -368,7 +378,7 @@ namespace FortnoxAPILibrary
 				Code
 			}
 
-			/// <remarks/>
+          /// <remarks/>
 			public enum TermsOfDelivery
 			{
 				/// <remarks/>

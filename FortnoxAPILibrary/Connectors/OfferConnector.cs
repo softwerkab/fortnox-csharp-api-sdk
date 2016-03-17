@@ -48,6 +48,12 @@ namespace FortnoxAPILibrary.Connectors
 		[FilterProperty]
 		public string YourReference { get; set; }
 
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [FilterProperty]
+        public string Label { get; set; }
+
 
 		private bool sentSet = false;
 		private bool sent;
