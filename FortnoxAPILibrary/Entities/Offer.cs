@@ -104,6 +104,8 @@ namespace FortnoxAPILibrary
 
 		private List<OfferRow> offerRowsField;
 
+        private List<Label> labelsField;
+
 		private string orderReferenceField;
 
 		private string organisationNumberField;
@@ -154,6 +156,7 @@ namespace FortnoxAPILibrary
         public Offer()
         {
             this.OfferRows = new List<OfferRow>();
+            this.Labels = new List<Label>();
         }
 
 		/// <remarks/>
@@ -659,6 +662,16 @@ namespace FortnoxAPILibrary
 				this.offerRowsField = value;
 			}
 		}
+        
+        /// <remarks/>
+        public List<Label> Labels {
+            get {
+                return this.labelsField;
+            }
+            set {
+                this.labelsField = value;
+            }
+        }
 
 		/// <summary>This field is Read-Only in Fortnox</summary>
 		[System.ComponentModel.ReadOnly(true)]
@@ -1308,4 +1321,6 @@ namespace FortnoxAPILibrary
 			}
 		}
 	}
+
+   
 }

@@ -67,6 +67,12 @@ namespace FortnoxAPILibrary.Connectors
         [FilterProperty]
 		public string OurReference { get; set; }
 
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [FilterProperty]
+        public string InvoiceDate { get; set; }
+
 		/// <summary>
 		/// Use with Find() to limit the search result
         /// </summary>
@@ -78,6 +84,12 @@ namespace FortnoxAPILibrary.Connectors
         /// </summary>
         [FilterProperty]
 		public string YourReference { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [FilterProperty]
+        public string Label { get; set; }
 
 		private bool sentSet = false;
 		private bool sent;
@@ -98,7 +110,7 @@ namespace FortnoxAPILibrary.Connectors
 			}
 		}
 
-		private bool notCompletedSet = false;
+       private bool notCompletedSet = false;
 		private bool notcompleted;
 		/// <summary>
 		/// Use with Find() to limit the search result

@@ -106,6 +106,8 @@ namespace FortnoxAPILibrary
 
 		private List<InvoiceRow> invoiceRowsField;
 
+        private List<Label> labelsField;
+
 		private InvoiceConnector.InvoiceType invoiceTypeField;
 
 		private string languageField;
@@ -186,6 +188,7 @@ namespace FortnoxAPILibrary
         public Invoice()
         {
             this.InvoiceRows = new List<InvoiceRow>();
+            this.Labels = new List<Label>();
         }
 
 		/// <remarks/>
@@ -718,6 +721,16 @@ namespace FortnoxAPILibrary
 				this.invoiceRowsField = value;
 			}
 		}
+
+        /// <remarks/>
+        public List<Label> Labels {
+            get {
+                return this.labelsField;
+            }
+            set {
+                this.labelsField = value;
+            }
+        }
 
 		/// <remarks/>
 		public InvoiceConnector.InvoiceType InvoiceType
@@ -1709,4 +1722,25 @@ namespace FortnoxAPILibrary
 			}
 		}
 	}
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public partial class Label
+    {
+        private string idField;
+
+        /// <remarks/>
+        public string Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+    }
 }

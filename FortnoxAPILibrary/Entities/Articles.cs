@@ -124,6 +124,8 @@ namespace FortnoxAPILibrary
 
 		private string unitField;
 
+        private string vATField;
+
 		private string webshopArticleField;
 
 		/// <remarks/>
@@ -287,6 +289,16 @@ namespace FortnoxAPILibrary
 				this.unitField = value;
 			}
 		}
+
+        /// <remarks/>
+        public string VAT {
+            get {
+                return this.vATField;
+            }
+            set {
+                this.vATField = value;
+            }
+        }
 
 		/// <remarks/>
 		[System.Xml.Serialization.XmlAttributeAttribute()]
