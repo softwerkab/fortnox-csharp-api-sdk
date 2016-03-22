@@ -164,6 +164,15 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
         /// <summary>
+		/// Delete a file. 
+		/// </summary>
+		/// <param name="fileId">The id of the file to be deleted</param>
+		public void DeleteFile(string fileId)
+        {
+            base.BaseDelete(fileId);
+    }
+
+        /// <summary>
         /// Creates a folder.
         /// </summary>
         /// <param name="folder">The folder entity to create</param>
