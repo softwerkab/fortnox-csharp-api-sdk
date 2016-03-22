@@ -14,6 +14,11 @@ namespace FortnoxAPILibrary.Connectors
             base.Resource = "supplierinvoiceurlconnections";
         }
 
+        /// <remarks/>
+        public SupplierInvoiceURLConnectionConnector() : this(null, null)
+        {
+        }
+
         /// <summary>
         /// Gets an supplier invoice url connection based on id
         /// </summary>

@@ -38,12 +38,17 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "projects";
 		}
 
-		/// <summary>
-		/// Gets a project based on project number
-		/// </summary>
-		/// <param name="projectNumber">The project number to find</param>
-		/// <returns>The found project</returns>
-		public Project Get(string projectNumber)
+        /// <remarks/>
+        public ProjectConnector() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Gets a project based on project number
+        /// </summary>
+        /// <param name="projectNumber">The project number to find</param>
+        /// <returns>The found project</returns>
+        public Project Get(string projectNumber)
 		{
 			return base.BaseGet(projectNumber);
 		}

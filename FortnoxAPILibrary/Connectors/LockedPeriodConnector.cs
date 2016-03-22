@@ -14,6 +14,11 @@ namespace FortnoxAPILibrary
             base.Resource = "settings/lockedperiod";
         }
 
+        /// <remarks/>
+        public LockedPeriodConnector() : this(null, null)
+        {
+        }
+
         /// <summary>
         /// Gets the locked period setting
         /// </summary>

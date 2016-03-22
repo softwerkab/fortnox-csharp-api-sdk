@@ -14,6 +14,11 @@ namespace FortnoxAPILibrary
             base.Resource = "settings/company";
         }
 
+        /// <remarks/>
+        public CompanySettingsConnector() : this(null, null)
+        {
+        }
+
         /// <summary>
         /// Gets the company settings
         /// </summary>

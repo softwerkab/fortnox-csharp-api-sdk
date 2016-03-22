@@ -17,12 +17,17 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "financialyears";
 		}
 
-		/// <summary>
-		/// Gets a financial year based on id
-		/// </summary>
-		/// <param name="id">The id of the financial year to find</param>
-		/// <returns></returns>
-		public FinancialYear Get(int id)
+        /// <remarks/>
+        public FinancialYearConnector() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Gets a financial year based on id
+        /// </summary>
+        /// <param name="id">The id of the financial year to find</param>
+        /// <returns></returns>
+        public FinancialYear Get(int id)
 		{
 			return base.BaseGet(id.ToString());
 		}

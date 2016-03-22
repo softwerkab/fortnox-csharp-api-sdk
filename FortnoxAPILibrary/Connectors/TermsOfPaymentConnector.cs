@@ -17,12 +17,17 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "termsofpayments";
 		}
 
-		/// <summary>
-		/// Gets a Terms of payment by code
-		/// </summary>
-		/// <param name="termsOfPaymentCode"></param>
-		/// <returns></returns>
-		public TermsOfPayment Get(string termsOfPaymentCode)
+        /// <remarks/>
+        public TermsOfPaymentConnector() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Gets a Terms of payment by code
+        /// </summary>
+        /// <param name="termsOfPaymentCode"></param>
+        /// <returns></returns>
+        public TermsOfPayment Get(string termsOfPaymentCode)
 		{
 			return base.BaseGet(termsOfPaymentCode);
 		}

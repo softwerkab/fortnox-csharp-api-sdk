@@ -15,6 +15,11 @@ namespace FortnoxAPILibrary.Connectors
         }
 
         /// <remarks/>
+        public SupplierInvoiceExternalURLConnectionConnector() : this(null, null)
+        {
+        }
+
+        /// <remarks/>
         public SupplierInvoiceExternalURLConnection Get(string id)
         {
             return base.BaseGet(id);

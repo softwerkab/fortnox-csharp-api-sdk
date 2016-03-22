@@ -28,14 +28,19 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "prices";
 		}
 
-		/// <summary>
-		/// Gets a price
-		/// </summary>
-		/// <param name="priceList">The price list to find</param>
-		/// <param name="articleNumber">The article number to find</param>
-		/// <param name="fromQuantity">The from quantity of the price to find. Optional. If omitted, 0 will be used.</param>
-		/// <returns>The found price</returns>
-		public Price Get(string priceList, string articleNumber, string fromQuantity = "0")
+        /// <remarks/>
+        public PriceConnector() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Gets a price
+        /// </summary>
+        /// <param name="priceList">The price list to find</param>
+        /// <param name="articleNumber">The article number to find</param>
+        /// <param name="fromQuantity">The from quantity of the price to find. Optional. If omitted, 0 will be used.</param>
+        /// <returns>The found price</returns>
+        public Price Get(string priceList, string articleNumber, string fromQuantity = "0")
 		{
 			base.Resource = "prices";
 

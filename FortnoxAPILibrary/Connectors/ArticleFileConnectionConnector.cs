@@ -20,12 +20,17 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "articlefileconnections";
 		}
 
-		/// <summary>
-		/// Get a article file connection based on fileId
-		/// </summary>
-		/// <param name="fileId">The id of the file to get</param>
-		/// <returns>The found article file connection</returns>
-		public ArticleFileConnection Get(string fileId)
+        /// <remarks/>
+        public ArticleFileConnectionConnector() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Get a article file connection based on fileId
+        /// </summary>
+        /// <param name="fileId">The id of the file to get</param>
+        /// <returns>The found article file connection</returns>
+        public ArticleFileConnection Get(string fileId)
 		{
 			return base.BaseGet(fileId);
 		}

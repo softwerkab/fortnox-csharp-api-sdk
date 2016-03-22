@@ -14,6 +14,11 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "contractaccruals";
 		}
 
+        /// <remarks/>
+        public ContractAccrualConnector() : this(null, null)
+        {
+        }
+
         /// <summary>
         /// Get an contract accrual	
         /// </summary>

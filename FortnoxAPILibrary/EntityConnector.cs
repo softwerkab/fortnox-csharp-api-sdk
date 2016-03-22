@@ -11,11 +11,15 @@ namespace FortnoxAPILibrary
     public abstract class EntityConnector<E, C, S> : UrlRequestBase
     {
         /// <remarks/>
-        public EntityConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        public EntityConnector(string accessToken, string clientSecret)
         {
             LastModified = DateTime.MinValue;
-
             Error = null;
+        }
+
+        /// <remarks/>
+        public EntityConnector() : this(null, null)
+        {
         }
 
         private S sortBy;

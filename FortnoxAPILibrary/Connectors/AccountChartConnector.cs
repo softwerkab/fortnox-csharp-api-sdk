@@ -10,11 +10,16 @@ namespace FortnoxAPILibrary.Connectors
             base.Resource = "accountcharts";
         }
 
-		/// <summary>
-		/// Gets a list of account charts 
-		/// </summary>
-		/// <returns>A list of account charts</returns>
-		public AccountCharts Find()
+        /// <remarks/>
+        public AccountChartConnector() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Gets a list of account charts 
+        /// </summary>
+        /// <returns>A list of account charts</returns>
+        public AccountCharts Find()
 		{
 			return base.BaseFind();
 		}

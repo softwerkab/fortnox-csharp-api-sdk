@@ -110,13 +110,17 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "customers";
 		}
 
+        /// <remarks/>
+        public CustomerConnector() : this(null, null)
+        {
+        }
 
-		/// <summary>
-		/// Find a customer based on customernumber
-		/// </summary>
-		/// <param name="customerNumber">The customernumber to find</param>
-		/// <returns>The found customer</returns>
-		public Customer Get(string customerNumber)
+        /// <summary>
+        /// Find a customer based on customernumber
+        /// </summary>
+        /// <param name="customerNumber">The customernumber to find</param>
+        /// <returns>The found customer</returns>
+        public Customer Get(string customerNumber)
 		{
 			return base.BaseGet(customerNumber);
 		}

@@ -54,12 +54,17 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "suppliers";
 		}
 
-		/// <summary>
-		/// Get a supplier based on suppliernumber
-		/// </summary>
-		/// <param name="supplierNumber">The suppliernumber to find</param>
-		/// <returns>The resulting supplier</returns>
-		public Supplier Get(string supplierNumber)
+        /// <remarks/>
+        public SupplierConnector() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Get a supplier based on suppliernumber
+        /// </summary>
+        /// <param name="supplierNumber">The suppliernumber to find</param>
+        /// <returns>The resulting supplier</returns>
+        public Supplier Get(string supplierNumber)
 		{
 			return BaseGet(supplierNumber);
 		}

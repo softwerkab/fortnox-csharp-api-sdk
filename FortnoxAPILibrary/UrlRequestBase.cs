@@ -104,7 +104,8 @@ namespace FortnoxAPILibrary
         internal HttpWebRequest SetupRequest(string requestUriString, string method)
         {
             Error = null;
-            if (string.IsNullOrEmpty(_accessToken) || string.IsNullOrEmpty(_clientSecret))
+            if (string.IsNullOrEmpty(_accessToken) && string.IsNullOrEmpty(ConnectionCredentials.AccessToken) 
+                || string.IsNullOrEmpty(_clientSecret) && string.IsNullOrEmpty(ConnectionCredentials.ClientSecret))
             {
                 throw new Exception("Access-Token and Client-Secret must be set");
             }

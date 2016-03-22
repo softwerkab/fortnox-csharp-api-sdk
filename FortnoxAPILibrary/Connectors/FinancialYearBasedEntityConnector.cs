@@ -50,7 +50,13 @@ namespace FortnoxAPILibrary.Connectors
             }
         }
 
+        /// <remarks/>
         public FinancialYearBasedEntityConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
+        {
+        }
+
+        /// <remarks/>
+        public FinancialYearBasedEntityConnector() : this(null, null)
         {
         }
     }

@@ -55,12 +55,17 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "taxreductions";
 		}
 
-		/// <summary>
-		/// Find a tax reduction based on id
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
-		public TaxReduction Get(string id)
+        /// <remarks/>
+        public TaxReductionConnector() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Find a tax reduction based on id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public TaxReduction Get(string id)
 		{
 			return base.BaseGet(id);
 		}

@@ -14,8 +14,13 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "invoiceaccruals";
 		}
 
-		/// <remarks/>
-		public enum Period
+        /// <remarks/>
+        public InvoiceAccrualConnector() : this(null, null)
+        {
+        }
+
+        /// <remarks/>
+        public enum Period
 		{
 			/// <remarks/>
 			MONTHLY,

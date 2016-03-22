@@ -17,12 +17,17 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "termsofdeliveries";
 		}
 
-		/// <summary>
-		/// Find a terms of delivery based on terms of delivery code
-		/// </summary>
-		/// <param name="termsOfDeliveryCode">The terms of deliverycode to find</param>
-		/// <returns>The resulting terms of delivery</returns>
-		public TermsOfDelivery Get(string termsOfDeliveryCode)
+        /// <remarks/>
+        public TermsOfDeliveryConnector() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Find a terms of delivery based on terms of delivery code
+        /// </summary>
+        /// <param name="termsOfDeliveryCode">The terms of deliverycode to find</param>
+        /// <returns>The resulting terms of delivery</returns>
+        public TermsOfDelivery Get(string termsOfDeliveryCode)
 		{
 			return base.BaseGet(termsOfDeliveryCode);
 		}

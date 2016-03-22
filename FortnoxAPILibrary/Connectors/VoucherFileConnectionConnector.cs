@@ -28,12 +28,17 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "voucherfileconnections";
 		}
 
-		/// <summary>
-		/// Get a voucher file connection based on fileId
-		/// </summary>
-		/// <param name="fileId">The id of the file to find.</param>
-		/// <returns>The found voucher file connection</returns>
-		public VoucherFileConnection Get(string fileId)
+        /// <remarks/>
+        public VoucherFileConnectionConnector() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Get a voucher file connection based on fileId
+        /// </summary>
+        /// <param name="fileId">The id of the file to find.</param>
+        /// <returns>The found voucher file connection</returns>
+        public VoucherFileConnection Get(string fileId)
 		{
 			return base.BaseGet(fileId);
 		}

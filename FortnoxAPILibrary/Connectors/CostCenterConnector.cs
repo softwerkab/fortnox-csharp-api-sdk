@@ -10,12 +10,17 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "costcenters";
 		}
 
-		/// <summary>
-		/// Finds a cost center based on cost center code
-		/// </summary>
-		/// <param name="costCenterCode">The cost center code to find</param>
-		/// <returns>The resulting cost center</returns>
-		public CostCenter Get(string costCenterCode)
+        /// <remarks/>
+        public CostCenterConnector() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Finds a cost center based on cost center code
+        /// </summary>
+        /// <param name="costCenterCode">The cost center code to find</param>
+        /// <returns>The resulting cost center</returns>
+        public CostCenter Get(string costCenterCode)
 		{
 			return base.BaseGet(costCenterCode);
 		}

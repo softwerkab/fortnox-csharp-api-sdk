@@ -17,12 +17,17 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "supplierinvoicefileconnections";
 		}
 
-		/// <summary>
-		/// Get a supplier invoice file connection based on fileId
-		/// </summary>
-		/// <param name="fileId">The id of the file to find.</param>
-		/// <returns>The found supplier invoice file connection</returns>
-		public SupplierInvoiceFileConnection Get(string fileId)
+        /// <remarks/>
+        public SupplierInvoiceFileConnectionConnector() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Get a supplier invoice file connection based on fileId
+        /// </summary>
+        /// <param name="fileId">The id of the file to find.</param>
+        /// <returns>The found supplier invoice file connection</returns>
+        public SupplierInvoiceFileConnection Get(string fileId)
 		{
 			return base.BaseGet(fileId);
 		}

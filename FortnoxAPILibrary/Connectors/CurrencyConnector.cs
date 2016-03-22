@@ -10,12 +10,17 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "currencies";
 		}
 
-		/// <summary>
-		/// Gets a currency based on currency code
-		/// </summary>
-		/// <param name="currencyCode"></param>
-		/// <returns></returns>
-		public Currency Get(string currencyCode)
+        /// <remarks/>
+        public CurrencyConnector() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Gets a currency based on currency code
+        /// </summary>
+        /// <param name="currencyCode"></param>
+        /// <returns></returns>
+        public Currency Get(string currencyCode)
 		{
 			return base.BaseGet(currencyCode);
 		}

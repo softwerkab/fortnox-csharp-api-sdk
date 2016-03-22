@@ -10,12 +10,17 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "units";
 		}
 
-		/// <summary>
-		/// Gets a unit based on unit code
-		/// </summary>
-		/// <param name="unitCode">The unit code to find</param>
-		/// <returns>The found unit</returns>
-		public Unit Get(string unitCode)
+        /// <remarks/>
+        public UnitConnector() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Gets a unit based on unit code
+        /// </summary>
+        /// <param name="unitCode">The unit code to find</param>
+        /// <returns>The found unit</returns>
+        public Unit Get(string unitCode)
 		{
 			return base.BaseGet(unitCode);
 		}

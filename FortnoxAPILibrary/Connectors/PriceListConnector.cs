@@ -10,12 +10,17 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "pricelists";
 		}
 
-		/// <summary>
-		/// Gets a price list 
-		/// </summary>
-		/// <param name="code">The code of the price list to find</param>
-		/// <returns>The found price list</returns>
-		public PriceList Get(string code)
+        /// <remarks/>
+        public PriceListConnector() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Gets a price list 
+        /// </summary>
+        /// <param name="code">The code of the price list to find</param>
+        /// <returns>The found price list</returns>
+        public PriceList Get(string code)
 		{
 			return base.BaseGet(code);
 		}

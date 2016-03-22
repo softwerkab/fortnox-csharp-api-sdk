@@ -30,13 +30,18 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public ArchiveConnector(string accessToken, string clientSecret) : base(accessToken, clientSecret)
         {
-			base.Resource = "archive";
-		}
+            base.Resource = "archive";
+        }
 
-		/// <summary>
-		/// Use this to set what folder to read from. 
-		/// </summary>
-		public enum RootFolder
+        /// <remarks/>
+		public ArchiveConnector() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Use this to set what folder to read from. 
+        /// </summary>
+        public enum RootFolder
 		{
 			/// <remarks/>
 			[RealValue("")]

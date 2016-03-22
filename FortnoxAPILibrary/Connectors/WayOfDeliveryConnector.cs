@@ -17,12 +17,17 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "wayofdeliveries";
 		}
 
-		/// <summary>
-		/// Find a way of delivery based on way of delivery code
-		/// </summary>
-		/// <param name="wayOfDeliveryCode">The way of deliverycode to find</param>
-		/// <returns>The resulting way of deliverycode</returns>
-		public WayOfDelivery Get(string wayOfDeliveryCode)
+        /// <remarks/>
+        public WayOfDeliveryConnector() : this(null, null)
+        {
+        }
+
+        /// <summary>
+        /// Find a way of delivery based on way of delivery code
+        /// </summary>
+        /// <param name="wayOfDeliveryCode">The way of deliverycode to find</param>
+        /// <returns>The resulting way of deliverycode</returns>
+        public WayOfDelivery Get(string wayOfDeliveryCode)
 		{
 			return base.BaseGet(wayOfDeliveryCode);
 		}
