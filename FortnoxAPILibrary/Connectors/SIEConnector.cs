@@ -123,25 +123,29 @@ namespace FortnoxAPILibrary.Connectors
 
             try
             {
-                WebResponse response = wr.GetResponse();
-                Stream responseStream = response.GetResponseStream();
-                int b;
+                using (WebResponse response = wr.GetResponse())
+                {
+                    using (Stream responseStream = response.GetResponseStream())
+                    {
+                        int b;
 
-                if (localPath != "")
-                {
-                    using (var writer = new FileStream(localPath, FileMode.Create))
-                    {
-                        while ((b = responseStream.ReadByte()) != -1)
+                        if (localPath != "")
                         {
-                            writer.WriteByte((byte)b);
+                            using (var writer = new FileStream(localPath, FileMode.Create))
+                            {
+                                while ((b = responseStream.ReadByte()) != -1)
+                                {
+                                    writer.WriteByte((byte)b);
+                                }
+                            }
                         }
-                    }
-                }
-                else
-                {
-                    while ((b = responseStream.ReadByte()) != -1)
-                    {
-                        data.Add((byte)b);
+                        else
+                        {
+                            while ((b = responseStream.ReadByte()) != -1)
+                            {
+                                data.Add((byte)b);
+                            }
+                        }
                     }
                 }
             }

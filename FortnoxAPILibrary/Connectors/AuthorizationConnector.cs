@@ -28,12 +28,16 @@ namespace FortnoxAPILibrary.Connectors
 				}
 
 				HttpWebRequest wr = SetupRequest(ConnectionCredentials.FortnoxAPIServer, AuthorizationCode, ClientSecret);
-				WebResponse response = wr.GetResponse();
-				Stream responseStream = response.GetResponseStream();
-				XmlSerializer xs = new XmlSerializer(typeof(Authorization));
-				Authorization auth = (Authorization)xs.Deserialize(responseStream);
-				AccessToken = auth.AccessToken;
-			}
+			    using (WebResponse response = wr.GetResponse())
+			    {
+			        using (Stream responseStream = response.GetResponseStream())
+			        {
+                        XmlSerializer xs = new XmlSerializer(typeof(Authorization));
+                        Authorization auth = (Authorization)xs.Deserialize(responseStream);
+                        AccessToken = auth.AccessToken;
+                    }
+                }
+            }
 			catch (WebException we)
 			{
 				Error = HandleException(we);
