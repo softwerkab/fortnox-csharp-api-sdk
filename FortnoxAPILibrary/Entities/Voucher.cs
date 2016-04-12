@@ -243,6 +243,8 @@ namespace FortnoxAPILibrary
 		private string creditField;
 
 		private string projectField;
+        
+        private string quantityField;
 
 		private string removedField;
 
@@ -325,6 +327,16 @@ namespace FortnoxAPILibrary
 				this.projectField = value;
 			}
 		}
+
+        /// <remarks/>
+        public string Quantity {
+            get {
+                return this.quantityField;
+            }
+            set {
+                this.quantityField = value;
+            }
+        }
 
 		/// <summary>This field is Read-Only in Fortnox</summary>
 		[System.ComponentModel.ReadOnly(true)]
