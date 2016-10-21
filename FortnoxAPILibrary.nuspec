@@ -8,7 +8,6 @@
     <owners>Fortnox AB</owners>
     <licenseUrl>https://github.com/FortnoxAB/csharp-api-sdk/blob/master/README.md</licenseUrl>
     <projectUrl>https://github.com/FortnoxAB/csharp-api-sdk</projectUrl>
-    <iconUrl></iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>C# SDK for developing integrations towards the Fortnox API.</description>
     <releaseNotes></releaseNotes>
