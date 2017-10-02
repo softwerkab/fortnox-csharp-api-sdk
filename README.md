@@ -1,3 +1,5 @@
+[![NuGet](https://img.shields.io/nuget/v/PayPal.svg)](https://www.nuget.org/packages/Fortnox.NET.SDK)
+
 # csharp-api-sdk
 C# SDK for developing integrations towards the Fortnox API.
 
