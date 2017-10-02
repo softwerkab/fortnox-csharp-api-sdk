@@ -1,36 +1,11 @@
 [![NuGet](https://img.shields.io/nuget/v/PayPal.svg)](https://www.nuget.org/packages/Fortnox.NET.SDK)
 
 # csharp-api-sdk
-C# SDK for developing integrations towards the Fortnox API.
-
-This is a guide to help developers to get started with the .NET SDK by developing a simple console application which creates, retrives, deletes and search for a customer.
-
-For a full API reference please visit [developer.fortnox.se/documentation/](http://developer.fortnox.se/documentation/)
+Official .NET SDK for developing integrations towards the Fortnox API. This is a guide to help developers to get started with the .NET SDK by developing a simple console application which creates, retrives, deletes and search for a customer. For a full API reference please visit [developer.fortnox.se/documentation/](http://developer.fortnox.se/documentation/)
 
 
-## Getting started
+## Install package via nuget
 
-### Create a console application project in Visual Studio 2010
-1.  Start Visual Studio and select the option to create a new project.
-2.  Select Console Application.
-3.  Name the project FortnoxAPILibraryDemo
-4.  Click OK to create the Project
-
-![](http://developer.fortnox.se/wp-content/uploads/2014/04/sdk.png)
-
-### Adding a reference to the Fortnox API
-1.  In the Solution Explorer right-click References and select Add Reference…
-2.  Locate the file FortnoxAPILibrary.dll file on your computer and add the reference
-
-![](http://developer.fortnox.se/wp-content/uploads/2014/04/sdk2.png)
-
-![](http://developer.fortnox.se/wp-content/uploads/2014/04/sdk11.png)
-
-### Adding namespaces 
-To be able to use Fortnox API you need to add the two namespaces `FortnoxAPILibrary` and
-`FortnoxAPILibrary.Connectors`
-
-![](http://developer.fortnox.se/wp-content/uploads/2014/04/sdk4.png)
 
 ## Connect to Fortnox API
 Before we can send and receive any data to/from Fortnox we need to provide an `access-token` and a
