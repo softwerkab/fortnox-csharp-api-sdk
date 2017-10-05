@@ -1,21 +1,20 @@
-﻿using FortnoxAPILibrary.Connectors;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 
 namespace FortnoxAPILibrary
 {
-    /// <remarks/>
-    public class ContractAccrual
+	/// <remarks/>
+	public class ContractAccrual
     {
         /// <remarks/>
         public string AccrualAccount { get; set; }
 
-        /// <remarks/>
-        public string Description { get; set; }
+		/// <remarks/>
+		public string CostAccount { get; set; }
+
+		/// <remarks/>
+		public string Description { get; set; }
 
         /// <remarks/>
         [XmlArrayItemAttribute("InvoiceAccrualRow", IsNullable = false)]
