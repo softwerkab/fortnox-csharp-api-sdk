@@ -61,6 +61,9 @@ namespace FortnoxAPILibrary
             /// <remarks/>
             [RealValue("unbooked")]
             Unbooked,
+            /// <remarks/>
+            [RealValue("pendingpayment")]
+            PendingPayment
         }
 
 		/// <remarks/>
