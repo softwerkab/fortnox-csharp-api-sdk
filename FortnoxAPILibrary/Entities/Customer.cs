@@ -92,6 +92,10 @@ namespace FortnoxAPILibrary
 
 		private string faxField;
 
+		private string glnField;
+
+		private string glnDeliveryField;
+
 		private string invoiceAdministrationFeeField;
 
 		private string invoiceDiscountField;
@@ -561,6 +565,32 @@ namespace FortnoxAPILibrary
 			set
 			{
 				this.faxField = value;
+			}
+		}
+
+		/// <remarks/>
+		public string GLN
+		{
+			get
+			{
+				return this.glnField;
+			}
+			set
+			{
+				this.glnField = value;
+			}
+		}
+
+		/// <remarks/>
+		public string GLNDelivery
+		{
+			get
+			{
+				return this.glnDeliveryField;
+			}
+			set
+			{
+				this.glnDeliveryField = value;
 			}
 		}
 
