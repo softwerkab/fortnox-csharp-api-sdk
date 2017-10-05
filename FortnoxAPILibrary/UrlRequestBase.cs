@@ -12,10 +12,66 @@ namespace FortnoxAPILibrary
     /// <remarks/>
     public class UrlRequestBase
     {
-        /// <summary>
-        /// Timeout of requests sent to the Fortnox API in miliseconds
-        /// </summary>
-        public int Timeout { get; set; }
+		string clientSecret;
+
+		string accessToken;
+
+		/// <summary>
+		/// Optional Fortnox Client Secret, if used it will override the static version.
+		/// </summary>
+		/// <exception cref="Exception">Exception will be thrown if client secret is not set.</exception>
+		public string ClientSecret
+		{
+			get
+			{
+				if (!string.IsNullOrEmpty(this.clientSecret))
+				{
+					return this.clientSecret;
+				}
+
+				if (!string.IsNullOrEmpty(ConnectionCredentials.ClientSecret))
+				{
+					return ConnectionCredentials.ClientSecret;
+				}
+
+				throw new Exception("Fortnox Client Secret must be set.");
+			}
+			set
+			{
+				this.clientSecret = value;
+			}
+		}
+
+		/// <summary>
+		/// Optional Fortnox Access Token, if used it will override the static version.
+		/// </summary>
+		/// /// <exception cref="Exception">Exception will be thrown if access token is not set.</exception>
+		public string AccessToken
+		{
+			get
+			{
+				if (!string.IsNullOrEmpty(this.accessToken))
+				{
+					return this.accessToken;
+				}
+
+				if (!string.IsNullOrEmpty(ConnectionCredentials.AccessToken))
+				{
+					return ConnectionCredentials.AccessToken;
+				}
+
+				throw new Exception("Fortnox Access Token must be set.");
+			}
+			set
+			{
+				this.accessToken = value;
+			}
+		}
+
+		/// <summary>
+		/// Timeout of requests sent to the Fortnox API in miliseconds
+		/// </summary>
+		public int Timeout { get; set; }
 
         /// <remarks/>
         public FortnoxError.ErrorInformation Error { get; set; }
@@ -92,14 +148,10 @@ namespace FortnoxAPILibrary
         internal HttpWebRequest SetupRequest(string requestUriString, string method)
         {
             Error = null;
-            if (string.IsNullOrEmpty(ConnectionCredentials.AccessToken) || string.IsNullOrEmpty(ConnectionCredentials.ClientSecret))
-            {
-                throw new Exception("Access-Token and Client-Secret must be set");
-            }
 
             HttpWebRequest wr = (HttpWebRequest)HttpWebRequest.Create(requestUriString);
-            wr.Headers.Add("access-token", ConnectionCredentials.AccessToken);
-            wr.Headers.Add("client-secret", ConnectionCredentials.ClientSecret);
+            wr.Headers.Add("access-token", this.AccessToken);
+            wr.Headers.Add("client-secret", this.ClientSecret);
             wr.ContentType = "application/xml";
             wr.Accept = "application/xml";
             wr.Method = method;
