@@ -28,6 +28,7 @@ namespace FortnoxAPILibrary
 	[System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
 	public partial class Article
 	{
+		private string activeField;
 
 		private string articleNumberField;
 
@@ -97,7 +98,20 @@ namespace FortnoxAPILibrary
 
 	    private string salesPriceField;
 
-	    /// <remarks/>
+		/// <remarks/>
+		public string Active
+		{
+			get
+			{
+				return this.activeField;
+			}
+			set
+			{
+				this.activeField = value;
+			}
+		}
+
+		/// <remarks/>
 		public string ArticleNumber
 		{
 			get
