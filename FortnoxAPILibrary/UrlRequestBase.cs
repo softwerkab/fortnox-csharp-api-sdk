@@ -77,6 +77,8 @@ namespace FortnoxAPILibrary
             return requestUriString;
         }
 
+        public AlternativeConnectionCredentials AlternativeConnectionCredentials { get; set; }
+
         /// <summary>
         /// This method is used to setup the WebRequest used in every call to Fortnox. 
         /// </summary>
@@ -92,14 +94,21 @@ namespace FortnoxAPILibrary
         internal HttpWebRequest SetupRequest(string requestUriString, string method)
         {
             Error = null;
-            if (string.IsNullOrEmpty(ConnectionCredentials.AccessToken) || string.IsNullOrEmpty(ConnectionCredentials.ClientSecret))
+            var accessToken = ConnectionCredentials.AccessToken;
+            var clientSecret = ConnectionCredentials.ClientSecret;
+            if (AlternativeConnectionCredentials != null)
+            {
+                accessToken = AlternativeConnectionCredentials.AccessToken;
+                clientSecret = AlternativeConnectionCredentials.ClientSecret;
+            }
+            if (string.IsNullOrEmpty(accessToken) || string.IsNullOrEmpty(clientSecret))
             {
                 throw new Exception("Access-Token and Client-Secret must be set");
             }
 
             HttpWebRequest wr = (HttpWebRequest)HttpWebRequest.Create(requestUriString);
-            wr.Headers.Add("access-token", ConnectionCredentials.AccessToken);
-            wr.Headers.Add("client-secret", ConnectionCredentials.ClientSecret);
+            wr.Headers.Add("access-token", accessToken);
+            wr.Headers.Add("client-secret", clientSecret);
             wr.ContentType = "application/xml";
             wr.Accept = "application/xml";
             wr.Method = method;

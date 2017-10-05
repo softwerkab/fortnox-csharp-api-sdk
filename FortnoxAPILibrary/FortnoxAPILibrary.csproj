@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FortnoxAPILibrary</RootNamespace>
     <AssemblyName>FortnoxAPILibrary</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlternativeConnectionCredentials.cs" />
     <Compile Include="APIConstants.cs" />
     <Compile Include="Connectors\AccountChartConnector.cs" />
     <Compile Include="Connectors\ArchiveConnector.cs" />
