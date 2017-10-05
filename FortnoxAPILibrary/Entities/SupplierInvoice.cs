@@ -89,6 +89,8 @@ namespace FortnoxAPILibrary
 
         private List<SupplierInvoiceRow> supplierInvoiceRowsField;
 
+        private string YourReferenceField;
+
         private string urlField;
 
         /// <remarks/>
@@ -495,6 +497,19 @@ namespace FortnoxAPILibrary
             }
         }
 
+        /// <remarks/>
+        public string YourReference
+        {
+            get
+            {
+                return this.YourReferenceField;
+            }
+            set
+            {
+                this.YourReferenceField = value;
+            }
+        }
+        
         /// <summary>This field is Read-Only in Fortnox</summary>
         [System.ComponentModel.ReadOnly(true)]
         [System.Xml.Serialization.XmlAttributeAttribute()]
