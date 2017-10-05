@@ -28,6 +28,8 @@ namespace FortnoxAPILibrary
 	[System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
 	public partial class Customer
 	{
+		private string activeField;
+
 		private string address1Field;
 
 		private string address2Field;
@@ -149,6 +151,19 @@ namespace FortnoxAPILibrary
 		private string zipCodeField;
 
 		private string urlField;
+
+		/// <remarks/>
+		public string Active
+		{
+			get
+			{
+				return this.activeField;
+			}
+			set
+			{
+				this.activeField = value;
+			}
+		}
 
 		/// <remarks/>
 		public string Address1
