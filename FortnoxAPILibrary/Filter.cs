@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-
-namespace FortnoxAPILibrary
+﻿namespace FortnoxAPILibrary
 {
 	/// <remarks/>
 	public class Filter
@@ -61,7 +55,13 @@ namespace FortnoxAPILibrary
             /// <remarks/>
             [RealValue("unbooked")]
             Unbooked,
-        }
+			/// <remarks/>
+			[RealValue("pendingpayment")]
+			PendingPayment,
+			/// <remarks/>
+			[RealValue("authorizepending")]
+			AuthorizePending,
+		}
 
 		/// <remarks/>
 		public enum Offer
