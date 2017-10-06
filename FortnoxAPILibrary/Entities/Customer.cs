@@ -288,6 +288,11 @@ namespace FortnoxAPILibrary
 		{
 			get
 			{
+				if (this.defaultDeliveryTypesField == null)
+				{
+					this.defaultDeliveryTypesField = new InvoiceDefaultDeliveryTypes();
+				}
+
 				return this.defaultDeliveryTypesField;
 			}
 			set
@@ -968,12 +973,6 @@ namespace FortnoxAPILibrary
 				this.urlField = value;
 			}
 		}
-
-        /// <remarks/>
-        public Customer()
-        {
-            this.DefaultDeliveryTypes = new InvoiceDefaultDeliveryTypes();
-        }
 	}
 
 	/// <remarks/>
