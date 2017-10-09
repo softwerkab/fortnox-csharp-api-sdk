@@ -167,6 +167,18 @@ namespace FortnoxAPILibrary
 
 		private string urlField;
 
+		/// <summary>
+		/// Actual Content Type if file data is manually downloaded from archive.
+		/// </summary>
+		[System.Xml.Serialization.XmlIgnore]
+		public string ContentType { get; set; }
+
+		/// <summary>
+		/// Actual file data if manually downloaded from archive.
+		/// </summary>
+		[System.Xml.Serialization.XmlIgnore]
+		public byte[] Data { get; set; }
+
 		/// <remarks/>
 		public string Comments
 		{
@@ -244,6 +256,39 @@ namespace FortnoxAPILibrary
 			{
 				this.urlField = value;
 			}
+		}
+
+		/// <remarks/>
+		public string GetFileExtension()
+		{
+			if (string.IsNullOrEmpty(this.Name))
+			{
+				return "";
+			}
+
+			return System.IO.Path.GetExtension(this.Name);
+		}
+
+		/// <remarks/>
+		public string GetFileNameWithoutExtension()
+		{
+			if (string.IsNullOrEmpty(this.Name))
+			{
+				return "";
+			}
+
+			return System.IO.Path.GetFileNameWithoutExtension(this.Name);
+		}
+
+		/// <remarks/>
+		public System.IO.MemoryStream GetFileDataAsMemoryStream()
+		{
+			if (this.Data == null)
+			{
+				throw new System.Exception("File data must be set.");
+			}
+
+			return new System.IO.MemoryStream(this.Data);
 		}
 	}
 

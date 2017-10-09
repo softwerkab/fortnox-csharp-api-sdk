@@ -126,11 +126,32 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="fileIdOrFilePath">The id or path of the file to download</param>
 		/// <param name="localPath">The local path to save the file to </param>
-		public new void DownloadFile(string fileIdOrFilePath, string localPath)
+		public void DownloadFile(string fileIdOrFilePath, string localPath)
         {
             base.Resource = "archive";
 
 			base.DownloadFile(fileIdOrFilePath, localPath);
+		}
+
+		/// <summary>
+		/// Downloads actual file data from Fortnox Archive into existing file object. Please note that the file object needs a valid file id.
+		/// </summary>
+		/// <param name="file">File object to be injected with file data.</param>
+		public void DownloadFileData(File file)
+		{
+			if (file == null)
+			{
+				throw new ArgumentNullException("File must be set.");
+			}
+
+			if (string.IsNullOrEmpty(file.Id))
+			{
+				throw new ArgumentException("File id must be set.");
+			}
+
+			base.Resource = "archive";
+
+			base.DownloadFile(file.Id, "", file);
 		}
 
 		/// <summary>
