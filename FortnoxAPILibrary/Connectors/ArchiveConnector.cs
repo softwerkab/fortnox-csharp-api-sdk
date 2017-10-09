@@ -173,5 +173,24 @@ namespace FortnoxAPILibrary.Connectors
 
             return base.BaseCreate(folder, parameters);
         }
+
+		/// <summary>
+		/// Deletes a file from Fortnox Archive.
+		/// </summary>
+		/// <param name="fileId">The id of the file to be deleted.</param>
+		public void DeleteFile(string fileId)
+		{
+			base.BaseDelete(fileId);
+		}
+
+		/// <summary>
+		/// Deletes a folder and all its content from Fortnox Archive.
+		/// </summary>
+		/// <param name="folderId">The id of the folder to be deleted.</param>
+		public void DeleteFolder(string folderId)
+		{
+			base.BaseDelete(folderId);
+		}
+
 	}
 }
