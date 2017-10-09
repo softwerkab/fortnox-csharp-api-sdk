@@ -121,5 +121,17 @@
 			[RealValue("inactive")]
 			Inactive,
 		}
+
+		/// <remarks/>
+		public enum Article
+		{
+			/// <remarks/>
+			[RealValue("active")]
+			Active,
+			/// <remarks/>
+			[RealValue("inactive")]
+			Inactive,
+		}
+
 	}
 }
