@@ -275,7 +275,7 @@ namespace FortnoxAPILibrary
             return entity;
         }
 
-        internal T UploadFile<T>(string localPath)
+        internal T UploadFile<T>(string localPath, byte[] fileData = null, string fileName = null)
         {
             this.ResponseXml = "";
 
@@ -283,11 +283,18 @@ namespace FortnoxAPILibrary
 
             try
             {
-                XmlSerializer xs = new XmlSerializer(typeof(T));
+				// prepp name and data
+				if (fileData == null)
+				{
+					fileName = System.IO.Path.GetFileName(localPath);
+					fileData = System.IO.File.ReadAllBytes(localPath);
+				}
+
+				XmlSerializer xs = new XmlSerializer(typeof(T));
 
                 Random rand = new Random();
                 string boundary = "----boundary" + rand.Next().ToString();
-                byte[] header = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + System.IO.Path.GetFileName(localPath) + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
+                byte[] header = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + fileName + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
                 byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
 
                 HttpWebRequest request = this.SetupRequest(this.RequestUriString, "POST");
@@ -296,8 +303,7 @@ namespace FortnoxAPILibrary
                 using (Stream data_stream = request.GetRequestStream())
                 {
                     data_stream.Write(header, 0, header.Length);
-                    byte[] file_bytes = System.IO.File.ReadAllBytes(localPath);
-                    data_stream.Write(file_bytes, 0, file_bytes.Length);
+                    data_stream.Write(fileData, 0, fileData.Length);
                     data_stream.Write(trailer, 0, trailer.Length);
                     data_stream.Close();
 

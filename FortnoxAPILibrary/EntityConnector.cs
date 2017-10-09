@@ -327,7 +327,7 @@ namespace FortnoxAPILibrary
             return base.UploadFile<SieSummary>(localPath);
         }
 
-        internal File BaseUploadFile(string localPath, string folderId)
+        internal File BaseUploadFile(string localPath, string folderId, byte[] fileData = null, string fileName = null)
         {
             base.RequestUriString = this.GetUrl();
 

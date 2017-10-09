@@ -53,7 +53,6 @@ namespace FortnoxAPILibrary.Connectors
 
 		}
 
-
 		/// <summary>
 		/// Gets at list of Files and Folders
 		/// </summary>
@@ -108,6 +107,34 @@ namespace FortnoxAPILibrary.Connectors
 			return resource;
 		}
 
+		/// <summary>
+		/// Creates a folder.
+		/// </summary>
+		/// <param name="folder">The folder entity to create</param>
+		/// <param name="destination">he id or path to the parent folder to create the folder in.</param>
+		/// <returns>The created folder.</returns>
+		public Folder CreateFolder(Folder folder, string destination = "")
+		{
+			base.Resource = "archive";
+
+			Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+			if (!String.IsNullOrWhiteSpace(destination))
+			{
+				Guid test = new Guid();
+				if (Guid.TryParse(destination, out test))
+				{
+					parameters.Add("folderid", destination);
+				}
+				else
+				{
+					parameters.Add("path", destination);
+				}
+			}
+
+			return base.BaseCreate(folder, parameters);
+		}
+
 		///<summary>
 		///Uploads a file to Fortnox
 		///</summary>
@@ -119,6 +146,43 @@ namespace FortnoxAPILibrary.Connectors
             base.Resource = "archive";
 
 			return base.BaseUploadFile(localPath, folderId);
+		}
+
+		/// <summary>
+		/// Uploads a file to Fortnox Archive from provided data array.
+		/// </summary>
+		/// <returns>Created file.</returns>
+		public File UploadFileData(byte[] data, string name, string folderId = "")
+		{
+			if (data == null) throw new ArgumentNullException("File data must be set.");
+
+			if (string.IsNullOrEmpty(name)) throw new ArgumentException("File name must be set.");
+
+			if (!System.IO.Path.HasExtension(name)) throw new ArgumentException("File name with extention must be set.");
+
+			base.Resource = "archive";
+
+			var uploadedFile = base.BaseUploadFile("", folderId, data, name);
+
+			uploadedFile.ContentType = System.Web.MimeMapping.GetMimeMapping(name); // as good as archive...
+
+			uploadedFile.Data = new byte[data.Length];
+
+			data.CopyTo(uploadedFile.Data, 0);
+
+			return uploadedFile;
+		}
+
+		/// <summary>
+		/// Uploads a file to Fortnox Archive from provided data stream.
+		/// </summary>
+		/// <returns>Created file.</returns>
+		public File UploadFileData(System.IO.Stream stream, string name, string folderId = "")
+		{
+			stream.Position = 0;
+			var arr = new byte[stream.Length];
+			stream.Read(arr, 0, (int)stream.Length);
+			return this.UploadFileData(arr, name, folderId);
 		}
 
 		/// <summary>
@@ -167,34 +231,6 @@ namespace FortnoxAPILibrary.Connectors
 			return base.MoveFile(fileId, destination);
 		}
 
-        /// <summary>
-        /// Creates a folder.
-        /// </summary>
-        /// <param name="folder">The folder entity to create</param>
-        /// <param name="destination">he id or path to the parent folder to create the folder in.</param>
-        /// <returns>The created folder.</returns>
-        public Folder CreateFolder(Folder folder, string destination = "")
-        {
-            base.Resource = "archive";
-
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-
-            if (!String.IsNullOrWhiteSpace(destination))
-            {
-                Guid test = new Guid();
-                if (Guid.TryParse(destination, out test))
-                {
-                    parameters.Add("folderid", destination);
-                }
-                else
-                {
-                    parameters.Add("path", destination);
-                }
-            }
-
-            return base.BaseCreate(folder, parameters);
-        }
-
 		/// <summary>
 		/// Deletes a file from Fortnox Archive.
 		/// </summary>
@@ -212,6 +248,5 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			base.BaseDelete(folderId);
 		}
-
 	}
 }
