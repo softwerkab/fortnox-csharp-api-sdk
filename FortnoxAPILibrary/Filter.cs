@@ -110,5 +110,16 @@
 			[RealValue("orders")]
 			Orders
 		}
+
+		/// <remarks/>
+		public enum Customer
+		{
+			/// <remarks/>
+			[RealValue("active")]
+			Active,
+			/// <remarks/>
+			[RealValue("inactive")]
+			Inactive,
+		}
 	}
 }
