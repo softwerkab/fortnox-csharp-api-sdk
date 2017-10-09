@@ -326,7 +326,7 @@ namespace FortnoxAPILibrary
             return result;
         }
 
-        internal void DownloadFile(string idOrPath, string localPath)
+        internal void DownloadFile(string idOrPath, string localPath, File file = null)
         {
             this.ResponseXml = "";
 
@@ -353,10 +353,24 @@ namespace FortnoxAPILibrary
                     httpStatusCode = response.StatusCode;
                     using (Stream responseStream = response.GetResponseStream())
                     {
-                        WriteStream(responseStream);
-                    }
-                }
-            }
+						if (file == null)
+						{
+							// hdd
+							WriteStream(responseStream);
+						}
+						else
+						{
+							// memory                          
+							using (var ms = new System.IO.MemoryStream())
+							{
+								file.ContentType = response.Headers["Content-Type"];
+								responseStream.CopyTo(ms);
+								file.Data = ms.ToArray();								
+							}
+						}
+					}
+				}
+			}
             catch (WebException we)
             {
                 Error = this.HandleException(we);
