@@ -168,17 +168,6 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <remarks/>
-		public enum PaymentWay
-		{
-			/// <remarks/>
-			CASH,
-			/// <remarks/>
-			CARD,
-			/// <remarks/>
-			AG
-		}
-
-		/// <remarks/>
 		public InvoiceConnector()
 		{
 			base.Resource = "invoices";
