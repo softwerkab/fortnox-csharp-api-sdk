@@ -45,13 +45,21 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="v300.cs" />
+    <Compile Include="Testv300.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FortnoxAPILibrary\FortnoxAPILibrary.csproj">
+      <Project>{b9bb428a-9be8-4e2c-a674-cd3ddb3b18f7}</Project>
+      <Name>FortnoxAPILibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
