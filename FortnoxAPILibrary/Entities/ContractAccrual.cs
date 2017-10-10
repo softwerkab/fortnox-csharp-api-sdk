@@ -7,8 +7,10 @@ namespace FortnoxAPILibrary
 	/// <remarks/>
 	public class ContractAccrual
     {
-        /// <remarks/>
-        public string AccrualAccount { get; set; }
+		private List<InvoiceAccrualRow> invoiceAccrualRowField;
+
+		/// <remarks/>
+		public string AccrualAccount { get; set; }
 
 		/// <remarks/>
 		public string CostAccount { get; set; }
@@ -16,12 +18,22 @@ namespace FortnoxAPILibrary
 		/// <remarks/>
 		public string Description { get; set; }
 
-        /// <remarks/>
-        [XmlArrayItemAttribute("InvoiceAccrualRow", IsNullable = false)]
-        public List<InvoiceAccrualRow> InvoiceAccrualRows { get; set; }
+		/// <remarks/>
+		[XmlArrayItemAttribute("InvoiceAccrualRow", IsNullable = false)]
+		public List<InvoiceAccrualRow> AccrualRows
+		{
+			get
+			{
+				return this.invoiceAccrualRowField;
+			}
+			set
+			{
+				this.invoiceAccrualRowField = value;
+			}
+		}
 
-        /// <remarks/>
-        public string DocumentNumber { get; set; }
+		/// <remarks/>
+		public string DocumentNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly(true)]
