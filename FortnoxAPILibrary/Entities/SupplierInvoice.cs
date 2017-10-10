@@ -28,7 +28,7 @@ namespace FortnoxAPILibrary
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
     public partial class SupplierInvoice
     {
-		private SupplierInvoiceConnector.AccountingMethod accountingMethod;
+		private string accountingMethod;
 
 		private string administrationFeeField;
 
@@ -108,8 +108,9 @@ namespace FortnoxAPILibrary
             this.SupplierInvoiceRows = new List<SupplierInvoiceRow>();
         }
 
-		/// <remarks/>
-		public SupplierInvoiceConnector.AccountingMethod AccountingMethod
+		/// <summary>This field is Read-Only in Fortnox</summary>
+		[System.ComponentModel.ReadOnly(true)]
+		public string AccountingMethod
 		{
 			get
 			{
