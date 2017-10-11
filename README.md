@@ -1,9 +1,6 @@
 [![GitHub release](https://img.shields.io/github/release/FortnoxAB/csharp-api-sdk.svg)]() [![nuget](https://img.shields.io/nuget/v/Fortnox.NET.SDK.svg)](https://www.nuget.org/packages/Fortnox.NET.SDK/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-***
-
 <img src="https://raw.githubusercontent.com/FortnoxAB/csharp-api-sdk/master/Repository/fortnox2.jpg" style="width:150%;">
-
 
 ## Fortnox .NET SDK
 Official .NET SDK package for developing integrations towards Fortnox REST API. Please note that this package is not totally aligned with the main API, however we are pretty close and will strive to keep up the pace. For more information please visit the official documentation <a href="https://developer.fortnox.se/documentation/">https://developer.fortnox.se/</a>.
@@ -39,7 +36,7 @@ Official .NET SDK package for developing integrations towards Fortnox REST API. 
 
 
 
-# Get licence
+## Get licence
 
 The MIT License (MIT)
 
