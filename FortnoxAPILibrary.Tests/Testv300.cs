@@ -281,6 +281,7 @@ namespace FortnoxAPILibrary.Tests
 			Assert.IsFalse(connector.HasError);
 		}
 
+        [Ignore]
 		[TestMethod]
 		public void TestFiles()
 		{
