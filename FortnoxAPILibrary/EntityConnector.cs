@@ -7,8 +7,22 @@ using System.Web;
 
 namespace FortnoxAPILibrary
 {
-    /// <remarks/>
-    public abstract class EntityConnector<E, C, S> : UrlRequestBase
+    /// <summary>
+    /// 
+    /// </summary>
+    public interface IEntityConnector
+    {
+        /// <remarks/>
+        FortnoxError.ErrorInformation Error { get; set; }
+
+        /// <summary>
+        /// True if something went wrong with the request. Otherwise false.
+        /// </summary>
+        bool HasError { get; }
+    }
+
+    /// <remarks />
+    public abstract class EntityConnector<TEntity, TCollection, TSortBy> : UrlRequestBase, IEntityConnector
     {
         /// <remarks/>
         public EntityConnector()
@@ -19,7 +33,7 @@ namespace FortnoxAPILibrary
 
         }
 
-        private S sortBy;
+        private TSortBy sortBy;
         private bool sortBySet = false;
         private string SortByRealValue
         {
@@ -52,7 +66,7 @@ namespace FortnoxAPILibrary
         /// <summary>
         /// Sort the result
         /// </summary>
-        public S SortBy
+        public TSortBy SortBy
         {
             get
             {
@@ -90,7 +104,7 @@ namespace FortnoxAPILibrary
         /// <remarks/>
         protected Dictionary<string, string> Parameters = new Dictionary<string, string>();
 
-        internal E BaseCreate(E entity, Dictionary<string, string> parameters = null)
+        internal TEntity BaseCreate(TEntity entity, Dictionary<string, string> parameters = null)
         {
             this.Parameters = parameters == null ? new Dictionary<string, string>() : parameters;
 
@@ -106,10 +120,10 @@ namespace FortnoxAPILibrary
             base.ResponseType = RequestResponseType.XML;
             base.RequestUriString = requestUriString;
 
-            return base.DoRequest<E>(entity);
+            return base.DoRequest<TEntity>(entity);
         }
 
-        internal E BaseUpdate(E entity, params string[] indices)
+        internal TEntity BaseUpdate(TEntity entity, params string[] indices)
         {
             this.Parameters = new Dictionary<string, string>();
 
@@ -127,7 +141,7 @@ namespace FortnoxAPILibrary
             base.ResponseType = RequestResponseType.XML;
             base.RequestUriString = requestUriString;
 
-            return base.DoRequest<E>(entity);
+            return base.DoRequest<TEntity>(entity);
         }
 
         internal void BaseDelete(string index)
@@ -145,7 +159,7 @@ namespace FortnoxAPILibrary
             base.DoRequest();
         }
 
-        internal E BaseGet(params string[] indices)
+        internal TEntity BaseGet(params string[] indices)
         {
             this.Parameters = new Dictionary<string, string>();
 
@@ -166,10 +180,10 @@ namespace FortnoxAPILibrary
             base.ResponseType = RequestResponseType.XML;
             base.RequestUriString = requestUriString;
 
-            return base.DoRequest<E>();
+            return base.DoRequest<TEntity>();
         }
 
-        internal C BaseFind(Dictionary<string, string> parameters = null)
+        internal TCollection BaseFind(Dictionary<string, string> parameters = null)
         {
             this.Parameters = parameters == null ? new Dictionary<string, string>() : parameters;
 
@@ -210,7 +224,7 @@ namespace FortnoxAPILibrary
             base.ResponseType = RequestResponseType.XML;
             base.RequestUriString = requestUriString;
 
-            C result = base.DoRequest<C>();
+            TCollection result = base.DoRequest<TCollection>();
 
             return result;
         }
@@ -283,7 +297,7 @@ namespace FortnoxAPILibrary
             }
         }
 
-        internal E DoAction(string documentNumber, string action)
+        internal TEntity DoAction(string documentNumber, string action)
         {
 
             string requestUriString = this.GetUrl(documentNumber.ToString());
@@ -315,7 +329,7 @@ namespace FortnoxAPILibrary
             }
             base.RequestUriString = requestUriString;
 
-            return base.DoRequest<E>();
+            return base.DoRequest<TEntity>();
         }
 
 
@@ -350,10 +364,10 @@ namespace FortnoxAPILibrary
         }
 
 
-        private static void ResetProperties(E entity)
+        private static void ResetProperties(TEntity entity)
         {
             //Nullar alla properties som har attibutet [ReadOnly(true)] eftersom de inte ska med i anropet. Kräver att alla properties är strängar
-            var properties = typeof(E).GetProperties().AsEnumerable();
+            var properties = typeof(TEntity).GetProperties().AsEnumerable();
 
             ResetProperties(entity, properties);
         }
