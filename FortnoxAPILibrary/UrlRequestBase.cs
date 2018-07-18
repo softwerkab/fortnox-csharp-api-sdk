@@ -118,11 +118,13 @@ namespace FortnoxAPILibrary
             this.Timeout = 300000;
         }
 
-        internal string GetUrl(string index = "")
+        internal string GetUrl(string index = "", string resource = null)
         {
+            resource = resource ?? this.Resource;
+
             string[] str = new string[]{
 				ConnectionCredentials.FortnoxAPIServer,
-				this.Resource,
+                resource,
 				index
 			};
 
@@ -277,27 +279,33 @@ namespace FortnoxAPILibrary
 
         internal T UploadFile<T>(string localPath, byte[] fileData = null, string fileName = null)
         {
+            if (fileData == null)
+            {
+                fileName = System.IO.Path.GetFileName(localPath);
+                fileData = System.IO.File.ReadAllBytes(localPath);
+            }
+
+            return UploadFile<T>(fileData, fileName);
+        }
+
+        internal T UploadFile<T>(byte[] fileData, string fileName, string uriString = null)
+        {
+            uriString = uriString ?? this.RequestUriString;
+
             this.ResponseXml = "";
 
             T result = default(T);
 
             try
             {
-				// prepp name and data
-				if (fileData == null)
-				{
-					fileName = System.IO.Path.GetFileName(localPath);
-					fileData = System.IO.File.ReadAllBytes(localPath);
-				}
-
-				XmlSerializer xs = new XmlSerializer(typeof(T));
+                XmlSerializer xs = new XmlSerializer(typeof(T));
 
                 Random rand = new Random();
                 string boundary = "----boundary" + rand.Next().ToString();
                 byte[] header = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + fileName + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
                 byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
 
-                HttpWebRequest request = this.SetupRequest(this.RequestUriString, "POST");
+                HttpWebRequest request = this.SetupRequest(uriString, "POST");
                 request.ContentType = "multipart/form-data; boundary=" + boundary;
 
                 using (Stream data_stream = request.GetRequestStream())
