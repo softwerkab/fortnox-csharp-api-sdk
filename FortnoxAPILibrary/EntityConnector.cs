@@ -353,13 +353,6 @@ namespace FortnoxAPILibrary
             return base.UploadFile<File>(localPath, fileData, fileName);
         }
 
-        internal File BaseUploadFile(byte[] fileData, string fileName, string targetUrl)
-        {
-            base.RequestUriString = this.GetUrl(resource: targetUrl);
-
-            return base.UploadFile<File>(fileData, fileName);
-        }
-
         internal string AddParameters(string requestUriString)
         {
             if (this.Parameters.Count > 0)

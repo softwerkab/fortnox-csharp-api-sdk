@@ -65,16 +65,5 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return base.BaseFind();
 		}
-
-        /// <summary>
-        /// Upload the file in order to get Id
-        /// </summary>
-        /// <param name="fileContent"></param>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
-        public File UploadFile(byte[] fileContent, string fileName)
-        {
-            return base.BaseUploadFile(fileContent, fileName, "index?path=Inbox_v");
-        }
 	}
 }
