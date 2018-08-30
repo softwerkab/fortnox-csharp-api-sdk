@@ -128,11 +128,11 @@ namespace FortnoxAPILibrary
 
 		private string termsOfPaymentField;
 
-		private CustomerConnector.Type typeField;
+		private CustomerConnector.Type? typeField;
 
 		private string vATNumberField;
 
-		private CustomerConnector.VATType vATTypeField;
+		private CustomerConnector.VATType? vATTypeField;
 
 		private string visitingAddressField;
 
@@ -810,7 +810,7 @@ namespace FortnoxAPILibrary
 		}
 
 		/// <remarks/>
-		public CustomerConnector.Type Type
+		public CustomerConnector.Type? Type
 		{
 			get
 			{
@@ -836,7 +836,7 @@ namespace FortnoxAPILibrary
 		}
 
 		/// <remarks/>
-		public CustomerConnector.VATType VATType
+		public CustomerConnector.VATType? VATType
 		{
 			get
 			{
@@ -984,14 +984,14 @@ namespace FortnoxAPILibrary
 	public partial class InvoiceDefaultDeliveryTypes
 	{
 
-		private CustomerConnector.DefaultInvoiceDeliveryType invoiceField;
+		private CustomerConnector.DefaultInvoiceDeliveryType? invoiceField;
 
-		private CustomerConnector.DefaultOfferDeliveryType offerField;
+		private CustomerConnector.DefaultOfferDeliveryType? offerField;
 
-		private CustomerConnector.DefaultOrderDeliveryType orderField;
+		private CustomerConnector.DefaultOrderDeliveryType? orderField;
 
 		/// <remarks/>
-		public CustomerConnector.DefaultInvoiceDeliveryType Invoice
+		public CustomerConnector.DefaultInvoiceDeliveryType? Invoice
 		{
 			get
 			{
@@ -1004,7 +1004,7 @@ namespace FortnoxAPILibrary
 		}
 
 		/// <remarks/>
-		public CustomerConnector.DefaultOfferDeliveryType Offer
+		public CustomerConnector.DefaultOfferDeliveryType? Offer
 		{
 			get
 			{
@@ -1017,7 +1017,7 @@ namespace FortnoxAPILibrary
 		}
 
 		/// <remarks/>
-		public CustomerConnector.DefaultOrderDeliveryType Order
+		public CustomerConnector.DefaultOrderDeliveryType? Order
 		{
 			get
 			{
