@@ -5,9 +5,45 @@ using System.Text;
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class InvoiceAccrualConnector : EntityConnector<InvoiceAccrual, InvoiceAccruals, Sort.By.InvoiceAccrual>
-	{
+    public interface IInvoiceAccrualConnector : IEntityConnector<Sort.By.InvoiceAccrual>
+    {
+        /// <summary>
+        /// Get an invoice accrual	
+        /// </summary>
+        /// <param name="invoiceNumber">The invoice number of the invoice accrual to get</param>
+        /// <returns>The found invoice accrual</returns>
+        InvoiceAccrual Get(string invoiceNumber);
+
+        /// <summary>
+        /// Updates an invoice accrual
+        /// </summary>
+        /// <param name="invoiceAccrual">The invoice accrual to update</param>
+        /// <returns>The updated invoice accrual</returns>
+        InvoiceAccrual Update(InvoiceAccrual invoiceAccrual);
+
+        /// <summary>
+        /// Create a new invoice accrual
+        /// </summary>
+        /// <param name="invoiceAccrual">The invoice accrual to create</param>
+        /// <returns>The created invoice accrual</returns>
+        InvoiceAccrual Create(InvoiceAccrual invoiceAccrual);
+
+        /// <summary>
+        /// Deletes an invoice accrual
+        /// </summary>
+        /// <param name="invoiceNumber">The invoice number of the invoice accrual to delete</param>
+        void Delete(string invoiceNumber);
+
+        /// <summary>
+        /// Gets a list of invoice accruals
+        /// </summary>
+        /// <returns>A list of invoice accruals</returns>
+        InvoiceAccruals Find();
+    }
+
+    /// <remarks/>
+	public class InvoiceAccrualConnector : EntityConnector<InvoiceAccrual, InvoiceAccruals, Sort.By.InvoiceAccrual>, IInvoiceAccrualConnector
+    {
 		/// <remarks/>
 		public InvoiceAccrualConnector()
 		{

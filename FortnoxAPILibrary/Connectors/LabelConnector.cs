@@ -1,8 +1,51 @@
 ﻿using System.Collections.Generic;
 
 namespace FortnoxAPILibrary.Connectors {
+    public interface ILabelConnector : IEntityConnector<Sort.By.Label>
+    {
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string Id { get; set; }
+
+        /// <summary>
+        /// Gets a Label by ID
+        /// </summary>
+        /// <param name="labelId"></param>
+        /// <returns></returns>
+        Label Get(string labelId);
+
+        /// <summary>
+        /// Updates a label
+        /// </summary>
+        /// <param name="label"></param>
+        /// <returns></returns>
+        Label Update(Label label);
+
+        /// <summary>
+        /// Create a new label
+        /// </summary>
+        /// <param name="label">The label entity to create</param>
+        /// <returns>The created label.</returns>
+        Label Create(Label label);
+
+        /// <summary>
+        /// Delete a label
+        /// </summary>
+        /// <param name="labelid">The label id to delete</param>
+        /// <returns>If the label was deleted. </returns>
+        void Delete(string labelid);
+
+        /// <summary>
+        /// Gets a list of labels
+        /// </summary>
+        /// <returns>A list of labels</returns>
+        Labels Find();
+    }
+
     /// <remarks/>
-    public class LabelConnector : EntityConnector<Label, Labels, Sort.By.Label> {
+    public class LabelConnector : EntityConnector<Label, Labels, Sort.By.Label>, ILabelConnector
+    {
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

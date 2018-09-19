@@ -1,9 +1,49 @@
-﻿using System.Collections.Generic;
-
-namespace FortnoxAPILibrary.Connectors
+﻿namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class TermsOfPaymentConnector : EntityConnector<TermsOfPayment, TermsOfPayments, Sort.By.TermsOfPayment>
+    public interface ITermsOfPaymentConnector : IEntityConnector<Sort.By.TermsOfPayment>
+    {
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string Code { get; set; }
+
+        /// <summary>
+        /// Gets a Terms of payment by code
+        /// </summary>
+        /// <param name="termsOfPaymentCode"></param>
+        /// <returns></returns>
+        TermsOfPayment Get(string termsOfPaymentCode);
+
+        /// <summary>
+        /// Updates a terms of payment
+        /// </summary>
+        /// <param name="termsOfPayment"></param>
+        /// <returns></returns>
+        TermsOfPayment Update(TermsOfPayment termsOfPayment);
+
+        /// <summary>
+        /// Create a new Terms of payment
+        /// </summary>
+        /// <param name="termsOfPayment">The terms of payment entity to create</param>
+        /// <returns>The created terms of payment.</returns>
+        TermsOfPayment Create(TermsOfPayment termsOfPayment);
+
+        /// <summary>
+        /// Delete a terms of payment
+        /// </summary>
+        /// <param name="termsOfPaymentCode">The terms of payemnt code to delete</param>
+        /// <returns>If the terms of payment was deleted. </returns>
+        void Delete(string termsOfPaymentCode);
+
+        /// <summary>
+        /// Gets a list of terms of payments
+        /// </summary>
+        /// <returns>A list of terms of payments</returns>
+        TermsOfPayments Find();
+    }
+
+    /// <remarks/>
+	public class TermsOfPaymentConnector : EntityConnector<TermsOfPayment, TermsOfPayments, Sort.By.TermsOfPayment>, ITermsOfPaymentConnector
     {
         /// <summary>
         /// Use with Find() to limit the search result

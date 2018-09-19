@@ -2,18 +2,81 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Web;
 
 namespace FortnoxAPILibrary
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public interface IEntityConnector
+
+    public interface IEntityConnector<TSortBy>
     {
+        /// <summary>
+        /// Sort Order, ascending or descending
+        /// </summary>
+        Sort.Order SortOrder { get; set; }
+
+        /// <summary>
+        /// Sort the result
+        /// </summary>
+        TSortBy SortBy { get; set; }
+
+        /// <summary>
+        /// <para>Use with Find() to limit the search result</para>
+        /// <para>Default is 100</para>
+        /// <para>Max is 500</para>
+        /// </summary>
+        int Limit { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        DateTime LastModified { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        int Page { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        int Offset { get; set; }
+
+        /// <summary>
+        /// Optional Fortnox Client Secret, if used it will override the static version.
+        /// </summary>
+        /// <exception cref="Exception">Exception will be thrown if client secret is not set.</exception>
+        string ClientSecret { get; set; }
+
+        /// <summary>
+        /// Optional Fortnox Access Token, if used it will override the static version.
+        /// </summary>
+        /// /// <exception cref="Exception">Exception will be thrown if access token is not set.</exception>
+        string AccessToken { get; set; }
+
+        /// <summary>
+        /// Timeout of requests sent to the Fortnox API in miliseconds
+        /// </summary>
+        int Timeout { get; set; }
+
         /// <remarks/>
         FortnoxError.ErrorInformation Error { get; set; }
+
+        /// <summary>
+        /// The HttpStatusCode returned by Fortnox API.
+        /// </summary>
+        HttpStatusCode httpStatusCode { get; set; }
+
+        /// <summary>
+        /// The data sent to Fortnox in Xml-format.
+        /// </summary>
+        string RequestXml { get; set; }
+
+        /// <summary>
+        /// The data returned from Fortnox in Xml-format. 
+        /// </summary>
+        string ResponseXml { get; set; }
 
         /// <summary>
         /// True if something went wrong with the request. Otherwise false.
@@ -22,7 +85,7 @@ namespace FortnoxAPILibrary
     }
 
     /// <remarks />
-    public abstract class EntityConnector<TEntity, TCollection, TSortBy> : UrlRequestBase, IEntityConnector
+    public abstract class EntityConnector<TEntity, TCollection, TSortBy> : UrlRequestBase, IEntityConnector<TSortBy>
     {
         /// <remarks/>
         public EntityConnector()

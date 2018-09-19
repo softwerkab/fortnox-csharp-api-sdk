@@ -5,8 +5,17 @@ using System.Text;
 
 namespace FortnoxAPILibrary
 {
+    public interface ILockedPeriodConnector : IEntityConnector<Sort.By.LockedPeriod>
+    {
+        /// <summary>
+        /// Gets the locked period setting
+        /// </summary>
+        /// <returns>The locked period setting</returns>
+        LockedPeriod Get();
+    }
+
     /// <remarks/>
-    public class LockedPeriodConnector : EntityConnector<LockedPeriod, LockedPeriod, Sort.By.LockedPeriod>
+    public class LockedPeriodConnector : EntityConnector<LockedPeriod, LockedPeriod, Sort.By.LockedPeriod>, ILockedPeriodConnector
     {
         /// <remarks/>
         public LockedPeriodConnector()

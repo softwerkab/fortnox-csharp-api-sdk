@@ -6,9 +6,22 @@ using System.Xml.Serialization;
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class AuthorizationConnector : UrlRequestBase
-	{
+    public interface IAuthorizationConnector
+    {
+        /// <summary>
+        /// <para>Use this function to create and get your Access-Token.</para>
+        /// <para>NOTE!</para>
+        /// <para>This functions should be used only once to get your access-token. If used again the authorisation-code given to you by Fortnox will be invalid. </para>
+        /// </summary>
+        /// <param name="AuthorizationCode">The authorisation-code given to you by Fortnox</param>
+        /// <param name="ClientSecret">The Client-Secret code given to you by Fortnox</param>
+        /// <returns>The Access-Token to use with Fortnox</returns>
+        string GetAccessToken(string AuthorizationCode, string ClientSecret);
+    }
+
+    /// <remarks/>
+	public class AuthorizationConnector : UrlRequestBase, IAuthorizationConnector
+    {
 		/// <summary>
 		/// <para>Use this function to create and get your Access-Token.</para>
 		/// <para>NOTE!</para>

@@ -1,9 +1,32 @@
 ﻿
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class PreDefinedAccountConnector : FinancialYearBasedEntityConnector<PreDefinedAccount, PreDefinedAccounts, Sort.By.PreDefinedAccount>
-	{
+    public interface IPreDefinedAccountConnector : IFinancialYearBasedEntityConnector<PreDefinedAccount, PreDefinedAccounts, Sort.By.PreDefinedAccount>
+    {
+        /// <summary>
+        /// Gets a predefined account
+        /// </summary>
+        /// <param name="name">The name of the predefined account to get</param>
+        /// <returns>a predefined account</returns>
+        PreDefinedAccount Get(string name);
+
+        /// <summary>
+        /// Updates a predefined account
+        /// </summary>
+        /// <param name="preDefinedAccount">The predefined account to update</param>
+        /// <returns>The updated predefined account</returns>
+        PreDefinedAccount Update(PreDefinedAccount preDefinedAccount);
+
+        /// <summary>
+        /// Gets a list of predefined accounts
+        /// </summary>
+        /// <returns>A list of predefined accounts</returns>
+        PreDefinedAccounts Find();
+    }
+
+    /// <remarks/>
+	public class PreDefinedAccountConnector : FinancialYearBasedEntityConnector<PreDefinedAccount, PreDefinedAccounts, Sort.By.PreDefinedAccount>, IPreDefinedAccountConnector
+    {
 		/// <remarks/>
 		public PreDefinedAccountConnector()
 		{

@@ -2,9 +2,84 @@
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class ArticleConnector : FinancialYearBasedEntityConnector<Article, Articles, Sort.By.Article>
-	{
+    public interface IArticleConnector : IEntityConnector<Sort.By.Article>
+    {
+        /// <remarks/>
+        Filter.Article FilterBy { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string ArticleNumber { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string Description { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string EAN { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string SupplierNumber { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string Manufacturer { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string ManufacturerArticleNumber { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string Webshop { get; set; }
+
+        /// <summary>
+        /// Gets an article based on articlenumber
+        /// </summary>
+        /// <param name="articleNumber">The articlenumber to find</param>
+        /// <returns>The found article</returns>
+        Article Get(string articleNumber);
+
+        /// <summary>
+        /// Updates an article
+        /// </summary>
+        /// <param name="article">The article to update</param>
+        /// <returns>The updated article</returns>
+        Article Update(Article article);
+
+        /// <summary>
+        /// Creates a new article
+        /// </summary>
+        /// <param name="article">The article to create</param>
+        /// <returns>The created article</returns>
+        Article Create(Article article);
+
+        /// <summary>
+        /// Deletes an article
+        /// </summary>
+        /// <param name="articleNumber">The articlenumber of the article to delete</param>
+        /// <returns>If the article was deleted or not</returns>
+        void Delete(string articleNumber);
+
+        /// <summary>
+        /// Gets a list of articles
+        /// </summary>
+        /// <returns>A list of articles</returns>
+        Articles Find();
+    }
+
+    /// <remarks/>
+	public class ArticleConnector : FinancialYearBasedEntityConnector<Article, Articles, Sort.By.Article>, IArticleConnector
+    {
 		private bool filterBySet = false;
 		private Filter.Article filterBy;
 		/// <remarks/>

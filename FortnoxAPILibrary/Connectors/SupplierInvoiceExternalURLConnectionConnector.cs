@@ -5,8 +5,23 @@ using System.Text;
 
 namespace FortnoxAPILibrary.Connectors
 {
+    public interface ISupplierInvoiceExternalURLConnectionConnector : IEntityConnector<Sort.By.SupplierInvoiceURLConnection>
+    {
+        /// <remarks/>
+        SupplierInvoiceExternalURLConnection Get(string id);
+
+        /// <remarks/>
+        SupplierInvoiceExternalURLConnection Create(SupplierInvoiceExternalURLConnection supplierInvoiceExternalUrlConnection);
+
+        /// <remarks/>
+        SupplierInvoiceExternalURLConnection Update(SupplierInvoiceExternalURLConnection supplierInvoiceExternalUrlConnection);
+
+        /// <remarks/>
+        void Delete(string id);
+    }
+
     /// <remarks/>
-    public class SupplierInvoiceExternalURLConnectionConnector : EntityConnector<SupplierInvoiceExternalURLConnection, SupplierInvoiceExternalURLConnection, Sort.By.SupplierInvoiceURLConnection>
+    public class SupplierInvoiceExternalURLConnectionConnector : EntityConnector<SupplierInvoiceExternalURLConnection, SupplierInvoiceExternalURLConnection, Sort.By.SupplierInvoiceURLConnection>, ISupplierInvoiceExternalURLConnectionConnector
     {
         /// <remarks/>
         public SupplierInvoiceExternalURLConnectionConnector()

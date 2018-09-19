@@ -1,12 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace FortnoxAPILibrary.Connectors
+﻿namespace FortnoxAPILibrary.Connectors
 {
+    public interface IVoucherConnector : IFinancialYearBasedEntityConnector<Voucher, Vouchers, Sort.By.Voucher>
+    {
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string VoucherSeries { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string CostCenter { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string FromDate { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string ToDate { get; set; }
+
+        /// <summary>
+        /// Gets a voucher
+        /// </summary>
+        /// <param name="voucherSeries">The series of the voucher to get</param>
+        /// <param name="voucherNumber">The number of the voucher to get</param>
+        /// <returns>The found voucher</returns>
+        Voucher Get(string voucherSeries, string voucherNumber);
+
+        /// <summary>
+        /// Create a new voucher
+        /// </summary>
+        /// <param name="voucher">The voucher to create</param>
+        /// <returns>The created voucher</returns>
+        Voucher Create(Voucher voucher);
+
+        /// <summary>
+        /// Gets a list of vouchers
+        /// </summary>
+        /// <returns>A list of vouchers</returns>
+        Vouchers Find();
+    }
+
     /// <remarks/>
-    public class VoucherConnector : FinancialYearBasedEntityConnector<Voucher, Vouchers, Sort.By.Voucher>
+    public class VoucherConnector : FinancialYearBasedEntityConnector<Voucher, Vouchers, Sort.By.Voucher>, IVoucherConnector
     {
         /// <summary>
         /// Use with Find() to limit the search result

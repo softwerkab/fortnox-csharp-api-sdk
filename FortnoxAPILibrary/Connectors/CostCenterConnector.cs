@@ -1,9 +1,46 @@
 ﻿
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class CostCenterConnector : EntityConnector<CostCenter, CostCenters, Sort.By.CostCenter>
-	{
+    public interface ICostCenterConnector : IEntityConnector<Sort.By.CostCenter>
+    {
+        /// <summary>
+        /// Finds a cost center based on cost center code
+        /// </summary>
+        /// <param name="costCenterCode">The cost center code to find</param>
+        /// <returns>The resulting cost center</returns>
+        CostCenter Get(string costCenterCode);
+
+        /// <summary>
+        /// Updates a cost center
+        /// </summary>
+        /// <param name="costCenter">The cost center entity to update</param>
+        /// <returns>The updated CostCenter</returns>
+        CostCenter Update(CostCenter costCenter);
+
+        /// <summary>
+        /// Creates a new cost center
+        /// </summary>
+        /// <param name="costCenter"></param>
+        /// <returns></returns>
+        CostCenter Create(CostCenter costCenter);
+
+        /// <summary>
+        /// Deletes a cost center
+        /// </summary>
+        /// <param name="costCenterCode">The cost center to delete</param>
+        /// <returns>If the cost center was deleted or not</returns>
+        void Delete(string costCenterCode);
+
+        /// <summary>
+        /// Gets a list of cost centers
+        /// </summary>
+        /// <returns>A list of cost centers</returns>
+        CostCenters Find();
+    }
+
+    /// <remarks/>
+	public class CostCenterConnector : EntityConnector<CostCenter, CostCenters, Sort.By.CostCenter>, ICostCenterConnector
+    {
 		/// <remarks/>
 		public CostCenterConnector()
 		{

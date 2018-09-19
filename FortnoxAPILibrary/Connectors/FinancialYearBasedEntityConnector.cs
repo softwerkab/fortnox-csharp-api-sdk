@@ -1,12 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 
 namespace FortnoxAPILibrary.Connectors
 {
+    public interface IFinancialYearBasedEntityConnector<E, C, S> : IEntityConnector<S>
+    {
+        /// <summary>
+        /// <para>Use FinancialYearDate to select the financial year to use.</para>
+        /// <para>If omitted the default financial year will be selected</para>
+        /// </summary>
+        string FinancialYearDate { get; set; }
+
+        /// <summary>
+        /// <para>Use FinancialYearID to select the financial year to use.</para>
+        /// <para>If omitted the default financial year will be selected</para>
+        /// </summary>
+        string FinancialYearID { get; set; }
+    }
+
     /// <remarks/>
-    public abstract class FinancialYearBasedEntityConnector<E, C, S> : EntityConnector<E, C, S>
+    public abstract class FinancialYearBasedEntityConnector<E, C, S> : EntityConnector<E, C, S>, IFinancialYearBasedEntityConnector<E, C, S>
     {
         private string financialYearDateValue;
         private bool financialYearDateSet = false;

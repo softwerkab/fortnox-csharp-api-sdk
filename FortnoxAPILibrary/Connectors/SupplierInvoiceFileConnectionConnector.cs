@@ -2,9 +2,43 @@
 
 namespace FortnoxAPILibrary.Connectors
 {
+    public interface ISupplierInvoiceFileConnectionConnector : IEntityConnector<Sort.By.SupplierInvoiceFileConnection>
+    {
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string SupplierInvoiceNumber { get; set; }
+
+        /// <summary>
+        /// Get a supplier invoice file connection based on fileId
+        /// </summary>
+        /// <param name="fileId">The id of the file to find.</param>
+        /// <returns>The found supplier invoice file connection</returns>
+        SupplierInvoiceFileConnection Get(string fileId);
+
+        /// <summary>
+        /// Creates a new connection between a file and a supplier invoice.
+        /// </summary>
+        /// <param name="supplierInvoiceFileConnection">The supplier invoice file connection to create</param>
+        /// <returns>The created supplier invoice file connection</returns>
+        SupplierInvoiceFileConnection Create(SupplierInvoiceFileConnection supplierInvoiceFileConnection);
+
+        /// <summary>
+        /// Deletes a connected file from a supplier invoice
+        /// </summary>
+        /// <param name="fileId">The id of the file to delete</param>
+        void Delete(string fileId);
+
+        /// <summary>
+        /// Gets a list of supplier invoice file Connections
+        /// </summary>
+        /// <returns></returns>
+        SupplierInvoiceFileConnections Find();
+    }
+
     /// <remarks/>
-	public class SupplierInvoiceFileConnectionConnector : EntityConnector<SupplierInvoiceFileConnection, SupplierInvoiceFileConnections, Sort.By.SupplierInvoiceFileConnection>
-	{
+	public class SupplierInvoiceFileConnectionConnector : EntityConnector<SupplierInvoiceFileConnection, SupplierInvoiceFileConnections, Sort.By.SupplierInvoiceFileConnection>, ISupplierInvoiceFileConnectionConnector
+    {
 		/// <summary>
 		/// Use with Find() to limit the search result
         /// </summary>

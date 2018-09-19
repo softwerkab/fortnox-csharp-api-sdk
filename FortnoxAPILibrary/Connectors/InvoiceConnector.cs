@@ -4,8 +4,178 @@ using System.Reflection;
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class InvoiceConnector : FinancialYearBasedEntityConnector<Invoice, Invoices, Sort.By.Invoice>
+    public interface IInvoiceConnector : IFinancialYearBasedEntityConnector<Invoice, Invoices, Sort.By.Invoice>
+    {
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string FromDate { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string ToDate { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string CostCenter { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string CustomerName { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string CustomerNumber { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string DocumentNumber { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string ExternalInvoiceReference1 { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string ExternalInvoiceReference2 { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string OCR { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string OurReference { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string InvoiceDate { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string Project { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string YourReference { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string Label { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        bool Sent { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        bool NotCompleted { get; set; }
+
+        /// <remarks/>
+        Filter.Invoice FilterBy { get; set; }
+
+        /// <summary>
+        /// Find an invoice
+        /// </summary>
+        /// <param name="documentNumber">The document number of the invoice to find</param>
+        /// <returns>The found invoice</returns>
+        Invoice Get(string documentNumber);
+
+        /// <summary>
+        /// Updates an Invoice
+        /// </summary>
+        /// <param name="invoice">The invoice to update</param>
+        /// <returns>The updated invoice</returns>
+        Invoice Update(Invoice invoice);
+
+        /// <summary>
+        /// Create a new invoice
+        /// </summary>
+        /// <param name="invoice">The invoice to create</param>
+        /// <returns>The created invoice</returns>
+        Invoice Create(Invoice invoice);
+
+        /// <summary>
+        /// Gets at list of Invoices
+        /// </summary>
+        /// <returns>A list of invoices</returns>
+        Invoices Find();
+
+        /// <summary>
+        /// Bookkeep an invoice
+        /// </summary>
+        /// <param name="documentNumber">The document number of the invoice to bookkeep.</param>
+        /// <returns>The bookkept invoice</returns>
+        Invoice Bookkeep(string documentNumber);
+
+        /// <summary>
+        /// Cancel an invoice
+        /// </summary>
+        /// <param name="documentNumber">The document number of the invoice to cancel</param>
+        /// <returns>The cancelled invoice</returns>
+        Invoice Cancel(string documentNumber);
+
+        /// <summary>
+        /// Credit an invoice
+        /// </summary>
+        /// <param name="documentNumber">The document number of the invoice to credit</param>
+        /// <returns>The credited invoice</returns>
+        Invoice Credit(string documentNumber);
+
+        /// <summary>
+        /// Emails an invoice
+        /// </summary>
+        /// <param name="documentNumber">The document number of the invoice to be emailed</param>
+        void Email(string documentNumber);
+
+        /// <summary>
+        /// Print an invoice to pdf
+        /// </summary>
+        /// <param name="documentNumber">The document number of the invoice to print</param>
+        /// <param name="localPath">The path where to save the generated pdf. If omitted the invoice will be set to printed (i.e Sent = true) and no pdf is returned. </param>
+        void Print(string documentNumber, string localPath = "");
+
+        /// <param name="documentNumber">The document number of the invoice to print</param>
+        void EPrint(string documentNumber);
+
+        /// <summary>
+        /// Prints a reminder to pdf and increments <Reminders></Reminders> on the invoice
+        /// </summary>
+        /// <param name="documentNumber"></param>
+        /// <param name="localPath">The path where to save the reminder </param>
+        void PrintReminder(string documentNumber, string localPath);
+
+        /// <summary>
+        /// Prints a preview as pdf
+        /// </summary>
+        /// <param name="documentNumber"></param>
+        /// <param name="localPath">The path where to save the preview</param>
+        void Preview(string documentNumber, string localPath);
+
+        /// <summary>
+        /// Marks the document as externally printed
+        /// </summary>
+        /// <param name="documentNumber"></param>
+        void ExternalPrint(string documentNumber);
+    }
+
+    /// <remarks/>
+	public class InvoiceConnector : FinancialYearBasedEntityConnector<Invoice, Invoices, Sort.By.Invoice>, IInvoiceConnector
     {
         /// <summary>
         /// Use with Find() to limit the search result

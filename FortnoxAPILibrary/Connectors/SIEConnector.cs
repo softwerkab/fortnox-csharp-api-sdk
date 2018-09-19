@@ -55,8 +55,39 @@ namespace FortnoxAPILibrary.Connectors
     }
 
 
+    public interface ISIEConnector : IFinancialYearBasedEntityConnector<SieSummary, SieSummary, Sort.By.Sie>
+    {
+        /// <remarks/>
+        ImportOptions ImportOptions { get; set; }
+
+        /// <remarks/>
+        ExportOptions ExportOptions { get; set; }
+
+        /// <summary>
+        /// Export SIE to a string
+        /// </summary>
+        /// <param name="sieType">The type of SIE to export</param>
+        /// <returns>SIE</returns>
+        byte[] ExportSIE(SIEConnector.SIEType sieType);
+
+        /// <summary>
+        /// Export SIE to a file
+        /// </summary>
+        /// <param name="sieType">The type of SIE to export</param>
+        /// <param name="localPath">Path to sie-file</param>
+        void ExportSIE(SIEConnector.SIEType sieType, string localPath);
+
+        /// <summary>
+        /// Imports a SIE file
+        /// </summary>
+        /// <param name="pathToFile">The local path to the file to import</param>
+        /// <param name="preview">Set to true to perform a preview of the import. Nothing will be imported.</param>
+        /// <returns>A summary of what is beeing imported. </returns>
+        SieSummary ImportSIE(string pathToFile, bool preview = false);
+    }
+
     /// <remarks/>
-    public class SIEConnector : FinancialYearBasedEntityConnector<SieSummary, SieSummary, Sort.By.Sie>
+    public class SIEConnector : FinancialYearBasedEntityConnector<SieSummary, SieSummary, Sort.By.Sie>, ISIEConnector
     {
         /// <remarks/>
         public enum SIEType

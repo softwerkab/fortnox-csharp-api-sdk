@@ -2,9 +2,18 @@
 using System.Collections.Generic;
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class PrintTemplateConnector : EntityConnector<PrintTemplates, PrintTemplates, Sort.By.PrintTemplate>
-	{
+    public interface IPrintTemplateConnector : IEntityConnector<Sort.By.PrintTemplate>
+    {
+        /// <summary>
+        /// Gets a list of print templates
+        /// </summary>
+        /// <returns>A list of print templates</returns>
+        PrintTemplates Find();
+    }
+
+    /// <remarks/>
+	public class PrintTemplateConnector : EntityConnector<PrintTemplates, PrintTemplates, Sort.By.PrintTemplate>, IPrintTemplateConnector
+    {
 		/// <remarks/>
 		public PrintTemplateConnector()
 		{

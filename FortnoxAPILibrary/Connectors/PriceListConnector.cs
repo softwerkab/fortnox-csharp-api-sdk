@@ -1,9 +1,39 @@
 ﻿
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class PriceListConnector : EntityConnector<PriceList, PriceLists, Sort.By.PriceList>
-	{
+    public interface IPriceListConnector : IEntityConnector<Sort.By.PriceList>
+    {
+        /// <summary>
+        /// Gets a price list 
+        /// </summary>
+        /// <param name="code">The code of the price list to find</param>
+        /// <returns>The found price list</returns>
+        PriceList Get(string code);
+
+        /// <summary>
+        /// Updates a price list
+        /// </summary>
+        /// <param name="priceList">The price list to update</param>
+        /// <returns>The updated price list</returns>
+        PriceList Update(PriceList priceList);
+
+        /// <summary>
+        /// Create a new price list
+        /// </summary>
+        /// <param name="priceList">The price list to create</param>
+        /// <returns>The created price list</returns>
+        PriceList Create(PriceList priceList);
+
+        /// <summary>
+        /// Gets a list of price lists
+        /// </summary>
+        /// <returns>A list of price lists</returns>
+        PriceLists Find();
+    }
+
+    /// <remarks/>
+	public class PriceListConnector : EntityConnector<PriceList, PriceLists, Sort.By.PriceList>, IPriceListConnector
+    {
 		/// <remarks/>
 		public PriceListConnector()
 		{

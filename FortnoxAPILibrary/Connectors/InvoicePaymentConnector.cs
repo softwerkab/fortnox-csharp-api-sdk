@@ -5,9 +5,56 @@ using System.Text;
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class InvoicePaymentConnector : FinancialYearBasedEntityConnector<InvoicePayment, InvoicePayments, Sort.By.InvoicePayment>
-	{
+    public interface IInvoicePaymentConnector : IEntityConnector<Sort.By.InvoicePayment>
+    {
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string InvoiceNumber { get; set; }
+
+        /// <summary>
+        /// Gets an invoice payment
+        /// </summary>
+        /// <param name="number">The number of the invoice payment to find</param>
+        /// <returns>The found invoice payment</returns>
+        InvoicePayment Get(string number);
+
+        /// <summary>
+        /// Updates an invoice payment
+        /// </summary>
+        /// <param name="invoicePayment">The invoice payment to update</param>
+        /// <returns>The updated invoice payment</returns>
+        InvoicePayment Update(InvoicePayment invoicePayment);
+
+        /// <summary>
+        /// Create a new invoice payment
+        /// </summary>
+        /// <param name="invoicePayment">The invoice payment to be created</param>
+        /// <returns>The created invoice payment</returns>
+        InvoicePayment Create(InvoicePayment invoicePayment);
+
+        /// <summary>
+        /// Deletes a payment
+        /// </summary>
+        /// <param name="number">The number of the payment to delete</param>
+        void Delete(string number);
+
+        /// <summary>
+        /// Gets a list of payments
+        /// </summary>
+        /// <returns>A list of payments</returns>
+        InvoicePayments Find();
+
+        /// <summary>
+        /// Bookkeep an invoice payment
+        /// </summary>
+        /// <param name="invoicePaymentNumber">The number of the invoice payment to bookkeep.</param>
+        void Bookkeep(string invoicePaymentNumber);
+    }
+
+    /// <remarks/>
+	public class InvoicePaymentConnector : FinancialYearBasedEntityConnector<InvoicePayment, InvoicePayments, Sort.By.InvoicePayment>, IInvoicePaymentConnector
+    {
 		/// <summary>
 		/// Use with Find() to limit the search result
         /// </summary>

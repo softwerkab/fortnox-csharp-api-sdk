@@ -2,9 +2,147 @@
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class SupplierInvoiceConnector : FinancialYearBasedEntityConnector<SupplierInvoice, SupplierInvoices, Sort.By.SupplierInvoice>
-	{
+    public interface ISupplierInvoiceConnector : IFinancialYearBasedEntityConnector<SupplierInvoice, SupplierInvoices, Sort.By.SupplierInvoice>
+    {
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string SupplierNumber { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string SupplierName { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string OrganisationNumber { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string Phone { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string ZipCode { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string City { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string Email { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string OCR { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string InvoiceNumber { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string SerialNumber { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string CostCenter { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string Project { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string OurReference { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string YourReference { get; set; }
+
+        /// <remarks/>
+        Filter.SupplierInvoice FilterBy { get; set; }
+
+        /// <summary>
+        /// Get a supplier invoice based on document number
+        /// </summary>
+        /// <param name="documentNumber">The document number to find</param>
+        /// <returns></returns>
+        SupplierInvoice Get(string documentNumber);
+
+        /// <summary>
+        /// Updates a supplier invoice
+        /// </summary>
+        /// <param name="supplierInvoice">the supplier invoice to update</param>
+        /// <returns></returns>
+        SupplierInvoice Update(SupplierInvoice supplierInvoice);
+
+        /// <summary>
+        /// Create a new supplier invoice
+        /// </summary>
+        /// <param name="supplierInvoice">The supplier invoice to create</param>
+        /// <returns>The created supplier invoice</returns>
+        SupplierInvoice Create(SupplierInvoice supplierInvoice);
+
+        /// <summary>
+        /// Gets at list of supplier invoices
+        /// </summary>
+        /// <returns>A list of supplier invoices</returns>
+        SupplierInvoices Find();
+
+        /// <summary>
+        /// Bookkeeps a supplier invoice
+        /// </summary>
+        /// <param name="documentNumber">The document number of the invoice to bookkeep.</param>
+        /// <returns>The bookkept invoice</returns>
+        SupplierInvoice Bookkeep(string documentNumber);
+
+        /// <summary>
+        /// Cancels a supplier invoice
+        /// </summary>
+        /// <param name="documentNumber">The document number of the invoice to be cancelled</param>
+        /// <returns>The cancelled invoice</returns>
+        SupplierInvoice Cancel(string documentNumber);
+
+        /// <summary>
+        /// Credits a supplier invoice
+        /// </summary>
+        /// <param name="documentNumber">The document number of the supplier invoice to credit</param>
+        /// <returns>The credited supplier invoice</returns>
+        SupplierInvoice Credit(string documentNumber);
+
+        /// <summary>
+        /// Approves a payment
+        /// </summary>
+        /// <param name="documentNumber">The doucment number of the supplier invoice to approve</param>
+        /// <returns></returns>
+        SupplierInvoice ApprovalPayment(string documentNumber);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="documentNumber"></param>
+        /// <returns></returns>
+        SupplierInvoice ApprovalBookkeep(string documentNumber);
+    }
+
+    /// <remarks/>
+	public class SupplierInvoiceConnector : FinancialYearBasedEntityConnector<SupplierInvoice, SupplierInvoices, Sort.By.SupplierInvoice>, ISupplierInvoiceConnector
+    {
 		/// <remarks/>
 		public enum VATType
         {

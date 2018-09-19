@@ -4,9 +4,94 @@ using System.Reflection;
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class ArchiveConnector : EntityConnector<Folder, Folder, Sort.By.Folder>
-	{
+    public interface IArchiveConnector : IEntityConnector<Sort.By.Folder>
+    {
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string Path { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string FolderId { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string Id { get; set; }
+
+        /// <summary>
+        /// Gets at list of Files and Folders
+        /// </summary>
+        /// <returns>A list of Files and Folders</returns>
+        Folder Find(ArchiveConnector.RootFolder rootFolder = ArchiveConnector.RootFolder.Root);
+
+        /// <summary>
+        /// Creates a folder.
+        /// </summary>
+        /// <param name="folder">The folder entity to create</param>
+        /// <param name="destination">he id or path to the parent folder to create the folder in.</param>
+        /// <returns>The created folder.</returns>
+        Folder CreateFolder(Folder folder, string destination = "");
+
+        ///<summary>
+        ///Uploads a file to Fortnox
+        ///</summary>
+        ///<param name="localPath">The local path to the file to upload</param>
+        ///<param name="folderId">The folderId in Fortnox archive to save the file</param>
+        ///<returns>Information of the uploaded file</returns>
+        File UploadFile(string localPath, string folderId = "");
+
+        /// <summary>
+        /// Uploads a file to Fortnox Archive from provided data array.
+        /// </summary>
+        /// <returns>Created file.</returns>
+        File UploadFileData(byte[] data, string name, string folderId = "");
+
+        /// <summary>
+        /// Uploads a file to Fortnox Archive from provided data stream.
+        /// </summary>
+        /// <returns>Created file.</returns>
+        File UploadFileData(System.IO.Stream stream, string name, string folderId = "");
+
+        /// <summary>
+        /// Downloads a file fron Fortnox Archive
+        /// </summary>
+        /// <param name="fileIdOrFilePath">The id or path of the file to download</param>
+        /// <param name="localPath">The local path to save the file to </param>
+        void DownloadFile(string fileIdOrFilePath, string localPath);
+
+        /// <summary>
+        /// Downloads actual file data from Fortnox Archive into existing file object. Please note that the file object needs a valid file id.
+        /// </summary>
+        /// <param name="file">File object to be injected with file data.</param>
+        void DownloadFileData(File file);
+
+        /// <summary>
+        /// Moves a file from one folder to another folder. 
+        /// </summary>
+        /// <param name="fileId">The id of the file to be moved</param>
+        /// <param name="destination">The id or path to the folder to move the file to.</param>
+        /// <returns>Information about the file. </returns>
+        new File MoveFile(string fileId, string destination);
+
+        /// <summary>
+        /// Deletes a file from Fortnox Archive.
+        /// </summary>
+        /// <param name="fileId">The id of the file to be deleted.</param>
+        void DeleteFile(string fileId);
+
+        /// <summary>
+        /// Deletes a folder and all its content from Fortnox Archive.
+        /// </summary>
+        /// <param name="folderId">The id of the folder to be deleted.</param>
+        void DeleteFolder(string folderId);
+    }
+
+    /// <remarks/>
+	public class ArchiveConnector : EntityConnector<Folder, Folder, Sort.By.Folder>, IArchiveConnector
+    {
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>

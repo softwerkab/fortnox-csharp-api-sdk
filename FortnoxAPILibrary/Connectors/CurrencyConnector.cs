@@ -1,9 +1,46 @@
 ﻿
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class CurrencyConnector : EntityConnector<Currency, Currencies, Sort.By.Currency>
-	{
+    public interface ICurrencyConnector : IEntityConnector<Sort.By.Currency>
+    {
+        /// <summary>
+        /// Gets a currency based on currency code
+        /// </summary>
+        /// <param name="currencyCode"></param>
+        /// <returns></returns>
+        Currency Get(string currencyCode);
+
+        /// <summary>
+        /// Updates a currency
+        /// </summary>
+        /// <param name="currency">The currency entity to update</param>
+        /// <returns>The updated currency entity</returns>
+        Currency Update(Currency currency);
+
+        /// <summary>
+        /// Create a new currency
+        /// </summary>
+        /// <param name="currency">The currency entity to create</param>
+        /// <returns>The created currency entity</returns>
+        Currency Create(Currency currency);
+
+        /// <summary>
+        /// Deletes a currency
+        /// </summary>
+        /// <param name="currencyCode">The currency code to delete</param>
+        /// <returns>If the currency was deleted or not</returns>
+        void Delete(string currencyCode);
+
+        /// <summary>
+        /// Gets at list of currencies
+        /// </summary>
+        /// <returns>A list of currencies</returns>
+        Currencies Find();
+    }
+
+    /// <remarks/>
+	public class CurrencyConnector : EntityConnector<Currency, Currencies, Sort.By.Currency>, ICurrencyConnector
+    {
 		/// <remarks/>
 		public CurrencyConnector()
 		{

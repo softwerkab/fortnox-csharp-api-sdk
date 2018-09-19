@@ -5,9 +5,31 @@ using System.Text;
 
 namespace FortnoxAPILibrary.Connectors
 {
+    public interface IPreDefinedVoucherSeriesConnector : IFinancialYearBasedEntityConnector<PreDefinedVoucherSeries, PreDefinedVoucherSeriesCollection, Sort.By.PreDefinedVoucherSeries>
+    {
+        /// <summary>
+        /// Finds a pre defined voucher series by name
+        /// </summary>
+        /// <param name="name">The name of the voucher series to find</param>
+        /// <returns>The found voucher series</returns>
+        PreDefinedVoucherSeries Get(PreDefinedVoucherSeriesConnector.PreDefinedVoucherSeriesName name);
 
-	/// <remarks/>
-	public class PreDefinedVoucherSeriesConnector : FinancialYearBasedEntityConnector<PreDefinedVoucherSeries, PreDefinedVoucherSeriesCollection, Sort.By.PreDefinedVoucherSeries>
+        /// <summary>
+        /// Updates a pre defined voucher series
+        /// </summary>
+        /// <param name="preDefinedVoucherSeries">The voucher series to update</param>
+        /// <returns></returns>
+        PreDefinedVoucherSeries Update(PreDefinedVoucherSeries preDefinedVoucherSeries);
+
+        /// <summary>
+        /// Gets a list of pre defined voucher series
+        /// </summary>
+        /// <returns></returns>
+        PreDefinedVoucherSeriesCollection Find();
+    }
+
+    /// <remarks/>
+	public class PreDefinedVoucherSeriesConnector : FinancialYearBasedEntityConnector<PreDefinedVoucherSeries, PreDefinedVoucherSeriesCollection, Sort.By.PreDefinedVoucherSeries>, IPreDefinedVoucherSeriesConnector
     {
 		/// <remarks/>
 		public PreDefinedVoucherSeriesConnector()
