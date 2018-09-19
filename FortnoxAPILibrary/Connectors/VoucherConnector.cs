@@ -85,7 +85,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>A list of vouchers</returns>
         public Vouchers Find()
         {
-            base.Resource += "/sublist/";
+            base.Resource = "vouchers/sublist";
 
             if (!string.IsNullOrEmpty(this.VoucherSeries))
             {
