@@ -52,6 +52,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Connectors\ConnectorTestsBase.cs" />
+    <Compile Include="Connectors\EmployeeConnectorTests.cs" />
+    <Compile Include="Connectors\SalaryTransactionsConnectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Testv300.cs" />
   </ItemGroup>

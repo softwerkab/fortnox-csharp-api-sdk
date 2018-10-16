@@ -55,6 +55,7 @@
     <Compile Include="Connectors\ContractAccrualConnector.cs" />
     <Compile Include="Connectors\ContractConnector.cs" />
     <Compile Include="Connectors\FinancialYearBasedEntityConnector.cs" />
+    <Compile Include="Connectors\IEmployeeConnector.cs" />
     <Compile Include="Connectors\InvoiceAccrualConnector.cs" />
     <Compile Include="Connectors\InvoicePaymentConnector.cs" />
     <Compile Include="Connectors\LabelConnector.cs" />
@@ -62,12 +63,18 @@
     <Compile Include="Connectors\PreDefinedAccountConnector.cs" />
     <Compile Include="Connectors\PreDefinedVoucherSeriesConnector.cs" />
     <Compile Include="Connectors\ProjectConnector.cs" />
+    <Compile Include="Connectors\SalaryTransactionsConnector.cs" />
     <Compile Include="Connectors\SupplierInvoiceAccrualConnector.cs" />
     <Compile Include="Connectors\SupplierInvoiceExternalURLConnectionConnector.cs" />
     <Compile Include="Entities\CompanySettings.cs" />
+    <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Entities\Employees.cs" />
     <Compile Include="Entities\Label.cs" />
     <Compile Include="Entities\Labels.cs" />
     <Compile Include="Entities\LockedPeriod.cs" />
+    <Compile Include="Entities\PagedResult.cs" />
+    <Compile Include="Entities\SalaryTransaction.cs" />
+    <Compile Include="Entities\SalaryTransactions.cs" />
     <Compile Include="Entities\SupplierInvoiceExternalURLConnections.cs" />
     <Compile Include="Connectors\SupplierInvoiceFileConnectionConnector.cs" />
     <Compile Include="Connectors\SupplierInvoicePaymentConnector.cs" />

@@ -120,10 +120,21 @@
 			/// <remarks/>
 			[RealValue("inactive")]
 			Inactive,
-		}
+        }
 
-		/// <remarks/>
-		public enum Article
+        /// <remarks/>
+        public enum Employee
+        {
+            /// <remarks/>
+            [RealValue("active")]
+            Active,
+            /// <remarks/>
+            [RealValue("inactive")]
+            Inactive
+        }
+
+        /// <remarks/>
+        public enum Article
 		{
 			/// <remarks/>
 			[RealValue("active")]

@@ -113,10 +113,15 @@ namespace FortnoxAPILibrary
 				[RealValue("name")]
 				Name
 
-			}
+		    }
 
-			/// <remarks/>
-			public enum FinancialYear
+		    /// <remarks/>
+		    public enum Employee
+		    {
+		    }
+
+            /// <remarks/>
+            public enum FinancialYear
 			{
 				/// <remarks/>
 				[RealValue("id")]
@@ -296,6 +301,11 @@ namespace FortnoxAPILibrary
 				/// <remarks/>
 				[RealValue("description")]
 				Description
+			}
+
+			/// <remarks/>
+			public enum SalaryTransaction
+			{
 			}
 			
 			/// <remarks/>
