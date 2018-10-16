@@ -3,7 +3,9 @@
 <img src="https://raw.githubusercontent.com/FortnoxAB/csharp-api-sdk/master/Repository/fortnox2.jpg" style="width:150%;">
 
 ## Fortnox .NET SDK
-Official .NET SDK package for developing integrations towards Fortnox REST API. Please note that this package is not totally aligned with the main API, however we are pretty close and will strive to keep up the pace. For more information please visit the official documentation <a href="https://developer.fortnox.se/documentation/">https://developer.fortnox.se/</a>.
+This is a fork of the original SDK, however this is frequently maintained.
+
+.NET SDK package for developing integrations towards Fortnox REST API. Please note that this package is not totally aligned with the main API, however we are pretty close and will strive to keep up the pace. For more information please visit the official documentation <a href="https://developer.fortnox.se/documentation/">https://developer.fortnox.se/</a>.
 
 
 ## Get started
