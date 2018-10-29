@@ -1,46 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortnoxAPILibrary", "FortnoxAPILibrary\FortnoxAPILibrary.csproj", "{B9BB428A-9BE8-4E2C-A674-CD3DDB3B18F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FortnoxAPILibrary", "FortnoxAPILibrary\FortnoxAPILibrary.csproj", "{0359120E-848C-461E-92E0-52A4C955EB28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortnoxAPILibrary.Tests", "FortnoxAPILibrary.Tests\FortnoxAPILibrary.Tests.csproj", "{153895BF-9571-4794-82E0-53D2DD4B3557}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FortnoxAPILibrary.Tests", "FortnoxAPILibrary.Tests\FortnoxAPILibrary.Tests.csproj", "{DC0D7AE2-31DA-4BD9-9192-44075D251DEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Debug|Mixed Platforms = Debug|Mixed Platforms
-		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
-		Release|Mixed Platforms = Release|Mixed Platforms
-		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B9BB428A-9BE8-4E2C-A674-CD3DDB3B18F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B9BB428A-9BE8-4E2C-A674-CD3DDB3B18F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B9BB428A-9BE8-4E2C-A674-CD3DDB3B18F7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{B9BB428A-9BE8-4E2C-A674-CD3DDB3B18F7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{B9BB428A-9BE8-4E2C-A674-CD3DDB3B18F7}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B9BB428A-9BE8-4E2C-A674-CD3DDB3B18F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B9BB428A-9BE8-4E2C-A674-CD3DDB3B18F7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B9BB428A-9BE8-4E2C-A674-CD3DDB3B18F7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{B9BB428A-9BE8-4E2C-A674-CD3DDB3B18F7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{B9BB428A-9BE8-4E2C-A674-CD3DDB3B18F7}.Release|x86.ActiveCfg = Release|Any CPU
-		{153895BF-9571-4794-82E0-53D2DD4B3557}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{153895BF-9571-4794-82E0-53D2DD4B3557}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{153895BF-9571-4794-82E0-53D2DD4B3557}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{153895BF-9571-4794-82E0-53D2DD4B3557}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{153895BF-9571-4794-82E0-53D2DD4B3557}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{153895BF-9571-4794-82E0-53D2DD4B3557}.Debug|x86.Build.0 = Debug|Any CPU
-		{153895BF-9571-4794-82E0-53D2DD4B3557}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{153895BF-9571-4794-82E0-53D2DD4B3557}.Release|Any CPU.Build.0 = Release|Any CPU
-		{153895BF-9571-4794-82E0-53D2DD4B3557}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{153895BF-9571-4794-82E0-53D2DD4B3557}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{153895BF-9571-4794-82E0-53D2DD4B3557}.Release|x86.ActiveCfg = Release|Any CPU
-		{153895BF-9571-4794-82E0-53D2DD4B3557}.Release|x86.Build.0 = Release|Any CPU
+		{0359120E-848C-461E-92E0-52A4C955EB28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0359120E-848C-461E-92E0-52A4C955EB28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0359120E-848C-461E-92E0-52A4C955EB28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0359120E-848C-461E-92E0-52A4C955EB28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC0D7AE2-31DA-4BD9-9192-44075D251DEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC0D7AE2-31DA-4BD9-9192-44075D251DEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC0D7AE2-31DA-4BD9-9192-44075D251DEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC0D7AE2-31DA-4BD9-9192-44075D251DEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7BE553EE-09B8-4EC7-B9D2-3C3FB24BEC19}
 	EndGlobalSection
 EndGlobal
