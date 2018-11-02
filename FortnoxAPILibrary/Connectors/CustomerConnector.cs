@@ -95,9 +95,12 @@
 			PRIVATE,
 			/// <remarks/>
 			COMPANY,
-			/// <remarks/>
-			UNDEFINED
-		}
+            /// <summary>
+		    /// This is NOT a valid input for customer type, never set a customer type to this value. This only occurs in some cases when fetching from Fortnox.
+		    /// When a customer in Fortnox has this state, it is not possible to update that customer, the request will fail with error 2001200 (Ogiltig kundtyp/Invalid customer type)
+            /// </summary>
+            UNDEFINED
+        }
 
 		/// <remarks/>
 		public enum VATType
