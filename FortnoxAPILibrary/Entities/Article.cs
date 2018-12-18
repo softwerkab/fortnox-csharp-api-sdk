@@ -98,6 +98,8 @@ namespace FortnoxAPILibrary
 
 	    private string salesPriceField;
 
+	    private string freightCostField;
+
 		/// <remarks/>
 		public string Active
 		{
@@ -554,8 +556,20 @@ namespace FortnoxAPILibrary
 			}
 		}
 
-		/// <summary>This field is Read-Only in Fortnox</summary>
-		[ReadOnly(true)]
+	    public string FreightCost
+        {
+	        get
+	        {
+	            return this.freightCostField;
+	        }
+	        set
+	        {
+	            this.freightCostField = value;
+	        }
+	    }
+
+        /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly(true)]
 		[System.Xml.Serialization.XmlAttributeAttribute()]
 		public string url
 		{
