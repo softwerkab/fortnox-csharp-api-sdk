@@ -92,7 +92,6 @@ namespace FortnoxAPILibrary
 
 		/// <summary>This field is Read-Only in Fortnox</summary>
 		[System.ComponentModel.ReadOnly(true)]
-		[System.Xml.Serialization.XmlAttributeAttribute()]
 		public string Year
 		{
 			get
