@@ -6,7 +6,7 @@ using System.Text;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <inheritdoc />
-    public interface IVoucherSeriesConnector : IEntityConnector<Sort.By.VoucherSeries>
+    public interface IVoucherSeriesConnector : IFinancialYearBasedEntityConnector<VoucherSeries, VoucherSeriesCollection, Sort.By.VoucherSeries>
     {
         /// <summary>
         /// Find a Voucher series by code
