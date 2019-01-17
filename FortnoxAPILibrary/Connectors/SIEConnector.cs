@@ -54,6 +54,14 @@ namespace FortnoxAPILibrary.Connectors
         public string ToDate;
     }
 
+    public class ExportSieResponse
+    {
+        /// <remarks/>
+        public byte[] SieBytes;
+
+        /// <remarks/>
+        public WebHeaderCollection Headers;
+    }
 
     public interface ISIEConnector : IFinancialYearBasedEntityConnector<SieSummary, SieSummary, Sort.By.Sie>
     {
@@ -68,7 +76,7 @@ namespace FortnoxAPILibrary.Connectors
         /// </summary>
         /// <param name="sieType">The type of SIE to export</param>
         /// <returns>SIE</returns>
-        byte[] ExportSIE(SIEConnector.SIEType sieType);
+        ExportSieResponse ExportSIE(SIEConnector.SIEType sieType);
 
         /// <summary>
         /// Export SIE to a file
@@ -120,7 +128,7 @@ namespace FortnoxAPILibrary.Connectors
         /// </summary>
         /// <param name="sieType">The type of SIE to export</param>
         /// <returns>SIE</returns>
-        public byte[] ExportSIE(SIEType sieType)
+        public ExportSieResponse ExportSIE(SIEType sieType)
         {
             return Export(sieType);
         }
@@ -135,7 +143,7 @@ namespace FortnoxAPILibrary.Connectors
             Export(sieType, localPath);
         }
 
-        private byte[] Export(SIEType sieType, string localPath = "")
+        private ExportSieResponse Export(SIEType sieType, string localPath = "")
         {
             base.Resource = "sie/" + (int)sieType;
             string requestString = base.GetUrl();
@@ -151,6 +159,8 @@ namespace FortnoxAPILibrary.Connectors
             HttpWebRequest wr = base.SetupRequest(requestString, "GET");
 
             List<byte> data = new List<byte>();
+
+            ExportSieResponse sieResponse = new ExportSieResponse();
 
             try
             {
@@ -178,6 +188,9 @@ namespace FortnoxAPILibrary.Connectors
                             }
                         }
                     }
+
+                    sieResponse.Headers = response.Headers;
+                    sieResponse.SieBytes = data.ToArray();
                 }
             }
             catch (WebException we)
@@ -185,7 +198,7 @@ namespace FortnoxAPILibrary.Connectors
                 Error = base.HandleException(we);
             }
 
-            return data.ToArray();
+            return sieResponse;
         }
 
         /// <summary>
