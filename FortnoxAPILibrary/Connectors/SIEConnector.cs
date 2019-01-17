@@ -54,13 +54,13 @@ namespace FortnoxAPILibrary.Connectors
         public string ToDate;
     }
 
-    public class ExportSieResponse
+    public class SieFile
     {
         /// <remarks/>
-        public byte[] SieBytes;
+        public byte[] Content;
 
         /// <remarks/>
-        public WebHeaderCollection Headers;
+        public string ContentDisposition;
     }
 
     public interface ISIEConnector : IFinancialYearBasedEntityConnector<SieSummary, SieSummary, Sort.By.Sie>
@@ -76,7 +76,7 @@ namespace FortnoxAPILibrary.Connectors
         /// </summary>
         /// <param name="sieType">The type of SIE to export</param>
         /// <returns>SIE</returns>
-        ExportSieResponse ExportSIE(SIEConnector.SIEType sieType);
+        SieFile ExportSIE(SIEConnector.SIEType sieType);
 
         /// <summary>
         /// Export SIE to a file
@@ -128,7 +128,7 @@ namespace FortnoxAPILibrary.Connectors
         /// </summary>
         /// <param name="sieType">The type of SIE to export</param>
         /// <returns>SIE</returns>
-        public ExportSieResponse ExportSIE(SIEType sieType)
+        public SieFile ExportSIE(SIEType sieType)
         {
             return Export(sieType);
         }
@@ -143,7 +143,7 @@ namespace FortnoxAPILibrary.Connectors
             Export(sieType, localPath);
         }
 
-        private ExportSieResponse Export(SIEType sieType, string localPath = "")
+        private SieFile Export(SIEType sieType, string localPath = "")
         {
             base.Resource = "sie/" + (int)sieType;
             string requestString = base.GetUrl();
@@ -160,7 +160,7 @@ namespace FortnoxAPILibrary.Connectors
 
             List<byte> data = new List<byte>();
 
-            ExportSieResponse sieResponse = new ExportSieResponse();
+            SieFile sieFile = new SieFile();
 
             try
             {
@@ -189,8 +189,8 @@ namespace FortnoxAPILibrary.Connectors
                         }
                     }
 
-                    sieResponse.Headers = response.Headers;
-                    sieResponse.SieBytes = data.ToArray();
+                    sieFile.ContentDisposition = response.Headers.Get("Content-Disposition");
+                    sieFile.Content = data.ToArray();
                 }
             }
             catch (WebException we)
@@ -198,7 +198,7 @@ namespace FortnoxAPILibrary.Connectors
                 Error = base.HandleException(we);
             }
 
-            return sieResponse;
+            return sieFile;
         }
 
         /// <summary>

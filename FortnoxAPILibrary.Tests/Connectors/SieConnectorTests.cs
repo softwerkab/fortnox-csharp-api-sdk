@@ -21,8 +21,8 @@ namespace FortnoxAPILibrary.Tests.Connectors
         public void GetSieShouldReturnSieWithHeaders()
         {
             var sieResponse = _connector.ExportSIE(SIEConnector.SIEType.SIE4);
-            Assert.AreNotEqual(sieResponse.SieBytes, null);
-            CollectionAssert.Contains(sieResponse.Headers.AllKeys, "Content-Disposition");
+            Assert.AreNotEqual(sieResponse.Content, null);
+            Assert.AreNotEqual(sieResponse.ContentDisposition, null);
         }
     }
 }
