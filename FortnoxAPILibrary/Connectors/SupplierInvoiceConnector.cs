@@ -5,8 +5,8 @@ namespace FortnoxAPILibrary.Connectors
 	/// <remarks/>
 	public class SupplierInvoiceConnector : FinancialYearBasedEntityConnector<SupplierInvoice, SupplierInvoices, Sort.By.SupplierInvoice>
 	{
-        /// <remarks/>
-        public enum VATType
+		/// <remarks/>
+		public enum VATType
         {
             /// <remarks/>
             NORMAL,

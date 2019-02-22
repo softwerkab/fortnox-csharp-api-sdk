@@ -28,6 +28,8 @@ namespace FortnoxAPILibrary
 	[System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
 	public partial class Customer
 	{
+		private string activeField;
+
 		private string address1Field;
 
 		private string address2Field;
@@ -92,6 +94,10 @@ namespace FortnoxAPILibrary
 
 		private string faxField;
 
+		private string glnField;
+
+		private string glnDeliveryField;
+
 		private string invoiceAdministrationFeeField;
 
 		private string invoiceDiscountField;
@@ -145,6 +151,19 @@ namespace FortnoxAPILibrary
 		private string zipCodeField;
 
 		private string urlField;
+
+		/// <remarks/>
+		public string Active
+		{
+			get
+			{
+				return this.activeField;
+			}
+			set
+			{
+				this.activeField = value;
+			}
+		}
 
 		/// <remarks/>
 		public string Address1
@@ -269,6 +288,11 @@ namespace FortnoxAPILibrary
 		{
 			get
 			{
+				if (this.defaultDeliveryTypesField == null)
+				{
+					this.defaultDeliveryTypesField = new InvoiceDefaultDeliveryTypes();
+				}
+
 				return this.defaultDeliveryTypesField;
 			}
 			set
@@ -561,6 +585,32 @@ namespace FortnoxAPILibrary
 			set
 			{
 				this.faxField = value;
+			}
+		}
+
+		/// <remarks/>
+		public string GLN
+		{
+			get
+			{
+				return this.glnField;
+			}
+			set
+			{
+				this.glnField = value;
+			}
+		}
+
+		/// <remarks/>
+		public string GLNDelivery
+		{
+			get
+			{
+				return this.glnDeliveryField;
+			}
+			set
+			{
+				this.glnDeliveryField = value;
 			}
 		}
 
@@ -923,12 +973,6 @@ namespace FortnoxAPILibrary
 				this.urlField = value;
 			}
 		}
-
-        /// <remarks/>
-        public Customer()
-        {
-            this.DefaultDeliveryTypes = new InvoiceDefaultDeliveryTypes();
-        }
 	}
 
 	/// <remarks/>

@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using FortnoxAPILibrary.Connectors;
 using System.Xml.Serialization;
 
 // 
@@ -28,6 +29,8 @@ namespace FortnoxAPILibrary
 		private string accountChartTypeField;
 
 		private string idField;
+
+		private FinancialYearConnector.AccountingMethod accountingMethodField;
 
 		private string fromDateField;
 
@@ -59,6 +62,19 @@ namespace FortnoxAPILibrary
 			set
 			{
 				this.idField = value;
+			}
+		}
+
+		/// <remarks/>
+		public FinancialYearConnector.AccountingMethod AccountingMethod
+		{
+			get
+			{
+				return this.accountingMethodField;
+			}
+			set
+			{
+				this.accountingMethodField = value;
 			}
 		}
 

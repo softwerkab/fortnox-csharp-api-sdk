@@ -327,7 +327,7 @@ namespace FortnoxAPILibrary
             return base.UploadFile<SieSummary>(localPath);
         }
 
-        internal File BaseUploadFile(string localPath, string folderId)
+        internal File BaseUploadFile(string localPath, string folderId, byte[] fileData = null, string fileName = null)
         {
             base.RequestUriString = this.GetUrl();
 
@@ -336,7 +336,7 @@ namespace FortnoxAPILibrary
                 base.RequestUriString += "?folderid=" + Uri.EscapeDataString(folderId);
             }
 
-            return base.UploadFile<File>(localPath);
+            return base.UploadFile<File>(localPath, fileData, fileName);
         }
 
         internal string AddParameters(string requestUriString)
@@ -407,6 +407,5 @@ namespace FortnoxAPILibrary
         {
             return propertyInfo.PropertyType.GetProperties().Where(p => p.PropertyType.GetProperties().Length > 0);
         }
-
     }
 }

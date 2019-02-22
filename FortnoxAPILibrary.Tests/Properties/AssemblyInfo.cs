@@ -1,15 +1,16 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FortnoxAPILibrary")]
+[assembly: AssemblyTitle("FortnoxAPILibrary.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Fortnox AB (publ)")]
-[assembly: AssemblyProduct("FortnoxAPILibrary")]
-[assembly: AssemblyCopyright("Copyright © Fortnox 2017")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("FortnoxAPILibrary.Tests")]
+[assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("bcdb270f-662a-4e17-94de-f2ced4a65115")]
+[assembly: Guid("153895bf-9571-4794-82e0-53d2dd4b3557")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -31,6 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.0.0")]
-[assembly: AssemblyFileVersion("3.0.0")]
-
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

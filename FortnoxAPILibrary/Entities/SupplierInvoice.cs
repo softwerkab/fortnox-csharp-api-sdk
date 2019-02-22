@@ -28,8 +28,9 @@ namespace FortnoxAPILibrary
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
     public partial class SupplierInvoice
     {
+		private string accountingMethod;
 
-        private string administrationFeeField;
+		private string administrationFeeField;
 
         private string balanceField;
 
@@ -38,6 +39,8 @@ namespace FortnoxAPILibrary
         private string cancelledField;
 
         private string commentsField;
+
+		private string costcenter;
 
         private string creditField;
 
@@ -73,7 +76,13 @@ namespace FortnoxAPILibrary
 
         private string oCRField;
 
-        private string roundOffValueField;
+		private string ourReference;
+
+		private string paymentPending;
+
+		private string project;
+
+		private string roundOffValueField;
 
         private SupplierInvoiceConnector.SalesType salesTypeField;
 
@@ -91,11 +100,27 @@ namespace FortnoxAPILibrary
 
         private string urlField;
 
-        /// <remarks/>
-        public SupplierInvoice()
+		private string yourReference;
+
+		/// <remarks/>
+		public SupplierInvoice()
         {
             this.SupplierInvoiceRows = new List<SupplierInvoiceRow>();
         }
+
+		/// <summary>This field is Read-Only in Fortnox</summary>
+		[System.ComponentModel.ReadOnly(true)]
+		public string AccountingMethod
+		{
+			get
+			{
+				return this.accountingMethod;
+			}
+			set
+			{
+				this.accountingMethod = value;
+			}
+		}
 
         /// <remarks/>
         public string AdministrationFee
@@ -165,8 +190,21 @@ namespace FortnoxAPILibrary
             }
         }
 
-        /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+		/// <remarks/>
+		public string CostCenter
+		{
+			get
+			{
+				return this.costcenter;
+			}
+			set
+			{
+				this.costcenter = value;
+			}
+		}
+
+		/// <summary>This field is Read-Only in Fortnox</summary>
+		[System.ComponentModel.ReadOnly(true)]
         public string Credit
         {
             get
@@ -388,9 +426,47 @@ namespace FortnoxAPILibrary
             }
         }
 
+		/// <remarks/>
+		public string OurReference
+		{
+			get
+			{
+				return this.ourReference;
+			}
+			set
+			{
+				this.ourReference = value;
+			}
+		}
 
-        /// <remarks/>
-        public string RoundOffValue
+		/// <remarks/>
+		public string PaymentPending
+		{
+			get
+			{
+				return this.paymentPending;
+			}
+			set
+			{
+				this.paymentPending = value;
+			}
+		}
+
+		/// <remarks/>
+		public string Project
+		{
+			get
+			{
+				return this.project;
+			}
+			set
+			{
+				this.project = value;
+			}
+		}
+
+		/// <remarks/>
+		public string RoundOffValue
         {
             get
             {
@@ -509,7 +585,20 @@ namespace FortnoxAPILibrary
                 this.urlField = value;
             }
         }
-    }
+
+		/// <remarks/>
+		public string YourReference
+		{
+			get
+			{
+				return this.yourReference;
+			}
+			set
+			{
+				this.yourReference = value;
+			}
+		}
+	}
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]

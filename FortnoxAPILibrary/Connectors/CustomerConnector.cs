@@ -62,10 +62,25 @@ namespace FortnoxAPILibrary.Connectors
 			PRINT
 		}
 
+		private bool filterBySet = false;
+		private Filter.Customer filterBy;
+		/// <remarks/>
+		[FilterProperty("filter")]
+		public Filter.Customer FilterBy
+		{
+			get { return filterBy; }
+			set
+			{
+				filterBy = value;
+				filterBySet = true;
+			}
+		}
+
+
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-        [FilterProperty]
+		[FilterProperty]
 		public string City { get; set; }
 
 		/// <summary>
@@ -103,6 +118,18 @@ namespace FortnoxAPILibrary.Connectors
         /// </summary>
         [FilterProperty]
 		public string ZipCode { get; set; }
+
+		/// <summary>
+		/// Use with Find() to limit the search result
+		/// </summary>
+		[FilterProperty]
+		public string GLN { get; set; }
+
+		/// <summary>
+		/// Use with Find() to limit the search result
+		/// </summary>
+		[FilterProperty]
+		public string GLNDelivery { get; set; }
 
 		/// <remarks/>
 		public CustomerConnector()

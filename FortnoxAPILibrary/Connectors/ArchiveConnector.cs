@@ -53,7 +53,6 @@ namespace FortnoxAPILibrary.Connectors
 
 		}
 
-
 		/// <summary>
 		/// Gets at list of Files and Folders
 		/// </summary>
@@ -108,6 +107,34 @@ namespace FortnoxAPILibrary.Connectors
 			return resource;
 		}
 
+		/// <summary>
+		/// Creates a folder.
+		/// </summary>
+		/// <param name="folder">The folder entity to create</param>
+		/// <param name="destination">he id or path to the parent folder to create the folder in.</param>
+		/// <returns>The created folder.</returns>
+		public Folder CreateFolder(Folder folder, string destination = "")
+		{
+			base.Resource = "archive";
+
+			Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+			if (!String.IsNullOrWhiteSpace(destination))
+			{
+				Guid test = new Guid();
+				if (Guid.TryParse(destination, out test))
+				{
+					parameters.Add("folderid", destination);
+				}
+				else
+				{
+					parameters.Add("path", destination);
+				}
+			}
+
+			return base.BaseCreate(folder, parameters);
+		}
+
 		///<summary>
 		///Uploads a file to Fortnox
 		///</summary>
@@ -122,15 +149,73 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
+		/// Uploads a file to Fortnox Archive from provided data array.
+		/// </summary>
+		/// <returns>Created file.</returns>
+		public File UploadFileData(byte[] data, string name, string folderId = "")
+		{
+			if (data == null) throw new ArgumentNullException("File data must be set.");
+
+			if (string.IsNullOrEmpty(name)) throw new ArgumentException("File name must be set.");
+
+			if (!System.IO.Path.HasExtension(name)) throw new ArgumentException("File name with extention must be set.");
+
+			base.Resource = "archive";
+
+			var uploadedFile = base.BaseUploadFile("", folderId, data, name);
+
+			uploadedFile.ContentType = System.Web.MimeMapping.GetMimeMapping(name); // as good as archive...
+
+			uploadedFile.Data = new byte[data.Length];
+
+			data.CopyTo(uploadedFile.Data, 0);
+
+			return uploadedFile;
+		}
+
+		/// <summary>
+		/// Uploads a file to Fortnox Archive from provided data stream.
+		/// </summary>
+		/// <returns>Created file.</returns>
+		public File UploadFileData(System.IO.Stream stream, string name, string folderId = "")
+		{
+			stream.Position = 0;
+			var arr = new byte[stream.Length];
+			stream.Read(arr, 0, (int)stream.Length);
+			return this.UploadFileData(arr, name, folderId);
+		}
+
+		/// <summary>
 		/// Downloads a file fron Fortnox Archive
 		/// </summary>
 		/// <param name="fileIdOrFilePath">The id or path of the file to download</param>
 		/// <param name="localPath">The local path to save the file to </param>
-		public new void DownloadFile(string fileIdOrFilePath, string localPath)
+		public void DownloadFile(string fileIdOrFilePath, string localPath)
         {
             base.Resource = "archive";
 
 			base.DownloadFile(fileIdOrFilePath, localPath);
+		}
+
+		/// <summary>
+		/// Downloads actual file data from Fortnox Archive into existing file object. Please note that the file object needs a valid file id.
+		/// </summary>
+		/// <param name="file">File object to be injected with file data.</param>
+		public void DownloadFileData(File file)
+		{
+			if (file == null)
+			{
+				throw new ArgumentNullException("File must be set.");
+			}
+
+			if (string.IsNullOrEmpty(file.Id))
+			{
+				throw new ArgumentException("File id must be set.");
+			}
+
+			base.Resource = "archive";
+
+			base.DownloadFile(file.Id, "", file);
 		}
 
 		/// <summary>
@@ -146,32 +231,22 @@ namespace FortnoxAPILibrary.Connectors
 			return base.MoveFile(fileId, destination);
 		}
 
-        /// <summary>
-        /// Creates a folder.
-        /// </summary>
-        /// <param name="folder">The folder entity to create</param>
-        /// <param name="destination">he id or path to the parent folder to create the folder in.</param>
-        /// <returns>The created folder.</returns>
-        public Folder CreateFolder(Folder folder, string destination = "")
-        {
-            base.Resource = "archive";
+		/// <summary>
+		/// Deletes a file from Fortnox Archive.
+		/// </summary>
+		/// <param name="fileId">The id of the file to be deleted.</param>
+		public void DeleteFile(string fileId)
+		{
+			base.BaseDelete(fileId);
+		}
 
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-
-            if (!String.IsNullOrWhiteSpace(destination))
-            {
-                Guid test = new Guid();
-                if (Guid.TryParse(destination, out test))
-                {
-                    parameters.Add("folderid", destination);
-                }
-                else
-                {
-                    parameters.Add("path", destination);
-                }
-            }
-
-            return base.BaseCreate(folder, parameters);
-        }
+		/// <summary>
+		/// Deletes a folder and all its content from Fortnox Archive.
+		/// </summary>
+		/// <param name="folderId">The id of the folder to be deleted.</param>
+		public void DeleteFolder(string folderId)
+		{
+			base.BaseDelete(folderId);
+		}
 	}
 }

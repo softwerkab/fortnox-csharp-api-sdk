@@ -5,6 +5,20 @@ namespace FortnoxAPILibrary.Connectors
 	/// <remarks/>
 	public class ArticleConnector : FinancialYearBasedEntityConnector<Article, Articles, Sort.By.Article>
 	{
+		private bool filterBySet = false;
+		private Filter.Article filterBy;
+		/// <remarks/>
+		[FilterProperty("filter")]
+		public Filter.Article FilterBy
+		{
+			get { return filterBy; }
+			set
+			{
+				filterBy = value;
+				filterBySet = true;
+			}
+		}
+
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>

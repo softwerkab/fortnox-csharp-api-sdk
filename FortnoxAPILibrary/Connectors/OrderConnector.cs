@@ -12,6 +12,18 @@ namespace FortnoxAPILibrary.Connectors
 		/// Use with Find() to limit the search result
 		/// </summary>
 		[FilterProperty]
+		public string FromDate { get; set; }
+
+		/// <summary>
+		/// Use with Find() to limit the search result
+		/// </summary>
+		[FilterProperty]
+		public string ToDate { get; set; }
+
+		/// <summary>
+		/// Use with Find() to limit the search result
+		/// </summary>
+		[FilterProperty]
 		public string CostCenter { get; set; }
 
 		/// <summary>

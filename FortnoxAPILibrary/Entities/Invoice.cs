@@ -128,6 +128,8 @@ namespace FortnoxAPILibrary
 
 		private string ourReferenceField;
 
+		private string paymentWayField;
+
 		private string phone1Field;
 
 		private string phone2Field;
@@ -864,6 +866,19 @@ namespace FortnoxAPILibrary
 			set
 			{
 				this.ourReferenceField = value;
+			}
+		}
+
+		/// <remarks/>
+		public string PaymentWay
+		{
+			get
+			{
+				return this.paymentWayField;
+			}
+			set
+			{
+				this.paymentWayField = value;
 			}
 		}
 
