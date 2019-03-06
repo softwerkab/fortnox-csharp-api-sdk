@@ -370,6 +370,7 @@ namespace FortnoxAPILibrary
 							using (var ms = new System.IO.MemoryStream())
 							{
 								file.ContentType = response.Headers["Content-Type"];
+                                file.Name = GetFileName(response.Headers);
 								responseStream.CopyTo(ms);
 								file.Data = ms.ToArray();								
 							}
@@ -381,6 +382,18 @@ namespace FortnoxAPILibrary
             {
                 Error = this.HandleException(we);
             }
+        }
+
+        static string GetFileName(WebHeaderCollection responseHeaders)
+        {
+            var contentDisposition = responseHeaders.Get("Content-Disposition");
+            if (string.IsNullOrEmpty(contentDisposition))
+                return null;
+
+            var parts = contentDisposition.Split(";");
+            var fileNamePart = parts.FirstOrDefault(p => p.Trim().StartsWith("filename="));
+
+            return fileNamePart?.Trim().Replace("filename=", string.Empty);
         }
 
         internal File MoveFile(string fileId, string destination)
