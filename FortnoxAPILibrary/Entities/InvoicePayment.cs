@@ -381,7 +381,7 @@ namespace FortnoxAPILibrary
 		/// <summary>This field is Read-Only in Fortnox</summary>
 		[System.Xml.Serialization.XmlAttributeAttribute()]
 		[System.ComponentModel.ReadOnly(true)]
-		public string url
+		public string @url
 		{
 			get
 			{
