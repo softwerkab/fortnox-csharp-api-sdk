@@ -73,8 +73,10 @@ namespace FortnoxAPILibrary
 
 		private string urlField;
 
-		/// <remarks/>
-		public string Amount
+        private string modeOfPaymentAccount;
+
+        /// <remarks/>
+        public string Amount
 		{
 			get
 			{
@@ -390,7 +392,19 @@ namespace FortnoxAPILibrary
 				this.urlField = value;
 			}
 		}
-	}
+
+        public string ModeOfPaymentAccount
+        {
+            get
+            {
+                return this.modeOfPaymentAccount;
+            }
+            set
+            {
+                this.modeOfPaymentAccount = value;
+            }
+        }
+    }
 
 	/// <remarks/>
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
@@ -508,5 +522,6 @@ namespace FortnoxAPILibrary
 				this.projectField = value;
 			}
 		}
-	}
+
+    }
 }
