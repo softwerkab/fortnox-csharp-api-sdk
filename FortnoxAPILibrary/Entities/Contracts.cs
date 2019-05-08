@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace FortnoxAPILibrary
@@ -11,7 +8,7 @@ namespace FortnoxAPILibrary
     {
         /// <remarks/>
         [XmlElementAttribute("ContractSubset")]
-        public List<ContractSubset> ContractSubset { get; set; }
+        public List<ContractSubset> ContractSubset { get; }
 
         /// <remarks/>
         [XmlAttribute]
@@ -31,7 +28,7 @@ namespace FortnoxAPILibrary
     {
         /// <remarks/>
         [XmlAttributeAttribute]
-        public string url { get; set; }
+        public string Url { get; set; }
 
         /// <remarks/>
         public string Continuous { get; set; }

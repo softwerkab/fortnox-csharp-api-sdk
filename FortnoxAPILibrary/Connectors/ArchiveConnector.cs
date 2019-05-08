@@ -164,7 +164,7 @@ namespace FortnoxAPILibrary.Connectors
 
 			var uploadedFile = base.BaseUploadFile("", folderId, data, name);
 
-			uploadedFile.ContentType = System.Web.MimeMapping.GetMimeMapping(name); // as good as archive...
+            uploadedFile.ContentType = MimeTypes.GetMimeType(name); 
 
 			uploadedFile.Data = new byte[data.Length];
 
