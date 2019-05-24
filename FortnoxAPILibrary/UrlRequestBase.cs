@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Xml;
@@ -17,9 +18,13 @@ namespace FortnoxAPILibrary
 
 		string accessToken;
 
-        private int MAX_REQUESTS_PER_SECOND = 3;
-        private static DateTime firstRequest = DateTime.Now;
-        private static int currentRequestsPerSecond = 0;
+        /// <summary>
+        /// link to restriction info:
+        /// https://developer.fortnox.se/documentation/general/regarding-fortnox-api-rate-limits/
+        /// </summary>
+        private int MAX_REQUESTS_PER_SECOND = 4;
+        private DateTime firstRequest = DateTime.Now;
+        private int currentRequestsPerSecond = 0;
 
         /// <summary>
         /// Optional Fortnox Client Secret, if used it will override the static version.
@@ -496,10 +501,11 @@ namespace FortnoxAPILibrary
             {
                 this.httpStatusCode = response.StatusCode;
 
-                if (response == null || this.httpStatusCode == HttpStatusCode.InternalServerError)
+                if (this.httpStatusCode == HttpStatusCode.InternalServerError)
                 {
                     throw we;
                 }
+
                 using (var errorStream = response.GetResponseStream())
                 {
                     XmlSerializer errorSerializer = new XmlSerializer(typeof(FortnoxError.ErrorInformation));
