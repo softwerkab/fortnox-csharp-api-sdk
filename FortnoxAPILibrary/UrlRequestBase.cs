@@ -3,7 +3,9 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -16,11 +18,19 @@ namespace FortnoxAPILibrary
 
 		string accessToken;
 
-		/// <summary>
-		/// Optional Fortnox Client Secret, if used it will override the static version.
-		/// </summary>
-		/// <exception cref="Exception">Exception will be thrown if client secret is not set.</exception>
-		public string ClientSecret
+        /// <summary>
+        /// link to restriction info:
+        /// https://developer.fortnox.se/documentation/general/regarding-fortnox-api-rate-limits/
+        /// </summary>
+        private int MAX_REQUESTS_PER_SECOND = 4;
+        private DateTime firstRequest = DateTime.Now;
+        private int currentRequestsPerSecond = 0;
+
+        /// <summary>
+        /// Optional Fortnox Client Secret, if used it will override the static version.
+        /// </summary>
+        /// <exception cref="Exception">Exception will be thrown if client secret is not set.</exception>
+        public string ClientSecret
 		{
 			get
 			{
@@ -134,6 +144,30 @@ namespace FortnoxAPILibrary
         }
 
         /// <summary>
+        /// This method is used to throttle every call to Fortnox. 
+        /// </summary>
+        internal void RateLimit()
+        {
+            bool reset = false;
+
+            currentRequestsPerSecond++;
+
+            if ((DateTime.Now - firstRequest).TotalMilliseconds >= (double)1000.0) reset = true;
+            else if (currentRequestsPerSecond >= MAX_REQUESTS_PER_SECOND)
+            {
+                // Wait out remainder of current second
+                Thread.Sleep(Convert.ToInt32((double)1000.0 - (DateTime.Now - firstRequest).TotalMilliseconds));
+                reset = true;
+            }
+
+            if (reset)
+            {
+                currentRequestsPerSecond = 0;
+                firstRequest = DateTime.Now;
+            }
+        }
+
+        /// <summary>
         /// This method is used to setup the WebRequest used in every call to Fortnox. 
         /// </summary>
         /// <param name="requestUriString">The url to the resource</param>
@@ -155,7 +189,8 @@ namespace FortnoxAPILibrary
             wr.ContentType = "application/xml";
             wr.Accept = "application/xml";
             wr.Method = method;
-            wr.Timeout = this.Timeout;
+            wr.Timeout = this.Timeout;            
+
             return wr;
         }
 
@@ -168,6 +203,8 @@ namespace FortnoxAPILibrary
 
             try
             {
+                RateLimit();
+
                 if (Method != "GET")
                 {
                     using (wr.GetRequestStream()) { }
@@ -196,6 +233,8 @@ namespace FortnoxAPILibrary
             this.ResponseXml = "";
             try
             {
+                RateLimit();
+
                 XmlSerializer xs = new XmlSerializer(typeof(T));
 
                 if (Method != "GET")
@@ -462,10 +501,11 @@ namespace FortnoxAPILibrary
             {
                 this.httpStatusCode = response.StatusCode;
 
-                if (response == null || this.httpStatusCode == HttpStatusCode.InternalServerError)
+                if (this.httpStatusCode == HttpStatusCode.InternalServerError)
                 {
                     throw we;
                 }
+
                 using (var errorStream = response.GetResponseStream())
                 {
                     XmlSerializer errorSerializer = new XmlSerializer(typeof(FortnoxError.ErrorInformation));
