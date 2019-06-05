@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FortnoxAPILibrary.Connectors;
 
@@ -15,6 +16,8 @@ namespace FortnoxAPILibrary.Tests
 		public void TestConnection1()
 		{
 			var cc = new CustomerConnector();
+            ConnectionCredentials.AccessToken = "";
+            ConnectionCredentials.ClientSecret = "";
 			cc.AccessToken = "";
 			cc.ClientSecret = "";
 			cc.Find();
@@ -77,13 +80,15 @@ namespace FortnoxAPILibrary.Tests
 			var customers = connector.Find();
 
 			Assert.IsFalse(connector.HasError);
-			Assert.IsTrue(customers.TotalResources == "1");
+            Assert.IsTrue(customers.CustomerSubset.Any(c => c.CustomerNumber == "0022"));
 
 			customer.Active = "true";
 			connector.Update(customer);
 
 			Assert.IsFalse(connector.HasError);
 			Assert.IsTrue(customer.Active == "true");
+            customers = connector.Find();
+            Assert.IsFalse(customers.CustomerSubset.Any(c => c.CustomerNumber == "0022"));
 		}
 
 		[TestMethod]
