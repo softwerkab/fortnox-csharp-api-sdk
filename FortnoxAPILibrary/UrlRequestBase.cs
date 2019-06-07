@@ -1,13 +1,12 @@
-﻿using FortnoxError;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
+using FortnoxAPILibrary.Helpers;
 
 namespace FortnoxAPILibrary
 {
@@ -506,7 +505,7 @@ namespace FortnoxAPILibrary
                     throw we;
                 }
 
-                using (var errorStream = response.GetResponseStream())
+                using (var errorStream = response.GetResponseStream().ToMemoryStream())
                 {
                     XmlSerializer errorSerializer = new XmlSerializer(typeof(FortnoxError.ErrorInformation));
 
