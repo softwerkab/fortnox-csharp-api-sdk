@@ -505,13 +505,17 @@ namespace FortnoxAPILibrary
                     throw we;
                 }
 
-                using (var errorStream = response.GetResponseStream().ToMemoryStream())
+                using (var errorStream = response.GetResponseStream())
+                using (var memStream = new MemoryStream())
                 {
+                    errorStream.CopyTo(memStream);
+                    memStream.Seek(0, SeekOrigin.Begin);
+
                     XmlSerializer errorSerializer = new XmlSerializer(typeof(FortnoxError.ErrorInformation));
 
                     try
                     {
-                        Error = (FortnoxError.ErrorInformation)errorSerializer.Deserialize(errorStream);
+                        Error = (FortnoxError.ErrorInformation)errorSerializer.Deserialize(memStream);
                         if (Error.Code == "2001392")
                         {
                             Error.Message = "No information was provided for the entity.";
@@ -521,8 +525,8 @@ namespace FortnoxAPILibrary
                     }
                     catch (Exception ex)
                     {
-                        errorStream.Position = 0;
-                        using (StreamReader reader = new StreamReader(errorStream))
+                        memStream.Seek(0, SeekOrigin.Begin);
+                        using (StreamReader reader = new StreamReader(memStream))
                         {
                             string text = reader.ReadToEnd();
 
