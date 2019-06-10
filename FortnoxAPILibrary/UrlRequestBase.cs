@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
-using FortnoxAPILibrary.Helpers;
 
 namespace FortnoxAPILibrary
 {
