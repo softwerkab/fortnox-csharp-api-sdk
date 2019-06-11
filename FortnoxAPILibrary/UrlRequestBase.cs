@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
+using FortnoxAPILibrary.Exceptions;
+using FortnoxError;
 
 namespace FortnoxAPILibrary
 {
@@ -499,9 +501,15 @@ namespace FortnoxAPILibrary
             {
                 this.httpStatusCode = response.StatusCode;
 
-                if (this.httpStatusCode == HttpStatusCode.InternalServerError)
+                switch (httpStatusCode)
                 {
-                    throw we;
+                    case HttpStatusCode.InternalServerError:
+                        throw we;
+                    case HttpStatusCode.TooManyRequests:
+                        throw new FortnoxTooManyRequestsException(we.Message, we)
+                        {
+                            Code = httpStatusCode
+                        };
                 }
 
                 using (var errorStream = response.GetResponseStream())
