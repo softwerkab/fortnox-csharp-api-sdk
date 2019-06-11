@@ -506,10 +506,7 @@ namespace FortnoxAPILibrary
                     case HttpStatusCode.InternalServerError:
                         throw we;
                     case HttpStatusCode.TooManyRequests:
-                        throw new FortnoxTooManyRequestsException(we.Message, we)
-                        {
-                            Code = httpStatusCode
-                        };
+                        throw new FortnoxTooManyRequestsException(we.Message, we);
                 }
 
                 using (var errorStream = response.GetResponseStream())
