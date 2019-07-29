@@ -85,6 +85,16 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         bool NotCompleted { get; set; }
+        
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        bool IsCredit { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        InvoiceConnector.InvoiceType InvoiceTypeFilter { get; set; }
 
         /// <remarks/>
         Filter.Invoice FilterBy { get; set; }
@@ -299,7 +309,19 @@ namespace FortnoxAPILibrary.Connectors
 			}
 		}
 
-		private bool filterBySet = false;
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [FilterProperty("credit")]
+        public bool IsCredit { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [FilterProperty("invoicetype")]
+        public InvoiceType InvoiceTypeFilter { get; set; }
+
+        private bool filterBySet = false;
 		private Filter.Invoice filterBy;
         /// <remarks/>
         [FilterProperty("filter")]
@@ -325,17 +347,22 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public enum InvoiceType
 		{
-			/// <remarks/>
+            /// <remarks/>
+            [RealValue("invoice")]
 			INVOICE,
-			/// <remarks/>
+            /// <remarks/>
+            [RealValue("cashinvoice")]
 			CASHINVOICE,
-			/// <remarks/>
+            /// <remarks/>
+            [RealValue("intrestinvoice")]
 			INTRESTINVOICE,
-			/// <remarks/>
+            /// <remarks/>
+            [RealValue("agreementinvoice")]
 			AGREEMENTINVOICE,
-			/// <remarks/>
+            /// <remarks/>
+            [RealValue("summaryinvoice")]
 			SUMMARYINVOICE
-		}
+        }
 
 		/// <remarks/>
 		public InvoiceConnector()
