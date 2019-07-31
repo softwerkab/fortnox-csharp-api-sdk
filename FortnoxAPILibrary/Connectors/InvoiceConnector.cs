@@ -309,17 +309,43 @@ namespace FortnoxAPILibrary.Connectors
 			}
 		}
 
+        private bool isCreditSet = false;
+        private bool isCredit;
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
         [FilterProperty("credit")]
-        public bool IsCredit { get; set; }
+        public bool IsCredit
+        {
+            get
+            {
+                return isCredit;
+            }
+            set
+            {
+                isCredit = value;
+                isCreditSet = true;
+            }
+        }
 
+        private bool invoiceTypeFilterSet = false;
+        private InvoiceType invoiceTypeFilter;
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
         [FilterProperty("invoicetype")]
-        public InvoiceType InvoiceTypeFilter { get; set; }
+        public InvoiceType InvoiceTypeFilter
+        {
+            get
+            {
+                return invoiceTypeFilter;
+            }
+            set
+            {
+                invoiceTypeFilter = value;
+                invoiceTypeFilterSet = true;
+            }
+        }
 
         private bool filterBySet = false;
 		private Filter.Invoice filterBy;
