@@ -333,24 +333,11 @@ namespace FortnoxAPILibrary.Connectors
             }
         }
 
-        private bool yourOrderNumberSet = false;
-        private string yourOrderNumber;
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
-        [FilterProperty("yourordernumber")]
-        public string YourOrderNumber
-        {
-            get
-            {
-                return yourOrderNumber;
-            }
-            set
-            {
-                yourOrderNumber = value;
-                yourOrderNumberSet = true;
-            }
-        }
+        [FilterProperty]
+        public string YourOrderNumber { get; set; }
 
         private bool invoiceTypeFilterSet = false;
         private InvoiceType invoiceTypeFilter;
