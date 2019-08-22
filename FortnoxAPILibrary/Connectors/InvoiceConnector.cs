@@ -94,6 +94,11 @@ namespace FortnoxAPILibrary.Connectors
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
+        string YourOrderNumber { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
         InvoiceConnector.InvoiceType InvoiceTypeFilter { get; set; }
 
         /// <remarks/>
@@ -325,6 +330,25 @@ namespace FortnoxAPILibrary.Connectors
             {
                 isCredit = value;
                 isCreditSet = true;
+            }
+        }
+
+        private bool yourOrderNumberSet = false;
+        private string yourOrderNumber;
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [FilterProperty("yourordernumber")]
+        public string YourOrderNumber
+        {
+            get
+            {
+                return yourOrderNumber;
+            }
+            set
+            {
+                yourOrderNumber = value;
+                yourOrderNumberSet = true;
             }
         }
 
