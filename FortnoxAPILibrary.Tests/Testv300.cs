@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FortnoxAPILibrary.Connectors;
@@ -312,5 +312,22 @@ namespace FortnoxAPILibrary.Tests
 			connector.DeleteFile(file.Id);
 			Assert.IsFalse(connector.HasError);
 		}
-	}
+
+        [Ignore]
+        [TestMethod]
+        public void TestRequestingInvoiceByYourOrderNumber()
+        {
+            var connector = new InvoiceConnector
+            {
+                //use credentials:
+                AccessToken = at, //16a366e1-7389-4e94-9032-31546d644e9a
+                ClientSecret = cs, // PNWPB5EGzJ
+                YourOrderNumber = "20190809"
+            };
+            var invoice = connector.Find();
+
+            Assert.IsTrue(invoice.InvoiceSubset != null);
+            Assert.IsTrue(invoice.InvoiceSubset.First() != null);
+        }
+    }
 }
