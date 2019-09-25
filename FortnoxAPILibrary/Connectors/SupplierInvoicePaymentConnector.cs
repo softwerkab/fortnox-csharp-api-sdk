@@ -18,6 +18,12 @@ namespace FortnoxAPILibrary.Connectors
         SupplierInvoicePayment Create(SupplierInvoicePayment supplierInvoicePayment);
 
         /// <summary>
+        /// Updates an supplier invoice payment
+        /// </summary>
+        /// <param name="supplierInvoicePayment">The supplier invoice payment to update</param>
+        /// <returns>The updated supplier invoice payment</returns>
+        SupplierInvoicePayment Update(SupplierInvoicePayment supplierInvoicePayment);
+        /// <summary>
         /// Gets a list of supplier payments
         /// </summary>
         /// <returns>A list of payments</returns>
@@ -60,7 +66,17 @@ namespace FortnoxAPILibrary.Connectors
 			return base.BaseCreate(supplierInvoicePayment);
 		}
 
-		/// <summary>
+        /// <summary>
+        /// Updates an supplier invoice payment
+        /// </summary>
+        /// <param name="supplierInvoicePayment">The supplier invoice payment to update</param>
+        /// <returns>The updated supplier invoice payment</returns>
+        public SupplierInvoicePayment Update(SupplierInvoicePayment supplierInvoicePayment)
+        {
+            return base.BaseUpdate(supplierInvoicePayment, supplierInvoicePayment.Number.ToString());
+        }
+
+        /// <summary>
 		/// Gets a list of supplier payments
 		/// </summary>
 		/// <returns>A list of payments</returns>
