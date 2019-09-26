@@ -333,8 +333,11 @@ namespace FortnoxAPILibrary
 				SupplierName,
 				/// <remarks/>
 				[RealValue("suppliernumber")]
-				SupplierNumber
-			}
+                SupplierNumber,
+				/// <remarks/>
+				[RealValue("invoicedate")]
+                InvoiceDate,
+            }
 
 			/// <remarks/>
 			public enum SupplierInvoiceAccrual
