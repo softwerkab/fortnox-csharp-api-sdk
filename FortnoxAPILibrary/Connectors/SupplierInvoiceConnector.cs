@@ -7,6 +7,15 @@ namespace FortnoxAPILibrary.Connectors
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
+        string FromDate { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        string ToDate { get; set; }
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
         string SupplierNumber { get; set; }
 
         /// <summary>
@@ -163,10 +172,21 @@ namespace FortnoxAPILibrary.Connectors
             SERVICE
         }
 
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [FilterProperty]
+        public string FromDate { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [FilterProperty]
+        public string ToDate { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
         [FilterProperty]
 		public string SupplierNumber { get; set; }
 
