@@ -121,7 +121,10 @@ namespace FortnoxAPILibrary.Connectors
             AssetRegister,
             /// <remarks/>
             [RealValue("inbox_b")]
-            BankFiles
+            BankFiles,
+            /// <remarks/>
+            [RealValue("inbox_kf")]
+            Invoices
         }
 
         /// <summary>
