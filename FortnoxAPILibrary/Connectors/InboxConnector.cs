@@ -124,7 +124,7 @@ namespace FortnoxAPILibrary.Connectors
             BankFiles,
             /// <remarks/>
             [RealValue("inbox_kf")]
-            Invoices
+            CustomerInvoices
         }
 
         /// <summary>
