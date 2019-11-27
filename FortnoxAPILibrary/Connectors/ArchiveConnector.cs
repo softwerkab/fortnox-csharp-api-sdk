@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Reflection;
+using Microsoft.AspNetCore.StaticFiles;
 
 namespace FortnoxAPILibrary.Connectors
 {
@@ -164,7 +165,7 @@ namespace FortnoxAPILibrary.Connectors
 
 			var uploadedFile = base.BaseUploadFile("", folderId, data, name);
 
-			uploadedFile.ContentType = System.Web.MimeMapping.GetMimeMapping(name); // as good as archive...
+            uploadedFile.ContentType = GetMimeType(name);
 
 			uploadedFile.Data = new byte[data.Length];
 
@@ -248,5 +249,12 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			base.BaseDelete(folderId);
 		}
-	}
+
+        private static string GetMimeType(string name)
+        {
+            var contentTypeProvider = new FileExtensionContentTypeProvider();
+            var typeKnown = contentTypeProvider.TryGetContentType(name, out var contentType);
+            return typeKnown ? contentType : "application/octet-stream";
+        }
+    }
 }
