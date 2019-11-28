@@ -14,7 +14,12 @@ namespace FortnoxAPILibrary.Tests
 		[ExpectedException(typeof(Exception))]
 		public void TestConnection1()
 		{
-			var cc = new CustomerConnector();
+            //Arrange
+            ConnectionCredentials.AccessToken = "";
+            ConnectionCredentials.ClientSecret = "";
+
+            //Act
+            var cc = new CustomerConnector();
 			cc.AccessToken = "";
 			cc.ClientSecret = "";
 			cc.Find();
