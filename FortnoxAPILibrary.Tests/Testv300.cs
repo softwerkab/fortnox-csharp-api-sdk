@@ -311,5 +311,29 @@ namespace FortnoxAPILibrary.Tests
 			connector.DeleteFile(file.Id);
 			Assert.IsFalse(connector.HasError);
 		}
-	}
+
+        [TestMethod]
+        public void Test_issue51_fixed() //Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/51
+        {
+            //Arrange
+            /* Assuming several (at least 5) vouchers exists */ 
+
+            //Act & Assert
+            var connector = new VoucherConnector();
+            connector.AccessToken = at;
+            connector.ClientSecret = cs;
+
+            connector.Limit = 2;
+            var voucherResult = connector.Find();
+            Assert.IsFalse(connector.HasError);
+
+            connector.Page = 2;
+            var voucherResult2 = connector.Find();
+            Assert.IsFalse(connector.HasError);
+
+            connector.Page = 3;
+            var voucherResult3 = connector.Find();
+            Assert.IsFalse(connector.HasError);
+        }
+    }
 }
