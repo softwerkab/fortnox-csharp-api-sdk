@@ -69,27 +69,30 @@ namespace FortnoxAPILibrary.Tests
 			connector.AccessToken = at;
 			connector.ClientSecret = cs;
 
-			var customer = connector.Get("0022");
-			customer.GLN = "123";
-			customer.GLNDelivery = "12345";
-			customer.Active = "false";
-			customer = connector.Update(customer);
+            //Arrange
+            connector.FilterBy = Filter.Customer.Inactive;
+            var originalInactiveCustomerCount = int.Parse(connector.Find().TotalResources);
 
-			Assert.IsFalse(connector.HasError);
-			Assert.IsTrue(customer.Active == "false");
+            //Act
+            var newCustomer = connector.Create(new Customer(){ Name = "TestCustomer", Active = "true" });
 
-			connector.FilterBy = Filter.Customer.Inactive;
-			var customers = connector.Find();
+            var customers = connector.Find();
+            Assert.IsFalse(connector.HasError);
+            Assert.AreEqual(originalInactiveCustomerCount, int.Parse(customers.TotalResources));
 
-			Assert.IsFalse(connector.HasError);
-			Assert.IsTrue(customers.TotalResources == "1");
+            newCustomer.Active = "false";
+			newCustomer = connector.Update(newCustomer);
 
-			customer.Active = "true";
-			connector.Update(customer);
-
-			Assert.IsFalse(connector.HasError);
-			Assert.IsTrue(customer.Active == "true");
-		}
+            customers = connector.Find();
+            Assert.IsFalse(connector.HasError);
+            Assert.AreEqual(originalInactiveCustomerCount + 1, int.Parse(customers.TotalResources));
+            
+            //Restore state
+            connector.Delete(newCustomer.CustomerNumber);
+            customers = connector.Find();
+            Assert.IsFalse(connector.HasError);
+            Assert.AreEqual(originalInactiveCustomerCount, int.Parse(customers.TotalResources));
+        }
 
 		[TestMethod]
 		public void TestArticle()
