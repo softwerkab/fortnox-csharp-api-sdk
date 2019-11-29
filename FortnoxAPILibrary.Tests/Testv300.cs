@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FortnoxAPILibrary.Connectors;
 
@@ -292,28 +293,39 @@ namespace FortnoxAPILibrary.Tests
 		[TestMethod]
 		public void TestFiles()
 		{
-			var connector = new ArchiveConnector();
+            //Arrange
+            var tmpPath = @"C:\temp\fortnoxImage.png";
+            if (System.IO.File.Exists(tmpPath))
+                System.IO.File.Delete(tmpPath);
+
+            if (!Directory.Exists(@"C:\temp\"))
+                Directory.CreateDirectory(@"C:\temp\");
+
+            //Act
+            var connector = new ArchiveConnector();
 			connector.AccessToken = at;
 			connector.ClientSecret = cs;
 
-			connector.DownloadFile("537be280-fc52-4b91-9dab-427be15db4c5", @"C:\temp\abc.txt");
-			Assert.IsFalse(connector.HasError);
+            var uploadedFile = connector.UploadFileData(Resource.fortnox_image, "FortnoxImage.png", "");
+            Assert.IsFalse(connector.HasError, $"Error: '{connector.Error?.Message}'");
+            Assert.AreEqual("image/png", uploadedFile.ContentType);
 
-			var file = new File();
-			file.Id = "537be280-fc52-4b91-9dab-427be15db4c5";
-			Assert.IsTrue(file.Data == null);
-			connector.DownloadFileData(file);
-			Assert.IsFalse(connector.HasError);
-			Assert.IsTrue(file.Data != null);
 
-			file = connector.UploadFileData(file.Data, "abc545.txt");
-			Assert.IsFalse(connector.HasError);
-			Assert.IsTrue(file.ContentType == "text/plain");
-			Assert.IsTrue(file.Data != null);			
+            connector.DownloadFile(uploadedFile.Id, tmpPath);
+            Assert.IsFalse(connector.HasError);
+            Assert.IsTrue(System.IO.File.Exists(tmpPath));
 
-			connector.DeleteFile(file.Id);
+            var reuploadedFile = connector.UploadFile(tmpPath);
+            Assert.IsFalse(connector.HasError);
+
+            //Restore State
+            connector.DeleteFile(uploadedFile.Id);
 			Assert.IsFalse(connector.HasError);
-		}
+            connector.DeleteFile(reuploadedFile.Id);
+            Assert.IsFalse(connector.HasError);
+
+            System.IO.File.Delete(tmpPath);
+        }
 
         [TestMethod]
         public void Test_issue51_fixed() //Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/51
