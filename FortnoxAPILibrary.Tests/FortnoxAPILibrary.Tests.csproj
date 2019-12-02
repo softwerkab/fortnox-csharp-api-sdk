@@ -23,12 +23,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Update="TestCredentials.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TestCredentials.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="TestCredentials.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TestCredentials.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
