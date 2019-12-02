@@ -59,7 +59,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <returns>A list of Files and Folders</returns>
 		public Folder Find(RootFolder rootFolder = RootFolder.Root)
-		{
+        {
             this.Parameters = new Dictionary<string, string>();
 
 			if (rootFolder == RootFolder.Root)
@@ -71,11 +71,11 @@ namespace FortnoxAPILibrary.Connectors
 
 				if (!string.IsNullOrWhiteSpace(FolderId))
 				{
-					base.Resource += "/" + FolderId;
+					base.Resource = "archive/" + FolderId;
 				}
 				else if (!string.IsNullOrWhiteSpace(Id))
 				{
-					base.Resource += "/" + Id;
+					base.Resource = "archive/" + Id;
 				}
 			}
 			else if (rootFolder == RootFolder.Inbox)
@@ -164,6 +164,7 @@ namespace FortnoxAPILibrary.Connectors
 			base.Resource = "archive";
 
 			var uploadedFile = base.BaseUploadFile("", folderId, data, name);
+            if (uploadedFile == null) return null;
 
             uploadedFile.ContentType = GetMimeType(name);
 

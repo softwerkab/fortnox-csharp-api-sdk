@@ -1,5 +1,6 @@
 ﻿using FortnoxError;
 using System;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -303,7 +304,7 @@ namespace FortnoxAPILibrary
             }
             catch (WebException we)
             {
-                this.HandleException(we);
+                Error = HandleException(we);
             }
 
             return entity;
@@ -503,13 +504,15 @@ namespace FortnoxAPILibrary
                     }
                     catch (Exception ex)
                     {
-                        errorStream.Position = 0;
+                        throw we;//TODO: Fix Bug - crashed when TooManyRequests Error (429)
+
+                        /*errorStream.Position = 0;
                         using (StreamReader reader = new StreamReader(errorStream))
                         {
                             string text = reader.ReadToEnd();
 
                             throw new Exception("Kunde inte tolka felmeddelandet från Fortnox API.\n\n" + text, ex.InnerException);
-                        }
+                        }*/
                     }
                 }
             }

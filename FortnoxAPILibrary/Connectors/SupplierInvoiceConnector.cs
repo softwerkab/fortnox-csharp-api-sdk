@@ -138,7 +138,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public SupplierInvoice Get(string documentNumber)
 		{
-			return base.BaseGet(documentNumber.ToString());
+			return base.BaseGet(documentNumber);
 		}
 
 		/// <summary>
@@ -148,7 +148,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public SupplierInvoice Update(SupplierInvoice supplierInvoice)
 		{
-			return base.BaseUpdate(supplierInvoice, supplierInvoice.GivenNumber.ToString());
+			return base.BaseUpdate(supplierInvoice, supplierInvoice.GivenNumber);
 		}
 
 		/// <summary>
