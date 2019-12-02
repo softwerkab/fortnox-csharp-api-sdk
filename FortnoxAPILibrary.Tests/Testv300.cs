@@ -432,5 +432,18 @@ namespace FortnoxAPILibrary.Tests
             var voucherResult3 = connector.Find();
             Assert.IsFalse(connector.HasError);
         }
+
+        [TestMethod]
+        public void Test_TooManyRequests_fixed()
+        {
+            var connector = new VoucherConnector();
+
+            for (int i = 0; i < 40; i++)
+            {
+                connector.Limit = 2;
+                connector.Find();
+                Assert.IsFalse(connector.HasError);
+            }
+        }
     }
 }
