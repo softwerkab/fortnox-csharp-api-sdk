@@ -39,7 +39,7 @@ namespace FortnoxAPILibrary
 
 		private string invoiceNumberField;
 
-		private InvoiceAccrualConnector.Period periodField;
+		private InvoiceAccrualConnector.Period? periodField;
 
 		private string revenueAccountField;
 
@@ -120,7 +120,7 @@ namespace FortnoxAPILibrary
 		}
 
 		/// <remarks/>
-		public InvoiceAccrualConnector.Period Period
+		public InvoiceAccrualConnector.Period? Period
 		{
 			get
 			{
@@ -131,6 +131,7 @@ namespace FortnoxAPILibrary
 				this.periodField = value;
 			}
 		}
+        public bool PeriodSpecified => Period != null;
 
 		/// <remarks/>
 		public string RevenueAccount

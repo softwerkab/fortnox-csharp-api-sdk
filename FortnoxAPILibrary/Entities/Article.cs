@@ -82,7 +82,7 @@ namespace FortnoxAPILibrary
 
 		private string supplierNumberField;
 
-		private ArticleConnector.ArticleType typeField;
+		private ArticleConnector.ArticleType? typeField;
 
 		private string unitField;
 
@@ -477,7 +477,7 @@ namespace FortnoxAPILibrary
 		}
 
 		/// <remarks/>
-		public ArticleConnector.ArticleType Type
+		public ArticleConnector.ArticleType? Type
 		{
 			get
 			{
@@ -488,9 +488,10 @@ namespace FortnoxAPILibrary
 				this.typeField = value;
 			}
 		}
+        public bool TypeSpecified => Type != null;
 
-		/// <remarks/>
-		public string Unit
+        /// <remarks/>
+        public string Unit
 		{
 			get
 			{

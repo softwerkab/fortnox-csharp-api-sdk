@@ -11,10 +11,8 @@ namespace FortnoxAPILibrary.Connectors
 			/// <remarks/>
 			PRIVATE,
 			/// <remarks/>
-			COMPANY,
-			/// <remarks/>
-			UNDEFINED
-		}
+			COMPANY
+        }
 
 		/// <remarks/>
 		public enum VATType
