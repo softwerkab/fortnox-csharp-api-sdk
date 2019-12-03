@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FortnoxAPILibrary.Connectors;
 
@@ -369,6 +369,38 @@ namespace FortnoxAPILibrary.Tests
                 connector.Find();
                 Assert.IsFalse(connector.HasError);
             }
+        }
+
+        [Ignore] //Scenario is not yet fixed
+        [TestMethod]
+        public void Test_issue57_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/57
+        {
+            var connector = new CustomerConnector();
+            var specificCustomer = connector.Create(new Customer() {Name = "TestCustomer", OrganisationNumber = "123456789"});
+            Assert.IsFalse(connector.HasError);
+            
+            connector.OrganisationNumber = "123456789";
+            var customers = connector.Find().CustomerSubset;
+            var customer = customers.FirstOrDefault(c => c.CustomerNumber == specificCustomer.CustomerNumber);
+            Assert.IsNotNull(customer);
+            
+            connector.Delete(specificCustomer.CustomerNumber);
+            Assert.IsFalse(connector.HasError);
+        }
+
+        [TestMethod]
+        public void Test_issue50_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/50
+        {
+            var connector = new CustomerConnector();
+            var newCustomer = connector.Create(new Customer() { Name = "TestCustomer", City = "Växjö", Type = CustomerConnector.Type.COMPANY });
+            Assert.IsFalse(connector.HasError);
+
+            var updatedCustomer = connector.Update(new Customer() {CustomerNumber = newCustomer.CustomerNumber, City = "Stockholm"});
+            Assert.IsFalse(connector.HasError);
+            Assert.AreEqual(CustomerConnector.Type.COMPANY, updatedCustomer.Type);
+
+            connector.Delete(newCustomer.CustomerNumber);
+            Assert.IsFalse(connector.HasError);
         }
     }
 }
