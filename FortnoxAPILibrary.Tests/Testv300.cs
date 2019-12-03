@@ -46,7 +46,7 @@ namespace FortnoxAPILibrary.Tests
             connector.ClientSecret = TestCredentials.Client_Secret;
 
             var customers = connector.Find();
-			Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
             Assert.IsNotNull(customers);
         }
 
@@ -63,7 +63,7 @@ namespace FortnoxAPILibrary.Tests
             connector.ClientSecret = "";
 
             var customers = connector.Find();
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
             Assert.IsNotNull(customers);
         }
 
@@ -95,22 +95,24 @@ namespace FortnoxAPILibrary.Tests
 
             //Act
             var newCustomer = connector.Create(new Customer(){ Name = "TestCustomer", Active = "true" });
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
 
             var customers = connector.Find();
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
             Assert.AreEqual(originalInactiveCustomerCount, int.Parse(customers.TotalResources));
 
             newCustomer.Active = "false";
 			newCustomer = connector.Update(newCustomer);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
 
             customers = connector.Find();
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
             Assert.AreEqual(originalInactiveCustomerCount + 1, int.Parse(customers.TotalResources));
             
             //Restore state
             connector.Delete(newCustomer.CustomerNumber);
             customers = connector.Find();
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
             Assert.AreEqual(originalInactiveCustomerCount, int.Parse(customers.TotalResources));
         }
 
@@ -124,24 +126,25 @@ namespace FortnoxAPILibrary.Tests
 
             //Act
             var newArticle = connector.Create(new Article { Active = "false", Description = "Test Article", PurchasePrice = "1999.99"});
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
 
             var articles = connector.Find();
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
             Assert.AreEqual(originalArticleCount + 1, int.Parse(articles.TotalResources));
 
             connector.Update(new Article() {ArticleNumber = newArticle.ArticleNumber, Description = "Test Article - Updated"});
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
             Assert.AreEqual(originalArticleCount + 1, int.Parse(articles.TotalResources));
 
             var obtainedArticle = connector.Get(newArticle.ArticleNumber);
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
             Assert.AreEqual("Test Article - Updated", obtainedArticle.Description);
             Assert.AreEqual("1999.99", obtainedArticle.PurchasePrice);
 
             //Restore state
             connector.Delete(newArticle.ArticleNumber);
             articles = connector.Find();
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
             Assert.AreEqual(originalArticleCount, int.Parse(articles.TotalResources));
         }
 
@@ -152,7 +155,7 @@ namespace FortnoxAPILibrary.Tests
 
             var connector = new FinancialYearConnector();
             var finicialYear = connector.Get(1);
-			Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
         }
 
 		[TestMethod]
@@ -167,7 +170,7 @@ namespace FortnoxAPILibrary.Tests
 
             var customerConnector = new CustomerConnector();
             var tmpCustomer = customerConnector.Create(new Customer() { Name = "CustomerForTestOrders" });
-            Assert.IsFalse(customerConnector.HasError);
+            Assert.IsFalse(customerConnector.HasError, $"Request failed due to '{customerConnector.Error?.Message}'.");
 
             //Act
             var offer1 = connector.Create(new Offer() { OfferDate = "2019-01-20", CustomerNumber = tmpCustomer.CustomerNumber });
@@ -176,17 +179,17 @@ namespace FortnoxAPILibrary.Tests
             Assert.IsFalse(connector.HasError);
 
             var offers = connector.Find();
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
             Assert.AreEqual(originalOfferCount + 2, int.Parse(offers.TotalResources));
 
             //Restore
             connector.Cancel(offer1.DocumentNumber);
             connector.Cancel(offer2.DocumentNumber);
             connector.Cancel(offer3.DocumentNumber);
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
 
             customerConnector.Delete(tmpCustomer.CustomerNumber);
-            Assert.IsFalse(customerConnector.HasError);
+            Assert.IsFalse(customerConnector.HasError, $"Request failed due to '{customerConnector.Error?.Message}'.");
         }
 
         [TestMethod]
@@ -201,13 +204,13 @@ namespace FortnoxAPILibrary.Tests
 
             var customerConnector = new CustomerConnector();
             var tmpCustomer = customerConnector.Create(new Customer(){Name = "CustomerForTestOrders"});
-            Assert.IsFalse(customerConnector.HasError);
+            Assert.IsFalse(customerConnector.HasError, $"Request failed due to '{customerConnector.Error?.Message}'.");
 
             //Act
             var order1 = connector.Create(new Order() {OrderDate = "2019-01-20", CustomerNumber = tmpCustomer.CustomerNumber});
             var order2 = connector.Create(new Order() {OrderDate = "2019-02-20", CustomerNumber = tmpCustomer.CustomerNumber});
             var order3 = connector.Create(new Order() {OrderDate = "2019-03-20", CustomerNumber = tmpCustomer.CustomerNumber});
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
 
             var orders = connector.Find();
 			Assert.IsFalse(connector.HasError);
@@ -217,10 +220,10 @@ namespace FortnoxAPILibrary.Tests
             connector.Cancel(order1.DocumentNumber);
             connector.Cancel(order2.DocumentNumber);
             connector.Cancel(order3.DocumentNumber);
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
 
             customerConnector.Delete(tmpCustomer.CustomerNumber);
-            Assert.IsFalse(customerConnector.HasError);
+            Assert.IsFalse(customerConnector.HasError, $"Request failed due to '{customerConnector.Error?.Message}'.");
         }
 
         [TestMethod]
@@ -233,22 +236,22 @@ namespace FortnoxAPILibrary.Tests
             var connector = new InvoiceConnector();
 
             var newInvoce = connector.Create(new Invoice() {InvoiceDate = "2019-01-20", DueDate = "2019-02-20", CustomerNumber = tmpCustomer.CustomerNumber});
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
 
-			var updatedInvoice = connector.Update(new Invoice(){ DocumentNumber = newInvoce.DocumentNumber, DueDate = "2019-03-20"});
-			Assert.IsFalse(connector.HasError);
+            var updatedInvoice = connector.Update(new Invoice(){ DocumentNumber = newInvoce.DocumentNumber, DueDate = "2019-03-20"});
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
 
             var invoice = connector.Get(newInvoce.DocumentNumber);
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
             Assert.AreEqual(invoice.InvoiceDate, "2019-01-20");
             Assert.AreEqual(invoice.DueDate, "2019-03-20");
 
             //Restore
             connector.Cancel(newInvoce.DocumentNumber);
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
 
             customerConnector.Delete(tmpCustomer.CustomerNumber);
-            Assert.IsFalse(customerConnector.HasError);
+            Assert.IsFalse(customerConnector.HasError, $"Request failed due to '{customerConnector.Error?.Message}'.");
         }
 
 		[TestMethod]
@@ -257,7 +260,7 @@ namespace FortnoxAPILibrary.Tests
             //Arrange
             var supplierConnector = new SupplierConnector();
             var tmpSupplier = supplierConnector.Create(new Supplier() { Name = "TestSupplier"});
-            Assert.IsFalse(supplierConnector.HasError);
+            Assert.IsFalse(supplierConnector.HasError, $"Request failed due to '{supplierConnector.Error?.Message}'.");
 
             /* Assumes several currencies exists, at least SEK and EUR */
 
@@ -265,24 +268,24 @@ namespace FortnoxAPILibrary.Tests
             var connector = new SupplierInvoiceConnector();
 
             var newInvoice = connector.Create(new SupplierInvoice(){ Currency = "EUR", InvoiceDate = "2019-01-01", SupplierNumber = tmpSupplier.SupplierNumber});
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
 
             connector.Update(new SupplierInvoice() { Currency = "SEK", GivenNumber = newInvoice.GivenNumber});
-            Assert.IsFalse(supplierConnector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
 
 
             var invoice = connector.Get(newInvoice.GivenNumber);
-			Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
             Assert.AreEqual("2019-01-01", invoice.InvoiceDate);
             Assert.AreEqual("SEK", invoice.Currency);
 
 
             //Restore
             connector.Cancel(newInvoice.GivenNumber);
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
 
             supplierConnector.Delete(tmpSupplier.SupplierNumber);
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(supplierConnector.HasError, $"Request failed due to '{supplierConnector.Error?.Message}'.");
 
             /* For some reason, deleting currencies ends with Bad Request. Most likely, if they are used in the invoices */
         }
@@ -295,11 +298,11 @@ namespace FortnoxAPILibrary.Tests
 			var folder = new Folder();
 			folder.Name = "f1";
 			folder = connector.CreateFolder(folder);
-			Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
 
-			connector.DeleteFolder(folder.Id);
-			Assert.IsFalse(connector.HasError);
-		}
+            connector.DeleteFolder(folder.Id);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
+        }
 
 		[TestMethod]
 		public void TestFiles()
@@ -316,22 +319,22 @@ namespace FortnoxAPILibrary.Tests
             var connector = new ArchiveConnector();
 
             var uploadedFile = connector.UploadFileData(Resource.fortnox_image, "FortnoxImage.png", "");
-            Assert.IsFalse(connector.HasError, $"Error: '{connector.Error?.Message}'");
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
             Assert.AreEqual("image/png", uploadedFile.ContentType);
 
 
             connector.DownloadFile(uploadedFile.Id, tmpPath);
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
             Assert.IsTrue(System.IO.File.Exists(tmpPath));
 
             var reuploadedFile = connector.UploadFile(tmpPath);
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
 
             //Restore State
             connector.DeleteFile(uploadedFile.Id);
-			Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
             connector.DeleteFile(reuploadedFile.Id);
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
 
             System.IO.File.Delete(tmpPath);
         }
@@ -347,15 +350,15 @@ namespace FortnoxAPILibrary.Tests
 
             connector.Limit = 2;
             var voucherResult = connector.Find();
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
 
             connector.Page = 2;
             var voucherResult2 = connector.Find();
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
 
             connector.Page = 3;
             var voucherResult3 = connector.Find();
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
         }
 
         [TestMethod]
@@ -367,7 +370,7 @@ namespace FortnoxAPILibrary.Tests
             {
                 connector.Limit = 2;
                 connector.Find();
-                Assert.IsFalse(connector.HasError);
+                Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
             }
         }
 
@@ -385,7 +388,7 @@ namespace FortnoxAPILibrary.Tests
             Assert.IsNotNull(customer);
             
             connector.Delete(specificCustomer.CustomerNumber);
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
         }
 
         [TestMethod]
@@ -393,14 +396,14 @@ namespace FortnoxAPILibrary.Tests
         {
             var connector = new CustomerConnector();
             var newCustomer = connector.Create(new Customer() { Name = "TestCustomer", City = "Växjö", Type = CustomerConnector.Type.COMPANY });
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
 
             var updatedCustomer = connector.Update(new Customer() {CustomerNumber = newCustomer.CustomerNumber, City = "Stockholm"});
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
             Assert.AreEqual(CustomerConnector.Type.COMPANY, updatedCustomer.Type);
 
             connector.Delete(newCustomer.CustomerNumber);
-            Assert.IsFalse(connector.HasError);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
         }
     }
 }
