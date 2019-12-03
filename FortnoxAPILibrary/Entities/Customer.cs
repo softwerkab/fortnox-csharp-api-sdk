@@ -128,11 +128,11 @@ namespace FortnoxAPILibrary
 
 		private string termsOfPaymentField;
 
-		private CustomerConnector.Type typeField;
+		private CustomerConnector.Type? typeField;
 
 		private string vATNumberField;
 
-		private CustomerConnector.VATType vATTypeField;
+		private CustomerConnector.VATType? vATTypeField;
 
 		private string visitingAddressField;
 
@@ -288,11 +288,6 @@ namespace FortnoxAPILibrary
 		{
 			get
 			{
-				if (this.defaultDeliveryTypesField == null)
-				{
-					this.defaultDeliveryTypesField = new InvoiceDefaultDeliveryTypes();
-				}
-
 				return this.defaultDeliveryTypesField;
 			}
 			set
@@ -809,8 +804,8 @@ namespace FortnoxAPILibrary
 			}
 		}
 
-		/// <remarks/>
-		public CustomerConnector.Type Type
+        /// <remarks/>
+        public CustomerConnector.Type? Type
 		{
 			get
 			{
@@ -821,6 +816,7 @@ namespace FortnoxAPILibrary
 				this.typeField = value;
 			}
 		}
+        public bool TypeSpecified => this.Type != null;
 
 		/// <remarks/>
 		public string VATNumber
@@ -836,7 +832,7 @@ namespace FortnoxAPILibrary
 		}
 
 		/// <remarks/>
-		public CustomerConnector.VATType VATType
+		public CustomerConnector.VATType? VATType
 		{
 			get
 			{
@@ -847,9 +843,10 @@ namespace FortnoxAPILibrary
 				this.vATTypeField = value;
 			}
 		}
+        public bool VATTypeSpecified => VATType != null;
 
-		/// <remarks/>
-		public string VisitingAddress
+        /// <remarks/>
+        public string VisitingAddress
 		{
 			get
 			{
@@ -984,14 +981,14 @@ namespace FortnoxAPILibrary
 	public partial class InvoiceDefaultDeliveryTypes
 	{
 
-		private CustomerConnector.DefaultInvoiceDeliveryType invoiceField;
+		private CustomerConnector.DefaultInvoiceDeliveryType? invoiceField;
 
-		private CustomerConnector.DefaultOfferDeliveryType offerField;
+		private CustomerConnector.DefaultOfferDeliveryType? offerField;
 
-		private CustomerConnector.DefaultOrderDeliveryType orderField;
+		private CustomerConnector.DefaultOrderDeliveryType? orderField;
 
 		/// <remarks/>
-		public CustomerConnector.DefaultInvoiceDeliveryType Invoice
+		public CustomerConnector.DefaultInvoiceDeliveryType? Invoice
 		{
 			get
 			{
@@ -1001,10 +998,11 @@ namespace FortnoxAPILibrary
 			{
 				this.invoiceField = value;
 			}
-		}
+        }
+        public bool InvoiceSpecified => Invoice != null;
 
-		/// <remarks/>
-		public CustomerConnector.DefaultOfferDeliveryType Offer
+        /// <remarks/>
+        public CustomerConnector.DefaultOfferDeliveryType? Offer
 		{
 			get
 			{
@@ -1015,9 +1013,10 @@ namespace FortnoxAPILibrary
 				this.offerField = value;
 			}
 		}
+        public bool OfferSpecified => Offer != null;
 
-		/// <remarks/>
-		public CustomerConnector.DefaultOrderDeliveryType Order
+        /// <remarks/>
+        public CustomerConnector.DefaultOrderDeliveryType? Order
 		{
 			get
 			{
@@ -1028,7 +1027,8 @@ namespace FortnoxAPILibrary
 				this.orderField = value;
 			}
 		}
-	}
+        public bool OrderSpecified => Order != null;
+    }
 
 	/// <remarks/>
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]

@@ -36,7 +36,7 @@ namespace FortnoxAPILibrary
 
 		private string costCenterField;
 
-		private AccountConnector.CostCenterSettingsValue costCenterSettingsField;
+		private AccountConnector.CostCenterSettingsValue? costCenterSettingsField;
 
 		private string descriptionField;
 
@@ -44,13 +44,13 @@ namespace FortnoxAPILibrary
 
 		private string projectField;
 
-		private AccountConnector.ProjectSettingsValue projectSettingsField;
+		private AccountConnector.ProjectSettingsValue? projectSettingsField;
 
 		private string sRUField;
 
 		private string transactionInformationField;
 
-		private AccountConnector.TransactionInfoSettingsValue transactionInformationSettingsField;
+		private AccountConnector.TransactionInfoSettingsValue? transactionInformationSettingsField;
 
 		private string vATCodeField;
 
@@ -112,7 +112,7 @@ namespace FortnoxAPILibrary
 		}
 
 		/// <remarks/>
-		public AccountConnector.CostCenterSettingsValue CostCenterSettings
+		public AccountConnector.CostCenterSettingsValue? CostCenterSettings
 		{
 			get
 			{
@@ -123,6 +123,7 @@ namespace FortnoxAPILibrary
 				this.costCenterSettingsField = value;
 			}
 		}
+        public bool ConstCenterSettingsSpecified => CostCenterSettings != null;
 
 		/// <remarks/>
 		public string Description
@@ -164,7 +165,7 @@ namespace FortnoxAPILibrary
 		}
 
 		/// <remarks/>
-		public AccountConnector.ProjectSettingsValue ProjectSettings
+		public AccountConnector.ProjectSettingsValue? ProjectSettings
 		{
 			get
 			{
@@ -175,9 +176,10 @@ namespace FortnoxAPILibrary
 				this.projectSettingsField = value;
 			}
 		}
+        public bool ProjectSettingsSpecified => ProjectSettings != null;
 
-		/// <remarks/>
-		public string SRU
+        /// <remarks/>
+        public string SRU
 		{
 			get
 			{
@@ -203,7 +205,7 @@ namespace FortnoxAPILibrary
 		}
 
 		/// <remarks/>
-		public AccountConnector.TransactionInfoSettingsValue TransactionInformationSettings
+		public AccountConnector.TransactionInfoSettingsValue? TransactionInformationSettings
 		{
 			get
 			{
@@ -214,9 +216,10 @@ namespace FortnoxAPILibrary
 				this.transactionInformationSettingsField = value;
 			}
 		}
+        public bool TransactionInformationSettingsSpecified => TransactionInformationSettings != null;
 
-		/// <remarks/>
-		public string VATCode
+        /// <remarks/>
+        public string VATCode
 		{
 			get
 			{
