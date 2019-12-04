@@ -1,15 +1,20 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
-	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-	[System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-	public partial class SieSummary
+    /// <remarks/>
+
+    [Serializable]
+	
+	
+	[XmlType(AnonymousType = true)]
+	[XmlRoot(Namespace = "", IsNullable = false)]
+	public class SieSummary
 	{
         /// <remarks/>
 		public string Accounts { get; set; }
@@ -60,17 +65,17 @@ namespace FortnoxAPILibrary
         public string Verifications { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("VerificationInterval", IsNullable = false)]
+        [XmlArrayItem("VerificationInterval", IsNullable = false)]
 		public List<VerificationInterval> VerificationsIntervals { get; set; }
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-	public partial class VerificationInterval
+	
+	[Serializable]
+	
+	
+	[XmlType(AnonymousType = true)]
+	public class VerificationInterval
 	{
         /// <remarks/>
 		public string First { get; set; }

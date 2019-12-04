@@ -1,29 +1,32 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Xml.Serialization;
 using FortnoxAPILibrary.Connectors;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
-	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-	[System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    /// <remarks/>
+    [Serializable]
+    [XmlType(AnonymousType = true)]
+	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class Order
 	{
         /// <remarks/>
         public Order()
         {
-            this.OrderRows = new List<OrderRow>();
-            this.Labels = new List<Label>();
+            OrderRows = new List<OrderRow>();
+            Labels = new List<Label>();
         }
 
 		/// <remarks/>
 		public string AdministrationFee { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
         public string AdministrationFeeVAT { get; set; }
 
         /// <remarks/>
@@ -33,11 +36,11 @@ namespace FortnoxAPILibrary
         public string Address2 { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string BasisTaxReduction { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string Cancelled { get; set; }
 
         /// <remarks/>
@@ -47,11 +50,11 @@ namespace FortnoxAPILibrary
         public string Comments { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string ContributionPercent { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string ContributionValue { get; set; }
 
         /// <remarks/>
@@ -114,33 +117,33 @@ namespace FortnoxAPILibrary
         public string Freight { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
         public string FreightVAT { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string Gross { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string HouseWork { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string InvoiceReference { get; set; }
 
         /// <remarks/>
         public string Language { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string Net { get; set; }
 
         /// <remarks/>
         public string NotCompleted { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string OfferReference { get; set; }
 
         /// <remarks/>
@@ -177,15 +180,15 @@ namespace FortnoxAPILibrary
         public string Remarks { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string RoundOff { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string Sent { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string TaxReduction { get; set; }
 
         /// <remarks/>
@@ -195,15 +198,15 @@ namespace FortnoxAPILibrary
         public string TermsOfPayment { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string Total { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string TotalToPay { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string TotalVAT { get; set; }
 
         /// <remarks/>
@@ -222,23 +225,23 @@ namespace FortnoxAPILibrary
         public string ZipCode { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
-		[System.Xml.Serialization.XmlAttributeAttribute()]
+        [ReadOnly(true)]
+		[XmlAttribute]
 		public string url { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
-		[System.Xml.Serialization.XmlAttributeAttribute()]
+        [ReadOnly(true)]
+		[XmlAttribute]
 		public string urlTaxReductionList { get; set; }
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-	public partial class OrderEmailInformation
+	
+	[Serializable]
+	
+	
+	[XmlType(AnonymousType = true)]
+	public class OrderEmailInformation
 	{
 		/// <remarks/>
 		public string EmailAddressFrom { get; set; }
@@ -260,11 +263,8 @@ namespace FortnoxAPILibrary
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [Serializable]
+    [XmlType(AnonymousType = true)]
 	public class OrderRow
 	{
 		/// <remarks/>
@@ -274,11 +274,11 @@ namespace FortnoxAPILibrary
         public string ArticleNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string ContributionPercent { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string ContributionValue { get; set; }
 
         /// <remarks/>
@@ -309,7 +309,7 @@ namespace FortnoxAPILibrary
         public string Project { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string Total { get; set; }
 
         /// <remarks/>

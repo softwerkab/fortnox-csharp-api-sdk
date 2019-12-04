@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Xml.Serialization;
-using System.ComponentModel;
-using System.Xml.Serialization;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 /// <remarks/>
 [Serializable]

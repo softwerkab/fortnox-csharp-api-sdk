@@ -1,7 +1,10 @@
-﻿using System;
-using FortnoxAPILibrary.Connectors;
+using System;
 using System.ComponentModel;
 using System.Xml.Serialization;
+using FortnoxAPILibrary.Connectors;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
@@ -42,10 +45,8 @@ namespace FortnoxAPILibrary
         /// <remarks/>
         public string EUVATAccount { get; set; }
 
-
         /// <remarks/>
         public string Expired { get; set; }
-
 
 		/// <remarks/>
 		public string ExportAccount { get; set; }
@@ -58,7 +59,6 @@ namespace FortnoxAPILibrary
 
         /// <remarks/>
         public string HouseWorkType { get; set; }
-
 
 		/// <remarks/>
 		public string Manufacturer { get; set; }
@@ -103,7 +103,7 @@ namespace FortnoxAPILibrary
         public string StockWarning { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string SupplierName { get; set; }
 
         /// <remarks/>
@@ -130,7 +130,7 @@ namespace FortnoxAPILibrary
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly(true)]
-		[System.Xml.Serialization.XmlAttributeAttribute()]
+		[XmlAttribute]
 		public string url { get; set; }
     }
 }

@@ -1,15 +1,17 @@
-﻿using System.ComponentModel;
+using System;
+using System.ComponentModel;
+using System.Xml.Serialization;
 using FortnoxAPILibrary.Connectors;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
-	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-	[System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    /// <remarks/>
+    [Serializable]
+    [XmlType(AnonymousType = true)]
+	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class Customer
 	{
 		/// <remarks/>
@@ -165,7 +167,7 @@ namespace FortnoxAPILibrary
 
         /// <remarks/>
         public CustomerConnector.Type? Type { get; set; }
-        public bool TypeSpecified => this.Type != null;
+        public bool TypeSpecified => Type != null;
 
 		/// <remarks/>
 		public string VATNumber { get; set; }
@@ -205,16 +207,13 @@ namespace FortnoxAPILibrary
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly(true)]
-		[System.Xml.Serialization.XmlAttributeAttribute()]
+		[XmlAttribute]
 		public string url { get; set; }
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [Serializable]
+    [XmlType(AnonymousType = true)]
 	public class InvoiceDefaultDeliveryTypes
 	{
 		/// <remarks/>
@@ -231,11 +230,8 @@ namespace FortnoxAPILibrary
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [Serializable]
+    [XmlType(AnonymousType = true)]
 	public class InvoiceDefaultTemplates
 	{
         /// <remarks/>

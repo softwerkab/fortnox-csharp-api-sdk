@@ -1,4 +1,11 @@
-﻿namespace FortnoxAPILibrary {
+using System.ComponentModel;
+using System.Xml.Serialization;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
+
+namespace FortnoxAPILibrary
+{
 
     /// <remarks/>
     public partial class Label { //TODO: Why partial? Where is other part??
@@ -7,8 +14,8 @@
         public string Description { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [ReadOnly(true)]
+        [XmlAttribute]
         public string url { get; set; }
     }
 }

@@ -1,39 +1,39 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
-	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-	[System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-	public partial class FinancialYears
+    /// <remarks/>
+
+    [Serializable]
+    [XmlType(AnonymousType = true)]
+	[XmlRoot(Namespace = "", IsNullable = false)]
+	public class FinancialYears
 	{
 		/// <remarks/>
-		[System.Xml.Serialization.XmlElementAttribute("FinancialYearSubset")]
+		[XmlElement("FinancialYearSubset")]
 		public List<FinancialYearSubset> FinancialYearSubset { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string TotalResources { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string TotalPages { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string CurrentPage { get; set; }
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [Serializable]
+    [XmlType(AnonymousType = true)]
 	public class FinancialYearSubset
 	{
         /// <remarks/>
@@ -46,7 +46,7 @@ namespace FortnoxAPILibrary
         public string ToDate { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string url { get; set; }
     }
 }

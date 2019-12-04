@@ -1,14 +1,16 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
-	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-	[System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    /// <remarks/>
+    [Serializable]
+    [XmlType(AnonymousType = true)]
+	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class Folder
 	{
         /// <remarks/>
@@ -27,41 +29,35 @@ namespace FortnoxAPILibrary
         public string Name { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string url { get; set; }
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [Serializable]
+    [XmlType(AnonymousType = true)]
 	public class Files
 	{
         /// <remarks/>
-		[System.Xml.Serialization.XmlElementAttribute("File")]
+		[XmlElement("File")]
 		public List<File> File { get; set; }
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [Serializable]
+    [XmlType(AnonymousType = true)]
 	public class File
 	{
         /// <summary>
 		/// Actual Content Type if file data is manually downloaded from archive.
 		/// </summary>
-		[System.Xml.Serialization.XmlIgnore]
+		[XmlIgnore]
 		public string ContentType { get; set; }
 
 		/// <summary>
 		/// Actual file data if manually downloaded from archive.
 		/// </summary>
-		[System.Xml.Serialization.XmlIgnore]
+		[XmlIgnore]
 		public byte[] Data { get; set; }
 
 		/// <remarks/>
@@ -80,62 +76,56 @@ namespace FortnoxAPILibrary
         public string Size { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string url { get; set; }
 
         /// <remarks/>
         public string GetFileExtension()
 		{
-			if (string.IsNullOrEmpty(this.Name))
+			if (string.IsNullOrEmpty(Name))
 			{
 				return "";
 			}
 
-			return System.IO.Path.GetExtension(this.Name);
+			return System.IO.Path.GetExtension(Name);
 		}
 
 		/// <remarks/>
 		public string GetFileNameWithoutExtension()
 		{
-			if (string.IsNullOrEmpty(this.Name))
+			if (string.IsNullOrEmpty(Name))
 			{
 				return "";
 			}
 
-			return System.IO.Path.GetFileNameWithoutExtension(this.Name);
+			return System.IO.Path.GetFileNameWithoutExtension(Name);
 		}
 
 		/// <remarks/>
 		public System.IO.MemoryStream GetFileDataAsMemoryStream()
 		{
-			if (this.Data == null)
+			if (Data == null)
 			{
-				throw new System.Exception("File data must be set.");
+				throw new Exception("File data must be set.");
 			}
 
-			return new System.IO.MemoryStream(this.Data);
+			return new System.IO.MemoryStream(Data);
 		}
 	}
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [Serializable]
+    [XmlType(AnonymousType = true)]
 	public class Folders
 	{
         /// <remarks/>
-		[System.Xml.Serialization.XmlElementAttribute("Folder")]
+		[XmlElement("Folder")]
 		public List<FoldersFolder> Folder { get; set; }
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [Serializable]
+    [XmlType(AnonymousType = true)]
 	public class FoldersFolder
 	{
         /// <remarks/>
@@ -145,7 +135,7 @@ namespace FortnoxAPILibrary
         public string Name { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string url { get; set; }
     }
 }

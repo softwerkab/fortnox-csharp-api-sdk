@@ -1,23 +1,26 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Xml.Serialization;
 using FortnoxAPILibrary.Connectors;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
-	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-	[System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    /// <remarks/>
+
+    [Serializable]
+    [XmlType(AnonymousType = true)]
+	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class Invoice
 	{
         /// <remarks/>
         public Invoice()
         {
-            this.InvoiceRows = new List<InvoiceRow>();
-            this.Labels = new List<Label>();
+            InvoiceRows = new List<InvoiceRow>();
+            Labels = new List<Label>();
         }
 
 		/// <remarks/>
@@ -291,12 +294,12 @@ namespace FortnoxAPILibrary
         public string ZipCode { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		[ReadOnly(true)]
 		public string url { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		[ReadOnly(true)]
 		public string urlTaxReductionList { get; set; }
 
@@ -306,11 +309,8 @@ namespace FortnoxAPILibrary
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [Serializable]
+    [XmlType(AnonymousType = true)]
 	public class InvoiceEDIInformation
 	{
 		/// <remarks/>
@@ -333,11 +333,8 @@ namespace FortnoxAPILibrary
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [Serializable]
+    [XmlType(AnonymousType = true)]
 	public class InvoiceEmailInformation
 	{
 		/// <remarks/>
@@ -360,11 +357,8 @@ namespace FortnoxAPILibrary
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [Serializable]
+    [XmlType(AnonymousType = true)]
 	public class InvoiceRow
 	{
 	    /// <remarks/>
@@ -431,11 +425,11 @@ namespace FortnoxAPILibrary
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [System.CodeDom.Compiler.GeneratedCode("xsd", "2.0.50727.3038")]
+    [Serializable]
+    [System.Diagnostics.DebuggerStepThrough]
+    [DesignerCategory("code")]
+    [XmlType(AnonymousType = true)]
     public partial class Label //TODO Merge with other Label class
     {
         /// <remarks/>

@@ -1,24 +1,27 @@
-﻿using FortnoxAPILibrary.Connectors;
+using System;
+using System.ComponentModel;
+using System.Xml.Serialization;
+using FortnoxAPILibrary.Connectors;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-[System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+[Serializable]
+[XmlType(AnonymousType=true)]
+[XmlRoot(Namespace="", IsNullable=false)]
 public class PreDefinedVoucherSeries {
 
     /// <summary>This field is Read-Only in Fortnox</summary>
-	[System.Xml.Serialization.XmlAttributeAttribute()]
-	[System.ComponentModel.ReadOnly(true)]
+	[XmlAttribute]
+	[ReadOnly(true)]
 	public PreDefinedVoucherSeriesConnector.PreDefinedVoucherSeriesName Name { get; set; }
 
     /// <remarks/>
     public string VoucherSeries { get; set; }
 
     /// <summary>This field is Read-Only in Fortnox</summary>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-	[System.ComponentModel.ReadOnly(true)]
+    [XmlAttribute]
+	[ReadOnly(true)]
     public string url { get; set; }
 }

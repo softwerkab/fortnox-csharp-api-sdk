@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
-using System.ComponentModel;
-using System.Xml.Serialization;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
@@ -11,32 +12,29 @@ namespace FortnoxAPILibrary
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(Namespace = "", IsNullable = false)]
-    public partial class Articles
+    public class Articles
 	{
 
 		/// <remarks/>
-		[System.Xml.Serialization.XmlElementAttribute("ArticleSubset", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+		[XmlElement("ArticleSubset", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
 		public List<ArticleSubset> ArticleSubset { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string TotalResources { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string TotalPages { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string CurrentPage { get; set; }
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+	[Serializable]
+    [XmlType(AnonymousType = true)]
 	public class ArticleSubset
 	{
         /// <remarks/>
@@ -80,7 +78,7 @@ namespace FortnoxAPILibrary
         public string VAT { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string url { get; set; }
 
         /// <remarks/>

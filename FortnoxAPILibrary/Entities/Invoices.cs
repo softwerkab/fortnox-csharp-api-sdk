@@ -1,39 +1,42 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Xml.Serialization;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
-	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-	[System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-	public partial class Invoices
+    /// <remarks/>
+
+    [Serializable]
+	
+	
+	[XmlType(AnonymousType = true)]
+	[XmlRoot(Namespace = "", IsNullable = false)]
+	public class Invoices
 	{
 		/// <remarks/>
-		[System.Xml.Serialization.XmlElementAttribute("InvoiceSubset")]
+		[XmlElement("InvoiceSubset")]
 		public List<InvoiceSubset> InvoiceSubset { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string TotalResources { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string TotalPages { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string CurrentPage { get; set; }
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [Serializable]
+    [XmlType(AnonymousType = true)]
 	public class InvoiceSubset
 	{
 	    /// <remarks/>
@@ -97,8 +100,8 @@ namespace FortnoxAPILibrary
         public string WayOfDelivery { get; set; }
 
 		/// <summary>This field is Read-Only in Fortnox</summary>
-		[System.ComponentModel.ReadOnly(true)]
-		[System.Xml.Serialization.XmlAttributeAttribute()]
+		[ReadOnly(true)]
+		[XmlAttribute]
 		public string url { get; set; }
     }
 }
