@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using FortnoxAPILibrary.Entities;
 
 namespace FortnoxAPILibrary
 {

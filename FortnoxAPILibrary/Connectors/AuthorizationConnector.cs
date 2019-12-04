@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Xml;
 using System.Xml.Serialization;
+using Authorization = FortnoxAPILibrary.Entities.Authorization;
 
 namespace FortnoxAPILibrary.Connectors
 {

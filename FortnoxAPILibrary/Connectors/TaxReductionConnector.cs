@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
+using FortnoxAPILibrary.Entities;
 
 namespace FortnoxAPILibrary.Connectors
 {

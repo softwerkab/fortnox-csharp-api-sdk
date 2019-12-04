@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Reflection;
+using FortnoxAPILibrary.Entities;
 using Microsoft.AspNetCore.StaticFiles;
 
 namespace FortnoxAPILibrary.Connectors
