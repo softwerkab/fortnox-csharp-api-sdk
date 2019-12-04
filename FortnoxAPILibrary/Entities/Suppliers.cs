@@ -1,40 +1,45 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
-	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-	[System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-	public partial class Suppliers
+    /// <remarks/>
+
+    [Serializable]
+	
+	
+	[XmlType(AnonymousType = true)]
+	[XmlRoot(Namespace = "", IsNullable = false)]
+	public class Suppliers
 	{
         /// <remarks/>
-		[System.Xml.Serialization.XmlElementAttribute("SupplierSubset", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+		[XmlElement("SupplierSubset", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
 		public List<SupplierSubset> SupplierSubset { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string TotalResources { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string TotalPages { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string CurrentPage { get; set; }
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-	public partial class SupplierSubset
+	
+	[Serializable]
+	
+	
+	[XmlType(AnonymousType = true)]
+	public class SupplierSubset
 	{
 
         /// <remarks/>
@@ -59,7 +64,7 @@ namespace FortnoxAPILibrary
         public string ZipCode { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string url { get; set; }
     }
 }

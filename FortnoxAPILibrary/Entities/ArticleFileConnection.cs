@@ -1,7 +1,9 @@
-﻿using System;
-using System.Xml.Serialization;
+using System;
 using System.ComponentModel;
 using System.Xml.Serialization;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
@@ -18,8 +20,8 @@ namespace FortnoxAPILibrary
         public string ArticleNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-		[System.ComponentModel.ReadOnly(true)]
+        [XmlAttribute]
+		[ReadOnly(true)]
 		public string url { get; set; }
     }
 }

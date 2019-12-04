@@ -1,40 +1,45 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
-	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-	[System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-	public partial class SupplierInvoices
+    /// <remarks/>
+
+    [Serializable]
+	
+	
+	[XmlType(AnonymousType = true)]
+	[XmlRoot(Namespace = "", IsNullable = false)]
+	public class SupplierInvoices
 	{
 		/// <remarks/>
-		[System.Xml.Serialization.XmlElementAttribute("SupplierInvoiceSubset", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+		[XmlElement("SupplierInvoiceSubset", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
 		public List<SupplierInvoiceSubset> SupplierInvoiceSubset { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string TotalResources { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string TotalPages { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string CurrentPage { get; set; }
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-	public partial class SupplierInvoiceSubset
+	
+	[Serializable]
+	
+	
+	[XmlType(AnonymousType = true)]
+	public class SupplierInvoiceSubset
 	{
         /// <remarks/>
 		public string Balance { get; set; }
@@ -67,7 +72,7 @@ namespace FortnoxAPILibrary
         public string Total { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string url { get; set; }
     }
 }

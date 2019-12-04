@@ -1,13 +1,15 @@
-﻿using System;
+using System;
+using System.ComponentModel;
 using System.Xml.Serialization;
 using FortnoxAPILibrary.Connectors;
+
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
-	/// <remarks/>
-	[Serializable]
+    /// <remarks/>
+    [Serializable]
 	[XmlType(AnonymousType = true)]
 	[XmlRoot(Namespace = "", IsNullable = false)]
 
@@ -20,7 +22,7 @@ namespace FortnoxAPILibrary
         public string BalanceBroughtForward { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string BalanceCarriedForward { get; set; }
 
         /// <remarks/>
@@ -57,12 +59,12 @@ namespace FortnoxAPILibrary
         public string VATCode { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string Year { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-		[System.ComponentModel.ReadOnly(true)]
+        [XmlAttribute]
+		[ReadOnly(true)]
 		public string url { get; set; }
     }
 }

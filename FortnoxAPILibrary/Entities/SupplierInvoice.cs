@@ -1,40 +1,44 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 using FortnoxAPILibrary.Connectors;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    [Serializable]
+    [XmlType(AnonymousType = true)]
+    [XmlRoot(Namespace = "", IsNullable = false)]
     public class SupplierInvoice
     {
 		/// <remarks/>
 		public SupplierInvoice()
         {
-            this.SupplierInvoiceRows = new List<SupplierInvoiceRow>();
+            SupplierInvoiceRows = new List<SupplierInvoiceRow>();
         }
 
 		/// <summary>This field is Read-Only in Fortnox</summary>
-		[System.ComponentModel.ReadOnly(true)]
+		[ReadOnly(true)]
 		public string AccountingMethod { get; set; }
 
         /// <remarks/>
         public string AdministrationFee { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
         public string Balance { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
         public string Booked { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
         public string Cancelled { get; set; }
 
         /// <remarks/>
@@ -44,11 +48,11 @@ namespace FortnoxAPILibrary
         public string CostCenter { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
         public string Credit { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
         public string CreditReference { get; set; }
 
         /// <remarks/>
@@ -115,7 +119,7 @@ namespace FortnoxAPILibrary
         public string SupplierNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
         public string SupplierName { get; set; }
 
         /// <remarks/>
@@ -128,12 +132,12 @@ namespace FortnoxAPILibrary
         public SupplierInvoiceConnector.VATType VATType { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("SupplierInvoiceRow", typeof(SupplierInvoiceRow), Form = System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable = false)]
+        [XmlArrayItem("SupplierInvoiceRow", typeof(SupplierInvoiceRow), Form = XmlSchemaForm.Unqualified, IsNullable = false)]
         public List<SupplierInvoiceRow> SupplierInvoiceRows { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [ReadOnly(true)]
+        [XmlAttribute]
         public string url { get; set; }
 
         /// <remarks/>
@@ -141,12 +145,9 @@ namespace FortnoxAPILibrary
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class SupplierInvoiceRow
+    [Serializable]
+    [XmlType(AnonymousType = true)]
+    public class SupplierInvoiceRow
     {
         /// <remarks/>
         public string Account { get; set; }

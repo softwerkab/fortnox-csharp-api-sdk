@@ -1,20 +1,23 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Xml.Serialization;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
-	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-	[System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    /// <remarks/>
+    [Serializable]
+    [XmlType(AnonymousType = true)]
+	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class Voucher
 	{
         /// <remarks/>
         public Voucher()
         {
-            this.VoucherRows = new List<VoucherRow>();
+            VoucherRows = new List<VoucherRow>();
         }
 
 		/// <remarks/>
@@ -30,43 +33,40 @@ namespace FortnoxAPILibrary
         public string Project { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string ReferenceNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string ReferenceType { get; set; }
 
         /// <remarks/>
         public string TransactionDate { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string VoucherNumber { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("VoucherRow", IsNullable = false)]
+        [XmlArrayItem("VoucherRow", IsNullable = false)]
 		public List<VoucherRow> VoucherRows { get; set; }
 
         /// <remarks/>
         public string VoucherSeries { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string Year { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
-		[System.Xml.Serialization.XmlAttributeAttribute()]
+        [ReadOnly(true)]
+		[XmlAttribute]
 		public string url { get; set; }
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [Serializable]
+    [XmlType(AnonymousType = true)]
 	public class VoucherRow
 	{
         /// <remarks/>
@@ -91,7 +91,7 @@ namespace FortnoxAPILibrary
         public string Quantity { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
+        [ReadOnly(true)]
 		public string Removed { get; set; }
 
         /// <remarks/>

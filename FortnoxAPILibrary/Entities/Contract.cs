@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
@@ -152,17 +155,17 @@ namespace FortnoxAPILibrary
         public string YourOrderNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true), XmlAttributeAttribute]
+        [ReadOnly(true), XmlAttribute]
         public string url { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true), XmlAttributeAttribute]
+        [ReadOnly(true), XmlAttribute]
         public string urlTaxReductionList { get; set; }
 
         /// <remarks/>
         public Contract()
         {
-            this.InvoiceRows = new List<InvoiceRow>();
+            InvoiceRows = new List<InvoiceRow>();
         }
     }
 

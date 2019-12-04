@@ -1,6 +1,9 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Xml.Serialization;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
@@ -44,7 +47,7 @@ namespace FortnoxAPILibrary
         public string Active { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		[ReadOnly(true)]
 		public string url { get; set; }
     }

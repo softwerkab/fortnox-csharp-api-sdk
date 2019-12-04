@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
 
@@ -13,28 +14,25 @@ namespace FortnoxAPILibrary
     public class Accounts
 	{
         /// <remarks/>
-		[System.Xml.Serialization.XmlElementAttribute("AccountSubset", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+		[XmlElement("AccountSubset", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
 		public List<AccountSubset> AccountSubset { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string TotalResources { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string TotalPages { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string CurrentPage { get; set; }
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [Serializable]
+    [XmlType(AnonymousType = true)]
 	public class AccountSubset
 	{
         /// <remarks/>
@@ -53,7 +51,7 @@ namespace FortnoxAPILibrary
         public string Year { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
 		public string url { get; set; }
     }
 }

@@ -1,22 +1,24 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Xml.Serialization;
 using FortnoxAPILibrary.Connectors;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {
-	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-	[System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    /// <remarks/>
+    [Serializable]
+    [XmlType(AnonymousType = true)]
+	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class SupplierInvoiceAccrual
 	{
         /// <remarks/>
         public SupplierInvoiceAccrual()
         {
-            this.SupplierInvoiceAccrualRows = new List<SupplierInvoiceAccrualRow>();
+            SupplierInvoiceAccrualRows = new List<SupplierInvoiceAccrualRow>();
         }
 
 		/// <remarks/>
@@ -38,7 +40,7 @@ namespace FortnoxAPILibrary
         public SupplierInvoiceAccrualConnector.Period Period { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("SupplierInvoiceAccrualRow", IsNullable = false)]
+        [XmlArrayItem("SupplierInvoiceAccrualRow", IsNullable = false)]
 		public List<SupplierInvoiceAccrualRow> SupplierInvoiceAccrualRows { get; set; }
 
         /// <remarks/>
@@ -55,18 +57,18 @@ namespace FortnoxAPILibrary
         public string VATIncluded { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-		[System.ComponentModel.ReadOnly(true)]
+        [XmlAttribute]
+		[ReadOnly(true)]
 		public string url { get; set; }
     }
 
 	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-	public partial class SupplierInvoiceAccrualRow
+	
+	[Serializable]
+	
+	
+	[XmlType(AnonymousType = true)]
+	public class SupplierInvoiceAccrualRow
 	{
         /// <remarks/>
 		public string Account { get; set; }

@@ -1,4 +1,7 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary
 {

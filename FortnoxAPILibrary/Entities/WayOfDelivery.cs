@@ -1,13 +1,20 @@
-﻿namespace FortnoxAPILibrary
+using System;
+using System.ComponentModel;
+using System.Xml.Serialization;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
+
+namespace FortnoxAPILibrary
 {
-	/// <remarks/>
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
-	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
-	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-	[System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-	public partial class WayOfDelivery
+    /// <remarks/>
+
+    [Serializable]
+	
+	
+	[XmlType(AnonymousType = true)]
+	[XmlRoot(Namespace = "", IsNullable = false)]
+	public class WayOfDelivery
 	{
         /// <remarks/>
 		public string Code { get; set; }
@@ -16,8 +23,8 @@
         public string Description { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [System.ComponentModel.ReadOnly(true)]
-		[System.Xml.Serialization.XmlAttributeAttribute()]
+        [ReadOnly(true)]
+		[XmlAttribute]
 		public string url { get; set; }
     }
 }
