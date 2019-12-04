@@ -406,5 +406,18 @@ namespace FortnoxAPILibrary.Tests
             connector.Delete(newCustomer.CustomerNumber);
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
         }
+
+        [TestMethod]
+        public void Test_issue61_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/61
+        {
+            var connector = new ArticleConnector();
+            var newArticle = connector.Create(new Article() { Description = "TestArticle", FreightCost = "10", OtherCost = "10", CostCalculationMethod = "MANUAL"});
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+
+            //NOTE: Server does not create the properties FreightCost, OtherCost and CostCalculationMethod
+            //Assert.AreEqual("10", newArticle.FreightCost); //Always fails
+            connector.Delete(newArticle.ArticleNumber);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+        }
     }
 }

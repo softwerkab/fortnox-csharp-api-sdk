@@ -132,5 +132,14 @@ namespace FortnoxAPILibrary.Entities
         [ReadOnly(true)]
 		[XmlAttribute]
 		public string url { get; set; }
+
+        /// <remarsk/>
+        public string FreightCost { get; set; }
+
+        /// <remarsk/>
+        public string OtherCost { get; set; }
+
+        /// <remarsk/>
+        public string CostCalculationMethod { get; set; }
     }
 }
