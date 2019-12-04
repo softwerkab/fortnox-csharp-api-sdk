@@ -309,12 +309,7 @@ namespace FortnoxAPILibrary.Tests
 		public void TestFiles()
 		{
             //Arrange
-            var tmpPath = @"C:\temp\fortnoxImage.png";
-            if (System.IO.File.Exists(tmpPath))
-                System.IO.File.Delete(tmpPath);
-
-            if (!Directory.Exists(@"C:\temp\"))
-                Directory.CreateDirectory(@"C:\temp\");
+            var tmpPath = Path.GetTempFileName();
 
             //Act
             var connector = new ArchiveConnector();
