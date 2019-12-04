@@ -1,4 +1,6 @@
 ﻿
+using FortnoxAPILibrary.Entities;
+
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>

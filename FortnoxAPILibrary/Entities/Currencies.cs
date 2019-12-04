@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
 
-namespace FortnoxAPILibrary
+namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [Serializable]

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
+using File = FortnoxAPILibrary.Entities.File;
 
 namespace FortnoxAPILibrary
 {

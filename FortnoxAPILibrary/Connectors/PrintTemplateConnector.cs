@@ -1,5 +1,7 @@
 ﻿
 using System.Collections.Generic;
+using FortnoxAPILibrary.Entities;
+
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>

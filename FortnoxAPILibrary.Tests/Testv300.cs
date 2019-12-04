@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FortnoxAPILibrary.Connectors;
+using FortnoxAPILibrary.Entities;
 
 namespace FortnoxAPILibrary.Tests
 {
