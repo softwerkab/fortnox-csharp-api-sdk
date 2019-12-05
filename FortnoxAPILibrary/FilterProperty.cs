@@ -1,23 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace FortnoxAPILibrary
 {
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property)]
     internal class FilterProperty : Attribute
     {
         public readonly string Name;
 
         public FilterProperty(string name)
         {
-            this.Name = name;
+            Name = name;
         }
 
         public FilterProperty()
         {
-            this.Name = null;
+            Name = null;
         }
     }
 }

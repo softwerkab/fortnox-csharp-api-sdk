@@ -1,4 +1,6 @@
-﻿
+﻿// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
+
 namespace FortnoxAPILibrary
 {
 	/// <remarks/>
@@ -13,7 +15,7 @@ namespace FortnoxAPILibrary
 			{
 				/// <remarks/>
 				[RealValue("number")]
-				AccountNumber,
+				AccountNumber
 			}
 
 			/// <remarks/>
@@ -35,7 +37,7 @@ namespace FortnoxAPILibrary
 				ReservedQuantity,
 				/// <remarks/>
 				[RealValue("stockvalue")]
-				StockValue,
+				StockValue
 			}
 
 			/// <remarks/>
@@ -163,7 +165,7 @@ namespace FortnoxAPILibrary
 				OCR,
 				/// <remarks/>
 				[RealValue("total")]
-				Total,
+				Total
 
 			}
 
@@ -206,7 +208,7 @@ namespace FortnoxAPILibrary
 			{
 				/// <remarks/>
 				[RealValue("code")]
-				Code,
+				Code
 			}
 
 			/// <remarks/>
@@ -226,7 +228,7 @@ namespace FortnoxAPILibrary
 				OfferDate,
 				/// <remarks/>
 				[RealValue("total")]
-				Total,
+				Total
 			}
 
 			/// <remarks/>
@@ -246,7 +248,7 @@ namespace FortnoxAPILibrary
 				OrderDate,
 				/// <remarks/>
 				[RealValue("total")]
-				Total,
+				Total
 			}
 
 
@@ -408,7 +410,7 @@ namespace FortnoxAPILibrary
 				VoucherNumber,
 				/// <remarks/>
 				[RealValue("voucherseries")]
-				VoucherSeries,
+				VoucherSeries
 
 			}
 
@@ -423,7 +425,7 @@ namespace FortnoxAPILibrary
 			{
 				/// <remarks/>
 				[RealValue("code")]
-				Code,
+				Code
 			}
 
 			/// <remarks/>

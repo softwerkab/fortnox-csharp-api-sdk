@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace FortnoxAPILibrary
 {
@@ -11,7 +8,7 @@ namespace FortnoxAPILibrary
 
 		public RealValueAttribute(string realValue)
 		{
-			this.RealValue = realValue;
+			RealValue = realValue;
 		}
 	}
 }

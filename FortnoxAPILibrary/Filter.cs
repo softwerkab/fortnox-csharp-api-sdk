@@ -34,7 +34,7 @@
 			UnpaidOverdue,
 			/// <remarks/>
 			[RealValue("unbooked")]
-			Unbooked,
+			Unbooked
 		}
 
         /// <remarks/>
@@ -60,7 +60,7 @@
 			PendingPayment,
 			/// <remarks/>
 			[RealValue("authorizepending")]
-			AuthorizePending,
+			AuthorizePending
 		}
 
 		/// <remarks/>
@@ -94,7 +94,7 @@
 			InvoiceCreated,
 			/// <remarks/>
 			[RealValue("invoicenotcreated")]
-			InvoiceNotCreated,
+			InvoiceNotCreated
 		}
 
 		/// <remarks/>
@@ -119,7 +119,7 @@
 			Active,
 			/// <remarks/>
 			[RealValue("inactive")]
-			Inactive,
+			Inactive
 		}
 
 		/// <remarks/>
@@ -130,7 +130,7 @@
 			Active,
 			/// <remarks/>
 			[RealValue("inactive")]
-			Inactive,
+			Inactive
 		}
 
 	}
