@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 // ReSharper disable UnusedMember.Global
@@ -15,7 +16,7 @@ namespace FortnoxAPILibrary.Entities
 	public class Currencies
 	{
 		/// <remarks/>
-		[XmlElement("CurrencySubset", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+		[XmlElement("CurrencySubset", Form = XmlSchemaForm.Unqualified)]
 		public List<CurrencySubset> CurrencySubset { get; set; }
     }
 
