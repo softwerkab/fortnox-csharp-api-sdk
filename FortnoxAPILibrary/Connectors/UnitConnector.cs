@@ -1,5 +1,7 @@
-﻿
+
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
@@ -9,7 +11,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public UnitConnector()
 		{
-			base.Resource = "units";
+			Resource = "units";
 		}
 
 		/// <summary>
@@ -19,7 +21,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found unit</returns>
 		public Unit Get(string unitCode)
 		{
-			return base.BaseGet(unitCode);
+			return BaseGet(unitCode);
 		}
 
 		/// <summary>
@@ -29,7 +31,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated unit</returns>
 		public Unit Update(Unit unit)
 		{
-			return base.BaseUpdate(unit, unit.Code);
+			return BaseUpdate(unit, unit.Code);
 		}
 
 		/// <summary>
@@ -39,7 +41,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created unit</returns>
 		public Unit Create(Unit unit)
 		{
-			return base.BaseCreate(unit);
+			return BaseCreate(unit);
 		}
 
 		/// <summary>
@@ -49,7 +51,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>If the unit was deleted or not.</returns>
 		public void Delete(string unitCode)
 		{
-			base.BaseDelete(unitCode);
+			BaseDelete(unitCode);
 		}
 
 		/// <summary>
@@ -58,7 +60,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of units</returns>
 		public Units Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

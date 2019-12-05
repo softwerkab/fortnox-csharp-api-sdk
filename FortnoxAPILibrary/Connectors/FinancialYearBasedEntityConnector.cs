@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
@@ -20,12 +17,12 @@ namespace FortnoxAPILibrary.Connectors
         {
             get
             {
-                return this.financialYearDateValue;
+                return financialYearDateValue;
             }
             set
             {
-                this.financialYearDateValue = value;
-                this.financialYearDateSet = true;
+                financialYearDateValue = value;
+                financialYearDateSet = true;
             }
         }
 
@@ -41,12 +38,12 @@ namespace FortnoxAPILibrary.Connectors
         {
             get
             {
-                return this.financialYearIDValue;
+                return financialYearIDValue;
             }
             set
             {
-                this.financialYearIDValue = value;
-                this.financialYearIDSet = true;
+                financialYearIDValue = value;
+                financialYearIDSet = true;
             }
         }
     }

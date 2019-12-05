@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
@@ -12,31 +10,31 @@ namespace FortnoxAPILibrary.Connectors
         /// <remarks/>
         public SupplierInvoiceExternalURLConnectionConnector()
         {
-            base.Resource = "supplierinvoiceexternalurlconnections";
+            Resource = "supplierinvoiceexternalurlconnections";
         }
 
         /// <remarks/>
         public SupplierInvoiceExternalURLConnection Get(string id)
         {
-            return base.BaseGet(id);
+            return BaseGet(id);
         }
 
         /// <remarks/>
         public SupplierInvoiceExternalURLConnection Create(SupplierInvoiceExternalURLConnection supplierInvoiceExternalUrlConnection)
         {
-            return base.BaseCreate(supplierInvoiceExternalUrlConnection);
+            return BaseCreate(supplierInvoiceExternalUrlConnection);
         }
 
         /// <remarks/>
         public SupplierInvoiceExternalURLConnection Update(SupplierInvoiceExternalURLConnection supplierInvoiceExternalUrlConnection)
         {
-            return base.BaseUpdate(supplierInvoiceExternalUrlConnection, supplierInvoiceExternalUrlConnection.Id);
+            return BaseUpdate(supplierInvoiceExternalUrlConnection, supplierInvoiceExternalUrlConnection.Id);
         }
 
         /// <remarks/>
         public void Delete(string id)
         {
-            base.BaseDelete(id);
+            BaseDelete(id);
         }
     }
 }

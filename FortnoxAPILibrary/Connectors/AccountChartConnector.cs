@@ -1,15 +1,16 @@
-﻿
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class AccountChartConnector : EntityConnector<AccountCharts, AccountCharts, Sort.By.AccountChart>
+    /// <remarks/>
+    public class AccountChartConnector : EntityConnector<AccountCharts, AccountCharts, Sort.By.AccountChart>
 	{
         /// <remarks/>
         public AccountChartConnector()
         {
-            base.Resource = "accountcharts";
+            Resource = "accountcharts";
         }
 
 		/// <summary>
@@ -18,7 +19,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of account charts</returns>
 		public AccountCharts Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

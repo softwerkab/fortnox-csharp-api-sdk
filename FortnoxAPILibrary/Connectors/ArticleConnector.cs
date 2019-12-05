@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class ArticleConnector : FinancialYearBasedEntityConnector<Article, Articles, Sort.By.Article>
+    /// <remarks/>
+    public class ArticleConnector : FinancialYearBasedEntityConnector<Article, Articles, Sort.By.Article>
 	{
 		private bool filterBySet = false;
 		private Filter.Article filterBy;
@@ -74,7 +75,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public ArticleConnector()
 		{
-			base.Resource = "articles";
+			Resource = "articles";
 		}
 
 		/// <summary>
@@ -84,7 +85,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found article</returns>
 		public Article Get(string articleNumber)
 		{
-			return base.BaseGet(articleNumber);
+			return BaseGet(articleNumber);
 		}
 
 		/// <summary>
@@ -94,7 +95,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated article</returns>
 		public Article Update(Article article)
 		{
-			return base.BaseUpdate(article, article.ArticleNumber);
+			return BaseUpdate(article, article.ArticleNumber);
 		}
 
 		/// <summary>
@@ -104,7 +105,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created article</returns>
 		public Article Create(Article article)
 		{
-			return base.BaseCreate(article);
+			return BaseCreate(article);
 		}
 
 		/// <summary>
@@ -114,7 +115,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>If the article was deleted or not</returns>
 		public void Delete(string articleNumber)
 		{
-			base.BaseDelete(articleNumber);
+			BaseDelete(articleNumber);
 		}
 
 		/// <summary>
@@ -123,7 +124,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of articles</returns>
 		public Articles Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

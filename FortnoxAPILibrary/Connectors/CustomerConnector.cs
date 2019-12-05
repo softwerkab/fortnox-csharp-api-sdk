@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class CustomerConnector : EntityConnector<Customer, Customers, Sort.By.Customer>
+    /// <remarks/>
+    public class CustomerConnector : EntityConnector<Customer, Customers, Sort.By.Customer>
 	{
 		/// <remarks/>
 		public enum Type
@@ -133,7 +134,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public CustomerConnector()
 		{
-			base.Resource = "customers";
+			Resource = "customers";
 		}
 
 
@@ -144,7 +145,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found customer</returns>
 		public Customer Get(string customerNumber)
 		{
-			return base.BaseGet(customerNumber);
+			return BaseGet(customerNumber);
 		}
 
 		/// <summary>
@@ -154,7 +155,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated customer</returns>
 		public Customer Update(Customer customer)
 		{
-			return base.BaseUpdate(customer, customer.CustomerNumber);
+			return BaseUpdate(customer, customer.CustomerNumber);
 		}
 
 		/// <summary>
@@ -164,7 +165,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created customer</returns>
 		public Customer Create(Customer customer)
 		{
-			return base.BaseCreate(customer);
+			return BaseCreate(customer);
 		}
 
 		/// <summary>
@@ -173,7 +174,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="customerNumber">The customernumber to delete</param>
 		public void Delete(string customerNumber)
 		{
-			base.BaseDelete(customerNumber);
+			BaseDelete(customerNumber);
 		}
 
 		/// <summary>
@@ -182,7 +183,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of customers</returns>
 		public Customers Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

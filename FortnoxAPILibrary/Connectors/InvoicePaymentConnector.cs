@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class InvoicePaymentConnector : FinancialYearBasedEntityConnector<InvoicePayment, InvoicePayments, Sort.By.InvoicePayment>
+    /// <remarks/>
+    public class InvoicePaymentConnector : FinancialYearBasedEntityConnector<InvoicePayment, InvoicePayments, Sort.By.InvoicePayment>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -18,7 +16,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public InvoicePaymentConnector()
 		{
-			base.Resource = "invoicepayments";
+			Resource = "invoicepayments";
 		}
 
 		/// <summary>
@@ -28,7 +26,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found invoice payment</returns>
 		public InvoicePayment Get(string number)
 		{
-			return base.BaseGet(number);
+			return BaseGet(number);
 		}
 
 		/// <summary>
@@ -38,7 +36,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated invoice payment</returns>
 		public InvoicePayment Update(InvoicePayment invoicePayment)
 		{
-			return base.BaseUpdate(invoicePayment, invoicePayment.Number.ToString());
+			return BaseUpdate(invoicePayment, invoicePayment.Number.ToString());
 		}
 
 		/// <summary>
@@ -48,7 +46,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created invoice payment</returns>
 		public InvoicePayment Create(InvoicePayment invoicePayment)
 		{
-			return base.BaseCreate(invoicePayment);
+			return BaseCreate(invoicePayment);
 		}
 
 		/// <summary>
@@ -57,7 +55,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="number">The number of the payment to delete</param>
 		public void Delete(string number)
 		{
-			base.BaseDelete(number);
+			BaseDelete(number);
 		}
 
 		/// <summary>
@@ -66,7 +64,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of payments</returns>
 		public InvoicePayments Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 
 		/// <summary>
@@ -75,7 +73,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="invoicePaymentNumber">The number of the invoice payment to bookkeep.</param>
 		public void Bookkeep(string invoicePaymentNumber)
 		{
-			base.DoAction(invoicePaymentNumber, "bookkeep");
+			DoAction(invoicePaymentNumber, "bookkeep");
 		}
 	}
 }

@@ -1,5 +1,7 @@
-﻿
+
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
@@ -9,7 +11,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public CostCenterConnector()
 		{
-			base.Resource = "costcenters";
+			Resource = "costcenters";
 		}
 
 		/// <summary>
@@ -19,7 +21,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The resulting cost center</returns>
 		public CostCenter Get(string costCenterCode)
 		{
-			return base.BaseGet(costCenterCode);
+			return BaseGet(costCenterCode);
 		}
 
 
@@ -30,7 +32,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated CostCenter</returns>
 		public CostCenter Update(CostCenter costCenter)
 		{
-			return base.BaseUpdate(costCenter, costCenter.Code);
+			return BaseUpdate(costCenter, costCenter.Code);
 		}
 
 		/// <summary>
@@ -40,7 +42,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public CostCenter Create(CostCenter costCenter)
 		{
-			return base.BaseCreate(costCenter);
+			return BaseCreate(costCenter);
 		}
 
 		/// <summary>
@@ -50,7 +52,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>If the cost center was deleted or not</returns>
 		public void Delete(string costCenterCode)
 		{
-			base.BaseDelete(costCenterCode);
+			BaseDelete(costCenterCode);
 		}
 
 		/// <summary>
@@ -59,7 +61,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of cost centers</returns>
 		public CostCenters Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

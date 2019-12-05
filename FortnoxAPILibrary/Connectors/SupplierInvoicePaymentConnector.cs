@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class SupplierInvoicePaymentConnector : FinancialYearBasedEntityConnector<SupplierInvoicePayment, SupplierInvoicePayments, Sort.By.SupplierInvoicePayment>
+    /// <remarks/>
+    public class SupplierInvoicePaymentConnector : FinancialYearBasedEntityConnector<SupplierInvoicePayment, SupplierInvoicePayments, Sort.By.SupplierInvoicePayment>
 	{
         /// <remarks/>
         [FilterProperty]
@@ -16,7 +14,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public SupplierInvoicePaymentConnector()
 		{
-			base.Resource = "supplierinvoicepayments";
+			Resource = "supplierinvoicepayments";
 		}
 
 		/// <summary>
@@ -26,7 +24,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created supplier invoice payment</returns>
 		public SupplierInvoicePayment Create(SupplierInvoicePayment supplierInvoicePayment)
 		{
-			return base.BaseCreate(supplierInvoicePayment);
+			return BaseCreate(supplierInvoicePayment);
 		}
 
 		/// <summary>
@@ -35,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of payments</returns>
 		public SupplierInvoicePayments Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 
         /// <summary>
@@ -45,7 +43,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The found supplier invoice payment</returns>
         public SupplierInvoicePayment Get(string supplierInvoicePaymentNumber)
         {
-            return base.BaseGet(supplierInvoicePaymentNumber);
+            return BaseGet(supplierInvoicePaymentNumber);
         }
 
 		/// <summary>
@@ -54,7 +52,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="supplierInvoicePaymentNumber">The number of the supplier invoice payment to bookkeep.</param>
 		public void Bookkeep(string supplierInvoicePaymentNumber)
 		{
-			base.DoAction(supplierInvoicePaymentNumber, "bookkeep");
+			DoAction(supplierInvoicePaymentNumber, "bookkeep");
 		}
 	}
 }

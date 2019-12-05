@@ -1,5 +1,7 @@
-﻿
+
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
@@ -9,7 +11,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public PreDefinedAccountConnector()
 		{
-			base.Resource = "predefinedaccounts";
+			Resource = "predefinedaccounts";
 		}
 
 		/// <summary>
@@ -19,7 +21,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>a predefined account</returns>
 		public PreDefinedAccount Get(string name)
 		{
-			return base.BaseGet(name);
+			return BaseGet(name);
 		}
 
 		/// <summary>
@@ -29,7 +31,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated predefined account</returns>
 		public PreDefinedAccount Update(PreDefinedAccount preDefinedAccount)
 		{
-			return base.BaseUpdate(preDefinedAccount, preDefinedAccount.Name);
+			return BaseUpdate(preDefinedAccount, preDefinedAccount.Name);
 		}
 
 		/// <summary>
@@ -38,7 +40,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of predefined accounts</returns>
 		public PreDefinedAccounts Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class OfferConnector : FinancialYearBasedEntityConnector<Offer, Offers, Sort.By.Offer>
+    /// <remarks/>
+    public class OfferConnector : FinancialYearBasedEntityConnector<Offer, Offers, Sort.By.Offer>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -129,7 +128,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public OfferConnector()
 		{
-			base.Resource = "offers";
+			Resource = "offers";
 		}
 
 		/// <summary>
@@ -139,7 +138,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>An offer</returns>
 		public Offer Get(string documentNumber)
 		{
-			return base.BaseGet(documentNumber.ToString());
+			return BaseGet(documentNumber.ToString());
 		}
 
 		/// <summary>
@@ -149,7 +148,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated offer</returns>
 		public Offer Update(Offer offer)
 		{
-			return base.BaseUpdate(offer, offer.DocumentNumber.ToString());
+			return BaseUpdate(offer, offer.DocumentNumber.ToString());
 		}
 
 		/// <summary>
@@ -159,7 +158,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created offer</returns>
 		public Offer Create(Offer offer)
 		{
-			return base.BaseCreate(offer);
+			return BaseCreate(offer);
 		}
 
 		/// <summary>
@@ -168,7 +167,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of offers</returns>
 		public Offers Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 
 		/// <summary>
@@ -178,7 +177,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The cancelled offer</returns>
 		public Offer Cancel(string documentNumber)
 		{
-			return base.DoAction(documentNumber, "cancel");
+			return DoAction(documentNumber, "cancel");
 		}
 
 		/// <summary>
@@ -187,7 +186,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="documentNumber">The document number of the offer to be emailed</param>
 		public void Email(string documentNumber)
 		{
-			base.DoAction(documentNumber, "email");
+			DoAction(documentNumber, "email");
 		}
 
 		/// <summary>
@@ -199,12 +198,12 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			if (string.IsNullOrEmpty(localPath))
 			{
-				base.DoAction(documentNumber, "externalprint");
+				DoAction(documentNumber, "externalprint");
 			}
 			else
 			{
-				base.LocalPath = localPath;
-				base.DoAction(documentNumber, "print");
+				LocalPath = localPath;
+				DoAction(documentNumber, "print");
 			}
 		}
 
@@ -214,7 +213,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <param name="documentNumber"></param>
         public void ExternalPrint(string documentNumber)
         {
-            base.DoAction(documentNumber, "externalprint");
+            DoAction(documentNumber, "externalprint");
         }
 
 		/// <summary>
@@ -224,7 +223,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public Offer CreateOrder(string documentNumber)
 		{
-			return base.DoAction(documentNumber, "createorder");
+			return DoAction(documentNumber, "createorder");
 		}
 	}
 }

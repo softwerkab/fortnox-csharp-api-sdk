@@ -1,5 +1,7 @@
-﻿
+
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
@@ -9,7 +11,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public PriceListConnector()
 		{
-			base.Resource = "pricelists";
+			Resource = "pricelists";
 		}
 
 		/// <summary>
@@ -19,7 +21,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found price list</returns>
 		public PriceList Get(string code)
 		{
-			return base.BaseGet(code);
+			return BaseGet(code);
 		}
 
 		/// <summary>
@@ -29,7 +31,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated price list</returns>
 		public PriceList Update(PriceList priceList)
 		{
-			return base.BaseUpdate(priceList, priceList.Code);
+			return BaseUpdate(priceList, priceList.Code);
 		}
 
 		/// <summary>
@@ -39,7 +41,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created price list</returns>
 		public PriceList Create(PriceList priceList)
 		{
-			return base.BaseCreate(priceList);
+			return BaseCreate(priceList);
 		}
 
 		/// <summary>
@@ -48,7 +50,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of price lists</returns>
 		public PriceLists Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

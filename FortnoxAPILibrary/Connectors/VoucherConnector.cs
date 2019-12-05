@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
@@ -52,7 +50,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <remarks/>
         public VoucherConnector()
         {
-            base.Resource = "vouchers";
+            Resource = "vouchers";
         }
 
         /// <summary>
@@ -63,9 +61,9 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The found voucher</returns>
         public Voucher Get(string voucherSeries, string voucherNumber)
         {
-            base.Resource = "vouchers";
+            Resource = "vouchers";
 
-            return base.BaseGet(voucherSeries, voucherNumber);
+            return BaseGet(voucherSeries, voucherNumber);
         }
 
         /// <summary>
@@ -75,9 +73,9 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The created voucher</returns>
         public Voucher Create(Voucher voucher)
         {
-            base.Resource = "vouchers";
+            Resource = "vouchers";
 
-            return base.BaseCreate(voucher);
+            return BaseCreate(voucher);
         }
 
         /// <summary>
@@ -86,14 +84,14 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>A list of vouchers</returns>
         public Vouchers Find()
         {
-            base.Resource = "vouchers/sublist";
+            Resource = "vouchers/sublist";
 
-            if (!string.IsNullOrEmpty(this.VoucherSeries))
+            if (!string.IsNullOrEmpty(VoucherSeries))
             {
-                base.Resource += this.VoucherSeries;
+                Resource += VoucherSeries;
             }
 
-            return base.BaseFind();
+            return BaseFind();
         }
     }
 }

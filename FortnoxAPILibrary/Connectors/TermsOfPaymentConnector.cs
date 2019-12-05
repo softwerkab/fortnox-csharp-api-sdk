@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class TermsOfPaymentConnector : EntityConnector<TermsOfPayment, TermsOfPayments, Sort.By.TermsOfPayment>
+    /// <remarks/>
+    public class TermsOfPaymentConnector : EntityConnector<TermsOfPayment, TermsOfPayments, Sort.By.TermsOfPayment>
     {
         /// <summary>
         /// Use with Find() to limit the search result
@@ -15,7 +16,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public TermsOfPaymentConnector()
 		{
-			base.Resource = "termsofpayments";
+			Resource = "termsofpayments";
 		}
 
 		/// <summary>
@@ -25,7 +26,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public TermsOfPayment Get(string termsOfPaymentCode)
 		{
-			return base.BaseGet(termsOfPaymentCode);
+			return BaseGet(termsOfPaymentCode);
 		}
 
 		/// <summary>
@@ -35,7 +36,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public TermsOfPayment Update(TermsOfPayment termsOfPayment)
 		{
-			return base.BaseUpdate(termsOfPayment, termsOfPayment.Code);
+			return BaseUpdate(termsOfPayment, termsOfPayment.Code);
 		}
 
 		/// <summary>
@@ -45,7 +46,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created terms of payment.</returns>
 		public TermsOfPayment Create(TermsOfPayment termsOfPayment)
 		{
-			return base.BaseCreate(termsOfPayment);
+			return BaseCreate(termsOfPayment);
 		}
 
 		/// <summary>
@@ -55,7 +56,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>If the terms of payment was deleted. </returns>
 		public void Delete(string termsOfPaymentCode)
 		{
-			base.BaseDelete(termsOfPaymentCode);
+			BaseDelete(termsOfPaymentCode);
 		}
 
 		/// <summary>
@@ -64,7 +65,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of terms of payments</returns>
 		public TermsOfPayments Find()
         {
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

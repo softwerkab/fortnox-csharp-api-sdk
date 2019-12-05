@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
 using FortnoxAPILibrary.Entities;
 
-namespace FortnoxAPILibrary.Connectors {
+// ReSharper disable UnusedMember.Global
+
+namespace FortnoxAPILibrary.Connectors
+{
     /// <remarks/>
     public class LabelConnector : EntityConnector<Label, Labels, Sort.By.Label> {
         /// <summary>
@@ -12,7 +14,7 @@ namespace FortnoxAPILibrary.Connectors {
 
         /// <remarks/>
         public LabelConnector() {
-            base.Resource = "labels";
+            Resource = "labels";
         }
 
         /// <summary>
@@ -21,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors {
         /// <param name="labelId"></param>
         /// <returns></returns>
         public Label Get(string labelId) {
-            return base.BaseGet(labelId);
+            return BaseGet(labelId);
         }
 
         /// <summary>
@@ -30,7 +32,7 @@ namespace FortnoxAPILibrary.Connectors {
         /// <param name="label"></param>
         /// <returns></returns>
         public Label Update(Label label) {
-            return base.BaseUpdate(label, label.Id);
+            return BaseUpdate(label, label.Id);
         }
 
         /// <summary>
@@ -39,7 +41,7 @@ namespace FortnoxAPILibrary.Connectors {
         /// <param name="label">The label entity to create</param>
         /// <returns>The created label.</returns>
         public Label Create(Label label) {
-            return base.BaseCreate(label);
+            return BaseCreate(label);
         }
 
         /// <summary>
@@ -48,7 +50,7 @@ namespace FortnoxAPILibrary.Connectors {
         /// <param name="labelid">The label id to delete</param>
         /// <returns>If the label was deleted. </returns>
         public void Delete(string labelid) {
-            base.BaseDelete(labelid);
+            BaseDelete(labelid);
         }
 
         /// <summary>
@@ -56,7 +58,7 @@ namespace FortnoxAPILibrary.Connectors {
         /// </summary>
         /// <returns>A list of labels</returns>
         public Labels Find() {
-            return base.BaseFind();
+            return BaseFind();
         }
     }
 }

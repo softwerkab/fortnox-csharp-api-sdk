@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Text;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
@@ -80,7 +81,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <remarks/>
         public SIEConnector()
         {
-            base.Resource = "sie";
+            Resource = "sie";
             ImportOptions = new ImportOptions();
             ExportOptions = new ExportOptions();
         }
@@ -107,18 +108,18 @@ namespace FortnoxAPILibrary.Connectors
 
         private byte[] Export(SIEType sieType, string localPath = "")
         {
-            base.Resource = "sie/" + (int)sieType;
-            string requestString = base.GetUrl();
+            Resource = "sie/" + (int)sieType;
+            string requestString = GetUrl();
 
-            this.Parameters = new Dictionary<string, string>();
+            Parameters = new Dictionary<string, string>();
 
             AddCustomParameters();
 
             AddExportOptions();
 
-            requestString = base.AddParameters(requestString);
+            requestString = AddParameters(requestString);
 
-            HttpWebRequest wr = base.SetupRequest(requestString, "GET");
+            HttpWebRequest wr = SetupRequest(requestString, "GET");
 
             List<byte> data = new List<byte>();
 
@@ -152,7 +153,7 @@ namespace FortnoxAPILibrary.Connectors
             }
             catch (WebException we)
             {
-                Error = base.HandleException(we);
+                Error = HandleException(we);
             }
 
             return data.ToArray();
@@ -173,25 +174,25 @@ namespace FortnoxAPILibrary.Connectors
 
             if (preview)
             {
-                base.Resource = "sie/preview";
+                Resource = "sie/preview";
             }
             else
             {
-                base.Resource = "sie";
+                Resource = "sie";
             }
             List<string> parameters = new List<string>();
             AddImportOptions(parameters);
 
-            return base.BaseUploadFile(pathToFile);
+            return BaseUploadFile(pathToFile);
         }
 
         private void AddExportOptions()
         {
-            if (this.ExportOptions.Selection != null && this.ExportOptions.Selection.Count > 0)
+            if (ExportOptions.Selection != null && ExportOptions.Selection.Count > 0)
             {
                 string sel = "";
 
-                foreach (Selection selection in this.ExportOptions.Selection)
+                foreach (Selection selection in ExportOptions.Selection)
                 {
                     if (!string.IsNullOrEmpty(selection.VoucherSeries))
                     {
@@ -209,22 +210,22 @@ namespace FortnoxAPILibrary.Connectors
                     }
                 }
 
-                this.Parameters.Add("selection", sel);
+                Parameters.Add("selection", sel);
             }
 
             if (ExportOptions.ExportAll)
             {
-                this.Parameters.Add("exportall", "true");
+                Parameters.Add("exportall", "true");
             }
 
-            if (!string.IsNullOrEmpty(this.ExportOptions.FromDate))
+            if (!string.IsNullOrEmpty(ExportOptions.FromDate))
             {
-                this.Parameters.Add("fromdate", this.ExportOptions.FromDate);
+                Parameters.Add("fromdate", ExportOptions.FromDate);
             }
 
             if (!string.IsNullOrEmpty(ExportOptions.ToDate))
             {
-                this.Parameters.Add("todate", this.ExportOptions.ToDate);
+                Parameters.Add("todate", ExportOptions.ToDate);
             }
         }
 

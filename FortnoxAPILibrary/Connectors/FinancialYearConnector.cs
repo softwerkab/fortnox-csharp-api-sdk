@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class FinancialYearConnector : EntityConnector<FinancialYear, FinancialYears, Sort.By.FinancialYear>
+    /// <remarks/>
+    public class FinancialYearConnector : EntityConnector<FinancialYear, FinancialYears, Sort.By.FinancialYear>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -15,7 +16,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public FinancialYearConnector()
 		{
-			base.Resource = "financialyears";
+			Resource = "financialyears";
 		}
 
 		/// <summary>
@@ -25,7 +26,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public FinancialYear Get(int id)
 		{
-			return base.BaseGet(id.ToString());
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -35,7 +36,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created financial year</returns>
 		public FinancialYear Create(FinancialYear financialYear)
 		{
-			return base.BaseCreate(financialYear);
+			return BaseCreate(financialYear);
 		}
 
 		/// <summary>
@@ -44,7 +45,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of financial years</returns>
 		public FinancialYears Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 
 		/// <remarks/>

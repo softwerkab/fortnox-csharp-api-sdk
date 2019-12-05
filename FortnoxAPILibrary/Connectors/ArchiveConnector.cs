@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System;
 using System.Reflection;
 using FortnoxAPILibrary.Entities;
 using Microsoft.AspNetCore.StaticFiles;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
@@ -32,7 +34,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public ArchiveConnector()
 		{
-			base.Resource = "archive";
+			Resource = "archive";
 		}
 
 		/// <summary>
@@ -61,38 +63,38 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of Files and Folders</returns>
 		public Folder Find(RootFolder rootFolder = RootFolder.Root)
         {
-            this.Parameters = new Dictionary<string, string>();
+            Parameters = new Dictionary<string, string>();
 
 			if (rootFolder == RootFolder.Root)
 			{
 				if (!string.IsNullOrWhiteSpace(Path))
 				{
-					this.Parameters.Add("path", this.Path);
+					Parameters.Add("path", Path);
 				}
 
 				if (!string.IsNullOrWhiteSpace(FolderId))
 				{
-					base.Resource = "archive/" + FolderId;
+					Resource = "archive/" + FolderId;
 				}
 				else if (!string.IsNullOrWhiteSpace(Id))
 				{
-					base.Resource = "archive/" + Id;
+					Resource = "archive/" + Id;
 				}
 			}
 			else if (rootFolder == RootFolder.Inbox)
 			{
-				base.Resource = "archive/" + GetRealValueFromAttribute(RootFolder.Inbox);
+				Resource = "archive/" + GetRealValueFromAttribute(RootFolder.Inbox);
 			}
 			else if (rootFolder == RootFolder.Inbox_SupplierInvoices)
 			{
-				base.Resource = "archive/" + GetRealValueFromAttribute(RootFolder.Inbox_SupplierInvoices);
+				Resource = "archive/" + GetRealValueFromAttribute(RootFolder.Inbox_SupplierInvoices);
 			}
 			else if (rootFolder == RootFolder.Inbox_Vouchers)
 			{
-				base.Resource = "archive/" + GetRealValueFromAttribute(RootFolder.Inbox_Vouchers);	
+				Resource = "archive/" + GetRealValueFromAttribute(RootFolder.Inbox_Vouchers);	
 			}
 			
-			return base.BaseFind(this.Parameters);
+			return BaseFind(Parameters);
 		}
 
 		private static string GetRealValueFromAttribute(RootFolder f)
@@ -117,7 +119,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created folder.</returns>
 		public Folder CreateFolder(Folder folder, string destination = "")
 		{
-			base.Resource = "archive";
+			Resource = "archive";
 
 			Dictionary<string, string> parameters = new Dictionary<string, string>();
 
@@ -134,7 +136,7 @@ namespace FortnoxAPILibrary.Connectors
 				}
 			}
 
-			return base.BaseCreate(folder, parameters);
+			return BaseCreate(folder, parameters);
 		}
 
 		///<summary>
@@ -145,9 +147,9 @@ namespace FortnoxAPILibrary.Connectors
 		///<returns>Information of the uploaded file</returns>
 		public File UploadFile(string localPath, string folderId = "")
         {
-            base.Resource = "archive";
+            Resource = "archive";
 
-			return base.BaseUploadFile(localPath, folderId);
+			return BaseUploadFile(localPath, folderId);
 		}
 
 		/// <summary>
@@ -162,9 +164,9 @@ namespace FortnoxAPILibrary.Connectors
 
 			if (!System.IO.Path.HasExtension(name)) throw new ArgumentException("File name with extention must be set.");
 
-			base.Resource = "archive";
+			Resource = "archive";
 
-			var uploadedFile = base.BaseUploadFile("", folderId, data, name);
+			var uploadedFile = BaseUploadFile("", folderId, data, name);
             if (uploadedFile == null) return null;
 
             uploadedFile.ContentType = GetMimeType(name);
@@ -185,7 +187,7 @@ namespace FortnoxAPILibrary.Connectors
 			stream.Position = 0;
 			var arr = new byte[stream.Length];
 			stream.Read(arr, 0, (int)stream.Length);
-			return this.UploadFileData(arr, name, folderId);
+			return UploadFileData(arr, name, folderId);
 		}
 
 		/// <summary>
@@ -195,7 +197,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="localPath">The local path to save the file to </param>
 		public void DownloadFile(string fileIdOrFilePath, string localPath)
         {
-            base.Resource = "archive";
+            Resource = "archive";
 
 			base.DownloadFile(fileIdOrFilePath, localPath);
 		}
@@ -216,7 +218,7 @@ namespace FortnoxAPILibrary.Connectors
 				throw new ArgumentException("File id must be set.");
 			}
 
-			base.Resource = "archive";
+			Resource = "archive";
 
 			base.DownloadFile(file.Id, "", file);
 		}
@@ -229,7 +231,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>Information about the file. </returns>
 		public new File MoveFile(string fileId, string destination)
         {
-            base.Resource = "archive";
+            Resource = "archive";
 
 			return base.MoveFile(fileId, destination);
 		}
@@ -240,7 +242,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="fileId">The id of the file to be deleted.</param>
 		public void DeleteFile(string fileId)
 		{
-			base.BaseDelete(fileId);
+			BaseDelete(fileId);
 		}
 
 		/// <summary>
@@ -249,7 +251,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="folderId">The id of the folder to be deleted.</param>
 		public void DeleteFolder(string folderId)
 		{
-			base.BaseDelete(folderId);
+			BaseDelete(folderId);
 		}
 
         private static string GetMimeType(string name)

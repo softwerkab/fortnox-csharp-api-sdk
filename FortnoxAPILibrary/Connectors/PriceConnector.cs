@@ -1,5 +1,7 @@
-﻿
+
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
@@ -27,7 +29,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public PriceConnector()
 		{
-			base.Resource = "prices";
+			Resource = "prices";
 		}
 
 		/// <summary>
@@ -39,9 +41,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found price</returns>
 		public Price Get(string priceList, string articleNumber, string fromQuantity = "0")
 		{
-			base.Resource = "prices";
+			Resource = "prices";
 
-			return base.BaseGet(priceList, articleNumber, fromQuantity);
+			return BaseGet(priceList, articleNumber, fromQuantity);
 		}
 
 		/// <summary>
@@ -51,8 +53,8 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated price</returns>
 		public Price Update(Price price)
 		{
-			base.Resource = "prices";
-			return base.BaseUpdate(price, price.PriceList, price.ArticleNumber);
+			Resource = "prices";
+			return BaseUpdate(price, price.PriceList, price.ArticleNumber);
 		}
 
 		/// <summary>
@@ -62,8 +64,8 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created price</returns>
 		public Price Create(Price price)
 		{
-			base.Resource = "prices";
-			return base.BaseCreate(price);
+			Resource = "prices";
+			return BaseCreate(price);
 		}
 
 		/// <summary>
@@ -75,7 +77,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>If the price was deleted or not</returns>
 		public void Delete(string priceList, string articleNumber, string fromQuantity = "0")
 		{
-			base.Resource = "prices";
+			Resource = "prices";
 			string id = priceList + "/" + articleNumber;
 
 			if (!string.IsNullOrEmpty(fromQuantity))
@@ -83,7 +85,7 @@ namespace FortnoxAPILibrary.Connectors
 				id += "/" + fromQuantity.ToString();
 			}
 
-			base.BaseDelete(id);
+			BaseDelete(id);
 		}
 
 		/// <summary>
@@ -92,14 +94,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of prices</returns>
 		public Prices Find()
 		{
-			base.Resource = "prices/sublist/";
+			Resource = "prices/sublist/";
 
-			if (!string.IsNullOrEmpty(this.PriceList))
+			if (!string.IsNullOrEmpty(PriceList))
 			{
-				base.Resource += this.PriceList;
+				Resource += PriceList;
 			}
 
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }
