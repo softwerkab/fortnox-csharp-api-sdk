@@ -1,8 +1,10 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using FortnoxAPILibrary.Entities;
 using Microsoft.AspNetCore.StaticFiles;
+using File = FortnoxAPILibrary.Entities.File;
 
 // ReSharper disable UnusedMember.Global
 
@@ -182,7 +184,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Uploads a file to Fortnox Archive from provided data stream.
 		/// </summary>
 		/// <returns>Created file.</returns>
-		public File UploadFileData(System.IO.Stream stream, string name, string folderId = "")
+		public File UploadFileData(Stream stream, string name, string folderId = "")
 		{
 			stream.Position = 0;
 			var arr = new byte[stream.Length];

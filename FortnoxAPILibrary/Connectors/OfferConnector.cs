@@ -67,7 +67,7 @@ namespace FortnoxAPILibrary.Connectors
         public string Label { get; set; }
 
 
-		private bool sentSet = false;
+		private bool sentSet;
 		private bool sent;
 		/// <remarks/>
 		[FilterProperty]
@@ -84,7 +84,7 @@ namespace FortnoxAPILibrary.Connectors
 			}
 		}
 
-		private bool notCompletedSet = false;
+		private bool notCompletedSet;
 		private bool notcompleted;
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -102,7 +102,7 @@ namespace FortnoxAPILibrary.Connectors
 			}
 		}
 
-		private bool filterBySet = false;
+		private bool filterBySet;
 		private Filter.Offer filterBy;
 		/// <remarks/>
 		[FilterProperty("filter")]
@@ -138,7 +138,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>An offer</returns>
 		public Offer Get(string documentNumber)
 		{
-			return BaseGet(documentNumber.ToString());
+			return BaseGet(documentNumber);
 		}
 
 		/// <summary>
@@ -148,7 +148,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated offer</returns>
 		public Offer Update(Offer offer)
 		{
-			return BaseUpdate(offer, offer.DocumentNumber.ToString());
+			return BaseUpdate(offer, offer.DocumentNumber);
 		}
 
 		/// <summary>

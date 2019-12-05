@@ -91,7 +91,7 @@ namespace FortnoxAPILibrary.Connectors
         [FilterProperty]
         public string Label { get; set; }
 
-		private bool sentSet = false;
+		private bool sentSet;
 		private bool sent;
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -110,7 +110,7 @@ namespace FortnoxAPILibrary.Connectors
 			}
 		}
 
-       private bool notCompletedSet = false;
+       private bool notCompletedSet;
 		private bool notcompleted;
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -129,7 +129,7 @@ namespace FortnoxAPILibrary.Connectors
 			}
 		}
 
-		private bool filterBySet = false;
+		private bool filterBySet;
 		private Filter.Invoice filterBy;
         /// <remarks/>
         [FilterProperty("filter")]

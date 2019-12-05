@@ -13,7 +13,7 @@ namespace FortnoxAPILibrary.Connectors
         [FilterProperty]
 		public string ReferenceNumber { get; set; }
 
-		private bool filterBySet = false;
+		private bool filterBySet;
 		private Filter.Invoice filterBy;
         /// <remarks/>
         [FilterProperty("filter")]
@@ -70,7 +70,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated tax reduction</returns>
 		public TaxReduction Update(TaxReduction taxReduction)
 		{
-			return BaseUpdate(taxReduction, taxReduction.Id.ToString());
+			return BaseUpdate(taxReduction, taxReduction.Id);
 		}
 
 		/// <summary>
@@ -89,7 +89,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Id of the tax reduction to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id.ToString());
+			BaseDelete(id);
 		}
 
 		/// <summary>

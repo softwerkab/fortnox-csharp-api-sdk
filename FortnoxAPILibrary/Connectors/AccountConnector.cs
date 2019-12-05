@@ -69,7 +69,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated account</returns>
 		public Account Update(Account account)
 		{
-			return BaseUpdate(account, account.Number.ToString());
+			return BaseUpdate(account, account.Number);
 		}
 
 		/// <summary>

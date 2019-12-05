@@ -112,7 +112,7 @@ namespace FortnoxAPILibrary.Connectors
         [FilterProperty]
         public string YourReference { get; set; }
 
-        private bool filterBySet = false;
+        private bool filterBySet;
         private Filter.SupplierInvoice filterBy;
         /// <remarks/>
         [FilterProperty("filter")]
