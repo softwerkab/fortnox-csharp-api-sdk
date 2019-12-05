@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 // ReSharper disable UnusedMember.Global
@@ -91,7 +92,7 @@ namespace FortnoxAPILibrary.Entities
 		public string VoucherYear { get; set; }
 
         /// <remarks/>
-        [XmlElement("WriteOff", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [XmlElement("WriteOff", Form = XmlSchemaForm.Unqualified)]
 		public List<SupplierInvoiceWriteOff> WriteOffs { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>

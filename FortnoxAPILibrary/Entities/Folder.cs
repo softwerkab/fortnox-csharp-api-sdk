@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml.Serialization;
 
 // ReSharper disable UnusedMember.Global
@@ -102,14 +103,14 @@ namespace FortnoxAPILibrary.Entities
 		}
 
 		/// <remarks/>
-		public System.IO.MemoryStream GetFileDataAsMemoryStream()
+		public MemoryStream GetFileDataAsMemoryStream()
 		{
 			if (Data == null)
 			{
 				throw new Exception("File data must be set.");
 			}
 
-			return new System.IO.MemoryStream(Data);
+			return new MemoryStream(Data);
 		}
 	}
 

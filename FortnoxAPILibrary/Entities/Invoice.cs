@@ -425,10 +425,7 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCode("xsd", "2.0.50727.3038")]
     [Serializable]
-    [System.Diagnostics.DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true)]
     public partial class Label //TODO Merge with other Label class
     {

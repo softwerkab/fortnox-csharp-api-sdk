@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 // ReSharper disable UnusedMember.Global
@@ -14,7 +15,7 @@ namespace FortnoxAPILibrary.Entities
     public class Accounts
 	{
         /// <remarks/>
-		[XmlElement("AccountSubset", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+		[XmlElement("AccountSubset", Form = XmlSchemaForm.Unqualified)]
 		public List<AccountSubset> AccountSubset { get; set; }
 
         /// <remarks/>
