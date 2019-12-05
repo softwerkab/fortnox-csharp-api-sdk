@@ -36,7 +36,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated invoice payment</returns>
 		public InvoicePayment Update(InvoicePayment invoicePayment)
 		{
-			return BaseUpdate(invoicePayment, invoicePayment.Number.ToString());
+			return BaseUpdate(invoicePayment, invoicePayment.Number);
 		}
 
 		/// <summary>

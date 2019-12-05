@@ -6,7 +6,7 @@ namespace FortnoxAPILibrary.Connectors
     public abstract class FinancialYearBasedEntityConnector<E, C, S> : EntityConnector<E, C, S>
     {
         private string financialYearDateValue;
-        private bool financialYearDateSet = false;
+        private bool financialYearDateSet;
 
         /// <summary>
         /// <para>Use FinancialYearDate to select the financial year to use.</para>
@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.Connectors
         }
 
         private string financialYearIDValue;
-        private bool financialYearIDSet = false;
+        private bool financialYearIDSet;
 
         /// <summary>
         /// <para>Use FinancialYearID to select the financial year to use.</para>

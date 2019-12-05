@@ -82,7 +82,7 @@ namespace FortnoxAPILibrary.Connectors
 
 			if (!string.IsNullOrEmpty(fromQuantity))
 			{
-				id += "/" + fromQuantity.ToString();
+				id += "/" + fromQuantity;
 			}
 
 			BaseDelete(id);

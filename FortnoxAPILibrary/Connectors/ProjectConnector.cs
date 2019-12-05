@@ -54,7 +54,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated project</returns>
 		public Project Update(Project project)
 		{
-			return BaseUpdate(project, project.ProjectNumber.ToString());
+			return BaseUpdate(project, project.ProjectNumber);
 		}
 
 		/// <summary>

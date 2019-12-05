@@ -62,7 +62,7 @@ namespace FortnoxAPILibrary.Connectors
 			PRINT
 		}
 
-		private bool filterBySet = false;
+		private bool filterBySet;
 		private Filter.Customer filterBy;
 		/// <remarks/>
 		[FilterProperty("filter")]

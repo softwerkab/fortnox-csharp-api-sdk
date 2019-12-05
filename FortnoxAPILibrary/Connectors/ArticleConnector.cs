@@ -7,7 +7,7 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class ArticleConnector : FinancialYearBasedEntityConnector<Article, Articles, Sort.By.Article>
 	{
-		private bool filterBySet = false;
+		private bool filterBySet;
 		private Filter.Article filterBy;
 		/// <remarks/>
 		[FilterProperty("filter")]
