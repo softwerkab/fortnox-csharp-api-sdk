@@ -9,19 +9,17 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary
 {
     /// <remarks/>
-    public abstract class EntityConnector<E, C, S> : UrlRequestBase
+    public abstract class EntityConnector<TEntity, TEntityCollection, TSort> : UrlRequestBase
     {
         /// <remarks/>
-        public EntityConnector()
+        protected EntityConnector()
         {
             LastModified = DateTime.MinValue;
-
             Error = null;
-
         }
 
-        private S sortBy;
-        private bool sortBySet = false;
+        private TSort sortBy;
+        private bool sortBySet;
         private string SortByRealValue
         {
             get
@@ -31,17 +29,15 @@ namespace FortnoxAPILibrary
                     return null;
                 }
 
-                Type type = this.SortBy.GetType();
-                MemberInfo[] memInfo = type.GetMember(this.SortBy.ToString());
+                Type type = SortBy.GetType();
+                MemberInfo[] memInfo = type.GetMember(SortBy.ToString());
                 object[] attrs = memInfo[0].GetCustomAttributes(typeof(RealValueAttribute), false);
                 if (attrs.Length > 0)
                 {
                     return ((RealValueAttribute)attrs[0]).RealValue;
                 }
-                else
-                {
-                    return this.SortBy.ToString();
-                }
+
+                return SortBy.ToString();
             }
         }
 
@@ -53,12 +49,9 @@ namespace FortnoxAPILibrary
         /// <summary>
         /// Sort the result
         /// </summary>
-        public S SortBy
+        public TSort SortBy
         {
-            get
-            {
-                return sortBy;
-            }
+            get => sortBy;
             set
             {
                 sortBy = value;
@@ -91,11 +84,11 @@ namespace FortnoxAPILibrary
         /// <remarks/>
         protected Dictionary<string, string> Parameters = new Dictionary<string, string>();
 
-        internal E BaseCreate(E entity, Dictionary<string, string> parameters = null)
+        internal TEntity BaseCreate(TEntity entity, Dictionary<string, string> parameters = null)
         {
-            this.Parameters = parameters == null ? new Dictionary<string, string>() : parameters;
+            Parameters = parameters ?? new Dictionary<string, string>();
 
-            string requestUriString = this.GetUrl();
+            string requestUriString = GetUrl();
 
             ResetProperties(entity);
 
@@ -103,20 +96,20 @@ namespace FortnoxAPILibrary
 
             requestUriString = AddParameters(requestUriString);
 
-            base.Method = "POST";
-            base.ResponseType = RequestResponseType.XML;
-            base.RequestUriString = requestUriString;
+            Method = "POST";
+            ResponseType = RequestResponseType.XML;
+            RequestUriString = requestUriString;
 
-            return base.DoRequest<E>(entity);
+            return DoRequest(entity);
         }
 
-        internal E BaseUpdate(E entity, params string[] indices)
+        internal TEntity BaseUpdate(TEntity entity, params string[] indices)
         {
-            this.Parameters = new Dictionary<string, string>();
+            Parameters = new Dictionary<string, string>();
 
-            string searchValue = String.Join("/", indices.Select(i => HttpUtility.UrlEncode(i)));
+            string searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
 
-            string requestUriString = this.GetUrl(searchValue);
+            string requestUriString = GetUrl(searchValue);
 
             ResetProperties(entity);
 
@@ -124,101 +117,101 @@ namespace FortnoxAPILibrary
 
             requestUriString = AddParameters(requestUriString);
 
-            base.Method = "PUT";
-            base.ResponseType = RequestResponseType.XML;
-            base.RequestUriString = requestUriString;
+            Method = "PUT";
+            ResponseType = RequestResponseType.XML;
+            RequestUriString = requestUriString;
 
-            return base.DoRequest<E>(entity);
+            return DoRequest(entity);
         }
 
         internal void BaseDelete(string index)
         {
-            this.Parameters = new Dictionary<string, string>();
+            Parameters = new Dictionary<string, string>();
 
-            string requestUriString = this.GetUrl(index);
+            string requestUriString = GetUrl(index);
 
             requestUriString = AddParameters(requestUriString);
 
-            base.Method = "DELETE";
-            base.ResponseType = RequestResponseType.XML;
-            base.RequestUriString = requestUriString;
+            Method = "DELETE";
+            ResponseType = RequestResponseType.XML;
+            RequestUriString = requestUriString;
 
-            base.DoRequest();
+            DoRequest();
         }
 
-        internal E BaseGet(params string[] indices)
+        internal TEntity BaseGet(params string[] indices)
         {
-            this.Parameters = new Dictionary<string, string>();
+            Parameters = new Dictionary<string, string>();
 
-            this.AddCustomParameters();
+            AddCustomParameters();
 
-            string searchValue = String.Join("/", indices.Select(i => HttpUtility.UrlEncode(i)));
+            string searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
 
             if (string.IsNullOrWhiteSpace(searchValue))
             {
                 throw new Exception("Ett sökvärde har inte angivits.");
             }
 
-            string requestUriString = this.GetUrl(searchValue);
+            string requestUriString = GetUrl(searchValue);
 
             requestUriString = AddParameters(requestUriString);
 
-            base.Method = "GET";
-            base.ResponseType = RequestResponseType.XML;
-            base.RequestUriString = requestUriString;
+            Method = "GET";
+            ResponseType = RequestResponseType.XML;
+            RequestUriString = requestUriString;
 
-            return base.DoRequest<E>();
+            return DoRequest<TEntity>();
         }
 
-        internal C BaseFind(Dictionary<string, string> parameters = null)
+        internal TEntityCollection BaseFind(Dictionary<string, string> parameters = null)
         {
-            this.Parameters = parameters == null ? new Dictionary<string, string>() : parameters;
+            Parameters = parameters ?? new Dictionary<string, string>();
 
-            this.AddCustomParameters();
+            AddCustomParameters();
 
-            string requestUriString = this.GetUrl();
+            string requestUriString = GetUrl();
 
-            if (this.Limit != 0)
+            if (Limit != 0)
             {
-                this.Parameters.Add("limit", this.Limit.ToString());
+                Parameters.Add("limit", Limit.ToString());
             }
 
-            if (this.LastModified != DateTime.MinValue)
+            if (LastModified != DateTime.MinValue)
             {
                 
-                this.Parameters.Add("lastmodified", this.LastModified.ToString("yyyy-MM-dd HH:mm:ss"));
+                Parameters.Add("lastmodified", LastModified.ToString("yyyy-MM-dd HH:mm:ss"));
             }
 
-            if (this.SortByRealValue != null)
+            if (SortByRealValue != null)
             {
-                this.Parameters.Add("sortby", this.SortByRealValue);
-                this.Parameters.Add("sortorder", this.SortOrder.ToString().ToLower());
+                Parameters.Add("sortby", SortByRealValue);
+                Parameters.Add("sortorder", SortOrder.ToString().ToLower());
             }
 
-            if (this.Page != 0)
+            if (Page != 0)
             {
-                this.Parameters.Add("page", this.Page.ToString());
+                Parameters.Add("page", Page.ToString());
             }
 
-            if (this.Offset != 0)
+            if (Offset != 0)
             {
-                this.Parameters.Add("offset", this.Offset.ToString());
+                Parameters.Add("offset", Offset.ToString());
             }
 
-            requestUriString = this.AddParameters(requestUriString);
+            requestUriString = AddParameters(requestUriString);
 
-            base.Method = "GET";
-            base.ResponseType = RequestResponseType.XML;
-            base.RequestUriString = requestUriString;
+            Method = "GET";
+            ResponseType = RequestResponseType.XML;
+            RequestUriString = requestUriString;
 
-            C result = base.DoRequest<C>();
+            TEntityCollection result = DoRequest<TEntityCollection>();
 
             return result;
         }
 
         protected void AddCustomParameters()
         {
-            var properties = this.GetType().GetProperties();
+            var properties = GetType().GetProperties();
 
             foreach (var property in properties)
             {
@@ -241,13 +234,13 @@ namespace FortnoxAPILibrary
                     strValue = value.ToString().ToLower();
                 }
 
-                if (String.IsNullOrWhiteSpace(strValue)) continue;
+                if (string.IsNullOrWhiteSpace(strValue)) continue;
 
                 string propertyName;
 
                 var filterPropertyAttribute = customAttributes.FirstOrDefault() as FilterProperty;
 
-                if (filterPropertyAttribute == null || String.IsNullOrWhiteSpace(filterPropertyAttribute.Name))
+                if (filterPropertyAttribute == null || string.IsNullOrWhiteSpace(filterPropertyAttribute.Name))
                 {
                     propertyName = property.Name;
                 }
@@ -270,7 +263,7 @@ namespace FortnoxAPILibrary
 
                 string propertySetName = property.Name[0].ToString().ToLower() + property.Name.Substring(1) + "Set";
 
-                var propertySet = this.GetType().GetField(propertySetName, BindingFlags.NonPublic | BindingFlags.Instance);
+                var propertySet = GetType().GetField(propertySetName, BindingFlags.NonPublic | BindingFlags.Instance);
 
                 if (propertySet != null)
                 {
@@ -280,14 +273,14 @@ namespace FortnoxAPILibrary
                     }
                 }
 
-                this.Parameters.Add(propertyName.ToLower(), strValue);
+                Parameters.Add(propertyName.ToLower(), strValue);
             }
         }
 
-        internal E DoAction(string documentNumber, string action)
+        internal TEntity DoAction(string documentNumber, string action)
         {
 
-            string requestUriString = this.GetUrl(documentNumber.ToString());
+            string requestUriString = GetUrl(documentNumber);
 
             requestUriString = requestUriString + "/" + action;
 
@@ -296,65 +289,65 @@ namespace FortnoxAPILibrary
 
             if (action == "print" || action == "preview" || action == "eprint")
             {
-                base.Method = "GET";
-                base.ResponseType = RequestResponseType.PDF;
+                Method = "GET";
+                ResponseType = RequestResponseType.PDF;
             }
             else if (action == "externalprint")
             {
-                base.Method = "PUT";
-                base.ResponseType = RequestResponseType.XML;
+                Method = "PUT";
+                ResponseType = RequestResponseType.XML;
 
             }
             else if (action == "email")
             {
-                base.Method = "GET";
-                base.ResponseType = RequestResponseType.EMAIL;
+                Method = "GET";
+                ResponseType = RequestResponseType.EMAIL;
             }
             else
             {
-                base.Method = "PUT";
+                Method = "PUT";
             }
-            base.RequestUriString = requestUriString;
+            RequestUriString = requestUriString;
 
-            return base.DoRequest<E>();
+            return DoRequest<TEntity>();
         }
 
 
         internal SieSummary BaseUploadFile(string localPath)
         {
-            string requestUriString = this.GetUrl();
-            base.RequestUriString = AddParameters(requestUriString);
+            string requestUriString = GetUrl();
+            RequestUriString = AddParameters(requestUriString);
 
-            return base.UploadFile<SieSummary>(localPath);
+            return UploadFile<SieSummary>(localPath);
         }
 
         internal File BaseUploadFile(string localPath, string folderId, byte[] fileData = null, string fileName = null)
         {
-            base.RequestUriString = this.GetUrl();
+            RequestUriString = GetUrl();
 
-            if (!String.IsNullOrWhiteSpace(folderId))
+            if (!string.IsNullOrWhiteSpace(folderId))
             {
-                base.RequestUriString += "?folderid=" + Uri.EscapeDataString(folderId);
+                RequestUriString += "?folderid=" + Uri.EscapeDataString(folderId);
             }
 
-            return base.UploadFile<File>(localPath, fileData, fileName);
+            return UploadFile<File>(localPath, fileData, fileName);
         }
 
         internal string AddParameters(string requestUriString)
         {
-            if (this.Parameters.Count > 0)
+            if (Parameters.Count > 0)
             {
-                requestUriString += "/?" + String.Join("&", this.Parameters.Select(p => p.Key + "=" + HttpUtility.UrlEncode(p.Value)));
+                requestUriString += "/?" + string.Join("&", Parameters.Select(p => p.Key + "=" + HttpUtility.UrlEncode(p.Value)));
             }
 
             return requestUriString;
         }
 
 
-        private static void ResetProperties(E entity)
+        private static void ResetProperties(TEntity entity)
         {
             //Nullar alla properties som har attibutet [ReadOnly(true)] eftersom de inte ska med i anropet. Kräver att alla properties är strängar
-            var properties = typeof(E).GetProperties().AsEnumerable();
+            var properties = typeof(TEntity).GetProperties().AsEnumerable();
 
             ResetProperties(entity, properties);
         }

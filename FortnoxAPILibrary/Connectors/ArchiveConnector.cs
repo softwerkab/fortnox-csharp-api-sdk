@@ -125,7 +125,7 @@ namespace FortnoxAPILibrary.Connectors
 
 			Dictionary<string, string> parameters = new Dictionary<string, string>();
 
-			if (!String.IsNullOrWhiteSpace(destination))
+			if (!string.IsNullOrWhiteSpace(destination))
 			{
 				Guid test = new Guid();
 				if (Guid.TryParse(destination, out test))
