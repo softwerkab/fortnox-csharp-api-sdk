@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class SupplierInvoiceAccrualConnector : EntityConnector<SupplierInvoiceAccrual, SupplierInvoiceAccruals, Sort.By.SupplierInvoiceAccrual>
+    /// <remarks/>
+    public class SupplierInvoiceAccrualConnector : EntityConnector<SupplierInvoiceAccrual, SupplierInvoiceAccruals, Sort.By.SupplierInvoiceAccrual>
 	{
 		/// <remarks/>
 		public SupplierInvoiceAccrualConnector()
 		{
-			base.Resource = "supplierinvoiceaccruals";
+			Resource = "supplierinvoiceaccruals";
 		}
 
 		/// <remarks/>
@@ -37,7 +35,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found supplier invoice accrual</returns>
 		public SupplierInvoiceAccrual Get(string supplierInvoiceNumber)
 		{
-			return base.BaseGet(supplierInvoiceNumber);
+			return BaseGet(supplierInvoiceNumber);
 		}
 
 		///<summary>
@@ -47,7 +45,7 @@ namespace FortnoxAPILibrary.Connectors
 		///<returns>The updated supplier invoice accrual</returns>
 		public SupplierInvoiceAccrual Update(SupplierInvoiceAccrual invoiceAccrual)
 		{
-			return base.BaseUpdate(invoiceAccrual, invoiceAccrual.SupplierInvoiceNumber);
+			return BaseUpdate(invoiceAccrual, invoiceAccrual.SupplierInvoiceNumber);
 		}
 
 		/// <summary>
@@ -57,7 +55,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created supplierinvoice accrual</returns>
 		public SupplierInvoiceAccrual Create(SupplierInvoiceAccrual supplierInvoiceAccrual)
 		{
-			return base.BaseCreate(supplierInvoiceAccrual);
+			return BaseCreate(supplierInvoiceAccrual);
 		}
 
 		/// <summary>
@@ -66,7 +64,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="supplierInvoiceNumber">The invoice number of the supplier invoice accrual to delete</param>
 		public void Delete(string supplierInvoiceNumber)
 		{
-			base.BaseDelete(supplierInvoiceNumber);
+			BaseDelete(supplierInvoiceNumber);
 		}
 
 		/// <summary>
@@ -75,7 +73,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of supplier invoice accruals</returns>
 		public SupplierInvoiceAccruals Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

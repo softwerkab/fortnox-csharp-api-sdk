@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
 
-	/// <remarks/>
-	public class OrderConnector : FinancialYearBasedEntityConnector<Order, Orders, Sort.By.Order>
+    /// <remarks/>
+    public class OrderConnector : FinancialYearBasedEntityConnector<Order, Orders, Sort.By.Order>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -146,7 +145,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public OrderConnector()
 		{
-			base.Resource = "orders";
+			Resource = "orders";
 		}
 
 
@@ -157,7 +156,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>An order</returns>
 		public Order Get(string documentNumber)
 		{
-			return base.BaseGet(documentNumber.ToString());
+			return BaseGet(documentNumber.ToString());
 		}
 
 		/// <summary>
@@ -167,7 +166,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated order</returns>
 		public Order Update(Order order)
 		{
-			return base.BaseUpdate(order, order.DocumentNumber.ToString());
+			return BaseUpdate(order, order.DocumentNumber.ToString());
 		}
 
 		/// <summary>
@@ -177,7 +176,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created order</returns>
 		public Order Create(Order order)
 		{
-			return base.BaseCreate(order);
+			return BaseCreate(order);
 		}
 
 		/// <summary>
@@ -186,7 +185,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of orders</returns>
 		public Orders Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 
 		/// <summary>
@@ -196,7 +195,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The cancelled order</returns>
 		public Order Cancel(string documentNumber)
 		{
-			return base.DoAction(documentNumber, "cancel");
+			return DoAction(documentNumber, "cancel");
 		}
 
 		/// <summary>
@@ -205,7 +204,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="documentNumber">The document number of the order to be emailed</param>
 		public void Email(string documentNumber)
 		{
-			base.DoAction(documentNumber, "email");
+			DoAction(documentNumber, "email");
 		}
 
 
@@ -218,12 +217,12 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			if (string.IsNullOrEmpty(localPath))
 			{
-				base.DoAction(documentNumber, "externalprint");
+				DoAction(documentNumber, "externalprint");
 			}
 			else
 			{
-				base.LocalPath = localPath;
-				base.DoAction(documentNumber, "print");
+				LocalPath = localPath;
+				DoAction(documentNumber, "print");
 			}
 		}
 
@@ -234,7 +233,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public Order CreateInvoice(string documentNumber)
 		{
-			return base.DoAction(documentNumber, "createinvoice");
+			return DoAction(documentNumber, "createinvoice");
 		}
 
         /// <summary>
@@ -243,7 +242,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <param name="documentNumber"></param>
         public void ExternalPrint(string documentNumber)
         {
-            base.DoAction(documentNumber, "externalprint");
+            DoAction(documentNumber, "externalprint");
         }
 	}
 }

@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class VoucherSeriesConnector : FinancialYearBasedEntityConnector<VoucherSeries, VoucherSeriesCollection, Sort.By.VoucherSeries>
+    /// <remarks/>
+    public class VoucherSeriesConnector : FinancialYearBasedEntityConnector<VoucherSeries, VoucherSeriesCollection, Sort.By.VoucherSeries>
 	{
 		/// <remarks/>
 		public VoucherSeriesConnector()
 		{
-			base.Resource = "voucherseries";
+			Resource = "voucherseries";
 		}
 
 		/// <summary>
@@ -22,7 +20,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found voucher series</returns>
 		public VoucherSeries Get(string code)
 		{
-			return base.BaseGet(code);
+			return BaseGet(code);
 		}
 
 		/// <summary>
@@ -33,7 +31,7 @@ namespace FortnoxAPILibrary.Connectors
 		public VoucherSeries Update(VoucherSeries voucherSeries)
 		{
 
-			return base.BaseUpdate(voucherSeries, voucherSeries.Code);
+			return BaseUpdate(voucherSeries, voucherSeries.Code);
 		}
 
 		/// <summary>
@@ -43,7 +41,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created voucher series</returns>
 		public VoucherSeries Create(VoucherSeries voucherseries)
 		{
-			return base.BaseCreate(voucherseries);
+			return BaseCreate(voucherseries);
 		}
 
 		/// <summary>
@@ -52,7 +50,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of voucher series</returns>
 		public VoucherSeriesCollection Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

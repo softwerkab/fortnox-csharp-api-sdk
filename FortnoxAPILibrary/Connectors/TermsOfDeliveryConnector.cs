@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class TermsOfDeliveryConnector : EntityConnector<TermsOfDelivery, TermsOfDeliveries, Sort.By.TermsOfDelivery>
+    /// <remarks/>
+    public class TermsOfDeliveryConnector : EntityConnector<TermsOfDelivery, TermsOfDeliveries, Sort.By.TermsOfDelivery>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -15,7 +16,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public TermsOfDeliveryConnector()
 		{
-			base.Resource = "termsofdeliveries";
+			Resource = "termsofdeliveries";
 		}
 
 		/// <summary>
@@ -25,7 +26,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The resulting terms of delivery</returns>
 		public TermsOfDelivery Get(string termsOfDeliveryCode)
 		{
-			return base.BaseGet(termsOfDeliveryCode);
+			return BaseGet(termsOfDeliveryCode);
 		}
 
 		/// <summary>
@@ -35,7 +36,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated terms of delivery</returns>
 		public TermsOfDelivery Update(TermsOfDelivery termsOfDelivery)
 		{
-			return base.BaseUpdate(termsOfDelivery, termsOfDelivery.Code);
+			return BaseUpdate(termsOfDelivery, termsOfDelivery.Code);
 		}
 
 		/// <summary>
@@ -45,7 +46,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created terms of delivery</returns>
 		public TermsOfDelivery Create(TermsOfDelivery termsOfDelivery)
 		{
-			return base.BaseCreate(termsOfDelivery);
+			return BaseCreate(termsOfDelivery);
 		}
 
 
@@ -56,7 +57,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>If the terms of delivery was deleted or not</returns>
 		public void Delete(string termsOfDeliveryCode)
 		{
-			base.BaseDelete(termsOfDeliveryCode);
+			BaseDelete(termsOfDeliveryCode);
 		}
 
 		/// <summary>
@@ -65,7 +66,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of terms of deliveries</returns>
 		public TermsOfDeliveries Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

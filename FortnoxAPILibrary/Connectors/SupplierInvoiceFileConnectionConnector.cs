@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
@@ -15,7 +16,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public SupplierInvoiceFileConnectionConnector()
 		{
-			base.Resource = "supplierinvoicefileconnections";
+			Resource = "supplierinvoicefileconnections";
 		}
 
 		/// <summary>
@@ -25,7 +26,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found supplier invoice file connection</returns>
 		public SupplierInvoiceFileConnection Get(string fileId)
 		{
-			return base.BaseGet(fileId);
+			return BaseGet(fileId);
 		}
 
 		/// <summary>
@@ -35,7 +36,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created supplier invoice file connection</returns>
 		public SupplierInvoiceFileConnection Create(SupplierInvoiceFileConnection supplierInvoiceFileConnection)
 		{
-			return base.BaseCreate(supplierInvoiceFileConnection);
+			return BaseCreate(supplierInvoiceFileConnection);
 		}
 
 		/// <summary>
@@ -44,7 +45,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="fileId">The id of the file to delete</param>
 		public void Delete(string fileId)
 		{
-			base.BaseDelete(fileId);
+			BaseDelete(fileId);
 		}
 
 		/// <summary>
@@ -53,7 +54,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public SupplierInvoiceFileConnections Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

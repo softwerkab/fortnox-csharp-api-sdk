@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class ModesOfPaymentConnector : FinancialYearBasedEntityConnector<ModeOfPayment, ModesOfPayments, Sort.By.ModesOfPayment>
+    /// <remarks/>
+    public class ModesOfPaymentConnector : FinancialYearBasedEntityConnector<ModeOfPayment, ModesOfPayments, Sort.By.ModesOfPayment>
 	{
 		/// <remarks/>
 		public ModesOfPaymentConnector()
 		{
-			base.Resource = "modesofpayments";
+			Resource = "modesofpayments";
 		}
 
 		/// <summary>
@@ -19,7 +20,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found mode of payment</returns>
 		public ModeOfPayment Get(string code)
 		{
-			return base.BaseGet(code);
+			return BaseGet(code);
 		}
 
 		/// <summary>
@@ -29,7 +30,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated mode of payment</returns>
 		public ModeOfPayment Update(ModeOfPayment modeofpayment)
 		{
-			return base.BaseUpdate(modeofpayment, modeofpayment.Code);
+			return BaseUpdate(modeofpayment, modeofpayment.Code);
 		}
 
 		/// <summary>
@@ -39,7 +40,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created mode of payment</returns>
 		public ModeOfPayment Create(ModeOfPayment modeOfPayment)
 		{
-			return base.BaseCreate(modeOfPayment);
+			return BaseCreate(modeOfPayment);
 		}
 
 		/// <summary>
@@ -48,7 +49,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="code">The code of the mode of payment to delete</param>
 		public void Delete(string code)
 		{
-			base.BaseDelete(code);
+			BaseDelete(code);
 		}
 
 		/// <summary>
@@ -57,7 +58,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public ModesOfPayments Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

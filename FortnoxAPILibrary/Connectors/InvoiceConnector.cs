@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class InvoiceConnector : FinancialYearBasedEntityConnector<Invoice, Invoices, Sort.By.Invoice>
+    /// <remarks/>
+    public class InvoiceConnector : FinancialYearBasedEntityConnector<Invoice, Invoices, Sort.By.Invoice>
     {
         /// <summary>
         /// Use with Find() to limit the search result
@@ -171,7 +170,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public InvoiceConnector()
 		{
-			base.Resource = "invoices";
+			Resource = "invoices";
 		}
 
 		/// <summary>
@@ -181,7 +180,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found invoice</returns>
 		public Invoice Get(string documentNumber)
 		{
-			return base.BaseGet(documentNumber);
+			return BaseGet(documentNumber);
 		}
 
 		/// <summary>
@@ -191,7 +190,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated invoice</returns>
 		public Invoice Update(Invoice invoice)
 		{
-			return base.BaseUpdate(invoice, invoice.DocumentNumber);
+			return BaseUpdate(invoice, invoice.DocumentNumber);
 		}
 
 		/// <summary>
@@ -201,7 +200,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created invoice</returns>
 		public Invoice Create(Invoice invoice)
 		{
-			return base.BaseCreate(invoice);
+			return BaseCreate(invoice);
 		}
 
 		/// <summary>
@@ -210,7 +209,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of invoices</returns>
 		public Invoices Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 
 		/// <summary>
@@ -220,7 +219,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The bookkept invoice</returns>
 		public Invoice Bookkeep(string documentNumber)
 		{
-			return base.DoAction(documentNumber, "bookkeep");
+			return DoAction(documentNumber, "bookkeep");
 		}
 
 		/// <summary>
@@ -230,7 +229,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The cancelled invoice</returns>
 		public Invoice Cancel(string documentNumber)
 		{
-			return base.DoAction(documentNumber, "cancel");
+			return DoAction(documentNumber, "cancel");
 		}
 
 		/// <summary>
@@ -240,7 +239,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The credited invoice</returns>
 		public Invoice Credit(string documentNumber)
 		{
-			return base.DoAction(documentNumber, "credit");
+			return DoAction(documentNumber, "credit");
 		}
 
 		/// <summary>
@@ -249,7 +248,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="documentNumber">The document number of the invoice to be emailed</param>
 		public void Email(string documentNumber)
 		{
-			base.DoAction(documentNumber, "email");
+			DoAction(documentNumber, "email");
 		}
 
 		/// <summary>
@@ -261,19 +260,19 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			if (string.IsNullOrEmpty(localPath))
 			{
-				base.DoAction(documentNumber, "externalprint");
+				DoAction(documentNumber, "externalprint");
 			}
 			else
 			{
-				base.LocalPath = localPath;
-				base.DoAction(documentNumber, "print");
+				LocalPath = localPath;
+				DoAction(documentNumber, "print");
 			}
 		}
         
         /// <param name="documentNumber">The document number of the invoice to print</param>
         public void EPrint(string documentNumber)
         {
-            base.DoAction(documentNumber, "eprint");
+            DoAction(documentNumber, "eprint");
         }
 
 		/// <summary>
@@ -283,8 +282,8 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="localPath">The path where to save the reminder </param>
 		public void PrintReminder(string documentNumber, string localPath)
 		{
-			base.LocalPath = localPath;
-			base.DoAction(documentNumber, "printreminder");
+			LocalPath = localPath;
+			DoAction(documentNumber, "printreminder");
 		}
 
         /// <summary>
@@ -294,8 +293,8 @@ namespace FortnoxAPILibrary.Connectors
         /// <param name="localPath">The path where to save the preview</param>
         public void Preview(string documentNumber, string localPath)
         {
-            base.LocalPath = localPath;
-            base.DoAction(documentNumber, "preview");
+            LocalPath = localPath;
+            DoAction(documentNumber, "preview");
         }
 
         /// <summary>
@@ -304,7 +303,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <param name="documentNumber"></param>
         public void ExternalPrint(string documentNumber)
         {
-            base.DoAction(documentNumber, "externalprint");
+            DoAction(documentNumber, "externalprint");
         }
 	}
 }

@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	public class VoucherFileConnectionConnector : EntityConnector<VoucherFileConnection, VoucherFileConnections, Sort.By.VoucherFileConnection>
+    public class VoucherFileConnectionConnector : EntityConnector<VoucherFileConnection, VoucherFileConnections, Sort.By.VoucherFileConnection>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -26,7 +27,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public VoucherFileConnectionConnector()
 		{
-			base.Resource = "voucherfileconnections";
+			Resource = "voucherfileconnections";
 		}
 
 		/// <summary>
@@ -36,7 +37,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found voucher file connection</returns>
 		public VoucherFileConnection Get(string fileId)
 		{
-			return base.BaseGet(fileId);
+			return BaseGet(fileId);
 		}
 
 		/// <summary>
@@ -46,7 +47,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created voucher file connection</returns>
 		public VoucherFileConnection Create(VoucherFileConnection voucherFileConnection)
 		{
-			return base.BaseCreate(voucherFileConnection);
+			return BaseCreate(voucherFileConnection);
 		}
 
 		/// <summary>
@@ -55,7 +56,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="fileId"></param>
 		public void Delete(string fileId)
 		{
-			base.BaseDelete(fileId);
+			BaseDelete(fileId);
 		}
 
 		/// <summary>
@@ -64,7 +65,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public VoucherFileConnections Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

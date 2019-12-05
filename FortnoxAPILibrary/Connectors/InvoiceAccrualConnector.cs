@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class InvoiceAccrualConnector : EntityConnector<InvoiceAccrual, InvoiceAccruals, Sort.By.InvoiceAccrual>
+    /// <remarks/>
+    public class InvoiceAccrualConnector : EntityConnector<InvoiceAccrual, InvoiceAccruals, Sort.By.InvoiceAccrual>
 	{
 		/// <remarks/>
 		public InvoiceAccrualConnector()
 		{
-			base.Resource = "invoiceaccruals";
+			Resource = "invoiceaccruals";
 		}
 
 		/// <remarks/>
@@ -37,7 +35,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found invoice accrual</returns>
 		public InvoiceAccrual Get(string invoiceNumber)
 		{
-			return base.BaseGet(invoiceNumber);
+			return BaseGet(invoiceNumber);
 		}
 
 		/// <summary>
@@ -47,7 +45,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated invoice accrual</returns>
 		public InvoiceAccrual Update(InvoiceAccrual invoiceAccrual)
 		{
-			return base.BaseUpdate(invoiceAccrual, invoiceAccrual.InvoiceNumber);
+			return BaseUpdate(invoiceAccrual, invoiceAccrual.InvoiceNumber);
 		}
 
 		/// <summary>
@@ -57,7 +55,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created invoice accrual</returns>
 		public InvoiceAccrual Create(InvoiceAccrual invoiceAccrual)
 		{
-			return base.BaseCreate(invoiceAccrual);
+			return BaseCreate(invoiceAccrual);
 		}
 
 		/// <summary>
@@ -66,7 +64,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="invoiceNumber">The invoice number of the invoice accrual to delete</param>
 		public void Delete(string invoiceNumber)
 		{
-			base.BaseDelete(invoiceNumber);
+			BaseDelete(invoiceNumber);
 		}
 
 		/// <summary>
@@ -75,7 +73,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of invoice accruals</returns>
 		public InvoiceAccruals Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

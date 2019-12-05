@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class ProjectConnector : EntityConnector<Project, Projects, Sort.By.Project>
+    /// <remarks/>
+    public class ProjectConnector : EntityConnector<Project, Projects, Sort.By.Project>
 	{
 
 		/// <remarks/>
@@ -36,7 +34,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public ProjectConnector()
 		{
-			base.Resource = "projects";
+			Resource = "projects";
 		}
 
 		/// <summary>
@@ -46,7 +44,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found project</returns>
 		public Project Get(string projectNumber)
 		{
-			return base.BaseGet(projectNumber);
+			return BaseGet(projectNumber);
 		}
 
 		/// <summary>
@@ -56,7 +54,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated project</returns>
 		public Project Update(Project project)
 		{
-			return base.BaseUpdate(project, project.ProjectNumber.ToString());
+			return BaseUpdate(project, project.ProjectNumber.ToString());
 		}
 
 		/// <summary>
@@ -66,7 +64,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created project</returns>
 		public Project Create(Project project)
 		{
-			return base.BaseCreate(project);
+			return BaseCreate(project);
 		}
 
 		/// <summary>
@@ -76,7 +74,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>If the project was deleted or not</returns>
 		public void Delete(string projectNumber)
 		{
-			base.BaseDelete(projectNumber);
+			BaseDelete(projectNumber);
 		}
 
 		/// <summary>
@@ -85,7 +83,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of projects</returns>
 		public Projects Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

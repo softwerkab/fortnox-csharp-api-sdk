@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class TaxReductionConnector : EntityConnector<TaxReduction, TaxReductions, Sort.By.TaxReduction>
+    /// <remarks/>
+    public class TaxReductionConnector : EntityConnector<TaxReduction, TaxReductions, Sort.By.TaxReduction>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -53,7 +50,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public TaxReductionConnector()
 		{
-			base.Resource = "taxreductions";
+			Resource = "taxreductions";
 		}
 
 		/// <summary>
@@ -63,7 +60,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public TaxReduction Get(string id)
 		{
-			return base.BaseGet(id);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -73,7 +70,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated tax reduction</returns>
 		public TaxReduction Update(TaxReduction taxReduction)
 		{
-			return base.BaseUpdate(taxReduction, taxReduction.Id.ToString());
+			return BaseUpdate(taxReduction, taxReduction.Id.ToString());
 		}
 
 		/// <summary>
@@ -83,7 +80,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created tax reduction</returns>
 		public TaxReduction Create(TaxReduction taxReduction)
 		{
-			return base.BaseCreate(taxReduction);
+			return BaseCreate(taxReduction);
 		}
 
 		/// <summary>
@@ -92,7 +89,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Id of the tax reduction to delete</param>
 		public void Delete(string id)
 		{
-			base.BaseDelete(id.ToString());
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>
@@ -101,7 +98,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of tax reductions</returns>
 		public TaxReductions Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

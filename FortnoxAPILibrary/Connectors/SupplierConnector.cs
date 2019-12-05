@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class SupplierConnector : EntityConnector<Supplier, Suppliers, Sort.By.Supplier>
+    /// <remarks/>
+    public class SupplierConnector : EntityConnector<Supplier, Suppliers, Sort.By.Supplier>
 	{
 
 		/// <summary>
@@ -52,7 +53,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public SupplierConnector()
 		{
-			base.Resource = "suppliers";
+			Resource = "suppliers";
 		}
 
 		/// <summary>
@@ -72,7 +73,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated supplier</returns>
 		public Supplier Update(Supplier supplier)
 		{
-			return base.BaseUpdate(supplier, supplier.SupplierNumber);
+			return BaseUpdate(supplier, supplier.SupplierNumber);
 		}
 
 		/// <summary>
@@ -82,7 +83,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created supplier</returns>
 		public Supplier Create(Supplier supplier)
 		{
-			return base.BaseCreate(supplier);
+			return BaseCreate(supplier);
 		}
 
 		/// <summary>
@@ -92,7 +93,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public void Delete(string supplierNumber)
 		{
-			base.BaseDelete(supplierNumber);
+			BaseDelete(supplierNumber);
 		}
 
 		/// <summary>
@@ -101,7 +102,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of suppliers</returns>
 		public Suppliers Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

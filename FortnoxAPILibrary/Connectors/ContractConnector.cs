@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
@@ -70,7 +67,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <remarks/>
         public ContractConnector()
         {
-            base.Resource = "contracts";
+            Resource = "contracts";
         }
         
 		/// <summary>
@@ -80,7 +77,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found Contract</returns>
         public Contract Get(string documentNumber)
         {
-            return base.BaseGet(documentNumber);
+            return BaseGet(documentNumber);
         }
 
         /// <summary>
@@ -90,7 +87,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The updated Contract</returns>
         public Contract Update(Contract contract)
         {
-            return base.BaseUpdate(contract, contract.DocumentNumber);
+            return BaseUpdate(contract, contract.DocumentNumber);
         }
 
         /// <summary>
@@ -100,7 +97,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The created Contract</returns>
         public Contract Create(Contract contract)
         {
-            return base.BaseCreate(contract);
+            return BaseCreate(contract);
         }
 
         /// <summary>
@@ -109,7 +106,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>A list of Contracts</returns>
         public Contracts Find()
         {
-            return base.BaseFind();
+            return BaseFind();
         }
 
         /// <summary>
@@ -119,7 +116,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The finished contract</returns>
         public Contract Finish(string documentNumber)
         {
-            return base.DoAction(documentNumber, "finish");
+            return DoAction(documentNumber, "finish");
         }
 
         /// <summary>
@@ -129,7 +126,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The Contract that the Invoice was created from</returns>
         public Contract CreateInvoice(string documentNumber)
         {
-            return base.DoAction(documentNumber, "createinvoice");
+            return DoAction(documentNumber, "createinvoice");
         }
 
         /// <summary>
@@ -139,7 +136,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The Contract that the Invoice was created from</returns>
         public Contract IncreaseInvoiceCount(string documentNumber)
         {
-            return base.DoAction(documentNumber, "increaseinvoicecount");
+            return DoAction(documentNumber, "increaseinvoicecount");
         }
     }
 }

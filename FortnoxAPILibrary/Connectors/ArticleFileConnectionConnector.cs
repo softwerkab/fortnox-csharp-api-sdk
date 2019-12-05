@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class ArticleFileConnectionConnector : EntityConnector<ArticleFileConnection, ArticleFileConnections, Sort.By.ArticleFileConnection>
+    /// <remarks/>
+    public class ArticleFileConnectionConnector : EntityConnector<ArticleFileConnection, ArticleFileConnections, Sort.By.ArticleFileConnection>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -18,7 +16,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public ArticleFileConnectionConnector()
 		{
-			base.Resource = "articlefileconnections";
+			Resource = "articlefileconnections";
 		}
 
 		/// <summary>
@@ -28,7 +26,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found article file connection</returns>
 		public ArticleFileConnection Get(string fileId)
 		{
-			return base.BaseGet(fileId);
+			return BaseGet(fileId);
 		}
 
 		/// <summary>
@@ -38,7 +36,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created article file connection</returns>
 		public ArticleFileConnection Create(ArticleFileConnection articleFileConnection)
 		{
-			return base.BaseCreate(articleFileConnection);
+			return BaseCreate(articleFileConnection);
 		}
 
 		/// <summary>
@@ -47,7 +45,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="fileId">The id of the file to delete</param>
 		public void Delete(string fileId)
 		{
-			base.BaseDelete(fileId);
+			BaseDelete(fileId);
 		}
 
 
@@ -57,7 +55,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public ArticleFileConnections Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

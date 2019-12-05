@@ -1,16 +1,16 @@
-﻿
-using System.Collections.Generic;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class PrintTemplateConnector : EntityConnector<PrintTemplates, PrintTemplates, Sort.By.PrintTemplate>
+    /// <remarks/>
+    public class PrintTemplateConnector : EntityConnector<PrintTemplates, PrintTemplates, Sort.By.PrintTemplate>
 	{
 		/// <remarks/>
 		public PrintTemplateConnector()
 		{
-			base.Resource = "printtemplates";
+			Resource = "printtemplates";
 		}
 
 		/// <summary>
@@ -19,7 +19,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of print templates</returns>
 		public PrintTemplates Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 	}
 }

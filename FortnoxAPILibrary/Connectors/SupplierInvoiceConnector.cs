@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
 using FortnoxAPILibrary.Entities;
+
+// ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class SupplierInvoiceConnector : FinancialYearBasedEntityConnector<SupplierInvoice, SupplierInvoices, Sort.By.SupplierInvoice>
+    /// <remarks/>
+    public class SupplierInvoiceConnector : FinancialYearBasedEntityConnector<SupplierInvoice, SupplierInvoices, Sort.By.SupplierInvoice>
 	{
 		/// <remarks/>
 		public enum VATType
@@ -128,7 +129,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public SupplierInvoiceConnector()
 		{
-			base.Resource = "supplierinvoices";
+			Resource = "supplierinvoices";
 		}
 
 
@@ -139,7 +140,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public SupplierInvoice Get(string documentNumber)
 		{
-			return base.BaseGet(documentNumber);
+			return BaseGet(documentNumber);
 		}
 
 		/// <summary>
@@ -149,7 +150,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public SupplierInvoice Update(SupplierInvoice supplierInvoice)
 		{
-			return base.BaseUpdate(supplierInvoice, supplierInvoice.GivenNumber);
+			return BaseUpdate(supplierInvoice, supplierInvoice.GivenNumber);
 		}
 
 		/// <summary>
@@ -159,7 +160,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created supplier invoice</returns>
 		public SupplierInvoice Create(SupplierInvoice supplierInvoice)
 		{
-			return base.BaseCreate(supplierInvoice);
+			return BaseCreate(supplierInvoice);
 		}
 
 		/// <summary>
@@ -168,7 +169,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of supplier invoices</returns>
 		public SupplierInvoices Find()
 		{
-			return base.BaseFind();
+			return BaseFind();
 		}
 
 		/// <summary>
@@ -178,7 +179,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The bookkept invoice</returns>
 		public SupplierInvoice Bookkeep(string documentNumber)
 		{
-			return base.DoAction(documentNumber, "bookkeep");
+			return DoAction(documentNumber, "bookkeep");
 		}
 
 		/// <summary>
@@ -188,7 +189,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The cancelled invoice</returns>
 		public SupplierInvoice Cancel(string documentNumber)
 		{
-			return base.DoAction(documentNumber, "cancel");
+			return DoAction(documentNumber, "cancel");
 		}
 
 		/// <summary>
@@ -198,7 +199,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The credited supplier invoice</returns>
 		public SupplierInvoice Credit(string documentNumber)
 		{
-			return base.DoAction(documentNumber, "credit");
+			return DoAction(documentNumber, "credit");
 		}
 
 		/// <summary>
@@ -208,7 +209,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public SupplierInvoice ApprovalPayment(string documentNumber)
 		{
-			return base.DoAction(documentNumber, "approvalpayment");
+			return DoAction(documentNumber, "approvalpayment");
 		}
 
 		/// <summary>
@@ -218,7 +219,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public SupplierInvoice ApprovalBookkeep(string documentNumber)
 		{
-			return base.DoAction(documentNumber, "approvalbookkeep");
+			return DoAction(documentNumber, "approvalbookkeep");
 		}
 	}
 }

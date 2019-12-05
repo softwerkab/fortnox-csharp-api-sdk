@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FortnoxAPILibrary.Entities;
 
-namespace FortnoxAPILibrary
+// ReSharper disable UnusedMember.Global
+
+namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
     public class LockedPeriodConnector : EntityConnector<LockedPeriod, LockedPeriod, Sort.By.LockedPeriod>
@@ -12,7 +10,7 @@ namespace FortnoxAPILibrary
         /// <remarks/>
         public LockedPeriodConnector()
         {
-            base.Resource = "settings/lockedperiod";
+            Resource = "settings/lockedperiod";
         }
 
         /// <summary>
@@ -21,7 +19,7 @@ namespace FortnoxAPILibrary
         /// <returns>The locked period setting</returns>
         public LockedPeriod Get()
         {
-            return base.BaseFind();
+            return BaseFind();
         }
     }
 }
