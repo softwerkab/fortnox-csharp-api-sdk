@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Serialization;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
@@ -10,8 +9,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
-	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class Folder
 	{
         /// <remarks/>
@@ -30,35 +27,29 @@ namespace FortnoxAPILibrary.Entities
         public string Name { get; set; }
 
         /// <remarks/>
-        [XmlAttribute]
 		public string url { get; set; }
     }
 
 	/// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
 	public class Files
 	{
         /// <remarks/>
-		[XmlElement("File")]
 		public List<File> File { get; set; }
     }
 
 	/// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
 	public class File
 	{
         /// <summary>
 		/// Actual Content Type if file data is manually downloaded from archive.
 		/// </summary>
-		[XmlIgnore]
 		public string ContentType { get; set; }
 
 		/// <summary>
 		/// Actual file data if manually downloaded from archive.
 		/// </summary>
-		[XmlIgnore]
 		public byte[] Data { get; set; }
 
 		/// <remarks/>
@@ -77,7 +68,6 @@ namespace FortnoxAPILibrary.Entities
         public string Size { get; set; }
 
         /// <remarks/>
-        [XmlAttribute]
 		public string url { get; set; }
 
         /// <remarks/>
@@ -116,17 +106,14 @@ namespace FortnoxAPILibrary.Entities
 
 	/// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
 	public class Folders
 	{
         /// <remarks/>
-		[XmlElement("Folder")]
 		public List<FoldersFolder> Folder { get; set; }
     }
 
 	/// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
 	public class FoldersFolder
 	{
         /// <remarks/>
@@ -136,7 +123,6 @@ namespace FortnoxAPILibrary.Entities
         public string Name { get; set; }
 
         /// <remarks/>
-        [XmlAttribute]
 		public string url { get; set; }
     }
 }

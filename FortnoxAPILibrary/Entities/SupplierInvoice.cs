@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Xml.Schema;
-using System.Xml.Serialization;
 using FortnoxAPILibrary.Connectors;
 
 // ReSharper disable UnusedMember.Global
@@ -12,8 +10,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
-    [XmlRoot(Namespace = "", IsNullable = false)]
     public class SupplierInvoice
     {
 		/// <remarks/>
@@ -132,12 +128,10 @@ namespace FortnoxAPILibrary.Entities
         public SupplierInvoiceConnector.VATType VATType { get; set; }
 
         /// <remarks/>
-        [XmlArrayItem("SupplierInvoiceRow", typeof(SupplierInvoiceRow), Form = XmlSchemaForm.Unqualified, IsNullable = false)]
         public List<SupplierInvoiceRow> SupplierInvoiceRows { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly(true)]
-        [XmlAttribute]
         public string url { get; set; }
 
         /// <remarks/>
@@ -146,7 +140,6 @@ namespace FortnoxAPILibrary.Entities
 
     /// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
     public class SupplierInvoiceRow
     {
         /// <remarks/>

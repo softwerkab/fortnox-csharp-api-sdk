@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.Xml.Serialization;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
@@ -9,8 +8,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
-	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class Price
 	{
         /// <remarks/>
@@ -27,7 +24,6 @@ namespace FortnoxAPILibrary.Entities
         public string Percent { get; set; }
 
         /// <remarks/>
-        [XmlElement("Price")]
 		public string PriceValue { get; set; }
 
         /// <remarks/>

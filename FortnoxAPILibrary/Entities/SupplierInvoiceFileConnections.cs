@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
@@ -12,25 +11,19 @@ namespace FortnoxAPILibrary.Entities
     [Serializable]
 	
 	
-	[XmlType(AnonymousType = true)]
-	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class SupplierInvoiceFileConnections
 	{
 
         /// <remarks/>
-		[XmlElement("SupplierInvoiceFileConnectionSubset")]
 		public List<SupplierInvoiceFileConnectionSubset> SupplierInvoiceFileConnectionSubset { get; set; }
 
         /// <remarks/>
-        [XmlAttribute]
 		public byte TotalResources { get; set; }
 
         /// <remarks/>
-        [XmlAttribute]
 		public byte TotalPages { get; set; }
 
         /// <remarks/>
-        [XmlAttribute]
 		public byte CurrentPage { get; set; }
     }
 
@@ -39,7 +32,6 @@ namespace FortnoxAPILibrary.Entities
 	[Serializable]
 	
 	
-	[XmlType(AnonymousType = true)]
 	public class SupplierInvoiceFileConnectionSubset
 	{
         /// <remarks/>
@@ -55,7 +47,6 @@ namespace FortnoxAPILibrary.Entities
         public string SupplierName { get; set; }
 
         /// <remarks/>
-        [XmlAttribute]
 		public string url { get; set; }
     }
 }

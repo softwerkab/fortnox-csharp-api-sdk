@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Xml.Schema;
-using System.Xml.Serialization;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
@@ -13,23 +11,17 @@ namespace FortnoxAPILibrary.Entities
     [Serializable]
 	
 	
-	[XmlType(AnonymousType = true)]
-	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class WayOfDeliveries
 	{
 		/// <remarks/>
-		[XmlElement("WayOfDeliverySubset", Form = XmlSchemaForm.Unqualified)]
 		public List<WayOfDeliverySubset> WayOfDeliverySubset { get; set; }
         /// <remarks/>
-        [XmlAttribute]
 		public string TotalResources { get; set; }
 
         /// <remarks/>
-        [XmlAttribute]
 		public string TotalPages { get; set; }
 
         /// <remarks/>
-        [XmlAttribute]
 		public string CurrentPage { get; set; }
     }
 
@@ -38,7 +30,6 @@ namespace FortnoxAPILibrary.Entities
 	[Serializable]
 	
 	
-	[XmlType(AnonymousType = true)]
 	public class WayOfDeliverySubset
 	{
         /// <remarks/>
@@ -48,7 +39,6 @@ namespace FortnoxAPILibrary.Entities
         public string Description { get; set; }
 
         /// <remarks/>
-        [XmlAttribute]
 		public string url { get; set; }
     }
 }

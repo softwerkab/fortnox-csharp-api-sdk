@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Xml.Serialization;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
@@ -10,19 +9,15 @@ namespace FortnoxAPILibrary.Entities
     public class Contracts
     {
         /// <remarks/>
-        [XmlElement("ContractSubset")]
         public List<ContractSubset> ContractSubset { get; set; }
 
         /// <remarks/>
-        [XmlAttribute]
         public string TotalResources { get; set; }
 
         /// <remarks/>
-        [XmlAttribute]
         public string TotalPages { get; set; }
 
         /// <remarks/>
-        [XmlAttribute]
         public string CurrentPage { get; set; }
     }
 
@@ -30,7 +25,6 @@ namespace FortnoxAPILibrary.Entities
     public class ContractSubset
     {
         /// <remarks/>
-        [XmlAttribute]
         public string url { get; set; }
 
         /// <remarks/>
