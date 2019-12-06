@@ -13,11 +13,9 @@ namespace FortnoxAPILibrary.Entities
 		public string Account { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Name { get; set; }
+		public string Name { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string url { get; set; }
+		public string url { get; private set; }
     }
 }

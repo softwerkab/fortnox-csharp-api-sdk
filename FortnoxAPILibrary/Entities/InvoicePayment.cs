@@ -17,82 +17,67 @@ namespace FortnoxAPILibrary.Entities
         public string AmountCurrency { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Booked { get; set; }
+		public string Booked { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Currency { get; set; }
+		public string Currency { get; private set; }
 
         /// <remarks/>
         public string CurrencyRate { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string CurrencyUnit { get; set; }
+		public string CurrencyUnit { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string ExternalInvoiceReference1 { get; set; }
+		public string ExternalInvoiceReference1 { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string ExternalInvoiceReference2 { get; set; }
+		public string ExternalInvoiceReference2 { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string InvoiceCustomerName { get; set; }
+		public string InvoiceCustomerName { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string InvoiceCustomerNumber { get; set; }
+		public string InvoiceCustomerNumber { get; private set; }
 
         /// <remarks/>
         public string InvoiceNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string InvoiceDueDate { get; set; }
+		public string InvoiceDueDate { get; private set; }
 
         /// <remarks/>
         public string InvoiceOCR { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string InvoiceTotal { get; set; }
+		public string InvoiceTotal { get; private set; }
 
         /// <remarks/>
         public string ModeOfPayment { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Number { get; set; }
+		public string Number { get; private set; }
 
         /// <remarks/>
         public string PaymentDate { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Source { get; set; }
+		public string Source { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string VoucherNumber { get; set; }
+		public string VoucherNumber { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string VoucherSeries { get; set; }
+		public string VoucherSeries { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string VoucherYear { get; set; }
+		public string VoucherYear { get; private set; }
 
         /// <remarks/>
         public List<InvoiceWriteOff> WriteOffs { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-		[ReadOnly(true)]
-		public string url { get; set; }
+		public string url { get; private set; }
     }
 
 	/// <remarks/>
@@ -108,12 +93,10 @@ namespace FortnoxAPILibrary.Entities
         public string CostCenter { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Currency { get; set; }
+		public string Currency { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Description { get; set; }
+		public string Description { get; private set; }
 
         /// <remarks/>
         public string TransactionInformation { get; set; }

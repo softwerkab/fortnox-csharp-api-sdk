@@ -416,7 +416,7 @@ namespace FortnoxAPILibrary.Tests
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void Test_Customers_ReadOnly_Properties_Reset()
         {
             //Read-only properties are reset before sending to the server. Therefore, request should pass without error.
@@ -432,7 +432,7 @@ namespace FortnoxAPILibrary.Tests
 
             connector.Delete(tmpCustomer.CustomerNumber);
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
-        }
+        }*/
 
         [TestMethod]
         public void Test_Customers_FilterBy()

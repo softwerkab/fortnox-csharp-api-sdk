@@ -42,8 +42,7 @@ namespace FortnoxAPILibrary.Entities
         public string StartDate { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Times { get; set; }
+		public string Times { get; private set; }
 
         /// <remarks/>
         public string Total { get; set; }
@@ -52,8 +51,7 @@ namespace FortnoxAPILibrary.Entities
         public string VATIncluded { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-		[ReadOnly(true)]
-		public string url { get; set; }
+		public string url { get; private set; }
     }
 
 	/// <remarks/>

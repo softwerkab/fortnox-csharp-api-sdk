@@ -25,15 +25,13 @@ namespace FortnoxAPILibrary.Entities
         public string DocumentNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public string Period { get; set; }
+        public string Period { get; private set; }
 
         /// <remarks/>
         public string RevenueAccount { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public string Times { get; set; }
+        public string Times { get; private set; }
 
         /// <remarks/>
         public string Total { get; set; }

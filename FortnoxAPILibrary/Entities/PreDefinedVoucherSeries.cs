@@ -11,14 +11,12 @@ namespace FortnoxAPILibrary.Entities
     public class PreDefinedVoucherSeries {
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public PreDefinedVoucherSeriesConnector.PreDefinedVoucherSeriesName Name { get; set; }
+        public PreDefinedVoucherSeriesConnector.PreDefinedVoucherSeriesName Name { get; private set; }
 
         /// <remarks/>
         public string VoucherSeries { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public string url { get; set; }
+        public string url { get; private set; }
     }
 }

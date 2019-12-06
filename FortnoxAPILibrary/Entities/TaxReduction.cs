@@ -12,22 +12,19 @@ namespace FortnoxAPILibrary.Entities
 	public class TaxReduction
 	{
         /// <summary>This field is Read-Only in Fortnox</summary>
-		[ReadOnly(true)]
-		public string ApprovedAmount { get; set; }
+		public string ApprovedAmount { get; private set; }
 
         /// <remarks/>
         public string AskedAmount { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string BilledAmount { get; set; }
+		public string BilledAmount { get; private set; }
 
         /// <remarks/>
         public string CustomerName { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Id { get; set; }
+		public string Id { get; private set; }
 
         /// <remarks/>
         public string PropertyDesignation { get; set; }
@@ -39,8 +36,7 @@ namespace FortnoxAPILibrary.Entities
         public string ReferenceNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string RequestSent { get; set; }
+		public string RequestSent { get; private set; }
 
         /// <remarks/>
         public string ResidenceAssociationOrganisationNumber { get; set; }
@@ -52,19 +48,15 @@ namespace FortnoxAPILibrary.Entities
         public TaxReductionConnector.TypeOfReduction TypeOfReduction { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string VoucherNumber { get; set; }
+		public string VoucherNumber { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string VoucherSeries { get; set; }
+		public string VoucherSeries { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string VoucherYear { get; set; }
+		public string VoucherYear { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string url { get; set; }
+		public string url { get; private set; }
     }
 }

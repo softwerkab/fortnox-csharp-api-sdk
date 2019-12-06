@@ -31,8 +31,7 @@ namespace FortnoxAPILibrary.Entities
         /// <para>Type:			Date</para>
         /// <para>Permissions:	R</para>
         /// </summary>
-        [ReadOnly(true)]
-		public string Date { get; set; }
+		public string Date { get; private set; }
 
         /// <summary>
         /// <para>Description of the currency</para>
@@ -59,8 +58,7 @@ namespace FortnoxAPILibrary.Entities
         public string Unit { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-		[ReadOnly(true)]
-		public string url { get; set; }
+		public string url { get; private set; }
     }
 }
 

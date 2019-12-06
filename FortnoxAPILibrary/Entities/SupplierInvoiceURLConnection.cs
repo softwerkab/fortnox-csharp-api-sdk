@@ -9,8 +9,7 @@ namespace FortnoxAPILibrary.Entities
     public class SupplierInvoiceURLConnection
     {
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public string Id { get; set; }
+        public string Id { get; private set; }
 
         /// <remarks/>
         public string SupplierInvoiceNumber { get; set; }

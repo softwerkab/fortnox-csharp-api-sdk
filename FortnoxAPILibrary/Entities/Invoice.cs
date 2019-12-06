@@ -23,8 +23,7 @@ namespace FortnoxAPILibrary.Entities
 		public string AdministrationFee { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        /// [ReadOnly(true)]
-        public string AdministrationFeeVAT { get; set; }
+        public string AdministrationFeeVAT { get; private set; }
 
         /// <remarks/>
         public string Address1 { get; set; }
@@ -33,20 +32,16 @@ namespace FortnoxAPILibrary.Entities
         public string Address2 { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Balance { get; set; }
+		public string Balance { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string BasisTaxReduction { get; set; }
+		public string BasisTaxReduction { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Booked { get; set; }
+		public string Booked { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Cancelled { get; set; }
+		public string Cancelled { get; private set; }
 
         /// <remarks/>
         public string City { get; set; }
@@ -58,12 +53,10 @@ namespace FortnoxAPILibrary.Entities
         public string ContractReference { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string ContributionPercent { get; set; }
+		public string ContributionPercent { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string ContributionValue { get; set; }
+		public string ContributionValue { get; private set; }
 
         /// <remarks/>
         public string Country { get; set; }
@@ -72,12 +65,10 @@ namespace FortnoxAPILibrary.Entities
         public string CostCenter { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Credit { get; set; }
+		public string Credit { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public string CreditInvoiceReference { get; set; }
+        public string CreditInvoiceReference { get; private set; }
 
 		/// <remarks/>
 		public string Currency { get; set; }
@@ -134,31 +125,25 @@ namespace FortnoxAPILibrary.Entities
         public string Freight { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public string FreightVAT { get; set; }
+        public string FreightVAT { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Gross { get; set; }
+		public string Gross { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string HouseWork { get; set; }
+		public string HouseWork { get; private set; }
 
         /// <remarks/>
         public string InvoiceDate { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public string InvoicePeriodStart { get; set; }
+        public string InvoicePeriodStart { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public string InvoicePeriodEnd { get; set; }
+        public string InvoicePeriodEnd { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public string InvoiceReference { get; set; }
+        public string InvoiceReference { get; private set; }
 
 		/// <remarks/>
 		public List<InvoiceRow> InvoiceRows { get; set; }
@@ -174,12 +159,10 @@ namespace FortnoxAPILibrary.Entities
         public string Language { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string LastRemindDate { get; set; }
+		public string LastRemindDate { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Net { get; set; }
+		public string Net { get; private set; }
 
         /// <remarks/>
         public string NotCompleted { get; set; }
@@ -188,16 +171,13 @@ namespace FortnoxAPILibrary.Entities
         public string OCR { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string OfferReference { get; set; }
+		public string OfferReference { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string OrderReference { get; set; }
+		public string OrderReference { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string OrganisationNumber { get; set; }
+		public string OrganisationNumber { get; private set; }
 
         /// <remarks/>
         public string OurReference { get; set; }
@@ -224,20 +204,16 @@ namespace FortnoxAPILibrary.Entities
         public string Remarks { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Reminders { get; set; }
+		public string Reminders { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string RoundOff { get; set; }
+		public string RoundOff { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Sent { get; set; }
+		public string Sent { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string TaxReduction { get; set; }
+		public string TaxReduction { get; private set; }
 
         /// <remarks/>
         public string TermsOfDelivery { get; set; }
@@ -246,16 +222,13 @@ namespace FortnoxAPILibrary.Entities
         public string TermsOfPayment { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Total { get; set; }
+		public string Total { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string TotalToPay { get; set; }
+		public string TotalToPay { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string TotalVAT { get; set; }
+		public string TotalVAT { get; private set; }
 
         /// <remarks/>
         public string ExternalInvoiceReference1 { get; set; }
@@ -267,16 +240,13 @@ namespace FortnoxAPILibrary.Entities
         public string VATIncluded { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string VoucherNumber { get; set; }
+		public string VoucherNumber { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string VoucherSeries { get; set; }
+		public string VoucherSeries { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string VoucherYear { get; set; }
+		public string VoucherYear { get; private set; }
 
         /// <remarks/>
         public string WayOfDelivery { get; set; }
@@ -291,16 +261,13 @@ namespace FortnoxAPILibrary.Entities
         public string ZipCode { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-		[ReadOnly(true)]
-		public string url { get; set; }
+		public string url { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-		[ReadOnly(true)]
-		public string urlTaxReductionList { get; set; }
+		public string urlTaxReductionList { get; private set; }
 
         /// <remarks/>
-        [ReadOnly(true)]
-	    public string NoxFinans { get; set; }
+	    public string NoxFinans { get; private set; }
     }
 
 	/// <remarks/>
@@ -357,12 +324,10 @@ namespace FortnoxAPILibrary.Entities
         public string ArticleNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string ContributionPercent { get; set; }
+		public string ContributionPercent { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string ContributionValue { get; set; }
+		public string ContributionValue { get; private set; }
 
         /// <remarks/>
         public string CostCenter { get; set; }
@@ -393,19 +358,16 @@ namespace FortnoxAPILibrary.Entities
 	    public string Price { get; set; }
 
         /// <remarks/>
-        [ReadOnly(true)]
-        public string PriceExcludingVAT { get; set; }
+        public string PriceExcludingVAT { get; private set; }
 
         /// <remarks/>
         public string Project { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Total { get; set; }
+		public string Total { get; private set; }
 
         /// <remarks/>
-        [ReadOnly(true)]
-        public string TotalExcludingVAT { get; set; }
+        public string TotalExcludingVAT { get; private set; }
 
         /// <remarks/>
         public string Unit { get; set; }

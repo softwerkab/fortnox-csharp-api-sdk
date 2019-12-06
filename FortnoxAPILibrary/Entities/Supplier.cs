@@ -49,8 +49,7 @@ namespace FortnoxAPILibrary.Entities
         public string CostCenter { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Country { get; set; }
+		public string Country { get; private set; }
 
         /// <remarks/>
         public string CountryCode { get; set; }
@@ -113,8 +112,7 @@ namespace FortnoxAPILibrary.Entities
         public string VisitingCity { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string VisitingCountry { get; set; }
+		public string VisitingCountry { get; private set; }
 
         /// <remarks/>
         public string VisitingCountryCode { get; set; }
@@ -135,7 +133,6 @@ namespace FortnoxAPILibrary.Entities
         public string ZipCode { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string url { get; set; }
+		public string url { get; private set; }
     }
 }

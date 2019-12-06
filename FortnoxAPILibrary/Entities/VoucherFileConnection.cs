@@ -16,8 +16,7 @@ namespace FortnoxAPILibrary.Entities
 		public string FileId { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string VoucherDescription { get; set; }
+		public string VoucherDescription { get; private set; }
 
         /// <remarks/>
         public string VoucherNumber { get; set; }
@@ -26,11 +25,9 @@ namespace FortnoxAPILibrary.Entities
         public string VoucherSeries { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string VoucherYear { get; set; }
+		public string VoucherYear { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string url { get; set; }
+		public string url { get; private set; }
     }
 }

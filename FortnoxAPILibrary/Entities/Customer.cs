@@ -23,8 +23,7 @@ namespace FortnoxAPILibrary.Entities
         public string City { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Country { get; set; }
+		public string Country { get; private set; }
 
         /// <remarks/>
         public string Comments { get; set; }
@@ -57,8 +56,7 @@ namespace FortnoxAPILibrary.Entities
         public string DeliveryCity { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string DeliveryCountry { get; set; }
+		public string DeliveryCountry { get; private set; }
 
         /// <remarks/>
         public string DeliveryCountryCode { get; set; }
@@ -179,12 +177,10 @@ namespace FortnoxAPILibrary.Entities
         public string VisitingCity { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string VisitingCountry { get; set; }
+		public string VisitingCountry { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public string VisitingCountryCode { get; set; }
+        public string VisitingCountryCode { get; private set; }
 
         /// <remarks/>
         public string VisitingZipCode { get; set; }
@@ -202,8 +198,7 @@ namespace FortnoxAPILibrary.Entities
         public string ZipCode { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string url { get; set; }
+		public string url { get; private set; }
     }
 
 	/// <remarks/>

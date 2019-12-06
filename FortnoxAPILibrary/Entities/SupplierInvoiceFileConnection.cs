@@ -16,18 +16,15 @@ namespace FortnoxAPILibrary.Entities
 		public string FileId { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Name { get; set; }
+		public string Name { get; private set; }
 
         /// <remarks/>
         public string SupplierInvoiceNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string SupplierName { get; set; }
+		public string SupplierName { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-		[ReadOnly(true)]
-		public string url { get; set; }
+		public string url { get; private set; }
     }
 }

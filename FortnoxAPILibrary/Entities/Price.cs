@@ -13,8 +13,7 @@ namespace FortnoxAPILibrary.Entities
 		public string ArticleNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Date { get; set; }
+		public string Date { get; private set; }
 
         /// <remarks/>
         public string FromQuantity { get; set; }
@@ -29,7 +28,6 @@ namespace FortnoxAPILibrary.Entities
         public string PriceList { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string url { get; set; }
+		public string url { get; private set; }
     }
 }
