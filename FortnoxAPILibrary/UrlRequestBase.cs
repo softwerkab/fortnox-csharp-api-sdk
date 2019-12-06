@@ -221,26 +221,18 @@ namespace FortnoxAPILibrary
             {
                 RateLimit();
 
-                var xs = new XmlSerializer(typeof(T));
-
                 if (Method != "GET")
                 {
-                    using (Stream requestStream = wr.GetRequestStream())
+                    using (var requestStream = new StreamWriter(wr.GetRequestStream()))
                     {
-                        xs.Serialize(requestStream, entity);
+                        var xml = Serialize(entity);
+                        requestStream.Write(xml);
                     }
                 }
 
                 if (Method == "POST" || Method == "PUT")
                 {
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        using (var xmlWriter = XmlWriter.Create(memoryStream))
-                        {
-                            xs.Serialize(xmlWriter, entity);
-                            RequestXml = Encoding.UTF8.GetString(memoryStream.ToArray());
-                        }
-                    }
+                    RequestXml = Serialize(entity);
                 }
 
                 using (var response = (HttpWebResponse) wr.GetResponse())
@@ -264,14 +256,7 @@ namespace FortnoxAPILibrary
                                 using (var sr = new StreamReader(responseStream))
                                 {
                                     ResponseXml = sr.ReadToEnd();
-                                    try
-                                    {
-                                        return (T)xs.Deserialize(new StringReader(ResponseXml));
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        throw new Exception("An error occured while deserializing the response. Check ResponseXML.", e.InnerException);
-                                    }
+                                    return Deserialize<T>(ResponseXml);
                                 }
                             }
 
@@ -315,8 +300,6 @@ namespace FortnoxAPILibrary
 					fileData = System.IO.File.ReadAllBytes(localPath);
 				}
 
-				var xs = new XmlSerializer(typeof(T));
-
                 var rand = new Random();
                 var boundary = "----boundary" + rand.Next();
                 var header = Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + fileName + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
@@ -335,16 +318,10 @@ namespace FortnoxAPILibrary
                     // Read the response
                     using (var response = request.GetResponse())
                     {
-                        using (var responseDataStream = response.GetResponseStream())
+                        using (var responseReader = new StreamReader(response.GetResponseStream()))
                         {
-                            using (var sr = new StreamReader(responseDataStream))
-                            {
-                                ResponseXml = sr.ReadToEnd();
-                            }
-                            using (var sr = new StringReader(ResponseXml))
-                            {
-                                result = (T)xs.Deserialize(sr);
-                            }
+                            ResponseXml = responseReader.ReadToEnd();
+                            result = Deserialize<T>(ResponseXml);
                         }
                     }
                 }
@@ -409,8 +386,6 @@ namespace FortnoxAPILibrary
 
             try
             {
-                var xs = new XmlSerializer(typeof(File));
-
                 var url = ConnectionCredentials.FortnoxAPIServer + "/" + Resource + "/move/" + fileId;
 
                 if (string.IsNullOrWhiteSpace(destination) || Guid.TryParse(destination, out var unused))
@@ -426,16 +401,10 @@ namespace FortnoxAPILibrary
                 using (var response = (HttpWebResponse) request.GetResponse())
                 {
                     HttpStatusCode = response.StatusCode;
-                    using (var responseStream = response.GetResponseStream())
+                    using (var responseReader = new StreamReader(response.GetResponseStream()))
                     {
-                        using (var sr = new StreamReader(responseStream))
-                        {
-                            ResponseXml = sr.ReadToEnd();
-                        }
-                        using (var sr = new StringReader(ResponseXml))
-                        {
-                            return (File) xs.Deserialize(sr);
-                        }
+                        ResponseXml = responseReader.ReadToEnd();
+                        return Deserialize<File>(ResponseXml);
                     }
                 }
             }
@@ -469,13 +438,13 @@ namespace FortnoxAPILibrary
                 {
                     throw we;
                 }
-                using (var errorStream = response.GetResponseStream())
+                using (var errorReader = new StreamReader(response.GetResponseStream()))
                 {
-                    var errorSerializer = new XmlSerializer(typeof(ErrorInformation));
+                    string errorXml = errorReader.ReadToEnd();
 
                     try
                     {
-                        Error = (ErrorInformation)errorSerializer.Deserialize(errorStream);
+                        Error = Deserialize<ErrorInformation>(errorXml);
                         if (Error.Code == "2001392")
                         {
                             Error.Message = "No information was provided for the entity.";
@@ -496,6 +465,34 @@ namespace FortnoxAPILibrary
                         }*/
                     }
                 }
+            }
+        }
+
+        public string Serialize<T>(T entity)
+        {
+            var xs = new XmlSerializer(typeof(T));
+
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var xmlWriter = XmlWriter.Create(memoryStream))
+                {
+                    xs.Serialize(xmlWriter, entity);
+                    return Encoding.UTF8.GetString(memoryStream.ToArray());
+                }
+            }
+        }
+
+        public T Deserialize<T>(string raw)
+        {
+            var xs = new XmlSerializer(typeof(T));
+
+            try
+            {
+                return (T)xs.Deserialize(new StringReader(ResponseXml));
+            }
+            catch (Exception e)
+            {
+                throw new Exception("An error occured while deserializing the response. Check ResponseXML.", e.InnerException);
             }
         }
     }
