@@ -7,7 +7,6 @@ using System.Collections.Generic;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Serializable]
 	public class InvoicePayments
 	{
         /// <remarks/>
@@ -24,7 +23,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-    [Serializable]
 	public class InvoicePaymentSubset
 	{
         /// <remarks/>

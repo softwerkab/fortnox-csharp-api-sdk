@@ -8,7 +8,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 
-    [Serializable]
 	
 	
 	public class SieSummary
@@ -67,7 +66,6 @@ namespace FortnoxAPILibrary.Entities
 
 	/// <remarks/>
 	
-	[Serializable]
 	
 	
 	public class VerificationInterval

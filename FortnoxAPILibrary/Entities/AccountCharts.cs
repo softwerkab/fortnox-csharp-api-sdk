@@ -7,7 +7,6 @@ using System.Collections.Generic;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Serializable]
 	public class AccountCharts
 	{
         /// <remarks/>
@@ -15,7 +14,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-    [Serializable]
 	public class AccountChartSubset
 	{
 		/// <remarks/>

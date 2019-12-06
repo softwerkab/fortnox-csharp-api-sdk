@@ -8,7 +8,6 @@ using System.ComponentModel;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Serializable]
 	public class Voucher
 	{
         /// <remarks/>
@@ -60,7 +59,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-    [Serializable]
 	public class VoucherRow
 	{
         /// <remarks/>

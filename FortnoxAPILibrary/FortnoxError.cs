@@ -5,7 +5,6 @@
 namespace FortnoxAPILibrary
 {
 	/// <remarks/>
-	[Serializable]
     public class ErrorInformation
 	{
 		/// <remarks/>

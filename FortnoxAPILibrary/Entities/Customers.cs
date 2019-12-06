@@ -7,7 +7,6 @@ using System.Collections.Generic;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Serializable]
 	public class Customers
 	{
         /// <remarks/>
@@ -25,7 +24,6 @@ namespace FortnoxAPILibrary.Entities
 
 	/// <remarks/>
 	
-	[Serializable]
 	public class CustomerSubset
 	{
 		/// <remarks/>

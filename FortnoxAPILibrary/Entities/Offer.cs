@@ -9,7 +9,6 @@ using FortnoxAPILibrary.Connectors;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Serializable]
 	public class Offer
 	{
         /// <remarks/>
@@ -226,7 +225,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-    [Serializable]
 	public class OfferEmailInformation
 	{
         /// <remarks/>
@@ -250,7 +248,6 @@ namespace FortnoxAPILibrary.Entities
 
 	/// <remarks/>
 	
-	[Serializable]
 	
 	
 	public class OfferRow

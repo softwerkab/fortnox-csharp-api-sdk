@@ -7,7 +7,6 @@ using System.Collections.Generic;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Serializable]
 	public class PreDefinedAccounts
 	{
         /// <remarks/>
@@ -25,7 +24,6 @@ namespace FortnoxAPILibrary.Entities
 
 	/// <remarks/>
 	
-	[Serializable]
 	
 	
 	public class PreDefinedAccountSubset

@@ -9,7 +9,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 
-    [Serializable]
 	
 	
 	public class ModesOfPayments
@@ -28,7 +27,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-    [Serializable]
 	public class ModeOfPaymentSubset
 	{
         /// <remarks/>

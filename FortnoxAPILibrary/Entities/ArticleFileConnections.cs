@@ -7,7 +7,6 @@ using System.Collections.Generic;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Serializable]
     public class ArticleFileConnections
 	{
         /// <remarks/>
@@ -24,7 +23,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-    [Serializable]
 	public class ArticleFileConnectionSubset
 	{
 		/// <remarks/>

@@ -6,7 +6,6 @@ using System;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Serializable]
     public class Authorization {
     
         /// <remarks/>

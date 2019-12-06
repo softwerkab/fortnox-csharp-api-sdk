@@ -8,7 +8,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 
-    [Serializable]
 	
 	
 	public class SupplierInvoices
@@ -28,7 +27,6 @@ namespace FortnoxAPILibrary.Entities
 
 	/// <remarks/>
 	
-	[Serializable]
 	
 	
 	public class SupplierInvoiceSubset

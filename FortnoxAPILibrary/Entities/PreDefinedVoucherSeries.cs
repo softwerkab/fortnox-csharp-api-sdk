@@ -8,7 +8,6 @@ using FortnoxAPILibrary.Connectors;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Serializable]
     public class PreDefinedVoucherSeries {
 
         /// <summary>This field is Read-Only in Fortnox</summary>

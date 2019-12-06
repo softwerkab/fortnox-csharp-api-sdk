@@ -9,7 +9,6 @@ using FortnoxAPILibrary.Connectors;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Serializable]
     public class SupplierInvoice
     {
 		/// <remarks/>
@@ -139,7 +138,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <remarks/>
-    [Serializable]
     public class SupplierInvoiceRow
     {
         /// <remarks/>

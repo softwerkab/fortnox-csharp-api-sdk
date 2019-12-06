@@ -8,7 +8,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 
-    [Serializable]
 	
 	
 	public class Prices
@@ -28,7 +27,6 @@ namespace FortnoxAPILibrary.Entities
 
 	/// <remarks/>
 	
-	[Serializable]
 	
 	
 	public class PriceSubset

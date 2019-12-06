@@ -8,7 +8,6 @@ using System.IO;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Serializable]
 	public class Folder
 	{
         /// <remarks/>
@@ -31,7 +30,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-    [Serializable]
 	public class Files
 	{
         /// <remarks/>
@@ -39,7 +37,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-    [Serializable]
 	public class File
 	{
         /// <summary>
@@ -105,7 +102,6 @@ namespace FortnoxAPILibrary.Entities
 	}
 
 	/// <remarks/>
-    [Serializable]
 	public class Folders
 	{
         /// <remarks/>
@@ -113,7 +109,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-    [Serializable]
 	public class FoldersFolder
 	{
         /// <remarks/>
