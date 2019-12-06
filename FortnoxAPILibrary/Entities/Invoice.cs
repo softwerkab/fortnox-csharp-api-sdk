@@ -375,11 +375,4 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         public string VAT { get; set; }
     }
-
-    /// <remarks/>
-    public partial class Label //TODO Merge with other Label class
-    {
-        /// <remarks/>
-        public string Id { get; set; }
-    }
 }
