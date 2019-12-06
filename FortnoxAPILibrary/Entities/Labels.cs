@@ -12,23 +12,14 @@ namespace FortnoxAPILibrary.Entities
     
     
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class Labels {
+    public class Labels : BaseEntityCollection : BaseEntityCollection : BaseEntityCollection {
 
         /// <remarks/>
         [JsonProperty]
         public List<LabelSubset> LabelSubset { get; set; }
 
-        /// <remarks/>
-        [JsonProperty]
-        public string TotalResources { get; set; }
 
-        /// <remarks/>
-        [JsonProperty]
-        public string TotalPages { get; set; }
 
-        /// <remarks/>
-        [JsonProperty]
-        public string CurrentPage { get; set; }
     }
 
     /// <remarks/>

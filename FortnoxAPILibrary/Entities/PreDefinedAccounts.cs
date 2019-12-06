@@ -9,23 +9,14 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class PreDefinedAccounts
+	public class PreDefinedAccounts : BaseEntityCollection
 	{
         /// <remarks/>
 		[JsonProperty]
 		public List<PreDefinedAccountSubset> PreDefinedAccountSubset { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string TotalResources { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string TotalPages { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string CurrentPage { get; set; }
     }
 
 	/// <remarks/>

@@ -12,23 +12,14 @@ namespace FortnoxAPILibrary.Entities
 	
 	
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class Suppliers
+	public class Suppliers : BaseEntityCollection
 	{
         /// <remarks/>
 		[JsonProperty]
 		public List<SupplierSubset> SupplierSubset { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string TotalResources { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string TotalPages { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string CurrentPage { get; set; }
     }
 
 	/// <remarks/>

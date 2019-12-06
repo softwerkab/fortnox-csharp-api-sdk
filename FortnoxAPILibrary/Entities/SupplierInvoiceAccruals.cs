@@ -13,23 +13,14 @@ namespace FortnoxAPILibrary.Entities
 	
 	
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class SupplierInvoiceAccruals
+	public class SupplierInvoiceAccruals : BaseEntityCollection
 	{
         /// <remarks/>
 		[JsonProperty]
 		public List<SupplierInvoiceAccrualSubset> SupplierInvoiceAccrualSubset { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string TotalResources { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string TotalPages { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string CurrentPage { get; set; }
     }
 
 	/// <remarks/>
