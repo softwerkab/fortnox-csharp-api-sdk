@@ -214,7 +214,6 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty]
         public CustomerConnector.Type? Type { get; set; }
-        public bool TypeSpecified => Type != null;
 
 		/// <remarks/>
 		[JsonProperty]
@@ -223,7 +222,6 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty]
         public CustomerConnector.VATType? VATType { get; set; }
-        public bool VATTypeSpecified => VATType != null;
 
         /// <remarks/>
         [JsonProperty]
@@ -273,17 +271,14 @@ namespace FortnoxAPILibrary.Entities
 		/// <remarks/>
 		[JsonProperty]
 		public CustomerConnector.DefaultInvoiceDeliveryType? Invoice { get; set; }
-        public bool InvoiceSpecified => Invoice != null;
 
         /// <remarks/>
         [JsonProperty]
         public CustomerConnector.DefaultOfferDeliveryType? Offer { get; set; }
-        public bool OfferSpecified => Offer != null;
 
         /// <remarks/>
         [JsonProperty]
         public CustomerConnector.DefaultOrderDeliveryType? Order { get; set; }
-        public bool OrderSpecified => Order != null;
     }
 
 	/// <remarks/>

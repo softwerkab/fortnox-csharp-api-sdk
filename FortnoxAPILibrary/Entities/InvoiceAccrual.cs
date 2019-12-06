@@ -36,7 +36,6 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty]
         public InvoiceAccrualConnector.Period? Period { get; set; }
-        public bool PeriodSpecified => Period != null;
 
 		/// <remarks/>
 		[JsonProperty]

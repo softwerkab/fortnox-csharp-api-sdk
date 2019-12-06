@@ -135,7 +135,6 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty]
         public ArticleConnector.ArticleType? Type { get; set; }
-        public bool TypeSpecified => Type != null;
 
         /// <remarks/>
         [JsonProperty]
