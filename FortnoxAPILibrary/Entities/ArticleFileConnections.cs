@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Entities
     public class ArticleFileConnections : BaseEntityCollection
 	{
         /// <remarks/>
-		[JsonProperty]
+		[JsonProperty(PropertyName="ArticleFileConnections")]
 		public List<ArticleFileConnectionSubset> ArticleFileConnectionSubset { get; set; }
 
 

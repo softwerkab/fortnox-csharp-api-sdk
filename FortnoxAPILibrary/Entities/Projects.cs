@@ -15,7 +15,7 @@ namespace FortnoxAPILibrary.Entities
 	public class Projects : BaseEntityCollection
 	{
         /// <remarks/>
-		[JsonProperty]
+		[JsonProperty(PropertyName="Projects")]
 		public List<ProjectSubset> ProjectSubset { get; set; }
 
 

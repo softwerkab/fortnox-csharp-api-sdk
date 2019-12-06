@@ -13,7 +13,7 @@ namespace FortnoxAPILibrary.Entities
 	{
 
         /// <remarks/>
-		[JsonProperty]
+		[JsonProperty(PropertyName="SupplierInvoiceFileConnections")]
 		public List<SupplierInvoiceFileConnectionSubset> SupplierInvoiceFileConnectionSubset { get; set; }
     }
 

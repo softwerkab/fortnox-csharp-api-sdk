@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Entities
 	public class Customers : BaseEntityCollection
 	{
         /// <remarks/>
-		[JsonProperty]
+		[JsonProperty(PropertyName="Customers")]
 		public List<CustomerSubset> CustomerSubset { get; set; }
 
 

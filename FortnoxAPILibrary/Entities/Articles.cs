@@ -14,7 +14,7 @@ namespace FortnoxAPILibrary.Entities
 	{
 
 		/// <remarks/>
-		[JsonProperty]
+		[JsonProperty(PropertyName="Articles")]
 		public List<ArticleSubset> ArticleSubset { get; set; }
 
 

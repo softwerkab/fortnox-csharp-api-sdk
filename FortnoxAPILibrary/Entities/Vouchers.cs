@@ -15,7 +15,7 @@ namespace FortnoxAPILibrary.Entities
     public class Vouchers : BaseEntityCollection
     {
         /// <remarks/>
-        [JsonProperty]
+        [JsonProperty(PropertyName="Vouchers")]
         public List<VoucherSubset> VoucherSubset { get; set; }
 
 

@@ -13,7 +13,7 @@ namespace FortnoxAPILibrary.Entities
 	public class InvoiceAccruals : BaseEntityCollection
 	{
         /// <remarks/>
-		[JsonProperty]
+		[JsonProperty(PropertyName="InvoiceAccruals")]
 		public List<InvoiceAccrualSubset> InvoiceAccrualSubset { get; set; }
 
 

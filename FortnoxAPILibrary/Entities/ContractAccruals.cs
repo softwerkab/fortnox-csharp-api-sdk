@@ -11,7 +11,7 @@ namespace FortnoxAPILibrary.Entities
     public class ContractAccruals : BaseEntityCollection
     {
         /// <remarks/>
-        [JsonProperty]
+        [JsonProperty(PropertyName="ContractAccruals")]
         public List<ContractAccrualSubSet> ContractAccrualSubset { get; set; }
 
 

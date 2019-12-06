@@ -15,7 +15,7 @@ namespace FortnoxAPILibrary.Entities
 	public class TermsOfPayments : BaseEntityCollection
 	{
 		/// <remarks/>
-		[JsonProperty]
+		[JsonProperty(PropertyName="TermsOfPayments")]
 		public List<TermsOfPaymentSubset> TermsOfPaymentSubset { get; set; }
 
 

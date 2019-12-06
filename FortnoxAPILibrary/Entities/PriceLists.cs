@@ -15,7 +15,7 @@ namespace FortnoxAPILibrary.Entities
 	public class PriceLists : BaseEntityCollection
 	{
         /// <remarks/>
-		[JsonProperty]
+		[JsonProperty(PropertyName="PriceLists")]
 		public List<PriceListSubset> PriceListSubset { get; set; }
 
 
