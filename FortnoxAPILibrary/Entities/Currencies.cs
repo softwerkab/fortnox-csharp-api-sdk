@@ -8,7 +8,6 @@ using System.ComponentModel;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Serializable]
 	public class Currencies
 	{
 		/// <remarks/>
@@ -16,7 +15,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-    [Serializable]
 	public class CurrencySubset
 	{
         /// <remarks/>

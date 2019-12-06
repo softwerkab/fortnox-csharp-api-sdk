@@ -8,7 +8,6 @@ using FortnoxAPILibrary.Connectors;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Serializable]
 	public class Customer
 	{
 		/// <remarks/>
@@ -208,7 +207,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-    [Serializable]
 	public class InvoiceDefaultDeliveryTypes
 	{
 		/// <remarks/>
@@ -225,7 +223,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-    [Serializable]
 	public class InvoiceDefaultTemplates
 	{
         /// <remarks/>

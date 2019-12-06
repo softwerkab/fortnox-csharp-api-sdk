@@ -9,7 +9,6 @@ using FortnoxAPILibrary.Connectors;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Serializable]
 	public class InvoiceAccrual
 	{
         /// <remarks/>
@@ -53,7 +52,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-	[Serializable]
 	public class InvoiceAccrualRow
 	{
         /// <remarks/>

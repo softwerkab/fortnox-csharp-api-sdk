@@ -7,14 +7,12 @@ namespace FortnoxAPILibrary.Entities
 // ReSharper disable InconsistentNaming
 
     /// <remarks/>
-    [Serializable]
     public class PreDefinedVoucherSeriesCollection {
         /// <remarks/>
         public List<PreDefinedVoucherSeriesSubset> PreDefinedVoucherSeriesSubset { get; set; }
     }
 
     /// <remarks/>
-    [Serializable]
     public class PreDefinedVoucherSeriesSubset {
         /// <remarks/>
         public string Name { get; set; }

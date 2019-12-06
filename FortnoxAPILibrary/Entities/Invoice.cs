@@ -10,7 +10,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 
-    [Serializable]
 	public class Invoice
 	{
         /// <remarks/>
@@ -305,7 +304,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-    [Serializable]
 	public class InvoiceEDIInformation
 	{
 		/// <remarks/>
@@ -328,7 +326,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-    [Serializable]
 	public class InvoiceEmailInformation
 	{
 		/// <remarks/>
@@ -351,7 +348,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-    [Serializable]
 	public class InvoiceRow
 	{
 	    /// <remarks/>
@@ -419,7 +415,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <remarks/>
-    [Serializable]
     public partial class Label //TODO Merge with other Label class
     {
         /// <remarks/>

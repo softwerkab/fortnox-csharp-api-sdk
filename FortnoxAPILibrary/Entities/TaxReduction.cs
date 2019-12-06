@@ -9,7 +9,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 
-    [Serializable]
 	public class TaxReduction
 	{
         /// <summary>This field is Read-Only in Fortnox</summary>

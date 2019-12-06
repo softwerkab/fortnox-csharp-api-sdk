@@ -8,7 +8,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 
-    [Serializable]
 	public class FinancialYears
 	{
 		/// <remarks/>
@@ -25,7 +24,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-    [Serializable]
 	public class FinancialYearSubset
 	{
         /// <remarks/>

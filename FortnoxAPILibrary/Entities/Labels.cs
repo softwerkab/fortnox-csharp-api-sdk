@@ -8,7 +8,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 
-    [Serializable]
     
     
     public class Labels {
@@ -27,7 +26,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <remarks/>
-    [Serializable]
     public class LabelSubset {
 
         /// <remarks/>

@@ -8,7 +8,6 @@ using System.ComponentModel;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Serializable]
     public class Articles
 	{
 
@@ -26,7 +25,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-	[Serializable]
 	public class ArticleSubset
 	{
         /// <remarks/>

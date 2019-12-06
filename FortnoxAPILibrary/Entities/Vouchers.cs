@@ -8,7 +8,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 
-    [Serializable]
     
     
     public class Vouchers
@@ -28,7 +27,6 @@ namespace FortnoxAPILibrary.Entities
 
     /// <remarks/>
     
-    [Serializable]
     
     
     public class VoucherSubset

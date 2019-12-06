@@ -8,7 +8,6 @@ using System.ComponentModel;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Serializable]
 	public class InvoicePayment
 	{
         /// <remarks/>
@@ -97,7 +96,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-    [Serializable]
     public class InvoiceWriteOff
 	{
 		/// <remarks/>

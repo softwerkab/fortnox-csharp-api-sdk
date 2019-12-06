@@ -7,7 +7,6 @@ using System.ComponentModel;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Serializable]
     public class ArticleFileConnection
 	{
         /// <remarks/>
