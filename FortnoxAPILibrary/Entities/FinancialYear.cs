@@ -15,8 +15,7 @@ namespace FortnoxAPILibrary.Entities
 		public string AccountChartType { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Id { get; set; }
+		public string Id { get; private set; }
 
         /// <remarks/>
         public FinancialYearConnector.AccountingMethod AccountingMethod { get; set; }
@@ -28,7 +27,6 @@ namespace FortnoxAPILibrary.Entities
         public string ToDate { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string url { get; set; }
+		public string url { get; private set; }
     }
 }

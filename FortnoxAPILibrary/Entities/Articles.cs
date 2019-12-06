@@ -46,8 +46,7 @@ namespace FortnoxAPILibrary.Entities
         public string PurchasePrice { get; set; }
 
         /// <remarks/>
-        [ReadOnly(true)]
-	    public string SalesPrice { get; set; }
+	    public string SalesPrice { get; private set; }
 
         /// <remarks/>
         public string QuantityInStock { get; set; }

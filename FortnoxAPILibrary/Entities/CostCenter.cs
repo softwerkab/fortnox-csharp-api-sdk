@@ -43,7 +43,6 @@ namespace FortnoxAPILibrary.Entities
         public string Active { get; set; }
 
         /// <remarks/>
-		[ReadOnly(true)]
-		public string url { get; set; }
+		public string url { get; private set; }
     }
 }

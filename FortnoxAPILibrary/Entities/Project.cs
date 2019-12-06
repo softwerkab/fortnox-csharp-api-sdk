@@ -38,7 +38,6 @@ namespace FortnoxAPILibrary.Entities
         public string StartDate { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string url { get; set; }
+		public string url { get; private set; }
     }
 }

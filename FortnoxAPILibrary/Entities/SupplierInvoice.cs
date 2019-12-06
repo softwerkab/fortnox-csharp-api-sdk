@@ -18,23 +18,19 @@ namespace FortnoxAPILibrary.Entities
         }
 
 		/// <summary>This field is Read-Only in Fortnox</summary>
-		[ReadOnly(true)]
-		public string AccountingMethod { get; set; }
+		public string AccountingMethod { get; private set; }
 
         /// <remarks/>
         public string AdministrationFee { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public string Balance { get; set; }
+        public string Balance { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public string Booked { get; set; }
+        public string Booked { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public string Cancelled { get; set; }
+        public string Cancelled { get; private set; }
 
         /// <remarks/>
         public string Comments { get; set; }
@@ -43,12 +39,10 @@ namespace FortnoxAPILibrary.Entities
         public string CostCenter { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public string Credit { get; set; }
+        public string Credit { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public string CreditReference { get; set; }
+        public string CreditReference { get; private set; }
 
         /// <remarks/>
         public string Currency { get; set; }
@@ -114,8 +108,7 @@ namespace FortnoxAPILibrary.Entities
         public string SupplierNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public string SupplierName { get; set; }
+        public string SupplierName { get; private set; }
 
         /// <remarks/>
         public string Total { get; set; }
@@ -130,8 +123,7 @@ namespace FortnoxAPILibrary.Entities
         public List<SupplierInvoiceRow> SupplierInvoiceRows { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-        public string url { get; set; }
+        public string url { get; private set; }
 
         /// <remarks/>
         public string YourReference { get; set; }

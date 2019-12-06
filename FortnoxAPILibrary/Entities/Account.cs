@@ -18,8 +18,7 @@ namespace FortnoxAPILibrary.Entities
         public string BalanceBroughtForward { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string BalanceCarriedForward { get; set; }
+		public string BalanceCarriedForward { get; private set; }
 
         /// <remarks/>
         public string CostCenter { get; set; }
@@ -55,11 +54,9 @@ namespace FortnoxAPILibrary.Entities
         public string VATCode { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string Year { get; set; }
+		public string Year { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-		[ReadOnly(true)]
-		public string url { get; set; }
+		public string url { get; private set; }
     }
 }

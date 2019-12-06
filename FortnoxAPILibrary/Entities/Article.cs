@@ -29,8 +29,7 @@ namespace FortnoxAPILibrary.Entities
         public string Description { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string DisposableQuantity { get; set; }
+		public string DisposableQuantity { get; private set; }
 
         /// <remarks/>
         public string EAN { get; set; }
@@ -72,15 +71,13 @@ namespace FortnoxAPILibrary.Entities
         public string PurchasePrice { get; set; }
 
         /// <remarks/>
-        [ReadOnly(true)]
-	    public string SalesPrice { get; set; }
+	    public string SalesPrice { get; private set; }
 
         /// <remarks/>
         public string QuantityInStock { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string ReservedQuantity { get; set; }
+		public string ReservedQuantity { get; private set; }
 
         /// <remarks/>
         public string SalesAccount { get; set; }
@@ -92,15 +89,13 @@ namespace FortnoxAPILibrary.Entities
         public string StockPlace { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string StockValue { get; set; }
+		public string StockValue { get; private set; }
 
         /// <remarks/>
         public string StockWarning { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string SupplierName { get; set; }
+		public string SupplierName { get; private set; }
 
         /// <remarks/>
         public string SupplierNumber { get; set; }
@@ -125,8 +120,7 @@ namespace FortnoxAPILibrary.Entities
         public string Width { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [ReadOnly(true)]
-		public string url { get; set; }
+		public string url { get; private set; }
 
         /// <remarsk/>
         public string FreightCost { get; set; }

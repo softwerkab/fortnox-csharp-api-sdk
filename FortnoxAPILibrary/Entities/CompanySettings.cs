@@ -9,120 +9,91 @@ namespace FortnoxAPILibrary.Entities
     public class CompanySettings
     {
         /// <remarks />
-        [ReadOnly(true)]
-        public string Address { get; set; }
+        public string Address { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string BG { get; set; }
+        public string BG { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string BIC { get; set; }
+        public string BIC { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string BranchCode { get; set; }
+        public string BranchCode { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string City { get; set; }
+        public string City { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string ContactFirstName { get; set; }
+        public string ContactFirstName { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string ContactLastName { get; set; }
+        public string ContactLastName { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string Country { get; set; }
+        public string Country { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string CountryCode { get; set; }
+        public string CountryCode { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string DatabaseNumber { get; set; }
+        public string DatabaseNumber { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string Domicile { get; set; }
+        public string Domicile { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string Email { get; set; }
+        public string Email { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string Fax { get; set; }
+        public string Fax { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string IBAN { get; set; }
+        public string IBAN { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string OrganizationNumber { get; set; }
+        public string OrganizationNumber { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string PG { get; set; }
+        public string PG { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string Phone1 { get; set; }
+        public string Phone1 { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string Phone2 { get; set; }
+        public string Phone2 { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string TaxEnabled { get; set; }
+        public string TaxEnabled { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string VATNumber { get; set; }
+        public string VATNumber { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string VisitAddress { get; set; }
+        public string VisitAddress { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string VisitCity { get; set; }
+        public string VisitCity { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string VisitCountry { get; set; }
+        public string VisitCountry { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string VisitCountryCode { get; set; }
+        public string VisitCountryCode { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string VisitName { get; set; }
+        public string VisitName { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string VisitZipCode { get; set; }
+        public string VisitZipCode { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string WWW { get; set; }
+        public string WWW { get; private set; }
 
         /// <remarks />
-        [ReadOnly(true)]
-        public string ZipCode { get; set; }
+        public string ZipCode { get; private set; }
 
     }
 }
