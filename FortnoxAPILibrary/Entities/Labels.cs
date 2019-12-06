@@ -8,18 +8,12 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-
-    
-    
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class Labels : BaseEntityCollection : BaseEntityCollection : BaseEntityCollection {
+    public class Labels : BaseEntityCollection {
 
         /// <remarks/>
-        [JsonProperty]
+        [JsonProperty(PropertyName="Labels")]
         public List<LabelSubset> LabelSubset { get; set; }
-
-
-
     }
 
     /// <remarks/>

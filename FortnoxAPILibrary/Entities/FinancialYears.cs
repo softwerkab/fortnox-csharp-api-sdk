@@ -13,7 +13,7 @@ namespace FortnoxAPILibrary.Entities
 	public class FinancialYears : BaseEntityCollection
 	{
 		/// <remarks/>
-		[JsonProperty]
+		[JsonProperty(PropertyName="FinancialYears")]
 		public List<FinancialYearSubset> FinancialYearSubset { get; set; }
 
 

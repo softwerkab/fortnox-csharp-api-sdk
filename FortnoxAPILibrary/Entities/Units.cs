@@ -15,7 +15,7 @@ namespace FortnoxAPILibrary.Entities
 	public class Units : BaseEntityCollection
 	{
         /// <remarks/>
-		[JsonProperty]
+		[JsonProperty(PropertyName="Units")]
 		public List<UnitSubset> UnitSubset { get; set; }
 
 

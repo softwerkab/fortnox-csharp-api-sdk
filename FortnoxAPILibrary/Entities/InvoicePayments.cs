@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Entities
 	public class InvoicePayments : BaseEntityCollection
 	{
         /// <remarks/>
-		[JsonProperty]
+		[JsonProperty(PropertyName="InvoicePayments")]
 		public List<InvoicePaymentSubset> InvoicePaymentSubset { get; set; }
 
 

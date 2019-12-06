@@ -15,7 +15,7 @@ namespace FortnoxAPILibrary.Entities
 	public class VoucherFileConnections : BaseEntityCollection
 	{
 		/// <remarks/>
-		[JsonProperty]
+		[JsonProperty(PropertyName="VoucherFileConnections")]
 		public List<VoucherFileConnectionSubset> VoucherFileConnectionSubset { get; set; }
 
 

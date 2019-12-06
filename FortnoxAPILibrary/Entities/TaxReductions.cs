@@ -15,7 +15,7 @@ namespace FortnoxAPILibrary.Entities
 	public class TaxReductions : BaseEntityCollection
 	{
         /// <remarks/>
-		[JsonProperty]
+		[JsonProperty(PropertyName="TaxReductions")]
 		public List<TaxReductionSubset> TaxReductionSubset { get; set; }
 
 

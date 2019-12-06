@@ -15,7 +15,7 @@ namespace FortnoxAPILibrary.Entities
 	public class SupplierInvoices : BaseEntityCollection
 	{
 		/// <remarks/>
-		[JsonProperty]
+		[JsonProperty(PropertyName="SupplierInvoices")]
 		public List<SupplierInvoiceSubset> SupplierInvoiceSubset { get; set; }
 
 
