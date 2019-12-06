@@ -91,60 +91,24 @@ namespace FortnoxAPILibrary.Connectors
         [FilterProperty]
         public string Label { get; set; }
 
-		private bool sentSet;
-		private bool sent;
 		/// <summary>
 		/// Use with Find() to limit the search result
         /// </summary>
         [FilterProperty]
-		public bool Sent
-		{
-			get
-			{
-				return sent;
-			}
-			set
-			{
-				sent = value;
-				sentSet = true;
-			}
-		}
+		public bool? Sent { get; set; }
 
-       private bool notCompletedSet;
-		private bool notcompleted;
 		/// <summary>
 		/// Use with Find() to limit the search result
         /// </summary>
         [FilterProperty]
-		public bool NotCompleted
-		{
-			get
-			{
-				return notcompleted;
-			}
-			set
-			{
-				notcompleted = value;
-				notCompletedSet = true;
-			}
-		}
+		public bool? NotCompleted { get; set; }
 
-		private bool filterBySet;
-		private Filter.Invoice filterBy;
         /// <remarks/>
         [FilterProperty("filter")]
-		public Filter.Invoice FilterBy
-		{
-			get { return filterBy; }
-			set
-			{
-				filterBy = value;
-				filterBySet = true;
-			}
-		}
+		public Filter.Invoice? FilterBy { get; set; }
 
-		/// <remarks/>
-		public enum DiscountType
+        /// <remarks/>
+        public enum DiscountType
 		{
 			/// <remarks/>
 			AMOUNT,

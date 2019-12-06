@@ -18,16 +18,12 @@ namespace FortnoxAPILibrary
             Error = null;
         }
 
-        private TSort sortBy;
-        private bool sortBySet;
         private string SortByRealValue
         {
             get
             {
-                if (!sortBySet)
-                {
+                if (SortBy == null)
                     return null;
-                }
 
                 var type = SortBy.GetType();
                 var memInfo = type.GetMember(SortBy.ToString());
@@ -49,15 +45,7 @@ namespace FortnoxAPILibrary
         /// <summary>
         /// Sort the result
         /// </summary>
-        public TSort SortBy
-        {
-            get => sortBy;
-            set
-            {
-                sortBy = value;
-                sortBySet = true;
-            }
-        }
+        public TSort SortBy { get; set; }
 
         /// <summary>
         /// <para>Use with Find() to limit the search result</para>
@@ -335,16 +323,13 @@ namespace FortnoxAPILibrary
 
         private static void ResetProperties(TEntity entity)
         {
-            //Nullar alla properties som har attibutet [ReadOnly(true)] eftersom de inte ska med i anropet. Kräver att alla properties är strängar
+            //Reset all ReadOnly attributes to a null value ( all properties must be nullable! )
             var properties = typeof(TEntity).GetProperties().AsEnumerable();
-
             ResetProperties(entity, properties);
         }
 
         private static void ResetProperties(object obj, IEnumerable<PropertyInfo> properties)
         {
-            properties = properties.Where(p => !p.PropertyType.IsEnum);
-
             foreach (var propertyInfo in properties)
             {
                 var a = from aa in propertyInfo.GetCustomAttributes(true)

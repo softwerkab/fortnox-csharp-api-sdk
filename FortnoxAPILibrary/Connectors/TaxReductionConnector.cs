@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class TaxReductionConnector : EntityConnector<TaxReduction, TaxReductions, Sort.By.TaxReduction>
+    public class TaxReductionConnector : EntityConnector<TaxReduction, TaxReductions, Sort.By.TaxReduction?>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -13,22 +13,12 @@ namespace FortnoxAPILibrary.Connectors
         [FilterProperty]
 		public string ReferenceNumber { get; set; }
 
-		private bool filterBySet;
-		private Filter.Invoice filterBy;
         /// <remarks/>
         [FilterProperty("filter")]
-		public Filter.Invoice FilterBy
-		{
-			get { return filterBy; }
-			set
-			{
-				filterBy = value;
-				filterBySet = true;
-			}
-		}
+		public Filter.Invoice? FilterBy { get; set; }
 
-		/// <remarks/>
-		public enum TypeOfReduction
+        /// <remarks/>
+        public enum TypeOfReduction
 		{
 			/// <remarks/>
 			ROT,

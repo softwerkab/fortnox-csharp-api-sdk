@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	public class PreDefinedAccountConnector : FinancialYearBasedEntityConnector<PreDefinedAccount, PreDefinedAccounts, Sort.By.PreDefinedAccount>
+	public class PreDefinedAccountConnector : FinancialYearBasedEntityConnector<PreDefinedAccount, PreDefinedAccounts, Sort.By.PreDefinedAccount?>
 	{
 		/// <remarks/>
 		public PreDefinedAccountConnector()

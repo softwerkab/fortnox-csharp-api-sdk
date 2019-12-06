@@ -11,7 +11,7 @@ using File = FortnoxAPILibrary.Entities.File;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	public class ArchiveConnector : EntityConnector<Folder, Folder, Sort.By.Folder>
+	public class ArchiveConnector : EntityConnector<Folder, Folder, Sort.By.Folder?>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result

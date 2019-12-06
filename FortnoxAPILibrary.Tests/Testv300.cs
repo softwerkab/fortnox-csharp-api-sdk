@@ -414,5 +414,69 @@ namespace FortnoxAPILibrary.Tests
             connector.Delete(newArticle.ArticleNumber);
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
         }
+
+        [TestMethod]
+        public void Test_Customers_ReadOnly_Properties_Reset()
+        {
+            //Read-only properties are reset before sending to the server. Therefore, request should pass without error.
+            var connector = new CustomerConnector();
+            connector.FilterBy = Filter.Customer.Active;
+            var tmpCustomer = connector.Create(new Customer
+            {
+                Name = "TestCustomer",
+                Country = "Sweden" //ReadOnly
+            });
+
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+
+            connector.Delete(tmpCustomer.CustomerNumber);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+        }
+
+        [TestMethod]
+        public void Test_Customers_FilterBy()
+        {
+            var connector = new CustomerConnector();
+            connector.FilterBy = Filter.Customer.Active;
+
+            var orig = int.Parse(connector.Find().TotalResources);
+
+            var tmpCustomer1 = connector.Create(new Customer
+            {
+                Name = "TestCustomer",
+                Active = "true"
+            });
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+
+            var tmpCustomer2 = connector.Create(new Customer
+            {
+                Name = "TestCustomer",
+                Active = "false"
+            });
+
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+
+
+            Assert.AreEqual(orig + 1, int.Parse(connector.Find().TotalResources));
+
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+
+            connector.Delete(tmpCustomer1.CustomerNumber);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            connector.Delete(tmpCustomer2.CustomerNumber);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+        }
+
+        [TestMethod]
+        public void Test_Customers_SortBy_Nullable()
+        {
+            var connector = new CustomerConnector();
+            connector.SortBy = Sort.By.Customer.Name;
+
+            connector.SortBy = null;
+
+            connector.Find();
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+        }
     }
 }

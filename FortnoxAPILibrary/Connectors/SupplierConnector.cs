@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class SupplierConnector : EntityConnector<Supplier, Suppliers, Sort.By.Supplier>
+    public class SupplierConnector : EntityConnector<Supplier, Suppliers, Sort.By.Supplier?>
 	{
 
 		/// <summary>

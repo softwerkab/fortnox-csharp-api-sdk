@@ -58,7 +58,7 @@ namespace FortnoxAPILibrary.Connectors
 
 
     /// <remarks/>
-    public class SIEConnector : FinancialYearBasedEntityConnector<SieSummary, SieSummary, Sort.By.Sie>
+    public class SIEConnector : FinancialYearBasedEntityConnector<SieSummary, SieSummary, Sort.By.Sie?>
     {
         /// <remarks/>
         public enum SIEType

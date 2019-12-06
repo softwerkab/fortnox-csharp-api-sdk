@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	public class CostCenterConnector : EntityConnector<CostCenter, CostCenters, Sort.By.CostCenter>
+	public class CostCenterConnector : EntityConnector<CostCenter, CostCenters, Sort.By.CostCenter?>
 	{
 		/// <remarks/>
 		public CostCenterConnector()

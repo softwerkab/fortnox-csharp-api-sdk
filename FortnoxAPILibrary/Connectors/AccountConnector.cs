@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class AccountConnector : FinancialYearBasedEntityConnector<Account, Accounts, Sort.By.Account>
+    public class AccountConnector : FinancialYearBasedEntityConnector<Account, Accounts, Sort.By.Account?>
 	{
 		/// <remarks/>
 		public enum CostCenterSettingsValue

@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class InvoiceAccrualConnector : EntityConnector<InvoiceAccrual, InvoiceAccruals, Sort.By.InvoiceAccrual>
+    public class InvoiceAccrualConnector : EntityConnector<InvoiceAccrual, InvoiceAccruals, Sort.By.InvoiceAccrual?>
 	{
 		/// <remarks/>
 		public InvoiceAccrualConnector()
