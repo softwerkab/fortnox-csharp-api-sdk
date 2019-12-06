@@ -200,7 +200,6 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty]
         public InvoiceConnector.InvoiceType? InvoiceType { get; set; }
-        public bool InvoiceTypeSpecified => InvoiceType != null;
 
         /// <remarks/>
         [JsonProperty]
@@ -452,7 +451,6 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty]
         public InvoiceConnector.DiscountType? DiscountType { get; set; }
-        public bool DiscountTypeSpecified => DiscountType != null;
 
         /// <remarks/>
         [JsonProperty]
