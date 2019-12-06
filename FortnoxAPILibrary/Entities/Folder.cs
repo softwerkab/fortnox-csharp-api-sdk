@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
@@ -8,63 +9,81 @@ using System.IO;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
+	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	public class Folder
 	{
         /// <remarks/>
+		[JsonProperty]
 		public string Email { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public Files Files { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public Folders Folders { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public string Id { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public string Name { get; set; }
 
         /// <remarks/>
+		[JsonProperty]
 		public string url { get; set; }
     }
 
 	/// <remarks/>
+	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	public class Files
 	{
         /// <remarks/>
+		[JsonProperty]
 		public List<File> File { get; set; }
     }
 
 	/// <remarks/>
+	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	public class File
 	{
         /// <summary>
 		/// Actual Content Type if file data is manually downloaded from archive.
 		/// </summary>
+		[JsonProperty]
 		public string ContentType { get; set; }
 
 		/// <summary>
 		/// Actual file data if manually downloaded from archive.
 		/// </summary>
+		[JsonProperty]
 		public byte[] Data { get; set; }
 
 		/// <remarks/>
+		[JsonProperty]
 		public string Comments { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public string Id { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public string Name { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public string Path { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public string Size { get; set; }
 
         /// <remarks/>
+		[JsonProperty]
 		public string url { get; set; }
 
         /// <remarks/>
@@ -102,22 +121,28 @@ namespace FortnoxAPILibrary.Entities
 	}
 
 	/// <remarks/>
+	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	public class Folders
 	{
         /// <remarks/>
+		[JsonProperty]
 		public List<FoldersFolder> Folder { get; set; }
     }
 
 	/// <remarks/>
+	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	public class FoldersFolder
 	{
         /// <remarks/>
+		[JsonProperty]
 		public string Id { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public string Name { get; set; }
 
         /// <remarks/>
+		[JsonProperty]
 		public string url { get; set; }
     }
 }
