@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
@@ -12,24 +11,18 @@ namespace FortnoxAPILibrary.Entities
     [Serializable]
 	
 	
-	[XmlType(AnonymousType = true)]
-	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class PriceLists
 	{
         /// <remarks/>
-		[XmlElement("PriceListSubset")]
 		public List<PriceListSubset> PriceListSubset { get; set; }
 
         /// <remarks/>
-        [XmlAttribute]
 		public string TotalResources { get; set; }
 
         /// <remarks/>
-        [XmlAttribute]
 		public string TotalPages { get; set; }
 
         /// <remarks/>
-        [XmlAttribute]
 		public string CurrentPage { get; set; }
     }
 
@@ -38,7 +31,6 @@ namespace FortnoxAPILibrary.Entities
 	[Serializable]
 	
 	
-	[XmlType(AnonymousType = true)]
 	public class PriceListSubset
 	{
         /// <remarks/>
@@ -54,7 +46,6 @@ namespace FortnoxAPILibrary.Entities
         public string PreSelected { get; set; }
 
 		/// <remarks/>
-		[XmlAttribute]
 		public string url { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.Xml.Serialization;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
@@ -12,8 +11,6 @@ namespace FortnoxAPILibrary.Entities
     [Serializable]
 	
 	
-	[XmlType(AnonymousType = true)]
-	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class SupplierInvoiceFileConnection
 	{
         /// <remarks/>
@@ -31,7 +28,6 @@ namespace FortnoxAPILibrary.Entities
 		public string SupplierName { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [XmlAttribute]
 		[ReadOnly(true)]
 		public string url { get; set; }
     }

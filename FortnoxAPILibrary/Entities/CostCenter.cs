@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.Xml.Serialization;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
@@ -9,8 +8,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
-    [XmlRoot(Namespace = "", IsNullable = false)]
     public class CostCenter
 	{
         /// <summary>
@@ -47,7 +44,6 @@ namespace FortnoxAPILibrary.Entities
         public string Active { get; set; }
 
         /// <remarks/>
-        [XmlAttribute]
 		[ReadOnly(true)]
 		public string url { get; set; }
     }

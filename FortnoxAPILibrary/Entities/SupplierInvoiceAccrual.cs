@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Xml.Serialization;
 using FortnoxAPILibrary.Connectors;
 
 // ReSharper disable UnusedMember.Global
@@ -11,8 +10,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
-	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class SupplierInvoiceAccrual
 	{
         /// <remarks/>
@@ -40,7 +37,6 @@ namespace FortnoxAPILibrary.Entities
         public SupplierInvoiceAccrualConnector.Period Period { get; set; }
 
         /// <remarks/>
-        [XmlArrayItem("SupplierInvoiceAccrualRow", IsNullable = false)]
 		public List<SupplierInvoiceAccrualRow> SupplierInvoiceAccrualRows { get; set; }
 
         /// <remarks/>
@@ -57,7 +53,6 @@ namespace FortnoxAPILibrary.Entities
         public string VATIncluded { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [XmlAttribute]
 		[ReadOnly(true)]
 		public string url { get; set; }
     }
@@ -67,7 +62,6 @@ namespace FortnoxAPILibrary.Entities
 	[Serializable]
 	
 	
-	[XmlType(AnonymousType = true)]
 	public class SupplierInvoiceAccrualRow
 	{
         /// <remarks/>

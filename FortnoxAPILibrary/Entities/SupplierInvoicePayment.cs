@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Xml.Schema;
-using System.Xml.Serialization;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
@@ -14,8 +12,6 @@ namespace FortnoxAPILibrary.Entities
     [Serializable]
 	
 	
-	[XmlType(AnonymousType = true)]
-	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class SupplierInvoicePayment
 	{
         /// <remarks/>
@@ -92,11 +88,9 @@ namespace FortnoxAPILibrary.Entities
 		public string VoucherYear { get; set; }
 
         /// <remarks/>
-        [XmlElement("WriteOff", Form = XmlSchemaForm.Unqualified)]
 		public List<SupplierInvoiceWriteOff> WriteOffs { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [XmlAttribute]
 		[ReadOnly(true)]
 		public string url { get; set; }
     }
@@ -106,7 +100,6 @@ namespace FortnoxAPILibrary.Entities
 	[Serializable]
 	
 	
-	[XmlType(AnonymousType = true)]
 
 	public class SupplierInvoiceWriteOff
 	{

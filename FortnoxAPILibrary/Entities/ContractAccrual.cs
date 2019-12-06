@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Xml.Serialization;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
@@ -20,7 +19,6 @@ namespace FortnoxAPILibrary.Entities
 		public string Description { get; set; }
 
 		/// <remarks/>
-		[XmlArrayItem("InvoiceAccrualRow", IsNullable = false)]
 		public List<InvoiceAccrualRow> AccrualRows { get; set; }
 
         /// <remarks/>
@@ -44,7 +42,6 @@ namespace FortnoxAPILibrary.Entities
         public string VATIncluded { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [XmlAttribute, ReadOnly(true)]
         public string url { get; set; }
     }
 }

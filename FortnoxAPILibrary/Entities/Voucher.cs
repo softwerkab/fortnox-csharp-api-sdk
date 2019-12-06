@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Xml.Serialization;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
@@ -10,8 +9,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
-	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class Voucher
 	{
         /// <remarks/>
@@ -48,7 +45,6 @@ namespace FortnoxAPILibrary.Entities
 		public string VoucherNumber { get; set; }
 
         /// <remarks/>
-        [XmlArrayItem("VoucherRow", IsNullable = false)]
 		public List<VoucherRow> VoucherRows { get; set; }
 
         /// <remarks/>
@@ -60,13 +56,11 @@ namespace FortnoxAPILibrary.Entities
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly(true)]
-		[XmlAttribute]
 		public string url { get; set; }
     }
 
 	/// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
 	public class VoucherRow
 	{
         /// <remarks/>

@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.Xml.Serialization;
 using FortnoxAPILibrary.Connectors;
 
 // ReSharper disable UnusedMember.Global
@@ -11,8 +10,6 @@ namespace FortnoxAPILibrary.Entities
     /// <remarks/>
 
     [Serializable]
-	[XmlType(AnonymousType = true)]
-	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class TaxReduction
 	{
         /// <summary>This field is Read-Only in Fortnox</summary>
@@ -69,7 +66,6 @@ namespace FortnoxAPILibrary.Entities
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly(true)]
-		[XmlAttribute]
 		public string url { get; set; }
     }
 }

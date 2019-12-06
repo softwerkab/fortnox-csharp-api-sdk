@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Xml.Serialization;
 using FortnoxAPILibrary.Connectors;
 
 // ReSharper disable UnusedMember.Global
@@ -11,8 +10,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
-	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class Order
 	{
         /// <remarks/>
@@ -226,12 +223,10 @@ namespace FortnoxAPILibrary.Entities
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly(true)]
-		[XmlAttribute]
 		public string url { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly(true)]
-		[XmlAttribute]
 		public string urlTaxReductionList { get; set; }
     }
 
@@ -240,7 +235,6 @@ namespace FortnoxAPILibrary.Entities
 	[Serializable]
 	
 	
-	[XmlType(AnonymousType = true)]
 	public class OrderEmailInformation
 	{
 		/// <remarks/>
@@ -264,7 +258,6 @@ namespace FortnoxAPILibrary.Entities
 
 	/// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
 	public class OrderRow
 	{
 		/// <remarks/>

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Xml.Serialization;
 using FortnoxAPILibrary.Connectors;
 
 // ReSharper disable UnusedMember.Global
@@ -12,8 +11,6 @@ namespace FortnoxAPILibrary.Entities
     /// <remarks/>
 
     [Serializable]
-    [XmlType(AnonymousType = true)]
-	[XmlRoot(Namespace = "", IsNullable = false)]
 	public class Invoice
 	{
         /// <remarks/>
@@ -295,12 +292,10 @@ namespace FortnoxAPILibrary.Entities
         public string ZipCode { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [XmlAttribute]
 		[ReadOnly(true)]
 		public string url { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [XmlAttribute]
 		[ReadOnly(true)]
 		public string urlTaxReductionList { get; set; }
 
@@ -311,7 +306,6 @@ namespace FortnoxAPILibrary.Entities
 
 	/// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
 	public class InvoiceEDIInformation
 	{
 		/// <remarks/>
@@ -335,7 +329,6 @@ namespace FortnoxAPILibrary.Entities
 
 	/// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
 	public class InvoiceEmailInformation
 	{
 		/// <remarks/>
@@ -359,7 +352,6 @@ namespace FortnoxAPILibrary.Entities
 
 	/// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
 	public class InvoiceRow
 	{
 	    /// <remarks/>
@@ -428,7 +420,6 @@ namespace FortnoxAPILibrary.Entities
 
     /// <remarks/>
     [Serializable]
-    [XmlType(AnonymousType = true)]
     public partial class Label //TODO Merge with other Label class
     {
         /// <remarks/>
