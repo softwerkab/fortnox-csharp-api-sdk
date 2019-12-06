@@ -49,7 +49,7 @@ namespace FortnoxAPILibrary.Entities
         public string Active { get; set; }
 
         /// <remarks/>
-		[JsonProperty]
-		public string url { get; private set; }
+		[JsonProperty(PropertyName = "@url")]
+		public string Url { get; private set; }
     }
 }

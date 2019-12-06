@@ -33,8 +33,8 @@ namespace FortnoxAPILibrary.Entities
         public string Name { get; set; }
 
         /// <remarks/>
-		[JsonProperty]
-		public string url { get; set; }
+		[JsonProperty(PropertyName = "@url")]
+		public string Url { get; set; }
     }
 
 	/// <remarks/>
@@ -83,8 +83,8 @@ namespace FortnoxAPILibrary.Entities
         public string Size { get; set; }
 
         /// <remarks/>
-		[JsonProperty]
-		public string url { get; set; }
+		[JsonProperty(PropertyName = "@url")]
+		public string Url { get; set; }
 
         /// <remarks/>
         public string GetFileExtension()
@@ -142,7 +142,7 @@ namespace FortnoxAPILibrary.Entities
         public string Name { get; set; }
 
         /// <remarks/>
-		[JsonProperty]
-		public string url { get; set; }
+		[JsonProperty(PropertyName = "@url")]
+		public string Url { get; set; }
     }
 }

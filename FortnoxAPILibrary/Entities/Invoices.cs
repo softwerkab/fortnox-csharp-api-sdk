@@ -117,7 +117,7 @@ namespace FortnoxAPILibrary.Entities
         public string WayOfDelivery { get; set; }
 
 		/// <summary>This field is Read-Only in Fortnox</summary>
-		[JsonProperty]
-		public string url { get; private set; }
+		[JsonProperty(PropertyName = "@url")]
+		public string Url { get; private set; }
     }
 }

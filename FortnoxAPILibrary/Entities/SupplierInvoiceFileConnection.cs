@@ -31,7 +31,7 @@ namespace FortnoxAPILibrary.Entities
 		public string SupplierName { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-		[JsonProperty]
-		public string url { get; private set; }
+		[JsonProperty(PropertyName = "@url")]
+		public string Url { get; private set; }
     }
 }

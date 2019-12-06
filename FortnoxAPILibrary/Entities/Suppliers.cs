@@ -68,7 +68,7 @@ namespace FortnoxAPILibrary.Entities
         public string ZipCode { get; set; }
 
         /// <remarks/>
-		[JsonProperty]
-		public string url { get; set; }
+		[JsonProperty(PropertyName = "@url")]
+		public string Url { get; set; }
     }
 }

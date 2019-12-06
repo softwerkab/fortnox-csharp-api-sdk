@@ -69,7 +69,7 @@ namespace FortnoxAPILibrary.Entities
         public string PaymentDate { get; set; }
 
 		/// <remarks/>
-		[JsonProperty]
-		public string url { get; set; }
+		[JsonProperty(PropertyName = "@url")]
+		public string Url { get; set; }
     }
 }

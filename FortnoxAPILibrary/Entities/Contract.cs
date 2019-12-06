@@ -188,12 +188,12 @@ namespace FortnoxAPILibrary.Entities
         public string YourOrderNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [JsonProperty]
-        public string url { get; set; }
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
-        [JsonProperty]
-        public string urlTaxReductionList { get; set; }
+        [JsonProperty(PropertyName = "@urlTaxReductionList")]
+        public string UrlTaxReductionList { get; set; }
 
         /// <remarks/>
         public Contract()
