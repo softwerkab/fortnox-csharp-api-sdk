@@ -32,8 +32,8 @@ namespace FortnoxAPILibrary.Entities
     public class ContractSubset
     {
         /// <remarks/>
-        [JsonProperty]
-        public string url { get; set; }
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
 
         /// <remarks/>
         [JsonProperty]

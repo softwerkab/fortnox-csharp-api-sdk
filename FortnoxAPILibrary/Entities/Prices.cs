@@ -55,7 +55,7 @@ namespace FortnoxAPILibrary.Entities
         public string Price { get; set; }
 
         /// <remarks/>
-		[JsonProperty]
-		public string url { get; set; }
+		[JsonProperty(PropertyName = "@url")]
+		public string Url { get; set; }
     }
 }
