@@ -29,9 +29,9 @@ namespace FortnoxAPILibrary
                     return null;
                 }
 
-                Type type = SortBy.GetType();
-                MemberInfo[] memInfo = type.GetMember(SortBy.ToString());
-                object[] attrs = memInfo[0].GetCustomAttributes(typeof(RealValueAttribute), false);
+                var type = SortBy.GetType();
+                var memInfo = type.GetMember(SortBy.ToString());
+                var attrs = memInfo[0].GetCustomAttributes(typeof(RealValueAttribute), false);
                 if (attrs.Length > 0)
                 {
                     return ((RealValueAttribute)attrs[0]).RealValue;
@@ -88,7 +88,7 @@ namespace FortnoxAPILibrary
         {
             Parameters = parameters ?? new Dictionary<string, string>();
 
-            string requestUriString = GetUrl();
+            var requestUriString = GetUrl();
 
             ResetProperties(entity);
 
@@ -107,9 +107,9 @@ namespace FortnoxAPILibrary
         {
             Parameters = new Dictionary<string, string>();
 
-            string searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
+            var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
 
-            string requestUriString = GetUrl(searchValue);
+            var requestUriString = GetUrl(searchValue);
 
             ResetProperties(entity);
 
@@ -128,7 +128,7 @@ namespace FortnoxAPILibrary
         {
             Parameters = new Dictionary<string, string>();
 
-            string requestUriString = GetUrl(index);
+            var requestUriString = GetUrl(index);
 
             requestUriString = AddParameters(requestUriString);
 
@@ -145,14 +145,14 @@ namespace FortnoxAPILibrary
 
             AddCustomParameters();
 
-            string searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
+            var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
 
             if (string.IsNullOrWhiteSpace(searchValue))
             {
                 throw new Exception("Ett sökvärde har inte angivits.");
             }
 
-            string requestUriString = GetUrl(searchValue);
+            var requestUriString = GetUrl(searchValue);
 
             requestUriString = AddParameters(requestUriString);
 
@@ -169,7 +169,7 @@ namespace FortnoxAPILibrary
 
             AddCustomParameters();
 
-            string requestUriString = GetUrl();
+            var requestUriString = GetUrl();
 
             if (Limit != 0)
             {
@@ -204,7 +204,7 @@ namespace FortnoxAPILibrary
             ResponseType = RequestResponseType.XML;
             RequestUriString = requestUriString;
 
-            TEntityCollection result = DoRequest<TEntityCollection>();
+            var result = DoRequest<TEntityCollection>();
 
             return result;
         }
@@ -219,20 +219,11 @@ namespace FortnoxAPILibrary
 
                 if (!customAttributes.Any()) continue;
 
-                object value = property.GetValue(this, null);
+                var value = property.GetValue(this, null);
 
                 if (value == null) continue;
 
-                string strValue;
-
-                if (value is string)
-                {
-                    strValue = value as string;
-                }
-                else
-                {
-                    strValue = value.ToString().ToLower();
-                }
+                var strValue = value is string ? value.ToString() : value.ToString().ToLower();
 
                 if (string.IsNullOrWhiteSpace(strValue)) continue;
 
@@ -253,9 +244,7 @@ namespace FortnoxAPILibrary
                 {
                     var member = value.GetType().GetMember(value.ToString()).FirstOrDefault();
 
-                    var attribute = member.GetCustomAttributes(typeof(RealValueAttribute), true).FirstOrDefault() as RealValueAttribute;
-
-                    if (attribute != null)
+                    if (member.GetCustomAttributes(typeof(RealValueAttribute), true).FirstOrDefault() is RealValueAttribute attribute)
                     {
                         strValue = attribute.RealValue;
                     }
@@ -356,7 +345,7 @@ namespace FortnoxAPILibrary
         {
             properties = properties.Where(p => !p.PropertyType.IsEnum);
 
-            foreach (PropertyInfo propertyInfo in properties)
+            foreach (var propertyInfo in properties)
             {
                 var a = from aa in propertyInfo.GetCustomAttributes(true)
                         where aa is ReadOnlyAttribute
@@ -370,7 +359,7 @@ namespace FortnoxAPILibrary
                 if (obj != null)
                 {
                     // Check if the property is a subclass
-                    IEnumerable<PropertyInfo> subProperties = GetSubClassProperties(propertyInfo);
+                    var subProperties = GetSubClassProperties(propertyInfo).ToList();
 
                     if (IsList(obj))
                     {
@@ -379,7 +368,7 @@ namespace FortnoxAPILibrary
                             ResetProperties(GetItemAtIndex(obj, propertyInfo, i), subProperties);
                         }
                     }
-                    else if (subProperties.Count() > 0)
+                    else if (subProperties.Count > 0)
                     {
                         ResetProperties(propertyInfo.GetValue(obj, null), subProperties);
                     }
