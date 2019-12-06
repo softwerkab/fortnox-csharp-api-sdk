@@ -1,5 +1,5 @@
+using System.IO;
 using System.Net;
-using System.Xml.Serialization;
 using Authorization = FortnoxAPILibrary.Entities.Authorization;
 
 // ReSharper disable UnusedMember.Global
@@ -30,10 +30,9 @@ namespace FortnoxAPILibrary.Connectors
 				var wr = SetupRequest(ConnectionCredentials.FortnoxAPIServer, authorizationCode, clientSecret);
 			    using (var response = wr.GetResponse())
 			    {
-			        using (var responseStream = response.GetResponseStream())
+			        using (var responseReader = new StreamReader(response.GetResponseStream()))
 			        {
-                        var xs = new XmlSerializer(typeof(Authorization));
-                        var auth = (Authorization)xs.Deserialize(responseStream);
+                        var auth = Deserialize<Authorization>(responseReader.ReadToEnd());
                         accessToken = auth.AccessToken;
                     }
                 }
