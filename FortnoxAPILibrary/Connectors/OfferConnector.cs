@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class OfferConnector : FinancialYearBasedEntityConnector<Offer, Offers, Sort.By.Offer>
+    public class OfferConnector : FinancialYearBasedEntityConnector<Offer, Offers, Sort.By.Offer?>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -66,57 +66,20 @@ namespace FortnoxAPILibrary.Connectors
         [FilterProperty]
         public string Label { get; set; }
 
-
-		private bool sentSet;
-		private bool sent;
 		/// <remarks/>
 		[FilterProperty]
-		public bool Sent
-		{
-			get
-			{
-				return sent;
-			}
-			set
-			{
-				sent = value;
-				sentSet = true;
-			}
-		}
+		public bool? Sent { get; set; }
 
-		private bool notCompletedSet;
-		private bool notcompleted;
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-		public bool NotCompleted
-		{
-			get
-			{
-				return notcompleted;
-			}
-			set
-			{
-				notcompleted = value;
-				notCompletedSet = true;
-			}
-		}
+		public bool? NotCompleted { get; set; }
 
-		private bool filterBySet;
-		private Filter.Offer filterBy;
 		/// <remarks/>
 		[FilterProperty("filter")]
-		public Filter.Offer FilterBy
-		{
-			get { return filterBy; }
-			set
-			{
-				filterBy = value;
-				filterBySet = true;
-			}
-		}
+		public Filter.Offer? FilterBy { get; set; }
 
-		/// <remarks/>
+        /// <remarks/>
 		public enum DiscountType
 		{
 			/// <remarks/>

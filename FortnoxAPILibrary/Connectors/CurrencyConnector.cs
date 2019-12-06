@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	public class CurrencyConnector : EntityConnector<Currency, Currencies, Sort.By.Currency>
+	public class CurrencyConnector : EntityConnector<Currency, Currencies, Sort.By.Currency?>
 	{
 		/// <remarks/>
 		public CurrencyConnector()

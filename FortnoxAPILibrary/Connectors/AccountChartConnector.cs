@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class AccountChartConnector : EntityConnector<AccountCharts, AccountCharts, Sort.By.AccountChart>
+    public class AccountChartConnector : EntityConnector<AccountCharts, AccountCharts, Sort.By.AccountChart?>
 	{
         /// <remarks/>
         public AccountChartConnector()

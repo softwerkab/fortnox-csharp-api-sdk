@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class InvoicePaymentConnector : FinancialYearBasedEntityConnector<InvoicePayment, InvoicePayments, Sort.By.InvoicePayment>
+    public class InvoicePaymentConnector : FinancialYearBasedEntityConnector<InvoicePayment, InvoicePayments, Sort.By.InvoicePayment?>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result

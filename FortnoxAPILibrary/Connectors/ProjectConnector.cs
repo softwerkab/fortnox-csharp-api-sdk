@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ProjectConnector : EntityConnector<Project, Projects, Sort.By.Project>
+    public class ProjectConnector : EntityConnector<Project, Projects, Sort.By.Project?>
 	{
 
 		/// <remarks/>

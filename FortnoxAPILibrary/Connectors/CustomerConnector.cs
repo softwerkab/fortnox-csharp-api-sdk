@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class CustomerConnector : EntityConnector<Customer, Customers, Sort.By.Customer>
+    public class CustomerConnector : EntityConnector<Customer, Customers, Sort.By.Customer?>
 	{
 		/// <remarks/>
 		public enum Type
@@ -62,25 +62,15 @@ namespace FortnoxAPILibrary.Connectors
 			PRINT
 		}
 
-		private bool filterBySet;
-		private Filter.Customer filterBy;
 		/// <remarks/>
 		[FilterProperty("filter")]
-		public Filter.Customer FilterBy
-		{
-			get { return filterBy; }
-			set
-			{
-				filterBy = value;
-				filterBySet = true;
-			}
-		}
+		public Filter.Customer? FilterBy { get; set; }
 
 
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[FilterProperty]
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [FilterProperty]
 		public string City { get; set; }
 
 		/// <summary>

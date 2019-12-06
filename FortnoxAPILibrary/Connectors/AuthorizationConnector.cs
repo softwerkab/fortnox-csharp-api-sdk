@@ -1,4 +1,3 @@
-using System.IO;
 using System.Net;
 using System.Xml.Serialization;
 using Authorization = FortnoxAPILibrary.Entities.Authorization;
@@ -28,13 +27,13 @@ namespace FortnoxAPILibrary.Connectors
 					return "";
 				}
 
-				HttpWebRequest wr = SetupRequest(ConnectionCredentials.FortnoxAPIServer, authorizationCode, clientSecret);
-			    using (WebResponse response = wr.GetResponse())
+				var wr = SetupRequest(ConnectionCredentials.FortnoxAPIServer, authorizationCode, clientSecret);
+			    using (var response = wr.GetResponse())
 			    {
-			        using (Stream responseStream = response.GetResponseStream())
+			        using (var responseStream = response.GetResponseStream())
 			        {
-                        XmlSerializer xs = new XmlSerializer(typeof(Authorization));
-                        Authorization auth = (Authorization)xs.Deserialize(responseStream);
+                        var xs = new XmlSerializer(typeof(Authorization));
+                        var auth = (Authorization)xs.Deserialize(responseStream);
                         accessToken = auth.AccessToken;
                     }
                 }
@@ -49,7 +48,7 @@ namespace FortnoxAPILibrary.Connectors
 
 		private static HttpWebRequest SetupRequest(string requestUriString, string authorizationCode, string clientSecret)
 		{
-			HttpWebRequest wr = (HttpWebRequest)WebRequest.Create(requestUriString);
+			var wr = (HttpWebRequest)WebRequest.Create(requestUriString);
 			wr.Headers.Add("authorization-code", authorizationCode);
 			wr.Headers.Add("client-secret", clientSecret);
 			wr.ContentType = "application/xml";

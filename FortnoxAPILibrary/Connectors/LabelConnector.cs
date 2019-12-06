@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class LabelConnector : EntityConnector<Label, Labels, Sort.By.Label> {
+    public class LabelConnector : EntityConnector<Label, Labels, Sort.By.Label?> {
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

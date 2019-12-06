@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class SupplierInvoiceURLConnectionConnector : EntityConnector<SupplierInvoiceURLConnection, SupplierInvoiceURLConnection, Sort.By.SupplierInvoiceURLConnection>
+    public class SupplierInvoiceURLConnectionConnector : EntityConnector<SupplierInvoiceURLConnection, SupplierInvoiceURLConnection, Sort.By.SupplierInvoiceURLConnection?>
     {
         /// <remarks/>
         public SupplierInvoiceURLConnectionConnector()

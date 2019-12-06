@@ -6,7 +6,7 @@ namespace FortnoxAPILibrary.Connectors
 {
 
     /// <remarks/>
-    public class OrderConnector : FinancialYearBasedEntityConnector<Order, Orders, Sort.By.Order>
+    public class OrderConnector : FinancialYearBasedEntityConnector<Order, Orders, Sort.By.Order?>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -79,59 +79,21 @@ namespace FortnoxAPILibrary.Connectors
         [FilterProperty]
         public string Label { get; set; }
 
-		private bool sentSet;
-		private bool sent;
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
 		[FilterProperty]
-		public bool Sent
-		{
-			get
-			{
-				return sent;
-			}
-			set
-			{
-				sent = value;
-				sentSet = true;
-			}
-		}
+		public bool? Sent { get; set; }
 
-
-		private bool notCompletedSet;
-		private bool notcompleted;
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
 		[FilterProperty]
-		public bool NotCompleted
-		{
-			get
-			{
-				return notcompleted;
-			}
-			set
-			{
-				notcompleted = value;
-				notCompletedSet = true;
-			}
-		}
+		public bool? NotCompleted { get; set; }
 
-
-		private bool filterBySet;
-		private Filter.Order filterBy;
 		/// <remarks/>
 		[FilterProperty("filter")]
-		public Filter.Order FilterBy
-		{
-			get { return filterBy; }
-			set
-			{
-				filterBy = value;
-				filterBySet = true;
-			}
-		}
+		public Filter.Order? FilterBy { get; set; }
 
 		/// <remarks/>
 		public enum DiscountType

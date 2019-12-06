@@ -50,19 +50,9 @@ namespace FortnoxAPILibrary.Connectors
         [FilterProperty]
         public string PeriodEnd { get; set; }
 
-        private bool filterBySet;
-        private Filter.Contract filterBy;
         /// <remarks/>
         [FilterProperty("filter")]
-        public Filter.Contract FilterBy
-        {
-            get { return filterBy; }
-            set
-            {
-                filterBy = value;
-                filterBySet = true;
-            }
-        }
+        public Filter.Contract? FilterBy { get; set; }
 
         /// <remarks/>
         public ContractConnector()

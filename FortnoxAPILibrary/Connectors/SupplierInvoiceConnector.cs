@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class SupplierInvoiceConnector : FinancialYearBasedEntityConnector<SupplierInvoice, SupplierInvoices, Sort.By.SupplierInvoice>
+    public class SupplierInvoiceConnector : FinancialYearBasedEntityConnector<SupplierInvoice, SupplierInvoices, Sort.By.SupplierInvoice?>
 	{
 		/// <remarks/>
 		public enum VATType
@@ -112,19 +112,9 @@ namespace FortnoxAPILibrary.Connectors
         [FilterProperty]
         public string YourReference { get; set; }
 
-        private bool filterBySet;
-        private Filter.SupplierInvoice filterBy;
         /// <remarks/>
         [FilterProperty("filter")]
-        public Filter.SupplierInvoice FilterBy
-        {
-            get { return filterBy; }
-            set
-            {
-                filterBy = value;
-                filterBySet = true;
-            }
-        }
+        public Filter.SupplierInvoice? FilterBy { get; set; }
 
 		/// <remarks/>
 		public SupplierInvoiceConnector()

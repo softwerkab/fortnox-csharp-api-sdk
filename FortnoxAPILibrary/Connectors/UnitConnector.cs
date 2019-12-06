@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	public class UnitConnector : EntityConnector<Unit, Units, Sort.By.Unit>
+	public class UnitConnector : EntityConnector<Unit, Units, Sort.By.Unit?>
 	{
 		/// <remarks/>
 		public UnitConnector()

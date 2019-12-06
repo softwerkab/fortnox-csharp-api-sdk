@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class PrintTemplateConnector : EntityConnector<PrintTemplates, PrintTemplates, Sort.By.PrintTemplate>
+    public class PrintTemplateConnector : EntityConnector<PrintTemplates, PrintTemplates, Sort.By.PrintTemplate?>
 	{
 		/// <remarks/>
 		public PrintTemplateConnector()

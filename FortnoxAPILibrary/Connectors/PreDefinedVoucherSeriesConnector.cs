@@ -6,7 +6,7 @@ namespace FortnoxAPILibrary.Connectors
 {
 
     /// <remarks/>
-    public class PreDefinedVoucherSeriesConnector : FinancialYearBasedEntityConnector<PreDefinedVoucherSeries, PreDefinedVoucherSeriesCollection, Sort.By.PreDefinedVoucherSeries>
+    public class PreDefinedVoucherSeriesConnector : FinancialYearBasedEntityConnector<PreDefinedVoucherSeries, PreDefinedVoucherSeriesCollection, Sort.By.PreDefinedVoucherSeries?>
     {
 		/// <remarks/>
 		public PreDefinedVoucherSeriesConnector()

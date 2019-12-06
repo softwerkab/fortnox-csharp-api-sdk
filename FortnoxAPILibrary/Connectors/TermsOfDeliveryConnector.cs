@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class TermsOfDeliveryConnector : EntityConnector<TermsOfDelivery, TermsOfDeliveries, Sort.By.TermsOfDelivery>
+    public class TermsOfDeliveryConnector : EntityConnector<TermsOfDelivery, TermsOfDeliveries, Sort.By.TermsOfDelivery?>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result

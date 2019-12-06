@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-	public class SupplierInvoiceFileConnectionConnector : EntityConnector<SupplierInvoiceFileConnection, SupplierInvoiceFileConnections, Sort.By.SupplierInvoiceFileConnection>
+	public class SupplierInvoiceFileConnectionConnector : EntityConnector<SupplierInvoiceFileConnection, SupplierInvoiceFileConnections, Sort.By.SupplierInvoiceFileConnection?>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result

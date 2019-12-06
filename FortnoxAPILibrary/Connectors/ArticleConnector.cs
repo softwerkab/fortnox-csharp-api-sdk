@@ -5,21 +5,11 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ArticleConnector : FinancialYearBasedEntityConnector<Article, Articles, Sort.By.Article>
+    public class ArticleConnector : FinancialYearBasedEntityConnector<Article, Articles, Sort.By.Article?>
 	{
-		private bool filterBySet;
-		private Filter.Article filterBy;
 		/// <remarks/>
 		[FilterProperty("filter")]
-		public Filter.Article FilterBy
-		{
-			get { return filterBy; }
-			set
-			{
-				filterBy = value;
-				filterBySet = true;
-			}
-		}
+		public Filter.Article? FilterBy { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result

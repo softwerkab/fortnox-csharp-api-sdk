@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	public class PriceConnector : EntityConnector<Price, Prices, Sort.By.Price>
+	public class PriceConnector : EntityConnector<Price, Prices, Sort.By.Price?>
 	{
 
 		/// <summary>
