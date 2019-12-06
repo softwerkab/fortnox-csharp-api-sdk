@@ -10,23 +10,14 @@ namespace FortnoxAPILibrary.Entities
     /// <remarks/>
 
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class FinancialYears
+	public class FinancialYears : BaseEntityCollection
 	{
 		/// <remarks/>
 		[JsonProperty]
 		public List<FinancialYearSubset> FinancialYearSubset { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string TotalResources { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string TotalPages { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string CurrentPage { get; set; }
     }
 
 	/// <remarks/>

@@ -10,24 +10,15 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class Articles
+    public class Articles : BaseEntityCollection
 	{
 
 		/// <remarks/>
 		[JsonProperty]
 		public List<ArticleSubset> ArticleSubset { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string TotalResources { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string TotalPages { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string CurrentPage { get; set; }
     }
 
 	/// <remarks/>

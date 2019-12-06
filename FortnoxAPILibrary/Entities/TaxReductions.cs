@@ -12,23 +12,14 @@ namespace FortnoxAPILibrary.Entities
 	
 	
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class TaxReductions
+	public class TaxReductions : BaseEntityCollection
 	{
         /// <remarks/>
 		[JsonProperty]
 		public List<TaxReductionSubset> TaxReductionSubset { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string TotalResources { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string TotalPages { get; set; }
 
-        /// <remarks/>
-		[JsonProperty]
-		public string CurrentPage { get; set; }
     }
 
 	/// <remarks/>

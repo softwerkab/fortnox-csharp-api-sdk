@@ -8,35 +8,17 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-
-	
-	
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class SupplierInvoiceFileConnections
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+	public class SupplierInvoiceFileConnections : BaseEntityCollection
 	{
 
         /// <remarks/>
 		[JsonProperty]
 		public List<SupplierInvoiceFileConnectionSubset> SupplierInvoiceFileConnectionSubset { get; set; }
-
-        /// <remarks/>
-		[JsonProperty]
-		public byte TotalResources { get; set; }
-
-        /// <remarks/>
-		[JsonProperty]
-		public byte TotalPages { get; set; }
-
-        /// <remarks/>
-		[JsonProperty]
-		public byte CurrentPage { get; set; }
     }
 
 	/// <remarks/>
-	
-	
-	
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	public class SupplierInvoiceFileConnectionSubset
 	{
         /// <remarks/>
