@@ -171,7 +171,8 @@ namespace FortnoxAPILibrary.Entities
         public List<Label> Labels { get; set; }
 
         /// <remarks/>
-        public InvoiceConnector.InvoiceType InvoiceType { get; set; }
+        public InvoiceConnector.InvoiceType? InvoiceType { get; set; }
+        public bool InvoiceTypeSpecified => InvoiceType != null;
 
         /// <remarks/>
         public string Language { get; set; }
@@ -388,7 +389,8 @@ namespace FortnoxAPILibrary.Entities
         public string Discount { get; set; }
 
         /// <remarks/>
-        public InvoiceConnector.DiscountType DiscountType { get; set; }
+        public InvoiceConnector.DiscountType? DiscountType { get; set; }
+        public bool DiscountTypeSpecified => DiscountType != null;
 
         /// <remarks/>
         public string HouseWork { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -476,6 +477,34 @@ namespace FortnoxAPILibrary.Tests
             connector.SortBy = null;
 
             connector.Find();
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+        }
+
+        [Ignore] //Fails because the server does not accept empty XML element <InvoiceRow/> 
+        [TestMethod]
+        public void Test_Issue_44() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/44
+        {
+            //Arrange
+            var customerConnector = new CustomerConnector();
+            var tmpCustomer = customerConnector.Create(new Customer() { Name = "TmpTestCustomer" });
+
+            var connector = new InvoiceConnector();
+
+            var newInvoce = connector.Create(new Invoice()
+            {
+                InvoiceDate = "2019-01-20", 
+                DueDate = "2019-02-20", 
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceType = InvoiceConnector.InvoiceType.INVOICE,
+                InvoiceRows = new List<InvoiceRow>()
+                { //Add Empty rows
+                    new InvoiceRow(), //Empty Row
+                    new InvoiceRow(), //Empty Row
+                    new InvoiceRow() { AccountNumber = "0000"},
+                    new InvoiceRow(), //Empty Row
+                }
+            });
+
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
         }
     }
