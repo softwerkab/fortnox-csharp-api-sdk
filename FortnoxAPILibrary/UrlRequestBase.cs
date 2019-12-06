@@ -17,7 +17,7 @@ namespace FortnoxAPILibrary
 
 		private string accessToken;
 
-        private int MAX_REQUESTS_PER_SECOND = 3;
+        private const int MaxRequestsPerSecond = 3;
         private static DateTime firstRequest = DateTime.Now;
         private static int currentRequestsPerSecond;
 
@@ -78,7 +78,7 @@ namespace FortnoxAPILibrary
         /// <summary>
         /// The HttpStatusCode returned by Fortnox API.
         /// </summary>
-        public HttpStatusCode httpStatusCode { get; set; }
+        public HttpStatusCode HttpStatusCode { get; set; }
 
         /// <summary>
         /// The data sent to Fortnox in Xml-format.
@@ -139,7 +139,7 @@ namespace FortnoxAPILibrary
             currentRequestsPerSecond++;
 
             if ((DateTime.Now - firstRequest).TotalMilliseconds >= 1000.0) reset = true;
-            else if (currentRequestsPerSecond >= MAX_REQUESTS_PER_SECOND)
+            else if (currentRequestsPerSecond >= MaxRequestsPerSecond)
             {
                 // Wait out remainder of current second
                 Thread.Sleep(Convert.ToInt32(1000.0 - (DateTime.Now - firstRequest).TotalMilliseconds));
@@ -185,7 +185,7 @@ namespace FortnoxAPILibrary
         /// </summary>
         internal void DoRequest()
         {
-            HttpWebRequest wr = SetupRequest(RequestUriString, Method);
+            var wr = SetupRequest(RequestUriString, Method);
 
             try
             {
@@ -196,9 +196,9 @@ namespace FortnoxAPILibrary
                     using (wr.GetRequestStream()) { }
                 }
 
-                using (HttpWebResponse response = (HttpWebResponse) wr.GetResponse())
+                using (var response = (HttpWebResponse) wr.GetResponse())
                 {
-                    httpStatusCode = response.StatusCode;
+                    HttpStatusCode = response.StatusCode;
                 }
             }
             catch (WebException we)
@@ -215,13 +215,13 @@ namespace FortnoxAPILibrary
         /// <returns>An entity</returns>
         internal T DoRequest<T>(T entity = default)
         {
-            HttpWebRequest wr = SetupRequest(RequestUriString, Method);
+            var wr = SetupRequest(RequestUriString, Method);
             ResponseXml = "";
             try
             {
                 RateLimit();
 
-                XmlSerializer xs = new XmlSerializer(typeof(T));
+                var xs = new XmlSerializer(typeof(T));
 
                 if (Method != "GET")
                 {
@@ -233,9 +233,9 @@ namespace FortnoxAPILibrary
 
                 if (Method == "POST" || Method == "PUT")
                 {
-                    using (MemoryStream memoryStream = new MemoryStream())
+                    using (var memoryStream = new MemoryStream())
                     {
-                        using (XmlWriter xmlWriter = XmlWriter.Create(memoryStream))
+                        using (var xmlWriter = XmlWriter.Create(memoryStream))
                         {
                             xs.Serialize(xmlWriter, entity);
                             RequestXml = Encoding.UTF8.GetString(memoryStream.ToArray());
@@ -243,10 +243,10 @@ namespace FortnoxAPILibrary
                     }
                 }
 
-                using (HttpWebResponse response = (HttpWebResponse) wr.GetResponse())
+                using (var response = (HttpWebResponse) wr.GetResponse())
                 {
-                    httpStatusCode = response.StatusCode;
-                    using (Stream responseStream = response.GetResponseStream())
+                    HttpStatusCode = response.StatusCode;
+                    using (var responseStream = response.GetResponseStream())
                     {
                         if (ResponseType == RequestResponseType.PDF)
                         {
@@ -280,9 +280,9 @@ namespace FortnoxAPILibrary
                                 return default;
                             }
 
-                            using (StreamReader sr = new StreamReader(responseStream))
+                            using (var sr = new StreamReader(responseStream))
                             {
-                                using (StreamWriter sw = new StreamWriter(LocalPath))
+                                using (var sw = new StreamWriter(LocalPath))
                                 {
                                     sw.Write(sr.ReadToEnd());
                                 }
@@ -315,29 +315,29 @@ namespace FortnoxAPILibrary
 					fileData = System.IO.File.ReadAllBytes(localPath);
 				}
 
-				XmlSerializer xs = new XmlSerializer(typeof(T));
+				var xs = new XmlSerializer(typeof(T));
 
-                Random rand = new Random();
-                string boundary = "----boundary" + rand.Next();
-                byte[] header = Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + fileName + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
-                byte[] trailer = Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
+                var rand = new Random();
+                var boundary = "----boundary" + rand.Next();
+                var header = Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + fileName + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
+                var trailer = Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
 
-                HttpWebRequest request = SetupRequest(RequestUriString, "POST");
+                var request = SetupRequest(RequestUriString, "POST");
                 request.ContentType = "multipart/form-data; boundary=" + boundary;
 
-                using (Stream data_stream = request.GetRequestStream())
+                using (var dataStream = request.GetRequestStream())
                 {
-                    data_stream.Write(header, 0, header.Length);
-                    data_stream.Write(fileData, 0, fileData.Length);
-                    data_stream.Write(trailer, 0, trailer.Length);
-                    data_stream.Close();
+                    dataStream.Write(header, 0, header.Length);
+                    dataStream.Write(fileData, 0, fileData.Length);
+                    dataStream.Write(trailer, 0, trailer.Length);
+                    dataStream.Close();
 
                     // Read the response
-                    using (WebResponse response = request.GetResponse())
+                    using (var response = request.GetResponse())
                     {
-                        using (var response_data_stream = response.GetResponseStream())
+                        using (var responseDataStream = response.GetResponseStream())
                         {
-                            using (var sr = new StreamReader(response_data_stream))
+                            using (var sr = new StreamReader(responseDataStream))
                             {
                                 ResponseXml = sr.ReadToEnd();
                             }
@@ -363,26 +363,21 @@ namespace FortnoxAPILibrary
 
             try
             {
-                string url = "";
-                Guid test = new Guid();
-
-                if (Guid.TryParse(idOrPath, out test))
-                {
+                string url;
+                
+                if (Guid.TryParse(idOrPath, out var unused))
                     url = GetUrl(idOrPath);
-                }
                 else
-                {
                     url = GetUrl() + "?path=" + Uri.EscapeDataString(idOrPath);
-                }
 
                 LocalPath = localPath;
 
-                HttpWebRequest request = SetupRequest(url, "GET");
+                var request = SetupRequest(url, "GET");
 
-                using (HttpWebResponse response = (HttpWebResponse) request.GetResponse())
+                using (var response = (HttpWebResponse) request.GetResponse())
                 {
-                    httpStatusCode = response.StatusCode;
-                    using (Stream responseStream = response.GetResponseStream())
+                    HttpStatusCode = response.StatusCode;
+                    using (var responseStream = response.GetResponseStream())
                     {
 						if (file == null)
 						{
@@ -412,17 +407,13 @@ namespace FortnoxAPILibrary
         {
             ResponseXml = "";
 
-            File file = default;
-
             try
             {
+                var xs = new XmlSerializer(typeof(File));
 
-                XmlSerializer xs = new XmlSerializer(typeof(File));
+                var url = ConnectionCredentials.FortnoxAPIServer + "/" + Resource + "/move/" + fileId;
 
-                string url = ConnectionCredentials.FortnoxAPIServer + "/" + Resource + "/move/" + fileId;
-                Guid test = new Guid();
-
-                if (string.IsNullOrWhiteSpace(destination) || Guid.TryParse(destination, out test))
+                if (string.IsNullOrWhiteSpace(destination) || Guid.TryParse(destination, out var unused))
                 {
                     url += "/" + destination;
                 }
@@ -431,11 +422,11 @@ namespace FortnoxAPILibrary
                     url += "/?destination=" + Uri.EscapeDataString(destination);
                 }
 
-                HttpWebRequest request = SetupRequest(url, "PUT");
-                using (HttpWebResponse response = (HttpWebResponse) request.GetResponse())
+                var request = SetupRequest(url, "PUT");
+                using (var response = (HttpWebResponse) request.GetResponse())
                 {
-                    httpStatusCode = response.StatusCode;
-                    using (Stream responseStream = response.GetResponseStream())
+                    HttpStatusCode = response.StatusCode;
+                    using (var responseStream = response.GetResponseStream())
                     {
                         using (var sr = new StreamReader(responseStream))
                         {
@@ -453,12 +444,12 @@ namespace FortnoxAPILibrary
                 Error = HandleException(we);
             }
 
-            return file;
+            return null;
         }
 
         private void WriteStream(Stream readStream)
         {
-            using (FileStream writeStream = new FileStream(LocalPath, FileMode.Create, FileAccess.Write))
+            using (var writeStream = new FileStream(LocalPath, FileMode.Create, FileAccess.Write))
             {
                 readStream.CopyTo(writeStream);
             }
@@ -470,17 +461,17 @@ namespace FortnoxAPILibrary
             {
                 throw new Exception("Inget svar från Fortnox API. Kontrollera inre exception.", we);
             }
-            using (HttpWebResponse response = (HttpWebResponse)we.Response)
+            using (var response = (HttpWebResponse)we.Response)
             {
-                httpStatusCode = response.StatusCode;
+                HttpStatusCode = response.StatusCode;
 
-                if (response == null || httpStatusCode == HttpStatusCode.InternalServerError)
+                if (response == null || HttpStatusCode == HttpStatusCode.InternalServerError)
                 {
                     throw we;
                 }
                 using (var errorStream = response.GetResponseStream())
                 {
-                    XmlSerializer errorSerializer = new XmlSerializer(typeof(ErrorInformation));
+                    var errorSerializer = new XmlSerializer(typeof(ErrorInformation));
 
                     try
                     {
