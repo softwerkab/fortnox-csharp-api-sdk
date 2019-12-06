@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using FortnoxAPILibrary.Connectors;
+using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
@@ -11,33 +12,43 @@ namespace FortnoxAPILibrary.Entities
 
 	
 	
+	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	public class Project
 	{
         /// <remarks/>
+		[JsonProperty]
 		public string Comments { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public string ContactPerson { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public string Description { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public string EndDate { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public string ProjectLeader { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public string ProjectNumber { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public ProjectConnector.Status Status { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public string StartDate { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[JsonProperty]
 		public string url { get; private set; }
     }
 }

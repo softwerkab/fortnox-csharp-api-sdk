@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
@@ -7,6 +8,7 @@ using System.ComponentModel;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     public class CostCenter
 	{
         /// <summary>
@@ -16,6 +18,7 @@ namespace FortnoxAPILibrary.Entities
 		/// <para>Type:			String</para>
 		/// <para>Permissions:	RW</para>
 		/// </summary>
+		[JsonProperty]
 		public string Code { get; set; }
 
         /// <summary>
@@ -24,6 +27,7 @@ namespace FortnoxAPILibrary.Entities
         /// <para>Type:			String</para>
         /// <para>Permissions:	RW</para>
         /// </summary>
+        [JsonProperty]
         public string Description { get; set; }
 
         /// <summary>
@@ -32,6 +36,7 @@ namespace FortnoxAPILibrary.Entities
         /// <para>Type:			String</para>
         /// <para>Permissions:	RW</para>
         /// </summary>
+        [JsonProperty]
         public string Note { get; set; }
 
         /// <summary>
@@ -40,9 +45,11 @@ namespace FortnoxAPILibrary.Entities
         /// <para>Type:			Bool</para>
         /// <para>Permissions:	RW</para>
         /// </summary>
+        [JsonProperty]
         public string Active { get; set; }
 
         /// <remarks/>
+		[JsonProperty]
 		public string url { get; private set; }
     }
 }

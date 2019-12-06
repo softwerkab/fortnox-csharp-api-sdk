@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
@@ -7,18 +8,23 @@ using System.ComponentModel;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
+	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	public class ModeOfPayment
 	{
         /// <remarks/>
+		[JsonProperty]
 		public string AccountNumber { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public string Code { get; set; }
 
         /// <remarks/>
+        [JsonProperty]
         public string Description { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[JsonProperty]
 		public string url { get; private set; }
     }
 }
