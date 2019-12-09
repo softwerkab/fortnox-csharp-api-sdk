@@ -1,4 +1,3 @@
-using FortnoxAPILibrary.Connectors;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
@@ -28,7 +27,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public AccountConnector.CostCenterSettingsValue? CostCenterSettings { get; set; }
+        public CostCenterSettingsValue? CostCenterSettings { get; set; }
 
 		/// <remarks/>
 		[JsonProperty]
@@ -44,7 +43,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public AccountConnector.ProjectSettingsValue? ProjectSettings { get; set; }
+        public ProjectSettingsValue? ProjectSettings { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -56,7 +55,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public AccountConnector.TransactionInfoSettingsValue? TransactionInformationSettings { get; set; }
+        public TransactionInfoSettingsValue? TransactionInformationSettings { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -98,5 +97,38 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty(PropertyName = "@url")]
         public string Url { get; set; }
+    }
+
+    /// <remarks/>
+    public enum CostCenterSettingsValue
+    {
+        /// <remarks/>
+        ALLOWED,
+        /// <remarks/>
+        NOTALLOWED,
+        /// <remarks/>
+        MANDATORY
+    }
+
+    /// <remarks/>
+    public enum ProjectSettingsValue
+    {
+        /// <remarks/>
+        ALLOWED,
+        /// <remarks/>
+        NOTALLOWED,
+        /// <remarks/>
+        MANDATORY
+    }
+
+    /// <remarks/>
+    public enum TransactionInfoSettingsValue
+    {
+        /// <remarks/>
+        ALLOWED,
+        /// <remarks/>
+        NOTALLOWED,
+        /// <remarks/>
+        MANDATORY
     }
 }

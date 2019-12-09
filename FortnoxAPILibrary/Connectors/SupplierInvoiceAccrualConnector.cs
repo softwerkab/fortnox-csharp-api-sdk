@@ -12,22 +12,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "supplierinvoiceaccruals";
 		}
-
-		/// <remarks/>
-		public enum Period
-		{
-			/// <remarks/>
-			MONTHLY,
-			/// <remarks/>
-			BIMONTHLY,
-			/// <remarks/>
-			QUARTERLY,
-			/// <remarks/>
-			SEMIANNUALLY,
-			/// <remarks/>
-			ANNUALLY
-		}
-
+        
 		/// <summary>
 		/// Get an supplierinvoice accrual	
 		/// </summary>

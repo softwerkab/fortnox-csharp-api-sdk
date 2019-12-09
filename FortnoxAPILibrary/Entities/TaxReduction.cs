@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using FortnoxAPILibrary.Connectors;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
@@ -39,7 +38,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public TaxReductionConnector.ReferenceDocumentType ReferenceDocumentType { get; set; }
+        public ReferenceDocumentType ReferenceDocumentType { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -59,7 +58,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public TaxReductionConnector.TypeOfReduction TypeOfReduction { get; set; }
+        public TypeOfReduction TypeOfReduction { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[JsonProperty]
@@ -109,5 +108,25 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty(PropertyName = "@url")]
         public string Url { get; set; }
+    }
+
+    /// <remarks/>
+    public enum TypeOfReduction
+    {
+        /// <remarks/>
+        ROT,
+        /// <remarks/>
+        RUT
+    }
+
+    /// <remarks/>
+    public enum ReferenceDocumentType
+    {
+        /// <remarks/>
+        OFFER,
+        /// <remarks/>
+        ORDER,
+        /// <remarks/>
+        INVOICE
     }
 }

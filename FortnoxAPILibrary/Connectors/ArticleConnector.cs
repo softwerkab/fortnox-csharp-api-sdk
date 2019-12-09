@@ -52,16 +52,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		[FilterProperty]
 		public string Webshop { get; set; }
-
-		/// <remarks/>
-		public enum ArticleType
-		{
-			/// <remarks/>
-			STOCK,
-			/// <remarks/>
-			SERVICE
-		}
-
+        
 		/// <remarks/>
 		public ArticleConnector()
 		{

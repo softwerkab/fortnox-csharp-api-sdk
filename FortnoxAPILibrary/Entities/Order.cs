@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using FortnoxAPILibrary.Connectors;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
@@ -344,7 +343,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public OrderConnector.DiscountType DiscountType { get; set; }
+        public DiscountType DiscountType { get; set; }
 
         /// <remarks/>
         [JsonProperty]

@@ -16,27 +16,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <remarks/>
         [FilterProperty("filter")]
 		public Filter.Invoice? FilterBy { get; set; }
-
-        /// <remarks/>
-        public enum TypeOfReduction
-		{
-			/// <remarks/>
-			ROT,
-			/// <remarks/>
-			RUT
-		}
-
-		/// <remarks/>
-		public enum ReferenceDocumentType
-		{
-			/// <remarks/>
-			OFFER,
-			/// <remarks/>
-			ORDER,
-			/// <remarks/>
-			INVOICE
-		}
-
+        
 		/// <remarks/>
 		public TaxReductionConnector()
 		{

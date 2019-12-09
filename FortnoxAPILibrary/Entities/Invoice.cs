@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using FortnoxAPILibrary.Connectors;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
@@ -198,7 +197,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public InvoiceConnector.InvoiceType? InvoiceType { get; set; }
+        public InvoiceType? InvoiceType { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -446,7 +445,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public InvoiceConnector.DiscountType? DiscountType { get; set; }
+        public DiscountType? DiscountType { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -576,5 +575,29 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
         [JsonProperty(PropertyName = "@url")]
         public string Url { get; private set; }
+    }
+
+    /// <remarks/>
+    public enum DiscountType
+    {
+        /// <remarks/>
+        AMOUNT,
+        /// <remarks/>
+        PERCENT
+    }
+
+    /// <remarks/>
+    public enum InvoiceType
+    {
+        /// <remarks/>
+        INVOICE,
+        /// <remarks/>
+        CASHINVOICE,
+        /// <remarks/>
+        INTRESTINVOICE,
+        /// <remarks/>
+        AGREEMENTINVOICE,
+        /// <remarks/>
+        SUMMARYINVOICE
     }
 }

@@ -13,32 +13,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "predefinedvoucherseries";
 		}
-
-		/// <remarks/>
-		public enum PreDefinedVoucherSeriesName
-		{
-			/// <remarks/>
-			ANL,
-			/// <remarks/>
-			CASHINVOICE,
-			/// <remarks/>
-			INVOICE,
-			/// <remarks/>
-			INVOICEACCRUAL,
-			/// <remarks/>
-			INVOICEPAYMENT,
-			/// <remarks/>
-			SALARY,
-			/// <remarks/>
-			SUPPLIERINVOICE,
-			/// <remarks/>
-			SUPPLIERINVOICEACCRUAL,
-			/// <remarks/>
-			SUPPLIERINVOICEPAYMENT,
-            /// <remarks/>
-            VAT
-		}
-
+        
 		/// <summary>
 		/// Finds a pre defined voucher series by name
 		/// </summary>
