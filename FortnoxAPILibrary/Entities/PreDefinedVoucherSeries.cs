@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using FortnoxAPILibrary.Connectors;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
@@ -14,7 +13,7 @@ namespace FortnoxAPILibrary.Entities
     {
         /// <summary>This field is Read-Only in Fortnox</summary>
         [JsonProperty]
-        public PreDefinedVoucherSeriesConnector.PreDefinedVoucherSeriesName Name { get; private set; }
+        public PreDefinedVoucherSeriesName Name { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -39,5 +38,30 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty(PropertyName = "@url")]
         public string Url { get; set; }
+    }
+
+    /// <remarks/>
+    public enum PreDefinedVoucherSeriesName
+    {
+        /// <remarks/>
+        ANL,
+        /// <remarks/>
+        CASHINVOICE,
+        /// <remarks/>
+        INVOICE,
+        /// <remarks/>
+        INVOICEACCRUAL,
+        /// <remarks/>
+        INVOICEPAYMENT,
+        /// <remarks/>
+        SALARY,
+        /// <remarks/>
+        SUPPLIERINVOICE,
+        /// <remarks/>
+        SUPPLIERINVOICEACCRUAL,
+        /// <remarks/>
+        SUPPLIERINVOICEPAYMENT,
+        /// <remarks/>
+        VAT
     }
 }

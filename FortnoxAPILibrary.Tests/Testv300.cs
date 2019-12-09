@@ -392,12 +392,12 @@ namespace FortnoxAPILibrary.Tests
         public void Test_issue50_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/50
         {
             var connector = new CustomerConnector();
-            var newCustomer = connector.Create(new Customer() { Name = "TestCustomer", City = "Växjö", Type = CustomerConnector.Type.COMPANY });
+            var newCustomer = connector.Create(new Customer() { Name = "TestCustomer", City = "Växjö", Type = CustomerType.COMPANY });
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
 
             var updatedCustomer = connector.Update(new Customer() {CustomerNumber = newCustomer.CustomerNumber, City = "Stockholm"});
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
-            Assert.AreEqual(CustomerConnector.Type.COMPANY, updatedCustomer.Type);
+            Assert.AreEqual(CustomerType.COMPANY, updatedCustomer.Type);
 
             connector.Delete(newCustomer.CustomerNumber);
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
@@ -494,7 +494,7 @@ namespace FortnoxAPILibrary.Tests
                 InvoiceDate = "2019-01-20", 
                 DueDate = "2019-02-20", 
                 CustomerNumber = tmpCustomer.CustomerNumber,
-                InvoiceType = InvoiceConnector.InvoiceType.INVOICE,
+                InvoiceType = InvoiceType.INVOICE,
                 InvoiceRows = new List<InvoiceRow>()
                 { //Add Empty rows
                     new InvoiceRow(), //Empty Row

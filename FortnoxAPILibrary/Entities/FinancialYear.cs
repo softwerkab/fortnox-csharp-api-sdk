@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using FortnoxAPILibrary.Connectors;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
@@ -23,7 +22,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public FinancialYearConnector.AccountingMethod AccountingMethod { get; set; }
+        public AccountingMethod AccountingMethod { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -57,5 +56,14 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty(PropertyName = "@url")]
         public string Url { get; set; }
+    }
+
+    /// <remarks/>
+    public enum AccountingMethod
+    {
+        /// <remarks/>
+        ACCRUAL,
+        /// <remarks/>
+        CASH
     }
 }

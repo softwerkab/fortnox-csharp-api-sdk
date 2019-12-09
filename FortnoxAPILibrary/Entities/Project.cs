@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using FortnoxAPILibrary.Connectors;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
@@ -38,7 +37,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public ProjectConnector.Status Status { get; set; }
+        public Status Status { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -76,5 +75,16 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty(PropertyName = "@url")]
         public string Url { get; set; }
+    }
+
+    /// <remarks/>
+    public enum Status
+    {
+        /// <remarks/>
+        NOTSTARTED,
+        /// <remarks/>
+        ONGOING,
+        /// <remarks/>
+        COMPLETED
     }
 }

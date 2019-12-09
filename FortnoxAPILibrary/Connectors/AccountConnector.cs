@@ -7,39 +7,6 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class AccountConnector : FinancialYearBasedEntityConnector<Account, EntityCollection<AccountSubset>, Sort.By.Account?>
 	{
-		/// <remarks/>
-		public enum CostCenterSettingsValue
-		{
-			/// <remarks/>
-			ALLOWED,
-			/// <remarks/>
-			NOTALLOWED,
-			/// <remarks/>
-			MANDATORY
-		}
-
-		/// <remarks/>
-		public enum ProjectSettingsValue
-		{
-			/// <remarks/>
-			ALLOWED,
-			/// <remarks/>
-			NOTALLOWED,
-			/// <remarks/>
-			MANDATORY
-		}
-
-		/// <remarks/>
-		public enum TransactionInfoSettingsValue
-		{
-			/// <remarks/>
-			ALLOWED,
-			/// <remarks/>
-			NOTALLOWED,
-			/// <remarks/>
-			MANDATORY
-		}
-
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>

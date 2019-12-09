@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using FortnoxAPILibrary.Connectors;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
@@ -133,7 +132,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public SupplierInvoiceConnector.SalesType SalesType { get; set; }
+        public SalesType SalesType { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -153,7 +152,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public SupplierInvoiceConnector.VATType VATType { get; set; }
+        public InvoiceVATType VATType { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -282,5 +281,25 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty(PropertyName = "@url")]
         public string Url { get; set; }
+    }
+
+    /// <remarks/>
+    public enum SalesType
+    {
+        /// <remarks/>
+        STOCK,
+        /// <remarks/>
+        SERVICE
+    }
+
+    /// <remarks/>
+    public enum InvoiceVATType
+    {
+        /// <remarks/>
+        NORMAL,
+        /// <remarks/>
+        REVERSE,
+        /// <remarks/>
+        EUINTERNAL
     }
 }

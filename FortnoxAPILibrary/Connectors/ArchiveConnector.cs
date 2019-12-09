@@ -103,7 +103,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			string resource = "";
 
-			Type type = f.GetType();
+            var type = f.GetType();
 			MemberInfo[] memInfo = type.GetMember(f.ToString());
 			object[] attrs = memInfo[0].GetCustomAttributes(typeof(RealValueAttribute), false);
 			if (attrs.Length > 0)

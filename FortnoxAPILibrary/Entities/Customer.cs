@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using FortnoxAPILibrary.Connectors;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
@@ -213,7 +212,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public CustomerConnector.Type? Type { get; set; }
+        public CustomerType? Type { get; set; }
 
 		/// <remarks/>
 		[JsonProperty]
@@ -221,7 +220,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public CustomerConnector.VATType? VATType { get; set; }
+        public VATType? VATType { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -269,15 +268,15 @@ namespace FortnoxAPILibrary.Entities
 	{
 		/// <remarks/>
 		[JsonProperty]
-		public CustomerConnector.DefaultInvoiceDeliveryType? Invoice { get; set; }
+		public DefaultInvoiceDeliveryType? Invoice { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public CustomerConnector.DefaultOfferDeliveryType? Offer { get; set; }
+        public DefaultOfferDeliveryType? Offer { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public CustomerConnector.DefaultOrderDeliveryType? Order { get; set; }
+        public DefaultOrderDeliveryType? Order { get; set; }
     }
 
 	/// <remarks/>
@@ -343,5 +342,60 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty]
         public string url { get; set; }
+    }
+
+    /// <remarks/>
+    public enum CustomerType
+    {
+        /// <remarks/>
+        PRIVATE,
+        /// <remarks/>
+        COMPANY
+    }
+
+    /// <remarks/>
+    public enum VATType
+    {
+        /// <remarks/>
+        SEVAT,
+        /// <remarks/>
+        SEREVERSEDVAT,
+        /// <remarks/>
+        EUREVERSEDVAT,
+        /// <remarks/>
+        EUVAT,
+        /// <remarks/>
+        EXPORT
+    }
+
+    /// <remarks/>
+    public enum DefaultInvoiceDeliveryType
+    {
+        /// <remarks/>
+        EMAIL,
+        /// <remarks/>
+        PRINT,
+        /// <remarks/>
+        PRINTSERVICE,
+        /// <remarks/>
+        ELECTRONICINVOICE
+    }
+
+    /// <remarks/>
+    public enum DefaultOfferDeliveryType
+    {
+        /// <remarks/>
+        EMAIL,
+        /// <remarks/>
+        PRINT
+    }
+
+    /// <remarks/>
+    public enum DefaultOrderDeliveryType
+    {
+        /// <remarks/>
+        EMAIL,
+        /// <remarks/>
+        PRINT
     }
 }

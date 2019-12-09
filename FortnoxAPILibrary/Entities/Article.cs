@@ -1,4 +1,3 @@
-using FortnoxAPILibrary.Connectors;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
@@ -132,7 +131,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public ArticleConnector.ArticleType? Type { get; set; }
+        public ArticleType? Type { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -234,5 +233,14 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty]
         public string WebshopArticle { get; set; }
+    }
+
+    /// <remarks/>
+    public enum ArticleType
+    {
+        /// <remarks/>
+        STOCK,
+        /// <remarks/>
+        SERVICE
     }
 }

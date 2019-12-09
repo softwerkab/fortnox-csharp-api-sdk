@@ -108,30 +108,6 @@ namespace FortnoxAPILibrary.Connectors
 		public Filter.Invoice? FilterBy { get; set; }
 
         /// <remarks/>
-        public enum DiscountType
-		{
-			/// <remarks/>
-			AMOUNT,
-			/// <remarks/>
-			PERCENT
-		}
-
-		/// <remarks/>
-		public enum InvoiceType
-		{
-			/// <remarks/>
-			INVOICE,
-			/// <remarks/>
-			CASHINVOICE,
-			/// <remarks/>
-			INTRESTINVOICE,
-			/// <remarks/>
-			AGREEMENTINVOICE,
-			/// <remarks/>
-			SUMMARYINVOICE
-		}
-
-		/// <remarks/>
 		public InvoiceConnector()
 		{
 			Resource = "invoices";

@@ -78,16 +78,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		[FilterProperty("filter")]
 		public Filter.Offer? FilterBy { get; set; }
-
-        /// <remarks/>
-		public enum DiscountType
-		{
-			/// <remarks/>
-			AMOUNT,
-			/// <remarks/>
-			PERCENT
-		}
-
+        
 		/// <remarks/>
 		public OfferConnector()
 		{

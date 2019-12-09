@@ -7,19 +7,7 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class ProjectConnector : EntityConnector<Project, EntityCollection<ProjectSubset>, Sort.By.Project?>
 	{
-
-		/// <remarks/>
-		public enum Status
-		{
-			/// <remarks/>
-			NOTSTARTED,
-			/// <remarks/>
-			ONGOING,
-			/// <remarks/>
-			COMPLETED
-		}
-
-		/// <summary>
+        /// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
         [FilterProperty]

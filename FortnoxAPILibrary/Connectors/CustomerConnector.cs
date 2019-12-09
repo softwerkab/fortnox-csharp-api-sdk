@@ -7,62 +7,7 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class CustomerConnector : EntityConnector<Customer, EntityCollection<CustomerSubset>, Sort.By.Customer?>
 	{
-		/// <remarks/>
-		public enum Type
-		{
-			/// <remarks/>
-			PRIVATE,
-			/// <remarks/>
-			COMPANY
-        }
-
-		/// <remarks/>
-		public enum VATType
-		{
-			/// <remarks/>
-			SEVAT,
-			/// <remarks/>
-			SEREVERSEDVAT,
-			/// <remarks/>
-			EUREVERSEDVAT,
-			/// <remarks/>
-			EUVAT,
-			/// <remarks/>
-			EXPORT
-		}
-
-		/// <remarks/>
-		public enum DefaultInvoiceDeliveryType
-		{
-			/// <remarks/>
-			EMAIL,
-			/// <remarks/>
-			PRINT,
-			/// <remarks/>
-			PRINTSERVICE,
-            /// <remarks/>
-            ELECTRONICINVOICE
-		}
-
-		/// <remarks/>
-		public enum DefaultOfferDeliveryType
-		{
-			/// <remarks/>
-			EMAIL,
-			/// <remarks/>
-			PRINT
-		}
-
-		/// <remarks/>
-		public enum DefaultOrderDeliveryType
-		{
-			/// <remarks/>
-			EMAIL,
-			/// <remarks/>
-			PRINT
-		}
-
-		/// <remarks/>
+        /// <remarks/>
 		[FilterProperty("filter")]
 		public Filter.Customer? FilterBy { get; set; }
 

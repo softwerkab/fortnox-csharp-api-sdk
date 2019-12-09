@@ -7,27 +7,6 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class SupplierInvoiceConnector : FinancialYearBasedEntityConnector<SupplierInvoice, EntityCollection<SupplierInvoiceSubset>, Sort.By.SupplierInvoice?>
 	{
-		/// <remarks/>
-		public enum VATType
-        {
-            /// <remarks/>
-            NORMAL,
-            /// <remarks/>
-            REVERSE,
-            /// <remarks/>
-            EUINTERNAL
-        }
-
-        /// <remarks/>
-        public enum SalesType
-        {
-            /// <remarks/>
-            STOCK,
-            /// <remarks/>
-            SERVICE
-        }
-
-
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>

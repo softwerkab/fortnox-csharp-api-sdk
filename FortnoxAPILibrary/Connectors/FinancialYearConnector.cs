@@ -47,14 +47,5 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseFind();
 		}
-
-		/// <remarks/>
-		public enum AccountingMethod
-		{
-			/// <remarks/>
-			ACCRUAL,
-			/// <remarks/>
-			CASH
-		}
-	}
+    }
 }

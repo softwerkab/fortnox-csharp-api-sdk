@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using FortnoxAPILibrary.Connectors;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
@@ -41,7 +40,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public SupplierInvoiceAccrualConnector.Period Period { get; set; }
+        public Period Period { get; set; }
 
         /// <remarks/>
 		[JsonProperty]
@@ -110,7 +109,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public SupplierInvoiceAccrualConnector.Period Period { get; set; }
+        public Period Period { get; set; }
 
         /// <remarks/>
         [JsonProperty(PropertyName = "@url")]
