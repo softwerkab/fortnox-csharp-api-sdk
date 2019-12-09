@@ -11,7 +11,7 @@ namespace FortnoxAPILibrary.Entities
     /// <remarks/>
 
 	[Entity(SingularName = "TaxReduction", PluralName = "TaxReductions")]
-	public class TaxReduction : TaxReductionSubset
+	public class TaxReduction 
 	{
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[JsonProperty]

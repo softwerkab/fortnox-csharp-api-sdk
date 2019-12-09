@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[Entity(SingularName = "Unit", PluralName = "Units")]
-	public class Unit : UnitSubset
+	public class Unit 
 	{
 		/// <remarks/>
 		[JsonProperty]

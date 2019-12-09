@@ -7,7 +7,7 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [Entity(SingularName = "ArticleFileConnection", PluralName = "ArticleFileConnections")]
-    public class ArticleFileConnection : ArticleFileConnectionSubset
+    public class ArticleFileConnection 
 	{
         /// <remarks/>
 		[JsonProperty]

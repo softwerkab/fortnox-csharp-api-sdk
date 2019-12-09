@@ -11,7 +11,7 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[Entity(SingularName = "SupplierInvoiceAccrual", PluralName = "SupplierInvoiceAccruals")]
-	public class SupplierInvoiceAccrual : SupplierInvoiceAccrualSubset
+	public class SupplierInvoiceAccrual 
 	{
         /// <remarks/>
         public SupplierInvoiceAccrual()

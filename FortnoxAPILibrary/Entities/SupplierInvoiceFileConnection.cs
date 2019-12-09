@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[Entity(SingularName = "SupplierInvoiceFileConnection", PluralName = "SupplierInvoiceFileConnections")]
-	public class SupplierInvoiceFileConnection : SupplierInvoiceFileConnectionSubset
+	public class SupplierInvoiceFileConnection 
 	{
         /// <remarks/>
 		[JsonProperty]

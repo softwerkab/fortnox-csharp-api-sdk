@@ -7,7 +7,7 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[Entity(SingularName = "AccountChart", PluralName = "AccountCharts")]
-	public class AccountChart : AccountChartSubset
+	public class AccountChart 
 	{
         /// <remarks/>
         [JsonProperty]

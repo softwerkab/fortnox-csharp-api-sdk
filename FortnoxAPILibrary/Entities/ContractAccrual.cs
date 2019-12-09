@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [Entity(SingularName = "ContractAccrual", PluralName = "ContractAccruals")]
-    public class ContractAccrual : ContractAccrualSubSet
+    public class ContractAccrual 
     {
 		/// <remarks/>
 		[JsonProperty]

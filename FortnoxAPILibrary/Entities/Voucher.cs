@@ -10,7 +10,7 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[Entity(SingularName = "Voucher", PluralName = "Vouchers")]
-	public class Voucher : VoucherSubset
+	public class Voucher 
 	{
         /// <remarks/>
         public Voucher()
