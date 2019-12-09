@@ -10,7 +10,6 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	[Entity(SingularName = "Order", PluralName = "Orders")]
 	public class Order : OrderSubset
 	{
@@ -281,7 +280,6 @@ namespace FortnoxAPILibrary.Entities
 	
 	
 	
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	public class OrderEmailInformation
 	{
 		/// <remarks/>
@@ -310,7 +308,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	public class OrderRow
 	{
 		/// <remarks/>
@@ -379,7 +376,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "Order", PluralName = "Orders")]
     public class OrderSubset
     {

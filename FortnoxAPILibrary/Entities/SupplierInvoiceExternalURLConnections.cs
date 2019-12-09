@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "SupplierInvoiceExternalURLConnection")]
     public class SupplierInvoiceExternalURLConnection
     {

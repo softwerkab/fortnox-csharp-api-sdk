@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "PrintTemplate", PluralName = "PrintTemplates")]
     public class PrintTemplate : PrintTemplatesSubset
     {
@@ -21,7 +20,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "PrintTemplate", PluralName = "PrintTemplates")]
     public class PrintTemplatesSubset
 	{

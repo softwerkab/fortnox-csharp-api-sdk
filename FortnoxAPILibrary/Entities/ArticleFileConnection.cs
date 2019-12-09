@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "ArticleFileConnection", PluralName = "ArticleFileConnections")]
     public class ArticleFileConnection : ArticleFileConnectionSubset
 	{
@@ -24,7 +23,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     public class ArticleFileConnectionSubset
     {
         /// <remarks/>

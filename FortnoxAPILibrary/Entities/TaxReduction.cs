@@ -10,7 +10,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	[Entity(SingularName = "TaxReduction", PluralName = "TaxReductions")]
 	public class TaxReduction : TaxReductionSubset
 	{
@@ -80,7 +79,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "TaxReduction", PluralName = "TaxReductions")]
     public class TaxReductionSubset
     {

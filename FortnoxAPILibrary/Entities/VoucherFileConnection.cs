@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	[Entity(SingularName = "VoucherFileConnection", PluralName = "VoucherFileConnections")]
 	public class VoucherFileConnection : VoucherFileConnectionSubset
 	{
@@ -38,7 +37,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "VoucherFileConnection", PluralName = "VoucherFileConnections")]
     public class VoucherFileConnectionSubset
     {

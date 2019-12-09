@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "PreDefinedVoucherSeries", PluralName = "PreDefinedVoucherSeriesCollection")]
     public class PreDefinedVoucherSeries : PreDefinedVoucherSeriesSubset{
 
@@ -26,7 +25,6 @@ namespace FortnoxAPILibrary.Entities
         public string Url { get; private set; }
     }
 
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "PreDefinedVoucherSeries", PluralName = "PreDefinedVoucherSeriesCollection")]
     public class PreDefinedVoucherSeriesSubset
     {

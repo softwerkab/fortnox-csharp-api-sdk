@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	[Entity(SingularName = "ModeOfPayment")]
 	public class ModeOfPayment : ModeOfPaymentSubset
 	{
@@ -30,7 +29,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "ModeOfPayment")]
     public class ModeOfPaymentSubset
     {

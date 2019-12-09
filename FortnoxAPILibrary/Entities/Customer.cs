@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	[Entity(SingularName = "Customer", PluralName = "Customers")]
 	public class Customer : CustomerSubset
 	{
@@ -266,7 +265,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	public class InvoiceDefaultDeliveryTypes
 	{
 		/// <remarks/>
@@ -283,7 +281,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	public class InvoiceDefaultTemplates
 	{
         /// <remarks/>
@@ -304,7 +301,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "Customer", PluralName = "Customers")]
     public class CustomerSubset
     {

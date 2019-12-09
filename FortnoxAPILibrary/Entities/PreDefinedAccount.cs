@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "PreDefinedAccount", PluralName = "PreDefinedAccounts")]
     public class PreDefinedAccount : PreDefinedAccountSubset
     {
@@ -26,7 +25,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "PreDefinedAccount", PluralName = "PreDefinedAccounts")]
     public class PreDefinedAccountSubset
     {
