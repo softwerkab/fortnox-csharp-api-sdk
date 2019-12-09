@@ -9,7 +9,8 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class ContractAccrual
+    [Entity(SingularName = "ContractAccrual", PluralName = "ContractAccruals")]
+    public class ContractAccrual : ContractAccrualSubSet
     {
 		/// <remarks/>
 		[JsonProperty]
@@ -52,6 +53,28 @@ namespace FortnoxAPILibrary.Entities
         public string VATIncluded { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "ContractAccrual", PluralName = "ContractAccruals")]
+    public class ContractAccrualSubSet
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string Description { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string InvoiceNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Period { get; set; }
+
+        /// <remarks/>
         [JsonProperty(PropertyName = "@url")]
         public string Url { get; set; }
     }

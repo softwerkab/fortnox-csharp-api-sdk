@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ContractConnector : FinancialYearBasedEntityConnector<Contract, Contracts, Sort.By.Contract>
+    public class ContractConnector : FinancialYearBasedEntityConnector<Contract, EntityCollection<ContractSubset>, Sort.By.Contract>
     {
         /// <remarks/>
         [FilterProperty]
@@ -94,7 +94,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Gets at list of Contracts
         /// </summary>
         /// <returns>A list of Contracts</returns>
-        public Contracts Find()
+        public EntityCollection<ContractSubset> Find()
         {
             return BaseFind();
         }

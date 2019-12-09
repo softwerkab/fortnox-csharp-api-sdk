@@ -9,11 +9,9 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-
-	
-	
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class SupplierInvoicePayment
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+	[Entity(SingularName = "SupplierInvoicePayment", PluralName = "SupplierInvoicePayments")]
+	public class SupplierInvoicePayment : SupplierInvoicePaymentSubset
 	{
         /// <remarks/>
 		[JsonProperty]
@@ -105,11 +103,7 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-	
-	
-	
-
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	public class SupplierInvoiceWriteOff
 	{
         /// <remarks/>
@@ -139,5 +133,47 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty]
         public string Project { get; set; }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "SupplierInvoicePayment", PluralName = "SupplierInvoicePayments")]
+    public class SupplierInvoicePaymentSubset
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string Amount { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Booked { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Currency { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string CurrencyRate { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string CurrencyUnit { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string InvoiceNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Number { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Source { get; set; }
+
+        /// <remarks/>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
     }
 }

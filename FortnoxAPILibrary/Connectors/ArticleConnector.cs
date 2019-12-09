@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ArticleConnector : FinancialYearBasedEntityConnector<Article, Articles, Sort.By.Article?>
+    public class ArticleConnector : FinancialYearBasedEntityConnector<Article, EntityCollection<ArticleSubset>, Sort.By.Article?>
 	{
 		/// <remarks/>
 		[FilterProperty("filter")]
@@ -112,7 +112,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of articles
 		/// </summary>
 		/// <returns>A list of articles</returns>
-		public Articles Find()
+		public EntityCollection<ArticleSubset> Find()
 		{
 			return BaseFind();
 		}

@@ -8,6 +8,7 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "SupplierInvoiceExternalURLConnection")]
     public class SupplierInvoiceExternalURLConnection
     {
         /// <summary>This field is Read-Only in Fortnox</summary>

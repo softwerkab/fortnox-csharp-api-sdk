@@ -50,8 +50,8 @@ namespace FortnoxAPILibrary.Connectors
 			var wr = (HttpWebRequest)WebRequest.Create(requestUriString);
 			wr.Headers.Add("authorization-code", authorizationCode);
 			wr.Headers.Add("client-secret", clientSecret);
-			wr.ContentType = "application/xml";
-			wr.Accept = "application/xml";
+			wr.ContentType = "application/json";
+			wr.Accept = "application/json";
 			wr.Method = "GET";
 			return wr;
 		}

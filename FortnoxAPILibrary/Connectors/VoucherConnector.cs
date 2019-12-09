@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class VoucherConnector : FinancialYearBasedEntityConnector<Voucher, Vouchers, Sort.By.Voucher?>
+    public class VoucherConnector : FinancialYearBasedEntityConnector<Voucher, EntityCollection<VoucherSubset>, Sort.By.Voucher?>
     {
         /// <summary>
         /// Use with Find() to limit the search result
@@ -82,7 +82,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Gets a list of vouchers
         /// </summary>
         /// <returns>A list of vouchers</returns>
-        public Vouchers Find()
+        public EntityCollection<VoucherSubset> Find()
         {
             Resource = "vouchers/sublist";
 

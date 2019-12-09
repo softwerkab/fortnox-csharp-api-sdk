@@ -10,7 +10,8 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class InvoicePayment
+	[Entity(SingularName = "InvoicePayment", PluralName = "InvoicePayments")]
+	public class InvoicePayment : InvoicePaymentSubset
 	{
         /// <remarks/>
 		[JsonProperty]
@@ -136,5 +137,51 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty]
         public string Project { get; set; }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "InvoicePayment", PluralName = "InvoicePayments")]
+    public class InvoicePaymentSubset
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string Amount { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Booked { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Currency { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string CurrencyRate { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string CurrencyUnit { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string InvoiceNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Number { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Source { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string PaymentDate { get; set; }
+
+        /// <remarks/>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
     }
 }

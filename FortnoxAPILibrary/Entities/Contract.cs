@@ -9,7 +9,8 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class Contract
+    [Entity(SingularName = "Contract", PluralName = "Contracts")]
+    public class Contract : ContractSubset
     {
         /// <remarks/>
         [JsonProperty]
@@ -200,6 +201,72 @@ namespace FortnoxAPILibrary.Entities
         {
             InvoiceRows = new List<InvoiceRow>();
         }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "Contract", PluralName = "Contracts")]
+    public class ContractSubset
+    {
+        /// <remarks/>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Continuous { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string ContractLength { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Currency { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string CustomerName { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string CustomerNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string DocumentNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string InvoiceInterval { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string InvoicesRemaining { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string LastInvoiceDate { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string PeriodStart { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string PeriodEnd { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Status { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string TemplateNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Total { get; set; }
     }
 
     /// <remarks/>

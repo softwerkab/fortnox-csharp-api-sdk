@@ -1,0 +1,91 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+
+namespace FortnoxAPILibrary.Entities
+{
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    public class EntityWrapper<T>
+    {
+        [GenericPropertyName]
+        public T Entity { get; set; }
+    }
+
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    public class EntityCollection<T>
+    {
+        [GenericPropertyName]
+        public List<T> Entities { get; set; }
+
+        [JsonProperty]
+        private MetaInformation MetaInformation { get; set; }
+
+        /// <remarks/>
+        public string TotalResources => MetaInformation.TotalResources;
+
+        /// <remarks/>
+        public string TotalPages => MetaInformation.TotalPages;
+
+        /// <remarks/>
+        public string CurrentPage => MetaInformation.CurrentPage;
+    }
+
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    public class MetaInformation
+    {
+        [JsonProperty("@TotalResources")]
+        public string TotalResources { get; set; }
+
+        [JsonProperty("@TotalPages")]
+        public string TotalPages { get; set; }
+
+        [JsonProperty("@CurrentPage")]
+        public string CurrentPage { get; set; }
+    }
+
+    internal class MyJsonContractResolver : DefaultContractResolver
+    {
+        protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+        {
+            var property = base.CreateProperty(member, memberSerialization);
+
+            var hasGenericName = member.GetCustomAttributes<GenericPropertyNameAttribute>().FirstOrDefault() != null;
+
+            if (hasGenericName)
+            {
+                var propertyType = ((PropertyInfo) member).PropertyType;
+                if (propertyType.IsAssignableFrom(typeof(IEnumerable))) //is collection
+                {
+                    var entityType = propertyType.GetGenericArguments()[0];
+                    var entityAtt = entityType.GetCustomAttributes<EntityAttribute>().FirstOrDefault();
+                    if (entityAtt?.SingularName != null)
+                        property.PropertyName = entityAtt.PluralName;
+                }
+                else //single 
+                {
+                    var entityType = propertyType;
+
+                    var entityAtt = entityType.GetCustomAttributes<EntityAttribute>().FirstOrDefault();
+                    if (entityAtt?.SingularName != null)
+                        property.PropertyName = entityAtt.SingularName;
+                }
+            }
+
+            return property;
+        }
+    }
+
+    internal class GenericPropertyNameAttribute : Attribute
+    {
+    }
+
+    internal class EntityAttribute : Attribute
+    {
+        public string SingularName { get; set; }
+        public string PluralName { get; set; }
+    }
+}

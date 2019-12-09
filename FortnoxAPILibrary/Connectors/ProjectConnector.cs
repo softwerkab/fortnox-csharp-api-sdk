@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ProjectConnector : EntityConnector<Project, Projects, Sort.By.Project?>
+    public class ProjectConnector : EntityConnector<Project, EntityCollection<ProjectSubset>, Sort.By.Project?>
 	{
 
 		/// <remarks/>
@@ -81,7 +81,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets at list of project, use the properties of ProjectConnector to limit the search
 		/// </summary>
 		/// <returns>A list of projects</returns>
-		public Projects Find()
+		public EntityCollection<ProjectSubset> Find()
 		{
 			return BaseFind();
 		}

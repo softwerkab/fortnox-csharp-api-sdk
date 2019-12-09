@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class WayOfDeliveryConnector : EntityConnector<WayOfDelivery, WayOfDeliveries, Sort.By.WayOfDelivery?>
+    public class WayOfDeliveryConnector : EntityConnector<WayOfDelivery, EntityCollection<WayOfDeliverySubset>, Sort.By.WayOfDelivery?>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -59,11 +59,11 @@ namespace FortnoxAPILibrary.Connectors
 			BaseDelete(wayOfDeliveryCode);
 		}
 
-		/// <summary>
-		/// Gets a list of way of deliveries
-		/// </summary>
-		/// <returns>A list of way of deliveries</returns>
-		public WayOfDeliveries Find()
+        /// <summary>
+        /// Gets a list of way of deliveries
+        /// </summary>
+        /// <returns>A list of way of deliveries</returns>
+        public EntityCollection<WayOfDeliverySubset> Find()
 		{
 			return BaseFind();
 		}

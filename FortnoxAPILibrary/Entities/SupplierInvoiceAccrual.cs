@@ -11,7 +11,8 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class SupplierInvoiceAccrual
+	[Entity(SingularName = "SupplierInvoiceAccrual", PluralName = "SupplierInvoiceAccruals")]
+	public class SupplierInvoiceAccrual : SupplierInvoiceAccrualSubset
 	{
         /// <remarks/>
         public SupplierInvoiceAccrual()
@@ -69,10 +70,7 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-	
-	
-	
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	public class SupplierInvoiceAccrualRow
 	{
         /// <remarks/>
@@ -98,5 +96,27 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty]
         public string Project { get; set; }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "SupplierInvoiceAccrual", PluralName = "SupplierInvoiceAccruals")]
+    public class SupplierInvoiceAccrualSubset
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string Description { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string InvoiceNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public SupplierInvoiceAccrualConnector.Period Period { get; set; }
+
+        /// <remarks/>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
     }
 }

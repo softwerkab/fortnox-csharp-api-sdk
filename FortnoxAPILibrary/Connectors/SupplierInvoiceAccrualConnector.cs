@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class SupplierInvoiceAccrualConnector : EntityConnector<SupplierInvoiceAccrual, SupplierInvoiceAccruals, Sort.By.SupplierInvoiceAccrual?>
+    public class SupplierInvoiceAccrualConnector : EntityConnector<SupplierInvoiceAccrual, EntityCollection<SupplierInvoiceAccrualSubset>, Sort.By.SupplierInvoiceAccrual?>
 	{
 		/// <remarks/>
 		public SupplierInvoiceAccrualConnector()
@@ -71,7 +71,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of supplier invoice accruals
 		/// </summary>
 		/// <returns>A list of supplier invoice accruals</returns>
-		public SupplierInvoiceAccruals Find()
+		public EntityCollection<SupplierInvoiceAccrualSubset> Find()
 		{
 			return BaseFind();
 		}

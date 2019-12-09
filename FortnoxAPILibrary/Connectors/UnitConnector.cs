@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	public class UnitConnector : EntityConnector<Unit, Units, Sort.By.Unit?>
+	public class UnitConnector : EntityConnector<Unit, EntityCollection<UnitSubset>, Sort.By.Unit?>
 	{
 		/// <remarks/>
 		public UnitConnector()
@@ -58,7 +58,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of units
 		/// </summary>
 		/// <returns>A list of units</returns>
-		public Units Find()
+		public EntityCollection<UnitSubset> Find()
 		{
 			return BaseFind();
 		}

@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ArticleFileConnectionConnector : EntityConnector<ArticleFileConnection, ArticleFileConnections, Sort.By.ArticleFileConnection?>
+    public class ArticleFileConnectionConnector : EntityConnector<ArticleFileConnection, EntityCollection<ArticleFileConnectionSubset>, Sort.By.ArticleFileConnection?>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -53,7 +53,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of article file Connections
 		/// </summary>
 		/// <returns></returns>
-		public ArticleFileConnections Find()
+		public EntityCollection<ArticleFileConnectionSubset> Find()
 		{
 			return BaseFind();
 		}

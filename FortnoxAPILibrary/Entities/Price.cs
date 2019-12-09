@@ -9,7 +9,8 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class Price
+	[Entity(SingularName = "Price", PluralName = "Prices")]
+	public class Price : PriceSubset
 	{
         /// <remarks/>
 		[JsonProperty]
@@ -38,5 +39,30 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
+    }
+
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "Price", PluralName = "Prices")]
+    public class PriceSubset
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string ArticleNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string FromQuantity { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string PriceList { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Price { get; set; }
+
+        /// <remarks/>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
     }
 }

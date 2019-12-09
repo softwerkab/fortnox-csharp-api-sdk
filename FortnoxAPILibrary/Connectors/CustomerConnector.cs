@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class CustomerConnector : EntityConnector<Customer, Customers, Sort.By.Customer?>
+    public class CustomerConnector : EntityConnector<Customer, EntityCollection<CustomerSubset>, Sort.By.Customer?>
 	{
 		/// <remarks/>
 		public enum Type
@@ -171,7 +171,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of customers
 		/// </summary>
 		/// <returns>A list of customers</returns>
-		public Customers Find()
+		public EntityCollection<CustomerSubset> Find()
 		{
 			return BaseFind();
 		}

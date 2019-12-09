@@ -10,7 +10,8 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class Folder
+	[Entity(SingularName = "Folder", PluralName = "Folders")]
+	public class Folder : FolderSubset
 	{
         /// <remarks/>
 		[JsonProperty]
@@ -18,11 +19,11 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public Files Files { get; set; }
+        public List<File> Files { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public Folders Folders { get; set; }
+        public List<FolderSubset> Folders { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -39,16 +40,8 @@ namespace FortnoxAPILibrary.Entities
 
 	/// <remarks/>
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class Files
-	{
-        /// <remarks/>
-		[JsonProperty]
-		public List<File> File { get; set; }
-    }
-
-	/// <remarks/>
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class File
+    [Entity(SingularName = "File", PluralName = "Files")]
+    public class File
 	{
         /// <summary>
 		/// Actual Content Type if file data is manually downloaded from archive.
@@ -122,16 +115,8 @@ namespace FortnoxAPILibrary.Entities
 
 	/// <remarks/>
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class Folders
-	{
-        /// <remarks/>
-		[JsonProperty]
-		public List<FoldersFolder> Folder { get; set; }
-    }
-
-	/// <remarks/>
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class FoldersFolder
+    [Entity(SingularName = "Folder", PluralName = "Folders")]
+    public class FolderSubset
 	{
         /// <remarks/>
 		[JsonProperty]

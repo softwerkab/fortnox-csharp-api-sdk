@@ -6,7 +6,7 @@ namespace FortnoxAPILibrary.Connectors
 {
 
     /// <remarks/>
-    public class OrderConnector : FinancialYearBasedEntityConnector<Order, Orders, Sort.By.Order?>
+    public class OrderConnector : FinancialYearBasedEntityConnector<Order, EntityCollection<OrderSubset>, Sort.By.Order?>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -145,7 +145,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of orders
 		/// </summary>
 		/// <returns>A list of orders</returns>
-		public Orders Find()
+		public EntityCollection<OrderSubset> Find()
 		{
 			return BaseFind();
 		}

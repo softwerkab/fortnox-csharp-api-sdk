@@ -10,9 +10,9 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class Invoice
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+	[Entity(SingularName = "Invoice", PluralName = "Invoices")]
+	public class Invoice : InvoiceSubset
 	{
         /// <remarks/>
         public Invoice()
@@ -491,5 +491,95 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty]
         public string VAT { get; set; }
+    }
+
+    /// <remarks/>
+	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "Invoice", PluralName = "Invoices")]
+    public class InvoiceSubset
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string Balance { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Booked { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Cancelled { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Currency { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string CurrencyRate { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string CurrencyUnit { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string CustomerName { get; set; }
+
+        /// <remarks/>
+		[JsonProperty]
+        public string CustomerNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string DocumentNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string DueDate { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string ExternalInvoiceReference1 { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string ExternalInvoiceReference2 { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string InvoiceDate { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string NoxFinans { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string OCR { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Project { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Sent { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Total { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string TermsOfPayment { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string WayOfDelivery { get; set; }
+
+        /// <summary>This field is Read-Only in Fortnox</summary>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; private set; }
     }
 }

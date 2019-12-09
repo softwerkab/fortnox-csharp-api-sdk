@@ -1,5 +1,3 @@
-using System;
-using System.ComponentModel;
 using FortnoxAPILibrary.Connectors;
 using Newtonsoft.Json;
 
@@ -9,9 +7,9 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class Account
+    [Entity(SingularName = "Account", PluralName = "Accounts")]
+    public class Account : AccountSubset
 	{
         /// <remarks/>
 		[JsonProperty]
@@ -72,5 +70,35 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "Account", PluralName = "Accounts")]
+    public class AccountSubset
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string Active { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Description { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Number { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string SRU { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Year { get; set; }
+
+        /// <remarks/>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
     }
 }

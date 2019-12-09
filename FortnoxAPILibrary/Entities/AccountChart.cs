@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
@@ -9,16 +7,18 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class AccountCharts
+	[Entity(SingularName = "AccountChart", PluralName = "AccountCharts")]
+	public class AccountChart : AccountChartSubset
 	{
         /// <remarks/>
-		[JsonProperty]
-		public List<AccountChartSubset> AccountChartSubset { get; set; }
+        [JsonProperty]
+        public string Name { get; set; }
     }
 
 	/// <remarks/>
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class AccountChartSubset
+    [Entity(SingularName = "AccountChart", PluralName = "AccountCharts")]
+    public class AccountChartSubset
 	{
 		/// <remarks/>
 		[JsonProperty]

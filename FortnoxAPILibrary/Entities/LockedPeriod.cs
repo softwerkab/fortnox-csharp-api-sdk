@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
@@ -8,6 +7,7 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "LockedPeriod")]
     public class LockedPeriod
     {
         /// <remarks/>

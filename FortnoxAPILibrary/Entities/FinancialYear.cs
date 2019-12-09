@@ -11,7 +11,8 @@ namespace FortnoxAPILibrary.Entities
     /// <remarks/>
 
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class FinancialYear
+	[Entity(SingularName = "FinancialYear", PluralName = "FinancialYears")]
+	public class FinancialYear : FinancialYearSubset
 	{
 		/// <remarks/>
 		[JsonProperty]
@@ -36,5 +37,27 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "FinancialYear", PluralName = "FinancialYears")]
+    public class FinancialYearSubset
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string Id { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string FromDate { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string ToDate { get; set; }
+
+        /// <remarks/>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
     }
 }

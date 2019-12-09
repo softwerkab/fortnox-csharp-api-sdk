@@ -8,11 +8,9 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-
-	
-	
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class Supplier
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+	[Entity(SingularName = "Supplier", PluralName = "Suppliers")]
+	public class Supplier : SupplierSubset
 	{
         /// <remarks/>
 		[JsonProperty]
@@ -177,5 +175,43 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "Supplier", PluralName = "Suppliers")]
+    public class SupplierSubset
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string City { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Email { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Name { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string OrganisationNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Phone { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string SupplierNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string ZipCode { get; set; }
+
+        /// <remarks/>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
     }
 }

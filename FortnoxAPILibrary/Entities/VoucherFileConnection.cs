@@ -8,11 +8,9 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-
-	
-	
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class VoucherFileConnection
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+	[Entity(SingularName = "VoucherFileConnection", PluralName = "VoucherFileConnections")]
+	public class VoucherFileConnection : VoucherFileConnectionSubset
 	{
         /// <remarks/>
 		[JsonProperty]
@@ -37,5 +35,35 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "VoucherFileConnection", PluralName = "VoucherFileConnections")]
+    public class VoucherFileConnectionSubset
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string FileId { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string VoucherDescription { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string VoucherNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string VoucherSeries { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string VoucherYear { get; set; }
+
+        /// <remarks/>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
     }
 }

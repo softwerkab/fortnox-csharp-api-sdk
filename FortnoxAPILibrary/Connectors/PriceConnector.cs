@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	public class PriceConnector : EntityConnector<Price, Prices, Sort.By.Price?>
+	public class PriceConnector : EntityConnector<Price, EntityCollection<PriceSubset>, Sort.By.Price?>
 	{
 
 		/// <summary>
@@ -92,7 +92,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of prices. Use the properties of PriceConnector to limit the result.
 		/// </summary>
 		/// <returns>A list of prices</returns>
-		public Prices Find()
+		public EntityCollection<PriceSubset> Find()
 		{
 			Resource = "prices/sublist/";
 

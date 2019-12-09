@@ -11,7 +11,8 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class Offer
+	[Entity(SingularName = "Offer", PluralName = "Offers")]
+	public class Offer : OfferSubset
 	{
         /// <remarks/>
         public Offer()
@@ -364,5 +365,51 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty]
         public string VAT { get; set; }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "Offer", PluralName = "Offers")]
+    public class OfferSubset
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string Cancelled { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Currency { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string CustomerName { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string CustomerNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string DocumentNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string OfferDate { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Project { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Sent { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Total { get; set; }
+
+        /// <summary>This field is Read-Only in Fortnox</summary>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; private set; }
     }
 }

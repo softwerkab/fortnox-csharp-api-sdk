@@ -10,7 +10,8 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class PreDefinedVoucherSeries {
+    [Entity(SingularName = "PreDefinedVoucherSeries", PluralName = "PreDefinedVoucherSeriesCollection")]
+    public class PreDefinedVoucherSeries : PreDefinedVoucherSeriesSubset{
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [JsonProperty]
@@ -23,5 +24,22 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
         [JsonProperty(PropertyName = "@url")]
         public string Url { get; private set; }
+    }
+
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "PreDefinedVoucherSeries", PluralName = "PreDefinedVoucherSeriesCollection")]
+    public class PreDefinedVoucherSeriesSubset
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string Name { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string VoucherSeries { get; set; }
+
+        /// <remarks/>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
     }
 }
