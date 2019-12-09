@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class FinancialYearConnector : EntityConnector<FinancialYear, FinancialYears, Sort.By.FinancialYear?>
+    public class FinancialYearConnector : EntityConnector<FinancialYear, EntityCollection<FinancialYearSubset>, Sort.By.FinancialYear?>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of financial years
 		/// </summary>
 		/// <returns>A list of financial years</returns>
-		public FinancialYears Find()
+		public EntityCollection<FinancialYearSubset> Find()
 		{
 			return BaseFind();
 		}

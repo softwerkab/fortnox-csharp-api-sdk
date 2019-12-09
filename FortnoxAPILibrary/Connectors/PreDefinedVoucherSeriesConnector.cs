@@ -6,7 +6,7 @@ namespace FortnoxAPILibrary.Connectors
 {
 
     /// <remarks/>
-    public class PreDefinedVoucherSeriesConnector : FinancialYearBasedEntityConnector<PreDefinedVoucherSeries, PreDefinedVoucherSeriesCollection, Sort.By.PreDefinedVoucherSeries?>
+    public class PreDefinedVoucherSeriesConnector : FinancialYearBasedEntityConnector<PreDefinedVoucherSeries, EntityCollection<PreDefinedVoucherSeriesSubset>, Sort.By.PreDefinedVoucherSeries?>
     {
 		/// <remarks/>
 		public PreDefinedVoucherSeriesConnector()
@@ -64,7 +64,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of pre defined voucher series
 		/// </summary>
 		/// <returns></returns>
-		public PreDefinedVoucherSeriesCollection Find()
+		public EntityCollection<PreDefinedVoucherSeriesSubset> Find()
 		{
 			return BaseFind();
 		}

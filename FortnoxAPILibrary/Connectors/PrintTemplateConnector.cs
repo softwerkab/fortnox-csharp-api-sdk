@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class PrintTemplateConnector : EntityConnector<PrintTemplates, PrintTemplates, Sort.By.PrintTemplate?>
+    public class PrintTemplateConnector : EntityConnector<PrintTemplate, EntityCollection<PrintTemplate>, Sort.By.PrintTemplate?>
 	{
 		/// <remarks/>
 		public PrintTemplateConnector()
@@ -17,7 +17,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of print templates
 		/// </summary>
 		/// <returns>A list of print templates</returns>
-		public PrintTemplates Find()
+		public EntityCollection<PrintTemplate> Find()
 		{
 			return BaseFind();
 		}

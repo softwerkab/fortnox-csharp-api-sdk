@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class VoucherSeriesConnector : FinancialYearBasedEntityConnector<VoucherSeries, VoucherSeriesCollection, Sort.By.VoucherSeries?>
+    public class VoucherSeriesConnector : FinancialYearBasedEntityConnector<VoucherSeries, EntityCollection<VoucherSeriesSubset>, Sort.By.VoucherSeries?>
 	{
 		/// <remarks/>
 		public VoucherSeriesConnector()
@@ -48,7 +48,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of voucher series
 		/// </summary>
 		/// <returns>A list of voucher series</returns>
-		public VoucherSeriesCollection Find()
+		public EntityCollection<VoucherSeriesSubset> Find()
 		{
 			return BaseFind();
 		}

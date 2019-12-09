@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ContractAccrualConnector : EntityConnector<ContractAccrual, ContractAccruals, Sort.By.ContractAccrual?>
+    public class ContractAccrualConnector : EntityConnector<ContractAccrual, EntityCollection<ContractAccrualSubSet>, Sort.By.ContractAccrual?>
     {
 		/// <remarks/>
         public ContractAccrualConnector()
@@ -56,7 +56,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Gets a list of contract accruals
         /// </summary>
         /// <returns>A list of contract accruals</returns>
-        public ContractAccruals Find()
+        public EntityCollection<ContractAccrualSubSet> Find()
         {
             return BaseFind();
         }

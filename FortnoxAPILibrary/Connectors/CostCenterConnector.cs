@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	public class CostCenterConnector : EntityConnector<CostCenter, CostCenters, Sort.By.CostCenter?>
+	public class CostCenterConnector : EntityConnector<CostCenter, EntityCollection<CostCenterSubset>, Sort.By.CostCenter?>
 	{
 		/// <remarks/>
 		public CostCenterConnector()
@@ -59,7 +59,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of cost centers
 		/// </summary>
 		/// <returns>A list of cost centers</returns>
-		public CostCenters Find()
+		public EntityCollection<CostCenterSubset> Find()
 		{
 			return BaseFind();
 		}

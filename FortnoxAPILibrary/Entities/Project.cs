@@ -9,11 +9,9 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-
-	
-	
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class Project
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+	[Entity(SingularName = "Project", PluralName = "Projects")]
+	public class Project : ProjectSubset
 	{
         /// <remarks/>
 		[JsonProperty]
@@ -50,5 +48,35 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "Project", PluralName = "Projects")]
+    public class ProjectSubset
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string Description { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string EndDate { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string ProjectNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Status { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string StartDate { get; set; }
+
+        /// <remarks/>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
     }
 }

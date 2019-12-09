@@ -9,8 +9,9 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class Currency
-	{
+	[Entity(SingularName = "Currency", PluralName = "Currencies")]
+	public class Currency : CurrencySubset
+    {
         /// <summary>
 		/// <para>The buy rate of the currency</para>
 		/// <para>Required:		No</para>
@@ -68,6 +69,40 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "Currency", PluralName = "Currencies")]
+    public class CurrencySubset
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string BuyRate { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Code { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Date { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Description { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string SellRate { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Unit { get; set; }
+
+        /// <summary>This field is Read-Only in Fortnox</summary>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; private set; }
     }
 }
 

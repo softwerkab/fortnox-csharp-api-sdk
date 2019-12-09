@@ -1,0 +1,36 @@
+using System.Collections.Generic;
+using Newtonsoft.Json;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
+
+namespace FortnoxAPILibrary.Entities
+{
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "PrintTemplate", PluralName = "PrintTemplates")]
+    public class PrintTemplate : PrintTemplatesSubset
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string Template { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Name { get; set; }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "PrintTemplate", PluralName = "PrintTemplates")]
+    public class PrintTemplatesSubset
+	{
+        /// <remarks/>
+		[JsonProperty]
+		public string Template { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Name { get; set; }
+    }
+}

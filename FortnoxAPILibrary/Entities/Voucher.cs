@@ -10,7 +10,8 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class Voucher
+	[Entity(SingularName = "Voucher", PluralName = "Vouchers")]
+	public class Voucher : VoucherSubset
 	{
         /// <remarks/>
         public Voucher()
@@ -106,5 +107,36 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty]
         public string TransactionInformation { get; set; }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "Voucher", PluralName = "Vouchers")]
+    public class VoucherSubset
+    {
+
+        /// <remarks/>
+        [JsonProperty]
+        public string ReferenceNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string ReferenceType { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string VoucherNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string VoucherSeries { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Year { get; set; }
+
+        /// <remarks/>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class TaxReductionConnector : EntityConnector<TaxReduction, TaxReductions, Sort.By.TaxReduction?>
+    public class TaxReductionConnector : EntityConnector<TaxReduction, EntityCollection<TaxReductionSubset>, Sort.By.TaxReduction?>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -86,7 +86,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of tax reductions
 		/// </summary>
 		/// <returns>A list of tax reductions</returns>
-		public TaxReductions Find()
+		public EntityCollection<TaxReductionSubset> Find()
 		{
 			return BaseFind();
 		}

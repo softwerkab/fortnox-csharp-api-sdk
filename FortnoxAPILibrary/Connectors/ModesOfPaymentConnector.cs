@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ModesOfPaymentConnector : FinancialYearBasedEntityConnector<ModeOfPayment, ModesOfPayments, Sort.By.ModesOfPayment?>
+    public class ModesOfPaymentConnector : FinancialYearBasedEntityConnector<ModeOfPayment, EntityCollection<ModeOfPaymentSubset>, Sort.By.ModesOfPayment?>
 	{
 		/// <remarks/>
 		public ModesOfPaymentConnector()
@@ -56,7 +56,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of Modes of payment
 		/// </summary>
 		/// <returns></returns>
-		public ModesOfPayments Find()
+		public EntityCollection<ModeOfPaymentSubset> Find()
 		{
 			return BaseFind();
 		}

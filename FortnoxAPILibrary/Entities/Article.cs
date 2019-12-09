@@ -1,5 +1,3 @@
-using System;
-using System.ComponentModel;
 using FortnoxAPILibrary.Connectors;
 using Newtonsoft.Json;
 
@@ -10,7 +8,8 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class Article
+    [Entity(SingularName = "Article", PluralName = "Articles")]
+    public class Article : ArticleSubset
     {
         /// <remarks/>
         [JsonProperty]
@@ -171,5 +170,71 @@ namespace FortnoxAPILibrary.Entities
         /// <remarsk/>
         [JsonProperty]
         public string CostCalculationMethod { get; set; }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "Article", PluralName = "Articles")]
+    public class ArticleSubset
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string ArticleNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Description { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string DisposableQuantity { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string EAN { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Housework { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string PurchasePrice { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string SalesPrice { get; private set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string QuantityInStock { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string ReservedQuantity { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string StockPlace { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string StockValue { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Unit { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string VAT { get; set; }
+
+        /// <remarks/>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string WebshopArticle { get; set; }
     }
 }

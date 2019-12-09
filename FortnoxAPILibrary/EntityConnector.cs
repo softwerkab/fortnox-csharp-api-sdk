@@ -85,10 +85,11 @@ namespace FortnoxAPILibrary
             requestUriString = AddParameters(requestUriString);
 
             Method = "POST";
-            ResponseType = RequestResponseType.XML;
+            ResponseType = RequestResponseType.JSON;
             RequestUriString = requestUriString;
 
-            return DoRequest(entity);
+            var wrappedEntity = new EntityWrapper<TEntity>() {Entity = entity};
+            return DoRequest(wrappedEntity).Entity;
         }
 
         internal TEntity BaseUpdate(TEntity entity, params string[] indices)
@@ -106,10 +107,11 @@ namespace FortnoxAPILibrary
             requestUriString = AddParameters(requestUriString);
 
             Method = "PUT";
-            ResponseType = RequestResponseType.XML;
+            ResponseType = RequestResponseType.JSON;
             RequestUriString = requestUriString;
 
-            return DoRequest(entity);
+            var wrappedEntity = new EntityWrapper<TEntity>() { Entity = entity };
+            return DoRequest(wrappedEntity).Entity;
         }
 
         internal void BaseDelete(string index)
@@ -121,7 +123,7 @@ namespace FortnoxAPILibrary
             requestUriString = AddParameters(requestUriString);
 
             Method = "DELETE";
-            ResponseType = RequestResponseType.XML;
+            ResponseType = RequestResponseType.JSON;
             RequestUriString = requestUriString;
 
             DoRequest();
@@ -145,10 +147,10 @@ namespace FortnoxAPILibrary
             requestUriString = AddParameters(requestUriString);
 
             Method = "GET";
-            ResponseType = RequestResponseType.XML;
+            ResponseType = RequestResponseType.JSON;
             RequestUriString = requestUriString;
 
-            return DoRequest<TEntity>();
+            return DoRequest<EntityWrapper<TEntity>>().Entity;
         }
 
         internal TEntityCollection BaseFind(Dictionary<string, string> parameters = null)
@@ -189,11 +191,10 @@ namespace FortnoxAPILibrary
             requestUriString = AddParameters(requestUriString);
 
             Method = "GET";
-            ResponseType = RequestResponseType.XML;
+            ResponseType = RequestResponseType.JSON;
             RequestUriString = requestUriString;
 
             var result = DoRequest<TEntityCollection>();
-
             return result;
         }
 
@@ -272,7 +273,7 @@ namespace FortnoxAPILibrary
             else if (action == "externalprint")
             {
                 Method = "PUT";
-                ResponseType = RequestResponseType.XML;
+                ResponseType = RequestResponseType.JSON;
 
             }
             else if (action == "email")
@@ -286,7 +287,7 @@ namespace FortnoxAPILibrary
             }
             RequestUriString = requestUriString;
 
-            return DoRequest<TEntity>();
+            return DoRequest<EntityWrapper<TEntity>>().Entity;
         }
 
 
@@ -319,7 +320,6 @@ namespace FortnoxAPILibrary
 
             return requestUriString;
         }
-
 
         private static void ResetProperties(TEntity entity)
         {

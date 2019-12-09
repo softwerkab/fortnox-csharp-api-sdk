@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class SupplierInvoicePaymentConnector : FinancialYearBasedEntityConnector<SupplierInvoicePayment, SupplierInvoicePayments, Sort.By.SupplierInvoicePayment?>
+    public class SupplierInvoicePaymentConnector : FinancialYearBasedEntityConnector<SupplierInvoicePayment, EntityCollection<SupplierInvoicePaymentSubset>, Sort.By.SupplierInvoicePayment?>
 	{
         /// <remarks/>
         [FilterProperty]
@@ -31,7 +31,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of supplier payments
 		/// </summary>
 		/// <returns>A list of payments</returns>
-		public SupplierInvoicePayments Find()
+		public EntityCollection<SupplierInvoicePaymentSubset> Find()
 		{
 			return BaseFind();
 		}

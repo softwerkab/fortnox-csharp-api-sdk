@@ -11,7 +11,8 @@ namespace FortnoxAPILibrary.Entities
     /// <remarks/>
 
 	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class TaxReduction
+	[Entity(SingularName = "TaxReduction", PluralName = "TaxReductions")]
+	public class TaxReduction : TaxReductionSubset
 	{
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[JsonProperty]
@@ -76,5 +77,39 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "TaxReduction", PluralName = "TaxReductions")]
+    public class TaxReductionSubset
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string ApprovedAmount { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string CustomerName { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Id { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string ReferenceDocumentType { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string ReferenceNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string SocialSecurityNumber { get; set; }
+
+        /// <remarks/>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
     }
 }

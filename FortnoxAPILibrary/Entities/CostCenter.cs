@@ -9,7 +9,8 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class CostCenter
+    [Entity(SingularName = "CostCenter", PluralName = "CostCenters")]
+    public class CostCenter : CostCenterSubset
 	{
         /// <summary>
 		/// <para>Code of the cost center</para>
@@ -51,5 +52,31 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "CostCenter", PluralName = "CostCenters")]
+    public class CostCenterSubset
+    {
+        /// <remarks/>
+        [JsonProperty]
+        public string Code { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Description { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Note { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string Active { get; set; }
+
+        /// <remarks/>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
     }
 }

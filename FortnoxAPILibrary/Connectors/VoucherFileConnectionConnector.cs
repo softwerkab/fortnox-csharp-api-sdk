@@ -4,7 +4,7 @@ using FortnoxAPILibrary.Entities;
 
 namespace FortnoxAPILibrary.Connectors
 {
-    public class VoucherFileConnectionConnector : EntityConnector<VoucherFileConnection, VoucherFileConnections, Sort.By.VoucherFileConnection?>
+    public class VoucherFileConnectionConnector : EntityConnector<VoucherFileConnection, EntityCollection<VoucherFileConnectionSubset>, Sort.By.VoucherFileConnection?>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -63,7 +63,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of VoucherFile Connections
 		/// </summary>
 		/// <returns></returns>
-		public VoucherFileConnections Find()
+		public EntityCollection<VoucherFileConnectionSubset> Find()
 		{
 			return BaseFind();
 		}

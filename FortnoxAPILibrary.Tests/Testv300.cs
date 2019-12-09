@@ -298,7 +298,7 @@ namespace FortnoxAPILibrary.Tests
 			var connector = new ArchiveConnector();
 
 			var folder = new Folder();
-			folder.Name = "f1";
+			folder.Name = "f12";
 			folder = connector.CreateFolder(folder);
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
 
@@ -380,7 +380,7 @@ namespace FortnoxAPILibrary.Tests
             Assert.IsFalse(connector.HasError);
             
             connector.OrganisationNumber = "123456789";
-            var customers = connector.Find().CustomerSubset;
+            var customers = connector.Find().Entities;
             var customer = customers.FirstOrDefault(c => c.CustomerNumber == specificCustomer.CustomerNumber);
             Assert.IsNotNull(customer);
             
@@ -480,7 +480,6 @@ namespace FortnoxAPILibrary.Tests
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
         }
 
-        [Ignore] //Fails because the server does not accept empty XML element <InvoiceRow/> 
         [TestMethod]
         public void Test_Issue_44() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/44
         {

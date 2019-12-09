@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	public class CurrencyConnector : EntityConnector<Currency, Currencies, Sort.By.Currency?>
+	public class CurrencyConnector : EntityConnector<Currency, EntityCollection<CurrencySubset>, Sort.By.Currency?>
 	{
 		/// <remarks/>
 		public CurrencyConnector()
@@ -58,7 +58,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets at list of currencies
 		/// </summary>
 		/// <returns>A list of currencies</returns>
-		public Currencies Find()
+		public EntityCollection<CurrencySubset> Find()
 		{
 			return BaseFind();
 		}

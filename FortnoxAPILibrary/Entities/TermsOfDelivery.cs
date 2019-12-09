@@ -8,11 +8,9 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-
-	
-	
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-	public class TermsOfDelivery
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+	[Entity(SingularName = "TermsOfDelivery", PluralName = "TermsOfDeliveries")]
+	public class TermsOfDelivery : TermsOfDeliverySubset
 	{
 		/// <remarks/>
 		[JsonProperty]
@@ -25,5 +23,21 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
+    }
+
+    /// <remarks/>
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [Entity(SingularName = "TermsOfDelivery", PluralName = "TermsOfDeliveries")]
+    public class TermsOfDeliverySubset
+    {
+        /// <remarks/>
+        public string Code { get; set; }
+
+        /// <remarks/>
+        public string Description { get; set; }
+
+        /// <remarks/>
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; private set; }
     }
 }

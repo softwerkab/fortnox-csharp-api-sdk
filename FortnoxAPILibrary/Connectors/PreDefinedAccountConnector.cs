@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	public class PreDefinedAccountConnector : FinancialYearBasedEntityConnector<PreDefinedAccount, PreDefinedAccounts, Sort.By.PreDefinedAccount?>
+	public class PreDefinedAccountConnector : FinancialYearBasedEntityConnector<PreDefinedAccount, EntityCollection<PreDefinedAccountSubset>, Sort.By.PreDefinedAccount?>
 	{
 		/// <remarks/>
 		public PreDefinedAccountConnector()
@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of predefined accounts
 		/// </summary>
 		/// <returns>A list of predefined accounts</returns>
-		public PreDefinedAccounts Find()
+		public EntityCollection<PreDefinedAccountSubset> Find()
 		{
 			return BaseFind();
 		}

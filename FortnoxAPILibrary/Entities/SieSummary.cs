@@ -8,10 +8,8 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-
-	
-	
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+	[Entity(SingularName = "SieSummary")]
 	public class SieSummary
 	{
         /// <remarks/>
@@ -84,10 +82,7 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-	
-	
-	
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	public class VerificationInterval
 	{
         /// <remarks/>

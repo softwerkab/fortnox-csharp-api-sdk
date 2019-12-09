@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class OfferConnector : FinancialYearBasedEntityConnector<Offer, Offers, Sort.By.Offer?>
+    public class OfferConnector : FinancialYearBasedEntityConnector<Offer, EntityCollection<OfferSubset>, Sort.By.Offer?>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -128,7 +128,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of offers
 		/// </summary>
 		/// <returns>A list of offers</returns>
-		public Offers Find()
+		public EntityCollection<OfferSubset> Find()
 		{
 			return BaseFind();
 		}
