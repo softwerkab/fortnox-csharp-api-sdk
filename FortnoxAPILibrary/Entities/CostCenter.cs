@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [Entity(SingularName = "CostCenter", PluralName = "CostCenters")]
-    public class CostCenter : CostCenterSubset
+    public class CostCenter 
 	{
         /// <summary>
 		/// <para>Code of the cost center</para>

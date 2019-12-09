@@ -8,7 +8,7 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [Entity(SingularName = "PrintTemplate", PluralName = "PrintTemplates")]
-    public class PrintTemplate : PrintTemplatesSubset
+    public class PrintTemplate 
     {
         /// <remarks/>
         [JsonProperty]

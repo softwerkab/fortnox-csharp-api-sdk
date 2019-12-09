@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[Entity(SingularName = "Currency", PluralName = "Currencies")]
-	public class Currency : CurrencySubset
+	public class Currency 
     {
         /// <summary>
 		/// <para>The buy rate of the currency</para>

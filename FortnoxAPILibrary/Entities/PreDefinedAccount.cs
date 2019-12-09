@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [Entity(SingularName = "PreDefinedAccount", PluralName = "PreDefinedAccounts")]
-    public class PreDefinedAccount : PreDefinedAccountSubset
+    public class PreDefinedAccount 
     {
         /// <remarks/>
         [JsonProperty]

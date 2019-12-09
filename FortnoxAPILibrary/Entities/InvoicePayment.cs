@@ -10,7 +10,7 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[Entity(SingularName = "InvoicePayment", PluralName = "InvoicePayments")]
-	public class InvoicePayment : InvoicePaymentSubset
+	public class InvoicePayment 
 	{
         /// <remarks/>
 		[JsonProperty]

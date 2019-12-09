@@ -11,7 +11,7 @@ namespace FortnoxAPILibrary.Entities
     /// <remarks/>
 
 	[Entity(SingularName = "FinancialYear", PluralName = "FinancialYears")]
-	public class FinancialYear : FinancialYearSubset
+	public class FinancialYear 
 	{
 		/// <remarks/>
 		[JsonProperty]

@@ -11,7 +11,7 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[Entity(SingularName = "Order", PluralName = "Orders")]
-	public class Order : OrderSubset
+	public class Order 
 	{
         /// <remarks/>
         public Order()

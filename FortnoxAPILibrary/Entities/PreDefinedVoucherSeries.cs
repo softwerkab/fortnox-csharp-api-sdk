@@ -10,8 +10,8 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [Entity(SingularName = "PreDefinedVoucherSeries", PluralName = "PreDefinedVoucherSeriesCollection")]
-    public class PreDefinedVoucherSeries : PreDefinedVoucherSeriesSubset{
-
+    public class PreDefinedVoucherSeries
+    {
         /// <summary>This field is Read-Only in Fortnox</summary>
         [JsonProperty]
         public PreDefinedVoucherSeriesConnector.PreDefinedVoucherSeriesName Name { get; private set; }

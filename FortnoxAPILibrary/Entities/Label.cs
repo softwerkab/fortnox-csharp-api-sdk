@@ -9,8 +9,8 @@ namespace FortnoxAPILibrary.Entities
 
     /// <remarks/>
     [Entity(SingularName = "Label", PluralName = "Labels")]
-    public class Label : LabelSubset{
-        
+    public class Label
+    {
         /// <remarks/>
         [JsonProperty]
         public string Description { get; set; }

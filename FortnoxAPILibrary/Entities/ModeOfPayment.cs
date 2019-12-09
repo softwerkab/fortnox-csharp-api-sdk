@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[Entity(SingularName = "ModeOfPayment")]
-	public class ModeOfPayment : ModeOfPaymentSubset
+	public class ModeOfPayment 
 	{
         /// <remarks/>
 		[JsonProperty]

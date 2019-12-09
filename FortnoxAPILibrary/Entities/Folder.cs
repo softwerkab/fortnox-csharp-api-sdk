@@ -10,7 +10,7 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 	[Entity(SingularName = "Folder", PluralName = "Folders")]
-	public class Folder : FolderSubset
+	public class Folder 
 	{
         /// <remarks/>
 		[JsonProperty]
