@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	[Entity(SingularName = "Folder", PluralName = "Folders")]
 	public class Folder : FolderSubset
 	{
@@ -39,7 +38,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "File", PluralName = "Files")]
     public class File
 	{
@@ -114,7 +112,6 @@ namespace FortnoxAPILibrary.Entities
 	}
 
 	/// <remarks/>
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "Folder", PluralName = "Folders")]
     public class FolderSubset
 	{

@@ -10,7 +10,6 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	[Entity(SingularName = "InvoiceAccrual", PluralName = "InvoiceAccruals")]
 	public class InvoiceAccrual : InvoiceAccrualSubset
 	{
@@ -64,7 +63,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	public class InvoiceAccrualRow
 	{
         /// <remarks/>
@@ -93,7 +91,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "InvoiceAccrual", PluralName = "InvoiceAccruals")]
     public class InvoiceAccrualSubset
     {

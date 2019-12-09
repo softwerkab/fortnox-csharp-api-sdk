@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	[Entity(SingularName = "WayOfDelivery", PluralName = "WayOfDeliveries")]
 	public class WayOfDelivery : WayOfDeliverySubset
 	{
@@ -26,7 +25,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "WayOfDelivery", PluralName = "WayOfDeliveries")]
     public class WayOfDeliverySubset
     {

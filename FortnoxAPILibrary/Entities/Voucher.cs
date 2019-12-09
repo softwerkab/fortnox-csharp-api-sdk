@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	[Entity(SingularName = "Voucher", PluralName = "Vouchers")]
 	public class Voucher : VoucherSubset
 	{
@@ -69,7 +68,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	public class VoucherRow
 	{
         /// <remarks/>
@@ -110,7 +108,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "Voucher", PluralName = "Vouchers")]
     public class VoucherSubset
     {

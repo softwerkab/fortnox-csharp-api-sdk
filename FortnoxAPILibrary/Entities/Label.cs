@@ -8,7 +8,6 @@ namespace FortnoxAPILibrary.Entities
 {
 
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "Label", PluralName = "Labels")]
     public class Label : LabelSubset{
         
@@ -26,7 +25,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "Label", PluralName = "Labels")]
     public class LabelSubset
     {

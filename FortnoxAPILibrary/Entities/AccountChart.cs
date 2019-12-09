@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	[Entity(SingularName = "AccountChart", PluralName = "AccountCharts")]
 	public class AccountChart : AccountChartSubset
 	{
@@ -16,7 +15,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
 	/// <remarks/>
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "AccountChart", PluralName = "AccountCharts")]
     public class AccountChartSubset
 	{

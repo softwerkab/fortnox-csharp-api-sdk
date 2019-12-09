@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +8,12 @@ using Newtonsoft.Json.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     public class EntityWrapper<T>
     {
         [GenericPropertyName]
         public T Entity { get; set; }
     }
 
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     public class EntityCollection<T>
     {
         [GenericPropertyName]
@@ -34,7 +32,6 @@ namespace FortnoxAPILibrary.Entities
         public string CurrentPage => MetaInformation.CurrentPage;
     }
 
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     public class MetaInformation
     {
         [JsonProperty("@TotalResources")]

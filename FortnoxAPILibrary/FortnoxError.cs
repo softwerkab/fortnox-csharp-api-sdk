@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary
 {
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "ErrorInformation")]
     public class ErrorInformation
     {

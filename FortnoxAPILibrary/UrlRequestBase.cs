@@ -120,6 +120,7 @@ namespace FortnoxAPILibrary
                 var settings = new JsonSerializerSettings();
                 settings.Converters.Add(new StringEnumConverter());
                 settings.ContractResolver = new MyJsonContractResolver();
+                settings.NullValueHandling = NullValueHandling.Ignore;
                 return settings;
             };
         }

@@ -10,7 +10,6 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
 
-	[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 	[Entity(SingularName = "FinancialYear", PluralName = "FinancialYears")]
 	public class FinancialYear : FinancialYearSubset
 	{
@@ -40,7 +39,6 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <remarks/>
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     [Entity(SingularName = "FinancialYear", PluralName = "FinancialYears")]
     public class FinancialYearSubset
     {
