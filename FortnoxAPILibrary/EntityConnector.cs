@@ -8,7 +8,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary
 {
     /// <remarks/>
-    public abstract class EntityConnector<TEntity, TEntityCollection, TSort> : UrlRequestBase
+    public abstract class EntityConnector<TEntity, TEntityCollection, TSort> : UrlRequestBase where TEntity : class
     {
         /// <remarks/>
         protected EntityConnector()
@@ -145,7 +145,8 @@ namespace FortnoxAPILibrary
             ResponseType = RequestResponseType.JSON;
             RequestUriString = requestUriString;
 
-            return DoRequest<EntityWrapper<TEntity>>().Entity;
+            var result = DoRequest<EntityWrapper<TEntity>>();
+            return result?.Entity;
         }
 
         internal TEntityCollection BaseFind(Dictionary<string, string> parameters = null)
@@ -282,7 +283,8 @@ namespace FortnoxAPILibrary
             }
             RequestUriString = requestUriString;
 
-            return DoRequest<EntityWrapper<TEntity>>().Entity;
+            var result = DoRequest<EntityWrapper<TEntity>>();
+            return result?.Entity;
         }
 
 

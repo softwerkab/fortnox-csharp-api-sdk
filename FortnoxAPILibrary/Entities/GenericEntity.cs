@@ -17,6 +17,7 @@ namespace FortnoxAPILibrary.Entities
     public class EntityCollection<T>
     {
         [GenericPropertyName]
+        [JsonProperty]
         public List<T> Entities { get; set; }
 
         [JsonProperty]
@@ -55,7 +56,7 @@ namespace FortnoxAPILibrary.Entities
             if (hasGenericName)
             {
                 var propertyType = ((PropertyInfo) member).PropertyType;
-                if (propertyType.IsAssignableFrom(typeof(IEnumerable))) //is collection
+                if (propertyType.GetInterfaces().Contains(typeof(IEnumerable))) //is collection
                 {
                     var entityType = propertyType.GetGenericArguments()[0];
                     var entityAtt = entityType.GetCustomAttributes<EntityAttribute>().FirstOrDefault();
