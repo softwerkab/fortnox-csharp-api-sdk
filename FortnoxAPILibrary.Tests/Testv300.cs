@@ -506,5 +506,22 @@ namespace FortnoxAPILibrary.Tests
 
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
         }
+
+        [TestMethod]
+        public void Test_Customer_Update_ReadOnlyProperty_Updated()
+        {
+            var connector = new CustomerConnector();
+
+            var tmpCustomer = connector.Create(new Customer() {Name = "TestUser", CountryCode = "SE"}); 
+            
+            tmpCustomer.CountryCode = "SK";
+
+            var updatedCustomer = connector.Update(tmpCustomer);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            Assert.AreEqual("Slovakia", updatedCustomer.Country);
+
+            connector.Delete(tmpCustomer.CustomerNumber);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+        }
     }
 }

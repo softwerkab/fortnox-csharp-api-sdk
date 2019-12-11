@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -78,8 +77,6 @@ namespace FortnoxAPILibrary
 
             var requestUriString = GetUrl();
 
-            ResetProperties(entity);
-
             AddCustomParameters();
 
             requestUriString = AddParameters(requestUriString);
@@ -99,8 +96,6 @@ namespace FortnoxAPILibrary
             var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
 
             var requestUriString = GetUrl(searchValue);
-
-            ResetProperties(entity);
 
             AddCustomParameters();
 
@@ -319,61 +314,6 @@ namespace FortnoxAPILibrary
             }
 
             return requestUriString;
-        }
-
-        private static void ResetProperties(TEntity entity)
-        {
-            //Reset all ReadOnly attributes to a null value ( all properties must be nullable! )
-            var properties = typeof(TEntity).GetProperties().AsEnumerable();
-            ResetProperties(entity, properties);
-        }
-
-        private static void ResetProperties(object obj, IEnumerable<PropertyInfo> properties)
-        {
-            foreach (var propertyInfo in properties)
-            {
-                var a = from aa in propertyInfo.GetCustomAttributes(true)
-                        where aa is ReadOnlyAttribute
-                        select aa;
-
-                if (a.Any())
-                {
-                    propertyInfo.SetValue(obj, null, null);
-                }
-
-                if (obj != null)
-                {
-                    // Check if the property is a subclass
-                    var subProperties = GetSubClassProperties(propertyInfo).ToList();
-
-                    if (IsList(obj))
-                    {
-                        for (int i = 0; i < (int)obj.GetValue("Count"); i++)
-                        {
-                            ResetProperties(GetItemAtIndex(obj, propertyInfo, i), subProperties);
-                        }
-                    }
-                    else if (subProperties.Count > 0)
-                    {
-                        ResetProperties(propertyInfo.GetValue(obj, null), subProperties);
-                    }
-                }
-            }
-        }
-
-        private static object GetItemAtIndex(object obj, PropertyInfo propertyInfo, int i)
-        {
-            return propertyInfo.GetValue(obj, new object[] { i });
-        }
-
-        private static bool IsList(object obj)
-        {
-            return typeof(List<>).Name == obj.GetType().Name;
-        }
-
-        private static IEnumerable<PropertyInfo> GetSubClassProperties(PropertyInfo propertyInfo)
-        {
-            return propertyInfo.PropertyType.GetProperties().Where(p => p.PropertyType.GetProperties().Length > 0);
         }
     }
 }
