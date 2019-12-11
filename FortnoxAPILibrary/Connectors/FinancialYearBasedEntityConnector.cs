@@ -3,7 +3,7 @@
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public abstract class FinancialYearBasedEntityConnector<E, C, S> : EntityConnector<E, C, S>
+    public abstract class FinancialYearBasedEntityConnector<TEntity, TEntityCollection, TSort> : EntityConnector<TEntity, TEntityCollection, TSort> where TEntity : class
     {
         /// <summary>
         /// <para>Use FinancialYearDate to select the financial year to use.</para>
