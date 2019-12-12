@@ -97,7 +97,7 @@ namespace FortnoxAPILibrary
 
         internal string Resource { get; set; }
         internal string Method { get; set; }
-        internal string RequestUriString { get; set; }
+        public string RequestUriString { get; set; }
         internal string LocalPath { get; set; }
 
         internal RequestResponseType ResponseType { get; set; }
@@ -293,7 +293,7 @@ namespace FortnoxAPILibrary
                 Error = HandleException(we);
             }
 
-            return entity;
+            return default;
         }
 
         internal T UploadFile<T>(string localPath, byte[] fileData = null, string fileName = null)

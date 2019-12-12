@@ -69,5 +69,15 @@ namespace FortnoxAPILibrary.Tests {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] sie_file {
+            get {
+                object obj = ResourceManager.GetObject("sie_file", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

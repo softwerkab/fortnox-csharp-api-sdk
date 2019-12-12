@@ -11,7 +11,7 @@ using File = FortnoxAPILibrary.Entities.File;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	public class ArchiveConnector : EntityConnector<Folder, Folder, Sort.By.Folder?>
+	public class ArchiveConnector : EntityConnector<Folder, EntityWrapper<Folder>, Sort.By.Folder?>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -96,7 +96,7 @@ namespace FortnoxAPILibrary.Connectors
 				Resource = "archive/" + GetRealValueFromAttribute(RootFolder.Inbox_Vouchers);	
 			}
 			
-			return BaseFind(Parameters);
+			return BaseFind(Parameters)?.Entity;
 		}
 
 		private static string GetRealValueFromAttribute(RootFolder f)

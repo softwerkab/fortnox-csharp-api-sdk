@@ -17,7 +17,7 @@ namespace FortnoxAPILibrary
             Error = null;
         }
 
-        private string SortByRealValue
+        private string SortByRealValue //TODO: Remove this property
         {
             get
             {
@@ -39,7 +39,7 @@ namespace FortnoxAPILibrary
         /// <summary>
         /// Sort Order, ascending or descending
         /// </summary>
-        public Sort.Order SortOrder { get; set; }
+        public Sort.Order? SortOrder { get; set; }
 
         /// <summary>
         /// Sort the result
@@ -56,7 +56,7 @@ namespace FortnoxAPILibrary
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
-        public DateTime LastModified { get; set; }
+        public DateTime? LastModified { get; set; }
 
         /// <summary>
         /// Use with Find() to limit the search result
@@ -86,7 +86,7 @@ namespace FortnoxAPILibrary
             RequestUriString = requestUriString;
 
             var wrappedEntity = new EntityWrapper<TEntity>() {Entity = entity};
-            return DoRequest(wrappedEntity).Entity;
+            return DoRequest(wrappedEntity)?.Entity;
         }
 
         internal TEntity BaseUpdate(TEntity entity, params string[] indices)
@@ -106,7 +106,7 @@ namespace FortnoxAPILibrary
             RequestUriString = requestUriString;
 
             var wrappedEntity = new EntityWrapper<TEntity>() { Entity = entity };
-            return DoRequest(wrappedEntity).Entity;
+            return DoRequest(wrappedEntity)?.Entity;
         }
 
         internal void BaseDelete(string index)
@@ -162,16 +162,16 @@ namespace FortnoxAPILibrary
                 Parameters.Add("limit", Limit.ToString());
             }
 
-            if (LastModified != DateTime.MinValue)
+            if (LastModified != null)
             {
-                
-                Parameters.Add("lastmodified", LastModified.ToString("yyyy-MM-dd HH:mm:ss"));
+                Parameters.Add("lastmodified", LastModified.Value.ToString("yyyy-MM-dd HH:mm:ss"));
             }
 
             if (SortByRealValue != null)
             {
                 Parameters.Add("sortby", SortByRealValue);
-                Parameters.Add("sortorder", SortOrder.ToString().ToLower());
+                if (SortOrder != null)
+                    Parameters.Add("sortorder", SortOrder.ToString().ToLower());
             }
 
             if (Page != 0)
