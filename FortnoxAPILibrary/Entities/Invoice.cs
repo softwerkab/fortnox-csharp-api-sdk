@@ -378,9 +378,13 @@ namespace FortnoxAPILibrary.Entities
         /// <remarks/>
         [JsonProperty]
         public string EDIYourElectronicReference { get; set; }
+
+        /// <remarks/>
+        [JsonProperty]
+        public string EDIStatus { get; private set; }
     }
 
-	/// <remarks/>
+    /// <remarks/>
 	public class InvoiceEmailInformation
 	{
 		/// <remarks/>

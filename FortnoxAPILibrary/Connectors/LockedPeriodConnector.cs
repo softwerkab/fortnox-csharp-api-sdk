@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class LockedPeriodConnector : EntityConnector<LockedPeriod, LockedPeriod, Sort.By.LockedPeriod?>
+    public class LockedPeriodConnector : EntityConnector<LockedPeriod, EntityWrapper<LockedPeriod>, Sort.By.LockedPeriod?>
     {
         /// <remarks/>
         public LockedPeriodConnector()
@@ -19,7 +19,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The locked period setting</returns>
         public LockedPeriod Get()
         {
-            return BaseFind();
+            return BaseFind().Entity;
         }
     }
 }

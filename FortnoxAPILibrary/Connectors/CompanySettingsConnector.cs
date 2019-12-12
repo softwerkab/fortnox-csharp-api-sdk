@@ -5,7 +5,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks />
-    public class CompanySettingsConnector : EntityConnector<CompanySettings, CompanySettings, Sort.By.CompanySettings?>
+    public class CompanySettingsConnector : EntityConnector<CompanySettings, EntityWrapper<CompanySettings>, Sort.By.CompanySettings?>
     {
         /// <remarks />
         public CompanySettingsConnector()
@@ -19,7 +19,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The company settings</returns>
         public CompanySettings Get()
         {
-            return BaseFind();
+            return BaseFind()?.Entity;
         }
     }
 }
