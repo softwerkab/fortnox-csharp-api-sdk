@@ -36,6 +36,7 @@ namespace FortnoxAPILibrary.Entities
         public string Comments { get; set; }
 
         /// <remarks/>
+        [ReadOnly]
         [JsonProperty]
         public string Currency { get; set; }
 

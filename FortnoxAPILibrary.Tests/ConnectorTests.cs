@@ -1,5 +1,6 @@
 ﻿using System;
 using FortnoxAPILibrary.Connectors;
+using FortnoxAPILibrary.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests
@@ -69,6 +70,36 @@ namespace FortnoxAPILibrary.Tests
             Assert.IsFalse(connector.RequestUriString.Contains("filter="));
             Assert.IsFalse(connector.RequestUriString.Contains("sortby="));
             Assert.IsFalse(connector.RequestUriString.Contains("sortorder="));
+        }
+
+        [TestMethod]
+        public void Test_ReadOnlyProperty_NotSerialized()
+        {
+            var connector = new CustomerConnector();
+
+            var createdCustomer = connector.Create(new Customer() { Name = "TestCustomer", CountryCode = "SE" });
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+
+            connector.Update(createdCustomer);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            Assert.IsFalse(connector.RequestContent.Contains("\"Country\":"), "Read-only property exists in Update request!");
+            //Country is read-only, should not be send in update request even if its unchanged
+
+            connector.Delete(createdCustomer.CustomerNumber);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+        }
+
+        [TestMethod]
+        public void Test_ReadOnlyProperty_Deserialized()
+        {
+            var connector = new CustomerConnector();
+
+            var createdCustomer = connector.Create(new Customer() { Name = "TestUser", CountryCode = "SE" });
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            Assert.AreEqual("Sverige", createdCustomer.Country);
+
+            connector.Delete(createdCustomer.CustomerNumber);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
         }
     }
 }

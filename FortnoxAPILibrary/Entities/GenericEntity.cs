@@ -51,6 +51,9 @@ namespace FortnoxAPILibrary.Entities
         {
             var property = base.CreateProperty(member, memberSerialization);
 
+            var isReadOnly = member.GetCustomAttributes<ReadOnlyAttribute>().Any();
+            property.ShouldSerialize = o => !isReadOnly;
+
             var hasGenericName = member.GetCustomAttributes<GenericPropertyNameAttribute>().FirstOrDefault() != null;
 
             if (hasGenericName)
@@ -75,6 +78,10 @@ namespace FortnoxAPILibrary.Entities
 
             return property;
         }
+    }
+
+    internal class ReadOnlyAttribute : Attribute
+    {
     }
 
     internal class GenericPropertyNameAttribute : Attribute
