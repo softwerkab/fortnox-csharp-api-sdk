@@ -10,32 +10,6 @@ namespace FortnoxAPILibrary
     /// <remarks/>
     public abstract class EntityConnector<TEntity, TEntityCollection, TSort> : UrlRequestBase where TEntity : class
     {
-        /// <remarks/>
-        protected EntityConnector()
-        {
-            LastModified = DateTime.MinValue;
-            Error = null;
-        }
-
-        private string SortByRealValue //TODO: Remove this property
-        {
-            get
-            {
-                if (SortBy == null)
-                    return null;
-
-                var type = SortBy.GetType();
-                var memInfo = type.GetMember(SortBy.ToString());
-                var attrs = memInfo[0].GetCustomAttributes(typeof(RealValueAttribute), false);
-                if (attrs.Length > 0)
-                {
-                    return ((RealValueAttribute)attrs[0]).RealValue;
-                }
-
-                return SortBy.ToString();
-            }
-        }
-
         /// <summary>
         /// Sort Order, ascending or descending
         /// </summary>
@@ -167,9 +141,9 @@ namespace FortnoxAPILibrary
                 Parameters.Add("lastmodified", LastModified.Value.ToString("yyyy-MM-dd HH:mm:ss"));
             }
 
-            if (SortByRealValue != null)
+            if (SortBy != null)
             {
-                Parameters.Add("sortby", SortByRealValue);
+                Parameters.Add("sortby", GetEnumRealValue(SortBy));
                 if (SortOrder != null)
                     Parameters.Add("sortorder", SortOrder.ToString().ToLower());
             }
@@ -192,6 +166,14 @@ namespace FortnoxAPILibrary
 
             var result = DoRequest<TEntityCollection>();
             return result;
+        }
+
+        public string GetEnumRealValue(object enumObj)
+        {
+            var type = enumObj.GetType();
+            var memberInfo = type.GetMember(enumObj.ToString()).First();
+            var stringValue = memberInfo.GetCustomAttributes<RealValueAttribute>().FirstOrDefault()?.RealValue;
+            return stringValue ?? "";
         }
 
         protected void AddCustomParameters()
@@ -227,12 +209,7 @@ namespace FortnoxAPILibrary
 
                 if (property.PropertyType.IsEnum)
                 {
-                    var member = value.GetType().GetMember(value.ToString()).FirstOrDefault();
-
-                    if (member.GetCustomAttributes(typeof(RealValueAttribute), true).FirstOrDefault() is RealValueAttribute attribute)
-                    {
-                        strValue = attribute.RealValue;
-                    }
+                    strValue = GetEnumRealValue(value);
                 }
 
                 string propertySetName = property.Name[0].ToString().ToLower() + property.Name.Substring(1) + "Set";

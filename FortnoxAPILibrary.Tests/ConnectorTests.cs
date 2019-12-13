@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Runtime;
+using System.Runtime.InteropServices.WindowsRuntime;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -50,7 +53,7 @@ namespace FortnoxAPILibrary.Tests
             Assert.IsFalse(connector.RequestUriString.Contains("filter="));
             Assert.IsFalse(connector.RequestUriString.Contains("sortby="));
             Assert.IsFalse(connector.RequestUriString.Contains("sortorder="));
-            Assert.IsTrue(connector.RequestUriString.Contains("lastmodified="));
+            Assert.IsFalse(connector.RequestUriString.Contains("lastmodified="));
         }
 
         [TestMethod]
@@ -70,6 +73,7 @@ namespace FortnoxAPILibrary.Tests
             Assert.IsFalse(connector.RequestUriString.Contains("filter="));
             Assert.IsFalse(connector.RequestUriString.Contains("sortby="));
             Assert.IsFalse(connector.RequestUriString.Contains("sortorder="));
+            Assert.IsFalse(connector.RequestUriString.Contains("lastmodified="));
         }
 
         [TestMethod]
@@ -116,6 +120,45 @@ namespace FortnoxAPILibrary.Tests
 
             connector.Delete(createdCustomer.CustomerNumber);
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+        }
+
+        [TestMethod]
+        public void Test_Paging()
+        {
+            const int large = 20;
+            const int small = 5;
+
+            var connector = new CustomerConnector();
+            connector.Limit = large;
+            connector.SortBy = Sort.By.Customer.CustomerNumber;
+            connector.SortOrder = Sort.Order.Ascending;
+
+            var largeCustomerCollection = connector.Find(); //get up to 'large' number of entities
+            var totalCustomers = int.Parse(largeCustomerCollection.TotalResources);
+
+            var neededPages = GetNeededPages(Math.Min(totalCustomers, large), small);
+            var mergedCollection = new List<CustomerSubset>();
+
+            for (int i = 0; i < neededPages; i++)
+            {
+                connector.Limit = small;
+                connector.Page = i + 1;
+                var smallCustomerCollection = connector.Find();
+                mergedCollection.AddRange(smallCustomerCollection.Entities);
+            }
+            
+            for(int i = 0;i<largeCustomerCollection.Entities.Count;i++)
+                Assert.AreEqual(largeCustomerCollection.Entities[i].CustomerNumber, mergedCollection[i].CustomerNumber);
+        }
+
+        private static int GetNeededPages(int totalSize, int pageSize)
+        {
+            return (int) Math.Ceiling(totalSize / (float) pageSize);
+
+            /*var pages =  totalSize / (double) pageSize;
+            if (totalSize % pageSize != 0)
+                pages++;
+            return pages;*/
         }
     }
 }
