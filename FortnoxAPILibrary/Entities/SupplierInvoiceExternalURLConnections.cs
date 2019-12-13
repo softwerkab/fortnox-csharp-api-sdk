@@ -11,6 +11,7 @@ namespace FortnoxAPILibrary.Entities
     public class SupplierInvoiceExternalURLConnection
     {
         /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly]
         [JsonProperty]
         public string Id { get; private set; }
 

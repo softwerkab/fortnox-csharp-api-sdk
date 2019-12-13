@@ -19,6 +19,7 @@ namespace FortnoxAPILibrary.Entities
         }
 
 		/// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string AccountingMethod { get; private set; }
 
@@ -27,14 +28,17 @@ namespace FortnoxAPILibrary.Entities
         public string AdministrationFee { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly]
         [JsonProperty]
         public string Balance { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly]
         [JsonProperty]
         public string Booked { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly]
         [JsonProperty]
         public string Cancelled { get; private set; }
 
@@ -47,10 +51,12 @@ namespace FortnoxAPILibrary.Entities
         public string CostCenter { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly]
         [JsonProperty]
         public string Credit { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly]
         [JsonProperty]
         public string CreditReference { get; private set; }
 
@@ -139,6 +145,7 @@ namespace FortnoxAPILibrary.Entities
         public string SupplierNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly]
         [JsonProperty]
         public string SupplierName { get; private set; }
 
@@ -159,6 +166,7 @@ namespace FortnoxAPILibrary.Entities
         public List<SupplierInvoiceRow> SupplierInvoiceRows { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly]
         [JsonProperty(PropertyName = "@url")]
         public string Url { get; private set; }
 

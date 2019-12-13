@@ -16,10 +16,12 @@ namespace FortnoxAPILibrary.Entities
         public string Account { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly]
         [JsonProperty]
         public string Name { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly]
         [JsonProperty(PropertyName = "@url")]
         public string Url { get; private set; }
     }

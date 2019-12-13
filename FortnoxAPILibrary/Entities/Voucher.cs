@@ -35,10 +35,12 @@ namespace FortnoxAPILibrary.Entities
         public string Project { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string ReferenceNumber { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string ReferenceType { get; private set; }
 
@@ -47,6 +49,7 @@ namespace FortnoxAPILibrary.Entities
         public string TransactionDate { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string VoucherNumber { get; private set; }
 
@@ -59,10 +62,12 @@ namespace FortnoxAPILibrary.Entities
         public string VoucherSeries { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Year { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
     }
@@ -99,6 +104,7 @@ namespace FortnoxAPILibrary.Entities
         public string Quantity { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Removed { get; private set; }
 

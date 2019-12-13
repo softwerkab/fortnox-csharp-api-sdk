@@ -10,6 +10,7 @@ namespace FortnoxAPILibrary.Entities
     public class LockedPeriod
     {
         /// <remarks/>
+        [ReadOnly]
         [JsonProperty]
         public string EndDate { get; private set; }
     }

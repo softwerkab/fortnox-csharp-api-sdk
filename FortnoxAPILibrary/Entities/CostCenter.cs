@@ -49,6 +49,7 @@ namespace FortnoxAPILibrary.Entities
         public string Active { get; set; }
 
         /// <remarks/>
+		[ReadOnly]
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
     }

@@ -45,6 +45,7 @@ namespace FortnoxAPILibrary.Entities
         public string StartDate { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Times { get; private set; }
 
@@ -57,6 +58,7 @@ namespace FortnoxAPILibrary.Entities
         public string VATIncluded { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
     }

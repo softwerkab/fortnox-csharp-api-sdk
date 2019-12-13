@@ -24,6 +24,7 @@ namespace FortnoxAPILibrary.Entities
 		public string AdministrationFee { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly]
         [JsonProperty]
         public string AdministrationFeeVAT { get; private set; }
 
@@ -36,10 +37,12 @@ namespace FortnoxAPILibrary.Entities
         public string Address2 { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string BasisTaxReduction { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Cancelled { get; private set; }
 
@@ -52,10 +55,12 @@ namespace FortnoxAPILibrary.Entities
         public string Comments { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string ContributionPercent { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string ContributionValue { get; private set; }
 
@@ -136,18 +141,22 @@ namespace FortnoxAPILibrary.Entities
         public string Freight { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly]
         [JsonProperty]
         public string FreightVAT { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Gross { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string HouseWork { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string InvoiceReference { get; private set; }
 
@@ -156,6 +165,7 @@ namespace FortnoxAPILibrary.Entities
         public string Language { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Net { get; private set; }
 
@@ -176,6 +186,7 @@ namespace FortnoxAPILibrary.Entities
         public List<Label> Labels { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string OrderReference { get; private set; }
 
@@ -212,14 +223,17 @@ namespace FortnoxAPILibrary.Entities
         public string Remarks { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string RoundOff { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Sent { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string TaxReduction { get; private set; }
 
@@ -232,14 +246,17 @@ namespace FortnoxAPILibrary.Entities
         public string TermsOfPayment { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Total { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string TotalToPay { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string TotalVAT { get; private set; }
 
@@ -260,10 +277,12 @@ namespace FortnoxAPILibrary.Entities
         public string ZipCode { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty(PropertyName = "@urlTaxReductionList")]
 		public string UrlTaxReductionList { get; private set; }
     }
@@ -308,10 +327,12 @@ namespace FortnoxAPILibrary.Entities
         public string ArticleNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string ContributionPercent { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string ContributionValue { get; private set; }
 
@@ -348,6 +369,7 @@ namespace FortnoxAPILibrary.Entities
         public string Quantity { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Total { get; private set; }
 
@@ -401,6 +423,7 @@ namespace FortnoxAPILibrary.Entities
         public string Total { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly]
         [JsonProperty(PropertyName = "@url")]
         public string Url { get; private set; }
     }
