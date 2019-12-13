@@ -7,13 +7,13 @@
         public enum Contract
         {
             /// <remarks/>
-            [RealValue("active")]
+            [StringValue("active")]
             Active,
             /// <remarks/>
-            [RealValue("inactive")]
+            [StringValue("inactive")]
             Inactive,
             /// <remarks/>
-            [RealValue("finished")]
+            [StringValue("finished")]
             Finished
         }
 
@@ -21,19 +21,19 @@
 		public enum Invoice
 		{
 			/// <remarks/>
-			[RealValue("fullypaid")]
+			[StringValue("fullypaid")]
 			FullyPaid,
 			/// <remarks/>
-			[RealValue("cancelled")]
+			[StringValue("cancelled")]
 			Cancelled,
 			/// <remarks/>
-			[RealValue("unpaid")]
+			[StringValue("unpaid")]
 			Unpaid,
 			/// <remarks/>
-			[RealValue("unpaidoverdue")]
+			[StringValue("unpaidoverdue")]
 			UnpaidOverdue,
 			/// <remarks/>
-			[RealValue("unbooked")]
+			[StringValue("unbooked")]
 			Unbooked
 		}
 
@@ -41,25 +41,25 @@
         public enum SupplierInvoice
         {
             /// <remarks/>
-            [RealValue("fullypaid")]
+            [StringValue("fullypaid")]
             FullyPaid,
             /// <remarks/>
-            [RealValue("cancelled")]
+            [StringValue("cancelled")]
             Cancelled,
             /// <remarks/>
-            [RealValue("unpaid")]
+            [StringValue("unpaid")]
             Unpaid,
             /// <remarks/>
-            [RealValue("unpaidoverdue")]
+            [StringValue("unpaidoverdue")]
             UnpaidOverdue,
             /// <remarks/>
-            [RealValue("unbooked")]
+            [StringValue("unbooked")]
             Unbooked,
 			/// <remarks/>
-			[RealValue("pendingpayment")]
+			[StringValue("pendingpayment")]
 			PendingPayment,
 			/// <remarks/>
-			[RealValue("authorizepending")]
+			[StringValue("authorizepending")]
 			AuthorizePending
 		}
 
@@ -67,16 +67,16 @@
 		public enum Offer
 		{
 			/// <remarks/>
-			[RealValue("cancelled")]
+			[StringValue("cancelled")]
 			Cancelled,
 			/// <remarks/>
-			[RealValue("expired")]
+			[StringValue("expired")]
 			Expired,
 			/// <remarks/>
-			[RealValue("ordercreated")]
+			[StringValue("ordercreated")]
 			OrderCreated,
 			/// <remarks/>
-			[RealValue("ordernotcreated")]
+			[StringValue("ordernotcreated")]
 			OrderNotCreated
 		}
 
@@ -84,16 +84,16 @@
 		public enum Order
 		{
 			/// <remarks/>
-			[RealValue("cancelled")]
+			[StringValue("cancelled")]
 			Cancelled,
 			/// <remarks/>
-			[RealValue("expired")]
+			[StringValue("expired")]
 			Expired,
 			/// <remarks/>
-			[RealValue("invoicecreated")]
+			[StringValue("invoicecreated")]
 			InvoiceCreated,
 			/// <remarks/>
-			[RealValue("invoicenotcreated")]
+			[StringValue("invoicenotcreated")]
 			InvoiceNotCreated
 		}
 
@@ -101,13 +101,13 @@
 		public enum TaxReduction
 		{
 			/// <remarks/>
-			[RealValue("invoices")]
+			[StringValue("invoices")]
 			Invoices,
 			/// <remarks/>
-			[RealValue("offers")]
+			[StringValue("offers")]
 			Offers,
 			/// <remarks/>
-			[RealValue("orders")]
+			[StringValue("orders")]
 			Orders
 		}
 
@@ -115,10 +115,10 @@
 		public enum Customer
 		{
 			/// <remarks/>
-			[RealValue("active")]
+			[StringValue("active")]
 			Active,
 			/// <remarks/>
-			[RealValue("inactive")]
+			[StringValue("inactive")]
 			Inactive
 		}
 
@@ -126,10 +126,10 @@
 		public enum Article
 		{
 			/// <remarks/>
-			[RealValue("active")]
+			[StringValue("active")]
 			Active,
 			/// <remarks/>
-			[RealValue("inactive")]
+			[StringValue("inactive")]
 			Inactive
 		}
 

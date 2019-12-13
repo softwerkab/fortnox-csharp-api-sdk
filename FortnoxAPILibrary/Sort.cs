@@ -14,7 +14,7 @@ namespace FortnoxAPILibrary
 			public enum Account
 			{
 				/// <remarks/>
-				[RealValue("number")]
+				[StringValue("number")]
 				AccountNumber
 			}
 
@@ -27,16 +27,16 @@ namespace FortnoxAPILibrary
 			public enum Article
 			{
 				/// <remarks/>
-				[RealValue("articlenumber")]
+				[StringValue("articlenumber")]
 				ArticleNumber,
 				/// <remarks/>
-				[RealValue("quantityinstock")]
+				[StringValue("quantityinstock")]
 				QuantityInStock,
 				/// <remarks/>
-				[RealValue("reservedquantity")]
+				[StringValue("reservedquantity")]
 				ReservedQuantity,
 				/// <remarks/>
-				[RealValue("stockvalue")]
+				[StringValue("stockvalue")]
 				StockValue
 			}
 
@@ -55,37 +55,37 @@ namespace FortnoxAPILibrary
             public enum Contract
             {
                 /// <remarks/>
-                [RealValue("documentnumber")]
+                [StringValue("documentnumber")]
                 DocumentNumber,
                 /// <remarks/>
-                [RealValue("customernumber")]
+                [StringValue("customernumber")]
                 CustomerNumber,
                 /// <remarks/>
-                [RealValue("customername")]
+                [StringValue("customername")]
                 CustomerName,
                 /// <remarks/>
-                [RealValue("templatenumber")]
+                [StringValue("templatenumber")]
                 TemplateNumber,
                 /// <remarks/>
-                [RealValue("contractlength")]
+                [StringValue("contractlength")]
                 ContractLength,
                 /// <remarks/>
-                [RealValue("invoiceinterval")]
+                [StringValue("invoiceinterval")]
                 InvoiceInterval,
                 /// <remarks/>
-                [RealValue("lastinvoicedate")]
+                [StringValue("lastinvoicedate")]
                 LastInvoiceDate,
                 /// <remarks/>
-                [RealValue("invoicesremaining")]
+                [StringValue("invoicesremaining")]
                 InvoicesRemaining,
                 /// <remarks/>
-                [RealValue("periodstart")]
+                [StringValue("periodstart")]
                 PeriodStart,
                 /// <remarks/>
-                [RealValue("periodend")]
+                [StringValue("periodend")]
                 PeriodEnd,
                 /// <remarks/>
-                [RealValue("total")]
+                [StringValue("total")]
                 Total
             }
 
@@ -93,7 +93,7 @@ namespace FortnoxAPILibrary
 			public enum CostCenter
 			{
 				/// <remarks/>
-				[RealValue("code")]
+				[StringValue("code")]
 				Code
 			}
 
@@ -101,7 +101,7 @@ namespace FortnoxAPILibrary
 			public enum Currency
 			{
 				/// <remarks/>
-				[RealValue("code")]
+				[StringValue("code")]
 				Code
 			}
 
@@ -109,10 +109,10 @@ namespace FortnoxAPILibrary
 			public enum Customer
 			{
 				/// <remarks/>
-				[RealValue("customernumber")]
+				[StringValue("customernumber")]
 				CustomerNumber,
 				/// <remarks/>
-				[RealValue("name")]
+				[StringValue("name")]
 				Name
 
 			}
@@ -121,13 +121,13 @@ namespace FortnoxAPILibrary
 			public enum FinancialYear
 			{
 				/// <remarks/>
-				[RealValue("id")]
+				[StringValue("id")]
 				Id,
 				/// <remarks/>
-				[RealValue("fromdate")]
+				[StringValue("fromdate")]
 				FromDate,
 				/// <remarks/>
-				[RealValue("todate")]
+				[StringValue("todate")]
 				ToDate
 			}
 
@@ -135,13 +135,13 @@ namespace FortnoxAPILibrary
 			public enum Folder
 			{
 				/// <remarks/>
-				[RealValue("id")]
+				[StringValue("id")]
 				Id,
 				/// <remarks/>
-				[RealValue("email")]
+				[StringValue("email")]
 				Email,
 				/// <remarks/>
-				[RealValue("name")]
+				[StringValue("name")]
 				Name
 			}
 
@@ -149,22 +149,22 @@ namespace FortnoxAPILibrary
 			public enum Invoice
 			{
 				/// <remarks/>
-				[RealValue("customername")]
+				[StringValue("customername")]
 				CustomerName,
 				/// <remarks/>
-				[RealValue("customernumber")]
+				[StringValue("customernumber")]
 				CustomerNumber,
 				/// <remarks/>
-				[RealValue("documentnumber")]
+				[StringValue("documentnumber")]
 				DocumentNumber,
 				/// <remarks/>
-				[RealValue("invoicedate")]
+				[StringValue("invoicedate")]
 				InvoiceDate,
 				/// <remarks/>
-				[RealValue("ocr")]
+				[StringValue("ocr")]
 				OCR,
 				/// <remarks/>
-				[RealValue("total")]
+				[StringValue("total")]
 				Total
 
 			}
@@ -190,10 +190,10 @@ namespace FortnoxAPILibrary
             /// <remarks/>
             public enum Label {
                 /// <remarks/>
-                [RealValue("id")]
+                [StringValue("id")]
                 Id,
                 /// <remarks/>
-                [RealValue("description")]
+                [StringValue("description")]
                 Description
             }
 
@@ -207,7 +207,7 @@ namespace FortnoxAPILibrary
 			public enum ModesOfPayment
 			{
 				/// <remarks/>
-				[RealValue("code")]
+				[StringValue("code")]
 				Code
 			}
 
@@ -215,19 +215,19 @@ namespace FortnoxAPILibrary
 			public enum Offer
 			{
 				/// <remarks/>
-				[RealValue("customername")]
+				[StringValue("customername")]
 				CustomerName,
 				/// <remarks/>
-				[RealValue("customernumber")]
+				[StringValue("customernumber")]
 				CustomerNumber,
 				/// <remarks/>
-				[RealValue("documentnumber")]
+				[StringValue("documentnumber")]
 				DocumentNumber,
 				/// <remarks/>
-				[RealValue("offerdate")]
+				[StringValue("offerdate")]
 				OfferDate,
 				/// <remarks/>
-				[RealValue("total")]
+				[StringValue("total")]
 				Total
 			}
 
@@ -235,19 +235,19 @@ namespace FortnoxAPILibrary
 			public enum Order
 			{
 				/// <remarks/>
-				[RealValue("customername")]
+				[StringValue("customername")]
 				CustomerName,
 				/// <remarks/>
-				[RealValue("customernumber")]
+				[StringValue("customernumber")]
 				CustomerNumber,
 				/// <remarks/>
-				[RealValue("documentnumber")]
+				[StringValue("documentnumber")]
 				DocumentNumber,
 				/// <remarks/>
-				[RealValue("orderdate")]
+				[StringValue("orderdate")]
 				OrderDate,
 				/// <remarks/>
-				[RealValue("total")]
+				[StringValue("total")]
 				Total
 			}
 
@@ -268,10 +268,10 @@ namespace FortnoxAPILibrary
 			public enum Price
 			{
 				/// <remarks/>
-				[RealValue("articlenumber")]
+				[StringValue("articlenumber")]
 				ArticleNumber,
 				/// <remarks/>
-				[RealValue("pricelist")]
+				[StringValue("pricelist")]
 				PriceList
 			}
 
@@ -279,7 +279,7 @@ namespace FortnoxAPILibrary
 			public enum PriceList
 			{
 				/// <remarks/>
-				[RealValue("code")]
+				[StringValue("code")]
 				Code
 			}
 
@@ -293,10 +293,10 @@ namespace FortnoxAPILibrary
 			public enum Project
 			{
 				/// <remarks/>
-				[RealValue("id")]
+				[StringValue("id")]
 				Id,
 				/// <remarks/>
-				[RealValue("description")]
+				[StringValue("description")]
 				Description
 			}
 			
@@ -310,10 +310,10 @@ namespace FortnoxAPILibrary
 			public enum Supplier
 			{
 				/// <remarks/>
-				[RealValue("name")]
+				[StringValue("name")]
 				Name,
 				/// <remarks/>
-				[RealValue("suppliernumber")]
+				[StringValue("suppliernumber")]
 				SupplierNumber
 			}
 
@@ -321,10 +321,10 @@ namespace FortnoxAPILibrary
 			public enum SupplierInvoice
 			{
 				/// <remarks/>
-				[RealValue("name")]
+				[StringValue("name")]
 				SupplierName,
 				/// <remarks/>
-				[RealValue("suppliernumber")]
+				[StringValue("suppliernumber")]
 				SupplierNumber
 			}
 
@@ -362,13 +362,13 @@ namespace FortnoxAPILibrary
 			public enum TaxReduction
 			{
 				/// <remarks/>
-				[RealValue("id")]
+				[StringValue("id")]
 				Id,
 				/// <remarks/>
-				[RealValue("customername")]
+				[StringValue("customername")]
 				CustomerName,
 				/// <remarks/>
-				[RealValue("invoicereferencenumber")]
+				[StringValue("invoicereferencenumber")]
 				InvoiceReferenceNumber
 			}
 
@@ -376,7 +376,7 @@ namespace FortnoxAPILibrary
 			public enum TermsOfPayment
 			{
 				/// <remarks/>
-				[RealValue("code")]
+				[StringValue("code")]
 				Code
 			}
 
@@ -384,7 +384,7 @@ namespace FortnoxAPILibrary
 			public enum TermsOfDelivery
 			{
 				/// <remarks/>
-				[RealValue("code")]
+				[StringValue("code")]
 				Code
 			}
 
@@ -392,7 +392,7 @@ namespace FortnoxAPILibrary
 			public enum Unit
 			{
 				/// <remarks/>
-				[RealValue("code")]
+				[StringValue("code")]
 				Code
 			}
 
@@ -400,16 +400,16 @@ namespace FortnoxAPILibrary
 			public enum Voucher
 			{
 				/// <remarks/>
-				[RealValue("referencenumber")]
+				[StringValue("referencenumber")]
 				ReferenceNumber,
 				/// <remarks/>
-				[RealValue("referencetype")]
+				[StringValue("referencetype")]
 				ReferenceYype,
 				/// <remarks/>
-				[RealValue("vouchernumber")]
+				[StringValue("vouchernumber")]
 				VoucherNumber,
 				/// <remarks/>
-				[RealValue("voucherseries")]
+				[StringValue("voucherseries")]
 				VoucherSeries
 
 			}
@@ -424,7 +424,7 @@ namespace FortnoxAPILibrary
 			public enum VoucherSeries
 			{
 				/// <remarks/>
-				[RealValue("code")]
+				[StringValue("code")]
 				Code
 			}
 
@@ -432,7 +432,7 @@ namespace FortnoxAPILibrary
 			public enum WayOfDelivery
 			{
 				/// <remarks/>
-				[RealValue("code")]
+				[StringValue("code")]
 				Code
 			}
 

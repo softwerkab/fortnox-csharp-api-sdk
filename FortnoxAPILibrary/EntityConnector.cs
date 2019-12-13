@@ -145,7 +145,7 @@ namespace FortnoxAPILibrary
         {
             var type = enumObj.GetType();
             var memberInfo = type.GetMember(enumObj.ToString()).First();
-            var stringValue = memberInfo.GetCustomAttributes<RealValueAttribute>().FirstOrDefault()?.RealValue;
+            var stringValue = memberInfo.GetCustomAttributes<StringValueAttribute>().FirstOrDefault()?.RealValue;
             return stringValue ?? "";
         }
 
