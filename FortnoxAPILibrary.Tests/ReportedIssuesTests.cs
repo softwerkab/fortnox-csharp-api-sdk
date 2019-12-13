@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace FortnoxAPILibrary.Tests
 {
     [TestClass]
-    class ReportedIssuesTests
+    public class ReportedIssuesTests
     {
         [TestInitialize]
         public void Init()

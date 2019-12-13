@@ -52,7 +52,7 @@ namespace FortnoxAPILibrary.Entities
             var property = base.CreateProperty(member, memberSerialization);
 
             var isReadOnly = member.GetCustomAttributes<ReadOnlyAttribute>().Any();
-            property.ShouldSerialize = o => !isReadOnly;
+            property.ShouldSerialize = o => !isReadOnly && !HasEmptyObjectValue(o, (PropertyInfo)member);
 
             var hasGenericName = member.GetCustomAttributes<GenericPropertyNameAttribute>().FirstOrDefault() != null;
 
@@ -77,6 +77,13 @@ namespace FortnoxAPILibrary.Entities
             }
 
             return property;
+        }
+
+        private static bool HasEmptyObjectValue(object obj, PropertyInfo member)
+        {
+            var value = member.GetValue(obj);
+            var json = JsonConvert.SerializeObject(value);
+            return json.Equals("{}"); //empty object
         }
     }
 
