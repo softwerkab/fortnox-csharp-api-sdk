@@ -8,71 +8,9 @@ using FortnoxAPILibrary.Entities;
 
 namespace FortnoxAPILibrary.Connectors
 {
-
-    /// <remarks/>
-    public class Selection
-    {
-        /// <remarks/>
-        public string VoucherSeries { get; set; }
-        /// <remarks/>
-        public string FromVoucherNumber { get; set; }
-        /// <remarks/>
-        public string ToVoucherNumber { get; set; }
-    }
-
-    /// <remarks/>
-    public class ImportOptions
-    {
-        /// <remarks/>
-        public bool AllAccounts;
-        /// <remarks/>
-        public bool AllCostCenters;
-        /// <remarks/>
-        public bool AllProjects;
-        /// <remarks/>
-        public bool UseCostCenterDescription;
-        /// <remarks/>
-        public bool UseProjectDescription;
-        /// <remarks/>
-        public bool UseSRU;
-        /// <remarks/>
-        public bool UseIncomingBalance;
-        /// <remarks/>
-        public bool UseBudget;
-        /// <remarks/>
-        public List<Selection> Selection;
-    }
-
-    /// <remarks/>
-    public class ExportOptions
-    {
-        /// <remarks/>
-        public bool ExportAll;
-        /// <remarks/>
-        public List<Selection> Selection;
-        /// <remarks/>
-        public string FromDate;
-        /// <remarks/>
-        public string ToDate;
-    }
-
-
     /// <remarks/>
     public class SIEConnector : FinancialYearBasedEntityConnector<SieSummary, SieSummary, Sort.By.Sie?>
     {
-        /// <remarks/>
-        public enum SIEType
-        {
-            /// <remarks/>
-            SIE1 = 1,
-            /// <remarks/>
-            SIE2 = 2,
-            /// <remarks/>
-            SIE3 = 3,
-            /// <remarks/>
-            SIE4 = 4
-        }
-
         /// <remarks/>
         public ImportOptions ImportOptions { get; set; }
         /// <remarks/>
@@ -295,5 +233,65 @@ namespace FortnoxAPILibrary.Connectors
                 parameters.Add("usesru=true");
             }
         }
+    }
+
+    /// <remarks/>
+    public class Selection
+    {
+        /// <remarks/>
+        public string VoucherSeries { get; set; }
+        /// <remarks/>
+        public string FromVoucherNumber { get; set; }
+        /// <remarks/>
+        public string ToVoucherNumber { get; set; }
+    }
+
+    /// <remarks/>
+    public class ImportOptions
+    {
+        /// <remarks/>
+        public bool AllAccounts;
+        /// <remarks/>
+        public bool AllCostCenters;
+        /// <remarks/>
+        public bool AllProjects;
+        /// <remarks/>
+        public bool UseCostCenterDescription;
+        /// <remarks/>
+        public bool UseProjectDescription;
+        /// <remarks/>
+        public bool UseSRU;
+        /// <remarks/>
+        public bool UseIncomingBalance;
+        /// <remarks/>
+        public bool UseBudget;
+        /// <remarks/>
+        public List<Selection> Selection;
+    }
+
+    /// <remarks/>
+    public class ExportOptions
+    {
+        /// <remarks/>
+        public bool ExportAll;
+        /// <remarks/>
+        public List<Selection> Selection;
+        /// <remarks/>
+        public string FromDate;
+        /// <remarks/>
+        public string ToDate;
+    }
+
+    /// <remarks/>
+    public enum SIEType
+    {
+        /// <remarks/>
+        SIE1 = 1,
+        /// <remarks/>
+        SIE2 = 2,
+        /// <remarks/>
+        SIE3 = 3,
+        /// <remarks/>
+        SIE4 = 4
     }
 }

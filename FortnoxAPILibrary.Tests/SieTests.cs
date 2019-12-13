@@ -25,7 +25,7 @@ namespace FortnoxAPILibrary.Tests
             var tmpPath = TestUtils.GetTempFilePath();
             var connector = new SIEConnector();
 
-            connector.ExportSIE(SIEConnector.SIEType.SIE3, tmpPath);
+            connector.ExportSIE(SIEType.SIE3, tmpPath);
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
             Assert.IsTrue(File.Exists(tmpPath) && new FileInfo(tmpPath).Length > 0);
 
@@ -37,7 +37,7 @@ namespace FortnoxAPILibrary.Tests
         {
             var connector = new SIEConnector();
 
-            var data = connector.ExportSIE(SIEConnector.SIEType.SIE3);
+            var data = connector.ExportSIE(SIEType.SIE3);
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
             Assert.IsTrue(data.Length > 0);
         }
