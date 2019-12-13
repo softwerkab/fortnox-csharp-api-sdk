@@ -50,9 +50,7 @@ namespace FortnoxAPILibrary.Connectors
             string requestString = GetUrl();
 
             Parameters = new Dictionary<string, string>();
-
-            AddCustomParameters();
-
+            
             AddExportOptions();
 
             requestString = AddParameters(requestString);

@@ -13,11 +13,13 @@ namespace FortnoxAPILibrary
         /// <summary>
         /// Sort Order, ascending or descending
         /// </summary>
+        [FilterProperty]
         public Sort.Order? SortOrder { get; set; }
 
         /// <summary>
         /// Sort the result
         /// </summary>
+        [FilterProperty]
         public TSort SortBy { get; set; }
 
         /// <summary>
@@ -25,22 +27,26 @@ namespace FortnoxAPILibrary
         /// <para>Default is 100</para>
         /// <para>Max is 500</para>
         /// </summary>
-        public int Limit { get; set; }
+        [FilterProperty]
+        public int? Limit { get; set; }
 
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
+        [FilterProperty]
         public DateTime? LastModified { get; set; }
 
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
-        public int Page { get; set; }
+        [FilterProperty]
+        public int? Page { get; set; }
 
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
-        public int Offset { get; set; }
+        [FilterProperty]
+        public int? Offset { get; set; }
 
         /// <remarks/>
         protected Dictionary<string, string> Parameters = new Dictionary<string, string>();
@@ -50,8 +56,6 @@ namespace FortnoxAPILibrary
             Parameters = parameters ?? new Dictionary<string, string>();
 
             var requestUriString = GetUrl();
-
-            AddCustomParameters();
 
             requestUriString = AddParameters(requestUriString);
 
@@ -70,8 +74,6 @@ namespace FortnoxAPILibrary
             var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
 
             var requestUriString = GetUrl(searchValue);
-
-            AddCustomParameters();
 
             requestUriString = AddParameters(requestUriString);
 
@@ -102,8 +104,6 @@ namespace FortnoxAPILibrary
         {
             Parameters = new Dictionary<string, string>();
 
-            AddCustomParameters();
-
             var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
 
             if (string.IsNullOrWhiteSpace(searchValue))
@@ -127,36 +127,9 @@ namespace FortnoxAPILibrary
         {
             Parameters = parameters ?? new Dictionary<string, string>();
 
-            AddCustomParameters();
+            AddSearchParameters();
 
             var requestUriString = GetUrl();
-
-            if (Limit != 0)
-            {
-                Parameters.Add("limit", Limit.ToString());
-            }
-
-            if (LastModified != null)
-            {
-                Parameters.Add("lastmodified", LastModified.Value.ToString("yyyy-MM-dd HH:mm:ss"));
-            }
-
-            if (SortBy != null)
-            {
-                Parameters.Add("sortby", GetEnumRealValue(SortBy));
-                if (SortOrder != null)
-                    Parameters.Add("sortorder", SortOrder.ToString().ToLower());
-            }
-
-            if (Page != 0)
-            {
-                Parameters.Add("page", Page.ToString());
-            }
-
-            if (Offset != 0)
-            {
-                Parameters.Add("offset", Offset.ToString());
-            }
 
             requestUriString = AddParameters(requestUriString);
 
@@ -176,55 +149,26 @@ namespace FortnoxAPILibrary
             return stringValue ?? "";
         }
 
-        protected void AddCustomParameters()
+        protected void AddSearchParameters()
         {
-            var properties = GetType().GetProperties();
-
-            foreach (var property in properties)
+            foreach (var property in GetType().GetProperties())
             {
-                var customAttributes = property.GetCustomAttributes(typeof(FilterProperty), true);
+                var isSearchParameter = property.GetCustomAttributes<FilterProperty>().Any();
+                if (!isSearchParameter) continue;
 
-                if (!customAttributes.Any()) continue;
-
-                var value = property.GetValue(this, null);
-
+                var value = property.GetValue(this);
                 if (value == null) continue;
 
                 var strValue = value is string ? value.ToString() : value.ToString().ToLower();
+                if (property.PropertyType.IsEnum)
+                    strValue = GetEnumRealValue(value);
 
                 if (string.IsNullOrWhiteSpace(strValue)) continue;
 
-                string propertyName;
+                var filterAttribute = property.GetCustomAttributes<FilterProperty>().First();
+                var paramName = filterAttribute.Name ?? property.Name;
 
-                var filterPropertyAttribute = customAttributes.FirstOrDefault() as FilterProperty;
-
-                if (filterPropertyAttribute == null || string.IsNullOrWhiteSpace(filterPropertyAttribute.Name))
-                {
-                    propertyName = property.Name;
-                }
-                else
-                {
-                    propertyName = filterPropertyAttribute.Name;
-                }
-
-                if (property.PropertyType.IsEnum)
-                {
-                    strValue = GetEnumRealValue(value);
-                }
-
-                string propertySetName = property.Name[0].ToString().ToLower() + property.Name.Substring(1) + "Set";
-
-                var propertySet = GetType().GetField(propertySetName, BindingFlags.NonPublic | BindingFlags.Instance);
-
-                if (propertySet != null)
-                {
-                    if (!(bool)propertySet.GetValue(this))
-                    {
-                        continue;
-                    }
-                }
-
-                Parameters.Add(propertyName.ToLower(), strValue);
+                Parameters.Add(paramName.ToLower(), strValue);
             }
         }
 
