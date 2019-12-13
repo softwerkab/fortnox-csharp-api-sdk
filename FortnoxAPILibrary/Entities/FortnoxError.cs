@@ -1,10 +1,8 @@
-﻿using System;
-using FortnoxAPILibrary.Entities;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
 
-namespace FortnoxAPILibrary
+namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [Entity(SingularName = "ErrorInformation")]
