@@ -34,6 +34,7 @@ namespace FortnoxAPILibrary.Entities
         public string Description { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string DisposableQuantity { get; private set; }
 
@@ -90,6 +91,7 @@ namespace FortnoxAPILibrary.Entities
         public string PurchasePrice { get; set; }
 
         /// <remarks/>
+	    [ReadOnly]
 	    [JsonProperty]
 	    public string SalesPrice { get; private set; }
 
@@ -98,6 +100,7 @@ namespace FortnoxAPILibrary.Entities
         public string QuantityInStock { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string ReservedQuantity { get; private set; }
 
@@ -114,6 +117,7 @@ namespace FortnoxAPILibrary.Entities
         public string StockPlace { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string StockValue { get; private set; }
 
@@ -122,6 +126,7 @@ namespace FortnoxAPILibrary.Entities
         public string StockWarning { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string SupplierName { get; private set; }
 
@@ -154,6 +159,7 @@ namespace FortnoxAPILibrary.Entities
         public string Width { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
 
@@ -199,6 +205,7 @@ namespace FortnoxAPILibrary.Entities
         public string PurchasePrice { get; set; }
 
         /// <remarks/>
+        [ReadOnly]
         [JsonProperty]
         public string SalesPrice { get; private set; }
 

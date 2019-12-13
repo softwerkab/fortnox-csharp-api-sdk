@@ -21,10 +21,12 @@ namespace FortnoxAPILibrary.Entities
         public string AmountCurrency { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Booked { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Currency { get; private set; }
 
@@ -33,22 +35,27 @@ namespace FortnoxAPILibrary.Entities
         public string CurrencyRate { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string CurrencyUnit { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string ExternalInvoiceReference1 { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string ExternalInvoiceReference2 { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string InvoiceCustomerName { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string InvoiceCustomerNumber { get; private set; }
 
@@ -57,6 +64,7 @@ namespace FortnoxAPILibrary.Entities
         public string InvoiceNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string InvoiceDueDate { get; private set; }
 
@@ -65,6 +73,7 @@ namespace FortnoxAPILibrary.Entities
         public string InvoiceOCR { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string InvoiceTotal { get; private set; }
 
@@ -73,6 +82,7 @@ namespace FortnoxAPILibrary.Entities
         public string ModeOfPayment { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Number { get; private set; }
 
@@ -81,18 +91,22 @@ namespace FortnoxAPILibrary.Entities
         public string PaymentDate { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Source { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string VoucherNumber { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string VoucherSeries { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string VoucherYear { get; private set; }
 
@@ -101,6 +115,7 @@ namespace FortnoxAPILibrary.Entities
         public List<InvoiceWriteOff> WriteOffs { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
     }
@@ -121,10 +136,12 @@ namespace FortnoxAPILibrary.Entities
         public string CostCenter { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Currency { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Description { get; private set; }
 

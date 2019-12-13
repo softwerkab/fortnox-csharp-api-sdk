@@ -17,6 +17,7 @@ namespace FortnoxAPILibrary.Entities
 		public string AccountChartType { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Id { get; private set; }
 
@@ -33,6 +34,7 @@ namespace FortnoxAPILibrary.Entities
         public string ToDate { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
     }

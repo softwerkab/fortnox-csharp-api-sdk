@@ -32,6 +32,7 @@ namespace FortnoxAPILibrary.Entities
         public string DocumentNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly]
         [JsonProperty]
         public string Period { get; private set; }
 
@@ -40,6 +41,7 @@ namespace FortnoxAPILibrary.Entities
         public string RevenueAccount { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly]
         [JsonProperty]
         public string Times { get; private set; }
 

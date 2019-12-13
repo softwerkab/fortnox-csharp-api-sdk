@@ -16,6 +16,7 @@ namespace FortnoxAPILibrary.Entities
 		public string FileId { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Name { get; private set; }
 
@@ -24,10 +25,12 @@ namespace FortnoxAPILibrary.Entities
         public string SupplierInvoiceNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string SupplierName { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
     }

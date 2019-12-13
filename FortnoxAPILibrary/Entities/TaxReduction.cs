@@ -13,6 +13,7 @@ namespace FortnoxAPILibrary.Entities
 	public class TaxReduction 
 	{
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string ApprovedAmount { get; private set; }
 
@@ -21,6 +22,7 @@ namespace FortnoxAPILibrary.Entities
         public string AskedAmount { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string BilledAmount { get; private set; }
 
@@ -29,6 +31,7 @@ namespace FortnoxAPILibrary.Entities
         public string CustomerName { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Id { get; private set; }
 
@@ -45,6 +48,7 @@ namespace FortnoxAPILibrary.Entities
         public string ReferenceNumber { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string RequestSent { get; private set; }
 
@@ -61,18 +65,22 @@ namespace FortnoxAPILibrary.Entities
         public TypeOfReduction TypeOfReduction { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string VoucherNumber { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string VoucherSeries { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string VoucherYear { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
     }

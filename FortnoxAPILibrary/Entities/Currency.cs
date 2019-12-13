@@ -35,6 +35,7 @@ namespace FortnoxAPILibrary.Entities
         /// <para>Type:			Date</para>
         /// <para>Permissions:	R</para>
         /// </summary>
+		[ReadOnly]
 		[JsonProperty]
 		public string Date { get; private set; }
 
@@ -66,6 +67,7 @@ namespace FortnoxAPILibrary.Entities
         public string Unit { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+		[ReadOnly]
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
     }
@@ -99,6 +101,7 @@ namespace FortnoxAPILibrary.Entities
         public string Unit { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
+        [ReadOnly]
         [JsonProperty(PropertyName = "@url")]
         public string Url { get; private set; }
     }
