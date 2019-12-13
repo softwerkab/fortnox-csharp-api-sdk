@@ -8,7 +8,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Tests
 {
     [TestClass]
-    class ArticleTests
+    public class ArticleTests
     {
         [TestInitialize]
         public void Init()
@@ -50,7 +50,7 @@ namespace FortnoxAPILibrary.Tests
 
             var updatedArticle = connector.Update(createdArticle);
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
-            Assert.AreEqual("Updated Test Article", updatedArticle);
+            Assert.AreEqual("Updated Test Article", updatedArticle.Description);
 
             #endregion UPDATE
 

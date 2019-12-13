@@ -101,5 +101,21 @@ namespace FortnoxAPILibrary.Tests
             connector.Delete(createdCustomer.CustomerNumber);
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
         }
+
+        [TestMethod]
+        public void Test_EmptyNestedObject()
+        {
+            var connector = new CustomerConnector();
+
+            var createdCustomer = connector.Create(new Customer()
+            {
+                Name = "TestUser", 
+                DefaultDeliveryTypes = new InvoiceDefaultDeliveryTypes() //Empty Object
+            });
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+
+            connector.Delete(createdCustomer.CustomerNumber);
+            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+        }
     }
 }
