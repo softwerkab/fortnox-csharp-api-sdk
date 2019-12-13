@@ -23,13 +23,18 @@ namespace FortnoxAPILibrary.Tests
         [TestMethod]
         public void Test_Find_ParamsAdded()
         {
-            var connector = new CustomerConnector();
-            connector.Name = "TestName";
-            connector.City = "TestCity";
-            connector.FilterBy = Filter.Customer.Active;
-            connector.SortBy = Sort.By.Customer.Name;
-            connector.SortOrder = Sort.Order.Ascending;
-            connector.LastModified = new DateTime(2000,01,01);
+            var connector = new CustomerConnector
+            {
+                Name = "TestName",
+                City = "TestCity",
+                FilterBy = Filter.Customer.Active,
+                SortBy = Sort.By.Customer.Name,
+                SortOrder = Sort.Order.Ascending,
+                LastModified = new DateTime(2000, 01, 01),
+                Limit = 10,
+                Offset = 0,
+                Page = 1
+            };
 
             connector.Find();
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
@@ -39,6 +44,9 @@ namespace FortnoxAPILibrary.Tests
             Assert.IsTrue(connector.RequestUriString.Contains("sortby=name"));
             Assert.IsTrue(connector.RequestUriString.Contains("sortorder=ascending"));
             Assert.IsTrue(connector.RequestUriString.Contains("lastmodified=2000-01-01"));
+            Assert.IsTrue(connector.RequestUriString.Contains("limit=10"));
+            Assert.IsTrue(connector.RequestUriString.Contains("offset=0"));
+            Assert.IsTrue(connector.RequestUriString.Contains("page=1"));
         }
 
         [TestMethod]
@@ -54,18 +62,26 @@ namespace FortnoxAPILibrary.Tests
             Assert.IsFalse(connector.RequestUriString.Contains("sortby="));
             Assert.IsFalse(connector.RequestUriString.Contains("sortorder="));
             Assert.IsFalse(connector.RequestUriString.Contains("lastmodified="));
+            Assert.IsFalse(connector.RequestUriString.Contains("limit="));
+            Assert.IsFalse(connector.RequestUriString.Contains("offset="));
+            Assert.IsFalse(connector.RequestUriString.Contains("page="));
         }
 
         [TestMethod]
         public void Test_Find_ParamsNullable()
         {
-            var connector = new CustomerConnector();
-            connector.Name = "TestName";
-            connector.City = null;
-            connector.FilterBy = null;
-            connector.SortBy = null;
-            connector.SortOrder = null;
-            connector.LastModified = null;
+            var connector = new CustomerConnector()
+            {
+                Name = "TestName",
+                City = null,
+                FilterBy = null,
+                SortBy = null,
+                SortOrder = null,
+                LastModified = null,
+                Limit = null,
+                Offset = null,
+                Page = null
+            };
 
             connector.Find();
             Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
@@ -74,6 +90,9 @@ namespace FortnoxAPILibrary.Tests
             Assert.IsFalse(connector.RequestUriString.Contains("sortby="));
             Assert.IsFalse(connector.RequestUriString.Contains("sortorder="));
             Assert.IsFalse(connector.RequestUriString.Contains("lastmodified="));
+            Assert.IsFalse(connector.RequestUriString.Contains("limit="));
+            Assert.IsFalse(connector.RequestUriString.Contains("offset="));
+            Assert.IsFalse(connector.RequestUriString.Contains("page="));
         }
 
         [TestMethod]
