@@ -2,11 +2,11 @@
 
 namespace FortnoxAPILibrary
 {
-	class RealValueAttribute : Attribute
+	public class StringValueAttribute : Attribute
 	{
 		public string RealValue { get; set; }
 
-		public RealValueAttribute(string realValue)
+		public StringValueAttribute(string realValue)
 		{
 			RealValue = realValue;
 		}

@@ -45,16 +45,16 @@ namespace FortnoxAPILibrary.Connectors
 		public enum RootFolder
 		{
 			/// <remarks/>
-			[RealValue("")]
+			[StringValue("")]
 			Root,
 			/// <remarks/>
-			[RealValue("inbox")]
+			[StringValue("inbox")]
 			Inbox,
 			/// <remarks/>
-			[RealValue("inbox_v")]
+			[StringValue("inbox_v")]
 			Inbox_Vouchers,
 			/// <remarks/>
-			[RealValue("inbox_s")]
+			[StringValue("inbox_s")]
 			Inbox_SupplierInvoices
 
 		}
@@ -105,10 +105,10 @@ namespace FortnoxAPILibrary.Connectors
 
             var type = f.GetType();
 			MemberInfo[] memInfo = type.GetMember(f.ToString());
-			object[] attrs = memInfo[0].GetCustomAttributes(typeof(RealValueAttribute), false);
+			object[] attrs = memInfo[0].GetCustomAttributes(typeof(StringValueAttribute), false);
 			if (attrs.Length > 0)
 			{
-				resource = ((RealValueAttribute)attrs[0]).RealValue;
+				resource = ((StringValueAttribute)attrs[0]).RealValue;
 			}
 			return resource;
 		}
