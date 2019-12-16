@@ -1,4 +1,5 @@
-﻿namespace FortnoxAPILibrary
+﻿// ReSharper disable InconsistentNaming
+namespace FortnoxAPILibrary
 {
 	/// <remarks/>
 	public class APIConstants

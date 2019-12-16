@@ -1,4 +1,3 @@
-
 using FortnoxAPILibrary.Entities;
 
 // ReSharper disable UnusedMember.Global

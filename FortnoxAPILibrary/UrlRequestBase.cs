@@ -21,7 +21,7 @@ namespace FortnoxAPILibrary
         private static DateTime firstRequest = DateTime.Now;
         private static int currentRequestsPerSecond;
 
-        private JsonEntitySerializer serializer;
+        private readonly JsonEntitySerializer serializer;
 
         /// <summary>
         /// Optional Fortnox Client Secret, if used it will override the static version.
@@ -32,16 +32,12 @@ namespace FortnoxAPILibrary
 			get
 			{
 				if (!string.IsNullOrEmpty(clientSecret))
-				{
-					return clientSecret;
-				}
+                    return clientSecret;
 
-				if (!string.IsNullOrEmpty(ConnectionCredentials.ClientSecret))
-				{
-					return ConnectionCredentials.ClientSecret;
-				}
+                if (!string.IsNullOrEmpty(ConnectionCredentials.ClientSecret))
+                    return ConnectionCredentials.ClientSecret;
 
-				throw new Exception("Fortnox Client Secret must be set.");
+                throw new Exception("Fortnox Client Secret must be set.");
 			}
 			set => clientSecret = value;
         }
@@ -55,16 +51,12 @@ namespace FortnoxAPILibrary
 			get
 			{
 				if (!string.IsNullOrEmpty(accessToken))
-				{
-					return accessToken;
-				}
+                    return accessToken;
 
-				if (!string.IsNullOrEmpty(ConnectionCredentials.AccessToken))
-				{
-					return ConnectionCredentials.AccessToken;
-				}
+                if (!string.IsNullOrEmpty(ConnectionCredentials.AccessToken))
+                    return ConnectionCredentials.AccessToken;
 
-				throw new Exception("Fortnox Access Token must be set.");
+                throw new Exception("Fortnox Access Token must be set.");
 			}
 			set => accessToken = value;
         }
@@ -102,14 +94,6 @@ namespace FortnoxAPILibrary
         internal string LocalPath { get; set; }
 
         internal RequestResponseType ResponseType { get; set; }
-        internal enum RequestResponseType
-        {
-            JSON,
-            XML,
-            PDF,
-            File,
-            EMAIL
-        }
 
         /// <remarks />
         public UrlRequestBase()
@@ -472,12 +456,12 @@ namespace FortnoxAPILibrary
             }
         }
 
-        public string Serialize<T>(T entity)
+        protected string Serialize<T>(T entity)
         {
             return serializer.Serialize(entity);
         }
 
-        public T Deserialize<T>(string content)
+        protected T Deserialize<T>(string content)
         {
             try
             {
@@ -487,6 +471,15 @@ namespace FortnoxAPILibrary
             {
                 throw new Exception("An error occured while deserializing the response. Check ResponseContent.", e.InnerException);
             }
+        }
+
+        internal enum RequestResponseType
+        {
+            JSON,
+            XML,
+            PDF,
+            File,
+            EMAIL
         }
     }
 }
