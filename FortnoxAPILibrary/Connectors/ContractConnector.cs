@@ -8,50 +8,50 @@ namespace FortnoxAPILibrary.Connectors
     public class ContractConnector : FinancialYearBasedEntityConnector<Contract, EntityCollection<ContractSubset>, Sort.By.Contract>
     {
         /// <remarks/>
-        [FilterProperty]
+        [SearchParameter]
         public string DocumentNumber { get; set; }
 
         /// <remarks/>
-        [FilterProperty]
+        [SearchParameter]
         public string CustomerNumber { get; set; }
 
         /// <remarks/>
-        [FilterProperty]
+        [SearchParameter]
         public string CustomerName { get; set; }
 
         /// <remarks/>
-        [FilterProperty]
+        [SearchParameter]
         public string TemplateNumber { get; set; }
 
         /// <remarks/>
-        [FilterProperty]
+        [SearchParameter]
         public string ContractLength { get; set; }
 
         /// <remarks/>
-        [FilterProperty]
+        [SearchParameter]
         public string InvoiceInterval { get; set; }
 
         /// <remarks/>
         public string LastInvoiceDate { get; set; }
 
         /// <remarks/>
-        [FilterProperty]
+        [SearchParameter]
         public string Total { get; set; }
 
         /// <remarks/>
-        [FilterProperty]
+        [SearchParameter]
         public string InvoicesRemaining { get; set; }
 
         /// <remarks/>
-        [FilterProperty]
+        [SearchParameter]
         public string PeriodStart { get; set; }
 
         /// <remarks/>
-        [FilterProperty]
+        [SearchParameter]
         public string PeriodEnd { get; set; }
 
         /// <remarks/>
-        [FilterProperty("filter")]
+        [SearchParameter("filter")]
         public Filter.Contract? FilterBy { get; set; }
 
         /// <remarks/>

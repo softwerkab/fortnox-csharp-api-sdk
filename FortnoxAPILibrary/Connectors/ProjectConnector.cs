@@ -10,13 +10,13 @@ namespace FortnoxAPILibrary.Connectors
         /// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-        [FilterProperty]
+        [SearchParameter]
 		public string Description { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
         /// </summary>
-        [FilterProperty]
+        [SearchParameter]
 		public string ProjectLeader { get; set; }
 
 		/// <remarks/>

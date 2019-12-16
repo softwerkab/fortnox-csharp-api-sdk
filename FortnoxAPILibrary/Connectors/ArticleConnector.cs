@@ -8,49 +8,49 @@ namespace FortnoxAPILibrary.Connectors
     public class ArticleConnector : FinancialYearBasedEntityConnector<Article, EntityCollection<ArticleSubset>, Sort.By.Article?>
 	{
 		/// <remarks/>
-		[FilterProperty("filter")]
+		[SearchParameter("filter")]
 		public Filter.Article? FilterBy { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-		[FilterProperty]
+		[SearchParameter]
 		public string ArticleNumber { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-		[FilterProperty]
+		[SearchParameter]
 		public string Description { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-		[FilterProperty]
+		[SearchParameter]
 		public string EAN { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-		[FilterProperty]
+		[SearchParameter]
 		public string SupplierNumber { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-		[FilterProperty]
+		[SearchParameter]
 		public string Manufacturer { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-		[FilterProperty]
+		[SearchParameter]
 		public string ManufacturerArticleNumber { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-		[FilterProperty]
+		[SearchParameter]
 		public string Webshop { get; set; }
         
 		/// <remarks/>

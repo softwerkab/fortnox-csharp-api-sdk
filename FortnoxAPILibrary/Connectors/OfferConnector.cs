@@ -10,25 +10,25 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-		[FilterProperty]
+		[SearchParameter]
 		public string FromDate { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-		[FilterProperty]
+		[SearchParameter]
 		public string ToDate { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-		[FilterProperty]
+		[SearchParameter]
 		public string CostCenter { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-		[FilterProperty]
+		[SearchParameter]
 		public string CustomerName { get; set; }
 
 		/// <summary>
@@ -39,35 +39,35 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-		[FilterProperty]
+		[SearchParameter]
 		public string DocumentNumber { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-		[FilterProperty]
+		[SearchParameter]
 		public string OurReference { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-		[FilterProperty]
+		[SearchParameter]
 		public string Project { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-		[FilterProperty]
+		[SearchParameter]
 		public string YourReference { get; set; }
 
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
-        [FilterProperty]
+        [SearchParameter]
         public string Label { get; set; }
 
 		/// <remarks/>
-		[FilterProperty]
+		[SearchParameter]
 		public bool? Sent { get; set; }
 
 		/// <summary>
@@ -76,7 +76,7 @@ namespace FortnoxAPILibrary.Connectors
 		public bool? NotCompleted { get; set; }
 
 		/// <remarks/>
-		[FilterProperty("filter")]
+		[SearchParameter("filter")]
 		public Filter.Offer? FilterBy { get; set; }
         
 		/// <remarks/>
