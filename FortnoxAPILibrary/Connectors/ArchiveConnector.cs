@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using FortnoxAPILibrary.Entities;
 using Microsoft.AspNetCore.StaticFiles;
 using File = FortnoxAPILibrary.Entities.File;
@@ -83,37 +82,15 @@ namespace FortnoxAPILibrary.Connectors
 					Resource = "archive/" + Id;
 				}
 			}
-			else if (rootFolder == RootFolder.Inbox)
-			{
-				Resource = "archive/" + GetRealValueFromAttribute(RootFolder.Inbox);
-			}
-			else if (rootFolder == RootFolder.Inbox_SupplierInvoices)
-			{
-				Resource = "archive/" + GetRealValueFromAttribute(RootFolder.Inbox_SupplierInvoices);
-			}
-			else if (rootFolder == RootFolder.Inbox_Vouchers)
-			{
-				Resource = "archive/" + GetRealValueFromAttribute(RootFolder.Inbox_Vouchers);	
-			}
+            else
+            {
+                Resource = "archive/" + rootFolder.GetStringValue();
+            }
 			
 			return BaseFind(Parameters)?.Entity;
 		}
 
-		private static string GetRealValueFromAttribute(RootFolder f)
-		{
-			string resource = "";
-
-            var type = f.GetType();
-			MemberInfo[] memInfo = type.GetMember(f.ToString());
-			object[] attrs = memInfo[0].GetCustomAttributes(typeof(StringValueAttribute), false);
-			if (attrs.Length > 0)
-			{
-				resource = ((StringValueAttribute)attrs[0]).RealValue;
-			}
-			return resource;
-		}
-
-		/// <summary>
+        /// <summary>
 		/// Creates a folder.
 		/// </summary>
 		/// <param name="folder">The folder entity to create</param>

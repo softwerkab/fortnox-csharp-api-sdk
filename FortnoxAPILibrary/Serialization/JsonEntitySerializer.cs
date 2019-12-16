@@ -42,10 +42,10 @@ namespace FortnoxAPILibrary.Serialization
             {
                 var property = base.CreateProperty(member, memberSerialization);
 
-                var isReadOnly = member.GetCustomAttributes<ReadOnlyAttribute>().Any();
+                var isReadOnly = member.HasAttribute<ReadOnlyAttribute>();
                 property.ShouldSerialize = o => !isReadOnly && !HasEmptyObjectValue(o, (PropertyInfo)member);
 
-                var hasGenericName = member.GetCustomAttributes<GenericPropertyNameAttribute>().FirstOrDefault() != null;
+                var hasGenericName = member.HasAttribute<GenericPropertyNameAttribute>();
 
                 if (hasGenericName)
                 {
@@ -53,7 +53,7 @@ namespace FortnoxAPILibrary.Serialization
                     if (propertyType.GetInterfaces().Contains(typeof(IEnumerable))) //is collection
                     {
                         var entityType = propertyType.GetGenericArguments()[0];
-                        var entityAtt = entityType.GetCustomAttributes<EntityAttribute>().FirstOrDefault();
+                        var entityAtt = entityType.GetAttribute<EntityAttribute>();
                         if (entityAtt?.SingularName != null)
                             property.PropertyName = entityAtt.PluralName;
                     }
@@ -61,7 +61,7 @@ namespace FortnoxAPILibrary.Serialization
                     {
                         var entityType = propertyType;
 
-                        var entityAtt = entityType.GetCustomAttributes<EntityAttribute>().FirstOrDefault();
+                        var entityAtt = entityType.GetAttribute<EntityAttribute>();
                         if (entityAtt?.SingularName != null)
                             property.PropertyName = entityAtt.SingularName;
                     }
