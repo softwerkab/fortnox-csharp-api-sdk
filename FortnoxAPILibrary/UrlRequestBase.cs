@@ -5,8 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using FortnoxAPILibrary.Entities;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using FortnoxAPILibrary.Serialization;
 using File = FortnoxAPILibrary.Entities.File;
 
 namespace FortnoxAPILibrary
@@ -21,6 +20,8 @@ namespace FortnoxAPILibrary
         private const int MaxRequestsPerSecond = 3;
         private static DateTime firstRequest = DateTime.Now;
         private static int currentRequestsPerSecond;
+
+        private JsonEntitySerializer serializer;
 
         /// <summary>
         /// Optional Fortnox Client Secret, if used it will override the static version.
@@ -114,15 +115,7 @@ namespace FortnoxAPILibrary
         public UrlRequestBase()
         {
             Timeout = 300000;
-            
-            JsonConvert.DefaultSettings = () =>
-            {
-                var settings = new JsonSerializerSettings();
-                settings.Converters.Add(new StringEnumConverter());
-                settings.ContractResolver = new MyJsonContractResolver();
-                settings.NullValueHandling = NullValueHandling.Ignore;
-                return settings;
-            };
+            serializer = new JsonEntitySerializer();
         }
 
         internal string GetUrl(string index = "")
@@ -481,14 +474,14 @@ namespace FortnoxAPILibrary
 
         public string Serialize<T>(T entity)
         {
-            return JsonConvert.SerializeObject(entity);
+            return serializer.Serialize(entity);
         }
 
-        public T Deserialize<T>(string json)
+        public T Deserialize<T>(string content)
         {
             try
             {
-                return JsonConvert.DeserializeObject<T>(json);
+                return serializer.Deserialize<T>(content);
             }
             catch (Exception e)
             {

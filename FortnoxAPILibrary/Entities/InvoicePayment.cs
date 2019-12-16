@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using FortnoxAPILibrary.Serialization;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
