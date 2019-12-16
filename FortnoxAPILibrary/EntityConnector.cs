@@ -141,19 +141,11 @@ namespace FortnoxAPILibrary
             return result;
         }
 
-        public string GetEnumRealValue(object enumObj)
-        {
-            var type = enumObj.GetType();
-            var memberInfo = type.GetMember(enumObj.ToString()).First();
-            var stringValue = memberInfo.GetCustomAttributes<StringValueAttribute>().FirstOrDefault()?.RealValue;
-            return stringValue ?? "";
-        }
-
         protected void AddSearchParameters()
         {
             foreach (var property in GetType().GetProperties())
             {
-                var isSearchParameter = property.GetCustomAttributes<SearchParameter>().Any();
+                var isSearchParameter = property.HasAttribute<SearchParameter>();
                 if (!isSearchParameter) continue;
 
                 var value = property.GetValue(this);
@@ -161,11 +153,11 @@ namespace FortnoxAPILibrary
 
                 var strValue = value is string ? value.ToString() : value.ToString().ToLower();
                 if (property.PropertyType.IsEnum)
-                    strValue = GetEnumRealValue(value);
+                    strValue = ((Enum) value).GetStringValue();
 
                 if (string.IsNullOrWhiteSpace(strValue)) continue;
 
-                var searchAttribute = property.GetCustomAttributes<SearchParameter>().First();
+                var searchAttribute = property.GetAttribute<SearchParameter>();
                 var paramName = searchAttribute.Name ?? property.Name;
 
                 Parameters.Add(paramName.ToLower(), strValue);
