@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using FortnoxAPILibrary.Entities;
-
+// ReSharper disable InconsistentNaming
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
@@ -47,23 +47,22 @@ namespace FortnoxAPILibrary.Connectors
         private byte[] Export(SIEType sieType, string localPath = "")
         {
             Resource = "sie/" + (int)sieType;
-            string requestString = GetUrl();
+            var requestString = GetUrl();
 
             Parameters = new Dictionary<string, string>();
-            
             AddExportOptions();
 
             requestString = AddParameters(requestString);
 
-            HttpWebRequest wr = SetupRequest(requestString, "GET");
+            var wr = SetupRequest(requestString, "GET");
 
-            List<byte> data = new List<byte>();
+            var data = new List<byte>();
 
             try
             {
-                using (WebResponse response = wr.GetResponse())
+                using (var response = wr.GetResponse())
                 {
-                    using (Stream responseStream = response.GetResponseStream())
+                    using (var responseStream = response.GetResponseStream())
                     {
                         int b;
 
@@ -104,132 +103,84 @@ namespace FortnoxAPILibrary.Connectors
         public SieSummary ImportSIE(string pathToFile, bool preview = false)
         {
             if (string.IsNullOrEmpty(pathToFile))
-            {
                 throw new Exception("A file to import must be selected");
-            }
 
-            if (preview)
-            {
-                Resource = "sie/preview";
-            }
-            else
-            {
-                Resource = "sie";
-            }
-            List<string> parameters = new List<string>();
-            AddImportOptions(parameters);
+            Resource = preview ? "sie/preview" : "sie";
+
+            Parameters = new Dictionary<string, string>();
+            AddImportOptions();
 
             return BaseUploadFile(pathToFile);
+        }
+
+        internal SieSummary BaseUploadFile(string localPath)
+        {
+            string requestUriString = GetUrl();
+            RequestUriString = AddParameters(requestUriString);
+
+            return UploadFile<SieSummary>(localPath);
         }
 
         private void AddExportOptions()
         {
             if (ExportOptions.Selection != null && ExportOptions.Selection.Count > 0)
-            {
-                string sel = "";
-
-                foreach (Selection selection in ExportOptions.Selection)
-                {
-                    if (!string.IsNullOrEmpty(selection.VoucherSeries))
-                    {
-                        if (sel != "")
-                        {
-                            sel += ";";
-                        }
-
-                        sel += selection.VoucherSeries;
-
-                        if (!string.IsNullOrEmpty(selection.FromVoucherNumber) && !string.IsNullOrEmpty(selection.ToVoucherNumber))
-                        {
-                            sel += "," + selection.FromVoucherNumber + "," + selection.ToVoucherNumber;
-                        }
-                    }
-                }
-
-                Parameters.Add("selection", sel);
-            }
+                Parameters.Add("selection", SelectionToString(ExportOptions.Selection));
 
             if (ExportOptions.ExportAll)
-            {
                 Parameters.Add("exportall", "true");
-            }
 
             if (!string.IsNullOrEmpty(ExportOptions.FromDate))
-            {
                 Parameters.Add("fromdate", ExportOptions.FromDate);
-            }
 
             if (!string.IsNullOrEmpty(ExportOptions.ToDate))
-            {
                 Parameters.Add("todate", ExportOptions.ToDate);
-            }
         }
 
-        private void AddImportOptions(List<string> parameters)
+        private void AddImportOptions()
         {
             if (ImportOptions.Selection != null && ImportOptions.Selection.Count > 0)
+                Parameters.Add("selection", SelectionToString(ImportOptions.Selection));
+
+            //TODO: Use reflection
+            if (ImportOptions.AllAccounts)
+                Parameters.Add("allaccounts","true");
+            if (ImportOptions.AllCostCenters)
+                Parameters.Add("allcostcenters", "true");
+            if (ImportOptions.AllProjects)
+                Parameters.Add("allprojects", "true");
+            if (ImportOptions.UseBudget)
+                Parameters.Add("usebudget", "true");
+            if (ImportOptions.UseCostCenterDescription)
+                Parameters.Add("usecostcenterdescription", "true");
+            if (ImportOptions.UseIncomingBalance)
+                Parameters.Add("useincomingbalance", "true");
+            if (ImportOptions.UseProjectDescription)
+                Parameters.Add("useprojectdescription", "true");
+            if (ImportOptions.UseSRU)
+                Parameters.Add("usesru", "true");
+        }
+
+        private static string SelectionToString(List<Selection> selection)
+        {
+            string str = "";
+
+            foreach (var currentSelection in selection)
             {
-                string selection = "selection=";
-
-                foreach (Selection currentSelection in ImportOptions.Selection)
+                if (!string.IsNullOrEmpty(currentSelection.VoucherSeries))
                 {
-                    if (!string.IsNullOrEmpty(currentSelection.VoucherSeries))
+                    if (str != "")
+                        str += ";";
+
+                    str += currentSelection.VoucherSeries;
+
+                    if (!string.IsNullOrEmpty(currentSelection.FromVoucherNumber) && !string.IsNullOrEmpty(currentSelection.ToVoucherNumber))
                     {
-
-                        if (selection != "selection=")
-                        {
-                            selection += ";";
-                        }
-                        selection += currentSelection.VoucherSeries;
-
-                        if (!string.IsNullOrEmpty(currentSelection.FromVoucherNumber) && !string.IsNullOrEmpty(currentSelection.ToVoucherNumber))
-                        {
-                            selection += "," + currentSelection.FromVoucherNumber + "," + currentSelection.ToVoucherNumber;
-                        }
+                        str += "," + currentSelection.FromVoucherNumber + "," + currentSelection.ToVoucherNumber;
                     }
                 }
-                parameters.Add(selection);
             }
 
-            if (ImportOptions.AllAccounts)
-            {
-                parameters.Add("allaccounts=true");
-            }
-
-            if (ImportOptions.AllCostCenters)
-            {
-                parameters.Add("allcostcenters=true");
-            }
-
-            if (ImportOptions.AllProjects)
-            {
-                parameters.Add("allprojects=true");
-            }
-
-            if (ImportOptions.UseBudget)
-            {
-                parameters.Add("usebudget=true");
-            }
-
-            if (ImportOptions.UseCostCenterDescription)
-            {
-                parameters.Add("usecostcenterdescription=true");
-            }
-
-            if (ImportOptions.UseIncomingBalance)
-            {
-                parameters.Add("useincomingbalance=true");
-            }
-
-            if (ImportOptions.UseProjectDescription)
-            {
-                parameters.Add("useprojectdescription=true");
-            }
-
-            if (ImportOptions.UseSRU)
-            {
-                parameters.Add("usesru=true");
-            }
+            return str;
         }
     }
 

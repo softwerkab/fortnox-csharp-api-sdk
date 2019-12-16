@@ -22,11 +22,6 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public string FolderId { get; set; }
 
-		///// <summary>
-		///// Use with Find() to limit the search result
-		///// </summary>
-		//public string Destination { get; set; }
-
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
@@ -59,7 +54,7 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Gets at list of Files and Folders
+		/// Gets a list of Files and Folders
 		/// </summary>
 		/// <returns>A list of Files and Folders</returns>
 		public Folder Find(RootFolder rootFolder = RootFolder.Root)
@@ -94,31 +89,26 @@ namespace FortnoxAPILibrary.Connectors
 		/// Creates a folder.
 		/// </summary>
 		/// <param name="folder">The folder entity to create</param>
-		/// <param name="destination">he id or path to the parent folder to create the folder in.</param>
+		/// <param name="destination">the id or path to the parent folder to create the folder in.</param>
 		/// <returns>The created folder.</returns>
 		public Folder CreateFolder(Folder folder, string destination = "")
 		{
 			Resource = "archive";
 
-			Dictionary<string, string> parameters = new Dictionary<string, string>();
+			var parameters = new Dictionary<string, string>();
 
 			if (!string.IsNullOrWhiteSpace(destination))
 			{
-				Guid test = new Guid();
-				if (Guid.TryParse(destination, out test))
-				{
-					parameters.Add("folderid", destination);
-				}
-				else
-				{
-					parameters.Add("path", destination);
-				}
-			}
+                if (IsFolderId(destination))
+                    parameters.Add("folderid", destination);
+                else
+                    parameters.Add("path", destination);
+            }
 
 			return BaseCreate(folder, parameters);
 		}
-
-		///<summary>
+        
+        ///<summary>
 		///Uploads a file to Fortnox
 		///</summary>
 		///<param name="localPath">The local path to the file to upload</param>
@@ -137,7 +127,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>Created file.</returns>
 		public File UploadFileData(byte[] data, string name, string folderId = "")
 		{
-			if (data == null) throw new ArgumentNullException("File data must be set.");
+			if (data == null) throw new ArgumentException("File data must be set.");
 
 			if (string.IsNullOrEmpty(name)) throw new ArgumentException("File name must be set.");
 
@@ -189,7 +179,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			if (file == null)
 			{
-				throw new ArgumentNullException("File must be set.");
+				throw new ArgumentException("File must be set.");
 			}
 
 			if (string.IsNullOrEmpty(file.Id))
@@ -199,7 +189,7 @@ namespace FortnoxAPILibrary.Connectors
 
 			Resource = "archive";
 
-			base.DownloadFile(file.Id, "", file);
+			DownloadFile(file.Id, "", file);
 		}
 
 		/// <summary>
@@ -238,6 +228,23 @@ namespace FortnoxAPILibrary.Connectors
             var contentTypeProvider = new FileExtensionContentTypeProvider();
             var typeKnown = contentTypeProvider.TryGetContentType(name, out var contentType);
             return typeKnown ? contentType : "application/octet-stream";
+        }
+
+        private static bool IsFolderId(string destination)
+        {
+            return Guid.TryParse(destination, out var unused);
+        }
+
+        private File BaseUploadFile(string localPath, string folderId, byte[] fileData = null, string fileName = null)
+        {
+            RequestUriString = GetUrl();
+
+            if (!string.IsNullOrWhiteSpace(folderId))
+            {
+                RequestUriString += "?folderid=" + Uri.EscapeDataString(folderId);
+            }
+
+            return UploadFile<File>(localPath, fileData, fileName);
         }
     }
 }

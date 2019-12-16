@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Web;
 using FortnoxAPILibrary.Entities;
 
@@ -51,7 +50,7 @@ namespace FortnoxAPILibrary
         /// <remarks/>
         protected Dictionary<string, string> Parameters = new Dictionary<string, string>();
 
-        internal TEntity BaseCreate(TEntity entity, Dictionary<string, string> parameters = null)
+        protected TEntity BaseCreate(TEntity entity, Dictionary<string, string> parameters = null)
         {
             Parameters = parameters ?? new Dictionary<string, string>();
 
@@ -67,7 +66,7 @@ namespace FortnoxAPILibrary
             return DoRequest(wrappedEntity)?.Entity;
         }
 
-        internal TEntity BaseUpdate(TEntity entity, params string[] indices)
+        protected TEntity BaseUpdate(TEntity entity, params string[] indices)
         {
             Parameters = new Dictionary<string, string>();
 
@@ -85,7 +84,7 @@ namespace FortnoxAPILibrary
             return DoRequest(wrappedEntity)?.Entity;
         }
 
-        internal void BaseDelete(string index)
+        protected void BaseDelete(string index)
         {
             Parameters = new Dictionary<string, string>();
 
@@ -100,7 +99,7 @@ namespace FortnoxAPILibrary
             DoRequest();
         }
 
-        internal TEntity BaseGet(params string[] indices)
+        protected TEntity BaseGet(params string[] indices)
         {
             Parameters = new Dictionary<string, string>();
 
@@ -123,7 +122,7 @@ namespace FortnoxAPILibrary
             return result?.Entity;
         }
 
-        internal TEntityCollection BaseFind(Dictionary<string, string> parameters = null)
+        protected TEntityCollection BaseFind(Dictionary<string, string> parameters = null)
         {
             Parameters = parameters ?? new Dictionary<string, string>();
 
@@ -164,9 +163,8 @@ namespace FortnoxAPILibrary
             }
         }
 
-        internal TEntity DoAction(string documentNumber, string action)
+        protected TEntity DoAction(string documentNumber, string action)
         {
-
             string requestUriString = GetUrl(documentNumber);
 
             requestUriString = requestUriString + "/" + action;
@@ -174,53 +172,33 @@ namespace FortnoxAPILibrary
             requestUriString = AddParameters(requestUriString);
 
 
-            if (action == "print" || action == "preview" || action == "eprint")
+            switch (action)
             {
-                Method = "GET";
-                ResponseType = RequestResponseType.PDF;
-            }
-            else if (action == "externalprint")
-            {
-                Method = "PUT";
-                ResponseType = RequestResponseType.JSON;
-
-            }
-            else if (action == "email")
-            {
-                Method = "GET";
-                ResponseType = RequestResponseType.EMAIL;
-            }
-            else
-            {
-                Method = "PUT";
+                case "print":
+                case "preview":
+                case "eprint":
+                    Method = "GET";
+                    ResponseType = RequestResponseType.PDF;
+                    break;
+                case "externalprint":
+                    Method = "PUT";
+                    ResponseType = RequestResponseType.JSON;
+                    break;
+                case "email":
+                    Method = "GET";
+                    ResponseType = RequestResponseType.EMAIL;
+                    break;
+                default:
+                    Method = "PUT";
+                    break;
             }
             RequestUriString = requestUriString;
 
             var result = DoRequest<EntityWrapper<TEntity>>();
             return result?.Entity;
         }
-
-        internal SieSummary BaseUploadFile(string localPath)
-        {
-            string requestUriString = GetUrl();
-            RequestUriString = AddParameters(requestUriString);
-
-            return UploadFile<SieSummary>(localPath);
-        }
-
-        internal File BaseUploadFile(string localPath, string folderId, byte[] fileData = null, string fileName = null)
-        {
-            RequestUriString = GetUrl();
-
-            if (!string.IsNullOrWhiteSpace(folderId))
-            {
-                RequestUriString += "?folderid=" + Uri.EscapeDataString(folderId);
-            }
-
-            return UploadFile<File>(localPath, fileData, fileName);
-        }
-
-        internal string AddParameters(string requestUriString)
+        
+        protected string AddParameters(string requestUriString)
         {
             if (Parameters.Count > 0)
             {
