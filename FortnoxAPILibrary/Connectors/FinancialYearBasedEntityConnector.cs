@@ -9,14 +9,14 @@ namespace FortnoxAPILibrary.Connectors
         /// <para>Use FinancialYearDate to select the financial year to use.</para>
         /// <para>If omitted the default financial year will be selected</para>
         /// </summary>
-        [FilterProperty]
+        [SearchParameter]
         public string FinancialYearDate { get; set; }
 
         /// <summary>
         /// <para>Use FinancialYearID to select the financial year to use.</para>
         /// <para>If omitted the default financial year will be selected</para>
         /// </summary>
-        [FilterProperty("financialyear")]
+        [SearchParameter("financialyear")]
         public string FinancialYearID { get; set; }
     }
 }

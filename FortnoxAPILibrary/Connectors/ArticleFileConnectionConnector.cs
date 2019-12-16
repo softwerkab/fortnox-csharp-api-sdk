@@ -10,7 +10,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Use with Find() to limit the search result
         /// </summary>
-        [FilterProperty]
+        [SearchParameter]
 		public string ArticleNumber { get; set; }
 
 		/// <remarks/>

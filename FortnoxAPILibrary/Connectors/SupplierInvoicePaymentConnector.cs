@@ -8,7 +8,7 @@ namespace FortnoxAPILibrary.Connectors
     public class SupplierInvoicePaymentConnector : FinancialYearBasedEntityConnector<SupplierInvoicePayment, EntityCollection<SupplierInvoicePaymentSubset>, Sort.By.SupplierInvoicePayment?>
 	{
         /// <remarks/>
-        [FilterProperty]
+        [SearchParameter]
         public string InvoiceNumber { get; set; }
 
 		/// <remarks/>

@@ -3,18 +3,13 @@
 namespace FortnoxAPILibrary
 {
     [AttributeUsage(AttributeTargets.Property)]
-    internal class FilterProperty : Attribute
+    internal class SearchParameter : Attribute
     {
         public readonly string Name;
 
-        public FilterProperty(string name)
+        public SearchParameter(string name = null)
         {
             Name = name;
-        }
-
-        public FilterProperty()
-        {
-            Name = null;
         }
     }
 }

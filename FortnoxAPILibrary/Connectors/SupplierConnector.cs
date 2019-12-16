@@ -11,43 +11,43 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-        [FilterProperty]
+        [SearchParameter]
 		public string City { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-        [FilterProperty]
+        [SearchParameter]
 		public string Email { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-        [FilterProperty]
+        [SearchParameter]
 		public string Name { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-        [FilterProperty]
+        [SearchParameter]
 		public string OrganisationNumber { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-        [FilterProperty]
+        [SearchParameter]
 		public string Phone { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-        [FilterProperty]
+        [SearchParameter]
 		public string SupplierNumber { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-        [FilterProperty]
+        [SearchParameter]
 		public string ZipCode { get; set; }
 
 		/// <remarks/>

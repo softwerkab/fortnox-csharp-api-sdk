@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
-        [FilterProperty]
+        [SearchParameter]
         public string Id { get; set; }
 
         /// <remarks/>

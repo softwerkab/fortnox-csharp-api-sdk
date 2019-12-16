@@ -32,19 +32,19 @@ namespace FortnoxAPILibrary.Connectors
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
-        [FilterProperty]
+        [SearchParameter]
         public string CostCenter { get; set; }
 
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
-        [FilterProperty]
+        [SearchParameter]
         public string FromDate { get; set; }
 
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
-        [FilterProperty]
+        [SearchParameter]
         public string ToDate { get; set; }
 
         /// <remarks/>

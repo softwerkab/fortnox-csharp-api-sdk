@@ -13,13 +13,13 @@ namespace FortnoxAPILibrary
         /// <summary>
         /// Sort Order, ascending or descending
         /// </summary>
-        [FilterProperty]
+        [SearchParameter]
         public Sort.Order? SortOrder { get; set; }
 
         /// <summary>
         /// Sort the result
         /// </summary>
-        [FilterProperty]
+        [SearchParameter]
         public TSort SortBy { get; set; }
 
         /// <summary>
@@ -27,25 +27,25 @@ namespace FortnoxAPILibrary
         /// <para>Default is 100</para>
         /// <para>Max is 500</para>
         /// </summary>
-        [FilterProperty]
+        [SearchParameter]
         public int? Limit { get; set; }
 
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
-        [FilterProperty]
+        [SearchParameter]
         public DateTime? LastModified { get; set; }
 
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
-        [FilterProperty]
+        [SearchParameter]
         public int? Page { get; set; }
 
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
-        [FilterProperty]
+        [SearchParameter]
         public int? Offset { get; set; }
 
         /// <remarks/>
@@ -153,7 +153,7 @@ namespace FortnoxAPILibrary
         {
             foreach (var property in GetType().GetProperties())
             {
-                var isSearchParameter = property.GetCustomAttributes<FilterProperty>().Any();
+                var isSearchParameter = property.GetCustomAttributes<SearchParameter>().Any();
                 if (!isSearchParameter) continue;
 
                 var value = property.GetValue(this);
@@ -165,8 +165,8 @@ namespace FortnoxAPILibrary
 
                 if (string.IsNullOrWhiteSpace(strValue)) continue;
 
-                var filterAttribute = property.GetCustomAttributes<FilterProperty>().First();
-                var paramName = filterAttribute.Name ?? property.Name;
+                var searchAttribute = property.GetCustomAttributes<SearchParameter>().First();
+                var paramName = searchAttribute.Name ?? property.Name;
 
                 Parameters.Add(paramName.ToLower(), strValue);
             }
@@ -207,7 +207,6 @@ namespace FortnoxAPILibrary
             var result = DoRequest<EntityWrapper<TEntity>>();
             return result?.Entity;
         }
-
 
         internal SieSummary BaseUploadFile(string localPath)
         {
