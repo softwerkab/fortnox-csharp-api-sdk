@@ -5,7 +5,6 @@ using FortnoxAPILibrary.Serialization;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
-// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary.Entities
 {
