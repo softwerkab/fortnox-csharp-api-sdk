@@ -1,4 +1,4 @@
-﻿using FortnoxAPILibrary.Serialization;
+using FortnoxAPILibrary.Serialization;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global

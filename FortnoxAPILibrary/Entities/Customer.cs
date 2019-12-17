@@ -2,7 +2,6 @@ using FortnoxAPILibrary.Serialization;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
-// ReSharper disable InconsistentNaming
 
 namespace FortnoxAPILibrary.Entities
 {
@@ -264,8 +263,8 @@ namespace FortnoxAPILibrary.Entities
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
-		[JsonProperty]
-		public string url { get; private set; }
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; private set; }
     }
 
 	/// <remarks/>
@@ -345,8 +344,8 @@ namespace FortnoxAPILibrary.Entities
         public string ZipCode { get; set; }
 
         /// <remarks/>
-        [JsonProperty]
-        public string url { get; set; }
+        [JsonProperty(PropertyName = "@url")]
+        public string Url { get; set; }
     }
 
     /// <remarks/>
