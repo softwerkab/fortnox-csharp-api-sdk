@@ -39,7 +39,7 @@ namespace FortnoxAPILibrary.Tests
 
             //Act
             var createdArticle = connector.Create(newArticle);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.AreEqual("Test Article", createdArticle.Description);
 
             #endregion CREATE
@@ -49,7 +49,7 @@ namespace FortnoxAPILibrary.Tests
             createdArticle.Description = "Updated Test Article";
 
             var updatedArticle = connector.Update(createdArticle);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.AreEqual("Updated Test Article", updatedArticle.Description);
 
             #endregion UPDATE
@@ -57,7 +57,7 @@ namespace FortnoxAPILibrary.Tests
             #region READ / GET
 
             var retrievedArticle = connector.Get(createdArticle.ArticleNumber);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.AreEqual("Updated Test Article", retrievedArticle.Description);
 
             #endregion READ / GET
@@ -65,7 +65,7 @@ namespace FortnoxAPILibrary.Tests
             #region DELETE
 
             connector.Delete(createdArticle.ArticleNumber);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
 
             retrievedArticle = connector.Get(createdArticle.ArticleNumber);
             Assert.AreEqual(null, retrievedArticle, "Entity still exists after Delete!");

@@ -37,7 +37,7 @@ namespace FortnoxAPILibrary.Tests
             connector.ClientSecret = TestCredentials.Client_Secret;
 
             var customers = connector.Find();
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.IsNotNull(customers);
         }
 
@@ -54,7 +54,7 @@ namespace FortnoxAPILibrary.Tests
             connector.ClientSecret = "";
 
             var customers = connector.Find();
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.IsNotNull(customers);
         }
 

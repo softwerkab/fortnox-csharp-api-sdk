@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Tests
             };
 
             var createdCustomer = connector.Create(newCustomer);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.AreEqual(createdCustomer.Name, "TestCustomer");
 
             #endregion CREATE
@@ -48,7 +48,7 @@ namespace FortnoxAPILibrary.Tests
             createdCustomer.Name = "UpdatedTestCustomer";
 
             var updatedCustomer = connector.Update(createdCustomer);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestCustomer", updatedCustomer.Name);
 
             #endregion UPDATE
@@ -56,7 +56,7 @@ namespace FortnoxAPILibrary.Tests
             #region READ / GET
 
             var retrievedCustomer = connector.Get(createdCustomer.CustomerNumber);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestCustomer", retrievedCustomer.Name);
 
             #endregion READ / GET
@@ -64,7 +64,7 @@ namespace FortnoxAPILibrary.Tests
             #region DELETE
 
             connector.Delete(createdCustomer.CustomerNumber);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
 
             retrievedCustomer = connector.Get(createdCustomer.CustomerNumber);
             Assert.AreEqual(null, retrievedCustomer, "Entity still exists after Delete!");
@@ -130,7 +130,7 @@ namespace FortnoxAPILibrary.Tests
             for (int i = 0;i < newCustomers.Count;i++)
             {
                 newCustomers[i] = connector.Create(newCustomers[i]);
-                Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+                MyAssert.HasNoError(connector);
             }
 
             connector.Limit = 10;
@@ -144,13 +144,13 @@ namespace FortnoxAPILibrary.Tests
             connector.Name = testId; //Matched by customers 1,2,3,4 (all)
 
             var retrievedCustomers = connector.Find();
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.AreEqual(2, retrievedCustomers.Entities.Count); //Final matched customers: 1,3
 
             foreach (var customer in newCustomers)
             {
                 connector.Delete(customer.CustomerNumber);
-                Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+                MyAssert.HasNoError(connector);
             }
         }
 
@@ -167,7 +167,7 @@ namespace FortnoxAPILibrary.Tests
                 Type = CustomerType.PRIVATE,
                 VATType = VATType.EUVAT
             });
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
 
             //Act - Update customer
             var updatedCustomerData = new Customer()
@@ -177,7 +177,7 @@ namespace FortnoxAPILibrary.Tests
             };
 
             var updatedCustomer = connector.Update(updatedCustomerData);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.AreEqual("Updated Address", updatedCustomer.Address1);
             Assert.AreEqual("TestCustomer", updatedCustomer.Name);
             Assert.AreEqual(CustomerType.PRIVATE, updatedCustomer.Type);
@@ -185,7 +185,7 @@ namespace FortnoxAPILibrary.Tests
 
             //Clean
             connector.Delete(existingCustomer.CustomerNumber);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
         }
     }
 }
