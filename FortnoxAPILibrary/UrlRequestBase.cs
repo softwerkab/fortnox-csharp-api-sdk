@@ -14,8 +14,7 @@ namespace FortnoxAPILibrary
     public class UrlRequestBase
     {
 		private string clientSecret;
-
-		private string accessToken;
+        private string accessToken;
 
         private const int MaxRequestsPerSecond = 3;
         private static DateTime firstRequest = DateTime.Now;
@@ -67,33 +66,33 @@ namespace FortnoxAPILibrary
 		public int Timeout { get; set; }
 
         /// <remarks/>
-        public ErrorInformation Error { get; set; }
+        public ErrorInformation Error { get; protected set; }
 
         /// <summary>
         /// The HttpStatusCode returned by Fortnox API.
         /// </summary>
-        public HttpStatusCode HttpStatusCode { get; set; }
+        public HttpStatusCode HttpStatusCode { get; protected set; }
 
         /// <summary>
         /// The data sent to Fortnox in JSON-format.
         /// </summary>
-        public string RequestContent { get; set; }
+        public string RequestContent { get; protected set; }
         /// <summary>
         /// The data returned from Fortnox in JSON-format. 
         /// </summary>
-        public string ResponseContent { get; set; }
+        public string ResponseContent { get; protected set; }
 
         /// <summary>
         /// True if something went wrong with the request. Otherwise false.
         /// </summary>
         public bool HasError => Error != null;
 
-        internal string Resource { get; set; }
-        internal string Method { get; set; }
-        public string RequestUriString { get; set; }
-        internal string LocalPath { get; set; }
+        public string Resource { get; protected set; }
+        public string Method { get; protected set; }
+        public string RequestUriString { get; protected set; }
+        public string LocalPath { get; protected set; }
 
-        internal RequestResponseType ResponseType { get; set; }
+        public RequestResponseType ResponseType { get; protected set; }
 
         /// <remarks />
         public UrlRequestBase()
@@ -102,7 +101,7 @@ namespace FortnoxAPILibrary
             serializer = new JsonEntitySerializer();
         }
 
-        internal string GetUrl(string index = "")
+        protected string GetUrl(string index = "")
         {
             string[] str = {
 				ConnectionCredentials.FortnoxAPIServer,
@@ -120,7 +119,7 @@ namespace FortnoxAPILibrary
         /// <summary>
         /// This method is used to throttle every call to Fortnox. 
         /// </summary>
-        internal void RateLimit()
+        protected void RateLimit()
         {
             bool reset = false;
 
@@ -153,11 +152,11 @@ namespace FortnoxAPILibrary
         /// <para>DELETE</para>
         /// </param>
         /// <returns></returns>
-        internal HttpWebRequest SetupRequest(string requestUriString, string method)
+        protected HttpWebRequest SetupRequest(string requestUriString, string method)
         {
             Error = null;
 
-            HttpWebRequest wr = (HttpWebRequest)WebRequest.Create(requestUriString);
+            var wr = (HttpWebRequest)WebRequest.Create(requestUriString);
             wr.Headers.Add("access-token", AccessToken);
             wr.Headers.Add("client-secret", ClientSecret);
             wr.ContentType = "application/json";
@@ -171,7 +170,7 @@ namespace FortnoxAPILibrary
         /// <summary>
         /// Perform the request to Fortnox API
         /// </summary>
-        internal void DoRequest()
+        protected void DoRequest()
         {
             var wr = SetupRequest(RequestUriString, Method);
 
@@ -181,13 +180,11 @@ namespace FortnoxAPILibrary
 
                 if (Method != "GET")
                 {
-                    using (wr.GetRequestStream()) { }
+                    using (wr.GetRequestStream()) { } //TODO: What is the purpose of this?
                 }
 
-                using (var response = (HttpWebResponse) wr.GetResponse())
-                {
-                    HttpStatusCode = response.StatusCode;
-                }
+                using var response = (HttpWebResponse) wr.GetResponse();
+                HttpStatusCode = response.StatusCode;
             }
             catch (WebException we)
             {
@@ -201,7 +198,7 @@ namespace FortnoxAPILibrary
         /// <typeparam name="T">The type of entity to create, read, update or delete.</typeparam>
         /// <param name="entity">The entity</param>
         /// <returns>An entity</returns>
-        internal T DoRequest<T>(T entity = default)
+        protected T DoRequest<T>(T entity = default)
         {
             var wr = SetupRequest(RequestUriString, Method);
             ResponseContent = "";
@@ -211,11 +208,9 @@ namespace FortnoxAPILibrary
 
                 if (Method != "GET")
                 {
-                    using (var requestStream = new StreamWriter(wr.GetRequestStream()))
-                    {
-                        var json = Serialize(entity);
-                        requestStream.Write(json);
-                    }
+                    using var requestStream = new StreamWriter(wr.GetRequestStream());
+                    var json = Serialize(entity);
+                    requestStream.Write(json);
                 }
 
                 if (Method == "POST" || Method == "PUT")
@@ -223,45 +218,37 @@ namespace FortnoxAPILibrary
                     RequestContent = Serialize(entity);
                 }
 
-                using (var response = (HttpWebResponse) wr.GetResponse())
+                using var response = (HttpWebResponse) wr.GetResponse();
+                HttpStatusCode = response.StatusCode;
+                using var responseStream = response.GetResponseStream();
+                if (ResponseType == RequestResponseType.PDF)
                 {
-                    HttpStatusCode = response.StatusCode;
-                    using (var responseStream = response.GetResponseStream())
+                    WriteStream(responseStream);
+                }
+                else
+                {
+                    if (response.Headers["Content-Disposition"] != null && response.Headers["Content-Disposition"].Split(';')[0] == "attachment")
                     {
-                        if (ResponseType == RequestResponseType.PDF)
-                        {
-                            WriteStream(responseStream);
-                        }
-                        else
-                        {
-                            if (response.Headers["Content-Disposition"] != null && response.Headers["Content-Disposition"].Split(';')[0] == "attachment")
-                            {
-                                throw new Exception("The specified path is a file. Use DownloadFile() to download the file.");
-                            }
+                        throw new Exception("The specified path is a file. Use DownloadFile() to download the file.");
+                    }
 
-                            if (ResponseType == RequestResponseType.JSON)
-                            {
-                                using (var sr = new StreamReader(responseStream))
-                                {
-                                    ResponseContent = sr.ReadToEnd();
-                                    return Deserialize<T>(ResponseContent);
-                                }
-                            }
-
-                            if (ResponseType == RequestResponseType.EMAIL)
-                            {
-                                return default;
-                            }
-
+                    switch (ResponseType)
+                    {
+                        case RequestResponseType.JSON:
                             using (var sr = new StreamReader(responseStream))
                             {
-                                using (var sw = new StreamWriter(LocalPath))
-                                {
-                                    sw.Write(sr.ReadToEnd());
-                                }
+                                ResponseContent = sr.ReadToEnd();
+                                return Deserialize<T>(ResponseContent);
+                            }
+                        case RequestResponseType.EMAIL:
+                            return default;
+                        default:
+                            using (var sr = new StreamReader(responseStream))
+                            {
+                                using var sw = new StreamWriter(LocalPath);
+                                sw.Write(sr.ReadToEnd());
                             }
                             return default;
-                        }
                     }
                 }
             }
@@ -273,7 +260,7 @@ namespace FortnoxAPILibrary
             return default;
         }
 
-        internal T UploadFile<T>(string localPath, byte[] fileData = null, string fileName = null)
+        protected T UploadFile<T>(string localPath, byte[] fileData = null, string fileName = null)
         {
             ResponseContent = "";
 
@@ -296,23 +283,17 @@ namespace FortnoxAPILibrary
                 var request = SetupRequest(RequestUriString, "POST");
                 request.ContentType = "multipart/form-data; boundary=" + boundary;
 
-                using (var dataStream = request.GetRequestStream())
-                {
-                    dataStream.Write(header, 0, header.Length);
-                    dataStream.Write(fileData, 0, fileData.Length);
-                    dataStream.Write(trailer, 0, trailer.Length);
-                    dataStream.Close();
+                using var dataStream = request.GetRequestStream();
+                dataStream.Write(header, 0, header.Length);
+                dataStream.Write(fileData, 0, fileData.Length);
+                dataStream.Write(trailer, 0, trailer.Length);
+                dataStream.Close();
 
-                    // Read the response
-                    using (var response = request.GetResponse())
-                    {
-                        using (var responseReader = new StreamReader(response.GetResponseStream()))
-                        {
-                            ResponseContent = responseReader.ReadToEnd();
-                            result = Deserialize<EntityWrapper<T>>(ResponseContent).Entity;
-                        }
-                    }
-                }
+                // Read the response
+                using var response = request.GetResponse();
+                using var responseReader = new StreamReader(response.GetResponseStream());
+                ResponseContent = responseReader.ReadToEnd();
+                result = Deserialize<EntityWrapper<T>>(ResponseContent).Entity;
             }
             catch (WebException we)
             {
@@ -322,7 +303,7 @@ namespace FortnoxAPILibrary
             return result;
         }
 
-        internal void DownloadFile(string idOrPath, string localPath, File file = null)
+        protected void DownloadFile(string idOrPath, string localPath, File file = null)
         {
             ResponseContent = "";
 
@@ -339,36 +320,30 @@ namespace FortnoxAPILibrary
 
                 var request = SetupRequest(url, "GET");
 
-                using (var response = (HttpWebResponse) request.GetResponse())
+                using var response = (HttpWebResponse) request.GetResponse();
+                HttpStatusCode = response.StatusCode;
+                using var responseStream = response.GetResponseStream();
+                if (file == null)
                 {
-                    HttpStatusCode = response.StatusCode;
-                    using (var responseStream = response.GetResponseStream())
-                    {
-						if (file == null)
-						{
-							// hdd
-							WriteStream(responseStream);
-						}
-						else
-						{
-							// memory                          
-							using (var ms = new MemoryStream())
-							{
-								file.ContentType = response.Headers["Content-Type"];
-								responseStream.CopyTo(ms);
-								file.Data = ms.ToArray();								
-							}
-						}
-					}
-				}
-			}
+                    // hdd
+                    WriteStream(responseStream);
+                }
+                else
+                {
+                    // memory                          
+                    using var ms = new MemoryStream();
+                    file.ContentType = response.Headers["Content-Type"];
+                    responseStream.CopyTo(ms);
+                    file.Data = ms.ToArray();
+                }
+            }
             catch (WebException we)
             {
                 Error = HandleException(we);
             }
         }
 
-        internal File MoveFile(string fileId, string destination)
+        protected File MoveFile(string fileId, string destination)
         {
             ResponseContent = "";
 
@@ -386,15 +361,11 @@ namespace FortnoxAPILibrary
                 }
 
                 var request = SetupRequest(url, "PUT");
-                using (var response = (HttpWebResponse) request.GetResponse())
-                {
-                    HttpStatusCode = response.StatusCode;
-                    using (var responseReader = new StreamReader(response.GetResponseStream()))
-                    {
-                        ResponseContent = responseReader.ReadToEnd();
-                        return Deserialize<EntityWrapper<File>>(ResponseContent).Entity;
-                    }
-                }
+                using var response = (HttpWebResponse)request.GetResponse();
+                HttpStatusCode = response.StatusCode;
+                using var responseReader = new StreamReader(response.GetResponseStream());
+                ResponseContent = responseReader.ReadToEnd();
+                return Deserialize<EntityWrapper<File>>(ResponseContent).Entity;
             }
             catch (WebException we)
             {
@@ -406,53 +377,42 @@ namespace FortnoxAPILibrary
 
         private void WriteStream(Stream readStream)
         {
-            using (var writeStream = new FileStream(LocalPath, FileMode.Create, FileAccess.Write))
-            {
-                readStream.CopyTo(writeStream);
-            }
+            using var writeStream = new FileStream(LocalPath, FileMode.Create, FileAccess.Write);
+            readStream.CopyTo(writeStream);
         }
 
-        internal ErrorInformation HandleException(WebException we)
+        protected ErrorInformation HandleException(WebException we)
         {
             if (we.Response == null)
             {
                 throw new Exception("Inget svar från Fortnox API. Kontrollera inre exception.", we);
             }
-            using (var response = (HttpWebResponse)we.Response)
+
+            using var response = (HttpWebResponse)we.Response;
+            HttpStatusCode = response.StatusCode;
+
+            if (response == null || HttpStatusCode == HttpStatusCode.InternalServerError)
             {
-                HttpStatusCode = response.StatusCode;
+                throw we;
+            }
 
-                if (response == null || HttpStatusCode == HttpStatusCode.InternalServerError)
+            using var errorReader = new StreamReader(response.GetResponseStream());
+            string errorJson = errorReader.ReadToEnd();
+
+            try
+            {
+                Error = Deserialize<EntityWrapper<ErrorInformation>>(errorJson).Entity;
+                if (Error.Code == "2001392")
                 {
-                    throw we;
+                    Error.Message = "No information was provided for the entity.";
                 }
-                using (var errorReader = new StreamReader(response.GetResponseStream()))
-                {
-                    string errorJson = errorReader.ReadToEnd();
 
-                    try
-                    {
-                        Error = Deserialize<EntityWrapper<ErrorInformation>>(errorJson).Entity;
-                        if (Error.Code == "2001392")
-                        {
-                            Error.Message = "No information was provided for the entity.";
-                        }
-
-                        return Error;
-                    }
-                    catch (Exception ex)
-                    {
-                        throw we;//TODO: Fix Bug - crashed when TooManyRequests Error (429)
-
-                        /*errorStream.Position = 0;
-                        using (StreamReader reader = new StreamReader(errorStream))
-                        {
-                            string text = reader.ReadToEnd();
-
-                            throw new Exception("Kunde inte tolka felmeddelandet från Fortnox API.\n\n" + text, ex.InnerException);
-                        }*/
-                    }
-                }
+                return Error;
+            }
+            catch (Exception)
+            {
+                //Could not interpret error message from Fortnox API.
+                throw we;
             }
         }
 
@@ -473,10 +433,9 @@ namespace FortnoxAPILibrary
             }
         }
 
-        internal enum RequestResponseType
+        public enum RequestResponseType
         {
             JSON,
-            XML,
             PDF,
             File,
             EMAIL

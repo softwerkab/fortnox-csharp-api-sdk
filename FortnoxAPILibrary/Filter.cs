@@ -1,4 +1,5 @@
-﻿namespace FortnoxAPILibrary
+﻿// ReSharper disable UnusedMember.Global
+namespace FortnoxAPILibrary
 {
 	/// <remarks/>
 	public class Filter
