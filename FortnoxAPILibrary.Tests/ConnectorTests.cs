@@ -151,7 +151,7 @@ namespace FortnoxAPILibrary.Tests
             connector.SortOrder = Sort.Order.Ascending;
 
             var largeCustomerCollection = connector.Find(); //get up to 'large' number of entities
-            var totalCustomers = int.Parse(largeCustomerCollection.TotalResources);
+            var totalCustomers = largeCustomerCollection.TotalResources;
 
             var neededPages = GetNeededPages(Math.Min(totalCustomers, large), small);
             var mergedCollection = new List<CustomerSubset>();
@@ -171,11 +171,6 @@ namespace FortnoxAPILibrary.Tests
         private static int GetNeededPages(int totalSize, int pageSize)
         {
             return (int) Math.Ceiling(totalSize / (float) pageSize);
-
-            /*var pages =  totalSize / (double) pageSize;
-            if (totalSize % pageSize != 0)
-                pages++;
-            return pages;*/
         }
     }
 }

@@ -14,24 +14,24 @@ namespace FortnoxAPILibrary.Entities
         private MetaInformation MetaInformation { get; set; }
 
         /// <remarks/>
-        public string TotalResources => MetaInformation.TotalResources;
+        public int TotalResources => MetaInformation.TotalResources;
 
         /// <remarks/>
-        public string TotalPages => MetaInformation.TotalPages;
+        public int TotalPages => MetaInformation.TotalPages;
 
         /// <remarks/>
-        public string CurrentPage => MetaInformation.CurrentPage;
+        public int CurrentPage => MetaInformation.CurrentPage;
     }
 
     public class MetaInformation
     {
         [JsonProperty("@TotalResources")]
-        public string TotalResources { get; set; }
+        public int TotalResources { get; set; }
 
         [JsonProperty("@TotalPages")]
-        public string TotalPages { get; set; }
+        public int TotalPages { get; set; }
 
         [JsonProperty("@CurrentPage")]
-        public string CurrentPage { get; set; }
+        public int CurrentPage { get; set; }
     }
 }
