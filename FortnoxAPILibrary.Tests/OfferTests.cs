@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.Tests
             };
 
             var createdOffer = connector.Create(newOffer);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.AreEqual(createdOffer.CustomerName, "TmpCustomer");
             Assert.AreEqual(3, createdOffer.OfferRows.Count);
 
@@ -54,7 +54,7 @@ namespace FortnoxAPILibrary.Tests
             createdOffer.City = "UpdatedCity";
 
             var updatedOffer = connector.Update(createdOffer);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedCity", updatedOffer.City);
 
             #endregion UPDATE
@@ -62,7 +62,7 @@ namespace FortnoxAPILibrary.Tests
             #region READ / GET
 
             var retrievedOffer = connector.Get(createdOffer.DocumentNumber);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedCity", retrievedOffer.City);
 
             #endregion READ / GET
@@ -70,7 +70,7 @@ namespace FortnoxAPILibrary.Tests
             #region DELETE
             //Offer does not provide DELETE method, but can be canceled
             connector.Cancel(createdOffer.DocumentNumber);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
 
             retrievedOffer = connector.Get(createdOffer.DocumentNumber);
             Assert.AreEqual("true", retrievedOffer.Cancelled);

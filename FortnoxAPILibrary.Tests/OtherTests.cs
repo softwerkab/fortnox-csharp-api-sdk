@@ -22,7 +22,7 @@ namespace FortnoxAPILibrary.Tests
 
             var connector = new FinancialYearConnector();
             var finicialYear = connector.Get(1);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'."); 
+            MyAssert.HasNoError(connector); 
         }
 
         [TestMethod]
@@ -30,7 +30,7 @@ namespace FortnoxAPILibrary.Tests
         {
             var connector = new CompanySettingsConnector();
             var settings = connector.Get();
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.IsNotNull(settings?.Name);
         }
 
@@ -39,7 +39,7 @@ namespace FortnoxAPILibrary.Tests
         {
             var connector = new LockedPeriodConnector();
             var period = connector.Get();
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.IsNotNull(period);
         }
     }

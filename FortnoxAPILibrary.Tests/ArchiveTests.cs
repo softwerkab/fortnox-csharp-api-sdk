@@ -29,22 +29,22 @@ namespace FortnoxAPILibrary.Tests
             var connector = new ArchiveConnector();
 
             var folder = connector.CreateFolder(new Folder { Name = Path.GetRandomFileName() });
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
 
             var subFolder1 = connector.CreateFolder(new Folder { Name = folder.Name+"/TestSubFolder1" });
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             var subFolder2 = connector.CreateFolder(new Folder { Name = folder.Name + "/TestSubFolder2" });
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
 
             var root = connector.Find();
             //TODO: Can not get specific folder !!
 
             connector.DeleteFolder(subFolder1.Id);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             connector.DeleteFolder(subFolder2.Id);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             connector.DeleteFolder(folder.Id);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
         }
 
 
@@ -59,19 +59,19 @@ namespace FortnoxAPILibrary.Tests
 
             //UPLOAD FILE
             var uploadedFile = connector.UploadFile(tmpPath, "");
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
 
             System.IO.File.Delete(tmpPath); //Delete local file
             Assert.IsFalse(System.IO.File.Exists(tmpPath));
 
             //DOWNLOAD FILE
             connector.DownloadFile(uploadedFile.Id, tmpPath);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.IsTrue(System.IO.File.Exists(tmpPath)); //Local file created by download
 
             //DELETE FILE
             connector.DeleteFile(uploadedFile.Id);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
 
             System.IO.File.Delete(tmpPath);
         }
@@ -83,18 +83,18 @@ namespace FortnoxAPILibrary.Tests
 
             // UPLOAD FILE DATA
             var uploadedFile = connector.UploadFileData(Resource.fortnox_image, "FortnoxImage.png", "");
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.AreEqual("image/png", uploadedFile.ContentType);
             
             //DOWNLOAD FILE DATA
             var downloadedFile = new File() { Id = uploadedFile.Id };
             connector.DownloadFileData(downloadedFile);
             Assert.AreEqual(Resource.fortnox_image.Length, downloadedFile.Data.Length);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
 
             //DELETE FILE
             connector.DeleteFile(uploadedFile.Id);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
         }
     }
 }

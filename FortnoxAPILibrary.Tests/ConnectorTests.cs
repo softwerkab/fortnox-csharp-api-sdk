@@ -37,7 +37,7 @@ namespace FortnoxAPILibrary.Tests
             };
 
             connector.Find();
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.IsTrue(connector.RequestUriString.Contains("name=TestName"));
             Assert.IsTrue(connector.RequestUriString.Contains("city=TestCity"));
             Assert.IsTrue(connector.RequestUriString.Contains("filter=active"));
@@ -56,7 +56,7 @@ namespace FortnoxAPILibrary.Tests
             connector.Name = "TestName";
 
             connector.Find();
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.IsFalse(connector.RequestUriString.Contains("city="));
             Assert.IsFalse(connector.RequestUriString.Contains("filter="));
             Assert.IsFalse(connector.RequestUriString.Contains("sortby="));
@@ -84,7 +84,7 @@ namespace FortnoxAPILibrary.Tests
             };
 
             connector.Find();
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.IsFalse(connector.RequestUriString.Contains("city="));
             Assert.IsFalse(connector.RequestUriString.Contains("filter="));
             Assert.IsFalse(connector.RequestUriString.Contains("sortby="));
@@ -101,15 +101,15 @@ namespace FortnoxAPILibrary.Tests
             var connector = new CustomerConnector();
 
             var createdCustomer = connector.Create(new Customer() { Name = "TestCustomer", CountryCode = "SE" });
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
 
             connector.Update(createdCustomer);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.IsFalse(connector.RequestContent.Contains("\"Country\":"), "Read-only property exists in Update request!");
             //Country is read-only, should not be send in update request even if its unchanged
 
             connector.Delete(createdCustomer.CustomerNumber);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -118,11 +118,11 @@ namespace FortnoxAPILibrary.Tests
             var connector = new CustomerConnector();
 
             var createdCustomer = connector.Create(new Customer() { Name = "TestUser", CountryCode = "SE" });
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.AreEqual("Sverige", createdCustomer.Country);
 
             connector.Delete(createdCustomer.CustomerNumber);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -135,10 +135,10 @@ namespace FortnoxAPILibrary.Tests
                 Name = "TestUser", 
                 DefaultDeliveryTypes = new InvoiceDefaultDeliveryTypes() //Empty Object
             });
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
 
             connector.Delete(createdCustomer.CustomerNumber);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]

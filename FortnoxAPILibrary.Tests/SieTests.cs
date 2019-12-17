@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.Tests
             var connector = new SIEConnector();
 
             connector.ExportSIE(SIEType.SIE3, tmpPath);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.IsTrue(File.Exists(tmpPath) && new FileInfo(tmpPath).Length > 0);
 
             File.Delete(tmpPath);
@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Tests
             var connector = new SIEConnector();
 
             var data = connector.ExportSIE(SIEType.SIE3);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.IsTrue(data.Length > 0);
         }
 
@@ -50,7 +50,7 @@ namespace FortnoxAPILibrary.Tests
 
             var connector = new SIEConnector();
             var summary = connector.ImportSIE(tmpPath, true);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.IsNotNull(summary.DateOfGeneration);
         }
 
@@ -63,7 +63,7 @@ namespace FortnoxAPILibrary.Tests
 
             var connector = new SIEConnector();
             var summary = connector.ImportSIE(tmpPath);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.IsNotNull(summary.DateOfGeneration);
         }
     }

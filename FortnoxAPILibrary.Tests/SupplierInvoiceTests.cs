@@ -47,7 +47,7 @@ namespace FortnoxAPILibrary.Tests
             };
 
             var createdInvoice = connector.Create(newInvoice);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.AreEqual(createdInvoice.SupplierName, "TmpSupplier");
             Assert.AreEqual(3+1,createdInvoice.SupplierInvoiceRows.Count);
             //3 + 1 => A row "Leverantörsskulder" is created by default
@@ -58,7 +58,7 @@ namespace FortnoxAPILibrary.Tests
 
             createdInvoice.OCR = "987654321";
             var updatedInvoice = connector.Update(createdInvoice);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.AreEqual("987654321", updatedInvoice.OCR);
 
             #endregion UPDATE
@@ -66,7 +66,7 @@ namespace FortnoxAPILibrary.Tests
             #region READ / GET
 
             var retrievedInvoice = connector.Get(createdInvoice.GivenNumber);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.AreEqual("987654321", retrievedInvoice.OCR);
 
             #endregion READ / GET
@@ -74,7 +74,7 @@ namespace FortnoxAPILibrary.Tests
             #region DELETE
             //Invoice does not provide DELETE method, but can be canceled
             connector.Cancel(createdInvoice.GivenNumber);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
 
             retrievedInvoice = connector.Get(createdInvoice.GivenNumber);
             Assert.AreEqual("true", retrievedInvoice.Cancelled);

@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.Tests
                 }
             });
 
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -57,15 +57,15 @@ namespace FortnoxAPILibrary.Tests
 
             connector.Limit = 2;
             var voucherResult = connector.Find();
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
 
             connector.Page = 2;
             var voucherResult2 = connector.Find();
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
 
             connector.Page = 3;
             var voucherResult3 = connector.Find();
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -77,7 +77,7 @@ namespace FortnoxAPILibrary.Tests
             {
                 connector.Limit = 2;
                 connector.Find();
-                Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+                MyAssert.HasNoError(connector);
             }
         }
 
@@ -95,7 +95,7 @@ namespace FortnoxAPILibrary.Tests
             Assert.IsNotNull(customer);
 
             connector.Delete(specificCustomer.CustomerNumber);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -103,14 +103,14 @@ namespace FortnoxAPILibrary.Tests
         {
             var connector = new CustomerConnector();
             var newCustomer = connector.Create(new Customer() { Name = "TestCustomer", City = "Växjö", Type = CustomerType.COMPANY });
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
 
             var updatedCustomer = connector.Update(new Customer() { CustomerNumber = newCustomer.CustomerNumber, City = "Stockholm" });
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
             Assert.AreEqual(CustomerType.COMPANY, updatedCustomer.Type);
 
             connector.Delete(newCustomer.CustomerNumber);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -118,12 +118,12 @@ namespace FortnoxAPILibrary.Tests
         {
             var connector = new ArticleConnector();
             var newArticle = connector.Create(new Article() { Description = "TestArticle", FreightCost = "10", OtherCost = "10", CostCalculationMethod = "MANUAL" });
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
 
             //NOTE: Server does not create the properties FreightCost, OtherCost and CostCalculationMethod
             //Assert.AreEqual("10", newArticle.FreightCost); //Always fails
             connector.Delete(newArticle.ArticleNumber);
-            Assert.IsFalse(connector.HasError, $"Request failed due to '{connector.Error?.Message}'.");
+            MyAssert.HasNoError(connector);
         }
 
     }
