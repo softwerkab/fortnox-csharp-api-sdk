@@ -1,12 +1,11 @@
-﻿// ReSharper disable InconsistentNaming
-namespace FortnoxAPILibrary
+﻿namespace FortnoxAPILibrary
 {
 	/// <remarks/>
 	public class APIConstants
 	{
 		/// <summary>
-		/// Use this to make a field blank in Fortnox. 
+		/// Use this to make a field blank in Fortnox.
 		/// </summary>
-		public const string API_BLANK = "API_BLANK";
+		public const string BlankValue = "API_BLANK";
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using FortnoxAPILibrary.Entities;
-// ReSharper disable InconsistentNaming
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
@@ -60,29 +59,23 @@ namespace FortnoxAPILibrary.Connectors
 
             try
             {
-                using (var response = wr.GetResponse())
-                {
-                    using (var responseStream = response.GetResponseStream())
-                    {
-                        int b;
+                using var response = wr.GetResponse();
+                using var responseStream = response.GetResponseStream();
+                int b;
 
-                        if (localPath != "")
-                        {
-                            using (var writer = new FileStream(localPath, FileMode.Create))
-                            {
-                                while ((b = responseStream.ReadByte()) != -1)
-                                {
-                                    writer.WriteByte((byte)b);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            while ((b = responseStream.ReadByte()) != -1)
-                            {
-                                data.Add((byte)b);
-                            }
-                        }
+                if (localPath != "")
+                {
+                    using var writer = new FileStream(localPath, FileMode.Create);
+                    while ((b = responseStream.ReadByte()) != -1)
+                    {
+                        writer.WriteByte((byte)b);
+                    }
+                }
+                else
+                {
+                    while ((b = responseStream.ReadByte()) != -1)
+                    {
+                        data.Add((byte)b);
                     }
                 }
             }
