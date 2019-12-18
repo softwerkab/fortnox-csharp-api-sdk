@@ -28,7 +28,7 @@ namespace FortnoxAPILibrary.Tests
                 FilterBy = Filter.Customer.Active,
                 SortBy = Sort.By.Customer.Name,
                 SortOrder = Sort.Order.Ascending,
-                LastModified = new DateTime(2000, 01, 01),
+                LastModified = new DateTime(2000,01,01,20,10,05), //2000-01-20 20:10:05
                 Limit = 10,
                 Offset = 0,
                 Page = 1
@@ -41,7 +41,7 @@ namespace FortnoxAPILibrary.Tests
             Assert.IsTrue(connector.RequestUriString.Contains("filter=active"));
             Assert.IsTrue(connector.RequestUriString.Contains("sortby=name"));
             Assert.IsTrue(connector.RequestUriString.Contains("sortorder=ascending"));
-            Assert.IsTrue(connector.RequestUriString.Contains("lastmodified=2000-01-01"));
+            Assert.IsTrue(connector.RequestUriString.Contains("lastmodified=2000-01-01+20%3a10%3a05")); //"lastmodified=2000-01-20 20:10:05" in URL encoding
             Assert.IsTrue(connector.RequestUriString.Contains("limit=10"));
             Assert.IsTrue(connector.RequestUriString.Contains("offset=0"));
             Assert.IsTrue(connector.RequestUriString.Contains("page=1"));

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
@@ -29,8 +30,8 @@ namespace FortnoxAPILibrary.Tests
 
             var newInvoce = connector.Create(new Invoice()
             {
-                InvoiceDate = "2019-01-20",
-                DueDate = "2019-02-20",
+                InvoiceDate = new DateTime(2019,1,20).ToString(APIConstants.DateFormat), //"2019-01-20",
+                DueDate = new DateTime(2019, 2, 20).ToString(APIConstants.DateFormat), //"2019-02-20",
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 InvoiceType = InvoiceType.INVOICE,
                 InvoiceRows = new List<InvoiceRow>()

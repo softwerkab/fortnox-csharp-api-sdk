@@ -440,10 +440,12 @@ namespace FortnoxAPILibrary
 		/// <remarks/>
 		public enum Order
 		{
-			/// <remarks/>
-			Ascending,
-			/// <remarks/>
-			Descending
+            /// <remarks/>
+            [StringValue("ascending")]
+            Ascending,
+            /// <remarks/>
+            [StringValue("descending")]
+            Descending
 		}
 	}
 }
