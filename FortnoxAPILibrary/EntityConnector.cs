@@ -148,12 +148,7 @@ namespace FortnoxAPILibrary
                 if (!isSearchParameter) continue;
 
                 var value = property.GetValue(this);
-                if (value == null) continue;
-
-                var strValue = value is string ? value.ToString() : value.ToString().ToLower();
-                if (property.PropertyType.IsEnum)
-                    strValue = ((Enum) value).GetStringValue();
-
+                var strValue = GetStringValue(value, property.PropertyType);
                 if (string.IsNullOrWhiteSpace(strValue)) continue;
 
                 var searchAttribute = property.GetAttribute<SearchParameter>();
@@ -161,6 +156,22 @@ namespace FortnoxAPILibrary
 
                 Parameters.Add(paramName.ToLower(), strValue);
             }
+        }
+
+        private static string GetStringValue(object value, Type type)
+        {
+            if (value == null) return null;
+
+            type = Nullable.GetUnderlyingType(type) ?? type; //unwrap nullable type
+
+            if (type == typeof(string))
+                return value.ToString();
+            if (type.IsEnum)
+               return ((Enum)value).GetStringValue();
+            if (type == typeof(DateTime))
+                return ((DateTime)value).ToString(APIConstants.DateAndTimeFormat);
+
+            return value.ToString().ToLower();
         }
 
         protected TEntity DoAction(string documentNumber, string action)

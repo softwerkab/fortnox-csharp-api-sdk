@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -32,8 +33,8 @@ namespace FortnoxAPILibrary.Tests
             {
                 
                 SupplierNumber = tmpSupplier.SupplierNumber,
-                InvoiceDate = "2019-01-20",
-                DueDate = "2019-02-20",
+                InvoiceDate = new DateTime(2019, 1, 20).ToString(APIConstants.DateFormat), //"2019-01-20",
+                DueDate = new DateTime(2019, 2, 20).ToString(APIConstants.DateFormat), //"2019-02-20",
                 SalesType = SalesType.STOCK,
                 OCR = "123456789",
                 SupplierInvoiceRows = new List<SupplierInvoiceRow>()
