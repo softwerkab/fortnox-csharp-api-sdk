@@ -103,7 +103,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public Period Period { get; set; }
+        public Period? Period { get; set; }
 
         /// <remarks/>
         [JsonProperty(PropertyName = "@url")]

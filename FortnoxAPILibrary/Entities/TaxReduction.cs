@@ -39,7 +39,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public ReferenceDocumentType ReferenceDocumentType { get; set; }
+        public ReferenceDocumentType? ReferenceDocumentType { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -60,7 +60,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public TypeOfReduction TypeOfReduction { get; set; }
+        public TypeOfReduction? TypeOfReduction { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]

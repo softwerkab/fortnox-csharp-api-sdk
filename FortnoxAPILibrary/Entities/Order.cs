@@ -362,7 +362,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public DiscountType DiscountType { get; set; }
+        public DiscountType? DiscountType { get; set; }
 
         /// <remarks/>
         [JsonProperty]
