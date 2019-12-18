@@ -136,7 +136,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public SalesType SalesType { get; set; }
+        public SalesType? SalesType { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -157,7 +157,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public InvoiceVATType VATType { get; set; }
+        public InvoiceVATType? VATType { get; set; }
 
         /// <remarks/>
         [JsonProperty]

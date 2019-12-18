@@ -21,7 +21,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public AccountingMethod AccountingMethod { get; set; }
+        public AccountingMethod? AccountingMethod { get; set; }
 
         /// <remarks/>
         [JsonProperty]

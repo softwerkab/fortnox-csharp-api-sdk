@@ -35,7 +35,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public Status Status { get; set; }
+        public Status? Status { get; set; }
 
         /// <remarks/>
         [JsonProperty]

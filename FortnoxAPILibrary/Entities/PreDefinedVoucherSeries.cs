@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
         [JsonProperty]
-        public PreDefinedVoucherSeriesName Name { get; private set; }
+        public PreDefinedVoucherSeriesName? Name { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
