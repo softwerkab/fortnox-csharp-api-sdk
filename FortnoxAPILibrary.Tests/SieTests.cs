@@ -38,30 +38,5 @@ namespace FortnoxAPILibrary.Tests
             MyAssert.HasNoError(connector);
             Assert.IsTrue(data.Length > 0);
         }
-
-        [TestMethod]
-        public void Test_SIE_Preview()
-        {
-            var tmpPath = TestUtils.GetTempFilePath();
-            File.WriteAllBytes(tmpPath, Resource.sie_file); //Create a SIE file
-
-            var connector = new SIEConnector();
-            var summary = connector.ImportSIE(tmpPath, true);
-            MyAssert.HasNoError(connector);
-            Assert.IsNotNull(summary.DateOfGeneration);
-        }
-
-        [Ignore] //Need a dummy SIE file to not risk creating real data resources
-        [TestMethod]
-        public void Test_SIE_Import()
-        {
-            var tmpPath = TestUtils.GetTempFilePath();
-            File.WriteAllBytes(tmpPath, Resource.sie_file); //Create a SIE file
-
-            var connector = new SIEConnector();
-            var summary = connector.ImportSIE(tmpPath);
-            MyAssert.HasNoError(connector);
-            Assert.IsNotNull(summary.DateOfGeneration);
-        }
     }
 }

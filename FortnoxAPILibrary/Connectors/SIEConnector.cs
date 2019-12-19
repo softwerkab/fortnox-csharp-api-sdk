@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -11,15 +10,12 @@ namespace FortnoxAPILibrary.Connectors
     public class SIEConnector : FinancialYearBasedEntityConnector<SieSummary, SieSummary, Sort.By.Sie?>
     {
         /// <remarks/>
-        public ImportOptions ImportOptions { get; set; }
-        /// <remarks/>
         public ExportOptions ExportOptions { get; set; }
 
         /// <remarks/>
         public SIEConnector()
         {
             Resource = "sie";
-            ImportOptions = new ImportOptions();
             ExportOptions = new ExportOptions();
         }
 
@@ -87,33 +83,6 @@ namespace FortnoxAPILibrary.Connectors
             return data.ToArray();
         }
 
-        /// <summary>
-        /// Imports a SIE file
-        /// </summary>
-        /// <param name="pathToFile">The local path to the file to import</param>
-        /// <param name="preview">Set to true to perform a preview of the import. Nothing will be imported.</param>
-        /// <returns>A summary of what is beeing imported. </returns>
-        public SieSummary ImportSIE(string pathToFile, bool preview = false)
-        {
-            if (string.IsNullOrEmpty(pathToFile))
-                throw new Exception("A file to import must be selected");
-
-            Resource = preview ? "sie/preview" : "sie";
-
-            Parameters = new Dictionary<string, string>();
-            AddImportOptions();
-
-            return BaseUploadFile(pathToFile);
-        }
-
-        internal SieSummary BaseUploadFile(string localPath)
-        {
-            string requestUriString = GetUrl();
-            RequestUriString = AddParameters(requestUriString);
-
-            return UploadFile<SieSummary>(localPath);
-        }
-
         private void AddExportOptions()
         {
             if (ExportOptions.Selection != null && ExportOptions.Selection.Count > 0)
@@ -128,31 +97,7 @@ namespace FortnoxAPILibrary.Connectors
             if (!string.IsNullOrEmpty(ExportOptions.ToDate))
                 Parameters.Add("todate", ExportOptions.ToDate);
         }
-
-        private void AddImportOptions()
-        {
-            if (ImportOptions.Selection != null && ImportOptions.Selection.Count > 0)
-                Parameters.Add("selection", SelectionToString(ImportOptions.Selection));
-
-            //TODO: Use reflection
-            if (ImportOptions.AllAccounts)
-                Parameters.Add("allaccounts","true");
-            if (ImportOptions.AllCostCenters)
-                Parameters.Add("allcostcenters", "true");
-            if (ImportOptions.AllProjects)
-                Parameters.Add("allprojects", "true");
-            if (ImportOptions.UseBudget)
-                Parameters.Add("usebudget", "true");
-            if (ImportOptions.UseCostCenterDescription)
-                Parameters.Add("usecostcenterdescription", "true");
-            if (ImportOptions.UseIncomingBalance)
-                Parameters.Add("useincomingbalance", "true");
-            if (ImportOptions.UseProjectDescription)
-                Parameters.Add("useprojectdescription", "true");
-            if (ImportOptions.UseSRU)
-                Parameters.Add("usesru", "true");
-        }
-
+        
         private static string SelectionToString(List<Selection> selection)
         {
             string str = "";
@@ -187,30 +132,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <remarks/>
         public string ToVoucherNumber { get; set; }
     }
-
-    /// <remarks/>
-    public class ImportOptions
-    {
-        /// <remarks/>
-        public bool AllAccounts;
-        /// <remarks/>
-        public bool AllCostCenters;
-        /// <remarks/>
-        public bool AllProjects;
-        /// <remarks/>
-        public bool UseCostCenterDescription;
-        /// <remarks/>
-        public bool UseProjectDescription;
-        /// <remarks/>
-        public bool UseSRU;
-        /// <remarks/>
-        public bool UseIncomingBalance;
-        /// <remarks/>
-        public bool UseBudget;
-        /// <remarks/>
-        public List<Selection> Selection;
-    }
-
+    
     /// <remarks/>
     public class ExportOptions
     {
