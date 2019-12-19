@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using FortnoxAPILibrary.Entities;
 // ReSharper disable UnusedMember.Global
@@ -51,36 +51,24 @@ namespace FortnoxAPILibrary.Connectors
 
             var wr = SetupRequest(requestString, "GET");
 
-            var data = new List<byte>();
-
+            var data = Array.Empty<byte>();
+                
             try
             {
                 using var response = wr.GetResponse();
                 using var responseStream = response.GetResponseStream();
-                int b;
 
                 if (localPath != "")
-                {
-                    using var writer = new FileStream(localPath, FileMode.Create);
-                    while ((b = responseStream.ReadByte()) != -1)
-                    {
-                        writer.WriteByte((byte)b);
-                    }
-                }
+                    responseStream.ToFile(localPath);
                 else
-                {
-                    while ((b = responseStream.ReadByte()) != -1)
-                    {
-                        data.Add((byte)b);
-                    }
-                }
+                    data = responseStream.ToBytes();
             }
             catch (WebException we)
             {
                 Error = HandleException(we);
             }
 
-            return data.ToArray();
+            return data;
         }
 
         private void AddExportOptions()

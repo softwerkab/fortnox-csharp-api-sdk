@@ -127,11 +127,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>Created file.</returns>
 		public File UploadFileData(byte[] data, string name, string folderId = "")
 		{
-			if (data == null) throw new ArgumentException("File data must be set.");
+			if (data == null) 
+                throw new ArgumentException("File data must be set.");
 
-			if (string.IsNullOrEmpty(name)) throw new ArgumentException("File name must be set.");
+			if (string.IsNullOrEmpty(name)) 
+                throw new ArgumentException("File name must be set.");
 
-			if (!System.IO.Path.HasExtension(name)) throw new ArgumentException("File name with extention must be set.");
+			if (!System.IO.Path.HasExtension(name)) 
+                throw new ArgumentException("File name with extention must be set.");
 
 			Resource = "archive";
 
@@ -139,10 +142,8 @@ namespace FortnoxAPILibrary.Connectors
             if (uploadedFile == null) return null;
 
             uploadedFile.ContentType = GetMimeType(name);
-
-			uploadedFile.Data = new byte[data.Length];
-
-			data.CopyTo(uploadedFile.Data, 0);
+            uploadedFile.Data = new byte[data.Length];
+            data.CopyTo(uploadedFile.Data, 0);
 
 			return uploadedFile;
 		}
@@ -154,8 +155,7 @@ namespace FortnoxAPILibrary.Connectors
 		public File UploadFileData(Stream stream, string name, string folderId = "")
 		{
 			stream.Position = 0;
-			var arr = new byte[stream.Length];
-			stream.Read(arr, 0, (int)stream.Length);
+            var arr = stream.ToBytes();
 			return UploadFileData(arr, name, folderId);
 		}
 
@@ -178,16 +178,12 @@ namespace FortnoxAPILibrary.Connectors
 		public void DownloadFileData(File file)
 		{
 			if (file == null)
-			{
-				throw new ArgumentException("File must be set.");
-			}
+                throw new ArgumentException("File must be set.");
 
 			if (string.IsNullOrEmpty(file.Id))
-			{
-				throw new ArgumentException("File id must be set.");
-			}
+                throw new ArgumentException("File id must be set.");
 
-			Resource = "archive";
+            Resource = "archive";
 
 			DownloadFile(file.Id, "", file);
 		}

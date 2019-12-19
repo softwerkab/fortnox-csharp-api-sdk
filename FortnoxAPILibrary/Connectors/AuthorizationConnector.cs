@@ -29,8 +29,8 @@ namespace FortnoxAPILibrary.Connectors
 
 				var wr = SetupRequest(ConnectionCredentials.FortnoxAPIServer, authorizationCode, clientSecret);
                 using var response = wr.GetResponse();
-                using var responseReader = new StreamReader(response.GetResponseStream());
-                var auth = Deserialize<Authorization>(responseReader.ReadToEnd());
+                using var responseStream = response.GetResponseStream();
+                var auth = Deserialize<Authorization>(responseStream.ToText());
                 accessToken = auth.AccessToken;
             }
 			catch (WebException we)
