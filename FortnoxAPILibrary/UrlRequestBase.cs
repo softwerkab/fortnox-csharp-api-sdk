@@ -208,9 +208,9 @@ namespace FortnoxAPILibrary
 
                 if (Method != "GET")
                 {
-                    using var requestStream = new StreamWriter(wr.GetRequestStream());
+                    using var requestStream = wr.GetRequestStream();
                     var json = Serialize(entity);
-                    requestStream.Write(json);
+                    requestStream.WriteText(json);
                 }
 
                 if (Method == "POST" || Method == "PUT")
@@ -223,7 +223,7 @@ namespace FortnoxAPILibrary
                 using var responseStream = response.GetResponseStream();
                 if (ResponseType == RequestResponseType.PDF)
                 {
-                    WriteStream(responseStream);
+                    responseStream.ToFile(LocalPath);
                 }
                 else
                 {
@@ -235,19 +235,12 @@ namespace FortnoxAPILibrary
                     switch (ResponseType)
                     {
                         case RequestResponseType.JSON:
-                            using (var sr = new StreamReader(responseStream))
-                            {
-                                ResponseContent = sr.ReadToEnd();
-                                return Deserialize<T>(ResponseContent);
-                            }
+                            ResponseContent = responseStream.ToText();
+                            return Deserialize<T>(ResponseContent);
                         case RequestResponseType.EMAIL:
                             return default;
                         default:
-                            using (var sr = new StreamReader(responseStream))
-                            {
-                                using var sw = new StreamWriter(LocalPath);
-                                sw.Write(sr.ReadToEnd());
-                            }
+                            responseStream.ToFile(LocalPath);
                             return default;
                     }
                 }
@@ -291,8 +284,8 @@ namespace FortnoxAPILibrary
 
                 // Read the response
                 using var response = request.GetResponse();
-                using var responseReader = new StreamReader(response.GetResponseStream());
-                ResponseContent = responseReader.ReadToEnd();
+                using var responseStream = response.GetResponseStream();
+                ResponseContent = responseStream.ToText();
                 result = Deserialize<EntityWrapper<T>>(ResponseContent).Entity;
             }
             catch (WebException we)
@@ -326,15 +319,13 @@ namespace FortnoxAPILibrary
                 if (file == null)
                 {
                     // hdd
-                    WriteStream(responseStream);
+                    responseStream.ToFile(LocalPath);
                 }
                 else
                 {
                     // memory                          
-                    using var ms = new MemoryStream();
                     file.ContentType = response.Headers["Content-Type"];
-                    responseStream.CopyTo(ms);
-                    file.Data = ms.ToArray();
+                    file.Data = responseStream.ToBytes();
                 }
             }
             catch (WebException we)
@@ -363,8 +354,8 @@ namespace FortnoxAPILibrary
                 var request = SetupRequest(url, "PUT");
                 using var response = (HttpWebResponse)request.GetResponse();
                 HttpStatusCode = response.StatusCode;
-                using var responseReader = new StreamReader(response.GetResponseStream());
-                ResponseContent = responseReader.ReadToEnd();
+                using var responseStream = response.GetResponseStream();
+                ResponseContent = responseStream.ToText();
                 return Deserialize<EntityWrapper<File>>(ResponseContent).Entity;
             }
             catch (WebException we)
@@ -374,13 +365,7 @@ namespace FortnoxAPILibrary
 
             return null;
         }
-
-        private void WriteStream(Stream readStream)
-        {
-            using var writeStream = new FileStream(LocalPath, FileMode.Create, FileAccess.Write);
-            readStream.CopyTo(writeStream);
-        }
-
+        
         protected ErrorInformation HandleException(WebException we)
         {
             if (we.Response == null)
@@ -396,8 +381,8 @@ namespace FortnoxAPILibrary
                 throw we;
             }
 
-            using var errorReader = new StreamReader(response.GetResponseStream());
-            string errorJson = errorReader.ReadToEnd();
+            using var responseStream = response.GetResponseStream();
+            string errorJson = responseStream.ToText();
 
             try
             {
