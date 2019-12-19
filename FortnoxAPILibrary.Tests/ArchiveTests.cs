@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -20,20 +21,24 @@ namespace FortnoxAPILibrary.Tests
         }
 
         [TestMethod]
-        public void Test_Folder_Create_Delete()
+        public void Test_Folder_Create_Find_Delete()
         {
             var connector = new ArchiveConnector();
 
             var folder = connector.CreateFolder(new Folder { Name = Path.GetRandomFileName() });
             MyAssert.HasNoError(connector);
 
-            var subFolder1 = connector.CreateFolder(new Folder { Name = folder.Name+"/TestSubFolder1" });
+            var subFolder1 = connector.CreateFolder(new Folder { Name = "TestSubFolder1" }, folder.Name);
             MyAssert.HasNoError(connector);
-            var subFolder2 = connector.CreateFolder(new Folder { Name = folder.Name + "/TestSubFolder2" });
+            var subFolder2 = connector.CreateFolder(new Folder { Name = "TestSubFolder2" }, folder.Name);
             MyAssert.HasNoError(connector);
 
-            var root = connector.Find();
-            //TODO: Can not get specific folder !!
+            connector.FolderId = folder.Id;
+            var  folderContent = connector.Find();
+            MyAssert.HasNoError(connector);
+            Assert.AreEqual(2, folderContent.Folders.Count);
+            Assert.IsTrue(folderContent.Folders.Any(f => f.Name.Equals(subFolder1.Name))); //contains subfolder1
+            Assert.IsTrue(folderContent.Folders.Any(f => f.Name.Equals(subFolder2.Name))); //contains subfolder2
 
             connector.DeleteFolder(subFolder1.Id);
             MyAssert.HasNoError(connector);

@@ -32,27 +32,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "archive";
 		}
-
-		/// <summary>
-		/// Use this to set what folder to read from. 
-		/// </summary>
-		public enum RootFolder
-		{
-			/// <remarks/>
-			[StringValue("")]
-			Root,
-			/// <remarks/>
-			[StringValue("inbox")]
-			Inbox,
-			/// <remarks/>
-			[StringValue("inbox_v")]
-			Inbox_Vouchers,
-			/// <remarks/>
-			[StringValue("inbox_s")]
-			Inbox_SupplierInvoices
-
-		}
-
+		
 		/// <summary>
 		/// Gets a list of Files and Folders
 		/// </summary>
@@ -207,6 +187,8 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="fileId">The id of the file to be deleted.</param>
 		public void DeleteFile(string fileId)
 		{
+            Resource = "archive";
+
 			BaseDelete(fileId);
 		}
 
@@ -216,6 +198,8 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="folderId">The id of the folder to be deleted.</param>
 		public void DeleteFolder(string folderId)
 		{
+            Resource = "archive";
+
 			BaseDelete(folderId);
 		}
 
@@ -242,5 +226,25 @@ namespace FortnoxAPILibrary.Connectors
 
             return UploadFile<File>(localPath, fileData, fileName);
         }
+    }
+
+    /// <summary>
+    /// Use this to set what folder to read from. 
+    /// </summary>
+    public enum RootFolder
+    {
+        /// <remarks/>
+        [StringValue("")]
+        Root,
+        /// <remarks/>
+        [StringValue("inbox")]
+        Inbox,
+        /// <remarks/>
+        [StringValue("inbox_v")]
+        Inbox_Vouchers,
+        /// <remarks/>
+        [StringValue("inbox_s")]
+        Inbox_SupplierInvoices
+
     }
 }
