@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Tests
         {
             //Arrange
             var tmpCustomer = new CustomerConnector().Create(new Customer(){ Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"});
-            var tmpArticle = new ArticleConnector().Create(new Article(){Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = "100"});
+            var tmpArticle = new ArticleConnector().Create(new Article(){Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100});
             
             //Act
             var connector = new InvoiceConnector();
@@ -38,9 +38,9 @@ namespace FortnoxAPILibrary.Tests
                 PaymentWay = "CASH",
                 InvoiceRows = new List<InvoiceRow>()
                 {
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "10"},
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "20"},
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "15"}
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15}
                 }
             };
 
@@ -75,7 +75,7 @@ namespace FortnoxAPILibrary.Tests
             MyAssert.HasNoError(connector);
 
             retrievedInvoice = connector.Get(createdInvoice.DocumentNumber);
-            Assert.AreEqual("true", retrievedInvoice.Cancelled);
+            Assert.AreEqual(true, retrievedInvoice.Cancelled);
 
             #endregion DELETE
 

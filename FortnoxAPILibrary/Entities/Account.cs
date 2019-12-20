@@ -11,16 +11,16 @@ namespace FortnoxAPILibrary.Entities
 	{
         /// <remarks/>
 		[JsonProperty]
-		public string Active { get; set; }
+		public bool? Active { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string BalanceBroughtForward { get; set; }
+        public double? BalanceBroughtForward { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public string BalanceCarriedForward { get; private set; }
+		public double? BalanceCarriedForward { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -48,7 +48,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string SRU { get; set; }
+        public int? SRU { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -65,7 +65,7 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public string Year { get; private set; }
+		public int? Year { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
@@ -79,7 +79,7 @@ namespace FortnoxAPILibrary.Entities
     {
         /// <remarks/>
         [JsonProperty]
-        public string Active { get; set; }
+        public bool? Active { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -91,11 +91,11 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string SRU { get; set; }
+        public int? SRU { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string Year { get; set; }
+        public int? Year { get; set; }
 
         /// <remarks/>
         [JsonProperty(PropertyName = "@url")]

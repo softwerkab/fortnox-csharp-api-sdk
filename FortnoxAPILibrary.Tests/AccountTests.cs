@@ -27,11 +27,11 @@ namespace FortnoxAPILibrary.Tests
             var newAccount = new Account
             {
                 Description = "Test Account",
-                Active = "false",
+                Active = false,
                 Number = "8454",
                 CostCenterSettings = CostCenterSettingsValue.ALLOWED,
                 ProjectSettings = ProjectSettingsValue.ALLOWED,
-                SRU = "123"
+                SRU = 123
             };
 
             //Act

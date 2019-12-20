@@ -31,7 +31,7 @@ namespace FortnoxAPILibrary.Tests
                 City = "Testopolis",
                 CountryCode = "SE", //CountryCode needs to be valid
                 Email = "testSupplier@test.com",
-                Active = "false",
+                Active = false,
                 Bank = "TestBank",
                 Currency = "SEK",
                 Phone1 = "01011111345",

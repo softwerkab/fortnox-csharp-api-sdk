@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string AdministrationFee { get; set; }
+        public double? AdministrationFee { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
@@ -33,12 +33,12 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
         [JsonProperty]
-        public string Booked { get; private set; }
+        public bool? Booked { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
         [JsonProperty]
-        public string Cancelled { get; private set; }
+        public bool? Cancelled { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -51,7 +51,7 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
         [JsonProperty]
-        public string Credit { get; private set; }
+        public bool? Credit { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
@@ -64,15 +64,15 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string CurrencyRate { get; set; }
+        public double? CurrencyRate { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string CurrencyUnit { get; set; }
+        public double? CurrencyUnit { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string DisablePaymentFile { get; set; }
+        public bool? DisablePaymentFile { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -88,7 +88,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string Freight { get; set; }
+        public double? Freight { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -124,7 +124,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string PaymentPending { get; set; }
+        public bool? PaymentPending { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -132,7 +132,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string RoundOffValue { get; set; }
+        public double? RoundOffValue { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -149,11 +149,11 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string Total { get; set; }
+        public double? Total { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string VAT { get; set; }
+        public double? VAT { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -178,7 +178,7 @@ namespace FortnoxAPILibrary.Entities
     {
         /// <remarks/>
         [JsonProperty]
-        public string Account { get; set; }
+        public int? Account { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -210,31 +210,31 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string Price { get; set; }
+        public double? Price { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string Quantity { get; set; }
+        public double? Quantity { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string Total { get; set; }
+        public double? Total { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string Credit { get; set; }
+        public bool? Credit { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string Debit { get; set; }
+        public double? Debit { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string CreditCurrency { get; set; }
+        public double? CreditCurrency { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string DebitCurrency { get; set; }
+        public double? DebitCurrency { get; set; }
         /// <remarks/>
         [JsonProperty]
         public string Unit { get; set; }
@@ -250,7 +250,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string Booked { get; set; }
+        public bool? Booked { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -282,7 +282,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string Total { get; set; }
+        public double? Total { get; set; }
 
         /// <remarks/>
         [JsonProperty(PropertyName = "@url")]

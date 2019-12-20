@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Tests
         {
             //Arrange
             var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = "100" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
 
             //Act
             var connector = new OrderConnector();
@@ -35,9 +35,9 @@ namespace FortnoxAPILibrary.Tests
                 OrderDate = new DateTime(2019, 1, 20).ToString(APIConstants.DateFormat), //"2019-01-20",
                 OrderRows = new List<OrderRow>()
                 {
-                    new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = "20", DeliveredQuantity = "10"},
-                    new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = "20", DeliveredQuantity = "20"},
-                    new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = "20", DeliveredQuantity = "15"}
+                    new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = 20, DeliveredQuantity = 10},
+                    new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = 20, DeliveredQuantity = 20},
+                    new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = 20, DeliveredQuantity = 15}
                 }
             };
 
@@ -72,7 +72,7 @@ namespace FortnoxAPILibrary.Tests
             MyAssert.HasNoError(connector);
 
             retrievedOrder = connector.Get(createdOrder.DocumentNumber);
-            Assert.AreEqual("true", retrievedOrder.Cancelled);
+            Assert.AreEqual(true, retrievedOrder.Cancelled);
 
             #endregion DELETE
 

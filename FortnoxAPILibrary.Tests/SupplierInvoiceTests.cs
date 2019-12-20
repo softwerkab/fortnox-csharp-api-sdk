@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Tests
         {
             //Arrange
             var tmpSupplier = new SupplierConnector().Create(new Supplier() { Name = "TmpSupplier", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article(){Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = "100"});
+            var tmpArticle = new ArticleConnector().Create(new Article(){Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100});
             
             //Act
             var connector = new SupplierInvoiceConnector();
@@ -31,7 +31,6 @@ namespace FortnoxAPILibrary.Tests
             #region CREATE
             var newInvoice = new SupplierInvoice()
             {
-                
                 SupplierNumber = tmpSupplier.SupplierNumber,
                 InvoiceDate = new DateTime(2019, 1, 20).ToString(APIConstants.DateFormat), //"2019-01-20",
                 DueDate = new DateTime(2019, 2, 20).ToString(APIConstants.DateFormat), //"2019-02-20",
@@ -39,9 +38,9 @@ namespace FortnoxAPILibrary.Tests
                 OCR = "123456789",
                 SupplierInvoiceRows = new List<SupplierInvoiceRow>()
                 {
-                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = "10"},
-                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = "20"},
-                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = "15"}
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 10},
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20},
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 15}
                 }
             };
 
@@ -76,7 +75,7 @@ namespace FortnoxAPILibrary.Tests
             MyAssert.HasNoError(connector);
 
             retrievedInvoice = connector.Get(createdInvoice.GivenNumber);
-            Assert.AreEqual("true", retrievedInvoice.Cancelled);
+            Assert.AreEqual(true, retrievedInvoice.Cancelled);
 
             #endregion DELETE
 
