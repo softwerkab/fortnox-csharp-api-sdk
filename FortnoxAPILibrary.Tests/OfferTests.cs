@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Tests
         {
             //Arrange
             var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = "100" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
 
             //Act
             var connector = new OfferConnector();
@@ -35,9 +35,9 @@ namespace FortnoxAPILibrary.Tests
                 OfferDate = new DateTime(2019, 1, 20).ToString(APIConstants.DateFormat), //"2019-01-20",
                 OfferRows = new List<OfferRow>()
                 {
-                    new OfferRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = "10"},
-                    new OfferRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = "20"},
-                    new OfferRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = "15"}
+                    new OfferRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 10},
+                    new OfferRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20},
+                    new OfferRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 15}
                 }
             };
 
@@ -72,7 +72,7 @@ namespace FortnoxAPILibrary.Tests
             MyAssert.HasNoError(connector);
 
             retrievedOffer = connector.Get(createdOffer.DocumentNumber);
-            Assert.AreEqual("true", retrievedOffer.Cancelled);
+            Assert.AreEqual(true, retrievedOffer.Cancelled);
 
             #endregion DELETE
 

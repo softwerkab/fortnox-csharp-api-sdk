@@ -15,7 +15,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string Active { get; set; }
+        public bool? Active { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -72,7 +72,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string DisablePaymentFile { get; set; }
+        public bool? DisablePaymentFile { get; set; }
 
         /// <remarks/>
         [JsonProperty]

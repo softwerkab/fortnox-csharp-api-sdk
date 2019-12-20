@@ -11,7 +11,7 @@ namespace FortnoxAPILibrary.Entities
 	{
 		/// <remarks/>
 		[JsonProperty]
-		public string Active { get; set; }
+		public bool? Active { get; set; }
 
 		/// <remarks/>
 		[JsonProperty]
@@ -153,15 +153,15 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string InvoiceAdministrationFee { get; set; }
+        public double? InvoiceAdministrationFee { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string InvoiceDiscount { get; set; }
+        public double? InvoiceDiscount { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string InvoiceFreight { get; set; }
+        public double? InvoiceFreight { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -201,7 +201,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string ShowPriceVATIncluded { get; set; }
+        public bool? ShowPriceVATIncluded { get; set; }
 
         /// <remarks/>
         [JsonProperty]

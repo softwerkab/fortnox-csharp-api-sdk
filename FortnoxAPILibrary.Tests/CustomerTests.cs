@@ -34,7 +34,7 @@ namespace FortnoxAPILibrary.Tests
                 CountryCode = "SE", //CountryCode needs to be valid
                 Email = "testCustomer@test.com",
                 Type = CustomerType.PRIVATE,
-                Active = "false"
+                Active = false
             };
 
             var createdCustomer = connector.Create(newCustomer);
@@ -90,7 +90,7 @@ namespace FortnoxAPILibrary.Tests
                     City = "Testopolis",
                     Email = "testCustomer@test.com",
                     Type = CustomerType.PRIVATE,
-                    Active = "true"
+                    Active = true
                 },
                 new Customer()
                 {
@@ -101,7 +101,7 @@ namespace FortnoxAPILibrary.Tests
                     City = "TestCity",
                     Email = "testCustomer@test.com",
                     Type = CustomerType.PRIVATE,
-                    Active = "true"
+                    Active = true
                 },
                 new Customer()
                 {
@@ -112,7 +112,7 @@ namespace FortnoxAPILibrary.Tests
                     City = "PolisTest",
                     Email = "testCustomer@test.com",
                     Type = CustomerType.PRIVATE,
-                    Active = "true"
+                    Active = true
                 },
                 new Customer()
                 {
@@ -123,7 +123,7 @@ namespace FortnoxAPILibrary.Tests
                     City = "Testopolis",
                     Email = "testCustomer@test.com",
                     Type = CustomerType.PRIVATE,
-                    Active = "false"
+                    Active = false
                 }
             };
 

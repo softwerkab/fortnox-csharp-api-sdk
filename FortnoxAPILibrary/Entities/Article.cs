@@ -11,7 +11,7 @@ namespace FortnoxAPILibrary.Entities
     {
         /// <remarks/>
         [JsonProperty]
-        public string Active { get; set; }
+        public bool? Active { get; set; }
 
         /// <remarks/>
 		[JsonProperty]
@@ -19,15 +19,15 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string Bulky { get; set; }
+        public bool? Bulky { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string ConstructionAccount { get; set; }
+        public int? ConstructionAccount { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string Depth { get; set; }
+        public int? Depth { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -36,7 +36,7 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public string DisposableQuantity { get; private set; }
+		public double? DisposableQuantity { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -44,27 +44,27 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string EUAccount { get; set; }
+        public int? EUAccount { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string EUVATAccount { get; set; }
+        public int? EUVATAccount { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string Expired { get; set; }
+        public bool? Expired { get; set; }
 
 		/// <remarks/>
 		[JsonProperty]
-		public string ExportAccount { get; set; }
+		public int? ExportAccount { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string Height { get; set; }
+        public int? Height { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string Housework { get; set; }
+        public bool? Housework { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -84,33 +84,33 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string PurchaseAccount { get; set; }
+        public int? PurchaseAccount { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string PurchasePrice { get; set; }
+        public double? PurchasePrice { get; set; }
 
         /// <remarks/>
 	    [ReadOnly]
 	    [JsonProperty]
-	    public string SalesPrice { get; private set; }
+	    public double? SalesPrice { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string QuantityInStock { get; set; }
+        public double? QuantityInStock { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public string ReservedQuantity { get; private set; }
+		public double? ReservedQuantity { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string SalesAccount { get; set; }
+        public int? SalesAccount { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string StockGoods { get; set; }
+        public bool? StockGoods { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -119,11 +119,11 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public string StockValue { get; private set; }
+		public double? StockValue { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string StockWarning { get; set; }
+        public double? StockWarning { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
@@ -144,19 +144,19 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string VAT { get; set; }
+        public double? VAT { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string WebshopArticle { get; set; }
+        public bool? WebshopArticle { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string Weight { get; set; }
+        public int? Weight { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string Width { get; set; }
+        public int? Width { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
@@ -190,7 +190,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string DisposableQuantity { get; set; }
+        public double? DisposableQuantity { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -198,24 +198,24 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string Housework { get; set; }
+        public bool? Housework { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string PurchasePrice { get; set; }
+        public double? PurchasePrice { get; set; }
 
         /// <remarks/>
         [ReadOnly]
         [JsonProperty]
-        public string SalesPrice { get; private set; }
+        public double? SalesPrice { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string QuantityInStock { get; set; }
+        public double? QuantityInStock { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string ReservedQuantity { get; set; }
+        public double? ReservedQuantity { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -223,7 +223,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string StockValue { get; set; }
+        public double? StockValue { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -231,7 +231,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string VAT { get; set; }
+        public double? VAT { get; set; }
 
         /// <remarks/>
         [JsonProperty(PropertyName = "@url")]
@@ -239,7 +239,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string WebshopArticle { get; set; }
+        public bool? WebshopArticle { get; set; }
     }
 
     /// <remarks/>
