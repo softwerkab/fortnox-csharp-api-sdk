@@ -68,6 +68,10 @@ namespace FortnoxAPILibrary.Entities
 		[ReadOnly]
 		[JsonProperty(PropertyName = "@url")]
 		public string Url { get; private set; }
+
+        [ReadOnly]
+        [JsonProperty]
+        public bool? IsAutomatic { get; private set; }
     }
 
     /// <remarks/>
@@ -102,6 +106,10 @@ namespace FortnoxAPILibrary.Entities
         [ReadOnly]
         [JsonProperty(PropertyName = "@url")]
         public string Url { get; private set; }
+
+        [ReadOnly]
+        [JsonProperty]
+        public bool? IsAutomatic { get; private set; }
     }
 }
 

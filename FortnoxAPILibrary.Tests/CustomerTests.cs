@@ -33,7 +33,8 @@ namespace FortnoxAPILibrary.Tests
                 City = "Testopolis",
                 CountryCode = "SE", //CountryCode needs to be valid
                 Email = "testCustomer@test.com",
-                Type = CustomerType.PRIVATE
+                Type = CustomerType.PRIVATE,
+                Active = "false"
             };
 
             var createdCustomer = connector.Create(newCustomer);
