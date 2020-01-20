@@ -12,11 +12,11 @@ namespace FortnoxAPILibrary.Entities
     {
         /// <remarks/>
         [JsonProperty]
-        public string Active { get; set; }
+        public bool? Active { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string AdministrationFee { get; set; }
+        public double? AdministrationFee { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string Continuous { get; set; }
+        public bool? Continuous { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -32,17 +32,17 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string ContractLength { get; set; }
+        public int? ContractLength { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
         [JsonProperty]
-        public string ContributionPercent { get; private set; }
+        public double? ContributionPercent { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
         [JsonProperty]
-        public string ContributionValue { get; private set; }
+        public double? ContributionValue { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -78,30 +78,30 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string Freight { get; set; }
+        public double? Freight { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
         [JsonProperty]
-        public string Gross { get; private set; }
+        public double? Gross { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
         [JsonProperty]
-        public string HouseWork { get; private set; }
+        public bool? HouseWork { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string InvoiceDiscount { get; set; }
+        public double? InvoiceDiscount { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string InvoiceInterval { get; set; }
+        public int? InvoiceInterval { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
         [JsonProperty]
-        public string InvoicesRemaining { get; private set; }
+        public int? InvoicesRemaining { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -119,7 +119,7 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
         [JsonProperty]
-        public string Net { get; private set; }
+        public double? Net { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -152,7 +152,7 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
         [JsonProperty]
-        public string TaxReduction { get; private set; }
+        public double? TaxReduction { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
@@ -174,21 +174,21 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
         [JsonProperty]
-        public string Total { get; private set; }
+        public double? Total { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
         [JsonProperty]
-        public string TotalToPay { get; private set; }
+        public double? TotalToPay { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
         [JsonProperty]
-        public string TotalVAT { get; private set; }
+        public double? TotalVAT { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string VATIncluded { get; set; }
+        public bool? VATIncluded { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -223,11 +223,11 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string Continuous { get; set; }
+        public bool? Continuous { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string ContractLength { get; set; }
+        public int? ContractLength { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -247,11 +247,11 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string InvoiceInterval { get; set; }
+        public int? InvoiceInterval { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public string InvoicesRemaining { get; set; }
+        public int? InvoicesRemaining { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -275,7 +275,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public string Total { get; set; }
+        public double? Total { get; set; }
     }
 
     /// <remarks/>
