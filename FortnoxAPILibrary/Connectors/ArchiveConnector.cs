@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using FortnoxAPILibrary.Entities;
-using Microsoft.AspNetCore.StaticFiles;
+using MimeTypes;
 using File = FortnoxAPILibrary.Entities.File;
 
 // ReSharper disable UnusedMember.Global
@@ -205,9 +205,8 @@ namespace FortnoxAPILibrary.Connectors
 
         private static string GetMimeType(string name)
         {
-            var contentTypeProvider = new FileExtensionContentTypeProvider();
-            var typeKnown = contentTypeProvider.TryGetContentType(name, out var contentType);
-            return typeKnown ? contentType : "application/octet-stream";
+            var extension = System.IO.Path.GetExtension(name);
+            return MimeTypeMap.GetMimeType(extension);
         }
 
         private static bool IsFolderId(string destination)
