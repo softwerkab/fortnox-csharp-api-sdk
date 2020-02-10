@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Connectors\**" />
+    <Compile Remove="Entities\**" />
+    <EmbeddedResource Remove="Connectors\**" />
+    <EmbeddedResource Remove="Entities\**" />
+    <None Remove="Connectors\**" />
+    <None Remove="Entities\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediaTypeMap.Core" Version="2.3.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
