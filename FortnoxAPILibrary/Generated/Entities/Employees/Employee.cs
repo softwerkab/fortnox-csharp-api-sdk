@@ -69,11 +69,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Type of employment. Validates against allowed values specified below. </summary>
         [JsonProperty]
-        public string EmploymentForm { get; set; }
+        public EmploymentForm? EmploymentForm { get; set; }
 
         ///<summary> Type of salary form. Validates against allowed values specified below. </summary>
         [JsonProperty]
-        public string SalaryForm { get; set; }
+        public SalaryForm? SalaryForm { get; set; }
 
         ///<summary> Job title </summary>
         [JsonProperty]
@@ -81,7 +81,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Personel type. Validates against allowed values specified below. </summary>
         [JsonProperty]
-        public string PersonelType { get; set; }
+        public PersonelType? PersonelType { get; set; }
 
         ///<summary> True if employee is inactive </summary>
         [JsonProperty]
@@ -93,7 +93,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Assigned fora type. Validates against allowed values specified below. </summary>
         [JsonProperty]
-        public string ForaType { get; set; }
+        public ForaType? ForaType { get; set; }
 
         ///<summary> Monthly salary </summary>
         [JsonProperty]
@@ -105,7 +105,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Tax allowance. Validates against allowed values specified below. </summary>
         [JsonProperty]
-        public string TaxAllowance { get; set; }
+        public TaxAllowance? TaxAllowance { get; set; }
 
         ///<summary> Tax table </summary>
         [JsonProperty]
