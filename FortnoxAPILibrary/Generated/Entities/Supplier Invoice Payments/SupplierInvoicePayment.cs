@@ -6,8 +6,8 @@ using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    [Entity(SingularName = "InvoicePayment", PluralName = "InvoicePayments")]
-    public class InvoicePayment
+    [Entity(SingularName = "SupplierInvoicePayment", PluralName = "SupplierInvoicePayments")]
+    public class SupplierInvoicePayment
     {
 
         ///<summary> Direct URL to the record </summary>
@@ -108,8 +108,7 @@ namespace FortnoxAPILibrary.Entities
         public int? VoucherYear { get; private set; }
 
         ///<summary>  </summary>
-        [ReadOnly]
         [JsonProperty]
-        public List<WriteOff> WriteOffs { get; private set; }
+        public List<WriteOff> WriteOffs { get; set; }
     }
 }

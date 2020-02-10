@@ -15,8 +15,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Filter.cs" />
+    <Compile Remove="Sort.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediaTypeMap.Core" Version="2.3.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Generated\Entities\Archive\" />
+    <Folder Include="Generated\Entities\Inbox\" />
   </ItemGroup>
 
 </Project>

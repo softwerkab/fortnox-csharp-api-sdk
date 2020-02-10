@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.Contract FilterBy { get; set; }
+		public Filter.Contract? FilterBy { get; set; }
 
 
         /// <summary>
@@ -58,13 +58,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a contract based on contractnumber
+		/// Find a contract based on id
 		/// </summary>
-		/// <param name="contractNumber">The contractnumber to find</param>
+		/// <param name="id">Identifier of the contract to find</param>
 		/// <returns>The found contract</returns>
-		public Contract Get(string contractNumber)
+		public Contract Get(string id)
 		{
-			return BaseGet(contractNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -74,11 +74,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated contract</returns>
 		public Contract Update(Contract contract)
 		{
-			return BaseUpdate(contract, contract.ContractNumber);
+			return BaseUpdate(contract, contract.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new contract
+		/// Creates a new contract
 		/// </summary>
 		/// <param name="contract">The contract to create</param>
 		/// <returns>The created contract</returns>
@@ -90,10 +90,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a contract
 		/// </summary>
-		/// <param name="contractNumber">The contractnumber to delete</param>
-		public void Delete(string contractNumber)
+		/// <param name="id">Identifier of the contract to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(contractNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

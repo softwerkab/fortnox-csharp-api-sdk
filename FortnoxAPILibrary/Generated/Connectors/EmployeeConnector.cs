@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.Employee FilterBy { get; set; }
+		public Filter.Employee? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a employee based on employeenumber
+		/// Find a employee based on id
 		/// </summary>
-		/// <param name="employeeNumber">The employeenumber to find</param>
+		/// <param name="id">Identifier of the employee to find</param>
 		/// <returns>The found employee</returns>
-		public Employee Get(string employeeNumber)
+		public Employee Get(string id)
 		{
-			return BaseGet(employeeNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated employee</returns>
 		public Employee Update(Employee employee)
 		{
-			return BaseUpdate(employee, employee.EmployeeNumber);
+			return BaseUpdate(employee, employee.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new employee
+		/// Creates a new employee
 		/// </summary>
 		/// <param name="employee">The employee to create</param>
 		/// <returns>The created employee</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a employee
 		/// </summary>
-		/// <param name="employeeNumber">The employeenumber to delete</param>
-		public void Delete(string employeeNumber)
+		/// <param name="id">Identifier of the employee to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(employeeNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

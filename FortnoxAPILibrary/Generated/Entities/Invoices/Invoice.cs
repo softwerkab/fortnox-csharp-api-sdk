@@ -160,11 +160,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> The properties for this object is listed in the table for “EDI Information”. </summary>
         [JsonProperty]
-        public object EDIInformation { get; set; }
+        public EDIInformation EDIInformation { get; set; }
 
         ///<summary> The properties for this object is listed in the table for “Email Information”. </summary>
         [JsonProperty]
-        public object EmailInformation { get; set; }
+        public EmailInformation EmailInformation { get; set; }
 
         ///<summary> EU Quarterly Report On / Off </summary>
         [JsonProperty]
@@ -217,7 +217,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> The properties for the object in this array is listed in the table “Invoice Rows”. </summary>
         [JsonProperty]
-        public List<object> InvoiceRows { get; set; }
+        public List<InvoiceRow> InvoiceRows { get; set; }
 
         ///<summary> The type of invoice. Can be INVOICE AGREEMENTINVOICE INTRESTINVOICE  SUMMARYINVOICE or CASHINVOICE. </summary>
         [JsonProperty]
@@ -225,7 +225,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> The properties for the object in this array is listed in the table “Labels” </summary>
         [JsonProperty]
-        public List<object> Labels { get; set; }
+        public List<Label> Labels { get; set; }
 
         ///<summary> Language code. Can be SV or EN. </summary>
         [JsonProperty]

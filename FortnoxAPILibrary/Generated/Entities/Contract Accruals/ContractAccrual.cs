@@ -28,9 +28,8 @@ namespace FortnoxAPILibrary.Entities
         public string Description { get; set; }
 
         ///<summary> – </summary>
-        [ReadOnly]
         [JsonProperty]
-        public List<ContractAccrualRow> AccrualRows { get; private set; }
+        public List<ContractAccrualRow> AccrualRows { get; set; }
 
         ///<summary> Document number </summary>
         [JsonProperty]

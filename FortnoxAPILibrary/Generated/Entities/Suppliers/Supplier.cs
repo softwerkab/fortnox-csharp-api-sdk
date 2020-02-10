@@ -137,7 +137,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> VAT Type </summary>
         [JsonProperty]
-        public VATType? VATType { get; set; }
+        public SupplierVATType? VATType { get; set; }
 
         ///<summary> Visiting address </summary>
         [JsonProperty]

@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.TermsOfPayment FilterBy { get; set; }
+		public Filter.TermsOfPayment? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a termsOfPayment based on termsOfPaymentnumber
+		/// Find a termsOfPayment based on id
 		/// </summary>
-		/// <param name="termsOfPaymentNumber">The termsOfPaymentnumber to find</param>
+		/// <param name="id">Identifier of the termsOfPayment to find</param>
 		/// <returns>The found termsOfPayment</returns>
-		public TermsOfPayment Get(string termsOfPaymentNumber)
+		public TermsOfPayment Get(string id)
 		{
-			return BaseGet(termsOfPaymentNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated termsOfPayment</returns>
 		public TermsOfPayment Update(TermsOfPayment termsOfPayment)
 		{
-			return BaseUpdate(termsOfPayment, termsOfPayment.TermsOfPaymentNumber);
+			return BaseUpdate(termsOfPayment, termsOfPayment.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new termsOfPayment
+		/// Creates a new termsOfPayment
 		/// </summary>
 		/// <param name="termsOfPayment">The termsOfPayment to create</param>
 		/// <returns>The created termsOfPayment</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a termsOfPayment
 		/// </summary>
-		/// <param name="termsOfPaymentNumber">The termsOfPaymentnumber to delete</param>
-		public void Delete(string termsOfPaymentNumber)
+		/// <param name="id">Identifier of the termsOfPayment to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(termsOfPaymentNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

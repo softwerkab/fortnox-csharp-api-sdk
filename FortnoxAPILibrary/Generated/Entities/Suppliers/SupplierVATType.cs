@@ -6,16 +6,16 @@ using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    public enum Offer
+    public enum SupplierVATType
     {
         ///<summary> No property description </summary>
-        [EnumMember(Value = "PRINT")]
-        PRINT,
+        [EnumMember(Value = "REVERSE")]
+        REVERSE,
         ///<summary> No property description </summary>
-        [EnumMember(Value = "EMAIL")]
-        EMAIL,
+        [EnumMember(Value = "NORMAL")]
+        NORMAL,
         ///<summary> No property description </summary>
-        [EnumMember(Value = "PRINTSERVICE")]
-        PRINTSERVICE,
+        [EnumMember(Value = "UIF")]
+        UIF,
     }
 }

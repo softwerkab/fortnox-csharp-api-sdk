@@ -111,9 +111,6 @@ namespace FortnoxAPILibrary
 				[StringValue("todate")]
 				ToDate,
 			}
-			public enum File
-			{
-			}
 			public enum InvoiceAccrual
 			{
 			}
@@ -215,7 +212,7 @@ namespace FortnoxAPILibrary
 			public enum SupplierInvoiceFileConnection
 			{
 			}
-			public enum InvoicePayment
+			public enum SupplierInvoicePayment
 			{
 			}
 			public enum SupplierInvoice

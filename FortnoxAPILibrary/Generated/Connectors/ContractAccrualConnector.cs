@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.ContractAccrual FilterBy { get; set; }
+		public Filter.ContractAccrual? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a contractAccrual based on contractAccrualnumber
+		/// Find a contractAccrual based on id
 		/// </summary>
-		/// <param name="contractAccrualNumber">The contractAccrualnumber to find</param>
+		/// <param name="id">Identifier of the contractAccrual to find</param>
 		/// <returns>The found contractAccrual</returns>
-		public ContractAccrual Get(string contractAccrualNumber)
+		public ContractAccrual Get(string id)
 		{
-			return BaseGet(contractAccrualNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated contractAccrual</returns>
 		public ContractAccrual Update(ContractAccrual contractAccrual)
 		{
-			return BaseUpdate(contractAccrual, contractAccrual.ContractAccrualNumber);
+			return BaseUpdate(contractAccrual, contractAccrual.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new contractAccrual
+		/// Creates a new contractAccrual
 		/// </summary>
 		/// <param name="contractAccrual">The contractAccrual to create</param>
 		/// <returns>The created contractAccrual</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a contractAccrual
 		/// </summary>
-		/// <param name="contractAccrualNumber">The contractAccrualnumber to delete</param>
-		public void Delete(string contractAccrualNumber)
+		/// <param name="id">Identifier of the contractAccrual to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(contractAccrualNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

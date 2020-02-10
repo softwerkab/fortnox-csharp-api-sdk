@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.InvoiceFileConnection FilterBy { get; set; }
+		public Filter.InvoiceFileConnection? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a invoiceFileConnection based on invoiceFileConnectionnumber
+		/// Find a invoiceFileConnection based on id
 		/// </summary>
-		/// <param name="invoiceFileConnectionNumber">The invoiceFileConnectionnumber to find</param>
+		/// <param name="id">Identifier of the invoiceFileConnection to find</param>
 		/// <returns>The found invoiceFileConnection</returns>
-		public InvoiceFileConnection Get(string invoiceFileConnectionNumber)
+		public InvoiceFileConnection Get(string id)
 		{
-			return BaseGet(invoiceFileConnectionNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated invoiceFileConnection</returns>
 		public InvoiceFileConnection Update(InvoiceFileConnection invoiceFileConnection)
 		{
-			return BaseUpdate(invoiceFileConnection, invoiceFileConnection.InvoiceFileConnectionNumber);
+			return BaseUpdate(invoiceFileConnection, invoiceFileConnection.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new invoiceFileConnection
+		/// Creates a new invoiceFileConnection
 		/// </summary>
 		/// <param name="invoiceFileConnection">The invoiceFileConnection to create</param>
 		/// <returns>The created invoiceFileConnection</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a invoiceFileConnection
 		/// </summary>
-		/// <param name="invoiceFileConnectionNumber">The invoiceFileConnectionnumber to delete</param>
-		public void Delete(string invoiceFileConnectionNumber)
+		/// <param name="id">Identifier of the invoiceFileConnection to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(invoiceFileConnectionNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

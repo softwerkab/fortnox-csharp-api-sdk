@@ -32,9 +32,8 @@ namespace FortnoxAPILibrary.Entities
         public int? InvoiceInterval { get; set; }
 
         ///<summary> – </summary>
-        [ReadOnly]
         [JsonProperty]
-        public List<InvoiceRow> InvoiceRows { get; private set; }
+        public List<ContractTemplateInvoiceRow> InvoiceRows { get; set; }
 
         ///<summary> If the contract is continuous </summary>
         [JsonProperty]

@@ -125,9 +125,8 @@ namespace FortnoxAPILibrary.Entities
         public int? DocumentNumber { get; set; }
 
         ///<summary>  </summary>
-        [ReadOnly]
         [JsonProperty]
-        public EmailInformation EmailInformation { get; private set; }
+        public EmailInformation EmailInformation { get; set; }
 
         ///<summary> External invoice reference 1 </summary>
         [JsonProperty]
@@ -180,9 +179,8 @@ namespace FortnoxAPILibrary.Entities
         public int? OfferReference { get; private set; }
 
         ///<summary>  </summary>
-        [ReadOnly]
         [JsonProperty]
-        public List<OrderRow> OrderRows { get; private set; }
+        public List<OrderRow> OrderRows { get; set; }
 
         ///<summary> Type of the Order. Can be Order or Backorder. </summary>
         [ReadOnly]

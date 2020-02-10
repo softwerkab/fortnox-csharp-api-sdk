@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.CompanyInformation FilterBy { get; set; }
+		public Filter.CompanyInformation? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a companyInformation based on companyInformationnumber
+		/// Find a companyInformation based on id
 		/// </summary>
-		/// <param name="companyInformationNumber">The companyInformationnumber to find</param>
+		/// <param name="id">Identifier of the companyInformation to find</param>
 		/// <returns>The found companyInformation</returns>
-		public CompanyInformation Get(string companyInformationNumber)
+		public CompanyInformation Get(string id)
 		{
-			return BaseGet(companyInformationNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated companyInformation</returns>
 		public CompanyInformation Update(CompanyInformation companyInformation)
 		{
-			return BaseUpdate(companyInformation, companyInformation.CompanyInformationNumber);
+			return BaseUpdate(companyInformation, companyInformation.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new companyInformation
+		/// Creates a new companyInformation
 		/// </summary>
 		/// <param name="companyInformation">The companyInformation to create</param>
 		/// <returns>The created companyInformation</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a companyInformation
 		/// </summary>
-		/// <param name="companyInformationNumber">The companyInformationnumber to delete</param>
-		public void Delete(string companyInformationNumber)
+		/// <param name="id">Identifier of the companyInformation to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(companyInformationNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

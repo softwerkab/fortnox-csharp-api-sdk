@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.PredefinedAccounts FilterBy { get; set; }
+		public Filter.PredefinedAccounts? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a predefinedAccounts based on predefinedAccountsnumber
+		/// Find a predefinedAccounts based on id
 		/// </summary>
-		/// <param name="predefinedAccountsNumber">The predefinedAccountsnumber to find</param>
+		/// <param name="id">Identifier of the predefinedAccounts to find</param>
 		/// <returns>The found predefinedAccounts</returns>
-		public PredefinedAccounts Get(string predefinedAccountsNumber)
+		public PredefinedAccounts Get(string id)
 		{
-			return BaseGet(predefinedAccountsNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated predefinedAccounts</returns>
 		public PredefinedAccounts Update(PredefinedAccounts predefinedAccounts)
 		{
-			return BaseUpdate(predefinedAccounts, predefinedAccounts.PredefinedAccountsNumber);
+			return BaseUpdate(predefinedAccounts, predefinedAccounts.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new predefinedAccounts
+		/// Creates a new predefinedAccounts
 		/// </summary>
 		/// <param name="predefinedAccounts">The predefinedAccounts to create</param>
 		/// <returns>The created predefinedAccounts</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a predefinedAccounts
 		/// </summary>
-		/// <param name="predefinedAccountsNumber">The predefinedAccountsnumber to delete</param>
-		public void Delete(string predefinedAccountsNumber)
+		/// <param name="id">Identifier of the predefinedAccounts to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(predefinedAccountsNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

@@ -125,9 +125,8 @@ namespace FortnoxAPILibrary.Entities
         public int? DocumentNumber { get; set; }
 
         ///<summary> – </summary>
-        [ReadOnly]
         [JsonProperty]
-        public EmailInformation EmailInformation { get; private set; }
+        public EmailInformation EmailInformation { get; set; }
 
         ///<summary> Expire date </summary>
         [JsonProperty]
@@ -208,9 +207,8 @@ namespace FortnoxAPILibrary.Entities
         public double? RoundOff { get; private set; }
 
         ///<summary> – </summary>
-        [ReadOnly]
         [JsonProperty]
-        public List<OfferRow> OfferRows { get; private set; }
+        public List<OfferRow> OfferRows { get; set; }
 
         ///<summary> If document is printed or e-mailed to customer </summary>
         [ReadOnly]

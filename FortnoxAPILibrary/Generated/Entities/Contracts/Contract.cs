@@ -75,9 +75,8 @@ namespace FortnoxAPILibrary.Entities
         public int? DocumentNumber { get; set; }
 
         ///<summary> – </summary>
-        [ReadOnly]
         [JsonProperty]
-        public List<EmailInformation> EmailInformation { get; private set; }
+        public List<EmailInformation> EmailInformation { get; set; }
 
         ///<summary> External invoice reference </summary>
         [JsonProperty]
@@ -110,9 +109,8 @@ namespace FortnoxAPILibrary.Entities
         public int? InvoiceInterval { get; set; }
 
         ///<summary> – </summary>
-        [ReadOnly]
         [JsonProperty]
-        public List<InvoiceRow> InvoiceRows { get; private set; }
+        public List<ContractInvoiceRow> InvoiceRows { get; set; }
 
         ///<summary> Invoices remaining </summary>
         [ReadOnly]

@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.AssetFileConnection FilterBy { get; set; }
+		public Filter.AssetFileConnection? FilterBy { get; set; }
 
 
         /// <summary>
@@ -28,13 +28,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a assetFileConnection based on assetFileConnectionnumber
+		/// Find a assetFileConnection based on id
 		/// </summary>
-		/// <param name="assetFileConnectionNumber">The assetFileConnectionnumber to find</param>
+		/// <param name="id">Identifier of the assetFileConnection to find</param>
 		/// <returns>The found assetFileConnection</returns>
-		public AssetFileConnection Get(string assetFileConnectionNumber)
+		public AssetFileConnection Get(string id)
 		{
-			return BaseGet(assetFileConnectionNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -44,11 +44,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated assetFileConnection</returns>
 		public AssetFileConnection Update(AssetFileConnection assetFileConnection)
 		{
-			return BaseUpdate(assetFileConnection, assetFileConnection.AssetFileConnectionNumber);
+			return BaseUpdate(assetFileConnection, assetFileConnection.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new assetFileConnection
+		/// Creates a new assetFileConnection
 		/// </summary>
 		/// <param name="assetFileConnection">The assetFileConnection to create</param>
 		/// <returns>The created assetFileConnection</returns>
@@ -60,10 +60,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a assetFileConnection
 		/// </summary>
-		/// <param name="assetFileConnectionNumber">The assetFileConnectionnumber to delete</param>
-		public void Delete(string assetFileConnectionNumber)
+		/// <param name="id">Identifier of the assetFileConnection to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(assetFileConnectionNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

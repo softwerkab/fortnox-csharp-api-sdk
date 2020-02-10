@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.InvoicePayment FilterBy { get; set; }
+		public Filter.InvoicePayment? FilterBy { get; set; }
 
 
         /// <summary>
@@ -28,13 +28,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a invoicePayment based on invoicePaymentnumber
+		/// Find a invoicePayment based on id
 		/// </summary>
-		/// <param name="invoicePaymentNumber">The invoicePaymentnumber to find</param>
+		/// <param name="id">Identifier of the invoicePayment to find</param>
 		/// <returns>The found invoicePayment</returns>
-		public InvoicePayment Get(string invoicePaymentNumber)
+		public InvoicePayment Get(string id)
 		{
-			return BaseGet(invoicePaymentNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -44,11 +44,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated invoicePayment</returns>
 		public InvoicePayment Update(InvoicePayment invoicePayment)
 		{
-			return BaseUpdate(invoicePayment, invoicePayment.InvoicePaymentNumber);
+			return BaseUpdate(invoicePayment, invoicePayment.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new invoicePayment
+		/// Creates a new invoicePayment
 		/// </summary>
 		/// <param name="invoicePayment">The invoicePayment to create</param>
 		/// <returns>The created invoicePayment</returns>
@@ -60,10 +60,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a invoicePayment
 		/// </summary>
-		/// <param name="invoicePaymentNumber">The invoicePaymentnumber to delete</param>
-		public void Delete(string invoicePaymentNumber)
+		/// <param name="id">Identifier of the invoicePayment to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(invoicePaymentNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

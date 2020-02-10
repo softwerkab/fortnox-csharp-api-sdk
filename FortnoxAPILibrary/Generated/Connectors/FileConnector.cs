@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.File FilterBy { get; set; }
+		public Filter.File? FilterBy { get; set; }
 
 
         /// <summary>
@@ -28,13 +28,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a file based on filenumber
+		/// Find a file based on id
 		/// </summary>
-		/// <param name="fileNumber">The filenumber to find</param>
+		/// <param name="id">Identifier of the file to find</param>
 		/// <returns>The found file</returns>
-		public File Get(string fileNumber)
+		public File Get(string id)
 		{
-			return BaseGet(fileNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -44,11 +44,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated file</returns>
 		public File Update(File file)
 		{
-			return BaseUpdate(file, file.FileNumber);
+			return BaseUpdate(file, file.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new file
+		/// Creates a new file
 		/// </summary>
 		/// <param name="file">The file to create</param>
 		/// <returns>The created file</returns>
@@ -60,10 +60,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a file
 		/// </summary>
-		/// <param name="fileNumber">The filenumber to delete</param>
-		public void Delete(string fileNumber)
+		/// <param name="id">Identifier of the file to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(fileNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

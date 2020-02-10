@@ -6,13 +6,13 @@ using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    public enum AccountingMethod
+    public enum Source
     {
         ///<summary> No property description </summary>
-        [EnumMember(Value = "ACCRUAL")]
-        ACCRUAL,
+        [EnumMember(Value = "manual")]
+        Manual,
         ///<summary> No property description </summary>
-        [EnumMember(Value = "CASH")]
-        CASH,
+        [EnumMember(Value = "direct")]
+        Direct,
     }
 }

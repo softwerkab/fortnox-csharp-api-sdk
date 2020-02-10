@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.TrustedEmailDomains FilterBy { get; set; }
+		public Filter.TrustedEmailDomains? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a trustedEmailDomains based on trustedEmailDomainsnumber
+		/// Find a trustedEmailDomains based on id
 		/// </summary>
-		/// <param name="trustedEmailDomainsNumber">The trustedEmailDomainsnumber to find</param>
+		/// <param name="id">Identifier of the trustedEmailDomains to find</param>
 		/// <returns>The found trustedEmailDomains</returns>
-		public TrustedEmailDomains Get(string trustedEmailDomainsNumber)
+		public TrustedEmailDomains Get(string id)
 		{
-			return BaseGet(trustedEmailDomainsNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated trustedEmailDomains</returns>
 		public TrustedEmailDomains Update(TrustedEmailDomains trustedEmailDomains)
 		{
-			return BaseUpdate(trustedEmailDomains, trustedEmailDomains.TrustedEmailDomainsNumber);
+			return BaseUpdate(trustedEmailDomains, trustedEmailDomains.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new trustedEmailDomains
+		/// Creates a new trustedEmailDomains
 		/// </summary>
 		/// <param name="trustedEmailDomains">The trustedEmailDomains to create</param>
 		/// <returns>The created trustedEmailDomains</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a trustedEmailDomains
 		/// </summary>
-		/// <param name="trustedEmailDomainsNumber">The trustedEmailDomainsnumber to delete</param>
-		public void Delete(string trustedEmailDomainsNumber)
+		/// <param name="id">Identifier of the trustedEmailDomains to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(trustedEmailDomainsNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

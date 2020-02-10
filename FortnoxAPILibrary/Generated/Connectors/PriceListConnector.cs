@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.PriceList FilterBy { get; set; }
+		public Filter.PriceList? FilterBy { get; set; }
 
 
         /// <summary>
@@ -34,13 +34,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a priceList based on priceListnumber
+		/// Find a priceList based on id
 		/// </summary>
-		/// <param name="priceListNumber">The priceListnumber to find</param>
+		/// <param name="id">Identifier of the priceList to find</param>
 		/// <returns>The found priceList</returns>
-		public PriceList Get(string priceListNumber)
+		public PriceList Get(string id)
 		{
-			return BaseGet(priceListNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -50,11 +50,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated priceList</returns>
 		public PriceList Update(PriceList priceList)
 		{
-			return BaseUpdate(priceList, priceList.PriceListNumber);
+			return BaseUpdate(priceList, priceList.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new priceList
+		/// Creates a new priceList
 		/// </summary>
 		/// <param name="priceList">The priceList to create</param>
 		/// <returns>The created priceList</returns>
@@ -66,10 +66,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a priceList
 		/// </summary>
-		/// <param name="priceListNumber">The priceListnumber to delete</param>
-		public void Delete(string priceListNumber)
+		/// <param name="id">Identifier of the priceList to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(priceListNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

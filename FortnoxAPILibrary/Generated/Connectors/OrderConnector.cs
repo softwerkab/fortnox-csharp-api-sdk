@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.Order FilterBy { get; set; }
+		public Filter.Order? FilterBy { get; set; }
 
 
         /// <summary>
@@ -88,13 +88,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a order based on ordernumber
+		/// Find a order based on id
 		/// </summary>
-		/// <param name="orderNumber">The ordernumber to find</param>
+		/// <param name="id">Identifier of the order to find</param>
 		/// <returns>The found order</returns>
-		public Order Get(string orderNumber)
+		public Order Get(string id)
 		{
-			return BaseGet(orderNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -104,11 +104,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated order</returns>
 		public Order Update(Order order)
 		{
-			return BaseUpdate(order, order.OrderNumber);
+			return BaseUpdate(order, order.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new order
+		/// Creates a new order
 		/// </summary>
 		/// <param name="order">The order to create</param>
 		/// <returns>The created order</returns>
@@ -120,10 +120,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a order
 		/// </summary>
-		/// <param name="orderNumber">The ordernumber to delete</param>
-		public void Delete(string orderNumber)
+		/// <param name="id">Identifier of the order to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(orderNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

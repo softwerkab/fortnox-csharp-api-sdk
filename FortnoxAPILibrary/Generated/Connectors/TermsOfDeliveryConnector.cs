@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.TermsOfDelivery FilterBy { get; set; }
+		public Filter.TermsOfDelivery? FilterBy { get; set; }
 
 
         /// <summary>
@@ -28,13 +28,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a termsOfDelivery based on termsOfDeliverynumber
+		/// Find a termsOfDelivery based on id
 		/// </summary>
-		/// <param name="termsOfDeliveryNumber">The termsOfDeliverynumber to find</param>
+		/// <param name="id">Identifier of the termsOfDelivery to find</param>
 		/// <returns>The found termsOfDelivery</returns>
-		public TermsOfDelivery Get(string termsOfDeliveryNumber)
+		public TermsOfDelivery Get(string id)
 		{
-			return BaseGet(termsOfDeliveryNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -44,11 +44,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated termsOfDelivery</returns>
 		public TermsOfDelivery Update(TermsOfDelivery termsOfDelivery)
 		{
-			return BaseUpdate(termsOfDelivery, termsOfDelivery.TermsOfDeliveryNumber);
+			return BaseUpdate(termsOfDelivery, termsOfDelivery.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new termsOfDelivery
+		/// Creates a new termsOfDelivery
 		/// </summary>
 		/// <param name="termsOfDelivery">The termsOfDelivery to create</param>
 		/// <returns>The created termsOfDelivery</returns>
@@ -60,10 +60,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a termsOfDelivery
 		/// </summary>
-		/// <param name="termsOfDeliveryNumber">The termsOfDeliverynumber to delete</param>
-		public void Delete(string termsOfDeliveryNumber)
+		/// <param name="id">Identifier of the termsOfDelivery to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(termsOfDeliveryNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

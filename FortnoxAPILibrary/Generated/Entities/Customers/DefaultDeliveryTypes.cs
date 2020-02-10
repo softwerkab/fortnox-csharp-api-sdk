@@ -12,14 +12,14 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Default delivery type for invoices. Can be PRINT EMAIL or PRINTSERVICE. </summary>
         [JsonProperty]
-        public Invoice? Invoice { get; set; }
+        public DefaultDeliveryType? Invoice { get; set; }
 
         ///<summary> Default delivery type for orders. Can be PRINT EMAIL or PRINTSERVICE. </summary>
         [JsonProperty]
-        public Order? Order { get; set; }
+        public DefaultDeliveryType? Order { get; set; }
 
         ///<summary> Default delivery type for offers. Can be PRINT EMAIL or PRINTSERVICE. </summary>
         [JsonProperty]
-        public Offer? Offer { get; set; }
+        public DefaultDeliveryType? Offer { get; set; }
     }
 }

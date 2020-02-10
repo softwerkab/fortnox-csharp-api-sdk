@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.ArticleFileConnection FilterBy { get; set; }
+		public Filter.ArticleFileConnection? FilterBy { get; set; }
 
 
         /// <summary>
@@ -28,13 +28,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a articleFileConnection based on articleFileConnectionnumber
+		/// Find a articleFileConnection based on id
 		/// </summary>
-		/// <param name="articleFileConnectionNumber">The articleFileConnectionnumber to find</param>
+		/// <param name="id">Identifier of the articleFileConnection to find</param>
 		/// <returns>The found articleFileConnection</returns>
-		public ArticleFileConnection Get(string articleFileConnectionNumber)
+		public ArticleFileConnection Get(string id)
 		{
-			return BaseGet(articleFileConnectionNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -44,11 +44,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated articleFileConnection</returns>
 		public ArticleFileConnection Update(ArticleFileConnection articleFileConnection)
 		{
-			return BaseUpdate(articleFileConnection, articleFileConnection.ArticleFileConnectionNumber);
+			return BaseUpdate(articleFileConnection, articleFileConnection.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new articleFileConnection
+		/// Creates a new articleFileConnection
 		/// </summary>
 		/// <param name="articleFileConnection">The articleFileConnection to create</param>
 		/// <returns>The created articleFileConnection</returns>
@@ -60,10 +60,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a articleFileConnection
 		/// </summary>
-		/// <param name="articleFileConnectionNumber">The articleFileConnectionnumber to delete</param>
-		public void Delete(string articleFileConnectionNumber)
+		/// <param name="id">Identifier of the articleFileConnection to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(articleFileConnectionNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

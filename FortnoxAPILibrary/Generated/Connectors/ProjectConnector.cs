@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.Project FilterBy { get; set; }
+		public Filter.Project? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a project based on projectnumber
+		/// Find a project based on id
 		/// </summary>
-		/// <param name="projectNumber">The projectnumber to find</param>
+		/// <param name="id">Identifier of the project to find</param>
 		/// <returns>The found project</returns>
-		public Project Get(string projectNumber)
+		public Project Get(string id)
 		{
-			return BaseGet(projectNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated project</returns>
 		public Project Update(Project project)
 		{
-			return BaseUpdate(project, project.ProjectNumber);
+			return BaseUpdate(project, project.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new project
+		/// Creates a new project
 		/// </summary>
 		/// <param name="project">The project to create</param>
 		/// <returns>The created project</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a project
 		/// </summary>
-		/// <param name="projectNumber">The projectnumber to delete</param>
-		public void Delete(string projectNumber)
+		/// <param name="id">Identifier of the project to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(projectNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

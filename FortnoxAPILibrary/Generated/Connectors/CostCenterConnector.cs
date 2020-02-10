@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.CostCenter FilterBy { get; set; }
+		public Filter.CostCenter? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a costCenter based on costCenternumber
+		/// Find a costCenter based on id
 		/// </summary>
-		/// <param name="costCenterNumber">The costCenternumber to find</param>
+		/// <param name="id">Identifier of the costCenter to find</param>
 		/// <returns>The found costCenter</returns>
-		public CostCenter Get(string costCenterNumber)
+		public CostCenter Get(string id)
 		{
-			return BaseGet(costCenterNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated costCenter</returns>
 		public CostCenter Update(CostCenter costCenter)
 		{
-			return BaseUpdate(costCenter, costCenter.CostCenterNumber);
+			return BaseUpdate(costCenter, costCenter.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new costCenter
+		/// Creates a new costCenter
 		/// </summary>
 		/// <param name="costCenter">The costCenter to create</param>
 		/// <returns>The created costCenter</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a costCenter
 		/// </summary>
-		/// <param name="costCenterNumber">The costCenternumber to delete</param>
-		public void Delete(string costCenterNumber)
+		/// <param name="id">Identifier of the costCenter to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(costCenterNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

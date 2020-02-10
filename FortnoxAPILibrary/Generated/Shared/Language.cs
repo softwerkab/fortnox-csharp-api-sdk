@@ -6,16 +6,12 @@ using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    public enum Invoice
-    {
+    public enum Language{
         ///<summary> No property description </summary>
-        [EnumMember(Value = "PRINT")]
-        PRINT,
+        [EnumMember(Value = "SV")]
+        SV,
         ///<summary> No property description </summary>
-        [EnumMember(Value = "EMAIL")]
-        EMAIL,
-        ///<summary> No property description </summary>
-        [EnumMember(Value = "PRINTSERVICE")]
-        PRINTSERVICE,
+        [EnumMember(Value = "EN")]
+        EN,
     }
 }

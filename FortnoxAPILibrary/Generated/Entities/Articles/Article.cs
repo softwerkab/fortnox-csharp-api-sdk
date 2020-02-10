@@ -138,7 +138,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> The type of the article. Can be STOCK or SERVICE. </summary>
         [JsonProperty]
-        public Type? Type { get; set; }
+        public ArticleType? Type { get; set; }
 
         ///<summary> Unit code for the article. The code must be of an existing unit. </summary>
         [JsonProperty]

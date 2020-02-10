@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.VoucherSeries FilterBy { get; set; }
+		public Filter.VoucherSeries? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a voucherSeries based on voucherSeriesnumber
+		/// Find a voucherSeries based on id
 		/// </summary>
-		/// <param name="voucherSeriesNumber">The voucherSeriesnumber to find</param>
+		/// <param name="id">Identifier of the voucherSeries to find</param>
 		/// <returns>The found voucherSeries</returns>
-		public VoucherSeries Get(string voucherSeriesNumber)
+		public VoucherSeries Get(string id)
 		{
-			return BaseGet(voucherSeriesNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated voucherSeries</returns>
 		public VoucherSeries Update(VoucherSeries voucherSeries)
 		{
-			return BaseUpdate(voucherSeries, voucherSeries.VoucherSeriesNumber);
+			return BaseUpdate(voucherSeries, voucherSeries.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new voucherSeries
+		/// Creates a new voucherSeries
 		/// </summary>
 		/// <param name="voucherSeries">The voucherSeries to create</param>
 		/// <returns>The created voucherSeries</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a voucherSeries
 		/// </summary>
-		/// <param name="voucherSeriesNumber">The voucherSeriesnumber to delete</param>
-		public void Delete(string voucherSeriesNumber)
+		/// <param name="id">Identifier of the voucherSeries to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(voucherSeriesNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

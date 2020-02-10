@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.AccountChart FilterBy { get; set; }
+		public Filter.AccountChart? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a accountChart based on accountChartnumber
+		/// Find a accountChart based on id
 		/// </summary>
-		/// <param name="accountChartNumber">The accountChartnumber to find</param>
+		/// <param name="id">Identifier of the accountChart to find</param>
 		/// <returns>The found accountChart</returns>
-		public AccountChart Get(string accountChartNumber)
+		public AccountChart Get(string id)
 		{
-			return BaseGet(accountChartNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated accountChart</returns>
 		public AccountChart Update(AccountChart accountChart)
 		{
-			return BaseUpdate(accountChart, accountChart.AccountChartNumber);
+			return BaseUpdate(accountChart, accountChart.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new accountChart
+		/// Creates a new accountChart
 		/// </summary>
 		/// <param name="accountChart">The accountChart to create</param>
 		/// <returns>The created accountChart</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a accountChart
 		/// </summary>
-		/// <param name="accountChartNumber">The accountChartnumber to delete</param>
-		public void Delete(string accountChartNumber)
+		/// <param name="id">Identifier of the accountChart to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(accountChartNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.LockedPeriod FilterBy { get; set; }
+		public Filter.LockedPeriod? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a lockedPeriod based on lockedPeriodnumber
+		/// Find a lockedPeriod based on id
 		/// </summary>
-		/// <param name="lockedPeriodNumber">The lockedPeriodnumber to find</param>
+		/// <param name="id">Identifier of the lockedPeriod to find</param>
 		/// <returns>The found lockedPeriod</returns>
-		public LockedPeriod Get(string lockedPeriodNumber)
+		public LockedPeriod Get(string id)
 		{
-			return BaseGet(lockedPeriodNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated lockedPeriod</returns>
 		public LockedPeriod Update(LockedPeriod lockedPeriod)
 		{
-			return BaseUpdate(lockedPeriod, lockedPeriod.LockedPeriodNumber);
+			return BaseUpdate(lockedPeriod, lockedPeriod.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new lockedPeriod
+		/// Creates a new lockedPeriod
 		/// </summary>
 		/// <param name="lockedPeriod">The lockedPeriod to create</param>
 		/// <returns>The created lockedPeriod</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a lockedPeriod
 		/// </summary>
-		/// <param name="lockedPeriodNumber">The lockedPeriodnumber to delete</param>
-		public void Delete(string lockedPeriodNumber)
+		/// <param name="id">Identifier of the lockedPeriod to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(lockedPeriodNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

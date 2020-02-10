@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.PrintTemplate FilterBy { get; set; }
+		public Filter.PrintTemplate? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a printTemplate based on printTemplatenumber
+		/// Find a printTemplate based on id
 		/// </summary>
-		/// <param name="printTemplateNumber">The printTemplatenumber to find</param>
+		/// <param name="id">Identifier of the printTemplate to find</param>
 		/// <returns>The found printTemplate</returns>
-		public PrintTemplate Get(string printTemplateNumber)
+		public PrintTemplate Get(string id)
 		{
-			return BaseGet(printTemplateNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated printTemplate</returns>
 		public PrintTemplate Update(PrintTemplate printTemplate)
 		{
-			return BaseUpdate(printTemplate, printTemplate.PrintTemplateNumber);
+			return BaseUpdate(printTemplate, printTemplate.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new printTemplate
+		/// Creates a new printTemplate
 		/// </summary>
 		/// <param name="printTemplate">The printTemplate to create</param>
 		/// <returns>The created printTemplate</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a printTemplate
 		/// </summary>
-		/// <param name="printTemplateNumber">The printTemplatenumber to delete</param>
-		public void Delete(string printTemplateNumber)
+		/// <param name="id">Identifier of the printTemplate to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(printTemplateNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

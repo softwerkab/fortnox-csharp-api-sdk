@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    public enum VATType
+    public enum CustomerVATType
     {
         ///<summary> No property description </summary>
         [EnumMember(Value = "SEVAT")]

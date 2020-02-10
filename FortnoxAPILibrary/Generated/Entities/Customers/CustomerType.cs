@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    public enum Type
+    public enum CustomerType
     {
         ///<summary> No property description </summary>
         [EnumMember(Value = "PRIVATE")]

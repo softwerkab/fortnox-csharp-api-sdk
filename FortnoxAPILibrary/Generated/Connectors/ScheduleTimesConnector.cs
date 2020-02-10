@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.ScheduleTimes FilterBy { get; set; }
+		public Filter.ScheduleTimes? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a scheduleTimes based on scheduleTimesnumber
+		/// Find a scheduleTimes based on id
 		/// </summary>
-		/// <param name="scheduleTimesNumber">The scheduleTimesnumber to find</param>
+		/// <param name="id">Identifier of the scheduleTimes to find</param>
 		/// <returns>The found scheduleTimes</returns>
-		public ScheduleTimes Get(string scheduleTimesNumber)
+		public ScheduleTimes Get(string id)
 		{
-			return BaseGet(scheduleTimesNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated scheduleTimes</returns>
 		public ScheduleTimes Update(ScheduleTimes scheduleTimes)
 		{
-			return BaseUpdate(scheduleTimes, scheduleTimes.ScheduleTimesNumber);
+			return BaseUpdate(scheduleTimes, scheduleTimes.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new scheduleTimes
+		/// Creates a new scheduleTimes
 		/// </summary>
 		/// <param name="scheduleTimes">The scheduleTimes to create</param>
 		/// <returns>The created scheduleTimes</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a scheduleTimes
 		/// </summary>
-		/// <param name="scheduleTimesNumber">The scheduleTimesnumber to delete</param>
-		public void Delete(string scheduleTimesNumber)
+		/// <param name="id">Identifier of the scheduleTimes to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(scheduleTimesNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

@@ -119,8 +119,7 @@ namespace FortnoxAPILibrary.Entities
         public Source? Source { get; private set; }
 
         ///<summary>  </summary>
-        [ReadOnly]
         [JsonProperty]
-        public List<WriteOff> WriteOffs { get; private set; }
+        public List<WriteOff> WriteOffs { get; set; }
     }
 }

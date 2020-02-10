@@ -58,11 +58,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> The properties for this object is listed in the table for “Default Delivery Types”. </summary>
         [JsonProperty]
-        public object DefaultDeliveryTypes { get; set; }
+        public DefaultDeliveryTypes DefaultDeliveryTypes { get; set; }
 
         ///<summary> The properties for this object is listed in the table for “Default Templates”. </summary>
         [JsonProperty]
-        public object DefaultTemplates { get; set; }
+        public DefaultTemplates DefaultTemplates { get; set; }
 
         ///<summary> Delivery address 1 for the customer. </summary>
         [JsonProperty]
@@ -219,7 +219,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Type of the customer. Can be PRIVATE or COMPANY. </summary>
         [JsonProperty]
-        public Type? Type { get; set; }
+        public CustomerType? Type { get; set; }
 
         ///<summary> VAT number for the customer. </summary>
         [JsonProperty]
@@ -227,7 +227,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> VAT type of the customer. Can be SEVAT SEREVERSEDVAT EUREVERSEDVAT EUVAT or EXPORT. </summary>
         [JsonProperty]
-        public VATType? VATType { get; set; }
+        public CustomerVATType? VATType { get; set; }
 
         ///<summary> Visiting address of the customer. </summary>
         [JsonProperty]

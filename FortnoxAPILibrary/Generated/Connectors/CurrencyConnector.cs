@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.Currency FilterBy { get; set; }
+		public Filter.Currency? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a currency based on currencynumber
+		/// Find a currency based on id
 		/// </summary>
-		/// <param name="currencyNumber">The currencynumber to find</param>
+		/// <param name="id">Identifier of the currency to find</param>
 		/// <returns>The found currency</returns>
-		public Currency Get(string currencyNumber)
+		public Currency Get(string id)
 		{
-			return BaseGet(currencyNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated currency</returns>
 		public Currency Update(Currency currency)
 		{
-			return BaseUpdate(currency, currency.CurrencyNumber);
+			return BaseUpdate(currency, currency.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new currency
+		/// Creates a new currency
 		/// </summary>
 		/// <param name="currency">The currency to create</param>
 		/// <returns>The created currency</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a currency
 		/// </summary>
-		/// <param name="currencyNumber">The currencynumber to delete</param>
-		public void Delete(string currencyNumber)
+		/// <param name="id">Identifier of the currency to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(currencyNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

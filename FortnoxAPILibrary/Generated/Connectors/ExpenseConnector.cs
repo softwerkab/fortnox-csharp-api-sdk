@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.Expense FilterBy { get; set; }
+		public Filter.Expense? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a expense based on expensenumber
+		/// Find a expense based on id
 		/// </summary>
-		/// <param name="expenseNumber">The expensenumber to find</param>
+		/// <param name="id">Identifier of the expense to find</param>
 		/// <returns>The found expense</returns>
-		public Expense Get(string expenseNumber)
+		public Expense Get(string id)
 		{
-			return BaseGet(expenseNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated expense</returns>
 		public Expense Update(Expense expense)
 		{
-			return BaseUpdate(expense, expense.ExpenseNumber);
+			return BaseUpdate(expense, expense.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new expense
+		/// Creates a new expense
 		/// </summary>
 		/// <param name="expense">The expense to create</param>
 		/// <returns>The created expense</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a expense
 		/// </summary>
-		/// <param name="expenseNumber">The expensenumber to delete</param>
-		public void Delete(string expenseNumber)
+		/// <param name="id">Identifier of the expense to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(expenseNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

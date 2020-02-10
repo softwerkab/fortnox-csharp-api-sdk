@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.Customer FilterBy { get; set; }
+		public Filter.Customer? FilterBy { get; set; }
 
 
         /// <summary>
@@ -76,13 +76,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a customer based on customernumber
+		/// Find a customer based on id
 		/// </summary>
-		/// <param name="customerNumber">The customernumber to find</param>
+		/// <param name="id">Identifier of the customer to find</param>
 		/// <returns>The found customer</returns>
-		public Customer Get(string customerNumber)
+		public Customer Get(string id)
 		{
-			return BaseGet(customerNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -92,11 +92,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated customer</returns>
 		public Customer Update(Customer customer)
 		{
-			return BaseUpdate(customer, customer.CustomerNumber);
+			return BaseUpdate(customer, customer.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new customer
+		/// Creates a new customer
 		/// </summary>
 		/// <param name="customer">The customer to create</param>
 		/// <returns>The created customer</returns>
@@ -108,10 +108,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a customer
 		/// </summary>
-		/// <param name="customerNumber">The customernumber to delete</param>
-		public void Delete(string customerNumber)
+		/// <param name="id">Identifier of the customer to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(customerNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.Price FilterBy { get; set; }
+		public Filter.Price? FilterBy { get; set; }
 
 
         /// <summary>
@@ -34,13 +34,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a price based on pricenumber
+		/// Find a price based on id
 		/// </summary>
-		/// <param name="priceNumber">The pricenumber to find</param>
+		/// <param name="id">Identifier of the price to find</param>
 		/// <returns>The found price</returns>
-		public Price Get(string priceNumber)
+		public Price Get(string id)
 		{
-			return BaseGet(priceNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -50,11 +50,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated price</returns>
 		public Price Update(Price price)
 		{
-			return BaseUpdate(price, price.PriceNumber);
+			return BaseUpdate(price, price.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new price
+		/// Creates a new price
 		/// </summary>
 		/// <param name="price">The price to create</param>
 		/// <returns>The created price</returns>
@@ -66,10 +66,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a price
 		/// </summary>
-		/// <param name="priceNumber">The pricenumber to delete</param>
-		public void Delete(string priceNumber)
+		/// <param name="id">Identifier of the price to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(priceNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

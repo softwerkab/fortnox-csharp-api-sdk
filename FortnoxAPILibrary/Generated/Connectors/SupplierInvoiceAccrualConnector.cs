@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.SupplierInvoiceAccrual FilterBy { get; set; }
+		public Filter.SupplierInvoiceAccrual? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a supplierInvoiceAccrual based on supplierInvoiceAccrualnumber
+		/// Find a supplierInvoiceAccrual based on id
 		/// </summary>
-		/// <param name="supplierInvoiceAccrualNumber">The supplierInvoiceAccrualnumber to find</param>
+		/// <param name="id">Identifier of the supplierInvoiceAccrual to find</param>
 		/// <returns>The found supplierInvoiceAccrual</returns>
-		public SupplierInvoiceAccrual Get(string supplierInvoiceAccrualNumber)
+		public SupplierInvoiceAccrual Get(string id)
 		{
-			return BaseGet(supplierInvoiceAccrualNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated supplierInvoiceAccrual</returns>
 		public SupplierInvoiceAccrual Update(SupplierInvoiceAccrual supplierInvoiceAccrual)
 		{
-			return BaseUpdate(supplierInvoiceAccrual, supplierInvoiceAccrual.SupplierInvoiceAccrualNumber);
+			return BaseUpdate(supplierInvoiceAccrual, supplierInvoiceAccrual.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new supplierInvoiceAccrual
+		/// Creates a new supplierInvoiceAccrual
 		/// </summary>
 		/// <param name="supplierInvoiceAccrual">The supplierInvoiceAccrual to create</param>
 		/// <returns>The created supplierInvoiceAccrual</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a supplierInvoiceAccrual
 		/// </summary>
-		/// <param name="supplierInvoiceAccrualNumber">The supplierInvoiceAccrualnumber to delete</param>
-		public void Delete(string supplierInvoiceAccrualNumber)
+		/// <param name="id">Identifier of the supplierInvoiceAccrual to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(supplierInvoiceAccrualNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

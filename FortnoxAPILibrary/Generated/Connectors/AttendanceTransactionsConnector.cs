@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.AttendanceTransactions FilterBy { get; set; }
+		public Filter.AttendanceTransactions? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a attendanceTransactions based on attendanceTransactionsnumber
+		/// Find a attendanceTransactions based on id
 		/// </summary>
-		/// <param name="attendanceTransactionsNumber">The attendanceTransactionsnumber to find</param>
+		/// <param name="id">Identifier of the attendanceTransactions to find</param>
 		/// <returns>The found attendanceTransactions</returns>
-		public AttendanceTransactions Get(string attendanceTransactionsNumber)
+		public AttendanceTransactions Get(string id)
 		{
-			return BaseGet(attendanceTransactionsNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated attendanceTransactions</returns>
 		public AttendanceTransactions Update(AttendanceTransactions attendanceTransactions)
 		{
-			return BaseUpdate(attendanceTransactions, attendanceTransactions.AttendanceTransactionsNumber);
+			return BaseUpdate(attendanceTransactions, attendanceTransactions.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new attendanceTransactions
+		/// Creates a new attendanceTransactions
 		/// </summary>
 		/// <param name="attendanceTransactions">The attendanceTransactions to create</param>
 		/// <returns>The created attendanceTransactions</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a attendanceTransactions
 		/// </summary>
-		/// <param name="attendanceTransactionsNumber">The attendanceTransactionsnumber to delete</param>
-		public void Delete(string attendanceTransactionsNumber)
+		/// <param name="id">Identifier of the attendanceTransactions to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(attendanceTransactionsNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

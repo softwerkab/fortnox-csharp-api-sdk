@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.Unit FilterBy { get; set; }
+		public Filter.Unit? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a unit based on unitnumber
+		/// Find a unit based on id
 		/// </summary>
-		/// <param name="unitNumber">The unitnumber to find</param>
+		/// <param name="id">Identifier of the unit to find</param>
 		/// <returns>The found unit</returns>
-		public Unit Get(string unitNumber)
+		public Unit Get(string id)
 		{
-			return BaseGet(unitNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated unit</returns>
 		public Unit Update(Unit unit)
 		{
-			return BaseUpdate(unit, unit.UnitNumber);
+			return BaseUpdate(unit, unit.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new unit
+		/// Creates a new unit
 		/// </summary>
 		/// <param name="unit">The unit to create</param>
 		/// <returns>The created unit</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a unit
 		/// </summary>
-		/// <param name="unitNumber">The unitnumber to delete</param>
-		public void Delete(string unitNumber)
+		/// <param name="id">Identifier of the unit to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(unitNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

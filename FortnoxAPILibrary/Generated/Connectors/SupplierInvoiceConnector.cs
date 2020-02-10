@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.SupplierInvoice FilterBy { get; set; }
+		public Filter.SupplierInvoice? FilterBy { get; set; }
 
 
         /// <summary>
@@ -46,13 +46,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a supplierInvoice based on supplierInvoicenumber
+		/// Find a supplierInvoice based on id
 		/// </summary>
-		/// <param name="supplierInvoiceNumber">The supplierInvoicenumber to find</param>
+		/// <param name="id">Identifier of the supplierInvoice to find</param>
 		/// <returns>The found supplierInvoice</returns>
-		public SupplierInvoice Get(string supplierInvoiceNumber)
+		public SupplierInvoice Get(string id)
 		{
-			return BaseGet(supplierInvoiceNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -62,11 +62,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated supplierInvoice</returns>
 		public SupplierInvoice Update(SupplierInvoice supplierInvoice)
 		{
-			return BaseUpdate(supplierInvoice, supplierInvoice.SupplierInvoiceNumber);
+			return BaseUpdate(supplierInvoice, supplierInvoice.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new supplierInvoice
+		/// Creates a new supplierInvoice
 		/// </summary>
 		/// <param name="supplierInvoice">The supplierInvoice to create</param>
 		/// <returns>The created supplierInvoice</returns>
@@ -78,10 +78,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a supplierInvoice
 		/// </summary>
-		/// <param name="supplierInvoiceNumber">The supplierInvoicenumber to delete</param>
-		public void Delete(string supplierInvoiceNumber)
+		/// <param name="id">Identifier of the supplierInvoice to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(supplierInvoiceNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

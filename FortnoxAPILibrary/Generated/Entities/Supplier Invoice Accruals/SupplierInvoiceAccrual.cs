@@ -40,9 +40,8 @@ namespace FortnoxAPILibrary.Entities
         public string Period { get; set; }
 
         ///<summary> – </summary>
-        [ReadOnly]
         [JsonProperty]
-        public List<SupplierInvoiceAccrualRow> SupplierInvoiceAccrualRows { get; private set; }
+        public List<SupplierInvoiceAccrualRow> SupplierInvoiceAccrualRows { get; set; }
 
         ///<summary> Start date </summary>
         [JsonProperty]

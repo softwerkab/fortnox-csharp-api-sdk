@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.SupplierInvoiceExternalURLConnection FilterBy { get; set; }
+		public Filter.SupplierInvoiceExternalURLConnection? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a supplierInvoiceExternalURLConnection based on supplierInvoiceExternalURLConnectionnumber
+		/// Find a supplierInvoiceExternalURLConnection based on id
 		/// </summary>
-		/// <param name="supplierInvoiceExternalURLConnectionNumber">The supplierInvoiceExternalURLConnectionnumber to find</param>
+		/// <param name="id">Identifier of the supplierInvoiceExternalURLConnection to find</param>
 		/// <returns>The found supplierInvoiceExternalURLConnection</returns>
-		public SupplierInvoiceExternalURLConnection Get(string supplierInvoiceExternalURLConnectionNumber)
+		public SupplierInvoiceExternalURLConnection Get(string id)
 		{
-			return BaseGet(supplierInvoiceExternalURLConnectionNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated supplierInvoiceExternalURLConnection</returns>
 		public SupplierInvoiceExternalURLConnection Update(SupplierInvoiceExternalURLConnection supplierInvoiceExternalURLConnection)
 		{
-			return BaseUpdate(supplierInvoiceExternalURLConnection, supplierInvoiceExternalURLConnection.SupplierInvoiceExternalURLConnectionNumber);
+			return BaseUpdate(supplierInvoiceExternalURLConnection, supplierInvoiceExternalURLConnection.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new supplierInvoiceExternalURLConnection
+		/// Creates a new supplierInvoiceExternalURLConnection
 		/// </summary>
 		/// <param name="supplierInvoiceExternalURLConnection">The supplierInvoiceExternalURLConnection to create</param>
 		/// <returns>The created supplierInvoiceExternalURLConnection</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a supplierInvoiceExternalURLConnection
 		/// </summary>
-		/// <param name="supplierInvoiceExternalURLConnectionNumber">The supplierInvoiceExternalURLConnectionnumber to delete</param>
-		public void Delete(string supplierInvoiceExternalURLConnectionNumber)
+		/// <param name="id">Identifier of the supplierInvoiceExternalURLConnection to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(supplierInvoiceExternalURLConnectionNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

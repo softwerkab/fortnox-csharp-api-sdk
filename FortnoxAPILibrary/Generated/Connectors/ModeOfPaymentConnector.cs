@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.ModeOfPayment FilterBy { get; set; }
+		public Filter.ModeOfPayment? FilterBy { get; set; }
 
 
         /// <summary>
@@ -28,13 +28,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a modeOfPayment based on modeOfPaymentnumber
+		/// Find a modeOfPayment based on id
 		/// </summary>
-		/// <param name="modeOfPaymentNumber">The modeOfPaymentnumber to find</param>
+		/// <param name="id">Identifier of the modeOfPayment to find</param>
 		/// <returns>The found modeOfPayment</returns>
-		public ModeOfPayment Get(string modeOfPaymentNumber)
+		public ModeOfPayment Get(string id)
 		{
-			return BaseGet(modeOfPaymentNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -44,11 +44,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated modeOfPayment</returns>
 		public ModeOfPayment Update(ModeOfPayment modeOfPayment)
 		{
-			return BaseUpdate(modeOfPayment, modeOfPayment.ModeOfPaymentNumber);
+			return BaseUpdate(modeOfPayment, modeOfPayment.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new modeOfPayment
+		/// Creates a new modeOfPayment
 		/// </summary>
 		/// <param name="modeOfPayment">The modeOfPayment to create</param>
 		/// <returns>The created modeOfPayment</returns>
@@ -60,10 +60,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a modeOfPayment
 		/// </summary>
-		/// <param name="modeOfPaymentNumber">The modeOfPaymentnumber to delete</param>
-		public void Delete(string modeOfPaymentNumber)
+		/// <param name="id">Identifier of the modeOfPayment to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(modeOfPaymentNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

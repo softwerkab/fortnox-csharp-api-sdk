@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.Label FilterBy { get; set; }
+		public Filter.Label? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a label based on labelnumber
+		/// Find a label based on id
 		/// </summary>
-		/// <param name="labelNumber">The labelnumber to find</param>
+		/// <param name="id">Identifier of the label to find</param>
 		/// <returns>The found label</returns>
-		public Label Get(string labelNumber)
+		public Label Get(string id)
 		{
-			return BaseGet(labelNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated label</returns>
 		public Label Update(Label label)
 		{
-			return BaseUpdate(label, label.LabelNumber);
+			return BaseUpdate(label, label.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new label
+		/// Creates a new label
 		/// </summary>
 		/// <param name="label">The label to create</param>
 		/// <returns>The created label</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a label
 		/// </summary>
-		/// <param name="labelNumber">The labelnumber to delete</param>
-		public void Delete(string labelNumber)
+		/// <param name="id">Identifier of the label to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(labelNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

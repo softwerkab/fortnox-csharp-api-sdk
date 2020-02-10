@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.PredefinedVoucherSeries FilterBy { get; set; }
+		public Filter.PredefinedVoucherSeries? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a predefinedVoucherSeries based on predefinedVoucherSeriesnumber
+		/// Find a predefinedVoucherSeries based on id
 		/// </summary>
-		/// <param name="predefinedVoucherSeriesNumber">The predefinedVoucherSeriesnumber to find</param>
+		/// <param name="id">Identifier of the predefinedVoucherSeries to find</param>
 		/// <returns>The found predefinedVoucherSeries</returns>
-		public PredefinedVoucherSeries Get(string predefinedVoucherSeriesNumber)
+		public PredefinedVoucherSeries Get(string id)
 		{
-			return BaseGet(predefinedVoucherSeriesNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated predefinedVoucherSeries</returns>
 		public PredefinedVoucherSeries Update(PredefinedVoucherSeries predefinedVoucherSeries)
 		{
-			return BaseUpdate(predefinedVoucherSeries, predefinedVoucherSeries.PredefinedVoucherSeriesNumber);
+			return BaseUpdate(predefinedVoucherSeries, predefinedVoucherSeries.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new predefinedVoucherSeries
+		/// Creates a new predefinedVoucherSeries
 		/// </summary>
 		/// <param name="predefinedVoucherSeries">The predefinedVoucherSeries to create</param>
 		/// <returns>The created predefinedVoucherSeries</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a predefinedVoucherSeries
 		/// </summary>
-		/// <param name="predefinedVoucherSeriesNumber">The predefinedVoucherSeriesnumber to delete</param>
-		public void Delete(string predefinedVoucherSeriesNumber)
+		/// <param name="id">Identifier of the predefinedVoucherSeries to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(predefinedVoucherSeriesNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

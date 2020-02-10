@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.WayOfDelivery FilterBy { get; set; }
+		public Filter.WayOfDelivery? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a wayOfDelivery based on wayOfDeliverynumber
+		/// Find a wayOfDelivery based on id
 		/// </summary>
-		/// <param name="wayOfDeliveryNumber">The wayOfDeliverynumber to find</param>
+		/// <param name="id">Identifier of the wayOfDelivery to find</param>
 		/// <returns>The found wayOfDelivery</returns>
-		public WayOfDelivery Get(string wayOfDeliveryNumber)
+		public WayOfDelivery Get(string id)
 		{
-			return BaseGet(wayOfDeliveryNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated wayOfDelivery</returns>
 		public WayOfDelivery Update(WayOfDelivery wayOfDelivery)
 		{
-			return BaseUpdate(wayOfDelivery, wayOfDelivery.WayOfDeliveryNumber);
+			return BaseUpdate(wayOfDelivery, wayOfDelivery.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new wayOfDelivery
+		/// Creates a new wayOfDelivery
 		/// </summary>
 		/// <param name="wayOfDelivery">The wayOfDelivery to create</param>
 		/// <returns>The created wayOfDelivery</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a wayOfDelivery
 		/// </summary>
-		/// <param name="wayOfDeliveryNumber">The wayOfDeliverynumber to delete</param>
-		public void Delete(string wayOfDeliveryNumber)
+		/// <param name="id">Identifier of the wayOfDelivery to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(wayOfDeliveryNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

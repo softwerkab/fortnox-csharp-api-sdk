@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.Supplier FilterBy { get; set; }
+		public Filter.Supplier? FilterBy { get; set; }
 
 
         /// <summary>
@@ -70,13 +70,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a supplier based on suppliernumber
+		/// Find a supplier based on id
 		/// </summary>
-		/// <param name="supplierNumber">The suppliernumber to find</param>
+		/// <param name="id">Identifier of the supplier to find</param>
 		/// <returns>The found supplier</returns>
-		public Supplier Get(string supplierNumber)
+		public Supplier Get(string id)
 		{
-			return BaseGet(supplierNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -86,11 +86,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated supplier</returns>
 		public Supplier Update(Supplier supplier)
 		{
-			return BaseUpdate(supplier, supplier.SupplierNumber);
+			return BaseUpdate(supplier, supplier.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new supplier
+		/// Creates a new supplier
 		/// </summary>
 		/// <param name="supplier">The supplier to create</param>
 		/// <returns>The created supplier</returns>
@@ -102,10 +102,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a supplier
 		/// </summary>
-		/// <param name="supplierNumber">The suppliernumber to delete</param>
-		public void Delete(string supplierNumber)
+		/// <param name="id">Identifier of the supplier to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(supplierNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.Asset FilterBy { get; set; }
+		public Filter.Asset? FilterBy { get; set; }
 
 
         /// <summary>
@@ -34,13 +34,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a asset based on assetnumber
+		/// Find a asset based on id
 		/// </summary>
-		/// <param name="assetNumber">The assetnumber to find</param>
+		/// <param name="id">Identifier of the asset to find</param>
 		/// <returns>The found asset</returns>
-		public Asset Get(string assetNumber)
+		public Asset Get(string id)
 		{
-			return BaseGet(assetNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -50,11 +50,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated asset</returns>
 		public Asset Update(Asset asset)
 		{
-			return BaseUpdate(asset, asset.AssetNumber);
+			return BaseUpdate(asset, asset.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new asset
+		/// Creates a new asset
 		/// </summary>
 		/// <param name="asset">The asset to create</param>
 		/// <returns>The created asset</returns>
@@ -66,10 +66,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a asset
 		/// </summary>
-		/// <param name="assetNumber">The assetnumber to delete</param>
-		public void Delete(string assetNumber)
+		/// <param name="id">Identifier of the asset to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(assetNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

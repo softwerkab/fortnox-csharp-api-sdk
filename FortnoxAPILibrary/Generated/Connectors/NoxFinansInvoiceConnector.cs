@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.NoxFinansInvoice FilterBy { get; set; }
+		public Filter.NoxFinansInvoice? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a noxFinansInvoice based on noxFinansInvoicenumber
+		/// Find a noxFinansInvoice based on id
 		/// </summary>
-		/// <param name="noxFinansInvoiceNumber">The noxFinansInvoicenumber to find</param>
+		/// <param name="id">Identifier of the noxFinansInvoice to find</param>
 		/// <returns>The found noxFinansInvoice</returns>
-		public NoxFinansInvoice Get(string noxFinansInvoiceNumber)
+		public NoxFinansInvoice Get(string id)
 		{
-			return BaseGet(noxFinansInvoiceNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated noxFinansInvoice</returns>
 		public NoxFinansInvoice Update(NoxFinansInvoice noxFinansInvoice)
 		{
-			return BaseUpdate(noxFinansInvoice, noxFinansInvoice.NoxFinansInvoiceNumber);
+			return BaseUpdate(noxFinansInvoice, noxFinansInvoice.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new noxFinansInvoice
+		/// Creates a new noxFinansInvoice
 		/// </summary>
 		/// <param name="noxFinansInvoice">The noxFinansInvoice to create</param>
 		/// <returns>The created noxFinansInvoice</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a noxFinansInvoice
 		/// </summary>
-		/// <param name="noxFinansInvoiceNumber">The noxFinansInvoicenumber to delete</param>
-		public void Delete(string noxFinansInvoiceNumber)
+		/// <param name="id">Identifier of the noxFinansInvoice to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(noxFinansInvoiceNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

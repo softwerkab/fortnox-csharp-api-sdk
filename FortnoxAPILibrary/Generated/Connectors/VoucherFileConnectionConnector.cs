@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.VoucherFileConnection FilterBy { get; set; }
+		public Filter.VoucherFileConnection? FilterBy { get; set; }
 
 
         /// <summary>
@@ -40,13 +40,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a voucherFileConnection based on voucherFileConnectionnumber
+		/// Find a voucherFileConnection based on id
 		/// </summary>
-		/// <param name="voucherFileConnectionNumber">The voucherFileConnectionnumber to find</param>
+		/// <param name="id">Identifier of the voucherFileConnection to find</param>
 		/// <returns>The found voucherFileConnection</returns>
-		public VoucherFileConnection Get(string voucherFileConnectionNumber)
+		public VoucherFileConnection Get(string id)
 		{
-			return BaseGet(voucherFileConnectionNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -56,11 +56,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated voucherFileConnection</returns>
 		public VoucherFileConnection Update(VoucherFileConnection voucherFileConnection)
 		{
-			return BaseUpdate(voucherFileConnection, voucherFileConnection.VoucherFileConnectionNumber);
+			return BaseUpdate(voucherFileConnection, voucherFileConnection.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new voucherFileConnection
+		/// Creates a new voucherFileConnection
 		/// </summary>
 		/// <param name="voucherFileConnection">The voucherFileConnection to create</param>
 		/// <returns>The created voucherFileConnection</returns>
@@ -72,10 +72,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a voucherFileConnection
 		/// </summary>
-		/// <param name="voucherFileConnectionNumber">The voucherFileConnectionnumber to delete</param>
-		public void Delete(string voucherFileConnectionNumber)
+		/// <param name="id">Identifier of the voucherFileConnection to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(voucherFileConnectionNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

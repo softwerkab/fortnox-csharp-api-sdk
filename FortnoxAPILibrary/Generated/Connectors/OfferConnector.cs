@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.Offer FilterBy { get; set; }
+		public Filter.Offer? FilterBy { get; set; }
 
 
         /// <summary>
@@ -70,13 +70,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a offer based on offernumber
+		/// Find a offer based on id
 		/// </summary>
-		/// <param name="offerNumber">The offernumber to find</param>
+		/// <param name="id">Identifier of the offer to find</param>
 		/// <returns>The found offer</returns>
-		public Offer Get(string offerNumber)
+		public Offer Get(string id)
 		{
-			return BaseGet(offerNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -86,11 +86,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated offer</returns>
 		public Offer Update(Offer offer)
 		{
-			return BaseUpdate(offer, offer.OfferNumber);
+			return BaseUpdate(offer, offer.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new offer
+		/// Creates a new offer
 		/// </summary>
 		/// <param name="offer">The offer to create</param>
 		/// <returns>The created offer</returns>
@@ -102,10 +102,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a offer
 		/// </summary>
-		/// <param name="offerNumber">The offernumber to delete</param>
-		public void Delete(string offerNumber)
+		/// <param name="id">Identifier of the offer to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(offerNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

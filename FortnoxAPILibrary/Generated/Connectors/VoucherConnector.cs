@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.Voucher FilterBy { get; set; }
+		public Filter.Voucher? FilterBy { get; set; }
 
 
         /// <summary>
@@ -28,13 +28,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a voucher based on vouchernumber
+		/// Find a voucher based on id
 		/// </summary>
-		/// <param name="voucherNumber">The vouchernumber to find</param>
+		/// <param name="id">Identifier of the voucher to find</param>
 		/// <returns>The found voucher</returns>
-		public Voucher Get(string voucherNumber)
+		public Voucher Get(string id)
 		{
-			return BaseGet(voucherNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -44,11 +44,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated voucher</returns>
 		public Voucher Update(Voucher voucher)
 		{
-			return BaseUpdate(voucher, voucher.VoucherNumber);
+			return BaseUpdate(voucher, voucher.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new voucher
+		/// Creates a new voucher
 		/// </summary>
 		/// <param name="voucher">The voucher to create</param>
 		/// <returns>The created voucher</returns>
@@ -60,10 +60,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a voucher
 		/// </summary>
-		/// <param name="voucherNumber">The vouchernumber to delete</param>
-		public void Delete(string voucherNumber)
+		/// <param name="id">Identifier of the voucher to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(voucherNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

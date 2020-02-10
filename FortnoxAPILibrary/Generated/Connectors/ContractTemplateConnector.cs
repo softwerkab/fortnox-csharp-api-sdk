@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.ContractTemplate FilterBy { get; set; }
+		public Filter.ContractTemplate? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a contractTemplate based on contractTemplatenumber
+		/// Find a contractTemplate based on id
 		/// </summary>
-		/// <param name="contractTemplateNumber">The contractTemplatenumber to find</param>
+		/// <param name="id">Identifier of the contractTemplate to find</param>
 		/// <returns>The found contractTemplate</returns>
-		public ContractTemplate Get(string contractTemplateNumber)
+		public ContractTemplate Get(string id)
 		{
-			return BaseGet(contractTemplateNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated contractTemplate</returns>
 		public ContractTemplate Update(ContractTemplate contractTemplate)
 		{
-			return BaseUpdate(contractTemplate, contractTemplate.ContractTemplateNumber);
+			return BaseUpdate(contractTemplate, contractTemplate.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new contractTemplate
+		/// Creates a new contractTemplate
 		/// </summary>
 		/// <param name="contractTemplate">The contractTemplate to create</param>
 		/// <returns>The created contractTemplate</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a contractTemplate
 		/// </summary>
-		/// <param name="contractTemplateNumber">The contractTemplatenumber to delete</param>
-		public void Delete(string contractTemplateNumber)
+		/// <param name="id">Identifier of the contractTemplate to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(contractTemplateNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

@@ -28,9 +28,8 @@ namespace FortnoxAPILibrary.Entities
         public DateTime? EndDate { get; set; }
 
         ///<summary> – </summary>
-        [ReadOnly]
         [JsonProperty]
-        public List<InvoiceAccrualRow> InvoiceAccrualRows { get; private set; }
+        public List<InvoiceAccrualRow> InvoiceAccrualRows { get; set; }
 
         ///<summary> Invoice number </summary>
         [JsonProperty]

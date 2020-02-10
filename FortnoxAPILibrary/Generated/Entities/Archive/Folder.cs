@@ -21,14 +21,12 @@ namespace FortnoxAPILibrary.Entities
         public string Email { get; private set; }
 
         ///<summary> List of files </summary>
-        [ReadOnly]
         [JsonProperty]
-        public List<File> Files { get; private set; }
+        public List<File> Files { get; set; }
 
         ///<summary> List of folders </summary>
-        [ReadOnly]
         [JsonProperty]
-        public List<Folder> Folders { get; private set; }
+        public List<Folder> Folders { get; set; }
 
         ///<summary> Id of the folder </summary>
         [ReadOnly]

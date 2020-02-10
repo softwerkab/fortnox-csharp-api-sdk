@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.InvoiceAccrual FilterBy { get; set; }
+		public Filter.InvoiceAccrual? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a invoiceAccrual based on invoiceAccrualnumber
+		/// Find a invoiceAccrual based on id
 		/// </summary>
-		/// <param name="invoiceAccrualNumber">The invoiceAccrualnumber to find</param>
+		/// <param name="id">Identifier of the invoiceAccrual to find</param>
 		/// <returns>The found invoiceAccrual</returns>
-		public InvoiceAccrual Get(string invoiceAccrualNumber)
+		public InvoiceAccrual Get(string id)
 		{
-			return BaseGet(invoiceAccrualNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated invoiceAccrual</returns>
 		public InvoiceAccrual Update(InvoiceAccrual invoiceAccrual)
 		{
-			return BaseUpdate(invoiceAccrual, invoiceAccrual.InvoiceAccrualNumber);
+			return BaseUpdate(invoiceAccrual, invoiceAccrual.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new invoiceAccrual
+		/// Creates a new invoiceAccrual
 		/// </summary>
 		/// <param name="invoiceAccrual">The invoiceAccrual to create</param>
 		/// <returns>The created invoiceAccrual</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a invoiceAccrual
 		/// </summary>
-		/// <param name="invoiceAccrualNumber">The invoiceAccrualnumber to delete</param>
-		public void Delete(string invoiceAccrualNumber)
+		/// <param name="id">Identifier of the invoiceAccrual to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(invoiceAccrualNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

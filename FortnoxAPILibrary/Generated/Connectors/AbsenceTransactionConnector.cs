@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.AbsenceTransaction FilterBy { get; set; }
+		public Filter.AbsenceTransaction? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a absenceTransaction based on absenceTransactionnumber
+		/// Find a absenceTransaction based on id
 		/// </summary>
-		/// <param name="absenceTransactionNumber">The absenceTransactionnumber to find</param>
+		/// <param name="id">Identifier of the absenceTransaction to find</param>
 		/// <returns>The found absenceTransaction</returns>
-		public AbsenceTransaction Get(string absenceTransactionNumber)
+		public AbsenceTransaction Get(string id)
 		{
-			return BaseGet(absenceTransactionNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated absenceTransaction</returns>
 		public AbsenceTransaction Update(AbsenceTransaction absenceTransaction)
 		{
-			return BaseUpdate(absenceTransaction, absenceTransaction.AbsenceTransactionNumber);
+			return BaseUpdate(absenceTransaction, absenceTransaction.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new absenceTransaction
+		/// Creates a new absenceTransaction
 		/// </summary>
 		/// <param name="absenceTransaction">The absenceTransaction to create</param>
 		/// <returns>The created absenceTransaction</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a absenceTransaction
 		/// </summary>
-		/// <param name="absenceTransactionNumber">The absenceTransactionnumber to delete</param>
-		public void Delete(string absenceTransactionNumber)
+		/// <param name="id">Identifier of the absenceTransaction to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(absenceTransactionNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

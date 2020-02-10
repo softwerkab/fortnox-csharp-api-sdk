@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.AssetTypes FilterBy { get; set; }
+		public Filter.AssetTypes? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a assetTypes based on assetTypesnumber
+		/// Find a assetTypes based on id
 		/// </summary>
-		/// <param name="assetTypesNumber">The assetTypesnumber to find</param>
+		/// <param name="id">Identifier of the assetTypes to find</param>
 		/// <returns>The found assetTypes</returns>
-		public AssetTypes Get(string assetTypesNumber)
+		public AssetTypes Get(string id)
 		{
-			return BaseGet(assetTypesNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated assetTypes</returns>
 		public AssetTypes Update(AssetTypes assetTypes)
 		{
-			return BaseUpdate(assetTypes, assetTypes.AssetTypesNumber);
+			return BaseUpdate(assetTypes, assetTypes.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new assetTypes
+		/// Creates a new assetTypes
 		/// </summary>
 		/// <param name="assetTypes">The assetTypes to create</param>
 		/// <returns>The created assetTypes</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a assetTypes
 		/// </summary>
-		/// <param name="assetTypesNumber">The assetTypesnumber to delete</param>
-		public void Delete(string assetTypesNumber)
+		/// <param name="id">Identifier of the assetTypes to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(assetTypesNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

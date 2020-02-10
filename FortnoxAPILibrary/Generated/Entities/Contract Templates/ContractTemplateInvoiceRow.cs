@@ -6,8 +6,8 @@ using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    [Entity(SingularName = "InvoiceRow", PluralName = "InvoiceRows")]
-    public class InvoiceRow
+    [Entity(SingularName = "ContractTemplateInvoiceRow", PluralName = "ContractTemplateInvoiceRows")]
+    public class ContractTemplateInvoiceRow
     {
 
         ///<summary> Account number (If empty Fortnox will use setting on article) </summary>

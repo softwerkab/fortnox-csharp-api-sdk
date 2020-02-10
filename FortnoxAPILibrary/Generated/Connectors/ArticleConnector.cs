@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.Article FilterBy { get; set; }
+		public Filter.Article? FilterBy { get; set; }
 
 
         /// <summary>
@@ -58,13 +58,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a article based on articlenumber
+		/// Find a article based on id
 		/// </summary>
-		/// <param name="articleNumber">The articlenumber to find</param>
+		/// <param name="id">Identifier of the article to find</param>
 		/// <returns>The found article</returns>
-		public Article Get(string articleNumber)
+		public Article Get(string id)
 		{
-			return BaseGet(articleNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -74,11 +74,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated article</returns>
 		public Article Update(Article article)
 		{
-			return BaseUpdate(article, article.ArticleNumber);
+			return BaseUpdate(article, article.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new article
+		/// Creates a new article
 		/// </summary>
 		/// <param name="article">The article to create</param>
 		/// <returns>The created article</returns>
@@ -90,10 +90,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a article
 		/// </summary>
-		/// <param name="articleNumber">The articlenumber to delete</param>
-		public void Delete(string articleNumber)
+		/// <param name="id">Identifier of the article to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(articleNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

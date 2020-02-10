@@ -16,9 +16,8 @@ namespace FortnoxAPILibrary.Entities
         public string Url { get; private set; }
 
         ///<summary> Accounting Method </summary>
-        [ReadOnly]
         [JsonProperty]
-        public AccountingMethod? AccountingMethod { get; private set; }
+        public AccountingMethod? AccountingMethod { get; set; }
 
         ///<summary> Administration fee </summary>
         [JsonProperty]
@@ -136,9 +135,8 @@ namespace FortnoxAPILibrary.Entities
         public SalesType? SalesType { get; set; }
 
         ///<summary> – </summary>
-        [ReadOnly]
         [JsonProperty]
-        public List<SupplierInvoiceRow> SupplierInvoiceRows { get; private set; }
+        public List<SupplierInvoiceRow> SupplierInvoiceRows { get; set; }
 
         ///<summary> Supplier number </summary>
         [JsonProperty]
@@ -158,9 +156,8 @@ namespace FortnoxAPILibrary.Entities
         public double? VAT { get; set; }
 
         ///<summary> Vat type </summary>
-        [ReadOnly]
         [JsonProperty]
-        public VATType? VATType { get; private set; }
+        public SupplierInvoiceVATType? VATType { get; set; }
 
         ///<summary> Customer reference </summary>
         [JsonProperty]

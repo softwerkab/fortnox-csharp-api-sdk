@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.TaxReduction FilterBy { get; set; }
+		public Filter.TaxReduction? FilterBy { get; set; }
 
 
         /// <summary>
@@ -28,13 +28,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a taxReduction based on taxReductionnumber
+		/// Find a taxReduction based on id
 		/// </summary>
-		/// <param name="taxReductionNumber">The taxReductionnumber to find</param>
+		/// <param name="id">Identifier of the taxReduction to find</param>
 		/// <returns>The found taxReduction</returns>
-		public TaxReduction Get(string taxReductionNumber)
+		public TaxReduction Get(string id)
 		{
-			return BaseGet(taxReductionNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -44,11 +44,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated taxReduction</returns>
 		public TaxReduction Update(TaxReduction taxReduction)
 		{
-			return BaseUpdate(taxReduction, taxReduction.TaxReductionNumber);
+			return BaseUpdate(taxReduction, taxReduction.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new taxReduction
+		/// Creates a new taxReduction
 		/// </summary>
 		/// <param name="taxReduction">The taxReduction to create</param>
 		/// <returns>The created taxReduction</returns>
@@ -60,10 +60,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a taxReduction
 		/// </summary>
-		/// <param name="taxReductionNumber">The taxReductionnumber to delete</param>
-		public void Delete(string taxReductionNumber)
+		/// <param name="id">Identifier of the taxReduction to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(taxReductionNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

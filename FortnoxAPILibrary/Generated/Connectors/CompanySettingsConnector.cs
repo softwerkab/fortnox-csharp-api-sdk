@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.CompanySettings FilterBy { get; set; }
+		public Filter.CompanySettings? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a companySettings based on companySettingsnumber
+		/// Find a companySettings based on id
 		/// </summary>
-		/// <param name="companySettingsNumber">The companySettingsnumber to find</param>
+		/// <param name="id">Identifier of the companySettings to find</param>
 		/// <returns>The found companySettings</returns>
-		public CompanySettings Get(string companySettingsNumber)
+		public CompanySettings Get(string id)
 		{
-			return BaseGet(companySettingsNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated companySettings</returns>
 		public CompanySettings Update(CompanySettings companySettings)
 		{
-			return BaseUpdate(companySettings, companySettings.CompanySettingsNumber);
+			return BaseUpdate(companySettings, companySettings.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new companySettings
+		/// Creates a new companySettings
 		/// </summary>
 		/// <param name="companySettings">The companySettings to create</param>
 		/// <returns>The created companySettings</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a companySettings
 		/// </summary>
-		/// <param name="companySettingsNumber">The companySettingsnumber to delete</param>
-		public void Delete(string companySettingsNumber)
+		/// <param name="id">Identifier of the companySettings to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(companySettingsNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

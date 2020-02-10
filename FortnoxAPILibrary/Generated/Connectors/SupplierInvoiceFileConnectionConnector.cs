@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.SupplierInvoiceFileConnection FilterBy { get; set; }
+		public Filter.SupplierInvoiceFileConnection? FilterBy { get; set; }
 
 
         /// <summary>
@@ -28,13 +28,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a supplierInvoiceFileConnection based on supplierInvoiceFileConnectionnumber
+		/// Find a supplierInvoiceFileConnection based on id
 		/// </summary>
-		/// <param name="supplierInvoiceFileConnectionNumber">The supplierInvoiceFileConnectionnumber to find</param>
+		/// <param name="id">Identifier of the supplierInvoiceFileConnection to find</param>
 		/// <returns>The found supplierInvoiceFileConnection</returns>
-		public SupplierInvoiceFileConnection Get(string supplierInvoiceFileConnectionNumber)
+		public SupplierInvoiceFileConnection Get(string id)
 		{
-			return BaseGet(supplierInvoiceFileConnectionNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -44,11 +44,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated supplierInvoiceFileConnection</returns>
 		public SupplierInvoiceFileConnection Update(SupplierInvoiceFileConnection supplierInvoiceFileConnection)
 		{
-			return BaseUpdate(supplierInvoiceFileConnection, supplierInvoiceFileConnection.SupplierInvoiceFileConnectionNumber);
+			return BaseUpdate(supplierInvoiceFileConnection, supplierInvoiceFileConnection.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new supplierInvoiceFileConnection
+		/// Creates a new supplierInvoiceFileConnection
 		/// </summary>
 		/// <param name="supplierInvoiceFileConnection">The supplierInvoiceFileConnection to create</param>
 		/// <returns>The created supplierInvoiceFileConnection</returns>
@@ -60,10 +60,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a supplierInvoiceFileConnection
 		/// </summary>
-		/// <param name="supplierInvoiceFileConnectionNumber">The supplierInvoiceFileConnectionnumber to delete</param>
-		public void Delete(string supplierInvoiceFileConnectionNumber)
+		/// <param name="id">Identifier of the supplierInvoiceFileConnection to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(supplierInvoiceFileConnectionNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

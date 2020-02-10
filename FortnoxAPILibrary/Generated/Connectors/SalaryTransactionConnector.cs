@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
-		public Filter.SalaryTransaction FilterBy { get; set; }
+		public Filter.SalaryTransaction? FilterBy { get; set; }
 
 
 		/// <remarks/>
@@ -22,13 +22,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Find a salaryTransaction based on salaryTransactionnumber
+		/// Find a salaryTransaction based on id
 		/// </summary>
-		/// <param name="salaryTransactionNumber">The salaryTransactionnumber to find</param>
+		/// <param name="id">Identifier of the salaryTransaction to find</param>
 		/// <returns>The found salaryTransaction</returns>
-		public SalaryTransaction Get(string salaryTransactionNumber)
+		public SalaryTransaction Get(string id)
 		{
-			return BaseGet(salaryTransactionNumber);
+			return BaseGet(id);
 		}
 
 		/// <summary>
@@ -38,11 +38,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated salaryTransaction</returns>
 		public SalaryTransaction Update(SalaryTransaction salaryTransaction)
 		{
-			return BaseUpdate(salaryTransaction, salaryTransaction.SalaryTransactionNumber);
+			return BaseUpdate(salaryTransaction, salaryTransaction.Id.ToString());
 		}
 
 		/// <summary>
-		/// Create a new salaryTransaction
+		/// Creates a new salaryTransaction
 		/// </summary>
 		/// <param name="salaryTransaction">The salaryTransaction to create</param>
 		/// <returns>The created salaryTransaction</returns>
@@ -54,10 +54,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Deletes a salaryTransaction
 		/// </summary>
-		/// <param name="salaryTransactionNumber">The salaryTransactionnumber to delete</param>
-		public void Delete(string salaryTransactionNumber)
+		/// <param name="id">Identifier of the salaryTransaction to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(salaryTransactionNumber);
+			BaseDelete(id);
 		}
 
 		/// <summary>

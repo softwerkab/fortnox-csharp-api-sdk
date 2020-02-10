@@ -90,10 +90,6 @@ namespace FortnoxAPILibrary
 		{
 
 		}
-		public enum File
-		{
-
-		}
 		public enum InvoiceAccrual
 		{
 
@@ -178,7 +174,7 @@ namespace FortnoxAPILibrary
 		{
 
 		}
-		public enum InvoicePayment
+		public enum SupplierInvoicePayment
 		{
 
 		}
