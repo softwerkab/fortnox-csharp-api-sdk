@@ -86,7 +86,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated supplier</returns>
 		public Supplier Update(Supplier supplier)
 		{
-			return BaseUpdate(supplier, supplier.Id.ToString());
+			return BaseUpdate(supplier, supplier.SupplierNumber.ToString());
 		}
 
 		/// <summary>

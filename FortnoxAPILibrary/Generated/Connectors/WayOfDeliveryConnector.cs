@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated wayOfDelivery</returns>
 		public WayOfDelivery Update(WayOfDelivery wayOfDelivery)
 		{
-			return BaseUpdate(wayOfDelivery, wayOfDelivery.Id.ToString());
+			return BaseUpdate(wayOfDelivery, wayOfDelivery.Code.ToString());
 		}
 
 		/// <summary>

@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated salaryTransaction</returns>
 		public SalaryTransaction Update(SalaryTransaction salaryTransaction)
 		{
-			return BaseUpdate(salaryTransaction, salaryTransaction.Id.ToString());
+			return BaseUpdate(salaryTransaction, salaryTransaction.Number.ToString());
 		}
 
 		/// <summary>

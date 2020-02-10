@@ -62,9 +62,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the contract to find</param>
 		/// <returns>The found contract</returns>
-		public Contract Get(string id)
+		public Contract Get(int? id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -74,7 +74,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated contract</returns>
 		public Contract Update(Contract contract)
 		{
-			return BaseUpdate(contract, contract.Id.ToString());
+			return BaseUpdate(contract, contract.DocumentNumber.ToString());
 		}
 
 		/// <summary>
@@ -104,5 +104,10 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseFind();
 		}
-	}
+
+        public void Finish(int? createdContractDocumentNumber)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }

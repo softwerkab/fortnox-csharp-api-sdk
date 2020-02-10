@@ -32,7 +32,7 @@ namespace FortnoxAPILibrary.Tests
             var newOffer = new Offer()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
-                OfferDate = new DateTime(2019, 1, 20).ToString(APIConstants.DateFormat), //"2019-01-20",
+                OfferDate = new DateTime(2019, 1, 20), //"2019-01-20",
                 OfferRows = new List<OfferRow>()
                 {
                     new OfferRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 10},

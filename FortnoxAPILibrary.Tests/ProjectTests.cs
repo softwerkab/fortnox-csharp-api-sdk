@@ -27,8 +27,8 @@ namespace FortnoxAPILibrary.Tests
             {
                 Description = "TestProject",
                 Status =  Status.ONGOING,
-                StartDate = new DateTime(2019, 10, 10).ToString(APIConstants.DateFormat),
-                EndDate = new DateTime(2021, 10, 10).ToString(APIConstants.DateFormat),
+                StartDate = new DateTime(2019, 10, 10),
+                EndDate = new DateTime(2021, 10, 10),
                 ProjectLeader = "TestProjectLeader",
                 ContactPerson = "TestContactPerson",
                 Comments = "TestComments"

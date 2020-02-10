@@ -50,9 +50,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the supplierInvoice to find</param>
 		/// <returns>The found supplierInvoice</returns>
-		public SupplierInvoice Get(string id)
+		public SupplierInvoice Get(long? id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -62,7 +62,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated supplierInvoice</returns>
 		public SupplierInvoice Update(SupplierInvoice supplierInvoice)
 		{
-			return BaseUpdate(supplierInvoice, supplierInvoice.Id.ToString());
+			return BaseUpdate(supplierInvoice, supplierInvoice.GivenNumber.ToString());
 		}
 
 		/// <summary>
@@ -92,5 +92,10 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseFind();
 		}
-	}
+
+        public void Cancel(long? createdInvoiceGivenNumber)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }

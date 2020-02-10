@@ -165,7 +165,7 @@ namespace FortnoxAPILibrary.Tests
                 Name = "TestCustomer",
                 Address1 = "TestStreet 1",
                 Type = CustomerType.PRIVATE,
-                VATType = VATType.EUVAT
+                VATType = CustomerVATType.EUVAT
             });
             MyAssert.HasNoError(connector);
 
@@ -181,7 +181,7 @@ namespace FortnoxAPILibrary.Tests
             Assert.AreEqual("Updated Address", updatedCustomer.Address1);
             Assert.AreEqual("TestCustomer", updatedCustomer.Name);
             Assert.AreEqual(CustomerType.PRIVATE, updatedCustomer.Type);
-            Assert.AreEqual(VATType.EUVAT, updatedCustomer.VATType);
+            Assert.AreEqual(CustomerVATType.EUVAT, updatedCustomer.VATType);
 
             //Clean
             connector.Delete(existingCustomer.CustomerNumber);

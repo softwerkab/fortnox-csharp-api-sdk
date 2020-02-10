@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿/*
+using System.IO;
 using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
@@ -99,3 +100,4 @@ namespace FortnoxAPILibrary.Tests
         }
     }
 }
+*/

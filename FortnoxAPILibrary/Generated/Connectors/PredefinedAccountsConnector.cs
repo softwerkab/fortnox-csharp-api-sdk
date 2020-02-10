@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated predefinedAccounts</returns>
 		public PredefinedAccounts Update(PredefinedAccounts predefinedAccounts)
 		{
-			return BaseUpdate(predefinedAccounts, predefinedAccounts.Id.ToString());
+			return BaseUpdate(predefinedAccounts, predefinedAccounts.Name.ToString());
 		}
 
 		/// <summary>

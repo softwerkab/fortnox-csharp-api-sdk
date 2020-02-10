@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated articleFileConnection</returns>
 		public ArticleFileConnection Update(ArticleFileConnection articleFileConnection)
 		{
-			return BaseUpdate(articleFileConnection, articleFileConnection.Id.ToString());
+			return BaseUpdate(articleFileConnection, articleFileConnection.FileId.ToString());
 		}
 
 		/// <summary>

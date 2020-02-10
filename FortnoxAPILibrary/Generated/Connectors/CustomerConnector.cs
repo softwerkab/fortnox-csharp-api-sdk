@@ -92,7 +92,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated customer</returns>
 		public Customer Update(Customer customer)
 		{
-			return BaseUpdate(customer, customer.Id.ToString());
+			return BaseUpdate(customer, customer.CustomerNumber.ToString());
 		}
 
 		/// <summary>

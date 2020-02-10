@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated expense</returns>
 		public Expense Update(Expense expense)
 		{
-			return BaseUpdate(expense, expense.Id.ToString());
+			return BaseUpdate(expense, expense.Code.ToString());
 		}
 
 		/// <summary>

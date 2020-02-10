@@ -29,8 +29,8 @@ namespace FortnoxAPILibrary.Tests
                 Width = 150,
                 Type = ArticleType.STOCK,
                 PurchasePrice = 2499.50,
-                FreightCost = "200",
-                OtherCost = "210",
+                FreightCost = 200,
+                OtherCost = 210,
                 Note = "Definitely not worth the price."
             };
 

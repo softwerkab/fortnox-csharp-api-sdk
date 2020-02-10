@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated modeOfPayment</returns>
 		public ModeOfPayment Update(ModeOfPayment modeOfPayment)
 		{
-			return BaseUpdate(modeOfPayment, modeOfPayment.Id.ToString());
+			return BaseUpdate(modeOfPayment, modeOfPayment.Code.ToString());
 		}
 
 		/// <summary>

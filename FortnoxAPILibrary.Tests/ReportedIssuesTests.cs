@@ -30,15 +30,15 @@ namespace FortnoxAPILibrary.Tests
 
             var newInvoce = connector.Create(new Invoice()
             {
-                InvoiceDate = new DateTime(2019,1,20).ToString(APIConstants.DateFormat), //"2019-01-20",
-                DueDate = new DateTime(2019, 2, 20).ToString(APIConstants.DateFormat), //"2019-02-20",
+                InvoiceDate = new DateTime(2019,1,20), //"2019-01-20",
+                DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 InvoiceType = InvoiceType.INVOICE,
                 InvoiceRows = new List<InvoiceRow>()
                 { //Add Empty rows
                     new InvoiceRow(), //Empty Row
                     new InvoiceRow(), //Empty Row
-                    new InvoiceRow() { AccountNumber = "0000"},
+                    new InvoiceRow() { AccountNumber = 0000},
                     new InvoiceRow(), //Empty Row
                 }
             });
@@ -117,7 +117,7 @@ namespace FortnoxAPILibrary.Tests
         public void Test_issue61_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/61
         {
             var connector = new ArticleConnector();
-            var newArticle = connector.Create(new Article() { Description = "TestArticle", FreightCost = "10", OtherCost = "10", CostCalculationMethod = "MANUAL" });
+            var newArticle = connector.Create(new Article() { Description = "TestArticle", FreightCost = 10, OtherCost = 10, CostCalculationMethod = "MANUAL" });
             MyAssert.HasNoError(connector);
 
             //NOTE: Server does not create the properties FreightCost, OtherCost and CostCalculationMethod

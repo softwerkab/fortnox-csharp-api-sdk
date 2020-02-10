@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated printTemplate</returns>
 		public PrintTemplate Update(PrintTemplate printTemplate)
 		{
-			return BaseUpdate(printTemplate, printTemplate.Id.ToString());
+			return BaseUpdate(printTemplate, printTemplate.Name.ToString());
 		}
 
 		/// <summary>

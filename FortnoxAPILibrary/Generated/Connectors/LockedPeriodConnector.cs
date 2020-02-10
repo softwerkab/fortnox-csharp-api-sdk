@@ -24,11 +24,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Find a lockedPeriod based on id
 		/// </summary>
-		/// <param name="id">Identifier of the lockedPeriod to find</param>
-		/// <returns>The found lockedPeriod</returns>
-		public LockedPeriod Get(string id)
+        /// <returns>The found lockedPeriod</returns>
+		public LockedPeriod Get()
 		{
-			return BaseGet(id);
+			return BaseGet();
 		}
 
 		/// <summary>
@@ -38,7 +37,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated lockedPeriod</returns>
 		public LockedPeriod Update(LockedPeriod lockedPeriod)
 		{
-			return BaseUpdate(lockedPeriod, lockedPeriod.Id.ToString());
+			return BaseUpdate(lockedPeriod, lockedPeriod.ToString());
 		}
 
 		/// <summary>

@@ -74,7 +74,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated article</returns>
 		public Article Update(Article article)
 		{
-			return BaseUpdate(article, article.Id.ToString());
+			return BaseUpdate(article, article.ArticleNumber.ToString());
 		}
 
 		/// <summary>

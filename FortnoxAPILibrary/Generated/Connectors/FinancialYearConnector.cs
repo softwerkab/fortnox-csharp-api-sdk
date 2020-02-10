@@ -38,9 +38,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the financialYear to find</param>
 		/// <returns>The found financialYear</returns>
-		public FinancialYear Get(string id)
+		public FinancialYear Get(int id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>

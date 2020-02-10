@@ -24,11 +24,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// Find a companySettings based on id
 		/// </summary>
-		/// <param name="id">Identifier of the companySettings to find</param>
-		/// <returns>The found companySettings</returns>
-		public CompanySettings Get(string id)
+        /// <returns>The found companySettings</returns>
+		public CompanySettings Get()
 		{
-			return BaseGet(id);
+			return BaseGet();
 		}
 
 		/// <summary>
@@ -38,7 +37,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated companySettings</returns>
 		public CompanySettings Update(CompanySettings companySettings)
 		{
-			return BaseUpdate(companySettings, companySettings.Id.ToString());
+			return BaseUpdate(companySettings, companySettings.Name.ToString());
 		}
 
 		/// <summary>

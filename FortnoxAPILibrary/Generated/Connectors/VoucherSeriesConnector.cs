@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated voucherSeries</returns>
 		public VoucherSeries Update(VoucherSeries voucherSeries)
 		{
-			return BaseUpdate(voucherSeries, voucherSeries.Id.ToString());
+			return BaseUpdate(voucherSeries, voucherSeries.Code.ToString());
 		}
 
 		/// <summary>

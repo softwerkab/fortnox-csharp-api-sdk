@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated attendanceTransactions</returns>
 		public AttendanceTransactions Update(AttendanceTransactions attendanceTransactions)
 		{
-			return BaseUpdate(attendanceTransactions, attendanceTransactions.Id.ToString());
+			return BaseUpdate(attendanceTransactions, attendanceTransactions.EmployeeId.ToString());
 		}
 
 		/// <summary>

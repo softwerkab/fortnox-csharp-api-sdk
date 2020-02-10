@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated costCenter</returns>
 		public CostCenter Update(CostCenter costCenter)
 		{
-			return BaseUpdate(costCenter, costCenter.Id.ToString());
+			return BaseUpdate(costCenter, costCenter.Code.ToString());
 		}
 
 		/// <summary>

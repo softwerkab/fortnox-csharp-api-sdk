@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated noxFinansInvoice</returns>
 		public NoxFinansInvoice Update(NoxFinansInvoice noxFinansInvoice)
 		{
-			return BaseUpdate(noxFinansInvoice, noxFinansInvoice.Id.ToString());
+			return BaseUpdate(noxFinansInvoice, noxFinansInvoice.InvoiceNumber.ToString());
 		}
 
 		/// <summary>

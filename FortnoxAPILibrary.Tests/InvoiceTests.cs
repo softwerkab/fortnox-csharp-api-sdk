@@ -32,8 +32,8 @@ namespace FortnoxAPILibrary.Tests
             var newInvoice = new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
-                InvoiceDate = new DateTime(2019,1,20).ToString(APIConstants.DateFormat), //"2019-01-20",
-                DueDate = new DateTime(2019,2,20).ToString(APIConstants.DateFormat), //"2019-02-20",
+                InvoiceDate = new DateTime(2019,1,20), //"2019-01-20",
+                DueDate = new DateTime(2019,2,20), //"2019-02-20",
                 InvoiceType = InvoiceType.CASHINVOICE,
                 PaymentWay = "CASH",
                 InvoiceRows = new List<InvoiceRow>()

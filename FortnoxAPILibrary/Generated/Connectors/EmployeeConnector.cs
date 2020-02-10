@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated employee</returns>
 		public Employee Update(Employee employee)
 		{
-			return BaseUpdate(employee, employee.Id.ToString());
+			return BaseUpdate(employee, employee.EmployeeId.ToString());
 		}
 
 		/// <summary>

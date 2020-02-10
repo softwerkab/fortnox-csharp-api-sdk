@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated termsOfDelivery</returns>
 		public TermsOfDelivery Update(TermsOfDelivery termsOfDelivery)
 		{
-			return BaseUpdate(termsOfDelivery, termsOfDelivery.Id.ToString());
+			return BaseUpdate(termsOfDelivery, termsOfDelivery.Code.ToString());
 		}
 
 		/// <summary>

@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated contractTemplate</returns>
 		public ContractTemplate Update(ContractTemplate contractTemplate)
 		{
-			return BaseUpdate(contractTemplate, contractTemplate.Id.ToString());
+			return BaseUpdate(contractTemplate, contractTemplate.TemplateNumber.ToString());
 		}
 
 		/// <summary>

@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated supplierInvoiceFileConnection</returns>
 		public SupplierInvoiceFileConnection Update(SupplierInvoiceFileConnection supplierInvoiceFileConnection)
 		{
-			return BaseUpdate(supplierInvoiceFileConnection, supplierInvoiceFileConnection.Id.ToString());
+			return BaseUpdate(supplierInvoiceFileConnection, supplierInvoiceFileConnection.FileId.ToString());
 		}
 
 		/// <summary>

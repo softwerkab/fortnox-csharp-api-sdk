@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated scheduleTimes</returns>
 		public ScheduleTimes Update(ScheduleTimes scheduleTimes)
 		{
-			return BaseUpdate(scheduleTimes, scheduleTimes.Id.ToString());
+			return BaseUpdate(scheduleTimes, scheduleTimes.ScheduleId.ToString());
 		}
 
 		/// <summary>

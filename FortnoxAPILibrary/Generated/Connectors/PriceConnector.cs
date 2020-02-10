@@ -50,7 +50,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated price</returns>
 		public Price Update(Price price)
 		{
-			return BaseUpdate(price, price.Id.ToString());
+			return BaseUpdate(price, price.PriceList.ToString());
 		}
 
 		/// <summary>

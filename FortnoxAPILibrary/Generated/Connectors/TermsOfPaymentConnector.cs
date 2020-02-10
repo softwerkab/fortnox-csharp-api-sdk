@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated termsOfPayment</returns>
 		public TermsOfPayment Update(TermsOfPayment termsOfPayment)
 		{
-			return BaseUpdate(termsOfPayment, termsOfPayment.Id.ToString());
+			return BaseUpdate(termsOfPayment, termsOfPayment.Code.ToString());
 		}
 
 		/// <summary>

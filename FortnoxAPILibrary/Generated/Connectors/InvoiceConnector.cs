@@ -122,9 +122,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the invoice to find</param>
 		/// <returns>The found invoice</returns>
-		public Invoice Get(string id)
+		public Invoice Get(int? id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -134,7 +134,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated invoice</returns>
 		public Invoice Update(Invoice invoice)
 		{
-			return BaseUpdate(invoice, invoice.Id.ToString());
+			return BaseUpdate(invoice, invoice.DocumentNumber.ToString());
 		}
 
 		/// <summary>
@@ -164,5 +164,10 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseFind();
 		}
-	}
+
+        public void Cancel(int? createdInvoiceDocumentNumber)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }

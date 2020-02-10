@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated companyInformation</returns>
 		public CompanyInformation Update(CompanyInformation companyInformation)
 		{
-			return BaseUpdate(companyInformation, companyInformation.Id.ToString());
+			return BaseUpdate(companyInformation, companyInformation.CompanyName.ToString());
 		}
 
 		/// <summary>

@@ -56,7 +56,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated voucherFileConnection</returns>
 		public VoucherFileConnection Update(VoucherFileConnection voucherFileConnection)
 		{
-			return BaseUpdate(voucherFileConnection, voucherFileConnection.Id.ToString());
+			return BaseUpdate(voucherFileConnection, voucherFileConnection.FileId.ToString());
 		}
 
 		/// <summary>

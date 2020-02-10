@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated supplierInvoiceAccrual</returns>
 		public SupplierInvoiceAccrual Update(SupplierInvoiceAccrual supplierInvoiceAccrual)
 		{
-			return BaseUpdate(supplierInvoiceAccrual, supplierInvoiceAccrual.Id.ToString());
+			return BaseUpdate(supplierInvoiceAccrual, supplierInvoiceAccrual.SupplierInvoiceNumber.ToString());
 		}
 
 		/// <summary>

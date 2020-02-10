@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated unit</returns>
 		public Unit Update(Unit unit)
 		{
-			return BaseUpdate(unit, unit.Id.ToString());
+			return BaseUpdate(unit, unit.Code.ToString());
 		}
 
 		/// <summary>

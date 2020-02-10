@@ -39,5 +39,8 @@ namespace FortnoxAPILibrary.Entities
         [ReadOnly]
         [JsonProperty]
         public string Size { get; private set; }
+
+        public byte[] Data { get; set; }
+        public string ContentType { get; set; }
     }
 }

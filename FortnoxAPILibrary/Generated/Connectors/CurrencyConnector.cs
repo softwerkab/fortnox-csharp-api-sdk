@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated currency</returns>
 		public Currency Update(Currency currency)
 		{
-			return BaseUpdate(currency, currency.Id.ToString());
+			return BaseUpdate(currency, currency.Code.ToString());
 		}
 
 		/// <summary>

@@ -20,17 +20,17 @@ namespace FortnoxAPILibrary.Tests
         public void Test_Account_CRUD()
         {
             var connector = new AccountConnector();
-            if (connector.Get("8454") != null) //Delete if already exists
-                connector.Delete("8454");
+            if (connector.Get(8454) != null) //Delete if already exists
+                connector.Delete(8454);
 
             #region CREATE
             var newAccount = new Account
             {
                 Description = "Test Account",
                 Active = false,
-                Number = "8454",
-                CostCenterSettings = CostCenterSettingsValue.ALLOWED,
-                ProjectSettings = ProjectSettingsValue.ALLOWED,
+                Number = 8454,
+                CostCenterSettings = CostCenterSettings.ALLOWED,
+                ProjectSettings = ProjectSettings.ALLOWED,
                 SRU = 123
             };
 

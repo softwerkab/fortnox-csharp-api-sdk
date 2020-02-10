@@ -32,21 +32,21 @@ namespace FortnoxAPILibrary.Tests
             var newContract = new Contract()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
-                ContractDate = new DateTime(2019, 1, 20).ToString(APIConstants.DateFormat), //"2019-01-20",
+                ContractDate = new DateTime(2019, 1, 20), //"2019-01-20",
                 Active = false,
                 Comments = "Contract used in tests",
                 ContractLength = 4,
                 Continuous = true,
                 Currency = "SEK",
-                Language = "EN",
-                InvoiceRows = new List<InvoiceRow>()
+                Language = Language.EN,
+                InvoiceRows = new List<ContractInvoiceRow>()
                 {
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10},
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20},
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15}
+                    //new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10},
+                    //new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20},
+                    //new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15}
                 },
-                PeriodStart = "2020-01-01",
-                PeriodEnd = "2020-03-01"
+                PeriodStart = new DateTime(2020,01,01),
+                PeriodEnd = new DateTime(2020,03,01)
             };
 
             var createdContract = connector.Create(newContract);

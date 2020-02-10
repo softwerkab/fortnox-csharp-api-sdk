@@ -74,9 +74,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the offer to find</param>
 		/// <returns>The found offer</returns>
-		public Offer Get(string id)
+		public Offer Get(int? id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -86,7 +86,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated offer</returns>
 		public Offer Update(Offer offer)
 		{
-			return BaseUpdate(offer, offer.Id.ToString());
+			return BaseUpdate(offer, offer.DocumentNumber.ToString());
 		}
 
 		/// <summary>
@@ -116,5 +116,10 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseFind();
 		}
-	}
+
+        public void Cancel(int? createdOfferDocumentNumber)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }

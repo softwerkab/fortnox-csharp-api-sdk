@@ -32,9 +32,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the account to find</param>
 		/// <returns>The found account</returns>
-		public Account Get(string id)
+		public Account Get(int? id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated account</returns>
 		public Account Update(Account account)
 		{
-			return BaseUpdate(account, account.Id.ToString());
+			return BaseUpdate(account, account.Number.ToString());
 		}
 
 		/// <summary>
@@ -61,9 +61,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a account
 		/// </summary>
 		/// <param name="id">Identifier of the account to delete</param>
-		public void Delete(string id)
+		public void Delete(int? id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

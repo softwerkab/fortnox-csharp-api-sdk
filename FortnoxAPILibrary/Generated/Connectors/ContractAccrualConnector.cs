@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated contractAccrual</returns>
 		public ContractAccrual Update(ContractAccrual contractAccrual)
 		{
-			return BaseUpdate(contractAccrual, contractAccrual.Id.ToString());
+			return BaseUpdate(contractAccrual, contractAccrual.DocumentNumber.ToString());
 		}
 
 		/// <summary>

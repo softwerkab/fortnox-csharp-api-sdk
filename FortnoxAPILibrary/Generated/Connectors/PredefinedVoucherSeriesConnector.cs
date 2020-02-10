@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated predefinedVoucherSeries</returns>
 		public PredefinedVoucherSeries Update(PredefinedVoucherSeries predefinedVoucherSeries)
 		{
-			return BaseUpdate(predefinedVoucherSeries, predefinedVoucherSeries.Id.ToString());
+			return BaseUpdate(predefinedVoucherSeries, predefinedVoucherSeries.Name.ToString());
 		}
 
 		/// <summary>

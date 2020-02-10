@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated accountChart</returns>
 		public AccountChart Update(AccountChart accountChart)
 		{
-			return BaseUpdate(accountChart, accountChart.Id.ToString());
+			return BaseUpdate(accountChart, accountChart.Name.ToString());
 		}
 
 		/// <summary>

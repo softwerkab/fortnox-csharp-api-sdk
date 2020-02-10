@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated absenceTransaction</returns>
 		public AbsenceTransaction Update(AbsenceTransaction absenceTransaction)
 		{
-			return BaseUpdate(absenceTransaction, absenceTransaction.Id.ToString());
+			return BaseUpdate(absenceTransaction, absenceTransaction.EmployeeId.ToString());
 		}
 
 		/// <summary>

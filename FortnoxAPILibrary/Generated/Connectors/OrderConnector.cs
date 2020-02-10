@@ -92,9 +92,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the order to find</param>
 		/// <returns>The found order</returns>
-		public Order Get(string id)
+		public Order Get(int? id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -104,7 +104,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated order</returns>
 		public Order Update(Order order)
 		{
-			return BaseUpdate(order, order.Id.ToString());
+			return BaseUpdate(order, order.DocumentNumber.ToString());
 		}
 
 		/// <summary>
@@ -134,5 +134,10 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseFind();
 		}
-	}
+
+        public void Cancel(int? createdOrderDocumentNumber)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿/*
+using System.IO;
 using FortnoxAPILibrary.Connectors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -40,3 +41,4 @@ namespace FortnoxAPILibrary.Tests
         }
     }
 }
+*/

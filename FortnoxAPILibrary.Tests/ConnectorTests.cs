@@ -131,7 +131,7 @@ namespace FortnoxAPILibrary.Tests
             var createdCustomer = connector.Create(new Customer()
             {
                 Name = "TestUser", 
-                DefaultDeliveryTypes = new InvoiceDefaultDeliveryTypes() //Empty Object
+                DefaultDeliveryTypes = new DefaultDeliveryTypes() //Empty Object
             });
             MyAssert.HasNoError(connector);
 
