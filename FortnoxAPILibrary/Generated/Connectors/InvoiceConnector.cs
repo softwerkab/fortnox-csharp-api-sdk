@@ -116,6 +116,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "invoices";
 		}
+
 		/// <summary>
 		/// Find a invoice based on id
 		/// </summary>
@@ -163,10 +164,95 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseFind();
 		}
-
-        public void Cancel(int? id)
-        {
-            DoAction(id.ToString(), "cancel");
-        }
-    }
+		
+		/// <summary>
+		/// Bookkeeps an invoice
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Invoice Bookkeep(int? id)
+		{
+			return DoAction(id.ToString(), "bookkeep");
+		}
+		
+		/// <summary>
+		/// Cancels an invoice
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Invoice Cancel(int? id)
+		{
+			return DoAction(id.ToString(), "cancel");
+		}
+		
+		/// <summary>
+		/// Creates a credit invoice from the provided invoice. The created credit invoice will be referenced in the property CreditInvoiceReference.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Invoice CreditInvoice(int? id)
+		{
+			return DoAction(id.ToString(), "credit");
+		}
+		
+		/// <summary>
+		/// Sends an e-mail to the customer with an attached PDF document of the invoice. You can use the properties in the EmailInformation to customize the e-mail message on each invoice.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Invoice Email(int? id)
+		{
+			return DoAction(id.ToString(), "email");
+		}
+		
+		/// <summary>
+		/// Sends an e-invoice to the customer with an attached PDF document of the invoice. Note that this action also sets the property Sent as true.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Invoice EInvoice(int? id)
+		{
+			return DoAction(id.ToString(), "einvoice");
+		}
+		
+		/// <summary>
+		/// This action returns a PDF document with the current template that is used by the specific document. Note that this action also sets the property Sent as true.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Invoice Print(int? id)
+		{
+			return DoAction(id.ToString(), "print");
+		}
+		
+		/// <summary>
+		/// This action returns a PDF document with the current reminder template that is used by the specific document. Note that this action also sets the property Sent as true.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Invoice PrintReminder(int? id)
+		{
+			return DoAction(id.ToString(), "printreminder");
+		}
+		
+		/// <summary>
+		/// This action is used to set the field Sent as true from an external system without generating a PDF.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Invoice ExternalPrint(int? id)
+		{
+			return DoAction(id.ToString(), "externalprint");
+		}
+		
+		/// <summary>
+		/// This action returns a PDF document with the current template that is used by the specific document. Unliike the action print, this action doesn’t set the property Sent as true.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Invoice Preview(int? id)
+		{
+			return DoAction(id.ToString(), "preview");
+		}
+	}
 }

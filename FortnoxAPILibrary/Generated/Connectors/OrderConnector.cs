@@ -86,6 +86,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "orders";
 		}
+
 		/// <summary>
 		/// Find a order based on id
 		/// </summary>
@@ -133,10 +134,65 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseFind();
 		}
-
-        public void Cancel(int? id)
-        {
-            DoAction(id.ToString(), "cancel");
-        }
-    }
+		
+		/// <summary>
+		/// Creates an invoice from the order
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Order CreateInvoice(int? id)
+		{
+			return DoAction(id.ToString(), "createinvoice");
+		}
+		
+		/// <summary>
+		/// Cancels an order
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Order Cancel(int? id)
+		{
+			return DoAction(id.ToString(), "cancel");
+		}
+		
+		/// <summary>
+		/// Sends an e-mail to the customer with an attached PDF document of the invoice. You can use the field EmailInformation to customize the e-mail message on each invoice.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Order Email(int? id)
+		{
+			return DoAction(id.ToString(), "email");
+		}
+		
+		/// <summary>
+		/// This action returns a PDF document with the current template that is used by the specific document. Note that this action also sets the field Sent as true.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Order Print(int? id)
+		{
+			return DoAction(id.ToString(), "print");
+		}
+		
+		/// <summary>
+		/// This action is used to set the field Sent as true from an external system without generating a PDF.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Order ExternalPrint(int? id)
+		{
+			return DoAction(id.ToString(), "externalprint");
+		}
+		
+		/// <summary>
+		/// This action returns a PDF document with the current template that is used by the specific document. Apart from the action print, this action doesn’t set the field Sent as true.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Order Preview(int? id)
+		{
+			return DoAction(id.ToString(), "preview");
+		}
+	}
 }

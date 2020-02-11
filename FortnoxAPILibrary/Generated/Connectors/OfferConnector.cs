@@ -68,6 +68,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "offers";
 		}
+
 		/// <summary>
 		/// Find a offer based on id
 		/// </summary>
@@ -115,10 +116,65 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseFind();
 		}
-
-        public void Cancel(int? id)
-        {
-            DoAction(id.ToString(), "cancel");
-        }
-    }
+		
+		/// <summary>
+		/// Creates an order from the offer
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Offer CreateOrder(int? id)
+		{
+			return DoAction(id.ToString(), "createorder");
+		}
+		
+		/// <summary>
+		/// Cancels an offer
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Offer Cancel(int? id)
+		{
+			return DoAction(id.ToString(), "cancel");
+		}
+		
+		/// <summary>
+		/// Sends an e-mail to the customer with an attached PDF document of the offer. You can use the fieldEmailInformation to customize the e-mail message on each offer.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Offer Email(int? id)
+		{
+			return DoAction(id.ToString(), "email");
+		}
+		
+		/// <summary>
+		/// This action returns a PDF document with the current template that is used by the specific document. Note that this action also sets the field Sent as true.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Offer Print(int? id)
+		{
+			return DoAction(id.ToString(), "print");
+		}
+		
+		/// <summary>
+		/// This action is used to set the field Sent as true from an external system without generating a PDF.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Offer ExternalPrint(int? id)
+		{
+			return DoAction(id.ToString(), "externalprint");
+		}
+		
+		/// <summary>
+		/// This action returns a PDF document with the current template that is used by the specific document. Apart from the action print, this action doesn’t set the field Sent as true.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Offer Preview(int? id)
+		{
+			return DoAction(id.ToString(), "preview");
+		}
+	}
 }

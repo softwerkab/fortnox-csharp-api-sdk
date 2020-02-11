@@ -56,6 +56,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "contracts";
 		}
+
 		/// <summary>
 		/// Find a contract based on id
 		/// </summary>
@@ -103,35 +104,35 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseFind();
 		}
-
+		
 		/// <summary>
 		/// Set a contract as finished
-		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
+		/// </summary>
 		public Contract Finish(int? id)
-        {
-            return DoAction(id.ToString(), "finish");
-        }
-
+		{
+			return DoAction(id.ToString(), "finish");
+		}
+		
 		/// <summary>
 		/// Create invoice from contract
-		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
+		/// </summary>
 		public Contract CreateInvoice(int? id)
-        {
-            return DoAction(id.ToString(), "createinvoice");
-        }
-
+		{
+			return DoAction(id.ToString(), "createinvoice");
+		}
+		
 		/// <summary>
 		/// Increases the invoice count without creating an invoice
-		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
+		/// </summary>
 		public Contract IncreaseInvoiceCount(int? id)
-        {
-            return DoAction(id.ToString(), "increaseinvoicecount");
-        }
+		{
+			return DoAction(id.ToString(), "increaseinvoicecount");
+		}
 	}
 }

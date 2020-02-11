@@ -44,6 +44,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "supplierinvoices";
 		}
+
 		/// <summary>
 		/// Find a supplierInvoice based on id
 		/// </summary>
@@ -91,10 +92,55 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseFind();
 		}
-
-        public void Cancel(long? id)
-        {
-            DoAction(id.ToString(), "cancel");
-        }
-    }
+		
+		/// <summary>
+		/// Bookkeeps the supplier invoice
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public SupplierInvoice Bookkeep(long? id)
+		{
+			return DoAction(id.ToString(), "bookkeep");
+		}
+		
+		/// <summary>
+		/// Cancels the supplier invoice
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public SupplierInvoice Cancel(long? id)
+		{
+			return DoAction(id.ToString(), "cancel");
+		}
+		
+		/// <summary>
+		/// Creates a credit of the supplier invoice
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public SupplierInvoice Credit(long? id)
+		{
+			return DoAction(id.ToString(), "credit");
+		}
+		
+		/// <summary>
+		/// Approval of payment of the supplier invoice
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public SupplierInvoice ApprovalPayment(long? id)
+		{
+			return DoAction(id.ToString(), "approvalpayment");
+		}
+		
+		/// <summary>
+		/// Approval of bookkeep of the supplier invoice
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public SupplierInvoice ApprovalBookkeep(long? id)
+		{
+			return DoAction(id.ToString(), "approvalbookkeep");
+		}
+	}
 }
