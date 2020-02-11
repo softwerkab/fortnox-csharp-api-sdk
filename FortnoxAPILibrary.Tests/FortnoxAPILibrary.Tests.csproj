@@ -7,6 +7,64 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="GeneratedTests\AbsenceTransactionTests.cs" />
+    <Compile Remove="GeneratedTests\AccountChartTests.cs" />
+    <Compile Remove="GeneratedTests\AccountTests.cs" />
+    <Compile Remove="GeneratedTests\ArticleFileConnectionTests.cs" />
+    <Compile Remove="GeneratedTests\ArticleTests.cs" />
+    <Compile Remove="GeneratedTests\AssetFileConnectionTests.cs" />
+    <Compile Remove="GeneratedTests\AssetTests.cs" />
+    <Compile Remove="GeneratedTests\AssetTypesTests.cs" />
+    <Compile Remove="GeneratedTests\AttendanceTransactionsTests.cs" />
+    <Compile Remove="GeneratedTests\CompanyInformationTests.cs" />
+    <Compile Remove="GeneratedTests\CompanySettingsTests.cs" />
+    <Compile Remove="GeneratedTests\ContractAccrualTests.cs" />
+    <Compile Remove="GeneratedTests\ContractTemplateTests.cs" />
+    <Compile Remove="GeneratedTests\ContractTests.cs" />
+    <Compile Remove="GeneratedTests\CostCenterTests.cs" />
+    <Compile Remove="GeneratedTests\CurrencyTests.cs" />
+    <Compile Remove="GeneratedTests\CustomerTests.cs" />
+    <Compile Remove="GeneratedTests\EmployeeTests.cs" />
+    <Compile Remove="GeneratedTests\ExpenseTests.cs" />
+    <Compile Remove="GeneratedTests\FileTests.cs" />
+    <Compile Remove="GeneratedTests\FinancialYearTests.cs" />
+    <Compile Remove="GeneratedTests\InvoiceAccrualTests.cs" />
+    <Compile Remove="GeneratedTests\InvoiceFileConnectionTests.cs" />
+    <Compile Remove="GeneratedTests\InvoicePaymentTests.cs" />
+    <Compile Remove="GeneratedTests\InvoiceTests.cs" />
+    <Compile Remove="GeneratedTests\LabelTests.cs" />
+    <Compile Remove="GeneratedTests\LockedPeriodTests.cs" />
+    <Compile Remove="GeneratedTests\ModeOfPaymentTests.cs" />
+    <Compile Remove="GeneratedTests\NoxFinansInvoiceTests.cs" />
+    <Compile Remove="GeneratedTests\OfferTests.cs" />
+    <Compile Remove="GeneratedTests\OrderTests.cs" />
+    <Compile Remove="GeneratedTests\PredefinedAccountsTests.cs" />
+    <Compile Remove="GeneratedTests\PredefinedVoucherSeriesTests.cs" />
+    <Compile Remove="GeneratedTests\PriceListTests.cs" />
+    <Compile Remove="GeneratedTests\PriceTests.cs" />
+    <Compile Remove="GeneratedTests\PrintTemplateTests.cs" />
+    <Compile Remove="GeneratedTests\ProjectTests.cs" />
+    <Compile Remove="GeneratedTests\SalaryTransactionTests.cs" />
+    <Compile Remove="GeneratedTests\ScheduleTimesTests.cs" />
+    <Compile Remove="GeneratedTests\SupplierInvoiceAccrualTests.cs" />
+    <Compile Remove="GeneratedTests\SupplierInvoiceExternalURLConnectionTests.cs" />
+    <Compile Remove="GeneratedTests\SupplierInvoiceFileConnectionTests.cs" />
+    <Compile Remove="GeneratedTests\SupplierInvoicePaymentTests.cs" />
+    <Compile Remove="GeneratedTests\SupplierInvoiceTests.cs" />
+    <Compile Remove="GeneratedTests\SupplierTests.cs" />
+    <Compile Remove="GeneratedTests\TaxReductionTests.cs" />
+    <Compile Remove="GeneratedTests\TermsOfDeliveryTests.cs" />
+    <Compile Remove="GeneratedTests\TermsOfPaymentTests.cs" />
+    <Compile Remove="GeneratedTests\TrustedEmailDomainsTests.cs" />
+    <Compile Remove="GeneratedTests\TrustedEmailSendersTests.cs" />
+    <Compile Remove="GeneratedTests\UnitTests.cs" />
+    <Compile Remove="GeneratedTests\VoucherFileConnectionTests.cs" />
+    <Compile Remove="GeneratedTests\VoucherSeriesTests.cs" />
+    <Compile Remove="GeneratedTests\VoucherTests.cs" />
+    <Compile Remove="GeneratedTests\WayOfDeliveryTests.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
@@ -39,6 +97,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>TestCredentials.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="GeneratedTests\" />
   </ItemGroup>
 
 </Project>
