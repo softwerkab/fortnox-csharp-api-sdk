@@ -1,11 +1,12 @@
+using FortnoxAPILibrary.Serialization;
+using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
-
-using Newtonsoft.Json;
 
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
+    [Entity(SingularName = "Customer", PluralName = "Customers")]
     public class CustomerSubset
     {
         /// <remarks/>
