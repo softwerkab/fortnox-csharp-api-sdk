@@ -31,39 +31,44 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newAccount = new Account()
             {
-                //TODO: Populate Entity
+                Description = "Test Account",
+                Active = false,
+                Number = 0123,
+                CostCenterSettings = CostCenterSettings.ALLOWED,
+                ProjectSettings = ProjectSettings.ALLOWED,
+                SRU = 123
             };
 
             var createdAccount = connector.Create(newAccount);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdAccount.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("Test Account", createdAccount.Description);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdAccount.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdAccount.Description = "Updated Test Account";
 
             var updatedAccount = connector.Update(createdAccount); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedAccount.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("Updated Test Account", updatedAccount.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedAccount = connector.Get(createdAccount.Number); //TODO: Check ID property
+            var retrievedAccount = connector.Get(createdAccount.Number);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedAccount.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("Updated Test Account", retrievedAccount.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdAccount.Number); //TODO: Check ID property
+            connector.Delete(createdAccount.Number);
             MyAssert.HasNoError(connector);
 
-            retrievedAccount = connector.Get(createdAccount.Number); //TODO: Check ID property
+            retrievedAccount = connector.Get(createdAccount.Number);
             Assert.AreEqual(null, retrievedAccount, "Entity still exists after Delete!");
 
             #endregion DELETE

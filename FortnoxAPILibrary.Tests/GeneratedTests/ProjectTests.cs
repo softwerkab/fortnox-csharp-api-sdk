@@ -31,39 +31,45 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newProject = new Project()
             {
-                //TODO: Populate Entity
+                Description = "TestProject",
+                Status = Status.ONGOING,
+                StartDate = new DateTime(2019, 10, 10),
+                EndDate = new DateTime(2021, 10, 10),
+                ProjectLeader = "TestProjectLeader",
+                ContactPerson = "TestContactPerson",
+                Comments = "TestComments"
             };
 
             var createdProject = connector.Create(newProject);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdProject.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestProject", createdProject.Description);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdProject.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdProject.Description = "UpdatedProject";
 
             var updatedProject = connector.Update(createdProject); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedProject.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedProject", updatedProject.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedProject = connector.Get(createdProject.ProjectNumber); //TODO: Check ID property
+            var retrievedProject = connector.Get(createdProject.ProjectNumber);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedProject.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedProject", retrievedProject.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdProject.ProjectNumber); //TODO: Check ID property
+            connector.Delete(createdProject.ProjectNumber);
             MyAssert.HasNoError(connector);
 
-            retrievedProject = connector.Get(createdProject.ProjectNumber); //TODO: Check ID property
+            retrievedProject = connector.Get(createdProject.ProjectNumber);
             Assert.AreEqual(null, retrievedProject, "Entity still exists after Delete!");
 
             #endregion DELETE

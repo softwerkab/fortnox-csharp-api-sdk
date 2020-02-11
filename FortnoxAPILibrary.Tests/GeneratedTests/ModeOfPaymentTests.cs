@@ -23,53 +23,55 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_ModeOfPayment_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var tmpAccount = new AccountConnector().Create(new Account(){Description = "TestAccount", Number = 0123});
             #endregion Arrange
 
             var connector = new ModeOfPaymentConnector();
-
+            connector.Delete("TEST_MODE");
             #region CREATE
             var newModeOfPayment = new ModeOfPayment()
             {
-                //TODO: Populate Entity
+                Description = "TestMode",
+                AccountNumber = 0123,
+                Code = "TEST_MODE",
             };
 
             var createdModeOfPayment = connector.Create(newModeOfPayment);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdModeOfPayment.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestMode", createdModeOfPayment.Description);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdModeOfPayment.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdModeOfPayment.Description = "UpdatedMode";
 
             var updatedModeOfPayment = connector.Update(createdModeOfPayment); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedModeOfPayment.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedMode", updatedModeOfPayment.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedModeOfPayment = connector.Get(createdModeOfPayment.Code); //TODO: Check ID property
+            var retrievedModeOfPayment = connector.Get(createdModeOfPayment.Code);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedModeOfPayment.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedMode", retrievedModeOfPayment.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdModeOfPayment.Code); //TODO: Check ID property
+            connector.Delete(createdModeOfPayment.Code);
             MyAssert.HasNoError(connector);
 
-            retrievedModeOfPayment = connector.Get(createdModeOfPayment.Code); //TODO: Check ID property
+            retrievedModeOfPayment = connector.Get(createdModeOfPayment.Code);
             Assert.AreEqual(null, retrievedModeOfPayment, "Entity still exists after Delete!");
 
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new AccountConnector().Delete(0123);
             #endregion Delete arranged resources
         }
     }

@@ -29,43 +29,19 @@ namespace FortnoxAPILibrary.GeneratedTests
             var connector = new AccountChartConnector();
 
             #region CREATE
-            var newAccountChart = new AccountChart()
-            {
-                //TODO: Populate Entity
-            };
-
-            var createdAccountChart = connector.Create(newAccountChart);
-            MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdAccountChart.SomeProperty); //TODO: Adapt
-
+            //Not allowed
             #endregion CREATE
 
             #region UPDATE
-
-            createdAccountChart.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
-
-            var updatedAccountChart = connector.Update(createdAccountChart); 
-            MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedAccountChart.SomeProperty); //TODO: Adapt
-
+            //Not allowed
             #endregion UPDATE
 
             #region READ / GET
-
-            var retrievedAccountChart = connector.Get(createdAccountChart.ID); //TODO: Check ID property
-            MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedAccountChart.SomeProperty); //TODO: Adapt
-
+            //Not Allowed
             #endregion READ / GET
 
             #region DELETE
-
-            connector.Delete(createdAccountChart.ID); //TODO: Check ID property
-            MyAssert.HasNoError(connector);
-
-            retrievedAccountChart = connector.Get(createdAccountChart.ID); //TODO: Check ID property
-            Assert.AreEqual(null, retrievedAccountChart, "Entity still exists after Delete!");
-
+            //Not allowed
             #endregion DELETE
 
             #region Delete arranged resources

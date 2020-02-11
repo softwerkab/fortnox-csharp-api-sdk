@@ -23,7 +23,8 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_Invoice_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
             #endregion Arrange
 
             var connector = new InvoiceConnector();
@@ -31,45 +32,53 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newInvoice = new Invoice()
             {
-                //TODO: Populate Entity
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
+                InvoiceType = InvoiceType.CASHINVOICE,
+                PaymentWay = "CASH",
+                Comments = "TestInvoice",
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15}
+                }
             };
 
             var createdInvoice = connector.Create(newInvoice);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdInvoice.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestInvoice", createdInvoice.Comments);
+            Assert.AreEqual("TmpCustomer", createdInvoice.CustomerName);
+            Assert.AreEqual(3, createdInvoice.InvoiceRows.Count);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdInvoice.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdInvoice.Comments = "UpdatedInvoice";
 
             var updatedInvoice = connector.Update(createdInvoice); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedInvoice.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedInvoice", updatedInvoice.Comments);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedInvoice = connector.Get(createdInvoice.DocumentNumber); //TODO: Check ID property
+            var retrievedInvoice = connector.Get(createdInvoice.DocumentNumber);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedInvoice.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedInvoice", retrievedInvoice.Comments);
 
             #endregion READ / GET
 
             #region DELETE
-
-            connector.Delete(createdInvoice.DocumentNumber); //TODO: Check ID property
-            MyAssert.HasNoError(connector);
-
-            retrievedInvoice = connector.Get(createdInvoice.DocumentNumber); //TODO: Check ID property
-            Assert.AreEqual(null, retrievedInvoice, "Entity still exists after Delete!");
-
+            //Not available
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

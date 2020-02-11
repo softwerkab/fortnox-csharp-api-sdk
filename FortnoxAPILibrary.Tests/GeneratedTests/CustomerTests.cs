@@ -31,39 +31,47 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newCustomer = new Customer()
             {
-                //TODO: Populate Entity
+                Name = "TestCustomer",
+                Address1 = "TestStreet 1",
+                Address2 = "TestStreet 2",
+                ZipCode = "01010",
+                City = "Testopolis",
+                CountryCode = "SE", //CountryCode needs to be valid
+                Email = "testCustomer@test.com",
+                Type = CustomerType.PRIVATE,
+                Active = false
             };
 
             var createdCustomer = connector.Create(newCustomer);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdCustomer.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestCustomer", createdCustomer.Name);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdCustomer.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdCustomer.Name = "UpdatedTestCustomer";
 
             var updatedCustomer = connector.Update(createdCustomer); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedCustomer.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestCustomer", updatedCustomer.Name);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedCustomer = connector.Get(createdCustomer.CustomerNumber); //TODO: Check ID property
+            var retrievedCustomer = connector.Get(createdCustomer.CustomerNumber);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedCustomer.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestCustomer", retrievedCustomer.Name);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdCustomer.CustomerNumber); //TODO: Check ID property
+            connector.Delete(createdCustomer.CustomerNumber);
             MyAssert.HasNoError(connector);
 
-            retrievedCustomer = connector.Get(createdCustomer.CustomerNumber); //TODO: Check ID property
+            retrievedCustomer = connector.Get(createdCustomer.CustomerNumber);
             Assert.AreEqual(null, retrievedCustomer, "Entity still exists after Delete!");
 
             #endregion DELETE

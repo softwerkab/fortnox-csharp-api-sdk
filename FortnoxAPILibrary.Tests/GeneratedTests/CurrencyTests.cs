@@ -23,7 +23,10 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_Currency_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            //Random currency code is not accepted by the server, therefore "SKK" is used.
+            var currencyConnector = new CurrencyConnector();
+            if (currencyConnector.Get("SKK") != null) //Delete currency if already exists
+                currencyConnector.Delete("SKK");
             #endregion Arrange
 
             var connector = new CurrencyConnector();
@@ -31,39 +34,42 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newCurrency = new Currency()
             {
-                //TODO: Populate Entity
+                Description = "TestCurrency",
+                Code = "SKK",
+                BuyRate = 1.11,
+                SellRate = 1.21
             };
 
             var createdCurrency = connector.Create(newCurrency);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdCurrency.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestCurrency", createdCurrency.Description);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdCurrency.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdCurrency.Description = "UpdatedCurrency";
 
             var updatedCurrency = connector.Update(createdCurrency); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedCurrency.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedCurrency", updatedCurrency.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedCurrency = connector.Get(createdCurrency.Code); //TODO: Check ID property
+            var retrievedCurrency = connector.Get(createdCurrency.Code);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedCurrency.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedCurrency", retrievedCurrency.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdCurrency.Code); //TODO: Check ID property
+            connector.Delete(createdCurrency.Code);
             MyAssert.HasNoError(connector);
 
-            retrievedCurrency = connector.Get(createdCurrency.Code); //TODO: Check ID property
+            retrievedCurrency = connector.Get(createdCurrency.Code);
             Assert.AreEqual(null, retrievedCurrency, "Entity still exists after Delete!");
 
             #endregion DELETE

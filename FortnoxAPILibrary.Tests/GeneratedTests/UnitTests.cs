@@ -31,39 +31,40 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newUnit = new Unit()
             {
-                //TODO: Populate Entity
+                Code = "TST",
+                Description = "TestUnit"
             };
 
             var createdUnit = connector.Create(newUnit);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdUnit.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestUnit", createdUnit.Description);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdUnit.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdUnit.Description = "UpdatedTestUnit";
 
             var updatedUnit = connector.Update(createdUnit); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedUnit.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestUnit", updatedUnit.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedUnit = connector.Get(createdUnit.Code); //TODO: Check ID property
+            var retrievedUnit = connector.Get(createdUnit.Code);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedUnit.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestUnit", retrievedUnit.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdUnit.Code); //TODO: Check ID property
+            connector.Delete(createdUnit.Code);
             MyAssert.HasNoError(connector);
 
-            retrievedUnit = connector.Get(createdUnit.Code); //TODO: Check ID property
+            retrievedUnit = connector.Get(createdUnit.Code);
             Assert.AreEqual(null, retrievedUnit, "Entity still exists after Delete!");
 
             #endregion DELETE

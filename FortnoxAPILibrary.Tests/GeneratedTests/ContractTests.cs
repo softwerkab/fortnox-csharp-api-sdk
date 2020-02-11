@@ -23,7 +23,8 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_Contract_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
             #endregion Arrange
 
             var connector = new ContractConnector();
@@ -31,45 +32,55 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newContract = new Contract()
             {
-                //TODO: Populate Entity
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                ContractDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                Active = false,
+                Comments = "TestContract",
+                ContractLength = 4,
+                Continuous = true,
+                Currency = "SEK",
+                Language = Language.EN,
+                InvoiceRows = new List<ContractInvoiceRow>()
+                {
+                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "10"},
+                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "20"},
+                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "15"}
+                },
+                PeriodStart = new DateTime(2020, 01, 01),
+                PeriodEnd = new DateTime(2020, 03, 01)
             };
 
             var createdContract = connector.Create(newContract);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdContract.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestContract", createdContract.Comments); //TODO: Adapt
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdContract.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdContract.Comments = "UpdatedTestContract";
 
             var updatedContract = connector.Update(createdContract); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedContract.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestContract", updatedContract.Comments);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedContract = connector.Get(createdContract.DocumentNumber); //TODO: Check ID property
+            var retrievedContract = connector.Get(createdContract.DocumentNumber);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedContract.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestContract", retrievedContract.Comments);
 
             #endregion READ / GET
 
             #region DELETE
-
-            connector.Delete(createdContract.DocumentNumber); //TODO: Check ID property
-            MyAssert.HasNoError(connector);
-
-            retrievedContract = connector.Get(createdContract.DocumentNumber); //TODO: Check ID property
-            Assert.AreEqual(null, retrievedContract, "Entity still exists after Delete!");
-
+            // Not available
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

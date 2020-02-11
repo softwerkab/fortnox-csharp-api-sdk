@@ -31,39 +31,45 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newEmployee = new Employee()
             {
-                //TODO: Populate Entity
+                FirstName = "Test",
+                LastName = "Testasson",
+                City = "Växjö",
+                Country = "Sweden",
+                ForaType = ForaType.A74,
+                JobTitle = "Woodcutter",
+                HourlyPay = 123.45
             };
 
             var createdEmployee = connector.Create(newEmployee);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdEmployee.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("Test", createdEmployee.FirstName);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdEmployee.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
-
+            createdEmployee.FirstName = "UpdatedTest";
+            
             var updatedEmployee = connector.Update(createdEmployee); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedEmployee.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTest", updatedEmployee.FirstName);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedEmployee = connector.Get(createdEmployee.EmployeeId); //TODO: Check ID property
+            var retrievedEmployee = connector.Get(createdEmployee.EmployeeId);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedEmployee.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTest", retrievedEmployee.FirstName);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdEmployee.EmployeeId); //TODO: Check ID property
+            connector.Delete(createdEmployee.EmployeeId);
             MyAssert.HasNoError(connector);
 
-            retrievedEmployee = connector.Get(createdEmployee.EmployeeId); //TODO: Check ID property
+            retrievedEmployee = connector.Get(createdEmployee.EmployeeId);
             Assert.AreEqual(null, retrievedEmployee, "Entity still exists after Delete!");
 
             #endregion DELETE

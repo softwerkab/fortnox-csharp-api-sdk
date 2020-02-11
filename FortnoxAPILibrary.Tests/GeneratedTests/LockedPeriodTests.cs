@@ -29,43 +29,23 @@ namespace FortnoxAPILibrary.GeneratedTests
             var connector = new LockedPeriodConnector();
 
             #region CREATE
-            var newLockedPeriod = new LockedPeriod()
-            {
-                //TODO: Populate Entity
-            };
-
-            var createdLockedPeriod = connector.Create(newLockedPeriod);
-            MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdLockedPeriod.SomeProperty); //TODO: Adapt
-
+            //Not Allowed
             #endregion CREATE
 
             #region UPDATE
-
-            createdLockedPeriod.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
-
-            var updatedLockedPeriod = connector.Update(createdLockedPeriod); 
-            MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedLockedPeriod.SomeProperty); //TODO: Adapt
-
+            //Not Allowed
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedLockedPeriod = connector.Get(createdLockedPeriod.ID); //TODO: Check ID property
+            var retrievedLockedPeriod = connector.Get();
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedLockedPeriod.SomeProperty); //TODO: Adapt
+            Assert.IsNotNull(retrievedLockedPeriod);
 
             #endregion READ / GET
 
             #region DELETE
-
-            connector.Delete(createdLockedPeriod.ID); //TODO: Check ID property
-            MyAssert.HasNoError(connector);
-
-            retrievedLockedPeriod = connector.Get(createdLockedPeriod.ID); //TODO: Check ID property
-            Assert.AreEqual(null, retrievedLockedPeriod, "Entity still exists after Delete!");
-
+            //Not Allowed
             #endregion DELETE
 
             #region Delete arranged resources

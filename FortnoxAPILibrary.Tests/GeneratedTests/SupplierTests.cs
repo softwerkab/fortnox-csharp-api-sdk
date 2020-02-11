@@ -31,39 +31,49 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newSupplier = new Supplier()
             {
-                //TODO: Populate Entity
+                Name = "TestSupplier",
+                Address1 = "TestStreet 1",
+                Address2 = "TestStreet 2",
+                ZipCode = "01010",
+                City = "Testopolis",
+                CountryCode = "SE", //CountryCode needs to be valid
+                Email = "testSupplier@test.com",
+                Active = false,
+                Bank = "TestBank",
+                Currency = "SEK",
+                Phone1 = "01011111345",
             };
 
             var createdSupplier = connector.Create(newSupplier);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdSupplier.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestSupplier", createdSupplier.Name);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdSupplier.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdSupplier.Name = "UpdatedSupplier";
 
             var updatedSupplier = connector.Update(createdSupplier); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedSupplier.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedSupplier", updatedSupplier.Name);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedSupplier = connector.Get(createdSupplier.SupplierNumber); //TODO: Check ID property
+            var retrievedSupplier = connector.Get(createdSupplier.SupplierNumber);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedSupplier.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedSupplier", retrievedSupplier.Name);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdSupplier.SupplierNumber); //TODO: Check ID property
+            connector.Delete(createdSupplier.SupplierNumber);
             MyAssert.HasNoError(connector);
 
-            retrievedSupplier = connector.Get(createdSupplier.SupplierNumber); //TODO: Check ID property
+            retrievedSupplier = connector.Get(createdSupplier.SupplierNumber);
             Assert.AreEqual(null, retrievedSupplier, "Entity still exists after Delete!");
 
             #endregion DELETE

@@ -31,39 +31,45 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newArticle = new Article()
             {
-                //TODO: Populate Entity
+                Description = "Test Article",
+                Height = 60,
+                Width = 150,
+                Type = ArticleType.STOCK,
+                PurchasePrice = 2499.50,
+                FreightCost = 200,
+                OtherCost = 210,
+                Note = "Definitely not worth the price."
             };
 
             var createdArticle = connector.Create(newArticle);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdArticle.SomeProperty); //TODO: Adapt
-
+            Assert.AreEqual("Test Article", createdArticle.Description);
             #endregion CREATE
 
             #region UPDATE
 
-            createdArticle.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdArticle.Description = "Updated Test Article";
 
             var updatedArticle = connector.Update(createdArticle); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedArticle.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("Updated Test Article", updatedArticle.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedArticle = connector.Get(createdArticle.ArticleNumber); //TODO: Check ID property
+            var retrievedArticle = connector.Get(createdArticle.ArticleNumber);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedArticle.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("Updated Test Article", retrievedArticle.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdArticle.ArticleNumber); //TODO: Check ID property
+            connector.Delete(createdArticle.ArticleNumber);
             MyAssert.HasNoError(connector);
 
-            retrievedArticle = connector.Get(createdArticle.ArticleNumber); //TODO: Check ID property
+            retrievedArticle = connector.Get(createdArticle.ArticleNumber);
             Assert.AreEqual(null, retrievedArticle, "Entity still exists after Delete!");
 
             #endregion DELETE

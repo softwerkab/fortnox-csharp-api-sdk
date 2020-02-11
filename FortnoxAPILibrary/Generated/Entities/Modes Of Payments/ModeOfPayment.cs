@@ -11,8 +11,9 @@ namespace FortnoxAPILibrary.Entities
     {
 
         ///<summary> Direct url to the record </summary>
+        [ReadOnly]
         [JsonProperty("@url")]
-        public string Url { get; set; }
+        public string Url { get; private set; }
 
         ///<summary> Code for mode of payment </summary>
         [JsonProperty]

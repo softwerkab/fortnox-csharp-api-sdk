@@ -31,39 +31,40 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newWayOfDelivery = new WayOfDelivery()
             {
-                //TODO: Populate Entity
+                Code = "TST",
+                Description = "TestDeliveryMethod"
             };
 
             var createdWayOfDelivery = connector.Create(newWayOfDelivery);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdWayOfDelivery.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestDeliveryMethod", createdWayOfDelivery.Description);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdWayOfDelivery.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdWayOfDelivery.Description = "UpdatedTestDeliveryMethod";
 
             var updatedWayOfDelivery = connector.Update(createdWayOfDelivery); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedWayOfDelivery.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestDeliveryMethod", updatedWayOfDelivery.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedWayOfDelivery = connector.Get(createdWayOfDelivery.Code); //TODO: Check ID property
+            var retrievedWayOfDelivery = connector.Get(createdWayOfDelivery.Code);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedWayOfDelivery.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestDeliveryMethod", retrievedWayOfDelivery.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdWayOfDelivery.Code); //TODO: Check ID property
+            connector.Delete(createdWayOfDelivery.Code);
             MyAssert.HasNoError(connector);
 
-            retrievedWayOfDelivery = connector.Get(createdWayOfDelivery.Code); //TODO: Check ID property
+            retrievedWayOfDelivery = connector.Get(createdWayOfDelivery.Code);
             Assert.AreEqual(null, retrievedWayOfDelivery, "Entity still exists after Delete!");
 
             #endregion DELETE

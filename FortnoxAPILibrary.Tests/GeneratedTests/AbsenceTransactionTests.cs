@@ -23,7 +23,13 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_AbsenceTransaction_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var employeeConnector = new EmployeeConnector();
+            var tmpEmployee = employeeConnector.Create(new Employee()
+            {
+                FirstName = "Test",
+                LastName = "Name",
+            });
+            MyAssert.HasNoError(employeeConnector);
             #endregion Arrange
 
             var connector = new AbsenceTransactionConnector();
@@ -31,45 +37,47 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newAbsenceTransaction = new AbsenceTransaction()
             {
-                //TODO: Populate Entity
+                EmployeeId = tmpEmployee.EmployeeId,
+                CauseCode = CauseCode.MIL,
+                Date = new DateTime(2018, 01,01),
+                Hours = 5.5
             };
 
             var createdAbsenceTransaction = connector.Create(newAbsenceTransaction);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdAbsenceTransaction.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(5.5, createdAbsenceTransaction.Hours);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdAbsenceTransaction.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdAbsenceTransaction.Hours = 8;
 
             var updatedAbsenceTransaction = connector.Update(createdAbsenceTransaction); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedAbsenceTransaction.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(8, updatedAbsenceTransaction.Hours);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedAbsenceTransaction = connector.Get(createdAbsenceTransaction.ID); //TODO: Check ID property
+            var retrievedAbsenceTransaction = connector.Get(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedAbsenceTransaction.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(8, retrievedAbsenceTransaction.Hours);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdAbsenceTransaction.ID); //TODO: Check ID property
+            connector.Delete(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode);
             MyAssert.HasNoError(connector);
 
-            retrievedAbsenceTransaction = connector.Get(createdAbsenceTransaction.ID); //TODO: Check ID property
+            retrievedAbsenceTransaction = connector.Get(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode);
             Assert.AreEqual(null, retrievedAbsenceTransaction, "Entity still exists after Delete!");
 
             #endregion DELETE
-
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            employeeConnector.Delete(tmpEmployee.EmployeeId);
             #endregion Delete arranged resources
         }
     }

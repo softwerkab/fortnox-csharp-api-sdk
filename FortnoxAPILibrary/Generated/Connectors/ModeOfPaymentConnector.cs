@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public ModeOfPaymentConnector()
 		{
-			Resource = "modeofpayments";
+			Resource = "modesofpayments";
 		}
 		/// <summary>
 		/// Find a modeOfPayment based on id

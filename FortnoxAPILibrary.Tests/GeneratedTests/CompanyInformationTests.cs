@@ -29,43 +29,24 @@ namespace FortnoxAPILibrary.GeneratedTests
             var connector = new CompanyInformationConnector();
 
             #region CREATE
-            var newCompanyInformation = new CompanyInformation()
-            {
-                //TODO: Populate Entity
-            };
-
-            var createdCompanyInformation = connector.Create(newCompanyInformation);
-            MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdCompanyInformation.SomeProperty); //TODO: Adapt
-
+            //Not Allowed
             #endregion CREATE
 
             #region UPDATE
-
-            createdCompanyInformation.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
-
-            var updatedCompanyInformation = connector.Update(createdCompanyInformation); 
-            MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedCompanyInformation.SomeProperty); //TODO: Adapt
+            //Not Allowed
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedCompanyInformation = connector.Get(createdCompanyInformation.ID); //TODO: Check ID property
+            var retrievedCompanyInformation = connector.Get();
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedCompanyInformation.SomeProperty); //TODO: Adapt
+            Assert.IsNotNull(retrievedCompanyInformation?.CompanyName);
 
             #endregion READ / GET
 
             #region DELETE
-
-            connector.Delete(createdCompanyInformation.ID); //TODO: Check ID property
-            MyAssert.HasNoError(connector);
-
-            retrievedCompanyInformation = connector.Get(createdCompanyInformation.ID); //TODO: Check ID property
-            Assert.AreEqual(null, retrievedCompanyInformation, "Entity still exists after Delete!");
-
+            //Not Allowed
             #endregion DELETE
 
             #region Delete arranged resources

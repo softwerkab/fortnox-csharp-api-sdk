@@ -84,11 +84,13 @@ namespace FortnoxAPILibrary
             return DoRequest(wrappedEntity)?.Entity;
         }
 
-        protected void BaseDelete(string index)
+        protected void BaseDelete(params string[] indices)
         {
             Parameters = new Dictionary<string, string>();
 
-            var requestUriString = GetUrl(index);
+            var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
+
+            var requestUriString = GetUrl(searchValue);
 
             requestUriString = AddParameters(requestUriString);
 
