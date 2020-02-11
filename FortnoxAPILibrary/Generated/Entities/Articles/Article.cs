@@ -170,18 +170,18 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Custom bookkeeping account used for stock for the article </summary>
         [JsonProperty]
-        public int StockAccount { get; set; }
+        public int? StockAccount { get; set; }
 
         ///<summary> Purchase price – Direct cost </summary>
         [JsonProperty]
-        public int DirectCost { get; set; }
+        public int? DirectCost { get; set; }
 
         ///<summary> Purchase price – Freight cost </summary>
         [JsonProperty]
-        public int FreightCost { get; set; }
+        public int? FreightCost { get; set; }
 
         ///<summary> Purchase price – Other cost </summary>
         [JsonProperty]
-        public int OtherCost { get; set; }
+        public int? OtherCost { get; set; }
     }
 }

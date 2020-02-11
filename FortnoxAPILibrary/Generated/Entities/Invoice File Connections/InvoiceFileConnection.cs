@@ -12,16 +12,16 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> ID of the document.  Can be used as “entityids” to fetch attachments from multiple entities </summary>
         [JsonProperty]
-        public long entityId { get; set; }
+        public long? entityId { get; set; }
 
         ///<summary> Number of attachments on the document (also the ones set as not included for send) </summary>
         [ReadOnly]
         [JsonProperty]
-        public long numberOfAttachments { get; private set; }
+        public long? numberOfAttachments { get; private set; }
 
         ///<summary> Document type (“F”, “O” or “OF”)  O = Orders  OF = Offers  F = Invoices </summary>
         [JsonProperty]
-        public long entityType { get; set; }
+        public long? entityType { get; set; }
 
         ///<summary> ID of the file.  Use ArchiveFileId from Inbox/Archive endpoint in this field. </summary>
         [JsonProperty]
