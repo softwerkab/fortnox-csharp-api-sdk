@@ -73,5 +73,14 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseFind();
 		}
+
+		/// <summary>
+		/// Bookkeeps the invoice payment
+		/// </summary>
+		/// <param name="id"></param>
+		public void Bookkeep(int? id)
+        {
+            DoAction(id.ToString(), "bookkeep");
+        }
 	}
 }

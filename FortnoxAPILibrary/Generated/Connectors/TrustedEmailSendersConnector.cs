@@ -18,7 +18,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public TrustedEmailSendersConnector()
 		{
-			Resource = "trustedemailsenders";
+			Resource = "emailsenders";
 		}
 		/// <summary>
 		/// Find a trustedEmailSenders based on id
@@ -67,5 +67,8 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseFind();
 		}
+
+
+        //TODO: Special: Resource path changes for post request
 	}
 }

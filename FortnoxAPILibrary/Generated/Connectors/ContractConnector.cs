@@ -104,14 +104,34 @@ namespace FortnoxAPILibrary.Connectors
 			return BaseFind();
 		}
 
-        /// <summary>
-        /// Finish a contract
-        /// </summary>
-        /// <param name="id">The document number of the contract to finish.</param>
-        /// <returns>The finished contract</returns>
-        public Contract Finish(int? id)
+		/// <summary>
+		/// Set a contract as finished
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public Contract Finish(int? id)
         {
             return DoAction(id.ToString(), "finish");
+        }
+
+		/// <summary>
+		/// Create invoice from contract
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public Contract CreateInvoice(int? id)
+        {
+            return DoAction(id.ToString(), "createinvoice");
+        }
+
+		/// <summary>
+		/// Increases the invoice count without creating an invoice
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public Contract IncreaseInvoiceCount(int? id)
+        {
+            return DoAction(id.ToString(), "increaseinvoicecount");
         }
 	}
 }

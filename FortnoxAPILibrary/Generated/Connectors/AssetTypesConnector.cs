@@ -1,3 +1,4 @@
+using System;
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
@@ -18,14 +19,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public AssetTypesConnector()
 		{
-			Resource = "assettypes";
+			Resource = "assets/types";
 		}
 		/// <summary>
 		/// Find a assetTypes based on id
 		/// </summary>
 		/// <param name="id">Identifier of the assetTypes to find</param>
 		/// <returns>The found assetTypes</returns>
-		public AssetTypes Get(int id)
+		public AssetTypes Get(int? id)
 		{
 			return BaseGet(id.ToString());
 		}
@@ -38,7 +39,7 @@ namespace FortnoxAPILibrary.Connectors
 		public AssetTypes Update(AssetTypes assetTypes)
 		{
 			return BaseUpdate(assetTypes, assetTypes.Id.ToString());
-		}
+        }
 
 		/// <summary>
 		/// Creates a new assetTypes
@@ -54,7 +55,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a assetTypes
 		/// </summary>
 		/// <param name="id">Identifier of the assetTypes to delete</param>
-		public void Delete(int id)
+		public void Delete(int? id)
 		{
 			BaseDelete(id.ToString());
 		}

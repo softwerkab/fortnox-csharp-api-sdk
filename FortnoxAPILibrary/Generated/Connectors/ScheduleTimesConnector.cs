@@ -28,5 +28,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseFind();
 		}
+
+		//TODO: Special, multiple argument for requests
 	}
 }

@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class CompanyInformationConnector : EntityConnector<CompanyInformation, EntityCollection<CompanyInformationSubset>, Sort.By.CompanyInformation?>
+    public class CompanyInformationConnector : EntityConnector<CompanyInformation, EntityWrapper<CompanyInformation>, Sort.By.CompanyInformation?>
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
@@ -20,13 +20,14 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "companyinformation";
 		}
+
 		/// <summary>
-		/// Gets a list of companyInformations
+		/// Retrieves the Company Information.
 		/// </summary>
-		/// <returns>A list of companyInformations</returns>
-		public EntityCollection<CompanyInformationSubset> Find()
-		{
-			return BaseFind();
-		}
+		/// <returns></returns>
+		public CompanyInformation Get()
+        {
+            return BaseFind()?.Entity;
+        }
 	}
 }

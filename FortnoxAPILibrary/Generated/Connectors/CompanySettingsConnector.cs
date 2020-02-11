@@ -21,9 +21,13 @@ namespace FortnoxAPILibrary.Connectors
 			Resource = "settings/company";
 		}
 
+        /// <summary>
+        /// Retrieves the company settings.
+        /// </summary>
+        /// <returns></returns>
         public CompanySettings Get()
         {
-            return BaseFind().Entity;
+            return BaseFind()?.Entity;
         }
     }
 }

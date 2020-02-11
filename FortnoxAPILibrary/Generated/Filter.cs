@@ -199,7 +199,10 @@ namespace FortnoxAPILibrary
 		}
         public enum Employee
 		{
-
+            [StringValue("active")]
+			Active,
+            [StringValue("inactive")]
+			Inactive
 		}
 		public enum Expense
 		{
@@ -255,7 +258,12 @@ namespace FortnoxAPILibrary
 		}
 		public enum PrintTemplate
 		{
-
+            [StringValue("order")]
+            Order,
+            [StringValue("offer")]
+            Offer,
+            [StringValue("invoice")]
+            Invoice
 		}
 		public enum Project
 		{

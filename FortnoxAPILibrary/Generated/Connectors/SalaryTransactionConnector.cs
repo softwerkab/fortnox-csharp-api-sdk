@@ -14,6 +14,17 @@ namespace FortnoxAPILibrary.Connectors
         [SearchParameter("filter")]
 		public Filter.SalaryTransaction? FilterBy { get; set; }
 
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+        public string EmployeeId { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+        public string Date { get; set; }
 
 		/// <remarks/>
 		public SalaryTransactionConnector()
@@ -25,7 +36,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the salaryTransaction to find</param>
 		/// <returns>The found salaryTransaction</returns>
-		public SalaryTransaction Get(double? id)
+		public SalaryTransaction Get(int? id)
 		{
 			return BaseGet(id.ToString());
 		}
@@ -37,7 +48,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated salaryTransaction</returns>
 		public SalaryTransaction Update(SalaryTransaction salaryTransaction)
 		{
-			return BaseUpdate(salaryTransaction, salaryTransaction.Number.ToString());
+			return BaseUpdate(salaryTransaction, salaryTransaction.SalaryRow.ToString());
 		}
 
 		/// <summary>
@@ -54,7 +65,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a salaryTransaction
 		/// </summary>
 		/// <param name="id">Identifier of the salaryTransaction to delete</param>
-		public void Delete(double? id)
+		public void Delete(int? id)
 		{
 			BaseDelete(id.ToString());
 		}
