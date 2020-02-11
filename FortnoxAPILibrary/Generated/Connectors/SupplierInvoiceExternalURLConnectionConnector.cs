@@ -20,15 +20,14 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "supplierinvoiceexternalurlconnections";
 		}
-
 		/// <summary>
 		/// Find a supplierInvoiceExternalURLConnection based on id
 		/// </summary>
 		/// <param name="id">Identifier of the supplierInvoiceExternalURLConnection to find</param>
 		/// <returns>The found supplierInvoiceExternalURLConnection</returns>
-		public SupplierInvoiceExternalURLConnection Get(string id)
+		public SupplierInvoiceExternalURLConnection Get(int? id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -55,9 +54,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a supplierInvoiceExternalURLConnection
 		/// </summary>
 		/// <param name="id">Identifier of the supplierInvoiceExternalURLConnection to delete</param>
-		public void Delete(string id)
+		public void Delete(int? id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

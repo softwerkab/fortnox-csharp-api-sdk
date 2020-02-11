@@ -26,7 +26,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "modeofpayments";
 		}
-
 		/// <summary>
 		/// Find a modeOfPayment based on id
 		/// </summary>
@@ -34,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found modeOfPayment</returns>
 		public ModeOfPayment Get(string id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -63,7 +62,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the modeOfPayment to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

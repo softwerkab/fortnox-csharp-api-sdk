@@ -20,15 +20,14 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "assettypes";
 		}
-
 		/// <summary>
 		/// Find a assetTypes based on id
 		/// </summary>
 		/// <param name="id">Identifier of the assetTypes to find</param>
 		/// <returns>The found assetTypes</returns>
-		public AssetTypes Get(string id)
+		public AssetTypes Get(int id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -55,9 +54,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a assetTypes
 		/// </summary>
 		/// <param name="id">Identifier of the assetTypes to delete</param>
-		public void Delete(string id)
+		public void Delete(int id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

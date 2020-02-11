@@ -20,15 +20,14 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "salarytransactions";
 		}
-
 		/// <summary>
 		/// Find a salaryTransaction based on id
 		/// </summary>
 		/// <param name="id">Identifier of the salaryTransaction to find</param>
 		/// <returns>The found salaryTransaction</returns>
-		public SalaryTransaction Get(string id)
+		public SalaryTransaction Get(double? id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -55,9 +54,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a salaryTransaction
 		/// </summary>
 		/// <param name="id">Identifier of the salaryTransaction to delete</param>
-		public void Delete(string id)
+		public void Delete(double? id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

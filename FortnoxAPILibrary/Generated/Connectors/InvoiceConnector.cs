@@ -116,7 +116,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "invoices";
 		}
-
 		/// <summary>
 		/// Find a invoice based on id
 		/// </summary>
@@ -151,9 +150,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a invoice
 		/// </summary>
 		/// <param name="id">Identifier of the invoice to delete</param>
-		public void Delete(string id)
+		public void Delete(int? id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>
@@ -165,9 +164,9 @@ namespace FortnoxAPILibrary.Connectors
 			return BaseFind();
 		}
 
-        public void Cancel(int? createdInvoiceDocumentNumber)
+        public void Cancel(int? id)
         {
-            throw new System.NotImplementedException();
+            DoAction(id.ToString(), "cancel");
         }
     }
 }

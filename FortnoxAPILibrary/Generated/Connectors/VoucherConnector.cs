@@ -26,15 +26,14 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "vouchers";
 		}
-
 		/// <summary>
 		/// Find a voucher based on id
 		/// </summary>
 		/// <param name="id">Identifier of the voucher to find</param>
 		/// <returns>The found voucher</returns>
-		public Voucher Get(string id)
+		public Voucher Get(int? id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -61,9 +60,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a voucher
 		/// </summary>
 		/// <param name="id">Identifier of the voucher to delete</param>
-		public void Delete(string id)
+		public void Delete(int? id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

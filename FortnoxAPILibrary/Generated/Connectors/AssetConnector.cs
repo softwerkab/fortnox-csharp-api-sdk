@@ -32,7 +32,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "assets";
 		}
-
 		/// <summary>
 		/// Find a asset based on id
 		/// </summary>
@@ -40,7 +39,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found asset</returns>
 		public Asset Get(string id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -69,7 +68,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the asset to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

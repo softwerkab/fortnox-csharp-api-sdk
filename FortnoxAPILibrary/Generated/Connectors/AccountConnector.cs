@@ -26,7 +26,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "accounts";
 		}
-
 		/// <summary>
 		/// Find a account based on id
 		/// </summary>

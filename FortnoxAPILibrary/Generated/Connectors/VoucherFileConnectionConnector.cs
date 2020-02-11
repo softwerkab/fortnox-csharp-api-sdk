@@ -38,46 +38,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "voucherfileconnections";
 		}
-
-		/// <summary>
-		/// Find a voucherFileConnection based on id
-		/// </summary>
-		/// <param name="id">Identifier of the voucherFileConnection to find</param>
-		/// <returns>The found voucherFileConnection</returns>
-		public VoucherFileConnection Get(string id)
-		{
-			return BaseGet(id);
-		}
-
-		/// <summary>
-		/// Updates a voucherFileConnection
-		/// </summary>
-		/// <param name="voucherFileConnection">The voucherFileConnection to update</param>
-		/// <returns>The updated voucherFileConnection</returns>
-		public VoucherFileConnection Update(VoucherFileConnection voucherFileConnection)
-		{
-			return BaseUpdate(voucherFileConnection, voucherFileConnection.FileId.ToString());
-		}
-
-		/// <summary>
-		/// Creates a new voucherFileConnection
-		/// </summary>
-		/// <param name="voucherFileConnection">The voucherFileConnection to create</param>
-		/// <returns>The created voucherFileConnection</returns>
-		public VoucherFileConnection Create(VoucherFileConnection voucherFileConnection)
-		{
-			return BaseCreate(voucherFileConnection);
-		}
-
-		/// <summary>
-		/// Deletes a voucherFileConnection
-		/// </summary>
-		/// <param name="id">Identifier of the voucherFileConnection to delete</param>
-		public void Delete(string id)
-		{
-			BaseDelete(id);
-		}
-
 		/// <summary>
 		/// Gets a list of voucherFileConnections
 		/// </summary>

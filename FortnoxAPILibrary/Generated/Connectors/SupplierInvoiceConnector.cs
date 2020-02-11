@@ -44,7 +44,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "supplierinvoices";
 		}
-
 		/// <summary>
 		/// Find a supplierInvoice based on id
 		/// </summary>
@@ -79,9 +78,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a supplierInvoice
 		/// </summary>
 		/// <param name="id">Identifier of the supplierInvoice to delete</param>
-		public void Delete(string id)
+		public void Delete(long? id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>
@@ -93,9 +92,9 @@ namespace FortnoxAPILibrary.Connectors
 			return BaseFind();
 		}
 
-        public void Cancel(long? createdInvoiceGivenNumber)
+        public void Cancel(long? id)
         {
-            throw new System.NotImplementedException();
+            DoAction(id.ToString(), "cancel");
         }
     }
 }

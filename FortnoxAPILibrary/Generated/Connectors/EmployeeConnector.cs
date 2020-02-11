@@ -20,7 +20,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "employees";
 		}
-
 		/// <summary>
 		/// Find a employee based on id
 		/// </summary>
@@ -28,7 +27,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found employee</returns>
 		public Employee Get(string id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -57,7 +56,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the employee to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

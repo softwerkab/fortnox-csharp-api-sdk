@@ -20,15 +20,14 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "trustedemailsenders";
 		}
-
 		/// <summary>
 		/// Find a trustedEmailSenders based on id
 		/// </summary>
 		/// <param name="id">Identifier of the trustedEmailSenders to find</param>
 		/// <returns>The found trustedEmailSenders</returns>
-		public TrustedEmailSenders Get(string id)
+		public TrustedEmailSenders Get(int? id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -55,9 +54,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a trustedEmailSenders
 		/// </summary>
 		/// <param name="id">Identifier of the trustedEmailSenders to delete</param>
-		public void Delete(string id)
+		public void Delete(int? id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

@@ -20,7 +20,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "wayofdeliveries";
 		}
-
 		/// <summary>
 		/// Find a wayOfDelivery based on id
 		/// </summary>
@@ -28,7 +27,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found wayOfDelivery</returns>
 		public WayOfDelivery Get(string id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -57,7 +56,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the wayOfDelivery to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

@@ -20,15 +20,14 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "labels";
 		}
-
 		/// <summary>
 		/// Find a label based on id
 		/// </summary>
 		/// <param name="id">Identifier of the label to find</param>
 		/// <returns>The found label</returns>
-		public Label Get(string id)
+		public Label Get(int? id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -55,9 +54,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a label
 		/// </summary>
 		/// <param name="id">Identifier of the label to delete</param>
-		public void Delete(string id)
+		public void Delete(int? id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

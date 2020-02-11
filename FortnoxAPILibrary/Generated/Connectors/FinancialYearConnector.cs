@@ -32,13 +32,12 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "financialyears";
 		}
-
 		/// <summary>
 		/// Find a financialYear based on id
 		/// </summary>
 		/// <param name="id">Identifier of the financialYear to find</param>
 		/// <returns>The found financialYear</returns>
-		public FinancialYear Get(int id)
+		public FinancialYear Get(int? id)
 		{
 			return BaseGet(id.ToString());
 		}
@@ -67,9 +66,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a financialYear
 		/// </summary>
 		/// <param name="id">Identifier of the financialYear to delete</param>
-		public void Delete(string id)
+		public void Delete(int? id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

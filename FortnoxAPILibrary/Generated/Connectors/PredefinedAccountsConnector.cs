@@ -20,46 +20,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "predefinedaccounts";
 		}
-
-		/// <summary>
-		/// Find a predefinedAccounts based on id
-		/// </summary>
-		/// <param name="id">Identifier of the predefinedAccounts to find</param>
-		/// <returns>The found predefinedAccounts</returns>
-		public PredefinedAccounts Get(string id)
-		{
-			return BaseGet(id);
-		}
-
-		/// <summary>
-		/// Updates a predefinedAccounts
-		/// </summary>
-		/// <param name="predefinedAccounts">The predefinedAccounts to update</param>
-		/// <returns>The updated predefinedAccounts</returns>
-		public PredefinedAccounts Update(PredefinedAccounts predefinedAccounts)
-		{
-			return BaseUpdate(predefinedAccounts, predefinedAccounts.Name.ToString());
-		}
-
-		/// <summary>
-		/// Creates a new predefinedAccounts
-		/// </summary>
-		/// <param name="predefinedAccounts">The predefinedAccounts to create</param>
-		/// <returns>The created predefinedAccounts</returns>
-		public PredefinedAccounts Create(PredefinedAccounts predefinedAccounts)
-		{
-			return BaseCreate(predefinedAccounts);
-		}
-
-		/// <summary>
-		/// Deletes a predefinedAccounts
-		/// </summary>
-		/// <param name="id">Identifier of the predefinedAccounts to delete</param>
-		public void Delete(string id)
-		{
-			BaseDelete(id);
-		}
-
 		/// <summary>
 		/// Gets a list of predefinedAccountss
 		/// </summary>

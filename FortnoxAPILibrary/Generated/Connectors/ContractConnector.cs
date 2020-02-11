@@ -56,7 +56,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "contracts";
 		}
-
 		/// <summary>
 		/// Find a contract based on id
 		/// </summary>
@@ -91,9 +90,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a contract
 		/// </summary>
 		/// <param name="id">Identifier of the contract to delete</param>
-		public void Delete(string id)
+		public void Delete(int? id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>
@@ -105,9 +104,14 @@ namespace FortnoxAPILibrary.Connectors
 			return BaseFind();
 		}
 
-        public void Finish(int? createdContractDocumentNumber)
+        /// <summary>
+        /// Finish a contract
+        /// </summary>
+        /// <param name="id">The document number of the contract to finish.</param>
+        /// <returns>The finished contract</returns>
+        public Contract Finish(int? id)
         {
-            throw new System.NotImplementedException();
+            return DoAction(id.ToString(), "finish");
         }
-    }
+	}
 }

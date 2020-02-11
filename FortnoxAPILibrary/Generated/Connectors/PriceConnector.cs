@@ -32,46 +32,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "prices";
 		}
-
-		/// <summary>
-		/// Find a price based on id
-		/// </summary>
-		/// <param name="id">Identifier of the price to find</param>
-		/// <returns>The found price</returns>
-		public Price Get(string id)
-		{
-			return BaseGet(id);
-		}
-
-		/// <summary>
-		/// Updates a price
-		/// </summary>
-		/// <param name="price">The price to update</param>
-		/// <returns>The updated price</returns>
-		public Price Update(Price price)
-		{
-			return BaseUpdate(price, price.PriceList.ToString());
-		}
-
-		/// <summary>
-		/// Creates a new price
-		/// </summary>
-		/// <param name="price">The price to create</param>
-		/// <returns>The created price</returns>
-		public Price Create(Price price)
-		{
-			return BaseCreate(price);
-		}
-
-		/// <summary>
-		/// Deletes a price
-		/// </summary>
-		/// <param name="id">Identifier of the price to delete</param>
-		public void Delete(string id)
-		{
-			BaseDelete(id);
-		}
-
 		/// <summary>
 		/// Gets a list of prices
 		/// </summary>

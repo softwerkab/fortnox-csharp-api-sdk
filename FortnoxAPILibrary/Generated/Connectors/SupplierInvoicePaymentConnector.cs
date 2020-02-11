@@ -26,15 +26,14 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "supplierinvoicepayments";
 		}
-
 		/// <summary>
 		/// Find a supplierInvoicePayment based on id
 		/// </summary>
 		/// <param name="id">Identifier of the supplierInvoicePayment to find</param>
 		/// <returns>The found supplierInvoicePayment</returns>
-		public SupplierInvoicePayment Get(string id)
+		public SupplierInvoicePayment Get(int? id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -61,9 +60,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a supplierInvoicePayment
 		/// </summary>
 		/// <param name="id">Identifier of the supplierInvoicePayment to delete</param>
-		public void Delete(string id)
+		public void Delete(int? id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

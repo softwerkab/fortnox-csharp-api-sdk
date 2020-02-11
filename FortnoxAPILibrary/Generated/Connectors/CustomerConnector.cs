@@ -74,7 +74,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "customers";
 		}
-
 		/// <summary>
 		/// Find a customer based on id
 		/// </summary>
@@ -82,7 +81,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found customer</returns>
 		public Customer Get(string id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -111,7 +110,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the customer to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

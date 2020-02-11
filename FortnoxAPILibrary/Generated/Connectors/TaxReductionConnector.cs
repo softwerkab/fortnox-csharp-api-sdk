@@ -26,7 +26,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "taxreductions";
 		}
-
 		/// <summary>
 		/// Find a taxReduction based on id
 		/// </summary>
@@ -34,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found taxReduction</returns>
 		public TaxReduction Get(string id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -63,7 +62,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the taxReduction to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

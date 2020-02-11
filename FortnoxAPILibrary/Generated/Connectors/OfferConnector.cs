@@ -68,7 +68,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "offers";
 		}
-
 		/// <summary>
 		/// Find a offer based on id
 		/// </summary>
@@ -103,9 +102,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a offer
 		/// </summary>
 		/// <param name="id">Identifier of the offer to delete</param>
-		public void Delete(string id)
+		public void Delete(int? id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>
@@ -117,9 +116,9 @@ namespace FortnoxAPILibrary.Connectors
 			return BaseFind();
 		}
 
-        public void Cancel(int? createdOfferDocumentNumber)
+        public void Cancel(int? id)
         {
-            throw new System.NotImplementedException();
+            DoAction(id.ToString(), "cancel");
         }
     }
 }

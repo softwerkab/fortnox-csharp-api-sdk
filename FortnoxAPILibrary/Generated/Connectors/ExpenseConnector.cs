@@ -20,7 +20,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "expenses";
 		}
-
 		/// <summary>
 		/// Find a expense based on id
 		/// </summary>
@@ -28,7 +27,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found expense</returns>
 		public Expense Get(string id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -57,7 +56,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the expense to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

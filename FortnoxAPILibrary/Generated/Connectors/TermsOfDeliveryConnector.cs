@@ -26,7 +26,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "termsofdeliveries";
 		}
-
 		/// <summary>
 		/// Find a termsOfDelivery based on id
 		/// </summary>
@@ -34,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found termsOfDelivery</returns>
 		public TermsOfDelivery Get(string id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -63,7 +62,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the termsOfDelivery to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

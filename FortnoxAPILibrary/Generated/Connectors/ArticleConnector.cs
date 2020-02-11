@@ -56,7 +56,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "articles";
 		}
-
 		/// <summary>
 		/// Find a article based on id
 		/// </summary>
@@ -64,7 +63,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found article</returns>
 		public Article Get(string id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -93,7 +92,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the article to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

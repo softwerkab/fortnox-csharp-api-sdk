@@ -68,7 +68,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "suppliers";
 		}
-
 		/// <summary>
 		/// Find a supplier based on id
 		/// </summary>
@@ -76,7 +75,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found supplier</returns>
 		public Supplier Get(string id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -105,7 +104,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the supplier to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

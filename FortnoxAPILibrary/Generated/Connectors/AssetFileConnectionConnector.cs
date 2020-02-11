@@ -26,7 +26,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "assetfileconnections";
 		}
-
 		/// <summary>
 		/// Find a assetFileConnection based on id
 		/// </summary>
@@ -34,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found assetFileConnection</returns>
 		public AssetFileConnection Get(string id)
 		{
-			return BaseGet(id);
+			return BaseGet(id.ToString());
 		}
 
 		/// <summary>
@@ -63,7 +62,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the assetFileConnection to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id);
+			BaseDelete(id.ToString());
 		}
 
 		/// <summary>
