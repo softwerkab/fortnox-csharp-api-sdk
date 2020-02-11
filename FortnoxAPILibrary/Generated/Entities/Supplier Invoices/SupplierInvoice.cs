@@ -16,8 +16,9 @@ namespace FortnoxAPILibrary.Entities
         public string Url { get; private set; }
 
         ///<summary> Accounting Method </summary>
+        [ReadOnly]
         [JsonProperty]
-        public AccountingMethod? AccountingMethod { get; set; }
+        public AccountingMethod? AccountingMethod { get; private set; }
 
         ///<summary> Administration fee </summary>
         [JsonProperty]

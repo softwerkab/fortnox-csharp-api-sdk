@@ -76,7 +76,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> – </summary>
         [JsonProperty]
-        public List<EmailInformation> EmailInformation { get; set; }
+        public EmailInformation EmailInformation { get; set; }
 
         ///<summary> External invoice reference </summary>
         [JsonProperty]

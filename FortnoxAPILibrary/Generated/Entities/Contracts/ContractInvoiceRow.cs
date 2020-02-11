@@ -11,14 +11,12 @@ namespace FortnoxAPILibrary.Entities
     {
 
         ///<summary> Account number (If empty Fortnox will use setting on article) </summary>
-        [ReadOnly]
         [JsonProperty]
-        public string AccountNumber { get; private set; }
+        public int? AccountNumber { get; set; }
 
         ///<summary> Article number </summary>
-        [ReadOnly]
         [JsonProperty]
-        public string ArticleNumber { get; private set; }
+        public string ArticleNumber { get; set; }
 
         ///<summary> Contribution Percent </summary>
         [ReadOnly]

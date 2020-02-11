@@ -236,11 +236,11 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Total vat amount </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? TotalVat { get; private set; }
+        public double? TotalVAT { get; private set; }
 
         ///<summary> If offer row price exclude or include vat </summary>
         [JsonProperty]
-        public bool? VatIncluded { get; set; }
+        public bool? VATIncluded { get; set; }
 
         ///<summary> Code of delivery </summary>
         [JsonProperty]

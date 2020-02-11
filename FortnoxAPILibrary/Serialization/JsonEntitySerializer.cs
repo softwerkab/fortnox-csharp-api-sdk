@@ -14,6 +14,7 @@ namespace FortnoxAPILibrary.Serialization
         public JsonEntitySerializer()
         {
             settings = new JsonSerializerSettings();
+            settings.DateFormatString = "yyyy-MM-dd";
             settings.Converters.Add(new StringEnumConverter());
             settings.NullValueHandling = NullValueHandling.Ignore;
             settings.ContractResolver = new MyJsonContractResolver(settings);
