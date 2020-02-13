@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace FortnoxAPILibrary.Entities
 {
     [Entity(SingularName = "AttendanceTransactions", PluralName = "AttendanceTransactions")]
-    public class AttendanceTransactions
+    public class AttendanceTransaction
     {
 
         ///<summary> Unique employee-id </summary>
@@ -16,7 +16,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Cause code </summary>
         [JsonProperty]
-        public string CauseCode { get; set; }
+        public AttendanceCauseCode? CauseCode { get; set; }
 
         ///<summary> Date </summary>
         [JsonProperty]

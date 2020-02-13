@@ -20,15 +20,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "labels";
 		}
-		/// <summary>
-		/// Find a label based on id
-		/// </summary>
-		/// <param name="id">Identifier of the label to find</param>
-		/// <returns>The found label</returns>
-		public Label Get(int? id)
-		{
-			return BaseGet(id.ToString());
-		}
 
 		/// <summary>
 		/// Updates a label

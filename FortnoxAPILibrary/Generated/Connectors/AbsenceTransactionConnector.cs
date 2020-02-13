@@ -23,13 +23,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
         /// <summary>
-        /// Find a absenceTransaction based on id
+        /// Gets a absenceTransaction
         /// </summary>
         /// <param name="employeeId"></param>
         /// <param name="date"></param>
         /// <param name="code"></param>
         /// <returns>The found absenceTransaction</returns>
-        public AbsenceTransaction Get(string employeeId, DateTime? date, CauseCode? code)
+        public AbsenceTransaction Get(string employeeId, DateTime? date, AbsenceCauseCode? code)
 		{
 			return BaseGet(employeeId, date?.ToString(APIConstants.DateFormat), code?.GetStringValue());
 		}
@@ -60,7 +60,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <param name="employeeId"></param>
         /// <param name="date"></param>
         /// <param name="code"></param>
-		public void Delete(string employeeId, DateTime? date, CauseCode? code)
+		public void Delete(string employeeId, DateTime? date, AbsenceCauseCode? code)
 		{
 			BaseDelete(employeeId, date?.ToString(APIConstants.DateFormat), code?.GetStringValue());
 		}

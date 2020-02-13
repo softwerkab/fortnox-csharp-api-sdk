@@ -61,16 +61,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseCreate(priceList);
 		}
-
-		/// <summary>
-		/// Deletes a priceList
-		/// </summary>
-		/// <param name="id">Identifier of the priceList to delete</param>
-		public void Delete(string id)
-		{
-			BaseDelete(id.ToString());
-		}
-
+		
 		/// <summary>
 		/// Gets a list of priceLists
 		/// </summary>

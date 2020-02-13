@@ -33,7 +33,7 @@ namespace FortnoxAPILibrary.Entities
         public double? Percent { get; set; }
 
         ///<summary> The price </summary>
-        [JsonProperty]
+        [JsonProperty("Price")]
         public double? PriceValue { get; set; }
 
         ///<summary> Price list of the price </summary>

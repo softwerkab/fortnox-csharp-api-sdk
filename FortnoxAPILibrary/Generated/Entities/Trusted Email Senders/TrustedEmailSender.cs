@@ -6,8 +6,8 @@ using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    [Entity(SingularName = "TrustedEmailSenders", PluralName = "TrustedEmailSenders")]
-    public class TrustedEmailSenders
+    [Entity(SingularName = "TrustedSender", PluralName = "TrustedSenders")]
+    public class TrustedEmailSender
     {
 
         ///<summary> Id of the record </summary>

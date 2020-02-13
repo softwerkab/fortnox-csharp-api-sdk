@@ -1,12 +1,13 @@
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Reused;
 
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class TrustedEmailSendersConnector : EntityConnector<TrustedEmailSenders, EntityCollection<TrustedEmailSendersSubset>, Sort.By.TrustedEmailSenders?>
+    public class TrustedEmailSendersConnector : EntityConnector<TrustedEmailSender, EntityWrapper<EmailSenders>, Sort.By.TrustedEmailSenders?>
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
@@ -18,34 +19,24 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public TrustedEmailSendersConnector()
 		{
-			Resource = "emailsenders";
+			Resource = "emailsenders/trusted";
 		}
 		/// <summary>
 		/// Find a trustedEmailSenders based on id
 		/// </summary>
 		/// <param name="id">Identifier of the trustedEmailSenders to find</param>
 		/// <returns>The found trustedEmailSenders</returns>
-		public TrustedEmailSenders Get(int? id)
+		public TrustedEmailSender Get(int? id)
 		{
 			return BaseGet(id.ToString());
 		}
-
-		/// <summary>
-		/// Updates a trustedEmailSenders
-		/// </summary>
-		/// <param name="trustedEmailSenders">The trustedEmailSenders to update</param>
-		/// <returns>The updated trustedEmailSenders</returns>
-		public TrustedEmailSenders Update(TrustedEmailSenders trustedEmailSenders)
-		{
-			return BaseUpdate(trustedEmailSenders, trustedEmailSenders.Id.ToString());
-		}
-
+		
 		/// <summary>
 		/// Creates a new trustedEmailSenders
 		/// </summary>
 		/// <param name="trustedEmailSenders">The trustedEmailSenders to create</param>
 		/// <returns>The created trustedEmailSenders</returns>
-		public TrustedEmailSenders Create(TrustedEmailSenders trustedEmailSenders)
+		public TrustedEmailSender Create(TrustedEmailSender trustedEmailSenders)
 		{
 			return BaseCreate(trustedEmailSenders);
 		}
@@ -59,16 +50,16 @@ namespace FortnoxAPILibrary.Connectors
 			BaseDelete(id.ToString());
 		}
 
-		/// <summary>
-		/// Gets a list of trustedEmailSenderss
-		/// </summary>
-		/// <returns>A list of trustedEmailSenderss</returns>
-		public EntityCollection<TrustedEmailSendersSubset> Find()
-		{
-			return BaseFind();
+        /// <summary>
+        /// Retrieves all trusted and rejected emails with id.
+        /// </summary>
+        /// <returns>Collection of emails with id </returns>
+        public EmailSenders Find()
+        {
+			Resource = "emailsenders";
+            var res = BaseFind()?.Entity;
+            Resource = "emailsenders/trusted";
+            return res;
 		}
-
-
-        //TODO: Special: Resource path changes for post request
 	}
 }

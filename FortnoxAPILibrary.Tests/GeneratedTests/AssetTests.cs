@@ -31,39 +31,49 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newAsset = new Asset()
             {
-                //TODO: Populate Entity
+                Description = "TestAsset",
+                AcquisitionStart = new DateTime(2011,1,1),
+                AcquisitionValue = 123.45,
+                Department = "Some Department",
+                Notes = "Some notes",
+                Group = "Some Group",
+                Room = "Some room",
+                Placement = "Right here",
+                //CostCenter = "1111", //TODO: Add references
+                //TypeId = "1231",
+
             };
 
             var createdAsset = connector.Create(newAsset);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdAsset.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestAsset", createdAsset.Description); //TODO: Adapt
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdAsset.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdAsset.Description = "UpdatedTestAsset";
 
             var updatedAsset = connector.Update(createdAsset); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedAsset.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestAsset", updatedAsset.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedAsset = connector.Get(createdAsset.Id); //TODO: Check ID property
+            var retrievedAsset = connector.Get(createdAsset.Id);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedAsset.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestAsset", retrievedAsset.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdAsset.Id); //TODO: Check ID property
+            connector.Delete(createdAsset.Id);
             MyAssert.HasNoError(connector);
 
-            retrievedAsset = connector.Get(createdAsset.Id); //TODO: Check ID property
+            retrievedAsset = connector.Get(createdAsset.Id);
             Assert.AreEqual(null, retrievedAsset, "Entity still exists after Delete!");
 
             #endregion DELETE

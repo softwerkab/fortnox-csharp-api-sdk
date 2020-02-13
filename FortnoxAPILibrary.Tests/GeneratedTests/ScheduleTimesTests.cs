@@ -23,53 +23,51 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_ScheduleTimes_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var tmpEmployee = new EmployeeConnector().Create(new Employee() {FirstName = "Test", LastName = "Testasson"});
             #endregion Arrange
 
             var connector = new ScheduleTimesConnector();
 
             #region CREATE
+            //Not available
+
             var newScheduleTimes = new ScheduleTimes()
             {
-                //TODO: Populate Entity
+                Hours = 6.5,
+                EmployeeId = tmpEmployee.EmployeeId,
+                Date = new DateTime(2020,10,10)
             };
 
-            var createdScheduleTimes = connector.Create(newScheduleTimes);
+            var createdScheduleTimes = connector.Update(newScheduleTimes);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdScheduleTimes.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(6.5, createdScheduleTimes.Hours);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdScheduleTimes.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdScheduleTimes.Hours = 7;
 
             var updatedScheduleTimes = connector.Update(createdScheduleTimes); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedScheduleTimes.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(7, updatedScheduleTimes.Hours);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedScheduleTimes = connector.Get(createdScheduleTimes.ID); //TODO: Check ID property
+            var retrievedScheduleTimes = connector.Get(createdScheduleTimes.EmployeeId, createdScheduleTimes.Date);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedScheduleTimes.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(7, retrievedScheduleTimes.Hours);
 
             #endregion READ / GET
 
             #region DELETE
-
-            connector.Delete(createdScheduleTimes.ID); //TODO: Check ID property
-            MyAssert.HasNoError(connector);
-
-            retrievedScheduleTimes = connector.Get(createdScheduleTimes.ID); //TODO: Check ID property
-            Assert.AreEqual(null, retrievedScheduleTimes, "Entity still exists after Delete!");
-
+            //Not available
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new EmployeeConnector().Delete(tmpEmployee.EmployeeId);
             #endregion Delete arranged resources
         }
     }

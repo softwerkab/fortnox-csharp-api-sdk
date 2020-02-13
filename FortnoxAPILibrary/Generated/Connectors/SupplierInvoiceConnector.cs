@@ -76,15 +76,6 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Deletes a supplierInvoice
-		/// </summary>
-		/// <param name="id">Identifier of the supplierInvoice to delete</param>
-		public void Delete(long? id)
-		{
-			BaseDelete(id.ToString());
-		}
-
-		/// <summary>
 		/// Gets a list of supplierInvoices
 		/// </summary>
 		/// <returns>A list of supplierInvoices</returns>

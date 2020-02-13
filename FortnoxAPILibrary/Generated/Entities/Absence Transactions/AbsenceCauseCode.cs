@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    public enum CauseCode
+    public enum AbsenceCauseCode
     {
         ///<summary> Arbetsskada </summary>
         [EnumMember(Value = "ASK")]
@@ -14,13 +14,13 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Arbetstidsf�rkortning </summary>
         [EnumMember(Value = "ATF")]
         ATF,
-        ///<summary> F�r�ldraledig </summary>
+        ///<summary> Föräldraledig </summary>
         [EnumMember(Value = "FPE")]
         FPE,
-        ///<summary> Fr�nvaro �vrigt </summary>
+        ///<summary> Frånvaro övrigt </summary>
         [EnumMember(Value = "FRA")]
         FRA,
-        ///<summary> Fr�nvaro �vrigt (used in PAXml) </summary>
+        ///<summary> Frånvaro övrigt (used in PAXml) </summary>
         [EnumMember(Value = "FR1")]
         FR1,
         ///<summary> Graviditetspenning </summary>
@@ -29,14 +29,14 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Kompledig </summary>
         [EnumMember(Value = "KOM")]
         KOM,
-        ///<summary> Milit�rtj�nst (max 60 dagar) </summary>
+        ///<summary> Militärtjänst (max 60 dagar) </summary>
         [EnumMember(Value = "MIL")]
         MIL,
-        ///<summary> N�rst�endev�rd </summary>
+        ///<summary> Närståendevård </summary>
         [EnumMember(Value = "NAR")]
         NAR,
-        /////<summary> N�rst�endev�rd (used in PAXml) </summary>
-        //[EnumMember(Value = "N�R")]
+        ///<summary> Närståendevård (used in PAXml) </summary>
+        [EnumMember(Value = "NÄR")]
         NÄR,
         ///<summary> Sjuk-OB 1 </summary>
         [EnumMember(Value = "OS1")]
@@ -65,16 +65,16 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Semester </summary>
         [EnumMember(Value = "SEM")]
         SEM,
-        ///<summary> Sjukfr�nvaro </summary>
+        ///<summary> Sjukfrånvaro </summary>
         [EnumMember(Value = "SJK")]
         SJK,
-        ///<summary> Smittb�rare </summary>
+        ///<summary> Smittbärare </summary>
         [EnumMember(Value = "SMB")]
         SMB,
-        ///<summary> Svenska f�r invandrare </summary>
+        ///<summary> Svenska för invandrare </summary>
         [EnumMember(Value = "SVE")]
         SVE,
-        ///<summary> Tj�nstledig </summary>
+        ///<summary> Tjänstledig </summary>
         [EnumMember(Value = "TJL")]
         TJL,
         ///<summary> Facklig utbildning </summary>
@@ -83,7 +83,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Facklig utbildning (used in PAXml) </summary>
         [EnumMember(Value = "FAC")]
         FAC,
-        ///<summary> V�rd av barn </summary>
+        ///<summary> Vård av barn </summary>
         [EnumMember(Value = "VAB")]
         VAB,
     }

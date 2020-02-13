@@ -167,7 +167,24 @@ namespace FortnoxAPILibrary
 		}
 		public enum Asset
 		{
-
+			/// <summary> Retrieves all active assets </summary>
+			[StringValue("active")]
+			Active,
+			/// <summary>Retrieves all inactive assets </summary>
+			[StringValue("inactive")]
+			Inactive,
+			/// <summary> Retrieves all fully depreciated assets </summary>
+			[StringValue("fully_depreciated")]
+			FullyDepreciated,
+			/// <summary> Retrieves all sold assets </summary>
+			[StringValue("sold")]
+			Sold,    
+			/// <summary> Retrieves all scrapped assets </summary>
+			[StringValue("scrapped")]
+			Scrapped,
+			/// <summary> Retrieves all voided assets </summary>
+			[StringValue("voided")]
+			Voided
 		}
 		public enum AttendanceTransactions
 		{

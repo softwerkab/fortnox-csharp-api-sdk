@@ -31,30 +31,33 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newAssetTypes = new AssetTypes()
             {
-                //TODO: Populate Entity
+                Description = "TestAssetType",
+                Notes = "Some notes",
+                Number = "123456789",
+                Type = "1"
             };
 
             var createdAssetTypes = connector.Create(newAssetTypes);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdAssetTypes.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestAssetType", createdAssetTypes.Description);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdAssetTypes.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdAssetTypes.Description = "UpdatedTestAssetType";
 
             var updatedAssetTypes = connector.Update(createdAssetTypes); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedAssetTypes.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestAssetType", updatedAssetTypes.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedAssetTypes = connector.Get(createdAssetTypes.Id); //TODO: Check ID property
+            var retrievedAssetTypes = connector.Get(createdAssetTypes.Id);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedAssetTypes.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestAssetType", retrievedAssetTypes.Description);
 
             #endregion READ / GET
 

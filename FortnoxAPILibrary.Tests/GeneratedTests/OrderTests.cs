@@ -23,7 +23,8 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_Order_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
             #endregion Arrange
 
             var connector = new OrderConnector();
@@ -31,45 +32,50 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newOrder = new Order()
             {
-                //TODO: Populate Entity
+                Comments = "TestOrder",
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                OrderDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                OrderRows = new List<OrderRow>()
+                {
+                    new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = 20, DeliveredQuantity = 10},
+                    new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = 20, DeliveredQuantity = 20},
+                    new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = 20, DeliveredQuantity = 15}
+                }
             };
 
             var createdOrder = connector.Create(newOrder);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdOrder.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestOrder", createdOrder.Comments);
+            Assert.AreEqual("TmpCustomer", createdOrder.CustomerName);
+            Assert.AreEqual(3, createdOrder.OrderRows.Count);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdOrder.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdOrder.Comments = "UpdatedTestOrder";
 
             var updatedOrder = connector.Update(createdOrder); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedOrder.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestOrder", updatedOrder.Comments);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedOrder = connector.Get(createdOrder.DocumentNumber); //TODO: Check ID property
+            var retrievedOrder = connector.Get(createdOrder.DocumentNumber);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedOrder.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestOrder", retrievedOrder.Comments);
 
             #endregion READ / GET
 
             #region DELETE
-
-            connector.Delete(createdOrder.DocumentNumber); //TODO: Check ID property
-            MyAssert.HasNoError(connector);
-
-            retrievedOrder = connector.Get(createdOrder.DocumentNumber); //TODO: Check ID property
-            Assert.AreEqual(null, retrievedOrder, "Entity still exists after Delete!");
-
+            //Not allowed
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

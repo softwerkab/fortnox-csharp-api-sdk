@@ -6,8 +6,8 @@ using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    [Entity(SingularName = "TrustedEmailDomains", PluralName = "TrustedEmailDomains")]
-    public class TrustedEmailDomains
+    [Entity(SingularName = "TrustedDomain", PluralName = "TrustedDomains")]
+    public class TrustedEmailDomain
     {
 
         ///<summary> Id of the record </summary>

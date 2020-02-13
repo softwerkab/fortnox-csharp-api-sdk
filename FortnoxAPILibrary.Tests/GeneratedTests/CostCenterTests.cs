@@ -31,30 +31,33 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newCostCenter = new CostCenter()
             {
-                //TODO: Populate Entity
+                Code = "TST",
+                Description = "TestCostCenter",
+                Active = true,
+                Note = "Some notes"
             };
 
             var createdCostCenter = connector.Create(newCostCenter);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdCostCenter.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestCostCenter", createdCostCenter.Description);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdCostCenter.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdCostCenter.Description = "UpdatedTestCostCenter";
 
             var updatedCostCenter = connector.Update(createdCostCenter); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedCostCenter.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestCostCenter", updatedCostCenter.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedCostCenter = connector.Get(createdCostCenter.Code); //TODO: Check ID property
+            var retrievedCostCenter = connector.Get(createdCostCenter.Code);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedCostCenter.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestCostCenter", retrievedCostCenter.Description);
 
             #endregion READ / GET
 

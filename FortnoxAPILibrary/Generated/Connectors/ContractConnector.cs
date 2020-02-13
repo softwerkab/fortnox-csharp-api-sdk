@@ -88,15 +88,6 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Deletes a contract
-		/// </summary>
-		/// <param name="id">Identifier of the contract to delete</param>
-		public void Delete(int? id)
-		{
-			BaseDelete(id.ToString());
-		}
-
-		/// <summary>
 		/// Gets a list of contracts
 		/// </summary>
 		/// <returns>A list of contracts</returns>

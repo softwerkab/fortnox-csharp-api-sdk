@@ -23,47 +23,56 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_AttendanceTransactions_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var employeeConnector = new EmployeeConnector();
+            var tmpEmployee = employeeConnector.Create(new Employee()
+            {
+                FirstName = "Test",
+                LastName = "Name",
+            });
+            MyAssert.HasNoError(employeeConnector);
             #endregion Arrange
 
             var connector = new AttendanceTransactionsConnector();
 
             #region CREATE
-            var newAttendanceTransactions = new AttendanceTransactions()
+            var newAttendanceTransactions = new AttendanceTransaction()
             {
-                //TODO: Populate Entity
+                EmployeeId = tmpEmployee.EmployeeId,
+                CauseCode = AttendanceCauseCode.FLX,
+                Date = new DateTime(2018, 01, 01),
+                Hours = 5.5
             };
 
             var createdAttendanceTransactions = connector.Create(newAttendanceTransactions);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdAttendanceTransactions.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(5.5, createdAttendanceTransactions.Hours);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdAttendanceTransactions.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdAttendanceTransactions.Hours = 8;
 
             var updatedAttendanceTransactions = connector.Update(createdAttendanceTransactions); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedAttendanceTransactions.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(8, updatedAttendanceTransactions.Hours);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedAttendanceTransactions = connector.Get(createdAttendanceTransactions.ID); //TODO: Check ID property
+            var retrievedAttendanceTransactions = connector.Get(createdAttendanceTransactions.EmployeeId, createdAttendanceTransactions.Date, createdAttendanceTransactions.CauseCode);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedAttendanceTransactions.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(8, retrievedAttendanceTransactions.Hours);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdAttendanceTransactions.ID); //TODO: Check ID property
+            connector.Delete(createdAttendanceTransactions.EmployeeId, createdAttendanceTransactions.Date, createdAttendanceTransactions.CauseCode);
             MyAssert.HasNoError(connector);
 
-            retrievedAttendanceTransactions = connector.Get(createdAttendanceTransactions.ID); //TODO: Check ID property
+            retrievedAttendanceTransactions = connector.Get(createdAttendanceTransactions.EmployeeId, createdAttendanceTransactions.Date, createdAttendanceTransactions.CauseCode);
             Assert.AreEqual(null, retrievedAttendanceTransactions, "Entity still exists after Delete!");
 
             #endregion DELETE

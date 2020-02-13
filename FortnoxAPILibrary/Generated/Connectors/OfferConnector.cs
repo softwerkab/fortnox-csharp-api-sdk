@@ -100,15 +100,6 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Deletes a offer
-		/// </summary>
-		/// <param name="id">Identifier of the offer to delete</param>
-		public void Delete(int? id)
-		{
-			BaseDelete(id.ToString());
-		}
-
-		/// <summary>
 		/// Gets a list of offers
 		/// </summary>
 		/// <returns>A list of offers</returns>

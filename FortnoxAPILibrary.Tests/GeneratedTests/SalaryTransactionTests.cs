@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_SalaryTransaction_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var tmpEmployee = new EmployeeConnector().Create(new Employee() {FirstName = "Test", LastName = "Testasson"});
             #endregion Arrange
 
             var connector = new SalaryTransactionConnector();
@@ -31,45 +31,48 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newSalaryTransaction = new SalaryTransaction()
             {
-                //TODO: Populate Entity
+                EmployeeId = tmpEmployee.EmployeeId,
+                SalaryCode = "123",
+                Date = new DateTime(2020,1,1),
+                Amount = 1250.50,
             };
 
             var createdSalaryTransaction = connector.Create(newSalaryTransaction);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdSalaryTransaction.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(1250.5, createdSalaryTransaction.Amount);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdSalaryTransaction.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdSalaryTransaction.Amount = 1500;
 
             var updatedSalaryTransaction = connector.Update(createdSalaryTransaction); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedSalaryTransaction.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(1500, updatedSalaryTransaction.Amount);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedSalaryTransaction = connector.Get(createdSalaryTransaction.Number); //TODO: Check ID property
+            var retrievedSalaryTransaction = connector.Get(createdSalaryTransaction.SalaryRow);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedSalaryTransaction.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(1500, retrievedSalaryTransaction.Amount);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdSalaryTransaction.Number); //TODO: Check ID property
+            connector.Delete(createdSalaryTransaction.SalaryRow);
             MyAssert.HasNoError(connector);
 
-            retrievedSalaryTransaction = connector.Get(createdSalaryTransaction.Number); //TODO: Check ID property
+            retrievedSalaryTransaction = connector.Get(createdSalaryTransaction.SalaryRow);
             Assert.AreEqual(null, retrievedSalaryTransaction, "Entity still exists after Delete!");
 
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new EmployeeConnector().Delete(tmpEmployee.EmployeeId);
             #endregion Delete arranged resources
         }
     }

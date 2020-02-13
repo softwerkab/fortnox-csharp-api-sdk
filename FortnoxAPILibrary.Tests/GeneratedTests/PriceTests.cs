@@ -23,7 +23,8 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_Price_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var tmpArticle = new ArticleConnector().Create(new Article() {Description = "TmpArticle"});
+            var tmpPriceList = new PriceListConnector().Get("TST_PR") ?? new PriceListConnector().Create(new PriceList() {Code = "TST_PR"});
             #endregion Arrange
 
             var connector = new PriceConnector();
@@ -31,45 +32,48 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newPrice = new Price()
             {
-                //TODO: Populate Entity
+                ArticleNumber = tmpArticle.ArticleNumber,
+                PriceList = tmpPriceList.Code,
+                FromQuantity = 10,
+                PriceValue = 12.5
             };
 
             var createdPrice = connector.Create(newPrice);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdPrice.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(12.5, createdPrice.PriceValue);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdPrice.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdPrice.PriceValue = 15;
 
             var updatedPrice = connector.Update(createdPrice); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedPrice.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(15, updatedPrice.PriceValue);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedPrice = connector.Get(createdPrice.ID); //TODO: Check ID property
+            var retrievedPrice = connector.Get(createdPrice.PriceList, createdPrice.ArticleNumber, createdPrice.FromQuantity);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedPrice.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(15, retrievedPrice.PriceValue);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdPrice.ID); //TODO: Check ID property
+            connector.Delete(createdPrice.PriceList, createdPrice.ArticleNumber, createdPrice.FromQuantity);
             MyAssert.HasNoError(connector);
 
-            retrievedPrice = connector.Get(createdPrice.ID); //TODO: Check ID property
+            retrievedPrice = connector.Get(createdPrice.PriceList, createdPrice.ArticleNumber, createdPrice.FromQuantity);
             Assert.AreEqual(null, retrievedPrice, "Entity still exists after Delete!");
 
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

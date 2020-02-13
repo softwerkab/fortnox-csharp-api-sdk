@@ -118,15 +118,6 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Deletes a order
-		/// </summary>
-		/// <param name="id">Identifier of the order to delete</param>
-		public void Delete(int? id)
-		{
-			BaseDelete(id.ToString());
-		}
-
-		/// <summary>
 		/// Gets a list of orders
 		/// </summary>
 		/// <returns>A list of orders</returns>

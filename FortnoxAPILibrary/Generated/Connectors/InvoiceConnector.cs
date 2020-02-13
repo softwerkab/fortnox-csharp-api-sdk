@@ -147,16 +147,7 @@ namespace FortnoxAPILibrary.Connectors
 			return BaseCreate(invoice);
 		}
 
-		/// <summary>
-		/// Deletes a invoice
-		/// </summary>
-		/// <param name="id">Identifier of the invoice to delete</param>
-		public void Delete(int? id)
-		{
-			BaseDelete(id.ToString());
-		}
-
-		/// <summary>
+        /// <summary>
 		/// Gets a list of invoices
 		/// </summary>
 		/// <returns>A list of invoices</returns>

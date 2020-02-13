@@ -16,7 +16,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Cause code </summary>
         [JsonProperty]
-        public CauseCode? CauseCode { get; set; }
+        public AbsenceCauseCode? CauseCode { get; set; }
 
         ///<summary> Date </summary>
         [JsonProperty]

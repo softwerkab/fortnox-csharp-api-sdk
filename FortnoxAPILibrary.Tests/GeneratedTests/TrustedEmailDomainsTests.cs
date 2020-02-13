@@ -29,41 +29,35 @@ namespace FortnoxAPILibrary.GeneratedTests
             var connector = new TrustedEmailDomainsConnector();
 
             #region CREATE
-            var newTrustedEmailDomains = new TrustedEmailDomains()
+            var newTrustedEmailDomains = new TrustedEmailDomain()
             {
-                //TODO: Populate Entity
+                Domain = "testdomain.tst",
             };
 
             var createdTrustedEmailDomains = connector.Create(newTrustedEmailDomains);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdTrustedEmailDomains.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("testdomain.tst", createdTrustedEmailDomains.Domain);
 
             #endregion CREATE
 
             #region UPDATE
-
-            createdTrustedEmailDomains.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
-
-            var updatedTrustedEmailDomains = connector.Update(createdTrustedEmailDomains); 
-            MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedTrustedEmailDomains.SomeProperty); //TODO: Adapt
-
+            //Not supported
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedTrustedEmailDomains = connector.Get(createdTrustedEmailDomains.Id); //TODO: Check ID property
+            var retrievedTrustedEmailDomains = connector.Get(createdTrustedEmailDomains.Id);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedTrustedEmailDomains.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("testdomain.tst", retrievedTrustedEmailDomains.Domain);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdTrustedEmailDomains.Id); //TODO: Check ID property
+            connector.Delete(createdTrustedEmailDomains.Id);
             MyAssert.HasNoError(connector);
 
-            retrievedTrustedEmailDomains = connector.Get(createdTrustedEmailDomains.Id); //TODO: Check ID property
+            retrievedTrustedEmailDomains = connector.Get(createdTrustedEmailDomains.Id);
             Assert.AreEqual(null, retrievedTrustedEmailDomains, "Entity still exists after Delete!");
 
             #endregion DELETE

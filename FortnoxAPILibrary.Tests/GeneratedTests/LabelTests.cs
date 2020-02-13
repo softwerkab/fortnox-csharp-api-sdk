@@ -31,40 +31,33 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newLabel = new Label()
             {
-                //TODO: Populate Entity
+                Description = "TestLabel"
             };
 
             var createdLabel = connector.Create(newLabel);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdLabel.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestLabel", createdLabel.Description);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdLabel.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdLabel.Description = "UpdatedTestLabel";
 
             var updatedLabel = connector.Update(createdLabel); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedLabel.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestLabel", updatedLabel.Description);
 
             #endregion UPDATE
 
             #region READ / GET
-
-            var retrievedLabel = connector.Get(createdLabel.Id); //TODO: Check ID property
-            MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedLabel.SomeProperty); //TODO: Adapt
-
+            //Not allowed to read single label
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdLabel.Id); //TODO: Check ID property
+            connector.Delete(createdLabel.Id);
             MyAssert.HasNoError(connector);
-
-            retrievedLabel = connector.Get(createdLabel.Id); //TODO: Check ID property
-            Assert.AreEqual(null, retrievedLabel, "Entity still exists after Delete!");
 
             #endregion DELETE
 

@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var newAbsenceTransaction = new AbsenceTransaction()
             {
                 EmployeeId = tmpEmployee.EmployeeId,
-                CauseCode = CauseCode.MIL,
+                CauseCode = AbsenceCauseCode.MIL,
                 Date = new DateTime(2018, 01,01),
                 Hours = 5.5
             };

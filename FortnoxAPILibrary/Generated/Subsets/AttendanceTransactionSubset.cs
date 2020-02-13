@@ -6,8 +6,8 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Entity(SingularName = "TrustedEmailSenders", PluralName = "TrustedEmailSenders")]
-    public class TrustedEmailSendersSubset
+    [Entity(SingularName = "AttendanceTransactions", PluralName = "AttendanceTransactions")]
+    public class AttendanceTransactionSubset
     {
         //Implement manually !!!
 	}

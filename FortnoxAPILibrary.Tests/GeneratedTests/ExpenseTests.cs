@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_Expense_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            new AccountConnector().Create(new Account() {Number = 0123, Description = "TmpAccount"});
             #endregion Arrange
 
             var connector = new ExpenseConnector();
@@ -31,45 +31,47 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newExpense = new Expense()
             {
-                //TODO: Populate Entity
+                Text = "TestExpense",
+                Code = "TST",
+                Account = 0123
             };
 
             var createdExpense = connector.Create(newExpense);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdExpense.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestExpense", createdExpense.Text);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdExpense.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdExpense.Text = "UpdatedTestExpense";
 
             var updatedExpense = connector.Update(createdExpense); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedExpense.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestExpense", updatedExpense.Text);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedExpense = connector.Get(createdExpense.Code); //TODO: Check ID property
+            var retrievedExpense = connector.Get(createdExpense.Code);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedExpense.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestExpense", retrievedExpense.Text);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdExpense.Code); //TODO: Check ID property
+            connector.Delete(createdExpense.Code);
             MyAssert.HasNoError(connector);
 
-            retrievedExpense = connector.Get(createdExpense.Code); //TODO: Check ID property
+            retrievedExpense = connector.Get(createdExpense.Code);
             Assert.AreEqual(null, retrievedExpense, "Entity still exists after Delete!");
 
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new AccountConnector().Delete(0123);
             #endregion Delete arranged resources
         }
     }

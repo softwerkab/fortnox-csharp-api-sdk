@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class AccountChartConnector : EntityConnector<AccountChart, EntityCollection<AccountChartSubset>, Sort.By.AccountChart?>
+    public class AccountChartConnector : EntityConnector<AccountChart, EntityCollection<AccountChart>, Sort.By.AccountChart?>
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of accountCharts
 		/// </summary>
 		/// <returns>A list of accountCharts</returns>
-		public EntityCollection<AccountChartSubset> Find()
+		public EntityCollection<AccountChart> Find()
 		{
 			return BaseFind();
 		}

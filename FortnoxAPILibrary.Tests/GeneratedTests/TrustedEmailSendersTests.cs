@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -23,53 +24,46 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_TrustedEmailSenders_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
             #endregion Arrange
 
             var connector = new TrustedEmailSendersConnector();
-
             #region CREATE
-            var newTrustedEmailSenders = new TrustedEmailSenders()
+            var newTrustedEmailSender = new TrustedEmailSender()
             {
-                //TODO: Populate Entity
+                Email = "test.testasson@test.tst"
             };
 
-            var createdTrustedEmailSenders = connector.Create(newTrustedEmailSenders);
+            var createdTrustedEmailSender = connector.Create(newTrustedEmailSender);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdTrustedEmailSenders.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("test.testasson@test.tst", createdTrustedEmailSender.Email);
 
             #endregion CREATE
 
             #region UPDATE
-
-            createdTrustedEmailSenders.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
-
-            var updatedTrustedEmailSenders = connector.Update(createdTrustedEmailSenders); 
-            MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedTrustedEmailSenders.SomeProperty); //TODO: Adapt
-
+            //Not supported
             #endregion UPDATE
 
             #region READ / GET
-
-            var retrievedTrustedEmailSenders = connector.Get(createdTrustedEmailSenders.Id); //TODO: Check ID property
+            //Single get is not supported, full list is used instead
+            var retrievedTrustedEmailSender = connector.Find().TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedTrustedEmailSenders.SomeProperty); //TODO: Adapt
-
+            Assert.AreEqual("test.testasson@test.tst", retrievedTrustedEmailSender.Email);
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdTrustedEmailSenders.Id); //TODO: Check ID property
+            connector.Delete(createdTrustedEmailSender.Id);
             MyAssert.HasNoError(connector);
 
-            retrievedTrustedEmailSenders = connector.Get(createdTrustedEmailSenders.Id); //TODO: Check ID property
-            Assert.AreEqual(null, retrievedTrustedEmailSenders, "Entity still exists after Delete!");
+            retrievedTrustedEmailSender = connector.Find().TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
+            Assert.AreEqual(null, retrievedTrustedEmailSender);
 
             #endregion DELETE
 
             #region Delete arranged resources
+
             //Add code to delete temporary resources
+
             #endregion Delete arranged resources
         }
     }
