@@ -19,6 +19,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
         }
 
+        [Ignore("CAN NOT UPDATE OR DELETE")]
         [TestMethod]
         public void Test_Expense_CRUD()
         {
@@ -43,35 +44,25 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion CREATE
 
             #region UPDATE
-
-            createdExpense.Text = "UpdatedTestExpense";
-
-            var updatedExpense = connector.Update(createdExpense); 
-            MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedTestExpense", updatedExpense.Text);
-
+            //Not supported
             #endregion UPDATE
 
             #region READ / GET
 
             var retrievedExpense = connector.Get(createdExpense.Code);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedTestExpense", retrievedExpense.Text);
+            Assert.AreEqual("TestExpense", retrievedExpense.Text);
 
             #endregion READ / GET
 
             #region DELETE
-
-            connector.Delete(createdExpense.Code);
-            MyAssert.HasNoError(connector);
-
-            retrievedExpense = connector.Get(createdExpense.Code);
-            Assert.AreEqual(null, retrievedExpense, "Entity still exists after Delete!");
-
+            //Not supported
             #endregion DELETE
 
             #region Delete arranged resources
-            new AccountConnector().Delete(0123);
+            var accConnector = new AccountConnector();
+            accConnector.Delete(0123);
+            MyAssert.HasNoError(accConnector);
             #endregion Delete arranged resources
         }
     }

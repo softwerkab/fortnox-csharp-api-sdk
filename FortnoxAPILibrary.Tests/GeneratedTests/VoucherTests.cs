@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -23,7 +24,6 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_Voucher_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
             #endregion Arrange
 
             var connector = new VoucherConnector();
@@ -31,41 +31,36 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newVoucher = new Voucher()
             {
-                //TODO: Populate Entity
+                Description = "TestVoucher",
+                Comments = "Some comments",
+                VoucherSeries = "A", //predefined series
+                TransactionDate = new DateTime(2020, 1,1),
+                VoucherRows = new List<VoucherRow>()
+                {
+                    new VoucherRow(){ Account = 1930, Debit = 1500, Credit = 0 },
+                    new VoucherRow(){ Account = 1910, Debit = 0, Credit = 1500 }
+                }
             };
 
             var createdVoucher = connector.Create(newVoucher);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdVoucher.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestVoucher", createdVoucher.Description);
 
             #endregion CREATE
 
             #region UPDATE
-
-            createdVoucher.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
-
-            var updatedVoucher = connector.Update(createdVoucher); 
-            MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedVoucher.SomeProperty); //TODO: Adapt
-
+            //Not supported
             #endregion UPDATE
 
             #region READ / GET
-
-            var retrievedVoucher = connector.Get(createdVoucher.VoucherNumber); //TODO: Check ID property
+            var retrievedVoucher = connector.Get(createdVoucher.VoucherNumber, createdVoucher.VoucherSeries, createdVoucher.Year);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedVoucher.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestVoucher", retrievedVoucher.Description);
 
             #endregion READ / GET
 
             #region DELETE
-
-            connector.Delete(createdVoucher.VoucherNumber); //TODO: Check ID property
-            MyAssert.HasNoError(connector);
-
-            retrievedVoucher = connector.Get(createdVoucher.VoucherNumber); //TODO: Check ID property
-            Assert.AreEqual(null, retrievedVoucher, "Entity still exists after Delete!");
-
+            //Not supported
             #endregion DELETE
 
             #region Delete arranged resources

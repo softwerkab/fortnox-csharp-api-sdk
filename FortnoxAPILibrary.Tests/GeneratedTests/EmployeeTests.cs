@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_Employee_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var alreadyExists = new EmployeeConnector().Get("TEST_EMP") != null;
             #endregion Arrange
 
             var connector = new EmployeeConnector();
@@ -31,16 +31,17 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newEmployee = new Employee()
             {
+                EmployeeId = "TEST_EMP",
                 FirstName = "Test",
                 LastName = "Testasson",
                 City = "Växjö",
                 Country = "Sweden",
                 ForaType = ForaType.A74,
                 JobTitle = "Woodcutter",
-                HourlyPay = 123.45
+                MonthlySalary = 20000
             };
 
-            var createdEmployee = connector.Create(newEmployee);
+            var createdEmployee = alreadyExists ? connector.Update(newEmployee) : connector.Create(newEmployee);
             MyAssert.HasNoError(connector);
             Assert.AreEqual("Test", createdEmployee.FirstName);
 
@@ -65,13 +66,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion READ / GET
 
             #region DELETE
-
-            connector.Delete(createdEmployee.EmployeeId);
-            MyAssert.HasNoError(connector);
-
-            retrievedEmployee = connector.Get(createdEmployee.EmployeeId);
-            Assert.AreEqual(null, retrievedEmployee, "Entity still exists after Delete!");
-
+            //Not supported
             #endregion DELETE
 
             #region Delete arranged resources

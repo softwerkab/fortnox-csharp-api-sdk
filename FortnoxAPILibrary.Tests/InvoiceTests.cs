@@ -35,7 +35,7 @@ namespace FortnoxAPILibrary.Tests
                 InvoiceDate = new DateTime(2019,1,20), //"2019-01-20",
                 DueDate = new DateTime(2019,2,20), //"2019-02-20",
                 InvoiceType = InvoiceType.CASHINVOICE,
-                PaymentWay = "CASH",
+                PaymentWay = PaymentWay.CASH,
                 InvoiceRows = new List<InvoiceRow>()
                 {
                     new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10},

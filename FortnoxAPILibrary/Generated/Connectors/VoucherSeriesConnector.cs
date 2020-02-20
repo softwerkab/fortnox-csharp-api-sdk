@@ -50,16 +50,7 @@ namespace FortnoxAPILibrary.Connectors
 			return BaseCreate(voucherSeries);
 		}
 
-		/// <summary>
-		/// Deletes a voucherSeries
-		/// </summary>
-		/// <param name="id">Identifier of the voucherSeries to delete</param>
-		public void Delete(string id)
-		{
-			BaseDelete(id.ToString());
-		}
-
-		/// <summary>
+        /// <summary>
 		/// Gets a list of voucherSeriess
 		/// </summary>
 		/// <returns>A list of voucherSeriess</returns>

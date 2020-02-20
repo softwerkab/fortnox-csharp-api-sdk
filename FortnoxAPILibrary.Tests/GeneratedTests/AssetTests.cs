@@ -19,11 +19,12 @@ namespace FortnoxAPILibrary.GeneratedTests
             ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
         }
 
+        [Ignore("Irregular jsons")]
         [TestMethod]
         public void Test_Asset_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var tmpCostCenter = new CostCenterConnector().Create(new CostCenter(){ Code = "TMP", Description = "TmpCostCenter"});
             #endregion Arrange
 
             var connector = new AssetConnector();
@@ -39,14 +40,13 @@ namespace FortnoxAPILibrary.GeneratedTests
                 Group = "Some Group",
                 Room = "Some room",
                 Placement = "Right here",
-                //CostCenter = "1111", //TODO: Add references
-                //TypeId = "1231",
-
+                CostCenter = tmpCostCenter.Code,
+                TypeId = "1250" //Datorer
             };
 
             var createdAsset = connector.Create(newAsset);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("TestAsset", createdAsset.Description); //TODO: Adapt
+            Assert.AreEqual("TestAsset", createdAsset.Description); //returns entity named "Assets" instead of "asset"
 
             #endregion CREATE
 

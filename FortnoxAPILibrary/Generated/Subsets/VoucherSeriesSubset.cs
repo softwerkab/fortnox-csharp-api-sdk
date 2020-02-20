@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
-    [Entity(SingularName = "VoucherSeries", PluralName = "VoucherSeries")]
+    [Entity(SingularName = "VoucherSeries", PluralName = "VoucherSeriesCollection")]
     public class VoucherSeriesSubset
     {
         //Implement manually !!!

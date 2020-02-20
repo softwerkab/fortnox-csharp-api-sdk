@@ -9,7 +9,6 @@ namespace FortnoxAPILibrary.Entities
     [Entity(SingularName = "Asset", PluralName = "Assets")]
     public class Asset
     {
-
         ///<summary> Direct URL to the record </summary>
         [ReadOnly]
         [JsonProperty("@url")]

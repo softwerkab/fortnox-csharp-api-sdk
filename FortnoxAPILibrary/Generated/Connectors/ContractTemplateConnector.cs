@@ -50,16 +50,7 @@ namespace FortnoxAPILibrary.Connectors
 			return BaseCreate(contractTemplate);
 		}
 
-		/// <summary>
-		/// Deletes a contractTemplate
-		/// </summary>
-		/// <param name="id">Identifier of the contractTemplate to delete</param>
-		public void Delete(string id)
-		{
-			BaseDelete(id.ToString());
-		}
-
-		/// <summary>
+        /// <summary>
 		/// Gets a list of contractTemplates
 		/// </summary>
 		/// <returns>A list of contractTemplates</returns>

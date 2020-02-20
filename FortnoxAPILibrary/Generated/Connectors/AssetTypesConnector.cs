@@ -7,7 +7,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class AssetTypesConnector : EntityConnector<AssetTypes, EntityCollection<AssetTypesSubset>, Sort.By.AssetTypes?>
+    public class AssetTypesConnector : EntityConnector<AssetType, EntityCollection<AssetTypesSubset>, Sort.By.AssetTypes?>
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the assetTypes to find</param>
 		/// <returns>The found assetTypes</returns>
-		public AssetTypes Get(int? id)
+		public AssetType Get(int? id)
 		{
 			return BaseGet(id.ToString());
 		}
@@ -36,7 +36,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="assetTypes">The assetTypes to update</param>
 		/// <returns>The updated assetTypes</returns>
-		public AssetTypes Update(AssetTypes assetTypes)
+		public AssetType Update(AssetType assetTypes)
 		{
 			return BaseUpdate(assetTypes, assetTypes.Id.ToString());
         }
@@ -46,7 +46,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="assetTypes">The assetTypes to create</param>
 		/// <returns>The created assetTypes</returns>
-		public AssetTypes Create(AssetTypes assetTypes)
+		public AssetType Create(AssetType assetTypes)
 		{
 			return BaseCreate(assetTypes);
 		}
@@ -66,7 +66,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of assetTypess</returns>
 		public EntityCollection<AssetTypesSubset> Find()
 		{
-			return BaseFind();
-		}
+			var res = BaseFind();
+            res.Entities.RemoveAt(0); //for some reason, the first element is metadata
+            return res;
+        }
 	}
 }

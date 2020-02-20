@@ -23,7 +23,8 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_SupplierInvoice_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var tmpSupplier = new SupplierConnector().Create(new Supplier() {Name = "TmpSupplier"});
+            var tmpArticle = new ArticleConnector().Create(new Article(){Description = "TmpArticle", PurchasePrice = 100});
             #endregion Arrange
 
             var connector = new SupplierInvoiceConnector();
@@ -31,41 +32,50 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newSupplierInvoice = new SupplierInvoice()
             {
-                //TODO: Populate Entity
+                SupplierNumber = tmpSupplier.SupplierNumber,
+                Comments = "InvoiceComments",
+                InvoiceDate = new DateTime(2010,1,1),
+                DueDate = new DateTime(2010,2,1),
+                SalesType = SalesType.STOCK,
+                OCR = "123456789",
+                Total = 5000,
+                SupplierInvoiceRows = new List<SupplierInvoiceRow>()
+                {
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 10, Price = 100},
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100},
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100}
+                }
             };
 
             var createdSupplierInvoice = connector.Create(newSupplierInvoice);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdSupplierInvoice.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("InvoiceComments", createdSupplierInvoice.Comments);
+            Assert.AreEqual("TmpSupplier", createdSupplierInvoice.SupplierName);
+            Assert.AreEqual(3 + 1, createdSupplierInvoice.SupplierInvoiceRows.Count);
+            //3 + 1 => A row "Leverantörsskulder" is created by default
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdSupplierInvoice.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdSupplierInvoice.Comments = "UpdatedInvoiceComments";
 
             var updatedSupplierInvoice = connector.Update(createdSupplierInvoice); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedSupplierInvoice.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedInvoiceComments", updatedSupplierInvoice.Comments);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedSupplierInvoice = connector.Get(createdSupplierInvoice.GivenNumber); //TODO: Check ID property
+            var retrievedSupplierInvoice = connector.Get(createdSupplierInvoice.GivenNumber);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedSupplierInvoice.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedInvoiceComments", retrievedSupplierInvoice.Comments);
 
             #endregion READ / GET
 
             #region DELETE
-
-            connector.Delete(createdSupplierInvoice.GivenNumber); //TODO: Check ID property
-            MyAssert.HasNoError(connector);
-
-            retrievedSupplierInvoice = connector.Get(createdSupplierInvoice.GivenNumber); //TODO: Check ID property
-            Assert.AreEqual(null, retrievedSupplierInvoice, "Entity still exists after Delete!");
-
+            //Not supported
             #endregion DELETE
 
             #region Delete arranged resources

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
@@ -39,25 +40,27 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "vouchers";
 		}
-		/// <summary>
-		/// Find a voucher based on id
-		/// </summary>
-		/// <param name="id">Identifier of the voucher to find</param>
-		/// <returns>The found voucher</returns>
-		public Voucher Get(int? id)
-		{
-			return BaseGet(id.ToString());
-		}
 
-		/// <summary>
-		/// Updates a voucher
-		/// </summary>
-		/// <param name="voucher">The voucher to update</param>
-		/// <returns>The updated voucher</returns>
-		public Voucher Update(Voucher voucher)
+        /// <summary>
+        /// Find a voucher based on id
+        /// </summary>
+        /// <param name="id">Identifier of the voucher to find</param>
+        /// <param name="seriesId">Idendifier of the voucher series</param>
+        /// <param name="financialYearId">Identifier of the financial year</param>
+        /// <returns>The found voucher</returns>
+        public Voucher Get(int? id, string seriesId, int? financialYearId)
 		{
-			return BaseUpdate(voucher, voucher.VoucherNumber.ToString());
-		}
+            BaseGetParametersInjection = new Dictionary<string, string>();
+            if (financialYearId != null)
+            {
+                BaseGetParametersInjection = new Dictionary<string, string>
+                {
+                    {"financialyear", financialYearId.ToString()}
+                };
+            }
+
+            return BaseGet(seriesId.ToString(), id.ToString());
+        }
 
 		/// <summary>
 		/// Creates a new voucher
@@ -67,15 +70,6 @@ namespace FortnoxAPILibrary.Connectors
 		public Voucher Create(Voucher voucher)
 		{
 			return BaseCreate(voucher);
-		}
-
-		/// <summary>
-		/// Deletes a voucher
-		/// </summary>
-		/// <param name="id">Identifier of the voucher to delete</param>
-		public void Delete(int? id)
-		{
-			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

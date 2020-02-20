@@ -19,11 +19,12 @@ namespace FortnoxAPILibrary.GeneratedTests
             ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
         }
 
+        [Ignore("Domain not understood")]
         [TestMethod]
         public void Test_SalaryTransaction_CRUD()
         {
             #region Arrange
-            var tmpEmployee = new EmployeeConnector().Create(new Employee() {FirstName = "Test", LastName = "Testasson"});
+            var tmpEmployee = new EmployeeConnector().Get("TEST_EMP") ?? new EmployeeConnector().Create(new Employee() { EmployeeId = "TEST_EMP" });
             #endregion Arrange
 
             var connector = new SalaryTransactionConnector();
@@ -32,9 +33,10 @@ namespace FortnoxAPILibrary.GeneratedTests
             var newSalaryTransaction = new SalaryTransaction()
             {
                 EmployeeId = tmpEmployee.EmployeeId,
-                SalaryCode = "123",
+                SalaryCode = "11", //Arbetstid
                 Date = new DateTime(2020,1,1),
                 Amount = 1250.50,
+                Number = 10,
             };
 
             var createdSalaryTransaction = connector.Create(newSalaryTransaction);
@@ -72,7 +74,6 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new EmployeeConnector().Delete(tmpEmployee.EmployeeId);
             #endregion Delete arranged resources
         }
     }

@@ -20,6 +20,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
         }
 
+        [Ignore("Does not provide update nor delete")]
         [TestMethod]
         public void Test_FinancialYear_CRUD()
         {
@@ -32,44 +33,32 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newFinancialYear = new FinancialYear()
             {
-                FromDate = new DateTime(2000,1,1),
-                ToDate = new DateTime(2000,12,31),
+                FromDate = new DateTime(2010,1,1),
+                ToDate = new DateTime(2010,12,31),
                 AccountChartType = existingAccountChartType.Name,
                 AccountingMethod = AccountingMethod.CASH
             };
 
             var createdFinancialYear = connector.Create(newFinancialYear);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(new DateTime(2000,1,1).ToString(), createdFinancialYear.FromDate?.ToString());
+            Assert.AreEqual(new DateTime(2010,1,1).ToString(), createdFinancialYear.FromDate?.ToString());
 
             #endregion CREATE
 
             #region UPDATE
-
-            createdFinancialYear.FromDate = new DateTime(2000, 2, 1);
-
-            var updatedFinancialYear = connector.Update(createdFinancialYear); 
-            MyAssert.HasNoError(connector);
-            Assert.AreEqual(new DateTime(2000, 2, 1).ToString(), updatedFinancialYear.FromDate?.ToString());
-
+            //Not supported
             #endregion UPDATE
 
             #region READ / GET
 
             var retrievedFinancialYear = connector.Get(createdFinancialYear.Id);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(new DateTime(2000, 2, 1).ToString(), retrievedFinancialYear.FromDate?.ToString());
+            Assert.AreEqual(new DateTime(2010, 1, 1).ToString(), retrievedFinancialYear.FromDate?.ToString());
 
             #endregion READ / GET
 
             #region DELETE
-
-            connector.Delete(createdFinancialYear.Id);
-            MyAssert.HasNoError(connector);
-
-            retrievedFinancialYear = connector.Get(createdFinancialYear.Id);
-            Assert.AreEqual(null, retrievedFinancialYear, "Entity still exists after Delete!");
-
+            //Not supported
             #endregion DELETE
 
             #region Delete arranged resources

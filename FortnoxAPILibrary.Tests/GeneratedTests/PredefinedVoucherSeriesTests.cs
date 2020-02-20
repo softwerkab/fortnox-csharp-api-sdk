@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -22,55 +23,22 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_PredefinedVoucherSeries_CRUD()
         {
-            #region Arrange
-            //Add code to create required resources
-            #endregion Arrange
-
             var connector = new PredefinedVoucherSeriesConnector();
 
-            #region CREATE
-            var newPredefinedVoucherSeries = new PredefinedVoucherSeries()
-            {
-                //TODO: Populate Entity
-            };
-
-            var createdPredefinedVoucherSeries = connector.Create(newPredefinedVoucherSeries);
+            //Get
+            var predefinedVoucherSeries = connector.Get("INVOICE");
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdPredefinedVoucherSeries.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("B", predefinedVoucherSeries.VoucherSeries);
 
-            #endregion CREATE
-
-            #region UPDATE
-
-            createdPredefinedVoucherSeries.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
-
-            var updatedPredefinedVoucherSeries = connector.Update(createdPredefinedVoucherSeries); 
+            //Update
+            predefinedVoucherSeries.VoucherSeries = "L"; //Lon -> "SALARY"
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedPredefinedVoucherSeries.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("L", predefinedVoucherSeries.VoucherSeries);
 
-            #endregion UPDATE
-
-            #region READ / GET
-
-            var retrievedPredefinedVoucherSeries = connector.Get(createdPredefinedVoucherSeries.ID); //TODO: Check ID property
+            //Reset
+            predefinedVoucherSeries.VoucherSeries = "B";
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedPredefinedVoucherSeries.SomeProperty); //TODO: Adapt
-
-            #endregion READ / GET
-
-            #region DELETE
-
-            connector.Delete(createdPredefinedVoucherSeries.ID); //TODO: Check ID property
-            MyAssert.HasNoError(connector);
-
-            retrievedPredefinedVoucherSeries = connector.Get(createdPredefinedVoucherSeries.ID); //TODO: Check ID property
-            Assert.AreEqual(null, retrievedPredefinedVoucherSeries, "Entity still exists after Delete!");
-
-            #endregion DELETE
-
-            #region Delete arranged resources
-            //Add code to delete temporary resources
-            #endregion Delete arranged resources
+            Assert.AreEqual("B", predefinedVoucherSeries.VoucherSeries);
         }
     }
 }

@@ -23,13 +23,9 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_AbsenceTransaction_CRUD()
         {
             #region Arrange
-            var employeeConnector = new EmployeeConnector();
-            var tmpEmployee = employeeConnector.Create(new Employee()
-            {
-                FirstName = "Test",
-                LastName = "Name",
-            });
-            MyAssert.HasNoError(employeeConnector);
+            var tmpEmployee = new EmployeeConnector().Get("TEST_EMP") ?? new EmployeeConnector().Create(new Employee() { EmployeeId = "TEST_EMP" });
+            var tmpProject = new ProjectConnector().Create(new Project() { Description = "TmpProject" });
+            var tmpCostCenter = new CostCenterConnector().Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
             #endregion Arrange
 
             var connector = new AbsenceTransactionConnector();
@@ -40,7 +36,9 @@ namespace FortnoxAPILibrary.GeneratedTests
                 EmployeeId = tmpEmployee.EmployeeId,
                 CauseCode = AbsenceCauseCode.MIL,
                 Date = new DateTime(2018, 01,01),
-                Hours = 5.5
+                Hours = 5.5,
+                CostCenter = tmpCostCenter.Code,
+                Project = tmpProject.ProjectNumber
             };
 
             var createdAbsenceTransaction = connector.Create(newAbsenceTransaction);
@@ -77,7 +75,8 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             #endregion DELETE
             #region Delete arranged resources
-            employeeConnector.Delete(tmpEmployee.EmployeeId);
+            new CostCenterConnector().Delete(tmpCostCenter.Code);
+            new ProjectConnector().Delete(tmpProject.ProjectNumber);
             #endregion Delete arranged resources
         }
     }

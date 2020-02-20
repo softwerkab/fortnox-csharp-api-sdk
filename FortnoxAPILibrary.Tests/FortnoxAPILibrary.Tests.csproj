@@ -9,26 +9,12 @@
   <ItemGroup>
     <Compile Remove="GeneratedTests\ArticleFileConnectionTests.cs" />
     <Compile Remove="GeneratedTests\AssetFileConnectionTests.cs" />
-    <Compile Remove="GeneratedTests\ContractAccrualTests.cs" />
-    <Compile Remove="GeneratedTests\ContractTemplateTests.cs" />
     <Compile Remove="GeneratedTests\FileTests.cs" />
-    <Compile Remove="GeneratedTests\InvoiceAccrualTests.cs" />
     <Compile Remove="GeneratedTests\InvoiceFileConnectionTests.cs" />
     <Compile Remove="GeneratedTests\NoxFinansInvoiceTests.cs" />
-    <Compile Remove="GeneratedTests\PredefinedAccountsTests.cs" />
-    <Compile Remove="GeneratedTests\PredefinedVoucherSeriesTests.cs" />
-    <Compile Remove="GeneratedTests\PrintTemplateTests.cs" />
-    <Compile Remove="GeneratedTests\SupplierInvoiceAccrualTests.cs" />
     <Compile Remove="GeneratedTests\SupplierInvoiceExternalURLConnectionTests.cs" />
     <Compile Remove="GeneratedTests\SupplierInvoiceFileConnectionTests.cs" />
-    <Compile Remove="GeneratedTests\SupplierInvoicePaymentTests.cs" />
-    <Compile Remove="GeneratedTests\SupplierInvoiceTests.cs" />
-    <Compile Remove="GeneratedTests\TaxReductionTests.cs" />
-    <Compile Remove="GeneratedTests\TermsOfDeliveryTests.cs" />
-    <Compile Remove="GeneratedTests\TermsOfPaymentTests.cs" />
     <Compile Remove="GeneratedTests\VoucherFileConnectionTests.cs" />
-    <Compile Remove="GeneratedTests\VoucherSeriesTests.cs" />
-    <Compile Remove="GeneratedTests\VoucherTests.cs" />
   </ItemGroup>
 
   <ItemGroup>

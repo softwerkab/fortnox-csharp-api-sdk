@@ -50,16 +50,7 @@ namespace FortnoxAPILibrary.Connectors
 			return BaseCreate(employee);
 		}
 
-		/// <summary>
-		/// Deletes a employee
-		/// </summary>
-		/// <param name="id">Identifier of the employee to delete</param>
-		public void Delete(string id)
-		{
-			BaseDelete(id.ToString());
-		}
-
-		/// <summary>
+        /// <summary>
 		/// Gets a list of employees
 		/// </summary>
 		/// <returns>A list of employees</returns>

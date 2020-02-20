@@ -23,7 +23,21 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_InvoiceAccrual_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+
+            var invoiceConnector = new InvoiceConnector();
+            var tmpInvoice = invoiceConnector.Create(new Invoice()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
+                Comments = "TestInvoice",
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 6, Price = 1000},
+                }
+            });
             #endregion Arrange
 
             var connector = new InvoiceAccrualConnector();
@@ -31,45 +45,58 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newInvoiceAccrual = new InvoiceAccrual()
             {
-                //TODO: Populate Entity
+                Description = "TestInvoiceAccrual",
+                InvoiceNumber = tmpInvoice.DocumentNumber,
+                Period = "MONTHLY",
+                AccrualAccount = 2990,
+                RevenueAccount = 3990,
+                StartDate = new DateTime(2020,3,25),
+                EndDate = new DateTime(2020, 6, 25),
+                Total = 6000,
+                InvoiceAccrualRows = new List<InvoiceAccrualRow>()
+                {
+                    new InvoiceAccrualRow(){ Account = 2990, Credit = 0, Debit = 2000 },
+                    new InvoiceAccrualRow(){ Account = 3990, Credit = 2000, Debit = 0 }
+                }
             };
 
             var createdInvoiceAccrual = connector.Create(newInvoiceAccrual);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdInvoiceAccrual.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestInvoiceAccrual", createdInvoiceAccrual.Description);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdInvoiceAccrual.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdInvoiceAccrual.Description = "UpdatedTestInvoiceAccrual";
 
             var updatedInvoiceAccrual = connector.Update(createdInvoiceAccrual); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedInvoiceAccrual.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestInvoiceAccrual", updatedInvoiceAccrual.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedInvoiceAccrual = connector.Get(createdInvoiceAccrual.ID); //TODO: Check ID property
+            var retrievedInvoiceAccrual = connector.Get(createdInvoiceAccrual.InvoiceNumber);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedInvoiceAccrual.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestInvoiceAccrual", retrievedInvoiceAccrual.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdInvoiceAccrual.ID); //TODO: Check ID property
+            connector.Delete(createdInvoiceAccrual.InvoiceNumber);
             MyAssert.HasNoError(connector);
 
-            retrievedInvoiceAccrual = connector.Get(createdInvoiceAccrual.ID); //TODO: Check ID property
+            retrievedInvoiceAccrual = connector.Get(createdInvoiceAccrual.InvoiceNumber);
             Assert.AreEqual(null, retrievedInvoiceAccrual, "Entity still exists after Delete!");
 
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

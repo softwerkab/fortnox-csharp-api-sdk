@@ -6,8 +6,8 @@ using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    [Entity(SingularName = "AssetTypes", PluralName = "AssetTypes")]
-    public class AssetTypes
+    [Entity(SingularName = "AssetType", PluralName = "AssetTypes")]
+    public class AssetType
     {
 
         ///<summary> Direct URL to the record </summary>

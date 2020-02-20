@@ -31,16 +31,6 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Updates a expense
-		/// </summary>
-		/// <param name="expense">The expense to update</param>
-		/// <returns>The updated expense</returns>
-		public Expense Update(Expense expense)
-		{
-			return BaseUpdate(expense, expense.Code.ToString());
-		}
-
-		/// <summary>
 		/// Creates a new expense
 		/// </summary>
 		/// <param name="expense">The expense to create</param>
@@ -48,15 +38,6 @@ namespace FortnoxAPILibrary.Connectors
 		public Expense Create(Expense expense)
 		{
 			return BaseCreate(expense);
-		}
-
-		/// <summary>
-		/// Deletes a expense
-		/// </summary>
-		/// <param name="id">Identifier of the expense to delete</param>
-		public void Delete(string id)
-		{
-			BaseDelete(id.ToString());
 		}
 
 		/// <summary>

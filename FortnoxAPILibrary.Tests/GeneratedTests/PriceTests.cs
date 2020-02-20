@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         {
             #region Arrange
             var tmpArticle = new ArticleConnector().Create(new Article() {Description = "TmpArticle"});
-            var tmpPriceList = new PriceListConnector().Get("TST_PR") ?? new PriceListConnector().Create(new PriceList() {Code = "TST_PR"});
+            var tmpPriceList = new PriceListConnector().Get("TST_PR") ?? new PriceListConnector().Create(new PriceList() {Code = "TST_PR", Description = "TmpPriceList"});
             #endregion Arrange
 
             var connector = new PriceConnector();

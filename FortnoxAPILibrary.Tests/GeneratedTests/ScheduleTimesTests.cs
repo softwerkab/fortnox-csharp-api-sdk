@@ -23,19 +23,21 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_ScheduleTimes_CRUD()
         {
             #region Arrange
-            var tmpEmployee = new EmployeeConnector().Create(new Employee() {FirstName = "Test", LastName = "Testasson"});
+            var tmpEmployee = new EmployeeConnector().Get("TEST_EMP") ?? new EmployeeConnector().Create(new Employee() { EmployeeId = "TEST_EMP" });
             #endregion Arrange
 
             var connector = new ScheduleTimesConnector();
 
             #region CREATE
-            //Not available
 
+            var abc = connector.Get(tmpEmployee.EmployeeId, new DateTime(2000, 10, 10));
+
+            //Create method is not supported
             var newScheduleTimes = new ScheduleTimes()
             {
                 Hours = 6.5,
                 EmployeeId = tmpEmployee.EmployeeId,
-                Date = new DateTime(2020,10,10)
+                Date = new DateTime(2050,10,10)
             };
 
             var createdScheduleTimes = connector.Update(newScheduleTimes);
@@ -67,7 +69,6 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new EmployeeConnector().Delete(tmpEmployee.EmployeeId);
             #endregion Delete arranged resources
         }
     }

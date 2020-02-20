@@ -50,6 +50,8 @@ namespace FortnoxAPILibrary
         /// <remarks/>
         protected Dictionary<string, string> Parameters = new Dictionary<string, string>();
 
+        protected Dictionary<string, string> BaseGetParametersInjection = new Dictionary<string, string>(); //TODO: Remove, only temporary workaround (BaseGet has no parameters injection)
+
         protected TEntity BaseCreate(TEntity entity, Dictionary<string, string> parameters = null)
         {
             Parameters = parameters ?? new Dictionary<string, string>();
@@ -104,6 +106,7 @@ namespace FortnoxAPILibrary
         protected TEntity BaseGet(params string[] indices)
         {
             Parameters = new Dictionary<string, string>();
+            Parameters = BaseGetParametersInjection;
 
             var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
 

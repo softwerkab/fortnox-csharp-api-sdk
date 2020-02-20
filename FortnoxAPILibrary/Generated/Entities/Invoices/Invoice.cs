@@ -20,9 +20,9 @@ namespace FortnoxAPILibrary.Entities
         [JsonProperty("@urlTaxReductionList")]
         public string UrlTaxReductionList { get; private set; }
 
-        ///<summary> Accounting Method. Can be ACCRUAL orCASH </summary>
+        ///<summary> Accounting Method. Can be ACCRUAL or CASH </summary>
         [JsonProperty]
-        public string AccountingMethod { get; set; }
+        public AccountingMethod? AccountingMethod { get; set; }
 
         ///<summary> The invoice administration fee. </summary>
         [JsonProperty]
@@ -275,7 +275,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> CASH, CARD, AG </summary>
         [JsonProperty]
-        public string PaymentWay { get; set; }
+        public PaymentWay? PaymentWay { get; set; }
 
         ///<summary> Phone number 1 of the customer for the invoice. </summary>
         [JsonProperty]

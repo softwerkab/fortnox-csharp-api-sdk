@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	public class PredefinedVoucherSeriesConnector : EntityConnector<PredefinedVoucherSeries, EntityCollection<PredefinedVoucherSeriesSubset>, Sort.By.PredefinedVoucherSeries?>
+	public class PredefinedVoucherSeriesConnector : EntityConnector<PredefinedVoucherSeries, EntityCollection<PredefinedVoucherSeries>, Sort.By.PredefinedVoucherSeries?>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -41,30 +41,11 @@ namespace FortnoxAPILibrary.Connectors
 			return BaseUpdate(predefinedVoucherSeries, predefinedVoucherSeries.Name.ToString());
 		}
 
-		/// <summary>
-		/// Creates a new predefinedVoucherSeries
-		/// </summary>
-		/// <param name="predefinedVoucherSeries">The predefinedVoucherSeries to create</param>
-		/// <returns>The created predefinedVoucherSeries</returns>
-		public PredefinedVoucherSeries Create(PredefinedVoucherSeries predefinedVoucherSeries)
-		{
-			return BaseCreate(predefinedVoucherSeries);
-		}
-
-		/// <summary>
-		/// Deletes a predefinedVoucherSeries
-		/// </summary>
-		/// <param name="id">Identifier of the predefinedVoucherSeries to delete</param>
-		public void Delete(string id)
-		{
-			BaseDelete(id.ToString());
-		}
-
-		/// <summary>
+        /// <summary>
 		/// Gets a list of predefinedVoucherSeriess
 		/// </summary>
 		/// <returns>A list of predefinedVoucherSeriess</returns>
-		public EntityCollection<PredefinedVoucherSeriesSubset> Find()
+		public EntityCollection<PredefinedVoucherSeries> Find()
 		{
 			return BaseFind();
 		}

@@ -31,39 +31,40 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newTermsOfDelivery = new TermsOfDelivery()
             {
-                //TODO: Populate Entity
+                Code = "TST",
+                Description = "TestDeliveryTerms"
             };
 
             var createdTermsOfDelivery = connector.Create(newTermsOfDelivery);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdTermsOfDelivery.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestDeliveryTerms", createdTermsOfDelivery.Description);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdTermsOfDelivery.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdTermsOfDelivery.Description = "UpdatedTestDeliveryTerms";
 
             var updatedTermsOfDelivery = connector.Update(createdTermsOfDelivery); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedTermsOfDelivery.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestDeliveryTerms", updatedTermsOfDelivery.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedTermsOfDelivery = connector.Get(createdTermsOfDelivery.Code); //TODO: Check ID property
+            var retrievedTermsOfDelivery = connector.Get(createdTermsOfDelivery.Code);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedTermsOfDelivery.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestDeliveryTerms", retrievedTermsOfDelivery.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdTermsOfDelivery.Code); //TODO: Check ID property
+            connector.Delete(createdTermsOfDelivery.Code);
             MyAssert.HasNoError(connector);
 
-            retrievedTermsOfDelivery = connector.Get(createdTermsOfDelivery.Code); //TODO: Check ID property
+            retrievedTermsOfDelivery = connector.Get(createdTermsOfDelivery.Code);
             Assert.AreEqual(null, retrievedTermsOfDelivery, "Entity still exists after Delete!");
 
             #endregion DELETE

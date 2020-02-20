@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    [Entity(SingularName = "PredefinedVoucherSeries", PluralName = "PredefinedVoucherSeries")]
+    [Entity(SingularName = "PreDefinedVoucherSeries", PluralName = "PreDefinedVoucherSeriesCollection")]
     public class PredefinedVoucherSeries
     {
 

@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    [Entity(SingularName = "AttendanceTransactions", PluralName = "AttendanceTransactions")]
+    [Entity(SingularName = "AttendanceTransaction", PluralName = "AttendanceTransactions")]
     public class AttendanceTransaction
     {
 

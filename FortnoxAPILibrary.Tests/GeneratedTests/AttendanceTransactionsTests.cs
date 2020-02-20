@@ -23,13 +23,9 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_AttendanceTransactions_CRUD()
         {
             #region Arrange
-            var employeeConnector = new EmployeeConnector();
-            var tmpEmployee = employeeConnector.Create(new Employee()
-            {
-                FirstName = "Test",
-                LastName = "Name",
-            });
-            MyAssert.HasNoError(employeeConnector);
+            var tmpEmployee = new EmployeeConnector().Get("TEST_EMP") ?? new EmployeeConnector().Create(new Employee() { EmployeeId = "TEST_EMP" });
+            var tmpProject = new ProjectConnector().Create(new Project() {Description = "TmpProject"});
+            var tmpCostCenter = new CostCenterConnector().Create(new CostCenter() {Code = "TMP", Description = "TmpCostCenter"});
             #endregion Arrange
 
             var connector = new AttendanceTransactionsConnector();
@@ -38,9 +34,11 @@ namespace FortnoxAPILibrary.GeneratedTests
             var newAttendanceTransactions = new AttendanceTransaction()
             {
                 EmployeeId = tmpEmployee.EmployeeId,
-                CauseCode = AttendanceCauseCode.FLX,
+                CauseCode = AttendanceCauseCode.TID,
                 Date = new DateTime(2018, 01, 01),
-                Hours = 5.5
+                Hours = 5.5,
+                CostCenter = tmpCostCenter.Code,
+                Project = tmpProject.ProjectNumber
             };
 
             var createdAttendanceTransactions = connector.Create(newAttendanceTransactions);
@@ -78,7 +76,8 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new CostCenterConnector().Delete(tmpCostCenter.Code);
+            new ProjectConnector().Delete(tmpProject.ProjectNumber);
             #endregion Delete arranged resources
         }
     }

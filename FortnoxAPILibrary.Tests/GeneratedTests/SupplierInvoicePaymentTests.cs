@@ -23,7 +23,24 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_SupplierInvoicePayment_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var tmpSupplier = new SupplierConnector().Create(new Supplier() { Name = "TmpSupplier" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
+            var tmpSpplierInvoice = new SupplierInvoiceConnector().Create(new SupplierInvoice()
+            {
+                SupplierNumber = tmpSupplier.SupplierNumber,
+                Comments = "InvoiceComments",
+                InvoiceDate = new DateTime(2020, 1, 1),
+                DueDate = new DateTime(2020, 2, 1),
+                SalesType = SalesType.STOCK,
+                OCR = "123456789",
+                Total = 5000,
+                SupplierInvoiceRows = new List<SupplierInvoiceRow>()
+                {
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 10, Price = 100},
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100},
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100}
+                }
+            });
             #endregion Arrange
 
             var connector = new SupplierInvoicePaymentConnector();
@@ -31,39 +48,42 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newSupplierInvoicePayment = new SupplierInvoicePayment()
             {
-                //TODO: Populate Entity
+                InvoiceNumber = (int?) tmpSpplierInvoice.GivenNumber,
+                Amount = 1000,
+                AmountCurrency = 1000,
+                PaymentDate = new DateTime(2020, 1, 20)
             };
 
             var createdSupplierInvoicePayment = connector.Create(newSupplierInvoicePayment);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdSupplierInvoicePayment.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(1000, createdSupplierInvoicePayment.Amount);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdSupplierInvoicePayment.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdSupplierInvoicePayment.Amount = 2000; 
 
             var updatedSupplierInvoicePayment = connector.Update(createdSupplierInvoicePayment); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedSupplierInvoicePayment.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(2000, updatedSupplierInvoicePayment.Amount);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedSupplierInvoicePayment = connector.Get(createdSupplierInvoicePayment.Number); //TODO: Check ID property
+            var retrievedSupplierInvoicePayment = connector.Get(createdSupplierInvoicePayment.Number);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedSupplierInvoicePayment.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(2000, retrievedSupplierInvoicePayment.Amount);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdSupplierInvoicePayment.Number); //TODO: Check ID property
+            connector.Delete(createdSupplierInvoicePayment.Number);
             MyAssert.HasNoError(connector);
 
-            retrievedSupplierInvoicePayment = connector.Get(createdSupplierInvoicePayment.Number); //TODO: Check ID property
+            retrievedSupplierInvoicePayment = connector.Get(createdSupplierInvoicePayment.Number);
             Assert.AreEqual(null, retrievedSupplierInvoicePayment, "Entity still exists after Delete!");
 
             #endregion DELETE

@@ -20,7 +20,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Listed below </summary>
         [JsonProperty]
-        public string Code { get; set; }
+        public string Code { get; set; } //TODO: Convert to enum
 
         ///<summary> Cost center code </summary>
         [JsonProperty]

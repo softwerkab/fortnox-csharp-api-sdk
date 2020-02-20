@@ -19,13 +19,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter]
-		public string FromDate { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string ToDate { get; set; }
+        public string Date { get; set; }
 
 		/// <remarks/>
 		public FinancialYearConnector()
@@ -42,17 +36,7 @@ namespace FortnoxAPILibrary.Connectors
 			return BaseGet(id.ToString());
 		}
 
-		/// <summary>
-		/// Updates a financialYear
-		/// </summary>
-		/// <param name="financialYear">The financialYear to update</param>
-		/// <returns>The updated financialYear</returns>
-		public FinancialYear Update(FinancialYear financialYear)
-		{
-			return BaseUpdate(financialYear, financialYear.Id.ToString());
-		}
-
-		/// <summary>
+        /// <summary>
 		/// Creates a new financialYear
 		/// </summary>
 		/// <param name="financialYear">The financialYear to create</param>
@@ -62,16 +46,7 @@ namespace FortnoxAPILibrary.Connectors
 			return BaseCreate(financialYear);
 		}
 
-		/// <summary>
-		/// Deletes a financialYear
-		/// </summary>
-		/// <param name="id">Identifier of the financialYear to delete</param>
-		public void Delete(int? id)
-		{
-			BaseDelete(id.ToString());
-		}
-
-		/// <summary>
+        /// <summary>
 		/// Gets a list of financialYears
 		/// </summary>
 		/// <returns>A list of financialYears</returns>

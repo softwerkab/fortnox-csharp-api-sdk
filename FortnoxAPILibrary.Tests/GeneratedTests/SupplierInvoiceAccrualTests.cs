@@ -23,7 +23,23 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_SupplierInvoiceAccrual_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var tmpSupplier = new SupplierConnector().Create(new Supplier() { Name = "TmpSupplier" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle" });
+            var conn = new SupplierInvoiceConnector();
+            var tmpSupplierInvoice = conn.Create(new SupplierInvoice()
+            {
+                SupplierNumber = tmpSupplier.SupplierNumber,
+                Comments = "InvoiceComments",
+                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
+                SalesType = SalesType.STOCK,
+                //OCR = "123456789",
+                Total = 6000,
+                SupplierInvoiceRows = new List<SupplierInvoiceRow>()
+                {
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 6, Price = 1000 }
+                }
+            });
             #endregion Arrange
 
             var connector = new SupplierInvoiceAccrualConnector();
@@ -31,45 +47,58 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newSupplierInvoiceAccrual = new SupplierInvoiceAccrual()
             {
-                //TODO: Populate Entity
+                Description = "TestSupplierInvoiceAccrual",
+                SupplierInvoiceNumber = (int?) tmpSupplierInvoice.GivenNumber,
+                Period = "MONTHLY",
+                AccrualAccount = 1790,
+                CostAccount = 5820,
+                StartDate = new DateTime(2020, 3, 25),
+                EndDate = new DateTime(2020, 6, 25),
+                Total = 6000,
+                SupplierInvoiceAccrualRows = new List<SupplierInvoiceAccrualRow>()
+                {
+                    new SupplierInvoiceAccrualRow(){ Account = 5820, Credit = 0, Debit = 2000 },
+                    new SupplierInvoiceAccrualRow(){ Account = 1790, Credit = 2000, Debit = 0 }
+                }
             };
 
             var createdSupplierInvoiceAccrual = connector.Create(newSupplierInvoiceAccrual);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdSupplierInvoiceAccrual.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestSupplierInvoiceAccrual", createdSupplierInvoiceAccrual.Description);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdSupplierInvoiceAccrual.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdSupplierInvoiceAccrual.Description = "UpdatedTestSupplierInvoiceAccrual";
 
             var updatedSupplierInvoiceAccrual = connector.Update(createdSupplierInvoiceAccrual); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedSupplierInvoiceAccrual.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestSupplierInvoiceAccrual", updatedSupplierInvoiceAccrual.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedSupplierInvoiceAccrual = connector.Get(createdSupplierInvoiceAccrual.ID); //TODO: Check ID property
+            var retrievedSupplierInvoiceAccrual = connector.Get(createdSupplierInvoiceAccrual.SupplierInvoiceNumber);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedSupplierInvoiceAccrual.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestSupplierInvoiceAccrual", retrievedSupplierInvoiceAccrual.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdSupplierInvoiceAccrual.ID); //TODO: Check ID property
+            connector.Delete(createdSupplierInvoiceAccrual.SupplierInvoiceNumber);
             MyAssert.HasNoError(connector);
 
-            retrievedSupplierInvoiceAccrual = connector.Get(createdSupplierInvoiceAccrual.ID); //TODO: Check ID property
+            retrievedSupplierInvoiceAccrual = connector.Get(createdSupplierInvoiceAccrual.SupplierInvoiceNumber);
             Assert.AreEqual(null, retrievedSupplierInvoiceAccrual, "Entity still exists after Delete!");
 
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new SupplierConnector().Delete(tmpSupplier.SupplierNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

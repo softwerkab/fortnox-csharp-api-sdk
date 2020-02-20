@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_ContractTemplate_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var tmpArticle = new ArticleConnector().Create(new Article(){ Description = "TmpArticle" });
             #endregion Arrange
 
             var connector = new ContractTemplateConnector();
@@ -31,45 +31,46 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newContractTemplate = new ContractTemplate()
             {
-                //TODO: Populate Entity
+                ContractLength = 4,
+                Continuous = false,
+                InvoiceInterval = 3,
+                InvoiceRows = new List<ContractTemplateInvoiceRow>()
+                {
+                    new ContractTemplateInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10}
+                },
+                TemplateName = "TestTemplate",
             };
 
             var createdContractTemplate = connector.Create(newContractTemplate);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdContractTemplate.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestTemplate", createdContractTemplate.TemplateName);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdContractTemplate.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdContractTemplate.TemplateName = "UpdatedTestTemplate";
 
             var updatedContractTemplate = connector.Update(createdContractTemplate); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedContractTemplate.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestTemplate", updatedContractTemplate.TemplateName);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedContractTemplate = connector.Get(createdContractTemplate.ID); //TODO: Check ID property
+            var retrievedContractTemplate = connector.Get(createdContractTemplate.TemplateNumber);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedContractTemplate.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestTemplate", retrievedContractTemplate.TemplateName);
 
             #endregion READ / GET
 
             #region DELETE
-
-            connector.Delete(createdContractTemplate.ID); //TODO: Check ID property
-            MyAssert.HasNoError(connector);
-
-            retrievedContractTemplate = connector.Get(createdContractTemplate.ID); //TODO: Check ID property
-            Assert.AreEqual(null, retrievedContractTemplate, "Entity still exists after Delete!");
-
+            //Not supported
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

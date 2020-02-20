@@ -27,45 +27,40 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion Arrange
 
             var connector = new VoucherSeriesConnector();
-
             #region CREATE
             var newVoucherSeries = new VoucherSeries()
             {
-                //TODO: Populate Entity
+                Code = "TST",
+                Description = "TestVoucherSeries",
             };
 
-            var createdVoucherSeries = connector.Create(newVoucherSeries);
+            
+            var createdVoucherSeries = connector.Create(newVoucherSeries) ?? connector.Update(newVoucherSeries); //if already exists, update it instead
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdVoucherSeries.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestVoucherSeries", createdVoucherSeries.Description);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdVoucherSeries.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdVoucherSeries.Description = "UpdatedTestVoucherSeries";
 
             var updatedVoucherSeries = connector.Update(createdVoucherSeries); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedVoucherSeries.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestVoucherSeries", updatedVoucherSeries.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedVoucherSeries = connector.Get(createdVoucherSeries.Code); //TODO: Check ID property
+            var retrievedVoucherSeries = connector.Get(createdVoucherSeries.Code);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedVoucherSeries.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestVoucherSeries", retrievedVoucherSeries.Description);
 
             #endregion READ / GET
 
             #region DELETE
-
-            connector.Delete(createdVoucherSeries.Code); //TODO: Check ID property
-            MyAssert.HasNoError(connector);
-
-            retrievedVoucherSeries = connector.Get(createdVoucherSeries.Code); //TODO: Check ID property
-            Assert.AreEqual(null, retrievedVoucherSeries, "Entity still exists after Delete!");
-
+            //Not supported
             #endregion DELETE
 
             #region Delete arranged resources

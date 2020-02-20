@@ -6,8 +6,8 @@ using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    [Entity(SingularName = "PredefinedAccounts", PluralName = "PredefinedAccounts")]
-    public class PredefinedAccounts
+    [Entity(SingularName = "PreDefinedAccount", PluralName = "PreDefinedAccounts")]
+    public class PredefinedAccount
     {
 
         ///<summary> Direct url to the record. </summary>

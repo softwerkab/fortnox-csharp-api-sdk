@@ -31,39 +31,40 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newTermsOfPayment = new TermsOfPayment()
             {
-                //TODO: Populate Entity
+                Code = "TST",
+                Description = "TestPaymentTerms"
             };
 
             var createdTermsOfPayment = connector.Create(newTermsOfPayment);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdTermsOfPayment.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("TestPaymentTerms", createdTermsOfPayment.Description);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdTermsOfPayment.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdTermsOfPayment.Description = "UpdatedTestPaymentTerms";
 
             var updatedTermsOfPayment = connector.Update(createdTermsOfPayment); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedTermsOfPayment.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestPaymentTerms", updatedTermsOfPayment.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedTermsOfPayment = connector.Get(createdTermsOfPayment.Code); //TODO: Check ID property
+            var retrievedTermsOfPayment = connector.Get(createdTermsOfPayment.Code);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedTermsOfPayment.SomeProperty); //TODO: Adapt
+            Assert.AreEqual("UpdatedTestPaymentTerms", retrievedTermsOfPayment.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdTermsOfPayment.Code); //TODO: Check ID property
+            connector.Delete(createdTermsOfPayment.Code);
             MyAssert.HasNoError(connector);
 
-            retrievedTermsOfPayment = connector.Get(createdTermsOfPayment.Code); //TODO: Check ID property
+            retrievedTermsOfPayment = connector.Get(createdTermsOfPayment.Code);
             Assert.AreEqual(null, retrievedTermsOfPayment, "Entity still exists after Delete!");
 
             #endregion DELETE

@@ -6,8 +6,8 @@ using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    [Entity(SingularName = "VoucherRows", PluralName = "VoucherRows")]
-    public class VoucherRows
+    [Entity(SingularName = "VoucherRow", PluralName = "VoucherRows")]
+    public class VoucherRow
     {
 
         ///<summary> Account number. The number must be of an existing active account. </summary>

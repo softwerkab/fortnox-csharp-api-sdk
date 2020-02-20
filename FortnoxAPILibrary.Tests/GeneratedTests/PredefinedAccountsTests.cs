@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -22,55 +23,28 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_PredefinedAccounts_CRUD()
         {
-            #region Arrange
-            //Add code to create required resources
-            #endregion Arrange
-
             var connector = new PredefinedAccountsConnector();
-
-            #region CREATE
-            var newPredefinedAccounts = new PredefinedAccounts()
-            {
-                //TODO: Populate Entity
-            };
-
-            var createdPredefinedAccounts = connector.Create(newPredefinedAccounts);
+            var list = connector.Find().Entities;
+            //Get
+            var bygAccount = connector.Get("CONSTRUCTION_DEB");
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdPredefinedAccounts.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(2647, bygAccount.Account);
 
-            #endregion CREATE
-
-            #region UPDATE
-
-            createdPredefinedAccounts.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
-
-            var updatedPredefinedAccounts = connector.Update(createdPredefinedAccounts); 
+            var patentAccount = connector.Get("PRODUCT_DEB");
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedPredefinedAccounts.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(2645, patentAccount.Account);
 
-            #endregion UPDATE
-
-            #region READ / GET
-
-            var retrievedPredefinedAccounts = connector.Get(createdPredefinedAccounts.ID); //TODO: Check ID property
+            //Update
+            patentAccount.Account = bygAccount.Account;
+            connector.Update(patentAccount);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedPredefinedAccounts.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(2647, patentAccount.Account);
 
-            #endregion READ / GET
-
-            #region DELETE
-
-            connector.Delete(createdPredefinedAccounts.ID); //TODO: Check ID property
+            //Revert
+            patentAccount.Account = 2645;
+            connector.Update(patentAccount);
             MyAssert.HasNoError(connector);
-
-            retrievedPredefinedAccounts = connector.Get(createdPredefinedAccounts.ID); //TODO: Check ID property
-            Assert.AreEqual(null, retrievedPredefinedAccounts, "Entity still exists after Delete!");
-
-            #endregion DELETE
-
-            #region Delete arranged resources
-            //Add code to delete temporary resources
-            #endregion Delete arranged resources
+            Assert.AreEqual(2645, patentAccount.Account);
         }
     }
 }

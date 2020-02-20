@@ -7,19 +7,16 @@ using System.Runtime.Serialization;
 namespace FortnoxAPILibrary.Entities
 {
     [Entity(SingularName = "PaymentWayValuesForCashInvoices", PluralName = "PaymentWayValuesForCashInvoices")]
-    public class PaymentWayValuesForCashInvoices
+    public enum PaymentWay
     {
-
-        ///<summary> Payment Way is set to Cash payment </summary>
-        [JsonProperty]
-        public string CASH { get; set; }
-
-        ///<summary> Payment Way is set to Card. </summary>
-        [JsonProperty]
-        public string CARD { get; set; }
-
-        ///<summary> Payment Way is set to Direct debit </summary>
-        [JsonProperty]
-        public string AG { get; set; }
+        ///<summary> Cash payment </summary>
+        [EnumMember]
+        CASH,
+        ///<summary> Card. </summary>
+        [EnumMember]
+        CARD,
+        ///<summary> Direct debit </summary>
+        [EnumMember]
+        AG
     }
 }
