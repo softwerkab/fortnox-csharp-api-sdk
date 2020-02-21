@@ -3,6 +3,8 @@
 
 namespace FortnoxAPILibrary
 {
+	//TODO: Fix plurals
+
     /// <remarks/>
     public class Sort
 	{
@@ -19,7 +21,7 @@ namespace FortnoxAPILibrary
 				[StringValue("number")]
 				Number,
 			}
-			public enum File
+			public enum Archive
 			{
 			}
 			public enum ArticleFileConnection

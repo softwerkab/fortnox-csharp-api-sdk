@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace FortnoxAPILibrary.Entities
 {
     [Entity(SingularName = "Folder", PluralName = "Folders")]
-    public class Folder
+    public class ArchiveFolder
     {
 
         ///<summary> Direct URL to the record </summary>
@@ -21,12 +21,14 @@ namespace FortnoxAPILibrary.Entities
         public string Email { get; private set; }
 
         ///<summary> List of files </summary>
+        [ReadOnly]
         [JsonProperty]
-        public List<File> Files { get; set; }
+        public List<ArchiveFile> Files { get; private set; }
 
         ///<summary> List of folders </summary>
+        [ReadOnly]
         [JsonProperty]
-        public List<Folder> Folders { get; set; }
+        public List<ArchiveFolder> Folders { get; private set; }
 
         ///<summary> Id of the folder </summary>
         [ReadOnly]

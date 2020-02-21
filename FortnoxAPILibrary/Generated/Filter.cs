@@ -148,7 +148,7 @@ namespace FortnoxAPILibrary
 		{
 
 		}
-		public enum File
+		public enum Archive
 		{
 
 		}

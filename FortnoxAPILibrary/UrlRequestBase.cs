@@ -1,12 +1,11 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Serialization;
-using File = FortnoxAPILibrary.Entities.File;
 
 namespace FortnoxAPILibrary
 {
@@ -253,7 +252,7 @@ namespace FortnoxAPILibrary
             return default;
         }
 
-        protected T UploadFile<T>(string localPath, byte[] fileData = null, string fileName = null)
+        protected T UploadFile<T>(byte[] fileData = null, string fileName = null)
         {
             ResponseContent = "";
 
@@ -261,13 +260,6 @@ namespace FortnoxAPILibrary
 
             try
             {
-				// prepp name and data
-				if (fileData == null)
-				{
-					fileName = Path.GetFileName(localPath);
-					fileData = System.IO.File.ReadAllBytes(localPath);
-				}
-
                 var rand = new Random();
                 var boundary = "----boundary" + rand.Next();
                 var header = Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + fileName + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
@@ -296,76 +288,29 @@ namespace FortnoxAPILibrary
             return result;
         }
 
-        protected void DownloadFile(string idOrPath, string localPath, File file = null)
+        protected byte[] DownloadFile()
         {
             ResponseContent = "";
 
             try
             {
-                string url;
-                
-                if (Guid.TryParse(idOrPath, out var unused))
-                    url = GetUrl(idOrPath);
-                else
-                    url = GetUrl() + "?path=" + Uri.EscapeDataString(idOrPath);
-
-                LocalPath = localPath;
-
-                var request = SetupRequest(url, "GET");
+                var request = SetupRequest(RequestUriString, "GET");
 
                 using var response = (HttpWebResponse) request.GetResponse();
                 HttpStatusCode = response.StatusCode;
                 using var responseStream = response.GetResponseStream();
-                if (file == null)
-                {
-                    // hdd
-                    responseStream.ToFile(LocalPath);
-                }
-                else
-                {
-                    // memory                          
-                    file.ContentType = response.Headers["Content-Type"];
-                    file.Data = responseStream.ToBytes();
-                }
+
+                //var contentType = response.Headers["Content-Type"];
+                var data = responseStream.ToBytes();
+                return data;
             }
             catch (WebException we)
             {
                 Error = HandleException(we);
+                return null;
             }
         }
 
-        protected File MoveFile(string fileId, string destination)
-        {
-            ResponseContent = "";
-
-            try
-            {
-                var url = ConnectionCredentials.FortnoxAPIServer + "/" + Resource + "/move/" + fileId;
-
-                if (string.IsNullOrWhiteSpace(destination) || Guid.TryParse(destination, out var unused))
-                {
-                    url += "/" + destination;
-                }
-                else
-                {
-                    url += "/?destination=" + Uri.EscapeDataString(destination);
-                }
-
-                var request = SetupRequest(url, "PUT");
-                using var response = (HttpWebResponse)request.GetResponse();
-                HttpStatusCode = response.StatusCode;
-                using var responseStream = response.GetResponseStream();
-                ResponseContent = responseStream.ToText();
-                return Deserialize<EntityWrapper<File>>(ResponseContent).Entity;
-            }
-            catch (WebException we)
-            {
-                Error = HandleException(we);
-            }
-
-            return null;
-        }
-        
         protected ErrorInformation HandleException(WebException we)
         {
             if (we.Response == null)

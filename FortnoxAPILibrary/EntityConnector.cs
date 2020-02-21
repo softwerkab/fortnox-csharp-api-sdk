@@ -51,6 +51,7 @@ namespace FortnoxAPILibrary
         protected Dictionary<string, string> Parameters = new Dictionary<string, string>();
 
         protected Dictionary<string, string> BaseGetParametersInjection = new Dictionary<string, string>(); //TODO: Remove, only temporary workaround (BaseGet has no parameters injection)
+        protected Dictionary<string, string> BaseDeleteParametersInjection = new Dictionary<string, string>(); //TODO: Remove, only temporary workaround (BaseGet has no parameters injection)
 
         protected TEntity BaseCreate(TEntity entity, Dictionary<string, string> parameters = null)
         {
@@ -89,6 +90,7 @@ namespace FortnoxAPILibrary
         protected void BaseDelete(params string[] indices)
         {
             Parameters = new Dictionary<string, string>();
+            Parameters = BaseDeleteParametersInjection;
 
             var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
 
@@ -109,11 +111,6 @@ namespace FortnoxAPILibrary
             Parameters = BaseGetParametersInjection;
 
             var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
-
-            if (string.IsNullOrWhiteSpace(searchValue))
-            {
-                throw new Exception("Ett sökvärde har inte angivits.");
-            }
 
             var requestUriString = GetUrl(searchValue);
 

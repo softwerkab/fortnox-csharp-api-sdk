@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace FortnoxAPILibrary.Entities
 {
     [Entity(SingularName = "File", PluralName = "Files")]
-    public class File
+    public class ArchiveFile
     {
 
         ///<summary> Direct URL to the record </summary>
@@ -39,8 +39,5 @@ namespace FortnoxAPILibrary.Entities
         [ReadOnly]
         [JsonProperty]
         public string Size { get; private set; }
-
-        public byte[] Data { get; set; }
-        public string ContentType { get; set; }
     }
 }
