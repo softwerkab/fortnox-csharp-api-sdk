@@ -93,6 +93,8 @@ namespace FortnoxAPILibrary
 
         public RequestResponseType ResponseType { get; protected set; }
 
+        protected Func<string, string> FixResponseContent; //Needed for fixing irregular json responses
+
         /// <remarks />
         public UrlRequestBase()
         {
@@ -342,7 +344,7 @@ namespace FortnoxAPILibrary
             catch (Exception)
             {
                 //Could not interpret error message from Fortnox API.
-                throw we;
+                return new ErrorInformation() { Message = we.Message };
             }
         }
 
@@ -355,11 +357,13 @@ namespace FortnoxAPILibrary
         {
             try
             {
+                if (FixResponseContent != null)
+                    content = FixResponseContent(content);
                 return serializer.Deserialize<T>(content);
             }
             catch (Exception e)
             {
-                throw new Exception("An error occured while deserializing the response. Check ResponseContent.", e.InnerException);
+                throw new SerializationException("An error occured while deserializing the response. Check ResponseContent.", e.InnerException);
             }
         }
 

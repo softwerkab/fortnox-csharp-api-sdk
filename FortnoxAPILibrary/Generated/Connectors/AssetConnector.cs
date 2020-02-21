@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
@@ -39,8 +40,13 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found asset</returns>
 		public Asset Get(string id)
 		{
-			return BaseGet(id.ToString());
-		}
+            FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
+
+            var result = BaseGet(id);
+
+            FixResponseContent = null;
+            return result;
+        }
 
 		/// <summary>
 		/// Updates a asset
@@ -48,8 +54,16 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="asset">The asset to update</param>
 		/// <returns>The updated asset</returns>
 		public Asset Update(Asset asset)
-		{
-			return BaseUpdate(asset, asset.Id.ToString());
+        {
+            var id = asset.Id;
+            asset.Id = null;
+            FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
+
+            var result = BaseUpdate(asset, id);
+
+            FixResponseContent = null;
+            asset.Id = id;
+            return result;
 		}
 
 		/// <summary>
@@ -58,9 +72,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="asset">The asset to create</param>
 		/// <returns>The created asset</returns>
 		public Asset Create(Asset asset)
-		{
-			return BaseCreate(asset);
-		}
+        {
+            FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
+
+            var result = BaseCreate(asset);
+
+            FixResponseContent = null;
+            return result;
+        }
 
 		/// <summary>
 		/// Deletes a asset

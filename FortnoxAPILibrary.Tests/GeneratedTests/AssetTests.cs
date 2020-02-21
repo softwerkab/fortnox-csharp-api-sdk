@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -19,12 +20,12 @@ namespace FortnoxAPILibrary.GeneratedTests
             ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
         }
 
-        [Ignore("Irregular jsons")]
         [TestMethod]
         public void Test_Asset_CRUD()
         {
             #region Arrange
-            var tmpCostCenter = new CostCenterConnector().Create(new CostCenter(){ Code = "TMP", Description = "TmpCostCenter"});
+            var tmpCostCenter = new CostCenterConnector().Get("TMP") ?? new CostCenterConnector().Create(new CostCenter(){ Code = "TMP", Description = "TmpCostCenter"});
+            var tmpAssetType = new AssetTypesConnector().Create(new AssetType() {Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
             #endregion Arrange
 
             var connector = new AssetConnector();
@@ -33,15 +34,18 @@ namespace FortnoxAPILibrary.GeneratedTests
             var newAsset = new Asset()
             {
                 Description = "TestAsset",
-                AcquisitionStart = new DateTime(2011,1,1),
-                AcquisitionValue = 123.45,
+                Number = TestUtils.RandomString(),
+                AcquisitionDate = new DateTime(2011, 1, 1),
+                AcquisitionStart = new DateTime(2011,2,1),
+                AcquisitionValue = 500,
+                DepreciationFinal = new DateTime(2012,1,1),
                 Department = "Some Department",
                 Notes = "Some notes",
                 Group = "Some Group",
                 Room = "Some room",
                 Placement = "Right here",
                 CostCenter = tmpCostCenter.Code,
-                TypeId = "1250" //Datorer
+                TypeId = tmpAssetType.Id.ToString()
             };
 
             var createdAsset = connector.Create(newAsset);
@@ -79,7 +83,8 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new CostCenterConnector().Delete(tmpCostCenter.Code);
+            new AssetTypesConnector().Delete(tmpAssetType.Id);
             #endregion Delete arranged resources
         }
     }

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
+using Microsoft.VisualBasic.FileIO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.GeneratedTests
@@ -19,7 +21,6 @@ namespace FortnoxAPILibrary.GeneratedTests
             ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
         }
 
-        [Ignore("Irregular jsons")]
         [TestMethod]
         public void Test_AssetTypes_CRUD()
         {
@@ -28,8 +29,9 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion Arrange
 
             var connector = new AssetTypesConnector();
-            //var list = connector.Find();
-            //connector.Delete(14);
+            var entry = connector.Find().Entities.FirstOrDefault(at => at.Number == "TST");
+            if (entry != null) 
+                connector.Delete(entry.Id);
 
             #region CREATE
             var newAssetTypes = new AssetType()
@@ -69,10 +71,10 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             #region DELETE
 
-            connector.Delete(createdAssetTypes.Id); //TODO: Check ID property
+            connector.Delete(createdAssetTypes.Id);
             MyAssert.HasNoError(connector);
 
-            retrievedAssetTypes = connector.Get(createdAssetTypes.Id); //TODO: Check ID property
+            retrievedAssetTypes = connector.Get(createdAssetTypes.Id);
             Assert.AreEqual(null, retrievedAssetTypes, "Entity still exists after Delete!");
 
             #endregion DELETE

@@ -53,14 +53,21 @@ namespace FortnoxAPILibrary.Entities
         [JsonProperty]
         public double? AcquisitionValue { get; set; }
 
+        ///<summary> AcquisitionDate</summary> 
+        [JsonProperty]
+        public DateTime? AcquisitionDate { get; set; } //NOTE: Not in documentated properties, but it is required
+
+        ///<summary> Number </summary> 
+        [JsonProperty]
+        public string Number { get; set; } //NOTE: Not in documentated properties, but it is required
+
         ///<summary> Depreciations start date </summary>
         [JsonProperty]
         public DateTime? AcquisitionStart { get; set; }
 
         ///<summary> Final date when asset became fully depreciated </summary>
-        [ReadOnly]
         [JsonProperty]
-        public DateTime? DepreciationFinal { get; private set; }
+        public DateTime? DepreciationFinal { get; set; }
 
         ///<summary> Asset depreciated until that date or null if no deprecations made </summary>
         [ReadOnly]
