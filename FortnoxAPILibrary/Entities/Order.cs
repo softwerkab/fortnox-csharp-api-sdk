@@ -155,7 +155,9 @@ namespace FortnoxAPILibrary
 		private string urlField;
 
 		private string urlTaxReductionListField;
-
+		
+		private string stockPointIdField;
+		
         /// <remarks/>
         public Order()
         {
@@ -1012,6 +1014,21 @@ namespace FortnoxAPILibrary
 				this.urlTaxReductionListField = value;
 			}
 		}
+		
+		/// <summary>This field is Read-Only in Fortnox</summary>
+		[System.ComponentModel.ReadOnly(true)]
+		[System.Xml.Serialization.XmlAttributeAttribute()]
+		public string StockPointIdField
+		{
+			get
+			{
+				return this.stockPointIdField;
+			}
+			set
+			{
+				this.stockPointIdField = value;
+			}
+		}
 	}
 
 	/// <remarks/>
@@ -1153,6 +1170,8 @@ namespace FortnoxAPILibrary
 		private string unitField;
 
 		private string vATField;
+		
+		private string stockPointIdField;
 
 		/// <remarks/>
 		public string AccountNumber
@@ -1362,6 +1381,19 @@ namespace FortnoxAPILibrary
 			set
 			{
 				this.vATField = value;
+			}
+		}
+		
+		/// <remarks/>
+		public string StockPointId
+		{
+			get
+			{
+				return this.stockPointIdField;
+			}
+			set
+			{
+				this.stockPointIdField = value;
 			}
 		}
 	}
