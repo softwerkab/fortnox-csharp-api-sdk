@@ -1016,7 +1016,7 @@ namespace FortnoxAPILibrary
 		}
 		
 		[System.Xml.Serialization.XmlAttributeAttribute()]
-		public string StockPointIdField
+		public string StockPointId
 		{
 			get
 			{
