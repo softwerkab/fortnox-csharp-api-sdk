@@ -287,7 +287,7 @@ namespace FortnoxAPILibrary.Tests
             connector.ClientSecret = cs;
 
             var folder = new Folder();
-            folder.Name = "f1";
+            folder.Name = $"f1-{Guid.NewGuid().ToString().Substring(0, 8)}";
             folder = connector.CreateFolder(folder);
             Assert.IsFalse(connector.HasError);
 
