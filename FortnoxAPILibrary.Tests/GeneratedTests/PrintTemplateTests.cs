@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -23,6 +24,44 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_PrintTemplate_CRUD()
         {
             //Not supported
+        }
+
+        [TestMethod]
+        public void Test_Find()
+        {
+            var connector = new PrintTemplateConnector();
+            
+            var fullCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(9, fullCollection.Entities.Count);
+            Assert.IsNotNull(fullCollection.Entities.First().Name);
+
+            //Limit not supported
+        }
+
+        [TestMethod]
+        public void Test_Find_Filter()
+        {
+            var connector = new PrintTemplateConnector();
+
+            connector.FilterBy = Filter.PrintTemplate.Order;
+            var orderTemplates = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(4, orderTemplates.Entities.Count);
+
+            connector.FilterBy = Filter.PrintTemplate.Offer;
+            var offerTemplates = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(1, offerTemplates.Entities.Count);
+
+            connector.FilterBy = Filter.PrintTemplate.Invoice;
+            var invoiceTemplates = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(9, invoiceTemplates.Entities.Count);
         }
     }
 }

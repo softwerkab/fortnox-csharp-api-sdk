@@ -36,17 +36,7 @@ namespace FortnoxAPILibrary.Connectors
 			return BaseGet(id.ToString());
 		}
 
-		/// <summary>
-		/// Updates a assetFileConnection
-		/// </summary>
-		/// <param name="assetFileConnection">The assetFileConnection to update</param>
-		/// <returns>The updated assetFileConnection</returns>
-		public AssetFileConnection Update(AssetFileConnection assetFileConnection)
-		{
-			return BaseUpdate(assetFileConnection, assetFileConnection.Id.ToString());
-		}
-
-		/// <summary>
+        /// <summary>
 		/// Creates a new assetFileConnection
 		/// </summary>
 		/// <param name="assetFileConnection">The assetFileConnection to create</param>

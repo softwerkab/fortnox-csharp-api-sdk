@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -64,6 +65,36 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region Delete arranged resources
             //Add code to delete temporary resources
             #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_Find()
+        {
+            var connector = new LabelConnector();
+
+            var existingCount = connector.Find().Entities.Count;
+
+            var createdEntries = new List<Label>();
+            //Add entries
+            for (var i = 0; i < 5; i++)
+            {
+                var createdEntry = connector.Create(new Label() {Description = TestUtils.RandomString()});
+                createdEntries.Add(createdEntry);
+            }
+
+            //Filter not supported
+            var fullCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);
+
+            //Limit not supported
+            
+            //Delete entries
+            foreach (var entry in createdEntries)
+            {
+                connector.Delete(entry.Id);
+            }
         }
     }
 }

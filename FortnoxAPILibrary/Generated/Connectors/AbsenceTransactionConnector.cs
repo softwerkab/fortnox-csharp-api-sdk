@@ -16,6 +16,12 @@ namespace FortnoxAPILibrary.Connectors
 		public Filter.AbsenceTransaction? FilterBy { get; set; }
 
 
+		[SearchParameter("employeeid")]
+		public string EmployeeId { get; set; }
+
+        [SearchParameter("employeeid")]
+        public DateTime? Date { get; set; }
+
 		/// <remarks/>
 		public AbsenceTransactionConnector()
 		{

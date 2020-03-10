@@ -9,7 +9,6 @@ namespace FortnoxAPILibrary.Entities
     [Entity(SingularName = "Invoice", PluralName = "Invoices")]
     public class Invoice
     {
-
         ///<summary> Direct url to the record. </summary>
         [ReadOnly]
         [JsonProperty("@url")]

@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_PredefinedAccounts_CRUD()
         {
             var connector = new PredefinedAccountsConnector();
-            var list = connector.Find().Entities;
+
             //Get
             var bygAccount = connector.Get("CONSTRUCTION_DEB");
             MyAssert.HasNoError(connector);
@@ -45,6 +45,26 @@ namespace FortnoxAPILibrary.GeneratedTests
             connector.Update(patentAccount);
             MyAssert.HasNoError(connector);
             Assert.AreEqual(2645, patentAccount.Account);
+        }
+
+        [TestMethod]
+        public void Test_Find()
+        {
+            var connector = new PredefinedAccountsConnector();
+
+            var fullCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(42, fullCollection.Entities.Count);
+            Assert.IsNotNull(fullCollection.Entities.First().Name);
+
+            connector.Limit = 2;
+            var limitedCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(2, limitedCollection.Entities.Count);
+            Assert.AreEqual(42, limitedCollection.TotalResources);
+            //Limit not supported
         }
     }
 }

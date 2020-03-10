@@ -38,16 +38,6 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Updates a articleFileConnection
-		/// </summary>
-		/// <param name="articleFileConnection">The articleFileConnection to update</param>
-		/// <returns>The updated articleFileConnection</returns>
-		public ArticleFileConnection Update(ArticleFileConnection articleFileConnection)
-		{
-			return BaseUpdate(articleFileConnection, articleFileConnection.FileId.ToString());
-		}
-
-		/// <summary>
 		/// Creates a new articleFileConnection
 		/// </summary>
 		/// <param name="articleFileConnection">The articleFileConnection to create</param>

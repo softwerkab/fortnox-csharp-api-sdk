@@ -76,5 +76,63 @@ namespace FortnoxAPILibrary.GeneratedTests
             new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
+
+        [TestMethod]
+        public void Test_Find()
+        {
+            #region Arrange
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", PurchasePrice = 10});
+            var tmpPriceList = new PriceListConnector().Get("TST_PR") ?? new PriceListConnector().Create(new PriceList() { Code = "TST_PR", Description = "TmpPriceList" });
+            #endregion Arrange
+
+
+            var connector = new PriceConnector();
+
+            var emptyCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber);
+
+            var newPrice = new Price()
+            {
+                ArticleNumber = tmpArticle.ArticleNumber,
+                PriceList = tmpPriceList.Code,
+                PriceValue = 100,
+                FromQuantity = 100
+        };
+
+            //Add entries
+            for (var i = 0; i < 5; i++)
+            {
+                newPrice.PriceValue = TestUtils.RandomInt();
+                newPrice.FromQuantity = TestUtils.RandomInt();
+                connector.Create(newPrice);
+                emptyCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber);
+            }
+
+            //No filter
+            var fullCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber);
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(5, fullCollection.TotalResources);
+            Assert.AreEqual(5, fullCollection.Entities.Count);
+            Assert.AreEqual(1, fullCollection.TotalPages);
+
+            //Apply Limit
+            connector.Limit = 2;
+            var limitedCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber);
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(5, limitedCollection.TotalResources);
+            Assert.AreEqual(2, limitedCollection.Entities.Count);
+            Assert.AreEqual(3, limitedCollection.TotalPages);
+
+            //Delete entries
+            foreach (var entry in fullCollection.Entities)
+            {
+                connector.Delete(entry.PriceList, entry.ArticleNumber, entry.FromQuantity);
+            }
+
+            #region Delete arranged resources
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            #endregion Delete arranged resources
+        }
     }
 }

@@ -124,13 +124,14 @@ namespace FortnoxAPILibrary
             return result?.Entity;
         }
 
-        protected TEntityCollection BaseFind(Dictionary<string, string> parameters = null)
+        protected TEntityCollection BaseFind(Dictionary<string, string> parameters = null, params string[] indices)
         {
             Parameters = parameters ?? new Dictionary<string, string>();
 
             AddSearchParameters();
+            var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
 
-            var requestUriString = GetUrl();
+            var requestUriString = GetUrl(searchValue);
 
             requestUriString = AddParameters(requestUriString);
 

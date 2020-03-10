@@ -23,7 +23,20 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_VoucherFileConnection_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+
+            var tmpVoucher = new VoucherConnector().Create(new Voucher()
+            {
+                Description = "TestVoucher",
+                Comments = "Some comments",
+                VoucherSeries = "A", //predefined series
+                TransactionDate = new DateTime(2020, 1, 1),
+                VoucherRows = new List<VoucherRow>()
+                {
+                    new VoucherRow() {Account = 1930, Debit = 1500, Credit = 0},
+                    new VoucherRow() {Account = 1910, Debit = 0, Credit = 1500}
+                }
+            });
+            var tmpFile = new ArchiveConnector().UploadFile("tmpImage.png", Resource.fortnox_image);
             #endregion Arrange
 
             var connector = new VoucherFileConnectionConnector();
@@ -31,45 +44,41 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newVoucherFileConnection = new VoucherFileConnection()
             {
-                //TODO: Populate Entity
+                FileId = tmpFile.Id,
+                VoucherNumber = tmpVoucher.VoucherNumber.ToString(),
+                VoucherSeries = tmpVoucher.VoucherSeries
             };
 
             var createdVoucherFileConnection = connector.Create(newVoucherFileConnection);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdVoucherFileConnection.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(tmpVoucher.Description, createdVoucherFileConnection.VoucherDescription);
 
             #endregion CREATE
 
             #region UPDATE
-
-            createdVoucherFileConnection.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
-
-            var updatedVoucherFileConnection = connector.Update(createdVoucherFileConnection); 
-            MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedVoucherFileConnection.SomeProperty); //TODO: Adapt
-
+            //Not supported
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedVoucherFileConnection = connector.Get(createdVoucherFileConnection.FileId); //TODO: Check ID property
+            var retrievedVoucherFileConnection = connector.Get(createdVoucherFileConnection.FileId);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedVoucherFileConnection.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(tmpVoucher.Description, retrievedVoucherFileConnection.VoucherDescription);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdVoucherFileConnection.FileId); //TODO: Check ID property
+            connector.Delete(createdVoucherFileConnection.FileId);
             MyAssert.HasNoError(connector);
 
-            retrievedVoucherFileConnection = connector.Get(createdVoucherFileConnection.FileId); //TODO: Check ID property
+            retrievedVoucherFileConnection = connector.Get(createdVoucherFileConnection.FileId);
             Assert.AreEqual(null, retrievedVoucherFileConnection, "Entity still exists after Delete!");
 
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new ArchiveConnector().DeleteFile(tmpFile.Id);
             #endregion Delete arranged resources
         }
     }

@@ -7,14 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="GeneratedTests\ArticleFileConnectionTests.cs" />
-    <Compile Remove="GeneratedTests\AssetFileConnectionTests.cs" />
     <Compile Remove="GeneratedTests\FileTests.cs" />
-    <Compile Remove="GeneratedTests\InvoiceFileConnectionTests.cs" />
     <Compile Remove="GeneratedTests\NoxFinansInvoiceTests.cs" />
-    <Compile Remove="GeneratedTests\SupplierInvoiceExternalURLConnectionTests.cs" />
-    <Compile Remove="GeneratedTests\SupplierInvoiceFileConnectionTests.cs" />
-    <Compile Remove="GeneratedTests\VoucherFileConnectionTests.cs" />
   </ItemGroup>
 
   <ItemGroup>

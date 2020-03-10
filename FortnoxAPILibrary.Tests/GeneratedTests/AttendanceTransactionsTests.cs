@@ -25,13 +25,13 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region Arrange
             var tmpEmployee = new EmployeeConnector().Get("TEST_EMP") ?? new EmployeeConnector().Create(new Employee() { EmployeeId = "TEST_EMP" });
             var tmpProject = new ProjectConnector().Create(new Project() {Description = "TmpProject"});
-            var tmpCostCenter = new CostCenterConnector().Create(new CostCenter() {Code = "TMP", Description = "TmpCostCenter"});
+            var tmpCostCenter = new CostCenterConnector().Get("TMP") ?? new CostCenterConnector().Create(new CostCenter() {Code = "TMP", Description = "TmpCostCenter"});
             #endregion Arrange
 
             var connector = new AttendanceTransactionsConnector();
 
             #region CREATE
-            var newAttendanceTransactions = new AttendanceTransaction()
+            var newAttendanceTransaction = new AttendanceTransaction()
             {
                 EmployeeId = tmpEmployee.EmployeeId,
                 CauseCode = AttendanceCauseCode.TID,
@@ -41,37 +41,37 @@ namespace FortnoxAPILibrary.GeneratedTests
                 Project = tmpProject.ProjectNumber
             };
 
-            var createdAttendanceTransactions = connector.Create(newAttendanceTransactions);
+            var createdAttendanceTransaction = connector.Create(newAttendanceTransaction);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(5.5, createdAttendanceTransactions.Hours);
+            Assert.AreEqual(5.5, createdAttendanceTransaction.Hours);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdAttendanceTransactions.Hours = 8;
+            createdAttendanceTransaction.Hours = 8;
 
-            var updatedAttendanceTransactions = connector.Update(createdAttendanceTransactions); 
+            var updatedAttendanceTransaction = connector.Update(createdAttendanceTransaction); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(8, updatedAttendanceTransactions.Hours);
+            Assert.AreEqual(8, updatedAttendanceTransaction.Hours);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedAttendanceTransactions = connector.Get(createdAttendanceTransactions.EmployeeId, createdAttendanceTransactions.Date, createdAttendanceTransactions.CauseCode);
+            var retrievedAttendanceTransaction = connector.Get(createdAttendanceTransaction.EmployeeId, createdAttendanceTransaction.Date, createdAttendanceTransaction.CauseCode);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(8, retrievedAttendanceTransactions.Hours);
+            Assert.AreEqual(8, retrievedAttendanceTransaction.Hours);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdAttendanceTransactions.EmployeeId, createdAttendanceTransactions.Date, createdAttendanceTransactions.CauseCode);
+            connector.Delete(createdAttendanceTransaction.EmployeeId, createdAttendanceTransaction.Date, createdAttendanceTransaction.CauseCode);
             MyAssert.HasNoError(connector);
 
-            retrievedAttendanceTransactions = connector.Get(createdAttendanceTransactions.EmployeeId, createdAttendanceTransactions.Date, createdAttendanceTransactions.CauseCode);
-            Assert.AreEqual(null, retrievedAttendanceTransactions, "Entity still exists after Delete!");
+            retrievedAttendanceTransaction = connector.Get(createdAttendanceTransaction.EmployeeId, createdAttendanceTransaction.Date, createdAttendanceTransaction.CauseCode);
+            Assert.AreEqual(null, retrievedAttendanceTransaction, "Entity still exists after Delete!");
 
             #endregion DELETE
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -22,8 +23,23 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_InvoiceFileConnection_CRUD()
         {
+            throw new NotImplementedException();
+
             #region Arrange
-            //Add code to create required resources
+            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 10 });
+            var invoiceConnector = new InvoiceConnector();
+            var tmpInvoice = invoiceConnector.Create(new Invoice()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceDate = new DateTime(2020, 1, 20),
+                DueDate = new DateTime(2020, 6, 20),
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 2, Price = 10},
+                }
+            });
+            var tmpFile = new ArchiveConnector().UploadFile("tmpImage.png", Resource.fortnox_image);
             #endregion Arrange
 
             var connector = new InvoiceFileConnectionConnector();
@@ -31,45 +47,48 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newInvoiceFileConnection = new InvoiceFileConnection()
             {
-                //TODO: Populate Entity
+                EntityId = tmpInvoice.DocumentNumber,
+                FileId = tmpFile.Id,
+                IncludeOnSend = false
             };
 
             var createdInvoiceFileConnection = connector.Create(newInvoiceFileConnection);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdInvoiceFileConnection.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(false, createdInvoiceFileConnection.IncludeOnSend);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdInvoiceFileConnection.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
+            createdInvoiceFileConnection.IncludeOnSend = true;
 
             var updatedInvoiceFileConnection = connector.Update(createdInvoiceFileConnection); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedInvoiceFileConnection.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(true, updatedInvoiceFileConnection.IncludeOnSend);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedInvoiceFileConnection = connector.Get(createdInvoiceFileConnection.FileId); //TODO: Check ID property
+            var retrievedInvoiceFileConnection = connector.Get(createdInvoiceFileConnection.Id);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedInvoiceFileConnection.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(true, retrievedInvoiceFileConnection.IncludeOnSend);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdInvoiceFileConnection.FileId); //TODO: Check ID property
+            connector.Delete(createdInvoiceFileConnection.Id);
             MyAssert.HasNoError(connector);
 
-            retrievedInvoiceFileConnection = connector.Get(createdInvoiceFileConnection.FileId); //TODO: Check ID property
+            retrievedInvoiceFileConnection = connector.Get(createdInvoiceFileConnection.FileId);
             Assert.AreEqual(null, retrievedInvoiceFileConnection, "Entity still exists after Delete!");
 
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

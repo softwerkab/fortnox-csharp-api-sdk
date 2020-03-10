@@ -25,7 +25,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region Arrange
             var tmpEmployee = new EmployeeConnector().Get("TEST_EMP") ?? new EmployeeConnector().Create(new Employee() { EmployeeId = "TEST_EMP" });
             var tmpProject = new ProjectConnector().Create(new Project() { Description = "TmpProject" });
-            var tmpCostCenter = new CostCenterConnector().Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
+            var tmpCostCenter = new CostCenterConnector().Get("TMP") ??  new CostCenterConnector().Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
             #endregion Arrange
 
             var connector = new AbsenceTransactionConnector();

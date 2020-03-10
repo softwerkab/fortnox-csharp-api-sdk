@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class WayOfDeliveryConnector : EntityConnector<WayOfDelivery, EntityCollection<WayOfDeliverySubset>, Sort.By.WayOfDelivery?>
+    public class WayOfDeliveryConnector : EntityConnector<WayOfDelivery, EntityCollection<WayOfDelivery>, Sort.By.WayOfDelivery?>
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
@@ -63,7 +63,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of wayOfDeliverys
 		/// </summary>
 		/// <returns>A list of wayOfDeliverys</returns>
-		public EntityCollection<WayOfDeliverySubset> Find()
+		public EntityCollection<WayOfDelivery> Find()
 		{
 			return BaseFind();
 		}

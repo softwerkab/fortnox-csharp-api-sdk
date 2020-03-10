@@ -52,7 +52,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             var createdContract = connector.Create(newContract);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("TestContract", createdContract.Comments); //TODO: Adapt
+            Assert.AreEqual("TestContract", createdContract.Comments);
 
             #endregion CREATE
 

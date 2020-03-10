@@ -23,7 +23,23 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_AssetFileConnection_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var tmpAssetType = new AssetTypesConnector().Create(new AssetType() { Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
+            var tmpAsset = new AssetConnector().Create(new Asset()
+            {
+                Description = "TestAsset",
+                Number = TestUtils.RandomString(),
+                AcquisitionDate = new DateTime(2011, 1, 1),
+                AcquisitionStart = new DateTime(2011, 2, 1),
+                AcquisitionValue = 500,
+                DepreciationFinal = new DateTime(2012, 1, 1),
+                Department = "Some Department",
+                Notes = "Some notes",
+                Group = "Some Group",
+                Room = "Some room",
+                Placement = "Right here",
+                TypeId = tmpAssetType.Id.ToString()
+            });
+            var tmpFile = new ArchiveConnector().UploadFile("tmpImage.png", Resource.fortnox_image);
             #endregion Arrange
 
             var connector = new AssetFileConnectionConnector();
@@ -31,45 +47,42 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newAssetFileConnection = new AssetFileConnection()
             {
-                //TODO: Populate Entity
+                FileId = tmpFile.Id,
+                AssetId = tmpAsset.Id
             };
 
             var createdAssetFileConnection = connector.Create(newAssetFileConnection);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdAssetFileConnection.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(tmpAsset.Id, createdAssetFileConnection.AssetId);
 
             #endregion CREATE
 
             #region UPDATE
-
-            createdAssetFileConnection.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
-
-            var updatedAssetFileConnection = connector.Update(createdAssetFileConnection); 
-            MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedAssetFileConnection.SomeProperty); //TODO: Adapt
-
+            //Update not supported
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedAssetFileConnection = connector.Get(createdAssetFileConnection.Id); //TODO: Check ID property
+            var retrievedAssetFileConnection = connector.Get(createdAssetFileConnection.FileId);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedAssetFileConnection.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(tmpAsset.Id, retrievedAssetFileConnection.AssetId);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdAssetFileConnection.Id); //TODO: Check ID property
+            connector.Delete(createdAssetFileConnection.FileId);
             MyAssert.HasNoError(connector);
 
-            retrievedAssetFileConnection = connector.Get(createdAssetFileConnection.Id); //TODO: Check ID property
+            retrievedAssetFileConnection = connector.Get(createdAssetFileConnection.FileId);
             Assert.AreEqual(null, retrievedAssetFileConnection, "Entity still exists after Delete!");
 
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new AssetConnector().Delete(tmpAsset.Id);
+            new AssetTypesConnector().Delete(tmpAssetType.Id);
+            new ArchiveConnector().DeleteFile(tmpFile.Id);
             #endregion Delete arranged resources
         }
     }

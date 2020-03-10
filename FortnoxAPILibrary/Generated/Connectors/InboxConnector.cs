@@ -2,9 +2,9 @@
 
 namespace FortnoxAPILibrary.Generated.Connectors
 {
-    public class InboxController : ArchiveConnector
+    public class InboxConnector : ArchiveConnector
     {
-        public InboxController()
+        public InboxConnector()
         {
             Resource = "inbox";
         }

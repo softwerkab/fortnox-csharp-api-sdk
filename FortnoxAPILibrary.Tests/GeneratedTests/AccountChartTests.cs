@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -22,31 +23,21 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_AccountChart_CRUD()
         {
-            #region Arrange
-            //Add code to create required resources
-            #endregion Arrange
+            //Not supported
+        }
 
+        [TestMethod]
+        public void Test_Find()
+        {
             var connector = new AccountChartConnector();
 
-            #region CREATE
-            //Not allowed
-            #endregion CREATE
+            var fullCollection = connector.Find();
+            MyAssert.HasNoError(connector);
 
-            #region UPDATE
-            //Not allowed
-            #endregion UPDATE
+            Assert.AreEqual(5, fullCollection.Entities.Count);
+            Assert.IsNotNull(fullCollection.Entities.First().Name);
 
-            #region READ / GET
-            //Not Allowed
-            #endregion READ / GET
-
-            #region DELETE
-            //Not allowed
-            #endregion DELETE
-
-            #region Delete arranged resources
-            //Add code to delete temporary resources
-            #endregion Delete arranged resources
+            //Limit not supported
         }
     }
 }

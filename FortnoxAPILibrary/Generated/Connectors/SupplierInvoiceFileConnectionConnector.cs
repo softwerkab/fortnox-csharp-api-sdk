@@ -38,16 +38,6 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Updates a supplierInvoiceFileConnection
-		/// </summary>
-		/// <param name="supplierInvoiceFileConnection">The supplierInvoiceFileConnection to update</param>
-		/// <returns>The updated supplierInvoiceFileConnection</returns>
-		public SupplierInvoiceFileConnection Update(SupplierInvoiceFileConnection supplierInvoiceFileConnection)
-		{
-			return BaseUpdate(supplierInvoiceFileConnection, supplierInvoiceFileConnection.FileId.ToString());
-		}
-
-		/// <summary>
 		/// Creates a new supplierInvoiceFileConnection
 		/// </summary>
 		/// <param name="supplierInvoiceFileConnection">The supplierInvoiceFileConnection to create</param>

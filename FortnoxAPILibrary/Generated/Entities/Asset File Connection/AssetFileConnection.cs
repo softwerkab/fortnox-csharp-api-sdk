@@ -17,7 +17,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Id of the file </summary>
         [JsonProperty]
-        public string Id { get; set; }
+        public string FileId { get; set; }
 
         ///<summary> Name of the file </summary>
         [ReadOnly]

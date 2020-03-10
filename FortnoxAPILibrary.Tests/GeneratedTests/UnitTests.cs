@@ -73,5 +73,38 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to delete temporary resources
             #endregion Delete arranged resources
         }
+
+        [TestMethod]
+        public void Test_Find()
+        {
+            var connector = new UnitConnector();
+
+            var existingCount = connector.Find().TotalResources;
+
+            var createdEntries = new List<Unit>();
+            //Add entries
+            for (var i = 0; i < 5; i++)
+            {
+                var createdEntry = connector.Create(new Unit() { Code = TestUtils.RandomString(), Description = TestUtils.RandomString() });
+                createdEntries.Add(createdEntry);
+            }
+
+            //Filter not supported
+            var fullCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(existingCount + 5, fullCollection.TotalResources);
+            
+            //Limit not supported
+            connector.Limit = 2;
+            var limitedCollection = connector.Find();
+            Assert.AreEqual(2, limitedCollection.Entities.Count);
+
+            //Delete entries
+            foreach (var entry in createdEntries)
+            {
+                connector.Delete(entry.Code);
+            }
+        }
     }
 }

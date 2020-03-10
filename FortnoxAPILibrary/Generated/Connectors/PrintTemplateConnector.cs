@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class PrintTemplateConnector : EntityConnector<PrintTemplate, EntityCollection<PrintTemplateSubset>, Sort.By.PrintTemplate?>
+    public class PrintTemplateConnector : EntityConnector<PrintTemplate, EntityCollection<PrintTemplate>, Sort.By.PrintTemplate?>
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
@@ -19,11 +19,12 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "printtemplates";
 		}
+
 		/// <summary>
 		/// Gets a list of printTemplates
 		/// </summary>
 		/// <returns>A list of printTemplates</returns>
-		public EntityCollection<PrintTemplateSubset> Find()
+		public EntityCollection<PrintTemplate> Find()
 		{
 			return BaseFind();
 		}

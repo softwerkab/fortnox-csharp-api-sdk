@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -23,7 +24,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_ModeOfPayment_CRUD()
         {
             #region Arrange
-            var tmpAccount = new AccountConnector().Create(new Account(){Description = "TestAccount", Number = 0123});
+            var tmpAccount = new AccountConnector().Get(0123) ?? new AccountConnector().Create(new Account(){Description = "TestAccount", Number = 0123});
             #endregion Arrange
 
             var connector = new ModeOfPaymentConnector();
@@ -32,7 +33,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var newModeOfPayment = new ModeOfPayment()
             {
                 Description = "TestMode",
-                AccountNumber = 0123,
+                AccountNumber = tmpAccount.Number,
                 Code = "TEST_MODE",
             };
 
@@ -69,6 +70,52 @@ namespace FortnoxAPILibrary.GeneratedTests
             Assert.AreEqual(null, retrievedModeOfPayment, "Entity still exists after Delete!");
 
             #endregion DELETE
+
+            #region Delete arranged resources
+            new AccountConnector().Delete(0123);
+            #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_Find()
+        {
+            #region Arrange
+            var tmpAccount = new AccountConnector().Get(0123) ?? new AccountConnector().Create(new Account() { Description = "TestAccount", Number = 0123 });
+            #endregion Arrange
+
+            var connector = new ModeOfPaymentConnector();
+
+            var existingCount = connector.Find().Entities.Count;
+            var testKeyMark = TestUtils.RandomString();
+
+            var createdEntries = new List<ModeOfPayment>();
+            //Add entries
+            for (var i = 0; i < 5; i++)
+            {
+                var createdEntry = connector.Create(new ModeOfPayment() { Code = TestUtils.RandomString(), Description = testKeyMark, AccountNumber = tmpAccount.Number });
+                createdEntries.Add(createdEntry);
+            }
+
+            //Filter not supported
+            var fullCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);
+            Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == testKeyMark));
+
+            //Apply Limit
+            connector.Limit = 2;
+            var limitedCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(existingCount + 5, limitedCollection.TotalResources);
+            Assert.AreEqual(2, limitedCollection.Entities.Count);
+
+            //Delete entries
+            foreach (var entry in createdEntries)
+            {
+                connector.Delete(entry.Code);
+            }
 
             #region Delete arranged resources
             new AccountConnector().Delete(0123);

@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ModeOfPaymentConnector : EntityConnector<ModeOfPayment, EntityCollection<ModeOfPaymentSubset>, Sort.By.ModeOfPayment?>
+    public class ModeOfPaymentConnector : EntityConnector<ModeOfPayment, EntityCollection<ModeOfPayment>, Sort.By.ModeOfPayment?>
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
@@ -69,7 +69,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of modeOfPayments
 		/// </summary>
 		/// <returns>A list of modeOfPayments</returns>
-		public EntityCollection<ModeOfPaymentSubset> Find()
+		public EntityCollection<ModeOfPayment> Find()
 		{
 			return BaseFind();
 		}

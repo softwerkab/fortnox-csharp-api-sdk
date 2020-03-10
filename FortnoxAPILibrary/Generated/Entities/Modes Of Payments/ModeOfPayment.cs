@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    [Entity(SingularName = "ModeOfPayment", PluralName = "ModeOfPayments")]
+    [Entity(SingularName = "ModeOfPayment", PluralName = "ModesOfPayments")]
     public class ModeOfPayment
     {
 

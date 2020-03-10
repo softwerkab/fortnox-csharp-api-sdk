@@ -82,5 +82,65 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to delete temporary resources
             #endregion Delete arranged resources
         }
+
+        [TestMethod]
+        public void Test_Find()
+        {
+            #region Arrange
+            //Add code to create required resources
+            #endregion Arrange
+
+            var testKeyMark = TestUtils.RandomString();
+
+            var connector = new SupplierConnector();
+            var newSupplier = new Supplier()
+            {
+                Name = "TestSupplier",
+                Address1 = "TestStreet 1",
+                Address2 = "TestStreet 2",
+                ZipCode = "01010",
+                City = testKeyMark,
+                CountryCode = "SE", //CountryCode needs to be valid
+                Email = "testSupplier@test.com",
+                Active = false,
+                Bank = "TestBank",
+                Currency = "SEK",
+                Phone1 = "01011111345",
+            };
+
+            //Add entries
+            for (var i = 0; i < 5; i++)
+            {
+                connector.Create(newSupplier);
+            }
+
+            //Apply base test filter
+            connector.City = testKeyMark;
+            var fullCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(5, fullCollection.TotalResources);
+            Assert.AreEqual(5, fullCollection.Entities.Count);
+            Assert.AreEqual(1, fullCollection.TotalPages);
+
+            //Apply Limit
+            connector.Limit = 2;
+            var limitedCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(5, limitedCollection.TotalResources);
+            Assert.AreEqual(2, limitedCollection.Entities.Count);
+            Assert.AreEqual(3, limitedCollection.TotalPages);
+
+            //Delete entries
+            foreach (var entry in fullCollection.Entities)
+            {
+                connector.Delete(entry.SupplierNumber);
+            }
+
+            #region Delete arranged resources
+            //Add code to delete temporary resources
+            #endregion Delete arranged resources
+        }
     }
 }

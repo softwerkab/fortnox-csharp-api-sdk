@@ -103,5 +103,75 @@ namespace FortnoxAPILibrary.GeneratedTests
             new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
+
+        [TestMethod]
+        public void Test_Find()
+        {
+            #region Arrange
+            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.SERVICE, PurchasePrice = 1000 });
+            var tmpInvoice = new InvoiceConnector().Create(new Invoice()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
+                Comments = "TestInvoice",
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, HouseWorkHoursToReport = 10, Price = 1000, HouseWorkType = HouseWorkType.GARDENING, HouseWork = true},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, HouseWorkHoursToReport = 20, Price = 1000, HouseWorkType = HouseWorkType.GARDENING, HouseWork = true},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, HouseWorkHoursToReport = 15, Price = 1000, HouseWorkType = HouseWorkType.GARDENING, HouseWork = true}
+                }
+            });
+            #endregion Arrange
+
+            //var testKeyMark = TestUtils.RandomString();
+
+            var connector = new TaxReductionConnector();
+            var newTaxReduction = new TaxReduction()
+            {
+                CustomerName = "TmpCustomer",
+                AskedAmount = 200,
+                ReferenceNumber = tmpInvoice.DocumentNumber,
+                ReferenceDocumentType = ReferenceDocumentType.INVOICE
+            };
+
+            //Add entries
+            for (var i = 0; i < 5; i++)
+            {
+                newTaxReduction.SocialSecurityNumber = TestUtils.RandomPersonalNumber();
+                connector.Create(newTaxReduction);
+                MyAssert.HasNoError(connector);
+            }
+
+            //Apply base test filter
+            connector.ReferenceNumber = tmpInvoice.DocumentNumber.ToString();
+            var fullCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(5, fullCollection.TotalResources);
+            Assert.AreEqual(5, fullCollection.Entities.Count);
+            Assert.AreEqual(1, fullCollection.TotalPages);
+
+            //Apply Limit
+            connector.Limit = 2;
+            var limitedCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(5, limitedCollection.TotalResources);
+            Assert.AreEqual(2, limitedCollection.Entities.Count);
+            Assert.AreEqual(3, limitedCollection.TotalPages);
+
+            //Delete entries
+            foreach (var entry in fullCollection.Entities)
+            {
+                connector.Delete(entry.Id);
+            }
+
+            #region Delete arranged resources
+            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            #endregion Delete arranged resources
+        }
     }
 }

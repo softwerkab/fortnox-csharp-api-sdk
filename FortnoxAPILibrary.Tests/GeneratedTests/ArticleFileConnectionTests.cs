@@ -23,7 +23,8 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_ArticleFileConnection_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var tmpArticle = new ArticleConnector().Create(new Article() {Description = "TmpArticle"});
+            var tmpFile = new ArchiveConnector().UploadFile("tmpImage.png", Resource.fortnox_image);
             #endregion Arrange
 
             var connector = new ArticleFileConnectionConnector();
@@ -31,45 +32,41 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newArticleFileConnection = new ArticleFileConnection()
             {
-                //TODO: Populate Entity
+                FileId = tmpFile.Id,
+                ArticleNumber = tmpArticle.ArticleNumber
             };
 
             var createdArticleFileConnection = connector.Create(newArticleFileConnection);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdArticleFileConnection.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(tmpArticle.ArticleNumber, createdArticleFileConnection.ArticleNumber);
 
             #endregion CREATE
 
             #region UPDATE
-
-            createdArticleFileConnection.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
-
-            var updatedArticleFileConnection = connector.Update(createdArticleFileConnection); 
-            MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedArticleFileConnection.SomeProperty); //TODO: Adapt
-
+            //Update not supported
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedArticleFileConnection = connector.Get(createdArticleFileConnection.FileId); //TODO: Check ID property
+            var retrievedArticleFileConnection = connector.Get(createdArticleFileConnection.FileId);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedArticleFileConnection.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(tmpArticle.ArticleNumber, retrievedArticleFileConnection.ArticleNumber);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdArticleFileConnection.FileId); //TODO: Check ID property
+            connector.Delete(createdArticleFileConnection.FileId);
             MyAssert.HasNoError(connector);
 
-            retrievedArticleFileConnection = connector.Get(createdArticleFileConnection.FileId); //TODO: Check ID property
+            retrievedArticleFileConnection = connector.Get(createdArticleFileConnection.FileId);
             Assert.AreEqual(null, retrievedArticleFileConnection, "Entity still exists after Delete!");
 
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            new ArchiveConnector().DeleteFile(tmpFile.Id);
             #endregion Delete arranged resources
         }
     }

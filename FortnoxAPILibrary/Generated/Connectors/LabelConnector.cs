@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class LabelConnector : EntityConnector<Label, EntityCollection<LabelSubset>, Sort.By.Label?>
+    public class LabelConnector : EntityConnector<Label, EntityCollection<Label>, Sort.By.Label?>
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
@@ -54,7 +54,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of labels
 		/// </summary>
 		/// <returns>A list of labels</returns>
-		public EntityCollection<LabelSubset> Find()
+		public EntityCollection<Label> Find()
 		{
 			return BaseFind();
 		}

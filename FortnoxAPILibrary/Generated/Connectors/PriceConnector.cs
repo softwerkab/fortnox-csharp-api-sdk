@@ -80,9 +80,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of prices
 		/// </summary>
 		/// <returns>A list of prices</returns>
-		public EntityCollection<PriceSubset> Find()
+		public EntityCollection<PriceSubset> Find(string priceListId, string articleId = null)
 		{
-			return BaseFind();
+			return BaseFind(null, "sublist", priceListId, articleId);
 		}
 	}
 }

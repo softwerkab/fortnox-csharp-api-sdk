@@ -32,13 +32,29 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             //Update
             predefinedVoucherSeries.VoucherSeries = "L"; //Lon -> "SALARY"
+            connector.Update(predefinedVoucherSeries);
             MyAssert.HasNoError(connector);
             Assert.AreEqual("L", predefinedVoucherSeries.VoucherSeries);
 
             //Reset
             predefinedVoucherSeries.VoucherSeries = "B";
+            connector.Update(predefinedVoucherSeries);
             MyAssert.HasNoError(connector);
             Assert.AreEqual("B", predefinedVoucherSeries.VoucherSeries);
+        }
+
+        [TestMethod]
+        public void Test_Find()
+        {
+            var connector = new PredefinedVoucherSeriesConnector();
+
+            var fullCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(13, fullCollection.Entities.Count);
+            Assert.IsNotNull(fullCollection.Entities.First().Name);
+
+            //Limit not supported
         }
     }
 }

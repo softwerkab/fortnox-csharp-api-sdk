@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -68,6 +69,50 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region Delete arranged resources
             //Add code to delete temporary resources
             #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_Find()
+        {
+            var testKeyMark = TestUtils.RandomInt();
+
+            var connector = new PriceListConnector();
+
+            var newPriceList = new PriceList()
+            {
+                Description = "TestPriceList",
+                Comments = "EntryForFindRequest"
+            };
+
+            for (var i = 0; i < 5; i++)
+            {
+                newPriceList.Code = "T" + i;
+                if (connector.Get(newPriceList.Code) == null) //not exists
+                    connector.Create(newPriceList);
+                else
+                    connector.Update(newPriceList);
+                MyAssert.HasNoError(connector);
+            }
+
+            //Apply filter -> filter on Comments or Code not working
+            //connector.Code = "t";
+            //connector.Comments = "EntryForFindRequest";
+            var fullCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            //Assert.AreEqual(5, fullCollection.TotalResources);
+            //Assert.AreEqual(5, fullCollection.Entities.Count);
+
+            Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Comments == "EntryForFindRequest"));
+
+            //Apply Limit
+            connector.Limit = 2;
+            var limitedCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            //Assert.AreEqual(5, limitedCollection.TotalResources);
+            Assert.AreEqual(2, limitedCollection.Entities.Count);
+            //Assert.AreEqual(3, limitedCollection.TotalPages);
         }
     }
 }

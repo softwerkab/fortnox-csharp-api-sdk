@@ -48,17 +48,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseGet(id.ToString());
 		}
-
-		/// <summary>
-		/// Updates a voucherFileConnection
-		/// </summary>
-		/// <param name="voucherFileConnection">The voucherFileConnection to update</param>
-		/// <returns>The updated voucherFileConnection</returns>
-		public VoucherFileConnection Update(VoucherFileConnection voucherFileConnection)
-		{
-			return BaseUpdate(voucherFileConnection, voucherFileConnection.FileId.ToString());
-		}
-
+		
 		/// <summary>
 		/// Creates a new voucherFileConnection
 		/// </summary>

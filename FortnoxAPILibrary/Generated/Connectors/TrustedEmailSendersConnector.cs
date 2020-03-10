@@ -21,15 +21,6 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "emailsenders/trusted";
 		}
-		/// <summary>
-		/// Find a trustedEmailSenders based on id
-		/// </summary>
-		/// <param name="id">Identifier of the trustedEmailSenders to find</param>
-		/// <returns>The found trustedEmailSenders</returns>
-		public TrustedEmailSender Get(int? id)
-		{
-			return BaseGet(id.ToString());
-		}
 		
 		/// <summary>
 		/// Creates a new trustedEmailSenders

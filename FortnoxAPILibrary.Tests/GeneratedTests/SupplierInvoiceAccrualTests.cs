@@ -30,8 +30,8 @@ namespace FortnoxAPILibrary.GeneratedTests
             {
                 SupplierNumber = tmpSupplier.SupplierNumber,
                 Comments = "InvoiceComments",
-                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
-                DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
+                InvoiceDate = new DateTime(2020, 1, 20), //"2019-01-20",
+                DueDate = new DateTime(2020, 6, 20), //"2019-02-20",
                 SalesType = SalesType.STOCK,
                 //OCR = "123456789",
                 Total = 6000,
@@ -40,6 +40,7 @@ namespace FortnoxAPILibrary.GeneratedTests
                     new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 6, Price = 1000 }
                 }
             });
+            MyAssert.HasNoError(conn);
             #endregion Arrange
 
             var connector = new SupplierInvoiceAccrualConnector();
@@ -52,8 +53,8 @@ namespace FortnoxAPILibrary.GeneratedTests
                 Period = "MONTHLY",
                 AccrualAccount = 1790,
                 CostAccount = 5820,
-                StartDate = new DateTime(2020, 3, 25),
-                EndDate = new DateTime(2020, 6, 25),
+                StartDate = new DateTime(2020, 1, 25),
+                EndDate = new DateTime(2020, 3, 25),
                 Total = 6000,
                 SupplierInvoiceAccrualRows = new List<SupplierInvoiceAccrualRow>()
                 {

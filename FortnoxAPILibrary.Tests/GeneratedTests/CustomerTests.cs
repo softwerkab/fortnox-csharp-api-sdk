@@ -80,5 +80,64 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to delete temporary resources
             #endregion Delete arranged resources
         }
+
+        [TestMethod]
+        public void Test_Find()
+        {
+            #region Arrange
+            //Add code to create required resources
+            #endregion Arrange
+
+            var testKeyMark = TestUtils.RandomString();
+
+            var connector = new CustomerConnector();
+            var newCustomer = new Customer()
+            {
+                Name = "TestCustomer",
+                Address1 = "TestStreet 1",
+                Address2 = "TestStreet 2",
+                ZipCode = "01010",
+                City = testKeyMark,
+                CountryCode = "SE", //CountryCode needs to be valid
+                Email = "testCustomer@test.com",
+                Type = CustomerType.PRIVATE,
+                Active = false,
+                Comments = testKeyMark
+            };
+
+            //Add entries
+            for (var i = 0; i < 5; i++)
+            {
+                connector.Create(newCustomer);
+            }
+
+            //Apply base test filter
+            connector.City = testKeyMark;
+            var fullCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(5, fullCollection.TotalResources);
+            Assert.AreEqual(5, fullCollection.Entities.Count);
+            Assert.AreEqual(1, fullCollection.TotalPages);
+
+            //Apply Limit
+            connector.Limit = 2;
+            var limitedCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(5, limitedCollection.TotalResources);
+            Assert.AreEqual(2, limitedCollection.Entities.Count);
+            Assert.AreEqual(3, limitedCollection.TotalPages);
+
+            //Delete entries
+            foreach (var entry in fullCollection.Entities)
+            {
+                connector.Delete(entry.CustomerNumber);
+            }
+
+            #region Delete arranged resources
+            //Add code to delete temporary resources
+            #endregion Delete arranged resources
+        }
     }
 }

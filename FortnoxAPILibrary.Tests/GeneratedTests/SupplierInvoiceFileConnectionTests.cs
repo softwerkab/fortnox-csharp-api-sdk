@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Generated.Connectors;
 using FortnoxAPILibrary.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -23,7 +24,25 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_SupplierInvoiceFileConnection_CRUD()
         {
             #region Arrange
-            //Add code to create required resources
+            var tmpSupplier = new SupplierConnector().Create(new Supplier() { Name = "TmpSupplier" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
+            var tmpSpplierInvoice = new SupplierInvoiceConnector().Create(new SupplierInvoice()
+            {
+                SupplierNumber = tmpSupplier.SupplierNumber,
+                Comments = "InvoiceComments",
+                InvoiceDate = new DateTime(2020, 1, 1),
+                DueDate = new DateTime(2020, 2, 1),
+                SalesType = SalesType.STOCK,
+                OCR = "123456789",
+                Total = 5000,
+                SupplierInvoiceRows = new List<SupplierInvoiceRow>()
+                {
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 10, Price = 100},
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100},
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100}
+                }
+            });
+            var tmpFile = new InboxConnector().UploadFile("tmpImage.png", Resource.fortnox_image, "inbox_s");
             #endregion Arrange
 
             var connector = new SupplierInvoiceFileConnectionConnector();
@@ -31,45 +50,41 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newSupplierInvoiceFileConnection = new SupplierInvoiceFileConnection()
             {
-                //TODO: Populate Entity
+                SupplierInvoiceNumber = tmpSpplierInvoice.GivenNumber.ToString(),
+                FileId = tmpFile.Id
             };
 
             var createdSupplierInvoiceFileConnection = connector.Create(newSupplierInvoiceFileConnection);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("PropertyValue", createdSupplierInvoiceFileConnection.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(tmpSupplier.Name, createdSupplierInvoiceFileConnection.SupplierName);
 
             #endregion CREATE
 
             #region UPDATE
-
-            createdSupplierInvoiceFileConnection.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
-
-            var updatedSupplierInvoiceFileConnection = connector.Update(createdSupplierInvoiceFileConnection); 
-            MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", updatedSupplierInvoiceFileConnection.SomeProperty); //TODO: Adapt
-
+            //Not supported
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedSupplierInvoiceFileConnection = connector.Get(createdSupplierInvoiceFileConnection.FileId); //TODO: Check ID property
+            var retrievedSupplierInvoiceFileConnection = connector.Get(createdSupplierInvoiceFileConnection.FileId);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedPropertyValue", retrievedSupplierInvoiceFileConnection.SomeProperty); //TODO: Adapt
+            Assert.AreEqual(tmpSupplier.Name, retrievedSupplierInvoiceFileConnection.SupplierName);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdSupplierInvoiceFileConnection.FileId); //TODO: Check ID property
+            connector.Delete(createdSupplierInvoiceFileConnection.FileId);
             MyAssert.HasNoError(connector);
 
-            retrievedSupplierInvoiceFileConnection = connector.Get(createdSupplierInvoiceFileConnection.FileId); //TODO: Check ID property
+            retrievedSupplierInvoiceFileConnection = connector.Get(createdSupplierInvoiceFileConnection.FileId);
             Assert.AreEqual(null, retrievedSupplierInvoiceFileConnection, "Entity still exists after Delete!");
 
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            new SupplierConnector().Delete(tmpSupplier.SupplierNumber);
             #endregion Delete arranged resources
         }
     }

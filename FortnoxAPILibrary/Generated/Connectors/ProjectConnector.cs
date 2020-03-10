@@ -20,6 +20,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "projects";
 		}
+
 		/// <summary>
 		/// Find a project based on id
 		/// </summary>
