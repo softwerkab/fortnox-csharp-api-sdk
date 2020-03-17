@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -34,7 +35,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             {
                 ArticleNumber = tmpArticle.ArticleNumber,
                 PriceList = tmpPriceList.Code,
-                FromQuantity = 10,
+                FromQuantity = 0,
                 PriceValue = 12.5
             };
 
@@ -84,36 +85,35 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", PurchasePrice = 10});
             var tmpPriceList = new PriceListConnector().Get("TST_PR") ?? new PriceListConnector().Create(new PriceList() { Code = "TST_PR", Description = "TmpPriceList" });
             #endregion Arrange
-
-
+            
             var connector = new PriceConnector();
-
-            var emptyCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber);
 
             var newPrice = new Price()
             {
                 ArticleNumber = tmpArticle.ArticleNumber,
                 PriceList = tmpPriceList.Code,
                 PriceValue = 100,
-                FromQuantity = 100
-        };
-
+                FromQuantity = 0
+            };
+            connector.Create(newPrice);
+            
             //Add entries
             for (var i = 0; i < 5; i++)
             {
-                newPrice.PriceValue = TestUtils.RandomInt();
-                newPrice.FromQuantity = TestUtils.RandomInt();
                 connector.Create(newPrice);
-                emptyCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber);
+
+                newPrice.PriceValue -= 10;
+                newPrice.FromQuantity += 10;
             }
 
-            //No filter
             var fullCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
             Assert.AreEqual(1, fullCollection.TotalPages);
+
+            Assert.AreEqual("TST_PR", fullCollection.Entities.First().PriceList);
 
             //Apply Limit
             connector.Limit = 2;

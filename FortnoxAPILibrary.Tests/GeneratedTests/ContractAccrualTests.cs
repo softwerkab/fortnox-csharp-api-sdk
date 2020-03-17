@@ -52,7 +52,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             {
                 DocumentNumber = tmpContract.DocumentNumber,
                 Description = "TestContractAccrual",
-                Total = 6000,
+                Total = 2000,
                 AccrualAccount = 2990,
                 CostAccount = 3990,
                 AccrualRows = new List<ContractAccrualRow>()

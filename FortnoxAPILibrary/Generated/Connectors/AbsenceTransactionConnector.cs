@@ -7,7 +7,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class AbsenceTransactionConnector : EntityConnector<AbsenceTransaction, EntityCollection<AbsenceTransactionSubset>, Sort.By.AbsenceTransaction?>
+    public class AbsenceTransactionConnector : EntityConnector<AbsenceTransaction, EntityCollection<AbsenceTransaction>, Sort.By.AbsenceTransaction?>
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
@@ -19,7 +19,7 @@ namespace FortnoxAPILibrary.Connectors
 		[SearchParameter("employeeid")]
 		public string EmployeeId { get; set; }
 
-        [SearchParameter("employeeid")]
+        [SearchParameter("date")]
         public DateTime? Date { get; set; }
 
 		/// <remarks/>
@@ -75,7 +75,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of absenceTransactions
 		/// </summary>
 		/// <returns>A list of absenceTransactions</returns>
-		public EntityCollection<AbsenceTransactionSubset> Find()
+		public EntityCollection<AbsenceTransaction> Find()
 		{
 			return BaseFind();
 		}

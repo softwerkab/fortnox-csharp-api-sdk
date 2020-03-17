@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -74,6 +75,70 @@ namespace FortnoxAPILibrary.GeneratedTests
             Assert.AreEqual(null, retrievedAbsenceTransaction, "Entity still exists after Delete!");
 
             #endregion DELETE
+
+            #region Delete arranged resources
+            new CostCenterConnector().Delete(tmpCostCenter.Code);
+            new ProjectConnector().Delete(tmpProject.ProjectNumber);
+            #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_Find()
+        {
+            #region Arrange
+            var tmpEmployee = new EmployeeConnector().Get("TEST_EMP") ?? new EmployeeConnector().Create(new Employee() { EmployeeId = "TEST_EMP" });
+            var tmpProject = new ProjectConnector().Create(new Project() { Description = "TmpProject" });
+            var tmpCostCenter = new CostCenterConnector().Get("TMP") ?? new CostCenterConnector().Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
+
+            for (var i = 0; i < 5; i++)
+                new AbsenceTransactionConnector().Delete(tmpEmployee.EmployeeId, new DateTime(2018, 01, 01).AddDays(i), AbsenceCauseCode.MIL);
+            #endregion Arrange
+
+            var connector = new AbsenceTransactionConnector();
+
+            var newAbsenceTransaction = new AbsenceTransaction()
+            {
+                EmployeeId = tmpEmployee.EmployeeId,
+                CauseCode = AbsenceCauseCode.MIL,
+                Date = new DateTime(2018, 01, 01),
+                Hours = 1,
+                CostCenter = tmpCostCenter.Code,
+                Project = tmpProject.ProjectNumber
+            };
+
+            //Add entries
+            for (var i = 0; i < 5; i++)
+            {
+                newAbsenceTransaction.Date = new DateTime(2018, 01, 01).AddDays(i);
+                connector.Create(newAbsenceTransaction);
+                MyAssert.HasNoError(connector);
+            }
+
+            connector.EmployeeId = tmpEmployee.EmployeeId;
+            var fullCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(5, fullCollection.TotalResources);
+            Assert.AreEqual(5, fullCollection.Entities.Count);
+            Assert.AreEqual(1, fullCollection.TotalPages);
+
+            Assert.AreEqual(tmpEmployee.EmployeeId, fullCollection.Entities.First().EmployeeId);
+
+            //Apply Limit
+            connector.Limit = 2;
+            var limitedCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(5, limitedCollection.TotalResources);
+            Assert.AreEqual(2, limitedCollection.Entities.Count);
+            Assert.AreEqual(3, limitedCollection.TotalPages);
+
+            //Delete entries
+            foreach (var entry in fullCollection.Entities)
+            {
+                connector.Delete(entry.EmployeeId, entry.Date, entry.CauseCode);
+            }
+
             #region Delete arranged resources
             new CostCenterConnector().Delete(tmpCostCenter.Code);
             new ProjectConnector().Delete(tmpProject.ProjectNumber);

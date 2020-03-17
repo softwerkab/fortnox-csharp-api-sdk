@@ -15,9 +15,14 @@ namespace FortnoxAPILibrary.Connectors
         [SearchParameter("filter")]
 		public Filter.AttendanceTransactions? FilterBy { get; set; }
 
+        [SearchParameter("employeeid")]
+        public string EmployeeId { get; set; }
 
-		/// <remarks/>
-		public AttendanceTransactionsConnector()
+        [SearchParameter("date")]
+        public DateTime? Date { get; set; }
+
+        /// <remarks/>
+        public AttendanceTransactionsConnector()
 		{
 			Resource = "attendancetransactions";
 		}

@@ -37,7 +37,7 @@ namespace FortnoxAPILibrary.GeneratedTests
                 Total = 6000,
                 SupplierInvoiceRows = new List<SupplierInvoiceRow>()
                 {
-                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 6, Price = 1000 }
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 6, Price = 1000, Account = 5820 }
                 }
             });
             MyAssert.HasNoError(conn);

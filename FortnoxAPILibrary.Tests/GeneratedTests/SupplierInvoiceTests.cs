@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -80,6 +81,67 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             #region Delete arranged resources
             //Add code to delete temporary resources
+            #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_Find()
+        {
+            #region Arrange
+            var tmpSupplier = new SupplierConnector().Create(new Supplier() { Name = "TmpSupplier" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
+            #endregion Arrange
+
+            var connector = new SupplierInvoiceConnector();
+            var newSupplierInvoice = new SupplierInvoice()
+            {
+                SupplierNumber = tmpSupplier.SupplierNumber,
+                Comments = "InvoiceComments",
+                InvoiceDate = new DateTime(2010, 1, 1),
+                DueDate = new DateTime(2010, 2, 1),
+                SalesType = SalesType.STOCK,
+                OCR = "123456789",
+                Total = 5000,
+                SupplierInvoiceRows = new List<SupplierInvoiceRow>()
+                {
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 10, Price = 100},
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100},
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100}
+                }
+            };
+
+            //Add entries
+            for (var i = 0; i < 5; i++)
+            {
+                connector.Create(newSupplierInvoice);
+                MyAssert.HasNoError(connector);
+            }
+
+            //Apply base test filter
+            connector.SupplierNumber = tmpSupplier.SupplierNumber;
+            var fullCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(5, fullCollection.TotalResources);
+            Assert.AreEqual(5, fullCollection.Entities.Count);
+            Assert.AreEqual(1, fullCollection.TotalPages);
+
+            Assert.AreEqual(tmpSupplier.SupplierNumber, fullCollection.Entities.First().SupplierNumber);
+
+            //Apply Limit
+            connector.Limit = 2;
+            var limitedCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(5, limitedCollection.TotalResources);
+            Assert.AreEqual(2, limitedCollection.Entities.Count);
+            Assert.AreEqual(3, limitedCollection.TotalPages);
+
+            //Delete entries (DELETE not supported)
+
+            #region Delete arranged resources
+            new CustomerConnector().Delete(tmpSupplier.SupplierNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

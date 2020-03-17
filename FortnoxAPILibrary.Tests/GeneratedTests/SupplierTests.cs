@@ -42,6 +42,8 @@ namespace FortnoxAPILibrary.GeneratedTests
                 Bank = "TestBank",
                 Currency = "SEK",
                 Phone1 = "01011111345",
+                BG = "1111111",
+                PG = "1111111"
             };
 
             var createdSupplier = connector.Create(newSupplier);
