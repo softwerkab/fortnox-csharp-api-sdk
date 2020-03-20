@@ -36,7 +36,7 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public double? DisposableQuantity { get; private set; }
+		public decimal? DisposableQuantity { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -88,21 +88,21 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? PurchasePrice { get; set; }
+        public decimal? PurchasePrice { get; set; }
 
         /// <remarks/>
 	    [ReadOnly]
 	    [JsonProperty]
-	    public double? SalesPrice { get; private set; }
+	    public decimal? SalesPrice { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
-        public double? QuantityInStock { get; set; }
+        public decimal? QuantityInStock { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public double? ReservedQuantity { get; private set; }
+		public decimal? ReservedQuantity { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -119,11 +119,11 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public double? StockValue { get; private set; }
+		public decimal? StockValue { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
-        public double? StockWarning { get; set; }
+        public decimal? StockWarning { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
@@ -144,7 +144,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? VAT { get; set; }
+        public decimal? VAT { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -190,7 +190,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? DisposableQuantity { get; set; }
+        public decimal? DisposableQuantity { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -202,20 +202,20 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? PurchasePrice { get; set; }
+        public decimal? PurchasePrice { get; set; }
 
         /// <remarks/>
         [ReadOnly]
         [JsonProperty]
-        public double? SalesPrice { get; private set; }
+        public decimal? SalesPrice { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
-        public double? QuantityInStock { get; set; }
+        public decimal? QuantityInStock { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public double? ReservedQuantity { get; set; }
+        public decimal? ReservedQuantity { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -223,7 +223,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? StockValue { get; set; }
+        public decimal? StockValue { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -231,7 +231,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? VAT { get; set; }
+        public decimal? VAT { get; set; }
 
         /// <remarks/>
         [JsonProperty(PropertyName = "@url")]

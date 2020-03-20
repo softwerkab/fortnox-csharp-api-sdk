@@ -15,12 +15,12 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? BalanceBroughtForward { get; set; }
+        public decimal? BalanceBroughtForward { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public double? BalanceCarriedForward { get; private set; }
+		public decimal? BalanceCarriedForward { get; private set; }
 
         /// <remarks/>
         [JsonProperty]

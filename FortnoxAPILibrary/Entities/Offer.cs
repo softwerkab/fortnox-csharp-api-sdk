@@ -19,12 +19,12 @@ namespace FortnoxAPILibrary.Entities
 
 		/// <remarks/>
 		[JsonProperty]
-		public double? AdministrationFee { get; set; }
+		public decimal? AdministrationFee { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
         [JsonProperty]
-        public double? AdministrationFeeVAT { get; private set; }
+        public decimal? AdministrationFeeVAT { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -37,7 +37,7 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public double? BasisTaxReduction { get; private set; }
+		public decimal? BasisTaxReduction { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
@@ -55,12 +55,12 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public double? ContributionPercent { get; private set; }
+		public decimal? ContributionPercent { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public double? ContributionValue { get; private set; }
+		public decimal? ContributionValue { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -80,11 +80,11 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? CurrencyRate { get; set; }
+        public decimal? CurrencyRate { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public double? CurrencyUnit { get; set; }
+        public decimal? CurrencyUnit { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -136,17 +136,17 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? Freight { get; set; }
+        public decimal? Freight { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
         [JsonProperty]
-        public double? FreightVAT { get; private set; }
+        public decimal? FreightVAT { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public double? Gross { get; private set; }
+		public decimal? Gross { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
@@ -165,7 +165,7 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public double? Net { get; private set; }
+		public decimal? Net { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -223,7 +223,7 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public double? RoundOff { get; private set; }
+		public decimal? RoundOff { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
@@ -233,7 +233,7 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public double? TaxReduction { get; private set; }
+		public decimal? TaxReduction { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -246,7 +246,7 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public double? Total { get; private set; }
+		public decimal? Total { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
@@ -327,12 +327,12 @@ namespace FortnoxAPILibrary.Entities
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public double? ContributionPercent { get; private set; }
+		public decimal? ContributionPercent { get; private set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public double? ContributionValue { get; private set; }
+		public decimal? ContributionValue { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -344,7 +344,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? Discount { get; set; }
+        public decimal? Discount { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -356,7 +356,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? Price { get; set; }
+        public decimal? Price { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -364,12 +364,12 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? Quantity { get; set; }
+        public decimal? Quantity { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
 		[JsonProperty]
-		public double? Total { get; private set; }
+		public decimal? Total { get; private set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -377,7 +377,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? VAT { get; set; }
+        public decimal? VAT { get; set; }
     }
 
     /// <remarks/>
@@ -418,7 +418,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? Total { get; set; }
+        public decimal? Total { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]

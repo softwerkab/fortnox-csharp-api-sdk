@@ -153,15 +153,15 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? InvoiceAdministrationFee { get; set; }
+        public decimal? InvoiceAdministrationFee { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public double? InvoiceDiscount { get; set; }
+        public decimal? InvoiceDiscount { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public double? InvoiceFreight { get; set; }
+        public decimal? InvoiceFreight { get; set; }
 
         /// <remarks/>
         [JsonProperty]

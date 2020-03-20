@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? AdministrationFee { get; set; }
+        public decimal? AdministrationFee { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
@@ -64,11 +64,11 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? CurrencyRate { get; set; }
+        public decimal? CurrencyRate { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public double? CurrencyUnit { get; set; }
+        public decimal? CurrencyUnit { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -88,7 +88,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? Freight { get; set; }
+        public decimal? Freight { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -132,7 +132,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? RoundOffValue { get; set; }
+        public decimal? RoundOffValue { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -149,11 +149,11 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? Total { get; set; }
+        public decimal? Total { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public double? VAT { get; set; }
+        public decimal? VAT { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -210,15 +210,15 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? Price { get; set; }
+        public decimal? Price { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public double? Quantity { get; set; }
+        public decimal? Quantity { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public double? Total { get; set; }
+        public decimal? Total { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -226,15 +226,15 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? Debit { get; set; }
+        public decimal? Debit { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public double? CreditCurrency { get; set; }
+        public decimal? CreditCurrency { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public double? DebitCurrency { get; set; }
+        public decimal? DebitCurrency { get; set; }
         /// <remarks/>
         [JsonProperty]
         public string Unit { get; set; }
@@ -282,7 +282,7 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? Total { get; set; }
+        public decimal? Total { get; set; }
 
         /// <remarks/>
         [JsonProperty(PropertyName = "@url")]

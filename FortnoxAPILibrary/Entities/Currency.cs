@@ -16,7 +16,7 @@ namespace FortnoxAPILibrary.Entities
 		/// <para>Permissions:	RW</para>
 		/// </summary>
 		[JsonProperty]
-		public double? BuyRate { get; set; }
+		public decimal? BuyRate { get; set; }
 
         /// <summary>
         /// <para>Code of the currency</para>
@@ -53,7 +53,7 @@ namespace FortnoxAPILibrary.Entities
         /// <para>Permissions:	RW</para>
         /// </summary>
         [JsonProperty]
-        public double? SellRate { get; set; }
+        public decimal? SellRate { get; set; }
 
         /// <summary>
         /// <para>The unit of the currency</para>
@@ -62,7 +62,7 @@ namespace FortnoxAPILibrary.Entities
         /// <para>Permissions:	RW</para>
         /// </summary>
         [JsonProperty]
-        public double? Unit { get; set; }
+        public decimal? Unit { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
 		[ReadOnly]
@@ -80,7 +80,7 @@ namespace FortnoxAPILibrary.Entities
     {
         /// <remarks/>
         [JsonProperty]
-        public double? BuyRate { get; set; }
+        public decimal? BuyRate { get; set; }
 
         /// <remarks/>
         [JsonProperty]
@@ -96,11 +96,11 @@ namespace FortnoxAPILibrary.Entities
 
         /// <remarks/>
         [JsonProperty]
-        public double? SellRate { get; set; }
+        public decimal? SellRate { get; set; }
 
         /// <remarks/>
         [JsonProperty]
-        public double? Unit { get; set; }
+        public decimal? Unit { get; set; }
 
         /// <summary>This field is Read-Only in Fortnox</summary>
         [ReadOnly]
