@@ -156,6 +156,8 @@ namespace FortnoxAPILibrary
         {
             Error = null;
 
+            ServicePointManager.SecurityProtocol = ConnectionCredentials.SecurityProtocol;
+
             var wr = (HttpWebRequest)WebRequest.Create(requestUriString);
             wr.Headers.Add("access-token", AccessToken);
             wr.Headers.Add("client-secret", ClientSecret);
