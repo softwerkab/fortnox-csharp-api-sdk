@@ -28,19 +28,19 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpContract = new ContractConnector().Create(new Contract()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
-                ContractDate = new DateTime(2020, 1, 1), 
-                Active = false,
-                Comments = "TestContract",
+                ContractDate = new DateTime(2020, 1, 1),
                 ContractLength = 3,
+                InvoiceInterval = 3,
+                Comments = "TestContract",
                 Continuous = true,
                 Currency = "SEK",
                 VATIncluded = false,
                 Language = Language.EN,
                 InvoiceRows = new List<ContractInvoiceRow>()
                 {
-                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "6", Price = "1000"}
+                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "6", Price = "1000", VAT = "0"}
                 },
-                PeriodStart = new DateTime(2020, 01, 20),
+                PeriodStart = new DateTime(2020, 01, 1),
                 PeriodEnd = new DateTime(2020, 03, 20)
             });
             #endregion Arrange
@@ -52,9 +52,10 @@ namespace FortnoxAPILibrary.GeneratedTests
             {
                 DocumentNumber = tmpContract.DocumentNumber,
                 Description = "TestContractAccrual",
-                Total = 2000,
+                Total = 6000,
                 AccrualAccount = 2990,
                 CostAccount = 3990,
+                VATIncluded = false,
                 AccrualRows = new List<ContractAccrualRow>()
                 {
                     new ContractAccrualRow(){ Account = 2990, Credit = 0, Debit = 2000},

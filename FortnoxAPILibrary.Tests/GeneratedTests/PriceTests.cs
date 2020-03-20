@@ -35,7 +35,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             {
                 ArticleNumber = tmpArticle.ArticleNumber,
                 PriceList = tmpPriceList.Code,
-                FromQuantity = 0,
+                FromQuantity = 1,
                 PriceValue = 12.5
             };
 
