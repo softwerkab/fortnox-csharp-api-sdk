@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class AssetFileConnectionConnector : EntityConnector<AssetFileConnection, EntityCollection<AssetFileConnectionSubset>, Sort.By.AssetFileConnection?>
+    public class AssetFileConnectionConnector : EntityConnector<AssetFileConnection, EntityCollection<AssetFileConnection>, Sort.By.AssetFileConnection?>
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
@@ -59,7 +59,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of assetFileConnections
 		/// </summary>
 		/// <returns>A list of assetFileConnections</returns>
-		public EntityCollection<AssetFileConnectionSubset> Find()
+		public EntityCollection<AssetFileConnection> Find()
 		{
 			return BaseFind();
 		}

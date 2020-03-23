@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -23,12 +24,15 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_Employee_CRUD()
         {
             #region Arrange
+
             var alreadyExists = new EmployeeConnector().Get("TEST_EMP") != null;
+
             #endregion Arrange
 
             var connector = new EmployeeConnector();
 
             #region CREATE
+
             var newEmployee = new Employee()
             {
                 EmployeeId = "TEST_EMP",
@@ -50,8 +54,8 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region UPDATE
 
             createdEmployee.FirstName = "UpdatedTest";
-            
-            var updatedEmployee = connector.Update(createdEmployee); 
+
+            var updatedEmployee = connector.Update(createdEmployee);
             MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTest", updatedEmployee.FirstName);
 
@@ -66,12 +70,29 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion READ / GET
 
             #region DELETE
+
             //Not supported
+
             #endregion DELETE
 
             #region Delete arranged resources
+
             //Add code to delete temporary resources
+
             #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_Employee_Find()
+        {
+            var connector = new EmployeeConnector();
+
+            var employees = connector.Find();
+            
+            Assert.AreEqual(1, employees.Entities.Count);
+            Assert.IsNotNull(employees.Entities.First().Url);
+
+            var x = connector.Get(employees.Entities.First().EmployeeId);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -72,6 +73,39 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region Delete arranged resources
             new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_ContractTemplate_Find()
+        {
+            #region Arrange
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle" });
+            #endregion Arrange
+
+            var connector = new ContractTemplateConnector();
+
+            var marks = TestUtils.RandomString();
+
+            var newContractTemplate = new ContractTemplate()
+            {
+                ContractLength = 4,
+                Continuous = false,
+                InvoiceInterval = 3,
+                InvoiceRows = new List<ContractTemplateInvoiceRow>()
+                {
+                    new ContractTemplateInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10}
+                },
+            };
+
+            for (int i = 0; i < 5; i++)
+            {
+                newContractTemplate.TemplateName = marks + i;
+                connector.Create(newContractTemplate);
+                MyAssert.HasNoError(connector);
+            }
+
+            var templates = connector.Find();
+            Assert.AreEqual(5, templates.Entities.Count(c => c.TemplateName.StartsWith(marks)));
         }
     }
 }

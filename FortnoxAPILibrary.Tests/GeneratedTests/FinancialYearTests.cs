@@ -25,28 +25,33 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_FinancialYear_CRUD()
         {
             #region Arrange
+
             var existingAccountChartType = new AccountChartConnector().Find().Entities.First();
+
             #endregion Arrange
 
             var connector = new FinancialYearConnector();
 
             #region CREATE
+
             var newFinancialYear = new FinancialYear()
             {
-                FromDate = new DateTime(2010,1,1),
-                ToDate = new DateTime(2010,12,31),
+                FromDate = new DateTime(2010, 1, 1),
+                ToDate = new DateTime(2010, 12, 31),
                 AccountChartType = existingAccountChartType.Name,
                 AccountingMethod = AccountingMethod.CASH
             };
 
             var createdFinancialYear = connector.Create(newFinancialYear);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(new DateTime(2010,1,1).ToString(), createdFinancialYear.FromDate?.ToString());
+            Assert.AreEqual(new DateTime(2010, 1, 1).ToString(), createdFinancialYear.FromDate?.ToString());
 
             #endregion CREATE
 
             #region UPDATE
+
             //Not supported
+
             #endregion UPDATE
 
             #region READ / GET
@@ -58,12 +63,26 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion READ / GET
 
             #region DELETE
+
             //Not supported
+
             #endregion DELETE
 
             #region Delete arranged resources
+
             //Add code to delete temporary resources
+
             #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_FinancialYear_Find()
+        {
+            var connector = new FinancialYearConnector();
+            
+            var finYears = connector.Find();
+            Assert.AreEqual(4, finYears.Entities.Count);
+            Assert.IsNotNull(finYears.Entities.First().AccountChartType);
         }
     }
 }

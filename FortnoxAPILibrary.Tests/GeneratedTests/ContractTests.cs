@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -82,6 +83,48 @@ namespace FortnoxAPILibrary.GeneratedTests
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
             new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_Contract_Find()
+        {
+            #region Arrange
+            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+            #endregion Arrange
+
+            var connector = new ContractConnector();
+
+            var newContract = new Contract()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                ContractDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                Active = false,
+                Comments = "TestContract",
+                ContractLength = 4,
+                Continuous = true,
+                Currency = "SEK",
+                Language = Language.EN,
+                InvoiceRows = new List<ContractInvoiceRow>()
+                {
+                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "10"},
+                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "20"},
+                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "15"}
+                },
+                PeriodStart = new DateTime(2020, 01, 01),
+                PeriodEnd = new DateTime(2020, 03, 01)
+            };
+
+            for (var i = 0; i < 5; i++)
+            {
+                connector.Create(newContract);
+                MyAssert.HasNoError(connector);
+            }
+
+            connector.CustomerNumber = tmpCustomer.CustomerNumber;
+            var contracts = connector.Find();
+            Assert.AreEqual(5, contracts.Entities.Count);
+            Assert.AreEqual("INACTIVE", contracts.Entities.First().Status);
         }
     }
 }

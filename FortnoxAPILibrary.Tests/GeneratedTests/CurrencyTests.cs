@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -23,15 +24,18 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_Currency_CRUD()
         {
             #region Arrange
+
             //Random currency code is not accepted by the server, therefore "SKK" is used.
             var currencyConnector = new CurrencyConnector();
             if (currencyConnector.Get("SKK") != null) //Delete currency if already exists
                 currencyConnector.Delete("SKK");
+
             #endregion Arrange
 
             var connector = new CurrencyConnector();
 
             #region CREATE
+
             var newCurrency = new Currency()
             {
                 Description = "TestCurrency",
@@ -50,7 +54,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             createdCurrency.Description = "UpdatedCurrency";
 
-            var updatedCurrency = connector.Update(createdCurrency); 
+            var updatedCurrency = connector.Update(createdCurrency);
             MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedCurrency", updatedCurrency.Description);
 
@@ -75,8 +79,21 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion DELETE
 
             #region Delete arranged resources
+
             //Add code to delete temporary resources
+
             #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_Currency_Find()
+        {
+            var connector = new CurrencyConnector();
+
+            var currencies = connector.Find();
+
+            Assert.AreEqual(3, currencies.Entities.Count); //SEK, EUR, USD
+            Assert.AreEqual(true, currencies.Entities.Any(c => c.Code == "SEK"));
         }
     }
 }

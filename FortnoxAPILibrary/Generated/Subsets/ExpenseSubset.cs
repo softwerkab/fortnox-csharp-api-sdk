@@ -7,8 +7,11 @@ namespace FortnoxAPILibrary.Entities
 {
     /// <remarks/>
     [Entity(SingularName = "Expense", PluralName = "Expenses")]
-    public class ExpenseSubset
+    public class ExpenseSubset : Expense
     {
-        //Implement manually !!!
-	}
+        ///<summary> Direct URL to the record </summary>
+        [ReadOnly]
+        [JsonProperty("@url")]
+        public string Url { get; private set; }
+    }
 }

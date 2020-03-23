@@ -22,6 +22,8 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_SupplierInvoiceExternalURLConnection_CRUD()
         {
+            var x = new SupplierInvoiceExternalURLConnectionConnector().Find();
+
             #region Arrange
             var tmpSupplier = new SupplierConnector().Create(new Supplier() { Name = "TmpSupplier" });
             var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });

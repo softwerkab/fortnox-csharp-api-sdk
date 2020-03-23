@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -81,11 +82,12 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             var existingCount = connector.Find().TotalResources;
 
+            var marks = TestUtils.RandomString();
             var createdEntries = new List<Unit>();
             //Add entries
             for (var i = 0; i < 5; i++)
             {
-                var createdEntry = connector.Create(new Unit() { Code = TestUtils.RandomString(), Description = TestUtils.RandomString() });
+                var createdEntry = connector.Create(new Unit() { Code = marks + i, Description = TestUtils.RandomString() });
                 createdEntries.Add(createdEntry);
             }
 
@@ -94,7 +96,8 @@ namespace FortnoxAPILibrary.GeneratedTests
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(existingCount + 5, fullCollection.TotalResources);
-            
+            Assert.AreEqual(5, fullCollection.Entities.Count(x => x.Code.StartsWith(marks)));
+
             //Limit not supported
             connector.Limit = 2;
             var limitedCollection = connector.Find();

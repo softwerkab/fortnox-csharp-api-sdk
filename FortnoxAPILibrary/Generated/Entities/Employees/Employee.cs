@@ -9,7 +9,6 @@ namespace FortnoxAPILibrary.Entities
     [Entity(SingularName = "Employee", PluralName = "Employees")]
     public class Employee
     {
-
         ///<summary> Unique employee-id. Can never be changed once an employee has been created </summary>
         [JsonProperty]
         public string EmployeeId { get; set; }

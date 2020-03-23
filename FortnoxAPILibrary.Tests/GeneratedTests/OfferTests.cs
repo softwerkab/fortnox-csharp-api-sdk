@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -72,6 +73,63 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region DELETE
             //Not allowed
             #endregion DELETE
+
+            #region Delete arranged resources
+            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_Find()
+        {
+            #region Arrange
+            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+            #endregion Arrange
+
+            var connector = new OfferConnector();
+            var newOffer = new Offer()
+            {
+                Comments = "TestOrder",
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                OfferDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                OfferRows = new List<OfferRow>()
+                {
+                    new OfferRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 10},
+                    new OfferRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20},
+                    new OfferRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 15}
+                }
+            };
+
+            //Add entries
+            for (var i = 0; i < 5; i++)
+            {
+                connector.Create(newOffer);
+                MyAssert.HasNoError(connector);
+            }
+
+            //Apply base test filter
+            connector.CustomerNumber = tmpCustomer.CustomerNumber;
+            var fullCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(5, fullCollection.TotalResources);
+            Assert.AreEqual(5, fullCollection.Entities.Count);
+            Assert.AreEqual(1, fullCollection.TotalPages);
+
+            Assert.AreEqual(tmpCustomer.CustomerNumber, fullCollection.Entities.First().CustomerNumber);
+
+            //Apply Limit
+            connector.Limit = 2;
+            var limitedCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(5, limitedCollection.TotalResources);
+            Assert.AreEqual(2, limitedCollection.Entities.Count);
+            Assert.AreEqual(3, limitedCollection.TotalPages);
+
+            //Delete entries (DELETE not supported)
 
             #region Delete arranged resources
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);

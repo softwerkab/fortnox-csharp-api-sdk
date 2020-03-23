@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class CurrencyConnector : EntityConnector<Currency, EntityCollection<CurrencySubset>, Sort.By.Currency?>
+    public class CurrencyConnector : EntityConnector<Currency, EntityCollection<Currency>, Sort.By.Currency?>
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
@@ -63,7 +63,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of currencys
 		/// </summary>
 		/// <returns>A list of currencys</returns>
-		public EntityCollection<CurrencySubset> Find()
+		public EntityCollection<Currency> Find()
 		{
 			return BaseFind();
 		}

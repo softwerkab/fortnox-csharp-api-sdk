@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	public class SupplierInvoiceFileConnectionConnector : EntityConnector<SupplierInvoiceFileConnection, EntityCollection<SupplierInvoiceFileConnectionSubset>, Sort.By.SupplierInvoiceFileConnection?>
+	public class SupplierInvoiceFileConnectionConnector : EntityConnector<SupplierInvoiceFileConnection, EntityCollection<SupplierInvoiceFileConnection>, Sort.By.SupplierInvoiceFileConnection?>
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -60,7 +60,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of supplierInvoiceFileConnections
 		/// </summary>
 		/// <returns>A list of supplierInvoiceFileConnections</returns>
-		public EntityCollection<SupplierInvoiceFileConnectionSubset> Find()
+		public EntityCollection<SupplierInvoiceFileConnection> Find()
 		{
 			return BaseFind();
 		}
