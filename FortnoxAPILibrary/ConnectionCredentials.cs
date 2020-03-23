@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace FortnoxAPILibrary
+﻿namespace FortnoxAPILibrary
 {
 	/// <remarks/>
 	public static class ConnectionCredentials
@@ -14,10 +12,5 @@ namespace FortnoxAPILibrary
         /// <remarks/>
         // ReSharper disable once InconsistentNaming
         public static string FortnoxAPIServer = "https://api.fortnox.se/3";
-
-        /// <summary>
-        /// Security protocol to be used in connection
-        /// </summary>
-        public static SecurityProtocolType SecurityProtocol = ServicePointManager.SecurityProtocol;
 	}
 }
