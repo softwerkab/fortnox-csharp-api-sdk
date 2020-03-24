@@ -23,13 +23,16 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_ArticleFileConnection_CRUD()
         {
             #region Arrange
+
             var tmpArticle = new ArticleConnector().Create(new Article() {Description = "TmpArticle"});
             var tmpFile = new ArchiveConnector().UploadFile("tmpImage.png", Resource.fortnox_image);
+
             #endregion Arrange
 
             var connector = new ArticleFileConnectionConnector();
 
             #region CREATE
+
             var newArticleFileConnection = new ArticleFileConnection()
             {
                 FileId = tmpFile.Id,
@@ -43,7 +46,9 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion CREATE
 
             #region UPDATE
+
             //Update not supported
+
             #endregion UPDATE
 
             #region READ / GET
@@ -65,8 +70,53 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion DELETE
 
             #region Delete arranged resources
+
             new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             new ArchiveConnector().DeleteFile(tmpFile.Id);
+
+            #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_ArticleFileConnection_Find()
+        {
+            #region Arrange
+
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle" });
+            #endregion Arrange
+
+            var connector = new ArticleFileConnectionConnector();
+
+            var newArticleFileConnection = new ArticleFileConnection()
+            {
+                ArticleNumber = tmpArticle.ArticleNumber
+            };
+
+            for (var i = 0; i < 5; i++)
+            {
+                var tmpFile = new ArchiveConnector().UploadFile($"tmpImage{i}.png", Resource.fortnox_image);
+                newArticleFileConnection.FileId = tmpFile.Id;
+
+                connector.Create(newArticleFileConnection);
+                MyAssert.HasNoError(connector);
+            }
+
+            connector.ArticleNumber = tmpArticle.ArticleNumber;
+            var connections = connector.Find();
+            Assert.AreEqual(5, connections.Entities.Count);
+
+            foreach (var entity in connections.Entities)
+            {
+                connector.Delete(entity.FileId);
+                MyAssert.HasNoError(connector);
+
+                new ArchiveConnector().DeleteFile(entity.FileId);
+            }
+
+            #region Delete arranged resources
+
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+
             #endregion Delete arranged resources
         }
     }

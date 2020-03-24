@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -124,6 +125,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
             Assert.AreEqual(1, fullCollection.TotalPages);
+            Assert.AreEqual(testKeyMark, fullCollection.Entities.First().City);
 
             //Apply Limit
             connector.Limit = 2;

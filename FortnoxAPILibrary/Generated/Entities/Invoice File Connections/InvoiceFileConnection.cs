@@ -21,7 +21,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Document type (“F”, “O” or “OF”)  O = Orders  OF = Offers  F = Invoices </summary>
         [JsonProperty("entityType")]
-        public long? EntityType { get; set; }
+        public EntityType? EntityType { get; set; }
 
         ///<summary> ID of the file.  Use ArchiveFileId from Inbox/Archive endpoint in this field. </summary>
         [JsonProperty("fileId")]
@@ -34,5 +34,18 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> ID of the connection. Used against Archive to fetch the file. </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
+    }
+
+    public enum EntityType
+    {
+        /// <summary> Invoice </summary>
+        [EnumMember(Value = "F")]
+        Invoice,
+        /// <summary> Order </summary>
+        [EnumMember(Value = "O")]
+        Order,
+        /// <summary> Offer </summary>
+        [EnumMember(Value = "OF")]
+        Offer
     }
 }

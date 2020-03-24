@@ -20,8 +20,9 @@ namespace FortnoxAPILibrary.Entities
         public string UrlTaxReductionList { get; private set; }
 
         ///<summary> Accounting Method. Can be ACCRUAL or CASH </summary>
+        [ReadOnly]
         [JsonProperty]
-        public AccountingMethod? AccountingMethod { get; set; }
+        public AccountingMethod? AccountingMethod { get; private set; }
 
         ///<summary> The invoice administration fee. </summary>
         [JsonProperty]

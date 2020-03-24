@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class SupplierInvoiceExternalURLConnectionConnector : EntityConnector<SupplierInvoiceExternalURLConnection, EntityCollection<SupplierInvoiceExternalURLConnectionSubset>, Sort.By.SupplierInvoiceExternalURLConnection?>
+    public class SupplierInvoiceExternalURLConnectionConnector : EntityConnector<SupplierInvoiceExternalURLConnection, EntityCollection<SupplierInvoiceExternalURLConnection>, Sort.By.SupplierInvoiceExternalURLConnection?>
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
@@ -63,7 +63,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of supplierInvoiceExternalURLConnections
 		/// </summary>
 		/// <returns>A list of supplierInvoiceExternalURLConnections</returns>
-		public EntityCollection<SupplierInvoiceExternalURLConnectionSubset> Find()
+		public EntityCollection<SupplierInvoiceExternalURLConnection> Find()
 		{
 			return BaseFind();
 		}

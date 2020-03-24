@@ -63,8 +63,9 @@ namespace FortnoxAPILibrary.Entities
         public string Currency { get; set; }
 
         ///<summary> Customer name </summary>
+        [ReadOnly]
         [JsonProperty]
-        public string CustomerName { get; set; }
+        public string CustomerName { get; private set; }
 
         ///<summary> Customer number </summary>
         [JsonProperty]

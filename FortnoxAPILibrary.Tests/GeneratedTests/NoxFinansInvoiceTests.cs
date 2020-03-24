@@ -19,10 +19,11 @@ namespace FortnoxAPILibrary.GeneratedTests
             ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
         }
 
+        [Ignore("Domain not understood")]
         [TestMethod]
         public void Test_NoxFinansInvoice_CRUD()
         {
-            #region Arrange
+            /*#region Arrange
             //Add code to create required resources
             #endregion Arrange
 
@@ -70,7 +71,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             #region Delete arranged resources
             //Add code to delete temporary resources
-            #endregion Delete arranged resources
+            #endregion Delete arranged resources*/
         }
     }
 }

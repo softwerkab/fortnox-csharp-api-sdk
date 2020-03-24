@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -23,8 +25,11 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_ContractAccrual_CRUD()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+
+            var tmpCustomer = new CustomerConnector().Create(new Customer()
+                {Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"});
+            var tmpArticle = new ArticleConnector().Create(new Article()
+                {Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100});
             var tmpContract = new ContractConnector().Create(new Contract()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
@@ -38,16 +43,19 @@ namespace FortnoxAPILibrary.GeneratedTests
                 Language = Language.EN,
                 InvoiceRows = new List<ContractInvoiceRow>()
                 {
-                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "6", Price = "1000", VAT = "0"}
+                    new ContractInvoiceRow()
+                        {ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "6", Price = "1000", VAT = "0"}
                 },
                 PeriodStart = new DateTime(2020, 01, 1),
                 PeriodEnd = new DateTime(2020, 03, 20)
             });
+
             #endregion Arrange
 
             var connector = new ContractAccrualConnector();
 
             #region CREATE
+
             var newContractAccrual = new ContractAccrual()
             {
                 DocumentNumber = tmpContract.DocumentNumber,
@@ -58,8 +66,8 @@ namespace FortnoxAPILibrary.GeneratedTests
                 VATIncluded = false,
                 AccrualRows = new List<ContractAccrualRow>()
                 {
-                    new ContractAccrualRow(){ Account = 2990, Credit = 0, Debit = 2000},
-                    new ContractAccrualRow(){ Account = 3990, Credit = 2000, Debit = 0},
+                    new ContractAccrualRow() {Account = 2990, Credit = 0, Debit = 2000},
+                    new ContractAccrualRow() {Account = 3990, Credit = 2000, Debit = 0},
                 }
             };
 
@@ -73,7 +81,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             createdContractAccrual.Description = "UpdatedTestContractAccrual";
 
-            var updatedContractAccrual = connector.Update(createdContractAccrual); 
+            var updatedContractAccrual = connector.Update(createdContractAccrual);
             MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestContractAccrual", updatedContractAccrual.Description);
 
@@ -98,7 +106,83 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+
+            #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_ContractAccrual_Find()
+        {
+            #region Arrange
+
+            var tmpCustomer = new CustomerConnector().Create(new Customer() {Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"});
+            var tmpArticle = new ArticleConnector().Create(new Article() {Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100});
+            var tmpContract = new ContractConnector().Create(new Contract()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                ContractDate = new DateTime(2020, 1, 1),
+                ContractLength = 3,
+                InvoiceInterval = 3,
+                Comments = "TestContract",
+                Continuous = true,
+                Currency = "SEK",
+                VATIncluded = false,
+                Language = Language.EN,
+                InvoiceRows = new List<ContractInvoiceRow>()
+                {
+                    new ContractInvoiceRow()
+                        {ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "6", Price = "1000", VAT = "0"}
+                },
+                PeriodStart = new DateTime(2020, 01, 1),
+                PeriodEnd = new DateTime(2020, 03, 20)
+            });
+
+            #endregion Arrange
+            var connector = new ContractAccrualConnector();
+
+            var marks = TestUtils.RandomString();
+            var newContractAccrual = new ContractAccrual()
+            {
+                Description = marks,
+                Total = 6000,
+                AccrualAccount = 2990,
+                CostAccount = 3990,
+                VATIncluded = false,
+                AccrualRows = new List<ContractAccrualRow>()
+                {
+                    new ContractAccrualRow() {Account = 2990, Credit = 0, Debit = 2000},
+                    new ContractAccrualRow() {Account = 3990, Credit = 2000, Debit = 0},
+                }
+            };
+
+            for (var i = 0; i < 5; i++)
+            {
+                newContractAccrual.DocumentNumber = tmpContract.DocumentNumber;
+                connector.Create(newContractAccrual);
+                MyAssert.HasNoError(connector);
+
+                var contractConnector = new ContractConnector();
+                tmpContract.DocumentNumber = null;
+                tmpContract = contractConnector.Create(tmpContract);
+                MyAssert.HasNoError(contractConnector);
+            }
+
+            var contractAccruals = connector.Find();
+            Assert.AreEqual(5,contractAccruals.Entities.Count(x => x.Description.StartsWith(marks)));
+
+            foreach (var entry in contractAccruals.Entities.Where(x => x.Description.StartsWith(marks)))
+            {
+                connector.Delete(entry.DocumentNumber);
+                MyAssert.HasNoError(connector);
+            }
+            #region Delete arranged resources
+
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+
             #endregion Delete arranged resources
         }
     }

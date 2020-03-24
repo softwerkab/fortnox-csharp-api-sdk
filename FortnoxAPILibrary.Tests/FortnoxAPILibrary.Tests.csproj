@@ -6,9 +6,12 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="GeneratedTests\FileTests.cs" />
-    <Compile Remove="GeneratedTests\NoxFinansInvoiceTests.cs" />
   </ItemGroup>
 
   <ItemGroup>

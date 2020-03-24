@@ -25,15 +25,18 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_AssetTypes_CRUD()
         {
             #region Arrange
+
             //Add code to create required resources
+
             #endregion Arrange
 
             var connector = new AssetTypesConnector();
             var entry = connector.Find().Entities.FirstOrDefault(at => at.Number == "TST");
-            if (entry != null) 
+            if (entry != null)
                 connector.Delete(entry.Id);
 
             #region CREATE
+
             var newAssetTypes = new AssetType()
             {
                 Description = "TestAssetType",
@@ -47,7 +50,8 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             var createdAssetTypes = connector.Create(newAssetTypes);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("TestAssetType", createdAssetTypes.Description); //Fails due to response entity is named "Type", not "AssetType"
+            Assert.AreEqual("TestAssetType",
+                createdAssetTypes.Description); //Fails due to response entity is named "Type", not "AssetType"
 
             #endregion CREATE
 
@@ -55,7 +59,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             createdAssetTypes.Description = "UpdatedTestAssetType";
 
-            var updatedAssetTypes = connector.Update(createdAssetTypes); 
+            var updatedAssetTypes = connector.Update(createdAssetTypes);
             MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestAssetType", updatedAssetTypes.Description);
 
@@ -80,8 +84,44 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion DELETE
 
             #region Delete arranged resources
+
             //Add code to delete temporary resources
+
             #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_AssetTypes_Find()
+        {
+            var connector = new AssetTypesConnector();
+
+            var newAssetType = new AssetType()
+            {
+                Description = "TestAssetType",
+                Notes = "Some notes",
+                Type = "1",
+                AccountAssetId = 1150,
+                AccountDepreciationId = 7824,
+                AccountValueLossId = 1159,
+            };
+
+            var marks = TestUtils.RandomString(3);
+            for (var i = 0; i < 5; i++)
+            {
+                newAssetType.Number = marks + i;
+                connector.Create(newAssetType);
+                MyAssert.HasNoError(connector);
+            }
+
+            var assetTypes = connector.Find();
+            Assert.AreEqual(5, assetTypes.Entities.Count(x => x.Number.StartsWith(marks)));
+
+            //restore
+            foreach (var entity in assetTypes.Entities.Where(x => x.Number.StartsWith(marks)))
+            {
+                connector.Delete(entity.Id);
+                MyAssert.HasNoError(connector);
+            }
         }
     }
 }
