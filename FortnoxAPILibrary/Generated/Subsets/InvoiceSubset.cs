@@ -18,14 +18,14 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Balance of the invoice. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Balance { get; private set; }
+        public decimal? Balance { get; private set; }
 
-        ///<summary> If the invoice is bookkept. This value can be changed by using the action “bookkeep”. </summary>
+        ///<summary> If the invoice is bookkept. This value can be changed by using the action ï¿½bookkeepï¿½. </summary>
         [ReadOnly]
         [JsonProperty]
         public bool? Booked { get; private set; }
 
-        ///<summary> If the invoice is cancelled. This value can be changed by using the action “cancel”. </summary>
+        ///<summary> If the invoice is cancelled. This value can be changed by using the action ï¿½cancelï¿½. </summary>
         [ReadOnly]
         [JsonProperty]
         public bool? Cancelled { get; private set; }
@@ -40,11 +40,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Currency rate used for the invoice. </summary>
         [JsonProperty]
-        public double? CurrencyRate { get; set; }
+        public decimal? CurrencyRate { get; set; }
 
         ///<summary> Currency unit used for the invoice. </summary>
         [JsonProperty]
-        public double? CurrencyUnit { get; set; }
+        public decimal? CurrencyUnit { get; set; }
 
         ///<summary> Name of the customer. </summary>
         [JsonProperty]
@@ -103,7 +103,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> The total amount of the invoice. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Total { get; private set; }
+        public decimal? Total { get; private set; }
         
         ///<summary> Code of the way of delivery. The code must be of an existing way of delivery. </summary>
         [JsonProperty]

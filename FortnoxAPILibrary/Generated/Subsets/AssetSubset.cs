@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.Entities
         
         ///<summary> Acquisition value </summary>
         [JsonProperty]
-        public double? AcquisitionValue { get; set; }
+        public decimal? AcquisitionValue { get; set; }
 
         ///<summary> AcquisitionDate</summary> 
         [JsonProperty]

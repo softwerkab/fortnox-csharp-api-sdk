@@ -46,11 +46,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Currency rate </summary>
         [JsonProperty]
-        public double? CurrencyRate { get; set; }
+        public decimal? CurrencyRate { get; set; }
 
         ///<summary> Currency unit </summary>
         [JsonProperty]
-        public double? CurrencyUnit { get; set; }
+        public decimal? CurrencyUnit { get; set; }
 
         ///<summary> Disable payment file </summary>
         [JsonProperty]
@@ -95,7 +95,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Total amount </summary>
         [JsonProperty]
-        public double? Total { get; set; }
+        public decimal? Total { get; set; }
 
         //NEW
 

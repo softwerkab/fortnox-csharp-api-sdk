@@ -54,7 +54,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Total of the accrual </summary>
         [JsonProperty]
-        public double? Total { get; set; }
+        public decimal? Total { get; set; }
 
         ///<summary> Is VAT included </summary>
         [JsonProperty]

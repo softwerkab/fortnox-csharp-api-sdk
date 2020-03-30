@@ -24,11 +24,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Extent in % </summary>
         [JsonProperty]
-        public double? Extent { get; set; }
+        public decimal? Extent { get; set; }
 
         ///<summary> Amount of hours </summary>
         [JsonProperty]
-        public double? Hours { get; set; }
+        public decimal? Hours { get; set; }
 
         ///<summary> Determiens whether or not the registrations is holiday entitling </summary>
         [JsonProperty]

@@ -26,15 +26,15 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> The quantity from where the price is applicable. </summary>
         [JsonProperty]
-        public double? FromQuantity { get; set; }
+        public decimal? FromQuantity { get; set; }
 
         ///<summary> Percent of original price </summary>
         [JsonProperty]
-        public double? Percent { get; set; }
+        public decimal? Percent { get; set; }
 
         ///<summary> The price </summary>
         [JsonProperty("Price")]
-        public double? PriceValue { get; set; }
+        public decimal? PriceValue { get; set; }
 
         ///<summary> Price list of the price </summary>
         [JsonProperty]

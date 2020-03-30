@@ -13,22 +13,22 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Balance fees in currency in SEK </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? BalanceIncludeFees { get; private set; }
+        public decimal? BalanceIncludeFees { get; private set; }
 
         ///<summary> Balance fees in currency (today is only SEK available) </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? BalanceIncludeFeesCurrency { get; private set; }
+        public decimal? BalanceIncludeFeesCurrency { get; private set; }
 
         ///<summary> Capital amount balance in SEK </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? CurrentCapitalBalance { get; private set; }
+        public decimal? CurrentCapitalBalance { get; private set; }
 
         ///<summary> Capital amount balance in currency (today is only SEK available) </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? CurrentCapitalBalanceCurrency { get; private set; }
+        public decimal? CurrentCapitalBalanceCurrency { get; private set; }
 
         ///<summary> URL to PDF document for invoice </summary>
         [ReadOnly]
@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> INVOICEREMINDER  REMINDER  COLLECTION  EXECUTIONCONTROLL  MONITORING </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? NextEvent { get; private set; }
+        public decimal? NextEvent { get; private set; }
 
         ///<summary>  </summary>
         [ReadOnly]

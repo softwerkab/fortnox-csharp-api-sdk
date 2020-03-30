@@ -21,12 +21,12 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Contribution Percent </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? ContributionPercent { get; private set; }
+        public decimal? ContributionPercent { get; private set; }
 
         ///<summary> Contribution Value </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? ContributionValue { get; private set; }
+        public decimal? ContributionValue { get; private set; }
 
         ///<summary> Cost center code </summary>
         [JsonProperty]
@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Discount amount </summary>
         [JsonProperty]
-        public double? Discount { get; set; }
+        public decimal? Discount { get; set; }
 
         ///<summary> Type of discount </summary>
         [JsonProperty]
@@ -58,7 +58,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Unit price (If empty Fortnox will use the price from the customers price list) </summary>
         [JsonProperty]
-        public double? Price { get; set; }
+        public decimal? Price { get; set; }
 
         ///<summary> Project code </summary>
         [JsonProperty]
@@ -66,12 +66,12 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Delivered quantity </summary>
         [JsonProperty]
-        public double? Quantity { get; set; }
+        public decimal? Quantity { get; set; }
 
         ///<summary> Total row amount </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Total { get; private set; }
+        public decimal? Total { get; private set; }
 
         ///<summary> Code of unit </summary>
         [JsonProperty]
@@ -79,6 +79,6 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Vat percent code (If empty Fortnox will use settings from the article) </summary>
         [JsonProperty]
-        public double? VAT { get; set; }
+        public decimal? VAT { get; set; }
     }
 }

@@ -20,11 +20,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Credit </summary>
         [JsonProperty]
-        public double? Credit { get; set; }
+        public decimal? Credit { get; set; }
 
         ///<summary> Debit </summary>
         [JsonProperty]
-        public double? Debit { get; set; }
+        public decimal? Debit { get; set; }
 
         ///<summary> Project number </summary>
         [JsonProperty]

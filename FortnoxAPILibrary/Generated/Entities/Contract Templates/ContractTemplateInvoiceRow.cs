@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Delivered quantity </summary>
         [JsonProperty]
-        public double? DeliveredQuantity { get; set; }
+        public decimal? DeliveredQuantity { get; set; }
 
         ///<summary> Description </summary>
         [JsonProperty]
@@ -32,7 +32,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Discount amount </summary>
         [JsonProperty]
-        public double? Discount { get; set; }
+        public decimal? Discount { get; set; }
 
         ///<summary> AMOUNT / PERCENT </summary>
         [JsonProperty]
@@ -40,7 +40,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Unit price </summary>
         [JsonProperty]
-        public double? Price { get; set; }
+        public decimal? Price { get; set; }
 
         ///<summary> Project code </summary>
         [JsonProperty]

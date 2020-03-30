@@ -35,14 +35,14 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Create method is not supported
             var newScheduleTimes = new ScheduleTimes()
             {
-                Hours = 6.5,
+                Hours = 6.5m,
                 EmployeeId = tmpEmployee.EmployeeId,
                 Date = new DateTime(2050,10,10)
             };
 
             var createdScheduleTimes = connector.Update(newScheduleTimes);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(6.5, createdScheduleTimes.Hours);
+            Assert.AreEqual(6.5m, createdScheduleTimes.Hours);
 
             #endregion CREATE
 

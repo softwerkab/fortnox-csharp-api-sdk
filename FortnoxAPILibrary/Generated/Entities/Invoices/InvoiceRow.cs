@@ -21,12 +21,12 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Contribution Percent. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? ContributionPercent { get; private set; }
+        public decimal? ContributionPercent { get; private set; }
 
         ///<summary> Contribution Value. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? ContributionValue { get; private set; }
+        public decimal? ContributionValue { get; private set; }
 
         ///<summary> Code of the cost center for the row. The code must be of an existing cost center. </summary>
         [JsonProperty]
@@ -34,7 +34,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Delivered quantity. </summary>
         [JsonProperty]
-        public double? DeliveredQuantity { get; set; }
+        public decimal? DeliveredQuantity { get; set; }
 
         ///<summary> Row description. </summary>
         [JsonProperty]
@@ -42,7 +42,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Discount amount. </summary>
         [JsonProperty]
-        public double? Discount { get; set; }
+        public decimal? Discount { get; set; }
 
         ///<summary> The type of discount used for the row. Can be AMOUNT or PERCENT. </summary>
         [JsonProperty]
@@ -62,12 +62,12 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Price per unit </summary>
         [JsonProperty]
-        public double? Price { get; set; }
+        public decimal? Price { get; set; }
 
         ///<summary> Price per unit excluding VAT (regardless of value of VATIncluded flag) </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? PriceExcludingVAT { get; private set; }
+        public decimal? PriceExcludingVAT { get; private set; }
 
         ///<summary> Code of the project for the row. The code must be of an existing project. </summary>
         [JsonProperty]
@@ -76,12 +76,12 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Total amount for the row. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Total { get; private set; }
+        public decimal? Total { get; private set; }
 
         ///<summary> Total amount for the row excluding VAT (regardless of value of VATIncluded flag) </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? TotalExcludingVAT { get; private set; }
+        public decimal? TotalExcludingVAT { get; private set; }
 
         ///<summary> Code of the unit for the row. The code must be of an existing unit. </summary>
         [JsonProperty]

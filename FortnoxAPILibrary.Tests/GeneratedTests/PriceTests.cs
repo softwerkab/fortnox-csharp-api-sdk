@@ -36,12 +36,12 @@ namespace FortnoxAPILibrary.GeneratedTests
                 ArticleNumber = tmpArticle.ArticleNumber,
                 PriceList = tmpPriceList.Code,
                 FromQuantity = 1,
-                PriceValue = 12.5
+                PriceValue = 12.5m
             };
 
             var createdPrice = connector.Create(newPrice);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(12.5, createdPrice.PriceValue);
+            Assert.AreEqual(12.5m, createdPrice.PriceValue);
 
             #endregion CREATE
 

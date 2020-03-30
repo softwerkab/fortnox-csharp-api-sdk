@@ -17,7 +17,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> The buy rate of the currency </summary>
         [JsonProperty]
-        public double? BuyRate { get; set; }
+        public decimal? BuyRate { get; set; }
 
         ///<summary> The code of the currency </summary>
         [JsonProperty]
@@ -34,11 +34,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> The sell rate of the currency </summary>
         [JsonProperty]
-        public double? SellRate { get; set; }
+        public decimal? SellRate { get; set; }
 
         ///<summary> The unit of the currency </summary>
         [JsonProperty]
-        public double? Unit { get; set; }
+        public decimal? Unit { get; set; }
 
         ///<summary> If the currency has automatic updates on it </summary>
         [ReadOnly]

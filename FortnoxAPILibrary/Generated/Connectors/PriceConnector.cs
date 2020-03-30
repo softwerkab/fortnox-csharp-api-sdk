@@ -40,7 +40,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <param name="articleNumber"></param>
         /// <param name="fromQuantity"></param>
         /// <returns>The found price</returns>
-        public Price Get(string priceListCode, string articleNumber, double? fromQuantity = null)
+        public Price Get(string priceListCode, string articleNumber, decimal? fromQuantity = null)
         {
             return BaseGet(priceListCode, articleNumber, fromQuantity?.ToString());
         }
@@ -71,7 +71,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <param name="priceListCode"></param>
         /// <param name="articleNumber"></param>
         /// <param name="fromQuantity"></param>
-        public void Delete(string priceListCode, string articleNumber, double? fromQuantity = null)
+        public void Delete(string priceListCode, string articleNumber, decimal? fromQuantity = null)
         {
             BaseDelete(priceListCode, articleNumber, fromQuantity?.ToString());
         }

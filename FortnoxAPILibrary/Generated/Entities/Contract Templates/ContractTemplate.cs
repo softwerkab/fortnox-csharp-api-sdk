@@ -17,7 +17,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Administration fee </summary>
         [JsonProperty]
-        public double? AdministrationFee { get; set; }
+        public decimal? AdministrationFee { get; set; }
 
         ///<summary> Length of the contract </summary>
         [JsonProperty]
@@ -25,7 +25,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Freight </summary>
         [JsonProperty]
-        public double? Freight { get; set; }
+        public decimal? Freight { get; set; }
 
         ///<summary> Invoice interval </summary>
         [JsonProperty]

@@ -14,7 +14,7 @@ namespace FortnoxAPILibrary.Entities
         [JsonProperty("@url")]
         public string Url { get; private set; }
 
-        ///<summary> Article number. If no article number is provided, the next number in the series will be used. Only alpha numeric characters, with the addition of – + /  . and _, are allowed. </summary>
+        ///<summary> Article number. If no article number is provided, the next number in the series will be used. Only alpha numeric characters, with the addition of ï¿½ + /  . and _, are allowed. </summary>
         [JsonProperty]
         public string ArticleNumber { get; set; }
         
@@ -25,7 +25,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Disposable quantity of the article. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? DisposableQuantity { get; private set; }
+        public decimal? DisposableQuantity { get; private set; }
 
         ///<summary> EAN bar code. </summary>
         [JsonProperty]
@@ -37,12 +37,12 @@ namespace FortnoxAPILibrary.Entities
         
         ///<summary> Purchase price of the article. </summary>
         [JsonProperty]
-        public double? PurchasePrice { get; set; }
+        public decimal? PurchasePrice { get; set; }
 
         ///<summary> Price of article for its default price list. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? SalesPrice { get; private set; }
+        public decimal? SalesPrice { get; private set; }
 
         ///<summary> Storage place for the article. </summary>
         [JsonProperty]
@@ -51,7 +51,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Value in stock of the article. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? StockValue { get; private set; }
+        public decimal? StockValue { get; private set; }
 
         ///<summary> Unit code for the article. The code must be of an existing unit. </summary>
         [JsonProperty]

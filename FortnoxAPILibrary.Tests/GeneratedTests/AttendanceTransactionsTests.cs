@@ -37,14 +37,14 @@ namespace FortnoxAPILibrary.GeneratedTests
                 EmployeeId = tmpEmployee.EmployeeId,
                 CauseCode = AttendanceCauseCode.TID,
                 Date = new DateTime(2018, 01, 01),
-                Hours = 5.5,
+                Hours = 5.5m,
                 CostCenter = tmpCostCenter.Code,
                 Project = tmpProject.ProjectNumber
             };
 
             var createdAttendanceTransaction = connector.Create(newAttendanceTransaction);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(5.5, createdAttendanceTransaction.Hours);
+            Assert.AreEqual(5.5m, createdAttendanceTransaction.Hours);
 
             #endregion CREATE
 

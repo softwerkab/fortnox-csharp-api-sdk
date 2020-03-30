@@ -159,15 +159,15 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Predefined invoice administration fee for the customer. </summary>
         [JsonProperty]
-        public double? InvoiceAdministrationFee { get; set; }
+        public decimal? InvoiceAdministrationFee { get; set; }
 
         ///<summary> Predefined invoice discount for the customer. </summary>
         [JsonProperty]
-        public double? InvoiceDiscount { get; set; }
+        public decimal? InvoiceDiscount { get; set; }
 
         ///<summary> Predefined invoice freight fee for the customer. </summary>
         [JsonProperty]
-        public double? InvoiceFreight { get; set; }
+        public decimal? InvoiceFreight { get; set; }
 
         ///<summary> Predefined invoice remark for the customer. </summary>
         [JsonProperty]

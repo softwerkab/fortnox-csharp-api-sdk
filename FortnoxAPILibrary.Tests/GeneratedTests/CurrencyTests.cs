@@ -40,8 +40,8 @@ namespace FortnoxAPILibrary.GeneratedTests
             {
                 Description = "TestCurrency",
                 Code = "SKK",
-                BuyRate = 1.11,
-                SellRate = 1.21
+                BuyRate = 1.11m,
+                SellRate = 1.21m
             };
 
             var createdCurrency = connector.Create(newCurrency);

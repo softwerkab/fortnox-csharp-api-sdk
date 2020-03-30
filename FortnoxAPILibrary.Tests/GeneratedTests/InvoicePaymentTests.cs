@@ -51,8 +51,8 @@ namespace FortnoxAPILibrary.GeneratedTests
             var newInvoicePayment = new InvoicePayment()
             {
                 InvoiceNumber = tmpInvoice.DocumentNumber,
-                Amount = 10.5,
-                AmountCurrency = 10.5,
+                Amount = 10.5m,
+                AmountCurrency = 10.5m,
                 PaymentDate = new DateTime(2020, 2, 1)
             };
 
@@ -123,8 +123,8 @@ namespace FortnoxAPILibrary.GeneratedTests
             var newInvoicePayment = new InvoicePayment()
             {
                 InvoiceNumber = tmpInvoice.DocumentNumber,
-                Amount = 10.5,
-                AmountCurrency = 10.5,
+                Amount = 10.5m,
+                AmountCurrency = 10.5m,
                 PaymentDate = new DateTime(2020, 2, 1)
             };
 
@@ -138,7 +138,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var payments = connector.Find();
 
             Assert.AreEqual(5, payments.Entities.Count);
-            Assert.AreEqual(10.5, payments.Entities.First().Amount);
+            Assert.AreEqual(10.5m, payments.Entities.First().Amount);
 
             foreach (var entity in payments.Entities)
             {

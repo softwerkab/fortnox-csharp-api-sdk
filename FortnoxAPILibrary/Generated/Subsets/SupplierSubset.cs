@@ -19,7 +19,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Bank account number of the supplier </summary>
         [JsonProperty]
-        public int? BankAccountNumber { get; set; }
+        public string BankAccountNumber { get; set; }
 
         ///<summary> BG number for the supplier </summary>
         [JsonProperty]

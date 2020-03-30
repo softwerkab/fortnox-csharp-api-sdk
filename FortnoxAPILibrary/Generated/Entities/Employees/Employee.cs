@@ -96,11 +96,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Monthly salary </summary>
         [JsonProperty]
-        public double? MonthlySalary { get; set; }
+        public decimal? MonthlySalary { get; set; }
 
         ///<summary> Hourly pay </summary>
         [JsonProperty]
-        public double? HourlyPay { get; set; }
+        public decimal? HourlyPay { get; set; }
 
         ///<summary> Tax allowance. Validates against allowed values specified below. </summary>
         [JsonProperty]
@@ -108,7 +108,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Tax table </summary>
         [JsonProperty]
-        public double? TaxTable { get; set; }
+        public decimal? TaxTable { get; set; }
 
         ///<summary> Tax column </summary>
         [JsonProperty]
@@ -116,7 +116,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Non-recurring tax % </summary>
         [JsonProperty]
-        public double? NonRecurringTax { get; set; }
+        public decimal? NonRecurringTax { get; set; }
 
         ///<summary> Clearing number </summary>
         [JsonProperty]
@@ -128,10 +128,10 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Average weekly hours </summary>
         [JsonProperty]
-        public double? AverageWeeklyHours { get; set; }
+        public decimal? AverageWeeklyHours { get; set; }
 
         ///<summary> Average hourly wage </summary>
         [JsonProperty]
-        public double? AverageHourlyWage { get; set; }
+        public decimal? AverageHourlyWage { get; set; }
     }
 }

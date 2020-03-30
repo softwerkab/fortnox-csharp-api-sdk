@@ -69,7 +69,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Total </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Total { get; private set; }
+        public decimal? Total { get; private set; }
 
         [JsonProperty]
         public string Status { get; set; }

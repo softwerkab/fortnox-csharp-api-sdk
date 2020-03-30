@@ -42,7 +42,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Disposable quantity of the article. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? DisposableQuantity { get; private set; }
+        public decimal? DisposableQuantity { get; private set; }
 
         ///<summary> EAN bar code. </summary>
         [JsonProperty]
@@ -90,16 +90,16 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Purchase price of the article. </summary>
         [JsonProperty]
-        public double? PurchasePrice { get; set; }
+        public decimal? PurchasePrice { get; set; }
 
         ///<summary> Quantity in stock of the article. </summary>
         [JsonProperty]
-        public double? QuantityInStock { get; set; }
+        public decimal? QuantityInStock { get; set; }
 
         ///<summary> Reserved quantity of the article. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? ReservedQuantity { get; private set; }
+        public decimal? ReservedQuantity { get; private set; }
 
         ///<summary> Account number for the sales account in Sweden. The number must be of an existing account. </summary>
         [JsonProperty]
@@ -108,7 +108,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Price of article for its default price list. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? SalesPrice { get; private set; }
+        public decimal? SalesPrice { get; private set; }
 
         ///<summary> If the article is stock goods. </summary>
         [JsonProperty]
@@ -121,11 +121,11 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Value in stock of the article. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? StockValue { get; private set; }
+        public decimal? StockValue { get; private set; }
 
         ///<summary> When to start warning for low quantity in stock. </summary>
         [JsonProperty]
-        public double? StockWarning { get; set; }
+        public decimal? StockWarning { get; set; }
 
         ///<summary> Name of the supplier. </summary>
         [ReadOnly]
@@ -146,7 +146,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> VAT percent, this is predefined by the VAT for the sales account. </summary>
         [JsonProperty]
-        public double? VAT { get; set; }
+        public decimal? VAT { get; set; }
 
         ///<summary> If the article is a webshop article. </summary>
         [JsonProperty]

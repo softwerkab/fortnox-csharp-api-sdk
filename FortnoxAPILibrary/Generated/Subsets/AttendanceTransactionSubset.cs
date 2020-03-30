@@ -28,7 +28,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Amount of hours </summary>
         [JsonProperty]
-        public double? Hours { get; set; }
+        public decimal? Hours { get; set; }
 
         ///<summary> Cost Center </summary>
         [JsonProperty]

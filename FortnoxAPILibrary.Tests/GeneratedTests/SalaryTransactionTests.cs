@@ -35,7 +35,7 @@ namespace FortnoxAPILibrary.GeneratedTests
                 EmployeeId = tmpEmployee.EmployeeId,
                 SalaryCode = "11", //Arbetstid
                 Date = new DateTime(2020,1,1),
-                Amount = 1250.50,
+                Amount = 1250.50m,
                 Number = 10,
             };
 

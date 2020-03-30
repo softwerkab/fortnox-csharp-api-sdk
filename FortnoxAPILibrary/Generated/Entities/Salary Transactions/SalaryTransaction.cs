@@ -29,15 +29,15 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Number of # </summary>
         [JsonProperty]
-        public double? Number { get; set; }
+        public decimal? Number { get; set; }
 
         ///<summary> Cost per # in SEK </summary>
         [JsonProperty]
-        public double? Amount { get; set; }
+        public decimal? Amount { get; set; }
 
         ///<summary> Sum in SEK </summary>
         [JsonProperty]
-        public double? Total { get; set; }
+        public decimal? Total { get; set; }
 
         ///<summary> Expense code from the expense registry </summary>
         [JsonProperty]
@@ -45,7 +45,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Sum VAT </summary>
         [JsonProperty]
-        public double? VAT { get; set; }
+        public decimal? VAT { get; set; }
 
         ///<summary> Optional additional text relating to the salary transaction </summary>
         [JsonProperty]

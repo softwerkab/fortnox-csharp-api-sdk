@@ -23,18 +23,18 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Amount of hours </summary>
         [JsonProperty]
-        public double? Hours { get; set; }
+        public decimal? Hours { get; set; }
 
         ///<summary> Amount of hours </summary>
         [JsonProperty]
-        public double? IWH1 { get; set; }
+        public decimal? IWH1 { get; set; }
 
         ///<summary> Amount of hours </summary>
         [JsonProperty]
-        public double? IWH2 { get; set; }
+        public decimal? IWH2 { get; set; }
 
         ///<summary> Amount of hours </summary>
         [JsonProperty]
-        public double? IWH3 { get; set; }
+        public decimal? IWH3 { get; set; }
     }
 }

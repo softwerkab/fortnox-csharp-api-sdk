@@ -20,7 +20,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Opening balance of the account </summary>
         [JsonProperty]
-        public double? BalanceBroughtForward { get; set; }
+        public decimal? BalanceBroughtForward { get; set; }
 
         ///<summary> Code of the proposed cost center. The code must be of an existing cost center. </summary>
         [JsonProperty]

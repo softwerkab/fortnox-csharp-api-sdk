@@ -20,7 +20,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Amount of credit. </summary>
         [JsonProperty]
-        public double? Credit { get; set; }
+        public decimal? Credit { get; set; }
 
         ///<summary> The description of the account. </summary>
         [ReadOnly]
@@ -29,7 +29,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Amount of debit. </summary>
         [JsonProperty]
-        public double? Debit { get; set; }
+        public decimal? Debit { get; set; }
 
         ///<summary> Code of the project. The code must be of an existing project. </summary>
         [JsonProperty]

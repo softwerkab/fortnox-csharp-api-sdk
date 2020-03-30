@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.Resources;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.GeneratedTests
@@ -29,7 +30,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         {
             var connector = new ArchiveConnector();
 
-            var data = System.IO.File.ReadAllBytes(@"C:\Users\Richard\Downloads\options.xml");
+            var data = Resource.fortnox_image;
 
             var fortnoxFile = connector.UploadFile("test.txt", data, testRootFolder.Name);
             MyAssert.HasNoError(connector);

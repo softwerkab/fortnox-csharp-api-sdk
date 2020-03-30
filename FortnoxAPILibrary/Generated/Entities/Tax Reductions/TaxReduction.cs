@@ -18,16 +18,16 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Apporoved amount </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? ApprovedAmount { get; private set; }
+        public decimal? ApprovedAmount { get; private set; }
 
         ///<summary> Asked amount </summary>
         [JsonProperty]
-        public double? AskedAmount { get; set; }
+        public decimal? AskedAmount { get; set; }
 
         ///<summary> Billed amount </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? BilledAmount { get; private set; }
+        public decimal? BilledAmount { get; private set; }
 
         ///<summary> Name of the customer </summary>
         [JsonProperty]

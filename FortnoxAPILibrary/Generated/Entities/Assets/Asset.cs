@@ -51,7 +51,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Acquisition value </summary>
         [JsonProperty]
-        public double? AcquisitionValue { get; set; }
+        public decimal? AcquisitionValue { get; set; }
 
         ///<summary> AcquisitionDate</summary> 
         [JsonProperty]
@@ -80,12 +80,12 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Depreciate to residual value </summary>
         [JsonProperty]
-        public double? DepreciateToResidualValue { get; set; }
+        public decimal? DepreciateToResidualValue { get; set; }
 
         ///<summary> Manual Ob value </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? ManualOb { get; private set; }
+        public decimal? ManualOb { get; private set; }
 
         ///<summary> Notes </summary>
         [JsonProperty]

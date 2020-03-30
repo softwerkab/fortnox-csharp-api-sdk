@@ -17,11 +17,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Amount of the payment </summary>
         [JsonProperty]
-        public double? Amount { get; set; }
+        public decimal? Amount { get; set; }
 
         ///<summary> Amount in the specified currency of the payment </summary>
         [JsonProperty]
-        public double? AmountCurrency { get; set; }
+        public decimal? AmountCurrency { get; set; }
 
         ///<summary> If the payment is booked or not </summary>
         [ReadOnly]
@@ -35,12 +35,12 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> The currency rate </summary>
         [JsonProperty]
-        public double? CurrencyRate { get; set; }
+        public decimal? CurrencyRate { get; set; }
 
         ///<summary> The currency unit </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? CurrencyUnit { get; private set; }
+        public decimal? CurrencyUnit { get; private set; }
 
         ///<summary> Information about the payment </summary>
         [JsonProperty]
@@ -72,7 +72,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Invoice total </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? InvoiceTotal { get; private set; }
+        public decimal? InvoiceTotal { get; private set; }
 
         ///<summary> Code of the mode of payment </summary>
         [JsonProperty]

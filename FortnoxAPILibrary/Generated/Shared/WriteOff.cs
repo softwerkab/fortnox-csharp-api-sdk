@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Amount of the writeoff </summary>
         [JsonProperty]
-        public double? Amount { get; set; }
+        public decimal? Amount { get; set; }
 
         ///<summary> Account number of the write off </summary>
         [JsonProperty]

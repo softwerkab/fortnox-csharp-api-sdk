@@ -22,7 +22,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Administration fee </summary>
         [JsonProperty]
-        public double? AdministrationFee { get; set; }
+        public decimal? AdministrationFee { get; set; }
 
         ///<summary> Name of authorizer on invoice (only in list view, not single) </summary>
         [ReadOnly]
@@ -68,11 +68,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Currency rate </summary>
         [JsonProperty]
-        public double? CurrencyRate { get; set; }
+        public decimal? CurrencyRate { get; set; }
 
         ///<summary> Currency unit </summary>
         [JsonProperty]
-        public double? CurrencyUnit { get; set; }
+        public decimal? CurrencyUnit { get; set; }
 
         ///<summary> Disable payment file </summary>
         [JsonProperty]
@@ -97,7 +97,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Freight </summary>
         [JsonProperty]
-        public double? Freight { get; set; }
+        public decimal? Freight { get; set; }
 
         ///<summary> Given Number </summary>
         [JsonProperty]
@@ -129,7 +129,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Round of amount </summary>
         [JsonProperty]
-        public double? RoundOffValue { get; set; }
+        public decimal? RoundOffValue { get; set; }
 
         ///<summary> Sales type </summary>
         [JsonProperty]
@@ -150,11 +150,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Total amount </summary>
         [JsonProperty]
-        public double? Total { get; set; }
+        public decimal? Total { get; set; }
 
         ///<summary> Vat amount </summary>
         [JsonProperty]
-        public double? VAT { get; set; }
+        public decimal? VAT { get; set; }
 
         ///<summary> Vat type </summary>
         [JsonProperty]

@@ -28,7 +28,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Amount </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Amount { get; private set; }
+        public decimal? Amount { get; private set; }
 
         ///<summary> User Id that performed that operation </summary>
         [ReadOnly]

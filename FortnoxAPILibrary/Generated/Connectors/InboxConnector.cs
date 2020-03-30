@@ -1,6 +1,4 @@
-﻿using FortnoxAPILibrary.Connectors;
-
-namespace FortnoxAPILibrary.Generated.Connectors
+﻿namespace FortnoxAPILibrary.Connectors
 {
     public class InboxConnector : ArchiveConnector
     {

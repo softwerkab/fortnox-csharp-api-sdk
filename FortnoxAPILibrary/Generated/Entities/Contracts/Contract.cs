@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Administration Fee </summary>
         [JsonProperty]
-        public double? AdministrationFee { get; set; }
+        public decimal? AdministrationFee { get; set; }
 
         ///<summary> Comments </summary>
         [JsonProperty]
@@ -47,12 +47,12 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Contribution percent </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? ContributionPercent { get; private set; }
+        public decimal? ContributionPercent { get; private set; }
 
         ///<summary> Contribution value </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? ContributionValue { get; private set; }
+        public decimal? ContributionValue { get; private set; }
 
         ///<summary> Cost center code </summary>
         [JsonProperty]
@@ -89,12 +89,12 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Freight </summary>
         [JsonProperty]
-        public double? Freight { get; set; }
+        public decimal? Freight { get; set; }
 
         ///<summary> Gross </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Gross { get; private set; }
+        public decimal? Gross { get; private set; }
 
         ///<summary> If house work </summary>
         [ReadOnly]
@@ -103,7 +103,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Invoice discount </summary>
         [JsonProperty]
-        public double? InvoiceDiscount { get; set; }
+        public decimal? InvoiceDiscount { get; set; }
 
         ///<summary> Invoice interval </summary>
         [JsonProperty]
@@ -130,7 +130,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Net </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Net { get; private set; }
+        public decimal? Net { get; private set; }
 
         ///<summary> Our reference </summary>
         [JsonProperty]
@@ -159,7 +159,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Tax reduction </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? TaxReduction { get; private set; }
+        public decimal? TaxReduction { get; private set; }
 
         ///<summary> Template name </summary>
         [ReadOnly]
@@ -181,17 +181,17 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Total </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Total { get; private set; }
+        public decimal? Total { get; private set; }
 
         ///<summary> Total to pay </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? TotalToPay { get; private set; }
+        public decimal? TotalToPay { get; private set; }
 
         ///<summary> Total VAT </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? TotalVAT { get; private set; }
+        public decimal? TotalVAT { get; private set; }
 
         ///<summary> If VAT is included </summary>
         [JsonProperty]

@@ -36,19 +36,19 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Debit </summary>
         [JsonProperty]
-        public double? Debit { get; set; }
+        public decimal? Debit { get; set; }
 
         ///<summary> Debit currency </summary>
         [JsonProperty]
-        public double? DebitCurrency { get; set; }
+        public decimal? DebitCurrency { get; set; }
 
         ///<summary> Credit </summary>
         [JsonProperty]
-        public double? Credit { get; set; }
+        public decimal? Credit { get; set; }
 
         ///<summary> Credit currency </summary>
         [JsonProperty]
-        public double? CreditCurrency { get; set; }
+        public decimal? CreditCurrency { get; set; }
 
         ///<summary> Project code </summary>
         [JsonProperty]
@@ -56,16 +56,16 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Unit price </summary>
         [JsonProperty]
-        public double? Price { get; set; }
+        public decimal? Price { get; set; }
 
         ///<summary> Quantity </summary>
         [JsonProperty]
-        public double? Quantity { get; set; }
+        public decimal? Quantity { get; set; }
 
         ///<summary> Row amount </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Total { get; private set; }
+        public decimal? Total { get; private set; }
 
         ///<summary> Transaction information </summary>
         [JsonProperty]

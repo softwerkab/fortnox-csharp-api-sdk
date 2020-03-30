@@ -53,7 +53,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             Assert.AreEqual("InvoiceComments", createdSupplierInvoice.Comments);
             Assert.AreEqual("TmpSupplier", createdSupplierInvoice.SupplierName);
             Assert.AreEqual(3 + 1, createdSupplierInvoice.SupplierInvoiceRows.Count);
-            //3 + 1 => A row "Leverantörsskulder" is created by default
+            //3 + 1 => A row "Leverantï¿½rsskulder" is created by default
 
             #endregion CREATE
 

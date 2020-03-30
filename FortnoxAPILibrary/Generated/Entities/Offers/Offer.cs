@@ -17,12 +17,12 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Administration fee </summary>
         [JsonProperty]
-        public double? AdministrationFee { get; set; }
+        public decimal? AdministrationFee { get; set; }
 
         ///<summary> VAT of the administration fee </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? AdministrationFeeVAT { get; private set; }
+        public decimal? AdministrationFeeVAT { get; private set; }
 
         ///<summary> Address 1 </summary>
         [JsonProperty]
@@ -35,7 +35,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> The amount that Taxreduction is based on </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? BasisTaxReduction { get; private set; }
+        public decimal? BasisTaxReduction { get; private set; }
 
         ///<summary> If the offer is cancelled </summary>
         [ReadOnly]
@@ -53,12 +53,12 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Contribution in Percent </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? ContributionPercent { get; private set; }
+        public decimal? ContributionPercent { get; private set; }
 
         ///<summary> Contribution in amount </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? ContributionValue { get; private set; }
+        public decimal? ContributionValue { get; private set; }
 
         ///<summary> Remarks will be copied from offer to order </summary>
         [JsonProperty]
@@ -78,11 +78,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Currency rate </summary>
         [JsonProperty]
-        public double? CurrencyRate { get; set; }
+        public decimal? CurrencyRate { get; set; }
 
         ///<summary> Currency unit </summary>
         [JsonProperty]
-        public double? CurrencyUnit { get; set; }
+        public decimal? CurrencyUnit { get; set; }
 
         ///<summary> Customer name </summary>
         [JsonProperty]
@@ -134,17 +134,17 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Freight </summary>
         [JsonProperty]
-        public double? Freight { get; set; }
+        public decimal? Freight { get; set; }
 
         ///<summary> VAT of the freight </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? FreightVAT { get; private set; }
+        public decimal? FreightVAT { get; private set; }
 
         ///<summary> Gross value of the offer </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Gross { get; private set; }
+        public decimal? Gross { get; private set; }
 
         ///<summary> If offer is marked with housework </summary>
         [ReadOnly]
@@ -154,7 +154,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Net amount </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Net { get; private set; }
+        public decimal? Net { get; private set; }
 
         ///<summary> If the offer is marked Completed (this mark stops the offer from being cancelled or that a user can create an order from the offer ) </summary>
         [JsonProperty]
@@ -204,7 +204,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Round off amount </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? RoundOff { get; private set; }
+        public decimal? RoundOff { get; private set; }
 
         ///<summary> – </summary>
         [JsonProperty]
@@ -218,7 +218,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Amount of Taxreduction </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? TaxReduction { get; private set; }
+        public decimal? TaxReduction { get; private set; }
 
         ///<summary> Terms of delivery code </summary>
         [JsonProperty]
@@ -231,12 +231,12 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Total amount </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Total { get; private set; }
+        public decimal? Total { get; private set; }
 
         ///<summary> Total vat amount </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? TotalVAT { get; private set; }
+        public decimal? TotalVAT { get; private set; }
 
         ///<summary> If offer row price exclude or include vat </summary>
         [JsonProperty]

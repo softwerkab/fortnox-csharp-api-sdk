@@ -26,12 +26,12 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> The invoice administration fee. </summary>
         [JsonProperty]
-        public double? AdministrationFee { get; set; }
+        public decimal? AdministrationFee { get; set; }
 
         ///<summary> VAT of the invoice administration fee. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? AdministrationFeeVAT { get; private set; }
+        public decimal? AdministrationFeeVAT { get; private set; }
 
         ///<summary> Invoice address 1. </summary>
         [JsonProperty]
@@ -44,12 +44,12 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Balance of the invoice. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Balance { get; private set; }
+        public decimal? Balance { get; private set; }
 
         ///<summary> Basis of tax reduction. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? BasisTaxReduction { get; private set; }
+        public decimal? BasisTaxReduction { get; private set; }
 
         ///<summary> If the invoice is bookkept. This value can be changed by using the action “bookkeep”. </summary>
         [ReadOnly]
@@ -87,12 +87,12 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Invoice contribution in percent. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? ContributionPercent { get; private set; }
+        public decimal? ContributionPercent { get; private set; }
 
         ///<summary> Invoice contribution in amount. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? ContributionValue { get; private set; }
+        public decimal? ContributionValue { get; private set; }
 
         ///<summary> Country for the invoice address. Must be a name of an existing country. </summary>
         [JsonProperty]
@@ -108,11 +108,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Currency rate used for the invoice. </summary>
         [JsonProperty]
-        public double? CurrencyRate { get; set; }
+        public decimal? CurrencyRate { get; set; }
 
         ///<summary> Currency unit used for the invoice. </summary>
         [JsonProperty]
-        public double? CurrencyUnit { get; set; }
+        public decimal? CurrencyUnit { get; set; }
 
         ///<summary> Name of the customer. </summary>
         [JsonProperty]
@@ -184,17 +184,17 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Freight cost of the invoice. </summary>
         [JsonProperty]
-        public double? Freight { get; set; }
+        public decimal? Freight { get; set; }
 
         ///<summary> VAT of the freight cost. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? FreightVAT { get; private set; }
+        public decimal? FreightVAT { get; private set; }
 
         ///<summary> Gross value of the invoice </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Gross { get; private set; }
+        public decimal? Gross { get; private set; }
 
         ///<summary> If there is any row of the invoice marked “house work”. </summary>
         [ReadOnly]
@@ -239,7 +239,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Net amount </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Net { get; private set; }
+        public decimal? Net { get; private set; }
 
         ///<summary> If the invoice is set as not completed. </summary>
         [JsonProperty]
@@ -309,7 +309,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Round off amount for the invoice. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? RoundOff { get; private set; }
+        public decimal? RoundOff { get; private set; }
 
         ///<summary> If the document is printed or sent in any way. </summary>
         [ReadOnly]
@@ -332,12 +332,12 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> The total amount of the invoice. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Total { get; private set; }
+        public decimal? Total { get; private set; }
 
         ///<summary> The total VAT amount of the invoice. </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? TotalVAT { get; private set; }
+        public decimal? TotalVAT { get; private set; }
 
         ///<summary> If the price of the invoice is including VAT. </summary>
         [JsonProperty]

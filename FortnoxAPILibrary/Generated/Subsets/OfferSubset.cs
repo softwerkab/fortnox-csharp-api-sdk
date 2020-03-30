@@ -11,7 +11,7 @@ namespace FortnoxAPILibrary.Entities
     [Entity(SingularName = "Offer", PluralName = "Offers")]
     public class OfferSubset
     {
-        ///<summary> Direct url to the record and URL to Taxreduction for the offer (URL to Taxreduction shows even if – Taxreduction is connected to offer) </summary>
+        ///<summary> Direct url to the record and URL to Taxreduction for the offer (URL to Taxreduction shows even if ï¿½ Taxreduction is connected to offer) </summary>
         [ReadOnly]
         [JsonProperty("@url")]
         public string Url { get; private set; }
@@ -53,6 +53,6 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Total amount </summary>
         [ReadOnly]
         [JsonProperty]
-        public double? Total { get; private set; }
+        public decimal? Total { get; private set; }
     }
 }
