@@ -75,7 +75,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             MyAssert.HasNoError(connector);
 
             retrievedAssetFileConnection = connector.Get(createdAssetFileConnection.FileId);
-            Assert.AreEqual(null, retrievedAssetFileConnection, "Entity still exists after Delete!");
+            Assert.AreEqual(null, retrievedAssetFileConnection.AssetId, "Entity still exists after Delete!");
 
             #endregion DELETE
 
