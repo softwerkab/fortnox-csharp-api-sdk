@@ -49,7 +49,8 @@ namespace FortnoxAPILibrary.Connectors
         /// Bookkeep an invoice payment
         /// </summary>
         /// <param name="invoicePaymentNumber">The number of the invoice payment to bookkeep.</param>
-        void Bookkeep(string invoicePaymentNumber);
+        /// <returns>The bookkept invoice payment</returns>
+        InvoicePayment Bookkeep(string invoicePaymentNumber);
     }
 
     /// <remarks/>
@@ -119,9 +120,10 @@ namespace FortnoxAPILibrary.Connectors
 		/// Bookkeep an invoice payment
 		/// </summary>
 		/// <param name="invoicePaymentNumber">The number of the invoice payment to bookkeep.</param>
-		public void Bookkeep(string invoicePaymentNumber)
+		/// <returns>The bookkept invoice payment</returns>
+		public InvoicePayment Bookkeep(string invoicePaymentNumber)
 		{
-			base.DoAction(invoicePaymentNumber, "bookkeep");
+			return base.DoAction(invoicePaymentNumber, "bookkeep");
 		}
 	}
 }
