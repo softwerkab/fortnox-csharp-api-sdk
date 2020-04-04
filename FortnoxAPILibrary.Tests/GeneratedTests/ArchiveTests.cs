@@ -31,8 +31,9 @@ namespace FortnoxAPILibrary.GeneratedTests
             var connector = new ArchiveConnector();
 
             var data = Resource.fortnox_image;
+            var randomFileName = TestUtils.RandomString()+".txt";
 
-            var fortnoxFile = connector.UploadFile("test.txt", data, testRootFolder.Name);
+            var fortnoxFile = connector.UploadFile(randomFileName, data, testRootFolder.Name);
             MyAssert.HasNoError(connector);
 
             var fileData = connector.DownloadFile(fortnoxFile.Id);
@@ -47,13 +48,14 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_Folder_Create_Get_Delete()
         {
             var connector = new ArchiveConnector();
+            var randomFolderName = TestUtils.RandomString();
 
-            var createdFolder = connector.CreateFolder("MyFolder", testRootFolder.Name);
+            var createdFolder = connector.CreateFolder(randomFolderName, testRootFolder.Name);
             MyAssert.HasNoError(connector);
 
             var retrievedFolder = connector.GetFolder(createdFolder.Id);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("MyFolder", retrievedFolder.Name);
+            Assert.AreEqual(randomFolderName, retrievedFolder.Name);
 
             connector.DeleteFile(retrievedFolder.Id);
             MyAssert.HasNoError(connector);
@@ -63,13 +65,14 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_Folder_Delete_ByPath()
         {
             var connector = new ArchiveConnector();
+            var randomFolderName = TestUtils.RandomString();
 
-            var createdFolder = connector.CreateFolder("MyFolder", testRootFolder.Name);
+            var createdFolder = connector.CreateFolder(randomFolderName, testRootFolder.Name);
             MyAssert.HasNoError(connector);
 
             var retrievedFolder = connector.GetFolder(createdFolder.Id);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("MyFolder", retrievedFolder.Name);
+            Assert.AreEqual(randomFolderName, retrievedFolder.Name);
 
             connector.DeleteFolder(testRootFolder.Name+ @"\" + retrievedFolder.Name);
             MyAssert.HasNoError(connector);

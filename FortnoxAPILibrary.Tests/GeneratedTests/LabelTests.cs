@@ -29,25 +29,28 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             var connector = new LabelConnector();
 
+            var randomLabel = TestUtils.RandomString();
+
             #region CREATE
             var newLabel = new Label()
             {
-                Description = "TestLabel"
+                Description = randomLabel
             };
 
             var createdLabel = connector.Create(newLabel);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("TestLabel", createdLabel.Description);
+            Assert.AreEqual(randomLabel, createdLabel.Description);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdLabel.Description = "UpdatedTestLabel";
+            var updatedRandomLabel = TestUtils.RandomString();
+            createdLabel.Description = updatedRandomLabel;
 
             var updatedLabel = connector.Update(createdLabel); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("UpdatedTestLabel", updatedLabel.Description);
+            Assert.AreEqual(updatedRandomLabel, updatedLabel.Description);
 
             #endregion UPDATE
 

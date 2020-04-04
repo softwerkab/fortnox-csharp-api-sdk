@@ -32,7 +32,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newTermsOfPayment = new TermsOfPayment()
             {
-                Code = "TST",
+                Code = TestUtils.RandomString(5),
                 Description = "TestPaymentTerms"
             };
 
@@ -80,34 +80,36 @@ namespace FortnoxAPILibrary.GeneratedTests
         {
             var connector = new TermsOfPaymentConnector();
 
-            var existingCount = connector.Find().Entities.Count;
-            var testKeyMark = TestUtils.RandomString();
+            var newTermsOfPayment = new TermsOfPayment()
+            {
+                Description = "TestPaymentTerms"
+            };
 
-            var createdEntries = new List<TermsOfPayment>();
             //Add entries
             for (var i = 0; i < 5; i++)
             {
-                var createdEntry = connector.Create(new TermsOfPayment() { Code = TestUtils.RandomString(), Description = testKeyMark });
-                createdEntries.Add(createdEntry);
+                newTermsOfPayment.Code = TestUtils.RandomString();
+                connector.Create(newTermsOfPayment);
+                MyAssert.HasNoError(connector);
             }
 
             //Filter not supported
+            connector.LastModified = DateTime.Now.AddMinutes(-5);
             var fullCollection = connector.Find();
             MyAssert.HasNoError(connector);
 
-            Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);
-            Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == testKeyMark));
+            Assert.AreEqual(5, fullCollection.Entities.Count);
+            Assert.AreEqual("TestPaymentTerms", fullCollection.Entities[0].Description);
 
             //Apply Limit
             connector.Limit = 2;
             var limitedCollection = connector.Find();
             MyAssert.HasNoError(connector);
 
-            Assert.AreEqual(existingCount + 5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
 
             //Delete entries
-            foreach (var entry in createdEntries)
+            foreach (var entry in fullCollection.Entities)
             {
                 connector.Delete(entry.Code);
             }

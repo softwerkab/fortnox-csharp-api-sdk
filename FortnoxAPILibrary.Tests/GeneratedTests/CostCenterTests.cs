@@ -31,7 +31,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newCostCenter = new CostCenter()
             {
-                Code = "TST",
+                Code = TestUtils.RandomString(5),
                 Description = "TestCostCenter",
                 Active = true,
                 Note = "Some notes"
@@ -85,40 +85,33 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             var testKeyMark = TestUtils.RandomInt();
 
-            var connector = new AccountConnector();
-            var newAccount = new Account()
+            var connector = new CostCenterConnector();
+            var newCostCenter = new CostCenter()
             {
-                Description = "Test Account",
-                Active = false,
-                CostCenterSettings = CostCenterSettings.ALLOWED,
-                ProjectSettings = ProjectSettings.ALLOWED,
-                SRU = testKeyMark
+                Code = TestUtils.RandomString(),
+                Description = "TestCostCenter",
+                Active = true,
+                Note = "Some notes"
             };
 
             //Add entries
             for (var i = 0; i < 5; i++)
             {
-                for (var j = 0; j < 10; j++) //try 10x times to create unique account number
-                {
-                    var number = TestUtils.RandomInt(0, 9999);
-                    if (connector.Get(number) == null) //not exists
-                    {
-                        newAccount.Number = number;
-                        break;
-                    }
-                }
-
-                connector.Create(newAccount);
+                newCostCenter.Code = TestUtils.RandomString(5);
+                connector.Create(newCostCenter);
+                MyAssert.HasNoError(connector);
             }
 
             //Apply base test filter
-            connector.SRU = testKeyMark.ToString();
+            connector.LastModified = DateTime.Now.AddMinutes(-5);
             var fullCollection = connector.Find();
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
             Assert.AreEqual(1, fullCollection.TotalPages);
+
+            Assert.AreEqual("TestCostCenter", fullCollection.Entities[0].Description);
 
             //Apply Limit
             connector.Limit = 2;
@@ -132,7 +125,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Delete entries
             foreach (var entry in fullCollection.Entities)
             {
-                connector.Delete(entry.Number);
+                connector.Delete(entry.Code);
             }
             #region Delete arranged resources
 

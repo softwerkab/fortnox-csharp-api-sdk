@@ -98,6 +98,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             {
                 newAccount.Number = GetUnusedAccountNumber();
                 connector.Create(newAccount);
+                MyAssert.HasNoError(connector);
             }
 
             //Apply base test filter

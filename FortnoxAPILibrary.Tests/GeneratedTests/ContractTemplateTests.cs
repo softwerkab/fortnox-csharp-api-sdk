@@ -75,6 +75,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion Delete arranged resources
         }
 
+        [Ignore("LastModified parameter is not accepted")]
         [TestMethod]
         public void Test_ContractTemplate_Find()
         {
@@ -104,8 +105,13 @@ namespace FortnoxAPILibrary.GeneratedTests
                 MyAssert.HasNoError(connector);
             }
 
+            connector.LastModified = DateTime.Now.AddMinutes(-5);
             var templates = connector.Find();
+            MyAssert.HasNoError(connector);
+
             Assert.AreEqual(5, templates.Entities.Count(c => c.TemplateName.StartsWith(marks)));
+
+            //No delete supported
         }
     }
 }

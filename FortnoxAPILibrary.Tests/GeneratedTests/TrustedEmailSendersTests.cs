@@ -30,12 +30,12 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region CREATE
             var newTrustedEmailSender = new TrustedEmailSender()
             {
-                Email = "test.testasson@test.tst"
+                Email = "test1.testasson@test.tst"
             };
 
             var createdTrustedEmailSender = connector.Create(newTrustedEmailSender);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("test.testasson@test.tst", createdTrustedEmailSender.Email);
+            Assert.AreEqual("test1.testasson@test.tst", createdTrustedEmailSender.Email);
 
             #endregion CREATE
 
@@ -47,7 +47,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Single get is not supported, full list is used instead
             var retrievedTrustedEmailSender = connector.Find().TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("test.testasson@test.tst", retrievedTrustedEmailSender.Email);
+            Assert.AreEqual("test1.testasson@test.tst", retrievedTrustedEmailSender.Email);
             #endregion READ / GET
 
             #region DELETE
