@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.Connectors
 					return "";
 				}
 
-				var wr = SetupRequest(ConnectionCredentials.FortnoxAPIServer, authorizationCode, clientSecret);
+				var wr = SetupRequest(ConnectionSettings.FortnoxAPIServer, authorizationCode, clientSecret);
                 using var response = wr.GetResponse();
                 using var responseStream = response.GetResponseStream();
                 var auth = Deserialize<Authorization>(responseStream.ToText());

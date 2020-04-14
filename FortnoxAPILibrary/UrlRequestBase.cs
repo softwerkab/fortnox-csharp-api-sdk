@@ -104,7 +104,7 @@ namespace FortnoxAPILibrary
         protected string GetUrl(string index = "")
         {
             string[] str = {
-				ConnectionCredentials.FortnoxAPIServer,
+                ConnectionSettings.FortnoxAPIServer,
 				Resource,
 				index
 			};
@@ -119,7 +119,7 @@ namespace FortnoxAPILibrary
         /// <summary>
         /// This method is used to throttle every call to Fortnox. 
         /// </summary>
-        protected void RateLimit()
+        protected static void RateLimit()
         {
             bool reset = false;
 
@@ -176,7 +176,8 @@ namespace FortnoxAPILibrary
 
             try
             {
-                RateLimit();
+                if (ConnectionSettings.UseRateLimiter)
+                    RateLimit();
 
                 if (Method != "GET")
                 {
@@ -204,7 +205,8 @@ namespace FortnoxAPILibrary
             ResponseContent = "";
             try
             {
-                RateLimit();
+                if (ConnectionSettings.UseRateLimiter)
+                    RateLimit();
 
                 if (Method != "GET")
                 {
@@ -340,7 +342,7 @@ namespace FortnoxAPILibrary
 
             try
             {
-                var url = ConnectionCredentials.FortnoxAPIServer + "/" + Resource + "/move/" + fileId;
+                var url = ConnectionSettings.FortnoxAPIServer + "/" + Resource + "/move/" + fileId;
 
                 if (string.IsNullOrWhiteSpace(destination) || Guid.TryParse(destination, out var unused))
                 {
