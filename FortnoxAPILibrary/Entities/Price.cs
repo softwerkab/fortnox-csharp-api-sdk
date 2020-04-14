@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.Entities
         public string Percent { get; set; }
 
         /// <remarks/>
-		[JsonProperty]
+		[JsonProperty("Price")]
 		public string PriceValue { get; set; }
 
         /// <remarks/>
