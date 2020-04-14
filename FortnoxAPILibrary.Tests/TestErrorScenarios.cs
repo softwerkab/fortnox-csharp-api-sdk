@@ -2,6 +2,7 @@
 using FortnoxAPILibrary.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Net;
 
 namespace FortnoxAPILibrary.Tests
 {
@@ -62,6 +63,31 @@ namespace FortnoxAPILibrary.Tests
             //Assert
             Assert.IsNotNull(exception);
             Assert.IsTrue(exception.Message.Contains("Too Many Requests"));
+        }
+
+        [TestMethod]
+        public void Test_TlsConnection_NotEstablishd_Error()
+        {
+            var defaultTlsSettings = ServicePointManager.SecurityProtocol;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11;
+            var connector = new CustomerConnector();
+
+            Exception exception = null;
+            try
+            {
+                connector.Find();
+            }
+            catch (Exception ex)
+            {
+                exception = ex;
+            }
+
+            //Restore settings
+            ServicePointManager.SecurityProtocol = defaultTlsSettings;
+
+            //Assert
+            Assert.IsNotNull(exception);
+            Assert.IsTrue(exception.InnerException.Message.Contains("The SSL connection could not be established"));
         }
     }
 }
