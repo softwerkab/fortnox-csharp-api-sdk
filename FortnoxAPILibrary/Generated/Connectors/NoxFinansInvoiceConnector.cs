@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class NoxFinansInvoiceConnector : EntityConnector<NoxFinansInvoice, EntityCollection<NoxFinansInvoiceSubset>, Sort.By.NoxFinansInvoice?>
+    public class NoxFinansInvoiceConnector : EntityConnector<NoxFinansInvoice, EntityCollection<NoxFinansInvoiceSubset>, Sort.By.NoxFinansInvoice?>, INoxFinansInvoiceConnector
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
@@ -14,8 +14,7 @@ namespace FortnoxAPILibrary.Connectors
         [SearchParameter("filter")]
 		public Filter.NoxFinansInvoice? FilterBy { get; set; }
 
-
-		/// <remarks/>
+        /// <remarks/>
 		public NoxFinansInvoiceConnector()
 		{
 			Resource = "noxfinansinvoices";

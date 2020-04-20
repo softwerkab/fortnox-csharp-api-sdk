@@ -6,14 +6,13 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class SupplierInvoicePaymentConnector : EntityConnector<SupplierInvoicePayment, EntityCollection<SupplierInvoicePayment>, Sort.By.SupplierInvoicePayment?>
+    public class SupplierInvoicePaymentConnector : EntityConnector<SupplierInvoicePayment, EntityCollection<SupplierInvoicePaymentSubset>, Sort.By.SupplierInvoicePayment?>, ISupplierInvoicePaymentConnector
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
 		public Filter.SupplierInvoicePayment? FilterBy { get; set; }
-
 
         /// <summary>
         /// Use with Find() to limit the search result
@@ -69,7 +68,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of supplierInvoicePayments
 		/// </summary>
 		/// <returns>A list of supplierInvoicePayments</returns>
-		public EntityCollection<SupplierInvoicePayment> Find()
+		public EntityCollection<SupplierInvoicePaymentSubset> Find()
 		{
 			return BaseFind();
 		}

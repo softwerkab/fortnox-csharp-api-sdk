@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class EmployeeConnector : EntityConnector<Employee, EntityCollection<EmployeeSubset>, Sort.By.Employee?>
+    public class EmployeeConnector : EntityConnector<Employee, EntityCollection<EmployeeSubset>, Sort.By.Employee?>, IEmployeeConnector
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
@@ -14,12 +14,12 @@ namespace FortnoxAPILibrary.Connectors
         [SearchParameter("filter")]
 		public Filter.Employee? FilterBy { get; set; }
 
-
-		/// <remarks/>
+        /// <remarks/>
 		public EmployeeConnector()
 		{
 			Resource = "employees";
 		}
+
 		/// <summary>
 		/// Find a employee based on id
 		/// </summary>

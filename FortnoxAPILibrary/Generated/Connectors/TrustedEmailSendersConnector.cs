@@ -7,14 +7,13 @@ using FortnoxAPILibrary.Reused;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class TrustedEmailSendersConnector : EntityConnector<TrustedEmailSender, EntityWrapper<EmailSenders>, Sort.By.TrustedEmailSenders?>
+    public class TrustedEmailSendersConnector : EntityConnector<TrustedEmailSender, EntityWrapper<EmailSenders>, Sort.By.TrustedEmailSenders?>, ITrustedEmailSendersConnector
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
 		public Filter.TrustedEmailSenders? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public TrustedEmailSendersConnector()

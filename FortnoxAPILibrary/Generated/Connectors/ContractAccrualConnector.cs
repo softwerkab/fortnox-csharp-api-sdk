@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ContractAccrualConnector : EntityConnector<ContractAccrual, EntityCollection<ContractAccrualSubset>, Sort.By.ContractAccrual?>
+    public class ContractAccrualConnector : EntityConnector<ContractAccrual, EntityCollection<ContractAccrualSubset>, Sort.By.ContractAccrual?>, IContractAccrualConnector
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result

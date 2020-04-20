@@ -7,7 +7,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class AttendanceTransactionsConnector : EntityConnector<AttendanceTransaction, EntityCollection<AttendanceTransactionSubset>, Sort.By.AttendanceTransactions?>
+    public class AttendanceTransactionsConnector : EntityConnector<AttendanceTransaction, EntityCollection<AttendanceTransactionSubset>, Sort.By.AttendanceTransactions?>, IAttendanceTransactionsConnector
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result

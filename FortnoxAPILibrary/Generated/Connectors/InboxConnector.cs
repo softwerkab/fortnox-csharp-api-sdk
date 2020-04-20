@@ -1,6 +1,6 @@
-﻿namespace FortnoxAPILibrary.Connectors
+namespace FortnoxAPILibrary.Connectors
 {
-    public class InboxConnector : ArchiveConnector
+    public class InboxConnector : ArchiveConnector, IArchiveConnector
     {
         public InboxConnector()
         {

@@ -6,14 +6,13 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	public class SupplierInvoiceFileConnectionConnector : EntityConnector<SupplierInvoiceFileConnection, EntityCollection<SupplierInvoiceFileConnection>, Sort.By.SupplierInvoiceFileConnection?>
+	public class SupplierInvoiceFileConnectionConnector : EntityConnector<SupplierInvoiceFileConnection, EntityCollection<SupplierInvoiceFileConnection>, Sort.By.SupplierInvoiceFileConnection?>, ISupplierInvoiceFileConnectionConnector
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
 		[SearchParameter("filter")]
 		public Filter.SupplierInvoiceFileConnection? FilterBy { get; set; }
-
 
 		/// <summary>
 		/// Use with Find() to limit the search result

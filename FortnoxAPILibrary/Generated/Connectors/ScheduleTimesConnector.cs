@@ -7,7 +7,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ScheduleTimesConnector : EntityConnector<ScheduleTimes, EntityCollection<ScheduleTimes>, Sort.By.ScheduleTimes?>
+    public class ScheduleTimesConnector : EntityConnector<ScheduleTimes, EntityCollection<ScheduleTimes>, Sort.By.ScheduleTimes?>, IScheduleTimesConnector
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
@@ -15,12 +15,12 @@ namespace FortnoxAPILibrary.Connectors
         [SearchParameter("filter")]
 		public Filter.ScheduleTimes? FilterBy { get; set; }
 
-
-		/// <remarks/>
+        /// <remarks/>
 		public ScheduleTimesConnector()
 		{
 			Resource = "scheduletimes";
 		}
+
 		/// <summary>
 		/// Gets a list of scheduleTimess
 		/// </summary>

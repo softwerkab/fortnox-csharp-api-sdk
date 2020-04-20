@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ArticleFileConnectionConnector : EntityConnector<ArticleFileConnection, EntityCollection<ArticleFileConnection>, Sort.By.ArticleFileConnection?>
+    public class ArticleFileConnectionConnector : EntityConnector<ArticleFileConnection, EntityCollection<ArticleFileConnection>, Sort.By.ArticleFileConnection?>, IArticleFileConnectionConnector
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result

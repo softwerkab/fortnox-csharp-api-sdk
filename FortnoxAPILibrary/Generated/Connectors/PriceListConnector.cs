@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class PriceListConnector : EntityConnector<PriceList, EntityCollection<PriceList>, Sort.By.PriceList?>
+    public class PriceListConnector : EntityConnector<PriceList, EntityCollection<PriceList>, Sort.By.PriceList?>, IPriceListConnector
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result

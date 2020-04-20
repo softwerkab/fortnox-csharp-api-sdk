@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class TrustedEmailDomainsConnector : EntityConnector<TrustedEmailDomain, EntityCollection<TrustedEmailDomain>, Sort.By.TrustedEmailDomains?>
+    public class TrustedEmailDomainsConnector : EntityConnector<TrustedEmailDomain, EntityCollection<TrustedEmailDomain>, Sort.By.TrustedEmailDomains?>, ITrustedEmailDomainsConnector
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result

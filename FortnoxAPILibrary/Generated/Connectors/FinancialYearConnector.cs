@@ -6,14 +6,13 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class FinancialYearConnector : EntityConnector<FinancialYear, EntityCollection<FinancialYearSubset>, Sort.By.FinancialYear?>
+    public class FinancialYearConnector : EntityConnector<FinancialYear, EntityCollection<FinancialYearSubset>, Sort.By.FinancialYear?>, IFinancialYearConnector
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter("filter")]
 		public Filter.FinancialYear? FilterBy { get; set; }
-
 
         /// <summary>
         /// Use with Find() to limit the search result

@@ -12,7 +12,7 @@ using Newtonsoft.Json.Linq;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class AssetTypesConnector : EntityConnector<AssetType, EntityCollection<AssetTypesSubset>, Sort.By.AssetTypes?>
+    public class AssetTypesConnector : EntityConnector<AssetType, EntityCollection<AssetTypesSubset>, Sort.By.AssetTypes?>, IAssetTypesConnector
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
