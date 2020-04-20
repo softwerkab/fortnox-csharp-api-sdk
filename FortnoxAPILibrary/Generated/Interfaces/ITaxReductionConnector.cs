@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface ITaxReductionConnector
+    public interface ITaxReductionConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.TaxReduction? FilterBy { get; set; }

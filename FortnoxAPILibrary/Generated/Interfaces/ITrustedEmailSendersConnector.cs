@@ -7,7 +7,7 @@ using FortnoxAPILibrary.Reused;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface ITrustedEmailSendersConnector
+    public interface ITrustedEmailSendersConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.TrustedEmailSenders? FilterBy { get; set; }

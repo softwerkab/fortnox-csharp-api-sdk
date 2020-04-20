@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IProjectConnector
+    public interface IProjectConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.Project? FilterBy { get; set; }

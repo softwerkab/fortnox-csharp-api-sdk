@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface ITermsOfDeliveryConnector
+    public interface ITermsOfDeliveryConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.TermsOfDelivery? FilterBy { get; set; }

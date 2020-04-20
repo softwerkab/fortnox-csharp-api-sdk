@@ -9,7 +9,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IArchiveConnector
+    public interface IArchiveConnector : IConnector
 	{
         /// <summary>
         /// Use with Find() to limit the search result

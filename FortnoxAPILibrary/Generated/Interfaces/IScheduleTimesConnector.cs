@@ -7,7 +7,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IScheduleTimesConnector
+    public interface IScheduleTimesConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.ScheduleTimes? FilterBy { get; set; }

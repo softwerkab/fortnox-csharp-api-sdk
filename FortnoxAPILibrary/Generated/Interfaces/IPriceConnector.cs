@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IPriceConnector
+    public interface IPriceConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.Price? FilterBy { get; set; }

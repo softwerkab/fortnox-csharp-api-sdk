@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface ISupplierInvoicePaymentConnector
+    public interface ISupplierInvoicePaymentConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.SupplierInvoicePayment? FilterBy { get; set; }

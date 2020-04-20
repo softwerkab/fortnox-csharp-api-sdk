@@ -7,7 +7,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IAttendanceTransactionsConnector
+    public interface IAttendanceTransactionsConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.AttendanceTransactions? FilterBy { get; set; }

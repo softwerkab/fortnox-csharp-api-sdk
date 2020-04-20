@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface ISupplierInvoiceExternalURLConnectionConnector
+    public interface ISupplierInvoiceExternalURLConnectionConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.SupplierInvoiceExternalURLConnection? FilterBy { get; set; }

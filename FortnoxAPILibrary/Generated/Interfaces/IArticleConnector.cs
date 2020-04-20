@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IArticleConnector
+    public interface IArticleConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.Article? FilterBy { get; set; }

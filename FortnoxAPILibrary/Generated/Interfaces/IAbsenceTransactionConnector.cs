@@ -7,7 +7,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IAbsenceTransactionConnector
+    public interface IAbsenceTransactionConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.AbsenceTransaction? FilterBy { get; set; }

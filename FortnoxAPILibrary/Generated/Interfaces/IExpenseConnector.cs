@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IExpenseConnector
+    public interface IExpenseConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.Expense? FilterBy { get; set; }

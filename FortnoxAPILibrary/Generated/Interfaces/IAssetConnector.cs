@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IAssetConnector
+    public interface IAssetConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.Asset? FilterBy { get; set; }

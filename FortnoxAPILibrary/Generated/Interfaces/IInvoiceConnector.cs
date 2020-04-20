@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IInvoiceConnector
+    public interface IInvoiceConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.Invoice? FilterBy { get; set; }

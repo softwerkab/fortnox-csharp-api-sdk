@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IAccountConnector
+    public interface IAccountConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.Account? FilterBy { get; set; }

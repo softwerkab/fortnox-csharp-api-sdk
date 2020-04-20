@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IVoucherFileConnectionConnector
+    public interface IVoucherFileConnectionConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.VoucherFileConnection? FilterBy { get; set; }

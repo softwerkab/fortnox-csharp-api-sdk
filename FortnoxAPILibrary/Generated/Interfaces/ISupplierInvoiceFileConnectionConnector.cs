@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface ISupplierInvoiceFileConnectionConnector
+    public interface ISupplierInvoiceFileConnectionConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.SupplierInvoiceFileConnection? FilterBy { get; set; }

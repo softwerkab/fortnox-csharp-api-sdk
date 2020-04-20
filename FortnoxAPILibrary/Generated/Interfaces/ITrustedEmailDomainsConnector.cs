@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface ITrustedEmailDomainsConnector
+    public interface ITrustedEmailDomainsConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.TrustedEmailDomains? FilterBy { get; set; }

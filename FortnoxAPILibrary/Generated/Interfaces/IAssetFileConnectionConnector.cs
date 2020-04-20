@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IAssetFileConnectionConnector
+    public interface IAssetFileConnectionConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.AssetFileConnection? FilterBy { get; set; }

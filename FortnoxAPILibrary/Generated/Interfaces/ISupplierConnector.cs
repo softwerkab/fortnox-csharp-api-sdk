@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface ISupplierConnector
+    public interface ISupplierConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.Supplier? FilterBy { get; set; }

@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface ICompanySettingsConnector
+    public interface ICompanySettingsConnector : IConnector
 	{
 		CompanySettings Get();
 	}

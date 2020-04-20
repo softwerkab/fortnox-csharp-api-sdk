@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IWayOfDeliveryConnector
+    public interface IWayOfDeliveryConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.WayOfDelivery? FilterBy { get; set; }

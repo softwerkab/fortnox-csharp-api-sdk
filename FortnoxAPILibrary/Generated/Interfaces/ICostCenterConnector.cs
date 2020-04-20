@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface ICostCenterConnector
+    public interface ICostCenterConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.CostCenter? FilterBy { get; set; }

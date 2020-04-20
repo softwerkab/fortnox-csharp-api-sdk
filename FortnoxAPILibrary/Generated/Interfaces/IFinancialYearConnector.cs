@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IFinancialYearConnector
+    public interface IFinancialYearConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.FinancialYear? FilterBy { get; set; }

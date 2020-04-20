@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface ILabelConnector
+    public interface ILabelConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.Label? FilterBy { get; set; }

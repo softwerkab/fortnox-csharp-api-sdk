@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface ISalaryTransactionConnector
+    public interface ISalaryTransactionConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.SalaryTransaction? FilterBy { get; set; }

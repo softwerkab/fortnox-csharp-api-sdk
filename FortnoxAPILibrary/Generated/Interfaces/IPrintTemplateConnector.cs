@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IPrintTemplateConnector
+    public interface IPrintTemplateConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.PrintTemplate? FilterBy { get; set; }

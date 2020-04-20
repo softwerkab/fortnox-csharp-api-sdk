@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IInvoiceAccrualConnector
+    public interface IInvoiceAccrualConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.InvoiceAccrual? FilterBy { get; set; }

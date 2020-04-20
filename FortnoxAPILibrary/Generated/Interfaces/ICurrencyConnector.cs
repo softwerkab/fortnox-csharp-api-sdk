@@ -6,7 +6,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface ICurrencyConnector
+    public interface ICurrencyConnector : IConnector
 	{
         [SearchParameter("filter")]
 		Filter.Currency? FilterBy { get; set; }
