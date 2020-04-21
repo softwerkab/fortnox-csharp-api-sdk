@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to create required resources
             #endregion Arrange
 
-            var connector = new TermsOfPaymentConnector();
+            ITermsOfPaymentConnector connector = new TermsOfPaymentConnector();
 
             #region CREATE
             var newTermsOfPayment = new TermsOfPayment()
@@ -78,7 +78,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_Find()
         {
-            var connector = new TermsOfPaymentConnector();
+            ITermsOfPaymentConnector connector = new TermsOfPaymentConnector();
 
             var newTermsOfPayment = new TermsOfPayment()
             {

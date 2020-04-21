@@ -29,7 +29,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             #endregion Arrange
 
-            var connector = new EmployeeConnector();
+            IEmployeeConnector connector = new EmployeeConnector();
 
             #region CREATE
 
@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.GeneratedTests
                 EmployeeId = "TEST_EMP",
                 FirstName = "Test",
                 LastName = "Testasson",
-                City = "Växjö",
+                City = "Vï¿½xjï¿½",
                 Country = "Sweden",
                 ForaType = ForaType.A74,
                 JobTitle = "Woodcutter",
@@ -85,14 +85,12 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_Employee_Find()
         {
-            var connector = new EmployeeConnector();
+            IEmployeeConnector connector = new EmployeeConnector();
 
             var employees = connector.Find();
             
             Assert.AreEqual(1, employees.Entities.Count);
             Assert.IsNotNull(employees.Entities.First().Url);
-
-            var x = connector.Get(employees.Entities.First().EmployeeId);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to create required resources
             #endregion Arrange
 
-            var connector = new SupplierConnector();
+            ISupplierConnector connector = new SupplierConnector();
 
             #region CREATE
             var newSupplier = new Supplier()
@@ -95,7 +95,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             var testKeyMark = TestUtils.RandomString();
 
-            var connector = new SupplierConnector();
+            ISupplierConnector connector = new SupplierConnector();
             var newSupplier = new Supplier()
             {
                 Name = "TestSupplier",

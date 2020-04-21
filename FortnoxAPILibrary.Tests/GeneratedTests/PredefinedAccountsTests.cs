@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_PredefinedAccounts_CRUD()
         {
-            var connector = new PredefinedAccountsConnector();
+            IPredefinedAccountsConnector connector = new PredefinedAccountsConnector();
 
             //Get
             var bygAccount = connector.Get("CONSTRUCTION_DEB");
@@ -50,7 +50,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_Find()
         {
-            var connector = new PredefinedAccountsConnector();
+            IPredefinedAccountsConnector connector = new PredefinedAccountsConnector();
 
             var fullCollection = connector.Find();
             MyAssert.HasNoError(connector);

@@ -52,7 +52,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             #endregion Arrange
 
-            var connector = new ContractAccrualConnector();
+            IContractAccrualConnector connector = new ContractAccrualConnector();
 
             #region CREATE
 
@@ -141,7 +141,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             });
 
             #endregion Arrange
-            var connector = new ContractAccrualConnector();
+            IContractAccrualConnector connector = new ContractAccrualConnector();
 
             var marks = TestUtils.RandomString();
             var newContractAccrual = new ContractAccrual()

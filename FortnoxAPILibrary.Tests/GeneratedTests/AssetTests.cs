@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpAssetType = new AssetTypesConnector().Create(new AssetType() {Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
             #endregion Arrange
 
-            var connector = new AssetConnector();
+            IAssetConnector connector = new AssetConnector();
 
             #region CREATE
             var newAsset = new Asset()
@@ -96,7 +96,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             var testKeyMark = TestUtils.RandomString();
 
-            var connector = new AssetConnector();
+            IAssetConnector connector = new AssetConnector();
             var newAsset = new Asset()
             {
                 Description = testKeyMark,

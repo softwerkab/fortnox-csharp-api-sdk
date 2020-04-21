@@ -26,7 +26,8 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region Arrange
             #endregion Arrange
 
-            var connector = new TrustedEmailSendersConnector();
+            ITrustedEmailSendersConnector connector = new TrustedEmailSendersConnector();
+
             #region CREATE
             var newTrustedEmailSender = new TrustedEmailSender()
             {

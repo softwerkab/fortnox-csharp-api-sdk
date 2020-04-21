@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             MyAssert.HasNoError(conn);
             #endregion Arrange
 
-            var connector = new SupplierInvoiceAccrualConnector();
+            ISupplierInvoiceAccrualConnector connector = new SupplierInvoiceAccrualConnector();
 
             #region CREATE
             var newSupplierInvoiceAccrual = new SupplierInvoiceAccrual()

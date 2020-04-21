@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to create required resources
             #endregion Arrange
 
-            var connector = new NoxFinansInvoiceConnector();
+            INoxFinansInvoiceConnector connector = new NoxFinansInvoiceConnector();
 
             #region CREATE
             var newNoxFinansInvoice = new NoxFinansInvoice()

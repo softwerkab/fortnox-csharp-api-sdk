@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.Tests
             var customerConnector = new CustomerConnector();
             var tmpCustomer = customerConnector.Create(new Customer() { Name = "TmpTestCustomer" });
 
-            var connector = new InvoiceConnector();
+            IInvoiceConnector connector = new InvoiceConnector();
 
             var newInvoce = connector.Create(new Invoice()
             {

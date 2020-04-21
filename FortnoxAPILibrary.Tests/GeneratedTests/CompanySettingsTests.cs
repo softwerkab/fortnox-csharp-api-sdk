@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to create required resources
             #endregion Arrange
 
-            var connector = new CompanySettingsConnector();
+            ICompanySettingsConnector connector = new CompanySettingsConnector();
 
             #region CREATE
             //Not Allowed

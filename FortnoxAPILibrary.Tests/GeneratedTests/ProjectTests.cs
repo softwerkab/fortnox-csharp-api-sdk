@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to create required resources
             #endregion Arrange
 
-            var connector = new ProjectConnector();
+            IProjectConnector connector = new ProjectConnector();
 
             #region CREATE
             var newProject = new Project()
@@ -87,7 +87,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to create required resources
             #endregion Arrange
 
-            var connector = new ProjectConnector();
+            IProjectConnector connector = new ProjectConnector();
             var existingEntries = connector.Find().Entities.Count;
             var testKeyMark = TestUtils.RandomString();
 

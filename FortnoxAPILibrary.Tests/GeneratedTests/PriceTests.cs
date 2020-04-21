@@ -28,7 +28,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpPriceList = new PriceListConnector().Get("TST_PR") ?? new PriceListConnector().Create(new PriceList() {Code = "TST_PR", Description = "TmpPriceList"});
             #endregion Arrange
 
-            var connector = new PriceConnector();
+            IPriceConnector connector = new PriceConnector();
 
             #region CREATE
             var newPrice = new Price()
@@ -86,7 +86,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpPriceList = new PriceListConnector().Get("TST_PR") ?? new PriceListConnector().Create(new PriceList() { Code = "TST_PR", Description = "TmpPriceList" });
             #endregion Arrange
             
-            var connector = new PriceConnector();
+            IPriceConnector connector = new PriceConnector();
 
             var newPrice = new Price()
             {

@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to create required resources
             #endregion Arrange
 
-            var connector = new CustomerConnector();
+            ICustomerConnector connector = new CustomerConnector();
 
             #region CREATE
             var newCustomer = new Customer()
@@ -90,7 +90,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             var testKeyMark = TestUtils.RandomString();
 
-            var connector = new CustomerConnector();
+            ICustomerConnector connector = new CustomerConnector();
             var newCustomer = new Customer()
             {
                 Name = "TestCustomer",

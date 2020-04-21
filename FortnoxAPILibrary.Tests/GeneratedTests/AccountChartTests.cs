@@ -29,7 +29,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_Find()
         {
-            var connector = new AccountChartConnector();
+            IAccountChartConnector connector = new AccountChartConnector();
 
             var fullCollection = connector.Find();
             MyAssert.HasNoError(connector);

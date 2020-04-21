@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to create required resources
             #endregion Arrange
 
-            var connector = new LockedPeriodConnector();
+            ILockedPeriodConnector connector = new LockedPeriodConnector();
 
             #region CREATE
             //Not Allowed

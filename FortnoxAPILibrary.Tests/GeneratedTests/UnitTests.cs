@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to create required resources
             #endregion Arrange
 
-            var connector = new UnitConnector();
+            IUnitConnector connector = new UnitConnector();
 
             #region CREATE
             var newUnit = new Unit()
@@ -78,7 +78,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_Find()
         {
-            var connector = new UnitConnector();
+            IUnitConnector connector = new UnitConnector();
 
             var existingCount = connector.Find().TotalResources;
 

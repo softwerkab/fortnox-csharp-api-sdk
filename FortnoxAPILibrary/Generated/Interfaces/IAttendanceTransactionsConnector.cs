@@ -12,6 +12,9 @@ namespace FortnoxAPILibrary.Connectors
         [SearchParameter("filter")]
 		Filter.AttendanceTransactions? FilterBy { get; set; }
 
+		string EmployeeId { get; set; }
+        DateTime? Date { get; set; }
+
 		AttendanceTransaction Update(AttendanceTransaction attendanceTransaction);
 
 		AttendanceTransaction Create(AttendanceTransaction attendanceTransaction);

@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to create required resources
             #endregion Arrange
 
-            var connector = new TermsOfDeliveryConnector();
+            ITermsOfDeliveryConnector connector = new TermsOfDeliveryConnector();
 
             #region CREATE
             var newTermsOfDelivery = new TermsOfDelivery()
@@ -78,7 +78,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_Find()
         {
-            var connector = new TermsOfDeliveryConnector();
+            ITermsOfDeliveryConnector connector = new TermsOfDeliveryConnector();
 
             var newTermsOfDelivery = new TermsOfDelivery()
             {

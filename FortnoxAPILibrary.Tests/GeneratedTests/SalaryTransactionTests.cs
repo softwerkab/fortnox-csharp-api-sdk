@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpEmployee = new EmployeeConnector().Get("TEST_EMP") ?? new EmployeeConnector().Create(new Employee() { EmployeeId = "TEST_EMP" });
             #endregion Arrange
 
-            var connector = new SalaryTransactionConnector();
+            ISalaryTransactionConnector connector = new SalaryTransactionConnector();
 
             #region CREATE
             var newSalaryTransaction = new SalaryTransaction()

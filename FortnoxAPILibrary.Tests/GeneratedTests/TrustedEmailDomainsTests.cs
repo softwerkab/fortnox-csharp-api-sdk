@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to create required resources
             #endregion Arrange
 
-            var connector = new TrustedEmailDomainsConnector();
+            ITrustedEmailDomainsConnector connector = new TrustedEmailDomainsConnector();
 
             #region CREATE
             var newTrustedEmailDomains = new TrustedEmailDomain()

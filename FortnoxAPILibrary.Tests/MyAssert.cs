@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using FortnoxAPILibrary.Connectors;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests
 {
@@ -8,7 +9,7 @@ namespace FortnoxAPILibrary.Tests
         /// Checks if the last request was successfull
         /// </summary>
         /// <param name="connector"></param>
-        public static void HasNoError(UrlRequestBase connector)
+        public static void HasNoError(IConnector connector)
         {
             if (connector.HasError)
                 throw new AssertFailedException($"Request failed due to '{connector.Error.Message}'.");

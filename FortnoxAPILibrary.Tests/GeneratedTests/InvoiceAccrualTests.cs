@@ -40,7 +40,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             });
             #endregion Arrange
 
-            var connector = new InvoiceAccrualConnector();
+            IInvoiceAccrualConnector connector = new InvoiceAccrualConnector();
 
             #region CREATE
             var newInvoiceAccrual = new InvoiceAccrual()
@@ -120,7 +120,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             });
             #endregion Arrange
 
-            var connector = new InvoiceAccrualConnector();
+            IInvoiceAccrualConnector connector = new InvoiceAccrualConnector();
 
             var marks = TestUtils.RandomString();
             var newInvoiceAccrual = new InvoiceAccrual()

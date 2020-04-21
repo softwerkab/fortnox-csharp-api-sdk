@@ -27,8 +27,8 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpAccount = new AccountConnector().Get(0123) ?? new AccountConnector().Create(new Account(){Description = "TestAccount", Number = 0123});
             #endregion Arrange
 
-            var connector = new ModeOfPaymentConnector();
-            connector.Delete("TEST_MODE");
+            IModeOfPaymentConnector connector = new ModeOfPaymentConnector();
+
             #region CREATE
             var newModeOfPayment = new ModeOfPayment()
             {
@@ -83,7 +83,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpAccount = new AccountConnector().Get(0123) ?? new AccountConnector().Create(new Account() { Description = "TestAccount", Number = 0123 });
             #endregion Arrange
 
-            var connector = new ModeOfPaymentConnector();
+            IModeOfPaymentConnector connector = new ModeOfPaymentConnector();
 
             var existingCount = connector.Find().Entities.Count;
             var testKeyMark = TestUtils.RandomString();

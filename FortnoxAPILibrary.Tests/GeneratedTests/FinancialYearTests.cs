@@ -30,7 +30,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             #endregion Arrange
 
-            var connector = new FinancialYearConnector();
+            IFinancialYearConnector connector = new FinancialYearConnector();
 
             #region CREATE
 
@@ -78,7 +78,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_FinancialYear_Find()
         {
-            var connector = new FinancialYearConnector();
+            IFinancialYearConnector connector = new FinancialYearConnector();
             
             var finYears = connector.Find();
             Assert.AreEqual(4, finYears.Entities.Count);

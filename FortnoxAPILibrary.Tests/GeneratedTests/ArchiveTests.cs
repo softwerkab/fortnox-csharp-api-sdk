@@ -21,14 +21,14 @@ namespace FortnoxAPILibrary.GeneratedTests
             ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
             ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
 
-            var connector = new ArchiveConnector();
+            IArchiveConnector connector = new ArchiveConnector();
             testRootFolder = connector.GetFolder("TestArchive") ?? connector.CreateFolder("TestArchive");
         }
 
         [TestMethod]
         public void Test_File_Upload_Download_Delete()
         {
-            var connector = new ArchiveConnector();
+            IArchiveConnector connector = new ArchiveConnector();
 
             var data = Resource.fortnox_image;
             var randomFileName = TestUtils.RandomString()+".txt";
@@ -47,7 +47,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_Folder_Create_Get_Delete()
         {
-            var connector = new ArchiveConnector();
+            IArchiveConnector connector = new ArchiveConnector();
             var randomFolderName = TestUtils.RandomString();
 
             var createdFolder = connector.CreateFolder(randomFolderName, testRootFolder.Name);
@@ -64,7 +64,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_Folder_Delete_ByPath()
         {
-            var connector = new ArchiveConnector();
+            IArchiveConnector connector = new ArchiveConnector();
             var randomFolderName = TestUtils.RandomString();
 
             var createdFolder = connector.CreateFolder(randomFolderName, testRootFolder.Name);

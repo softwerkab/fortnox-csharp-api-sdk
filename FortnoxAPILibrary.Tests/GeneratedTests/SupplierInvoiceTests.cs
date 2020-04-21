@@ -28,7 +28,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpArticle = new ArticleConnector().Create(new Article(){Description = "TmpArticle", PurchasePrice = 100});
             #endregion Arrange
 
-            var connector = new SupplierInvoiceConnector();
+            ISupplierInvoiceConnector connector = new SupplierInvoiceConnector();
 
             #region CREATE
             var newSupplierInvoice = new SupplierInvoice()
@@ -92,7 +92,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
             #endregion Arrange
 
-            var connector = new SupplierInvoiceConnector();
+            ISupplierInvoiceConnector connector = new SupplierInvoiceConnector();
             var newSupplierInvoice = new SupplierInvoice()
             {
                 SupplierNumber = tmpSupplier.SupplierNumber,

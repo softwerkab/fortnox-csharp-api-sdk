@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to create required resources
             #endregion Arrange
 
-            var connector = new ArticleConnector();
+            IArticleConnector connector = new ArticleConnector();
 
             #region CREATE
             var newArticle = new Article()
@@ -89,7 +89,8 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             var testKeyMark = TestUtils.RandomString();
 
-            var connector = new ArticleConnector();
+            IArticleConnector connector = new ArticleConnector();
+
             var newArticle = new Article
             {
                 Description = testKeyMark,

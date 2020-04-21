@@ -29,7 +29,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             #endregion Arrange
 
-            var connector = new ArticleFileConnectionConnector();
+            IArticleFileConnectionConnector connector = new ArticleFileConnectionConnector();
 
             #region CREATE
 
@@ -85,7 +85,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle" });
             #endregion Arrange
 
-            var connector = new ArticleFileConnectionConnector();
+            IArticleFileConnectionConnector connector = new ArticleFileConnectionConnector();
 
             var newArticleFileConnection = new ArticleFileConnection()
             {

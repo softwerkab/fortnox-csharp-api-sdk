@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to create required resources
             #endregion Arrange
 
-            var connector = new CostCenterConnector();
+            ICostCenterConnector connector = new CostCenterConnector();
 
             #region CREATE
             var newCostCenter = new CostCenter()
@@ -85,7 +85,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             var testKeyMark = TestUtils.RandomInt();
 
-            var connector = new CostCenterConnector();
+            ICostCenterConnector connector = new CostCenterConnector();
             var newCostCenter = new CostCenter()
             {
                 Code = TestUtils.RandomString(),

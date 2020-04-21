@@ -39,7 +39,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpFile = new ArchiveConnector().UploadFile("tmpImage.png", Resource.fortnox_image);
             #endregion Arrange
 
-            var connector = new VoucherFileConnectionConnector();
+            IVoucherFileConnectionConnector connector = new VoucherFileConnectionConnector();
 
             #region CREATE
             var newVoucherFileConnection = new VoucherFileConnection()

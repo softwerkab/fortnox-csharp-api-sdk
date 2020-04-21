@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_PredefinedVoucherSeries_CRUD()
         {
-            var connector = new PredefinedVoucherSeriesConnector();
+            IPredefinedVoucherSeriesConnector connector = new PredefinedVoucherSeriesConnector();
 
             //Get
             var predefinedVoucherSeries = connector.Get("INVOICE");
@@ -46,7 +46,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_Find()
         {
-            var connector = new PredefinedVoucherSeriesConnector();
+            IPredefinedVoucherSeriesConnector connector = new PredefinedVoucherSeriesConnector();
 
             var fullCollection = connector.Find();
             MyAssert.HasNoError(connector);

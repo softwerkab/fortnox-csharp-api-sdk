@@ -45,7 +45,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             });
             #endregion Arrange
 
-            var connector = new SupplierInvoiceExternalURLConnectionConnector();
+            ISupplierInvoiceExternalURLConnectionConnector connector = new SupplierInvoiceExternalURLConnectionConnector();
 
             #region CREATE
             var newSupplierInvoiceExternalURLConnection = new SupplierInvoiceExternalURLConnection()

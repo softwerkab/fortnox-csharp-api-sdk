@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             });
             #endregion Arrange
 
-            var connector = new SupplierInvoicePaymentConnector();
+            ISupplierInvoicePaymentConnector connector = new SupplierInvoicePaymentConnector();
 
             #region CREATE
             var newSupplierInvoicePayment = new SupplierInvoicePayment()

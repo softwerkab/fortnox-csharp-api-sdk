@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             #endregion Arrange
 
-            var connector = new InvoicePaymentConnector();
+            IInvoicePaymentConnector connector = new InvoicePaymentConnector();
 
             #region CREATE
 
@@ -118,7 +118,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             invoiceConnector.Bookkeep(tmpInvoice.DocumentNumber);
             #endregion Arrange
 
-            var connector = new InvoicePaymentConnector();
+            IInvoicePaymentConnector connector = new InvoicePaymentConnector();
 
             var newInvoicePayment = new InvoicePayment()
             {

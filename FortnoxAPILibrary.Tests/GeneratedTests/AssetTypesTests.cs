@@ -30,7 +30,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             #endregion Arrange
 
-            var connector = new AssetTypesConnector();
+            IAssetTypesConnector connector = new AssetTypesConnector();
             var entry = connector.Find().Entities.FirstOrDefault(at => at.Number == "TST");
             if (entry != null)
                 connector.Delete(entry.Id);
@@ -93,7 +93,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_AssetTypes_Find()
         {
-            var connector = new AssetTypesConnector();
+            IAssetTypesConnector connector = new AssetTypesConnector();
 
             var newAssetType = new AssetType()
             {

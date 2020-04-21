@@ -29,7 +29,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpCostCenter = new CostCenterConnector().Get("TMP") ??  new CostCenterConnector().Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
             #endregion Arrange
 
-            var connector = new AbsenceTransactionConnector();
+            IAbsenceTransactionConnector connector = new AbsenceTransactionConnector();
 
             #region CREATE
             var newAbsenceTransaction = new AbsenceTransaction()
@@ -94,7 +94,7 @@ namespace FortnoxAPILibrary.GeneratedTests
                 new AbsenceTransactionConnector().Delete(tmpEmployee.EmployeeId, new DateTime(2018, 01, 01).AddDays(i), AbsenceCauseCode.MIL);
             #endregion Arrange
 
-            var connector = new AbsenceTransactionConnector();
+            IAbsenceTransactionConnector connector = new AbsenceTransactionConnector();
 
             var newAbsenceTransaction = new AbsenceTransaction()
             {

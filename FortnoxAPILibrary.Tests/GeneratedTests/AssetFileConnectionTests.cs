@@ -42,7 +42,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpFile = new ArchiveConnector().UploadFile("tmpImage.png", Resource.fortnox_image);
             #endregion Arrange
 
-            var connector = new AssetFileConnectionConnector();
+            IAssetFileConnectionConnector connector = new AssetFileConnectionConnector();
 
             #region CREATE
             var newAssetFileConnection = new AssetFileConnection()

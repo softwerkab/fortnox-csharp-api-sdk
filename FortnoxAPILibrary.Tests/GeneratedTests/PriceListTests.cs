@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region Arrange
             #endregion Arrange
 
-            var connector = new PriceListConnector();
+            IPriceListConnector connector = new PriceListConnector();
 
             #region CREATE
             var newPriceList = new PriceList()
@@ -74,9 +74,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_Find()
         {
-            var testKeyMark = TestUtils.RandomInt();
-
-            var connector = new PriceListConnector();
+            IPriceListConnector connector = new PriceListConnector();
 
             var newPriceList = new PriceList()
             {

@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpFile = new InboxConnector().UploadFile("tmpImage.png", Resource.fortnox_image, "inbox_s");
             #endregion Arrange
 
-            var connector = new SupplierInvoiceFileConnectionConnector();
+            ISupplierInvoiceFileConnectionConnector connector = new SupplierInvoiceFileConnectionConnector();
 
             #region CREATE
             var newSupplierInvoiceFileConnection = new SupplierInvoiceFileConnection()

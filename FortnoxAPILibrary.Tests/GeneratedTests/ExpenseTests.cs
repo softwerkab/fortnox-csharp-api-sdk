@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             new AccountConnector().Create(new Account() {Number = 0123, Description = "TmpAccount"});
             #endregion Arrange
 
-            var connector = new ExpenseConnector();
+            IExpenseConnector connector = new ExpenseConnector();
 
             #region CREATE
             var newExpense = new Expense()

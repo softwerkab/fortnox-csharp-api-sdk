@@ -22,7 +22,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_Account_CRUD()
         {
-            var connector = new AccountConnector();
+            IAccountConnector connector = new AccountConnector();
 
             #region CREATE
             var newAccount = new Account()
@@ -83,7 +83,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             var testKeyMark = TestUtils.RandomInt();
 
-            var connector = new AccountConnector();
+            IAccountConnector connector = new AccountConnector();
             var newAccount = new Account()
             {
                 Description = "Test Account",
@@ -133,7 +133,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
         private static int GetUnusedAccountNumber()
         {
-            var connector = new AccountConnector();
+            IAccountConnector connector = new AccountConnector();
 
             for (var j = 0; j < 10; j++) //try 10x times to create unique account number
             {

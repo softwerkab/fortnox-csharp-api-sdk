@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpArticle = new ArticleConnector().Create(new Article(){ Description = "TmpArticle" });
             #endregion Arrange
 
-            var connector = new ContractTemplateConnector();
+            IContractTemplateConnector connector = new ContractTemplateConnector();
 
             #region CREATE
             var newContractTemplate = new ContractTemplate()
@@ -83,7 +83,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle" });
             #endregion Arrange
 
-            var connector = new ContractTemplateConnector();
+            IContractTemplateConnector connector = new ContractTemplateConnector();
 
             var marks = TestUtils.RandomString();
 

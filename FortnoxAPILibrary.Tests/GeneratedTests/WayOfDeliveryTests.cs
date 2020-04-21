@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to create required resources
             #endregion Arrange
 
-            var connector = new WayOfDeliveryConnector();
+            IWayOfDeliveryConnector connector = new WayOfDeliveryConnector();
 
             #region CREATE
             var newWayOfDelivery = new WayOfDelivery()
@@ -78,7 +78,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_Find()
         {
-            var connector = new WayOfDeliveryConnector();
+            IWayOfDeliveryConnector connector = new WayOfDeliveryConnector();
 
             var existingCount = connector.Find().Entities.Count;
             var testKeyMark = TestUtils.RandomString();

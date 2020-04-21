@@ -118,7 +118,7 @@ namespace FortnoxAPILibrary.Tests
         [TestMethod]
         public void Test_ReadOnlyProperty_Deserialized()
         {
-            var connector = new CustomerConnector();
+            ICustomerConnector connector = new CustomerConnector();
 
             var createdCustomer = connector.Create(new Customer() {Name = "TestUser", CountryCode = "SE"});
             MyAssert.HasNoError(connector);
@@ -131,7 +131,7 @@ namespace FortnoxAPILibrary.Tests
         [TestMethod]
         public void Test_EmptyNestedObject()
         {
-            var connector = new CustomerConnector();
+            ICustomerConnector connector = new CustomerConnector();
 
             var createdCustomer = connector.Create(new Customer()
             {

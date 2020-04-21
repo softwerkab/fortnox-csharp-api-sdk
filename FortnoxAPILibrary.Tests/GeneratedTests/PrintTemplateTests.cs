@@ -29,7 +29,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_Find()
         {
-            var connector = new PrintTemplateConnector();
+            IPrintTemplateConnector connector = new PrintTemplateConnector();
             
             var fullCollection = connector.Find();
             MyAssert.HasNoError(connector);
@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_Find_Filter()
         {
-            var connector = new PrintTemplateConnector();
+            IPrintTemplateConnector connector = new PrintTemplateConnector();
 
             connector.FilterBy = Filter.PrintTemplate.Order;
             var orderTemplates = connector.Find();

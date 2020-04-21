@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to create required resources
             #endregion Arrange
 
-            var connector = new LabelConnector();
+            ILabelConnector connector = new LabelConnector();
 
             var randomLabel = TestUtils.RandomString();
 
@@ -73,7 +73,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_Find()
         {
-            var connector = new LabelConnector();
+            ILabelConnector connector = new LabelConnector();
 
             var existingCount = connector.Find().Entities.Count;
 

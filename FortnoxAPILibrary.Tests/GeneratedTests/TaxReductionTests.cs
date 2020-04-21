@@ -40,7 +40,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             });
             #endregion Arrange
 
-            var connector = new TaxReductionConnector();
+            ITaxReductionConnector connector = new TaxReductionConnector();
 
             #region CREATE
 
@@ -127,7 +127,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             //var testKeyMark = TestUtils.RandomString();
 
-            var connector = new TaxReductionConnector();
+            ITaxReductionConnector connector = new TaxReductionConnector();
             var newTaxReduction = new TaxReduction()
             {
                 CustomerName = "TmpCustomer",

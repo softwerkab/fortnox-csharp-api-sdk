@@ -28,7 +28,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
             #endregion Arrange
 
-            var connector = new OfferConnector();
+            IOfferConnector connector = new OfferConnector();
 
             #region CREATE
             var newOffer = new Offer()
@@ -88,7 +88,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
             #endregion Arrange
 
-            var connector = new OfferConnector();
+            IOfferConnector connector = new OfferConnector();
             var newOffer = new Offer()
             {
                 Comments = "TestOrder",

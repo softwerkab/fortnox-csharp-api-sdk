@@ -32,7 +32,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             #endregion Arrange
 
-            var connector = new CurrencyConnector();
+            ICurrencyConnector connector = new CurrencyConnector();
 
             #region CREATE
 
@@ -88,7 +88,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_Currency_Find()
         {
-            var connector = new CurrencyConnector();
+            ICurrencyConnector connector = new CurrencyConnector();
 
             var currencies = connector.Find();
 

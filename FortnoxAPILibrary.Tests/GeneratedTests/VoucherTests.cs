@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region Arrange
             #endregion Arrange
 
-            var connector = new VoucherConnector();
+            IVoucherConnector connector = new VoucherConnector();
 
             #region CREATE
             var newVoucher = new Voucher()

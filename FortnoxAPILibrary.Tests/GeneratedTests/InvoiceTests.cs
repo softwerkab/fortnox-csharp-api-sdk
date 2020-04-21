@@ -28,7 +28,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
             #endregion Arrange
 
-            var connector = new InvoiceConnector();
+            IInvoiceConnector connector = new InvoiceConnector();
 
             #region CREATE
             var newInvoice = new Invoice()
@@ -91,7 +91,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
             #endregion Arrange
 
-            var connector = new InvoiceConnector();
+            IInvoiceConnector connector = new InvoiceConnector();
             var newInvoice = new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,

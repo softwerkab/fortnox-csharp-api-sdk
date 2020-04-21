@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var tmpEmployee = new EmployeeConnector().Get("TEST_EMP") ?? new EmployeeConnector().Create(new Employee() { EmployeeId = "TEST_EMP" });
             #endregion Arrange
 
-            var connector = new ScheduleTimesConnector();
+            IScheduleTimesConnector connector = new ScheduleTimesConnector();
 
             #region CREATE
 
