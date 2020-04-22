@@ -81,7 +81,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             IFinancialYearConnector connector = new FinancialYearConnector();
             
             var finYears = connector.Find();
-            Assert.AreEqual(4, finYears.Entities.Count);
+            Assert.AreEqual(1, finYears.Entities.Count);
             Assert.IsNotNull(finYears.Entities.First().AccountChartType);
         }
     }

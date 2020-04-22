@@ -24,8 +24,8 @@ namespace FortnoxAPILibrary.GeneratedTests
         public void Test_Employee_CRUD()
         {
             #region Arrange
-
-            var alreadyExists = new EmployeeConnector().Get("TEST_EMP") != null;
+            var c = new EmployeeConnector();
+            var alreadyExists = c.Get("TEST_EMP") != null;
 
             #endregion Arrange
 
@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.GeneratedTests
                 EmployeeId = "TEST_EMP",
                 FirstName = "Test",
                 LastName = "Testasson",
-                City = "V�xj�",
+                City = "Växjö",
                 Country = "Sweden",
                 ForaType = ForaType.A74,
                 JobTitle = "Woodcutter",

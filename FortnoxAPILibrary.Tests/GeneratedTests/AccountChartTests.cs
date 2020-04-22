@@ -34,7 +34,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             var fullCollection = connector.Find();
             MyAssert.HasNoError(connector);
 
-            Assert.AreEqual(5, fullCollection.Entities.Count);
+            Assert.AreEqual(6, fullCollection.Entities.Count);
             Assert.IsNotNull(fullCollection.Entities.First().Name);
 
             //Limit not supported

@@ -41,6 +41,7 @@ namespace FortnoxAPILibrary.GeneratedTests
                     new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100}
                 }
             });
+            var bookedInvoice = new SupplierInvoiceConnector().Bookkeep(tmpSpplierInvoice.GivenNumber);
             #endregion Arrange
 
             ISupplierInvoicePaymentConnector connector = new SupplierInvoicePaymentConnector();

@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary.Entities
     public enum ForaType
     {
         ///<summary> Not signed </summary>
-        [EnumMember(Value = "–")]
+        [EnumMember(Value = "-")]
         None,
         ///<summary> Worker </summary>
         [EnumMember(Value = "A")]

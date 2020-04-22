@@ -88,6 +88,8 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_Currency_Find()
         {
+            //Prerequisites: SEK, EUR and USD currencies are already present in the system
+
             ICurrencyConnector connector = new CurrencyConnector();
 
             var currencies = connector.Find();
