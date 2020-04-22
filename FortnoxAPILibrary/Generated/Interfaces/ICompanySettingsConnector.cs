@@ -1,5 +1,7 @@
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 namespace FortnoxAPILibrary.Connectors
 {
@@ -10,5 +12,7 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.CompanySettings? SortBy { get; set; }
 
 		CompanySettings Get();
+
+		Task<CompanySettings> GetAsync();
 	}
 }

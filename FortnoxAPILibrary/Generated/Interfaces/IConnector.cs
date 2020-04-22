@@ -18,5 +18,6 @@ namespace FortnoxAPILibrary.Connectors
         DateTime? LastModified { get; set; }
         int? Page { get; set; }
         int? Offset { get; set; }
+
     }
 }

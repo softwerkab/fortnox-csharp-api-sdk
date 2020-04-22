@@ -1,5 +1,7 @@
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 namespace FortnoxAPILibrary.Connectors
 {
@@ -32,5 +34,10 @@ namespace FortnoxAPILibrary.Connectors
 		Order Print(int? id);
 		Order ExternalPrint(int? id);
 		Order Preview(int? id);
+
+		Task<Order> UpdateAsync(Order order);
+		Task<Order> CreateAsync(Order order);
+		Task<Order> GetAsync(int? id);
+        Task<EntityCollection<OrderSubset>> FindAsync();
 	}
 }

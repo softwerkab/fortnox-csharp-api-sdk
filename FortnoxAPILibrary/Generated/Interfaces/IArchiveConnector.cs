@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 namespace FortnoxAPILibrary.Connectors
 {
-    /// <remarks/>
     public interface IArchiveConnector : IConnector
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.Archive? SortBy { get; set; }
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
         Filter.Archive? FilterBy { get; set; }
 
         byte[] DownloadFile(string id);

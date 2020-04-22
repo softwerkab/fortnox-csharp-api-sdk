@@ -1,5 +1,7 @@
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 namespace FortnoxAPILibrary.Connectors
 {
@@ -16,5 +18,11 @@ namespace FortnoxAPILibrary.Connectors
 		CostCenter Get(string id);
 		void Delete(string id);
 		EntityCollection<CostCenter> Find();
+
+		Task<CostCenter> UpdateAsync(CostCenter costCenter);
+		Task<CostCenter> CreateAsync(CostCenter costCenter);
+		Task<CostCenter> GetAsync(string id);
+		Task DeleteAsync(string id);
+		Task<EntityCollection<CostCenter>> FindAsync();
 	}
 }

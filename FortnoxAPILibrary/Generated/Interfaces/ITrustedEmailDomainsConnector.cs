@@ -1,5 +1,7 @@
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 namespace FortnoxAPILibrary.Connectors
 {
@@ -14,5 +16,10 @@ namespace FortnoxAPILibrary.Connectors
 		TrustedEmailDomain Get(int? id);
 		void Delete(int? id);
 		EntityCollection<TrustedEmailDomain> Find();
+
+        Task<TrustedEmailDomain> CreateAsync(TrustedEmailDomain trustedEmailDomain);
+		Task<TrustedEmailDomain> GetAsync(int? id);
+		Task DeleteAsync(int? id);
+		Task<EntityCollection<TrustedEmailDomain>> FindAsync();
     }
 }

@@ -1,5 +1,7 @@
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 namespace FortnoxAPILibrary.Connectors
 {
@@ -13,5 +15,9 @@ namespace FortnoxAPILibrary.Connectors
 		PredefinedAccount Update(PredefinedAccount predefinedAccounts);
         PredefinedAccount Get(string id);
 		EntityCollection<PredefinedAccount> Find();
+
+		Task<PredefinedAccount> UpdateAsync(PredefinedAccount predefinedAccounts);
+        Task<PredefinedAccount> GetAsync(string id);
+		Task<EntityCollection<PredefinedAccount>> FindAsync();
 	}
 }

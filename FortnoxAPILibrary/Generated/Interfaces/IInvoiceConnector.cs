@@ -1,5 +1,7 @@
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 namespace FortnoxAPILibrary.Connectors
 {
@@ -40,5 +42,10 @@ namespace FortnoxAPILibrary.Connectors
 		Invoice PrintReminder(int? id);
 		Invoice ExternalPrint(int? id);
 		Invoice Preview(int? id);
+
+		Task<Invoice> UpdateAsync(Invoice invoice);
+		Task<Invoice> CreateAsync(Invoice invoice);
+		Task<Invoice> GetAsync(int? id);
+        Task<EntityCollection<InvoiceSubset>> FindAsync();
 	}
 }

@@ -1,5 +1,7 @@
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 namespace FortnoxAPILibrary.Connectors
 {
@@ -24,5 +26,11 @@ namespace FortnoxAPILibrary.Connectors
 		Supplier Get(string id);
 		void Delete(string id);
 		EntityCollection<SupplierSubset> Find();
+
+		Task<Supplier> UpdateAsync(Supplier supplier);
+		Task<Supplier> CreateAsync(Supplier supplier);
+		Task<Supplier> GetAsync(string id);
+		Task DeleteAsync(string id);
+		Task<EntityCollection<SupplierSubset>> FindAsync();
 	}
 }
