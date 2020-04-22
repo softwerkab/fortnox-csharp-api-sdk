@@ -1,8 +1,6 @@
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
-
 // ReSharper disable UnusedMember.Global
-
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
@@ -10,11 +8,8 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.AccountChart? SortBy { get; set; }
-
-        [SearchParameter("filter")]
 		Filter.AccountChart? FilterBy { get; set; }
-		
-		EntityCollection<AccountChart> Find();
 
+		EntityCollection<AccountChart> Find();
 	}
 }

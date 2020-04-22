@@ -1,9 +1,7 @@
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Reused;
-
 // ReSharper disable UnusedMember.Global
-
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
@@ -11,15 +9,10 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.TrustedEmailSenders? SortBy { get; set; }
-
-        [SearchParameter("filter")]
 		Filter.TrustedEmailSenders? FilterBy { get; set; }
 
         TrustedEmailSender Create(TrustedEmailSender trustedEmailSenders);
-
         void Delete(int? id);
-
         EmailSenders Find();
-
 	}
 }

@@ -1,8 +1,6 @@
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
-
 // ReSharper disable UnusedMember.Global
-
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
@@ -10,19 +8,13 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.CostCenter? SortBy { get; set; }
-
-        [SearchParameter("filter")]
 		Filter.CostCenter? FilterBy { get; set; }
 
+
 		CostCenter Update(CostCenter costCenter);
-
 		CostCenter Create(CostCenter costCenter);
-
 		CostCenter Get(string id);
-
 		void Delete(string id);
-
 		EntityCollection<CostCenter> Find();
-
 	}
 }

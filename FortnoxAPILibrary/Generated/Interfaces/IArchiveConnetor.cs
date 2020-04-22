@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
-
 // ReSharper disable UnusedMember.Global
-
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
@@ -13,20 +11,16 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.Archive? SortBy { get; set; }
-
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
-        [SearchParameter("filter")]
         Filter.Archive? FilterBy { get; set; }
 
         byte[] DownloadFile(string id);
         void DownloadFile(string id, string localPath);
-
         ArchiveFile UploadFile(string name, byte[] data, string folderPathOrId = null);
         ArchiveFile UploadFile(string name, Stream stream, string folderPathOrId = null);
         ArchiveFile UploadFile(string localPath, string folderPathOrId = null);
-
         void DeleteFile(string id);
 
         ArchiveFolder GetFolder(string pathOrId = null);
