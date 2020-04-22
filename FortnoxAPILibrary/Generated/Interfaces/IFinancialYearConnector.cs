@@ -8,6 +8,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IFinancialYearConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.FinancialYear? SortBy { get; set; }
+
         [SearchParameter("filter")]
 		Filter.FinancialYear? FilterBy { get; set; }
 

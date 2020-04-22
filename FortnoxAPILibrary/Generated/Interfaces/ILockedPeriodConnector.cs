@@ -8,6 +8,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface ILockedPeriodConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.LockedPeriod? SortBy { get; set; }
+
         LockedPeriod Get();
     }
 }

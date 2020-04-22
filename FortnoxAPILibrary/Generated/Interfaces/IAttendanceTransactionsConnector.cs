@@ -9,6 +9,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IAttendanceTransactionsConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.AttendanceTransactions? SortBy { get; set; }
+
         [SearchParameter("filter")]
 		Filter.AttendanceTransactions? FilterBy { get; set; }
 

@@ -8,6 +8,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IInvoiceAccrualConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.InvoiceAccrual? SortBy { get; set; }
+
         [SearchParameter("filter")]
 		Filter.InvoiceAccrual? FilterBy { get; set; }
 

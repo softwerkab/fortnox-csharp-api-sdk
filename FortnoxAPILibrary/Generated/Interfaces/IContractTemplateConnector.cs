@@ -8,6 +8,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IContractTemplateConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.ContractTemplate? SortBy { get; set; }
+
         [SearchParameter("filter")]
 		Filter.ContractTemplate? FilterBy { get; set; }
 

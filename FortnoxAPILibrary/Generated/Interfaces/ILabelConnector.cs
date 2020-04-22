@@ -8,6 +8,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface ILabelConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.Label? SortBy { get; set; }
+
         [SearchParameter("filter")]
 		Filter.Label? FilterBy { get; set; }
 

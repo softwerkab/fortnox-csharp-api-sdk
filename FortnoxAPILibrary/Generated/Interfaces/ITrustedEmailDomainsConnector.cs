@@ -8,6 +8,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface ITrustedEmailDomainsConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.TrustedEmailDomains? SortBy { get; set; }
+
         [SearchParameter("filter")]
 		Filter.TrustedEmailDomains? FilterBy { get; set; }
 

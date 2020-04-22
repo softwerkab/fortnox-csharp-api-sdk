@@ -8,6 +8,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IAssetConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.Asset? SortBy { get; set; }
+
         [SearchParameter("filter")]
 		Filter.Asset? FilterBy { get; set; }
 

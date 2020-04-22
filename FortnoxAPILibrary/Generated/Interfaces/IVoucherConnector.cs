@@ -8,6 +8,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IVoucherConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.Voucher? SortBy { get; set; }
+
         [SearchParameter("filter")]
 		Filter.Voucher? FilterBy { get; set; }
 

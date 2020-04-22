@@ -8,6 +8,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface INoxFinansInvoiceConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.NoxFinansInvoice? SortBy { get; set; }
+
         [SearchParameter("filter")]
 		Filter.NoxFinansInvoice? FilterBy { get; set; }
 

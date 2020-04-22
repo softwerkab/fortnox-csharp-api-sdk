@@ -8,6 +8,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IModeOfPaymentConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.ModeOfPayment? SortBy { get; set; }
+
         [SearchParameter("filter")]
 		Filter.ModeOfPayment? FilterBy { get; set; }
 

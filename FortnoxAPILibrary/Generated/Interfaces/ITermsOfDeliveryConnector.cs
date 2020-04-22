@@ -8,6 +8,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface ITermsOfDeliveryConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.TermsOfDelivery? SortBy { get; set; }
+
         [SearchParameter("filter")]
 		Filter.TermsOfDelivery? FilterBy { get; set; }
 

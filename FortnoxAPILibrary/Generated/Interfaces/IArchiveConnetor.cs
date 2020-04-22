@@ -11,6 +11,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IArchiveConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.Archive? SortBy { get; set; }
+
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

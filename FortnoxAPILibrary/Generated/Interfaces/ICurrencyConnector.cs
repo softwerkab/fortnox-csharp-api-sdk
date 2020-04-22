@@ -8,6 +8,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface ICurrencyConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.Currency? SortBy { get; set; }
+
         [SearchParameter("filter")]
 		Filter.Currency? FilterBy { get; set; }
 

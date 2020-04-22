@@ -8,6 +8,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IProjectConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.Project? SortBy { get; set; }
+
         [SearchParameter("filter")]
 		Filter.Project? FilterBy { get; set; }
 

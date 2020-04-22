@@ -8,6 +8,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IInvoiceFileConnectionConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.InvoiceFileConnection? SortBy { get; set; }
+
         [SearchParameter("filter")]
 		Filter.InvoiceFileConnection? FilterBy { get; set; }
 

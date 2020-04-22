@@ -8,6 +8,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IArticleConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.Article? SortBy { get; set; }
+
         [SearchParameter("filter")]
 		Filter.Article? FilterBy { get; set; }
 

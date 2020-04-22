@@ -9,6 +9,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IScheduleTimesConnector : IConnector
 	{
+		Sort.Order? SortOrder { get; set; }
+		Sort.By.ScheduleTimes? SortBy { get; set; }
+
         [SearchParameter("filter")]
 		Filter.ScheduleTimes? FilterBy { get; set; }
 
