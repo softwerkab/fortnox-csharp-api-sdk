@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using FortnoxAPILibrary.Entities;
 
@@ -53,7 +54,7 @@ namespace FortnoxAPILibrary
         protected Dictionary<string, string> BaseGetParametersInjection = new Dictionary<string, string>(); //TODO: Remove, only temporary workaround (BaseGet has no parameters injection)
         protected Dictionary<string, string> BaseDeleteParametersInjection = new Dictionary<string, string>(); //TODO: Remove, only temporary workaround (BaseGet has no parameters injection)
 
-        protected TEntity BaseCreate(TEntity entity, Dictionary<string, string> parameters = null)
+        protected async Task<TEntity> BaseCreate(TEntity entity, Dictionary<string, string> parameters = null)
         {
             Parameters = parameters ?? new Dictionary<string, string>();
 
@@ -66,10 +67,11 @@ namespace FortnoxAPILibrary
             RequestUriString = requestUriString;
 
             var wrappedEntity = new EntityWrapper<TEntity>() {Entity = entity};
-            return DoRequest(wrappedEntity)?.Entity;
+            var result = await DoRequest(wrappedEntity);
+            return result?.Entity;
         }
 
-        protected TEntity BaseUpdate(TEntity entity, params string[] indices)
+        protected async Task<TEntity> BaseUpdate(TEntity entity, params string[] indices)
         {
             Parameters = new Dictionary<string, string>();
 
@@ -84,10 +86,12 @@ namespace FortnoxAPILibrary
             RequestUriString = requestUriString;
 
             var wrappedEntity = new EntityWrapper<TEntity>() { Entity = entity };
-            return DoRequest(wrappedEntity)?.Entity;
+
+            var result = await DoRequest(wrappedEntity);
+            return result?.Entity;
         }
 
-        protected void BaseDelete(params string[] indices)
+        protected async Task BaseDelete(params string[] indices)
         {
             Parameters = new Dictionary<string, string>();
             Parameters = BaseDeleteParametersInjection;
@@ -102,10 +106,10 @@ namespace FortnoxAPILibrary
             ResponseType = RequestResponseType.JSON;
             RequestUriString = requestUriString;
 
-            DoRequest();
+            await DoRequest();
         }
 
-        protected TEntity BaseGet(params string[] indices)
+        protected async Task<TEntity> BaseGet(params string[] indices)
         {
             Parameters = new Dictionary<string, string>();
             Parameters = BaseGetParametersInjection;
@@ -120,11 +124,11 @@ namespace FortnoxAPILibrary
             ResponseType = RequestResponseType.JSON;
             RequestUriString = requestUriString;
 
-            var result = DoRequest<EntityWrapper<TEntity>>();
+            var result = await DoRequest<EntityWrapper<TEntity>>();
             return result?.Entity;
         }
 
-        protected TEntityCollection BaseFind(Dictionary<string, string> parameters = null, params string[] indices)
+        protected async Task<TEntityCollection> BaseFind(Dictionary<string, string> parameters = null, params string[] indices)
         {
             Parameters = parameters ?? new Dictionary<string, string>();
 
@@ -139,7 +143,7 @@ namespace FortnoxAPILibrary
             ResponseType = RequestResponseType.JSON;
             RequestUriString = requestUriString;
 
-            var result = DoRequest<TEntityCollection>();
+            var result = await DoRequest<TEntityCollection>();
             return result;
         }
 
@@ -177,7 +181,7 @@ namespace FortnoxAPILibrary
             return value.ToString().ToLower();
         }
 
-        protected TEntity DoAction(string documentNumber, string action)
+        protected async Task<TEntity> DoAction(string documentNumber, string action)
         {
             string requestUriString = GetUrl(documentNumber);
 
@@ -208,7 +212,7 @@ namespace FortnoxAPILibrary
             }
             RequestUriString = requestUriString;
 
-            var result = DoRequest<EntityWrapper<TEntity>>();
+            var result = await DoRequest<EntityWrapper<TEntity>>();
             return result?.Entity;
         }
         

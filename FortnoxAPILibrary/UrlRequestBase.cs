@@ -4,6 +4,7 @@ using System.Net;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Serialization;
 
@@ -120,7 +121,7 @@ namespace FortnoxAPILibrary
         /// <summary>
         /// This method is used to throttle every call to Fortnox. 
         /// </summary>
-        protected void RateLimit()
+        protected async Task RateLimit()
         {
             bool reset = false;
 
@@ -130,7 +131,8 @@ namespace FortnoxAPILibrary
             else if (currentRequestsPerSecond >= MaxRequestsPerSecond)
             {
                 // Wait out remainder of current second
-                Thread.Sleep(Convert.ToInt32(1000.0 - (DateTime.Now - firstRequest).TotalMilliseconds));
+                var waitTime = Convert.ToInt32(1000.0 - (DateTime.Now - firstRequest).TotalMilliseconds);
+                await Task.Delay(waitTime);
                 reset = true;
             }
 
@@ -171,13 +173,13 @@ namespace FortnoxAPILibrary
         /// <summary>
         /// Perform the request to Fortnox API
         /// </summary>
-        protected void DoRequest()
+        protected async Task DoRequest()
         {
             var wr = SetupRequest(RequestUriString, Method);
 
             try
             {
-                RateLimit();
+                await RateLimit();
 
                 if (Method != "GET")
                 {
@@ -199,13 +201,13 @@ namespace FortnoxAPILibrary
         /// <typeparam name="T">The type of entity to create, read, update or delete.</typeparam>
         /// <param name="entity">The entity</param>
         /// <returns>An entity</returns>
-        protected T DoRequest<T>(T entity = default)
+        protected async Task<T> DoRequest<T>(T entity = default)
         {
             var wr = SetupRequest(RequestUriString, Method);
             ResponseContent = "";
             try
             {
-                RateLimit();
+                await RateLimit();
 
                 if (Method != "GET")
                 {
@@ -254,7 +256,7 @@ namespace FortnoxAPILibrary
             return default;
         }
 
-        protected T UploadFile<T>(byte[] fileData = null, string fileName = null)
+        protected async Task<T> UploadFile<T>(byte[] fileData = null, string fileName = null)
         {
             ResponseContent = "";
 
@@ -262,6 +264,8 @@ namespace FortnoxAPILibrary
 
             try
             {
+                await RateLimit();
+
                 var rand = new Random();
                 var boundary = "----boundary" + rand.Next();
                 var header = Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + fileName + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
@@ -290,12 +294,14 @@ namespace FortnoxAPILibrary
             return result;
         }
 
-        protected byte[] DownloadFile()
+        protected async Task<byte[]> DownloadFile()
         {
             ResponseContent = "";
 
             try
             {
+                await RateLimit();
+
                 var request = SetupRequest(RequestUriString, "GET");
 
                 using var response = (HttpWebResponse) request.GetResponse();
