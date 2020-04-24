@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -72,13 +74,18 @@ namespace FortnoxAPILibrary.Tests
         public void Test_TooManyRequests_fixed()
         {
             var connector = new VoucherConnector();
+            connector.Limit = 2;
 
+            var watch = new Stopwatch();
+            watch.Start();
             for (int i = 0; i < 40; i++)
             {
-                connector.Limit = 2;
                 connector.Find();
                 MyAssert.HasNoError(connector);
             }
+
+            watch.Stop();
+            Console.WriteLine(@"Total time: "+watch.ElapsedMilliseconds);
         }
 
         [Ignore] //Scenario is not yet fixed
@@ -126,5 +133,30 @@ namespace FortnoxAPILibrary.Tests
             MyAssert.HasNoError(connector);
         }
 
+        [TestMethod]
+        public void Test_issue73_async_non_blockable()
+        {
+            var connector = new CustomerConnector();
+            connector.Limit = 2;
+            var watch = new Stopwatch();
+            watch.Start();
+
+            var runningTasks = new List<Task<EntityCollection<CustomerSubset>>>();
+            for (int i = 0;i<40;i++) 
+                runningTasks.Add(connector.FindAsync());
+
+            Console.WriteLine(@"Thread free after: "+watch.ElapsedMilliseconds);
+            Assert.IsTrue(watch.ElapsedMilliseconds < 1000);
+
+            watch.Start();
+            foreach (var runningTask in runningTasks)
+            {
+                var result = runningTask.Result;
+                MyAssert.HasNoError(connector);
+                Assert.IsNotNull(result);
+            }
+            watch.Stop();
+            Console.WriteLine(@"Total time: "+watch.ElapsedMilliseconds);
+        }
     }
 }

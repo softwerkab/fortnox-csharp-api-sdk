@@ -5,20 +5,21 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ComposableAsync;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Serialization;
+using RateLimiter;
 
 namespace FortnoxAPILibrary
 {
     /// <remarks/>
     public class UrlRequestBase
     {
-		private string clientSecret;
-        private string accessToken;
+        private const int LimitPerSecond = 3;
+        private static readonly TimeLimiter RateLimiter = TimeLimiter.GetFromMaxCountByInterval(LimitPerSecond, TimeSpan.FromSeconds(1));
 
-        private const int MaxRequestsPerSecond = 3;
-        private static DateTime firstRequest = DateTime.Now;
-        private static int currentRequestsPerSecond;
+        private string clientSecret;
+        private string accessToken;
 
         private readonly JsonEntitySerializer serializer;
 
@@ -123,24 +124,7 @@ namespace FortnoxAPILibrary
         /// </summary>
         protected async Task RateLimit()
         {
-            bool reset = false;
-
-            currentRequestsPerSecond++;
-
-            if ((DateTime.Now - firstRequest).TotalMilliseconds >= 1000.0) reset = true;
-            else if (currentRequestsPerSecond >= MaxRequestsPerSecond)
-            {
-                // Wait out remainder of current second
-                var waitTime = Convert.ToInt32(1000.0 - (DateTime.Now - firstRequest).TotalMilliseconds);
-                await Task.Delay(waitTime);
-                reset = true;
-            }
-
-            if (reset)
-            {
-                currentRequestsPerSecond = 0;
-                firstRequest = DateTime.Now;
-            }
+            await RateLimiter;
         }
 
         /// <summary>
