@@ -181,7 +181,11 @@ namespace FortnoxAPILibrary
             return value.ToString().ToLower();
         }
 
-        protected async Task<TEntity> DoAction(string documentNumber, string action)
+        protected TEntity DoAction(string documentNumber, string action)
+        {
+            return DoActionAsync(documentNumber, action).Result;
+        }
+        protected async Task<TEntity> DoActionAsync(string documentNumber, string action)
         {
             string requestUriString = GetUrl(documentNumber);
 
