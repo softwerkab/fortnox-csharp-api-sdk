@@ -8,7 +8,7 @@ namespace FortnoxAPILibrary.Tests
     public class ConnectionTests
     {
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(AggregateException))]
         public void TestConnection_WithoutCredenials_Error()
         {
             //Arrange

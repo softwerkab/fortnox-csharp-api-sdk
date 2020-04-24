@@ -25,5 +25,18 @@ namespace FortnoxAPILibrary.Connectors
         ArchiveFolder GetRoot();
         ArchiveFolder CreateFolder(string folderName, string path = null);
         void DeleteFolder(string pathOrId);
+
+
+        Task<byte[]> DownloadFileAsync(string id);
+        Task DownloadFileAsync(string id, string localPath);
+        Task<ArchiveFile> UploadFileAsync(string name, byte[] data, string folderPathOrId = null);
+        Task<ArchiveFile> UploadFileAsync(string name, Stream stream, string folderPathOrId = null);
+        Task<ArchiveFile> UploadFileAsync(string localPath, string folderPathOrId = null);
+        Task DeleteFileAsync(string id);
+
+        Task<ArchiveFolder> GetFolderAsync(string pathOrId = null);
+        Task<ArchiveFolder> GetRootAsync();
+        Task<ArchiveFolder> CreateFolderAsync(string folderName, string path = null);
+        Task DeleteFolderAsync(string pathOrId);
     }
 }

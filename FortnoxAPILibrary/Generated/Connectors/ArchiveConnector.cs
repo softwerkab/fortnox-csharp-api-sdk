@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace FortnoxAPILibrary.Connectors
 {
+    //TODO: Implement Async methods
     /// <remarks/>
     public class ArchiveConnector : EntityConnector<ArchiveFolder, EntityWrapper<ArchiveFolder>, Sort.By.Archive?>, IArchiveConnector
 	{
@@ -89,7 +90,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Id of the file delete</param>
         public void DeleteFile(string id)
 		{
-            BaseDelete(id);
+            BaseDelete(id).Wait();
         }
 
         /// <summary>
@@ -100,12 +101,12 @@ namespace FortnoxAPILibrary.Connectors
         public ArchiveFolder GetFolder(string pathOrId = null)
         {
             if (IsArchiveId(pathOrId))
-                return BaseGet(pathOrId);
+                return BaseGet(pathOrId).Result;
             else
             {
                 BaseGetParametersInjection = new Dictionary<string, string>();
                 BaseGetParametersInjection.Add("path", pathOrId);
-                return BaseGet();
+                return BaseGet().Result;
             }
         }
 
@@ -126,7 +127,7 @@ namespace FortnoxAPILibrary.Connectors
             if (path != null)
                 urlParams.Add("path", path);
 
-            return BaseCreate(folder, urlParams);
+            return BaseCreate(folder, urlParams).Result;
         }
 
         /// <summary>
@@ -136,13 +137,63 @@ namespace FortnoxAPILibrary.Connectors
         public void DeleteFolder(string pathOrId)
         {
             if (IsArchiveId(pathOrId))
-                BaseDelete(pathOrId);
+                BaseDelete(pathOrId).Wait();
             else
             {
                 BaseDeleteParametersInjection = new Dictionary<string, string>();
                 BaseDeleteParametersInjection.Add("path", pathOrId);
-                BaseDelete();
+                BaseDelete().Wait();
             }
+        }
+
+        public Task<byte[]> DownloadFileAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DownloadFileAsync(string id, string localPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ArchiveFile> UploadFileAsync(string name, byte[] data, string folderPathOrId = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ArchiveFile> UploadFileAsync(string name, Stream stream, string folderPathOrId = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ArchiveFile> UploadFileAsync(string localPath, string folderPathOrId = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteFileAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ArchiveFolder> GetFolderAsync(string pathOrId = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ArchiveFolder> GetRootAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ArchiveFolder> CreateFolderAsync(string folderName, string path = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteFolderAsync(string pathOrId)
+        {
+            throw new NotImplementedException();
         }
 
         private ArchiveFile BaseUpload(string name, byte[] data, Dictionary<string, string> parameters, params string[] indices)
@@ -155,7 +206,7 @@ namespace FortnoxAPILibrary.Connectors
 
             RequestUriString = requestUriString;
 
-            return UploadFile<ArchiveFile>(data, name);
+            return UploadFile<ArchiveFile>(data, name).Result;
         }
 
         private byte[] BaseDownload(Dictionary<string, string> parameters, params string[] indices)
@@ -168,7 +219,7 @@ namespace FortnoxAPILibrary.Connectors
 
             RequestUriString = requestUriString;
 
-            return DownloadFile();
+            return DownloadFile().Result;
         }
 
         private static bool IsArchiveId(string str)
