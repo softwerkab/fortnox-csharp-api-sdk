@@ -29,7 +29,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of scheduleTimess</returns>
 		public EntityCollection<ScheduleTimes> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		/// <summary>
@@ -40,12 +40,12 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found schedule time</returns>
 		public ScheduleTimes Get(string employeeId, DateTime? date)
         {
-            return BaseGet(employeeId, date?.ToString(APIConstants.DateFormat));
+			return GetAsync(employeeId, date).Result;
         }
 
         public ScheduleTimes Update(ScheduleTimes scheduleTime)
         {
-            return BaseUpdate(scheduleTime,scheduleTime.EmployeeId, scheduleTime.Date?.ToString(APIConstants.DateFormat));
+			return UpdateAsync(scheduleTime).Result;
         }
 
 		/// <summary>
@@ -56,9 +56,13 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The reset schedule time</returns>
 		public ScheduleTimes Reset(string employeeId, DateTime? date)
         {
-            return BaseUpdate(null, employeeId, date?.ToString(APIConstants.DateFormat), "resetday");
+			return ResetAsync(employeeId, date).Result;
         }
 
+        public async Task<ScheduleTimes> ResetAsync(string employeeId, DateTime? date)
+        {
+            return await BaseUpdate(null, employeeId, date?.ToString(APIConstants.DateFormat), "resetday");
+        }
         public async Task<ScheduleTimes> UpdateAsync(ScheduleTimes scheduleTime)
         {
             return await BaseUpdate(scheduleTime,scheduleTime.EmployeeId, scheduleTime.Date?.ToString(APIConstants.DateFormat));

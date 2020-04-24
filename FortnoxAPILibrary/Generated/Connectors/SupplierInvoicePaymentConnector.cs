@@ -34,7 +34,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found supplierInvoicePayment</returns>
 		public SupplierInvoicePayment Get(int? id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated supplierInvoicePayment</returns>
 		public SupplierInvoicePayment Update(SupplierInvoicePayment supplierInvoicePayment)
 		{
-			return BaseUpdate(supplierInvoicePayment, supplierInvoicePayment.Number.ToString());
+			return UpdateAsync(supplierInvoicePayment).Result;
 		}
 
 		/// <summary>
@@ -54,7 +54,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created supplierInvoicePayment</returns>
 		public SupplierInvoicePayment Create(SupplierInvoicePayment supplierInvoicePayment)
 		{
-			return BaseCreate(supplierInvoicePayment);
+			return CreateAsync(supplierInvoicePayment).Result;
 		}
 
 		/// <summary>
@@ -63,7 +63,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the supplierInvoicePayment to delete</param>
 		public void Delete(int? id)
 		{
-			BaseDelete(id.ToString());
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
@@ -72,7 +72,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of supplierInvoicePayments</returns>
 		public EntityCollection<SupplierInvoicePaymentSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		/// <summary>

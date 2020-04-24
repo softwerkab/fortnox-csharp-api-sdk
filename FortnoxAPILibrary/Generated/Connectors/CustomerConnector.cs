@@ -83,7 +83,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found customer</returns>
 		public Customer Get(string id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -93,7 +93,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated customer</returns>
 		public Customer Update(Customer customer)
 		{
-			return BaseUpdate(customer, customer.CustomerNumber.ToString());
+			return UpdateAsync(customer).Result;
 		}
 
 		/// <summary>
@@ -103,7 +103,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created customer</returns>
 		public Customer Create(Customer customer)
 		{
-			return BaseCreate(customer);
+			return CreateAsync(customer).Result;
 		}
 
 		/// <summary>
@@ -112,7 +112,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the customer to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id.ToString());
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
@@ -121,7 +121,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of customers</returns>
 		public EntityCollection<CustomerSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<CustomerSubset>> FindAsync()

@@ -30,7 +30,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The found invoiceAccrual</returns>
         public InvoiceAccrual Get(int? id)
         {
-            return BaseGet(id.ToString());
+			return GetAsync(id).Result;
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The updated invoiceAccrual</returns>
         public InvoiceAccrual Update(InvoiceAccrual invoiceAccrual)
         {
-            return BaseUpdate(invoiceAccrual, invoiceAccrual.InvoiceNumber.ToString());
+			return UpdateAsync(invoiceAccrual).Result;
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The created invoiceAccrual</returns>
         public InvoiceAccrual Create(InvoiceAccrual invoiceAccrual)
         {
-            return BaseCreate(invoiceAccrual);
+			return CreateAsync(invoiceAccrual).Result;
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <param name="id">Identifier of the invoiceAccrual to delete</param>
         public void Delete(int? id)
         {
-            BaseDelete(id.ToString());
+			DeleteAsync(id).Wait();
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>A list of invoiceAccruals</returns>
         public EntityCollection<InvoiceAccrualSubset> Find()
         {
-            return BaseFind();
+			return FindAsync().Result;
         }
 
         public async Task<EntityCollection<InvoiceAccrualSubset>> FindAsync()

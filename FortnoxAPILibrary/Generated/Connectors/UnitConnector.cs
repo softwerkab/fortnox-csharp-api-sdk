@@ -29,7 +29,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found unit</returns>
 		public Unit Get(string id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -39,7 +39,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated unit</returns>
 		public Unit Update(Unit unit)
 		{
-			return BaseUpdate(unit, unit.Code.ToString());
+			return UpdateAsync(unit).Result;
 		}
 
 		/// <summary>
@@ -49,7 +49,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created unit</returns>
 		public Unit Create(Unit unit)
 		{
-			return BaseCreate(unit);
+			return CreateAsync(unit).Result;
 		}
 
 		/// <summary>
@@ -58,7 +58,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the unit to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id.ToString());
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
@@ -67,7 +67,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of units</returns>
 		public EntityCollection<Unit> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<Unit>> FindAsync()

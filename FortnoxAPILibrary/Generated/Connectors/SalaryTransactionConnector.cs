@@ -40,7 +40,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found salaryTransaction</returns>
 		public SalaryTransaction Get(int? id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -50,7 +50,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated salaryTransaction</returns>
 		public SalaryTransaction Update(SalaryTransaction salaryTransaction)
 		{
-			return BaseUpdate(salaryTransaction, salaryTransaction.SalaryRow.ToString());
+			return UpdateAsync(salaryTransaction).Result;
 		}
 
 		/// <summary>
@@ -60,7 +60,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created salaryTransaction</returns>
 		public SalaryTransaction Create(SalaryTransaction salaryTransaction)
 		{
-			return BaseCreate(salaryTransaction);
+			return CreateAsync(salaryTransaction).Result;
 		}
 
 		/// <summary>
@@ -69,7 +69,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the salaryTransaction to delete</param>
 		public void Delete(int? id)
 		{
-			BaseDelete(id.ToString());
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
@@ -78,7 +78,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of salaryTransactions</returns>
 		public EntityCollection<SalaryTransactionSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<SalaryTransactionSubset>> FindAsync()

@@ -29,7 +29,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found currency</returns>
 		public Currency Get(string id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -39,7 +39,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated currency</returns>
 		public Currency Update(Currency currency)
 		{
-			return BaseUpdate(currency, currency.Code.ToString());
+			return UpdateAsync(currency).Result;
 		}
 
 		/// <summary>
@@ -49,7 +49,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created currency</returns>
 		public Currency Create(Currency currency)
 		{
-			return BaseCreate(currency);
+			return CreateAsync(currency).Result;
 		}
 
 		/// <summary>
@@ -58,7 +58,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the currency to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id.ToString());
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
@@ -67,7 +67,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of currencys</returns>
 		public EntityCollection<Currency> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<Currency>> FindAsync()

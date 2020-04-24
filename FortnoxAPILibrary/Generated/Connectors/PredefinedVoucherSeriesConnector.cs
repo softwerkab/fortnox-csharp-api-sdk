@@ -30,7 +30,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found predefinedVoucherSeries</returns>
 		public PredefinedVoucherSeries Get(string id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -40,7 +40,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated predefinedVoucherSeries</returns>
 		public PredefinedVoucherSeries Update(PredefinedVoucherSeries predefinedVoucherSeries)
 		{
-			return BaseUpdate(predefinedVoucherSeries, predefinedVoucherSeries.Name.ToString());
+			return UpdateAsync(predefinedVoucherSeries).Result;
 		}
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of predefinedVoucherSeriess</returns>
 		public EntityCollection<PredefinedVoucherSeries> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<PredefinedVoucherSeries>> FindAsync()

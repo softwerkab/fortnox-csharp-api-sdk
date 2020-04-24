@@ -126,7 +126,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found invoice</returns>
 		public Invoice Get(int? id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -136,7 +136,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated invoice</returns>
 		public Invoice Update(Invoice invoice)
 		{
-			return BaseUpdate(invoice, invoice.DocumentNumber.ToString());
+			return UpdateAsync(invoice).Result;
 		}
 
 		/// <summary>
@@ -146,7 +146,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created invoice</returns>
 		public Invoice Create(Invoice invoice)
 		{
-			return BaseCreate(invoice);
+			return CreateAsync(invoice).Result;
 		}
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of invoices</returns>
 		public EntityCollection<InvoiceSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 		
 		/// <summary>

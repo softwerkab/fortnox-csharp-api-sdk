@@ -29,7 +29,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found costCenter</returns>
 		public CostCenter Get(string id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -39,7 +39,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated costCenter</returns>
 		public CostCenter Update(CostCenter costCenter)
 		{
-			return BaseUpdate(costCenter, costCenter.Code.ToString());
+			return UpdateAsync(costCenter).Result;
 		}
 
 		/// <summary>
@@ -49,7 +49,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created costCenter</returns>
 		public CostCenter Create(CostCenter costCenter)
 		{
-			return BaseCreate(costCenter);
+			return CreateAsync(costCenter).Result;
 		}
 
 		/// <summary>
@@ -58,7 +58,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the costCenter to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id.ToString());
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
@@ -67,7 +67,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of costCenters</returns>
 		public EntityCollection<CostCenter> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<CostCenter>> FindAsync()

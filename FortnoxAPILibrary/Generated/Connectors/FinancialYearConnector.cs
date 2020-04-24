@@ -34,7 +34,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found financialYear</returns>
 		public FinancialYear Get(int? id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created financialYear</returns>
 		public FinancialYear Create(FinancialYear financialYear)
 		{
-			return BaseCreate(financialYear);
+			return CreateAsync(financialYear).Result;
 		}
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of financialYears</returns>
 		public EntityCollection<FinancialYearSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<FinancialYearSubset>> FindAsync()

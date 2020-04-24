@@ -64,7 +64,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found article</returns>
 		public Article Get(string id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -74,7 +74,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated article</returns>
 		public Article Update(Article article)
 		{
-			return BaseUpdate(article, article.ArticleNumber.ToString());
+			return UpdateAsync(article).Result;
 		}
 
 		/// <summary>
@@ -84,7 +84,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created article</returns>
 		public Article Create(Article article)
 		{
-			return BaseCreate(article);
+			return CreateAsync(article).Result;
 		}
 
 		/// <summary>
@@ -93,7 +93,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the article to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id.ToString());
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
@@ -102,7 +102,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of articles</returns>
 		public EntityCollection<ArticleSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<ArticleSubset>> FindAsync()

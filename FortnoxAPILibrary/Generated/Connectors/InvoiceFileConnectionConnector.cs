@@ -30,7 +30,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found invoiceFileConnection</returns>
 		public InvoiceFileConnection Get(string id)
 		{
-			return BaseGet(id);
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -40,7 +40,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated invoiceFileConnection</returns>
 		public InvoiceFileConnection Update(InvoiceFileConnection invoiceFileConnection)
 		{
-			return BaseUpdate(invoiceFileConnection, invoiceFileConnection.Id);
+			return UpdateAsync(invoiceFileConnection).Result;
 		}
 
 		/// <summary>
@@ -50,7 +50,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created invoiceFileConnection</returns>
 		public InvoiceFileConnection Create(InvoiceFileConnection invoiceFileConnection)
 		{
-			return BaseCreate(invoiceFileConnection);
+			return CreateAsync(invoiceFileConnection).Result;
 		}
 
 		/// <summary>
@@ -59,7 +59,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the invoiceFileConnection to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id);
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
@@ -68,7 +68,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of invoiceFileConnections</returns>
 		public EntityCollection<InvoiceFileConnectionSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<InvoiceFileConnectionSubset>> FindAsync()

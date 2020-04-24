@@ -78,7 +78,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found offer</returns>
 		public Offer Get(int? id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -88,7 +88,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated offer</returns>
 		public Offer Update(Offer offer)
 		{
-			return BaseUpdate(offer, offer.DocumentNumber.ToString());
+			return UpdateAsync(offer).Result;
 		}
 
 		/// <summary>
@@ -98,7 +98,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created offer</returns>
 		public Offer Create(Offer offer)
 		{
-			return BaseCreate(offer);
+			return CreateAsync(offer).Result;
 		}
 
 		/// <summary>
@@ -107,7 +107,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of offers</returns>
 		public EntityCollection<OfferSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 		
 		/// <summary>

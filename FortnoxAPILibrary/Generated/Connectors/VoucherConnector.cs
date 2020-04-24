@@ -52,16 +52,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The found voucher</returns>
         public Voucher Get(int? id, string seriesId, int? financialYearId)
 		{
-            BaseGetParametersInjection = new Dictionary<string, string>();
-            if (financialYearId != null)
-            {
-                BaseGetParametersInjection = new Dictionary<string, string>
-                {
-                    {"financialyear", financialYearId.ToString()}
-                };
-            }
-
-            return BaseGet(seriesId.ToString(), id.ToString());
+			return GetAsync(id, seriesId, financialYearId).Result;
         }
 
 		/// <summary>
@@ -71,7 +62,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created voucher</returns>
 		public Voucher Create(Voucher voucher)
 		{
-			return BaseCreate(voucher);
+			return CreateAsync(voucher).Result;
 		}
 
 		/// <summary>
@@ -80,7 +71,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of vouchers</returns>
 		public EntityCollection<VoucherSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<VoucherSubset>> FindAsync()
@@ -93,10 +84,10 @@ namespace FortnoxAPILibrary.Connectors
 		}
         public async Task<Voucher> GetAsync(int? id, string seriesId, int? financialYearId)
 		{
-            await BaseGetParametersInjection = new Dictionary<string, string>();
+            BaseGetParametersInjection = new Dictionary<string, string>();
             if (financialYearId != null)
             {
-                await BaseGetParametersInjection = new Dictionary<string, string>
+                BaseGetParametersInjection = new Dictionary<string, string>
                 {
                     {"financialyear", financialYearId.ToString()}
                 };

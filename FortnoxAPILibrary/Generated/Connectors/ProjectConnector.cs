@@ -30,7 +30,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found project</returns>
 		public Project Get(string id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -40,7 +40,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated project</returns>
 		public Project Update(Project project)
 		{
-			return BaseUpdate(project, project.ProjectNumber.ToString());
+			return UpdateAsync(project).Result;
 		}
 
 		/// <summary>
@@ -50,7 +50,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created project</returns>
 		public Project Create(Project project)
 		{
-			return BaseCreate(project);
+			return CreateAsync(project).Result;
 		}
 
 		/// <summary>
@@ -59,7 +59,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the project to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id.ToString());
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
@@ -68,7 +68,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of projects</returns>
 		public EntityCollection<ProjectSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<ProjectSubset>> FindAsync()

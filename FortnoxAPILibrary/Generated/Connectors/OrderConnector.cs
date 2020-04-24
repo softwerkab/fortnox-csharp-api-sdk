@@ -96,7 +96,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found order</returns>
 		public Order Get(int? id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -106,7 +106,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated order</returns>
 		public Order Update(Order order)
 		{
-			return BaseUpdate(order, order.DocumentNumber.ToString());
+			return UpdateAsync(order).Result;
 		}
 
 		/// <summary>
@@ -116,7 +116,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created order</returns>
 		public Order Create(Order order)
 		{
-			return BaseCreate(order);
+			return CreateAsync(order).Result;
 		}
 
 		/// <summary>
@@ -125,7 +125,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of orders</returns>
 		public EntityCollection<OrderSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 		
 		/// <summary>

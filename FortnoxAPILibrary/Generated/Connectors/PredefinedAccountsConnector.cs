@@ -30,17 +30,17 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found predefinedAccount</returns>
 		public PredefinedAccount Get(string id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
 		/// Updates a predefinedAccounts
 		/// </summary>
-		/// <param name="predefinedAccounts">The predefinedAccount to update</param>
+		/// <param name="predefinedAccount">The predefinedAccount to update</param>
 		/// <returns>The updated predefinedAccount</returns>
 		public PredefinedAccount Update(PredefinedAccount predefinedAccount)
 		{
-			return BaseUpdate(predefinedAccount, predefinedAccount.Name.ToString());
+			return UpdateAsync(predefinedAccount).Result;
 		}
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of predefinedAccounts</returns>
 		public EntityCollection<PredefinedAccount> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<PredefinedAccount>> FindAsync()

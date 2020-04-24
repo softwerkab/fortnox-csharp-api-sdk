@@ -35,7 +35,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found assetFileConnection</returns>
 		public AssetFileConnection Get(string id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created assetFileConnection</returns>
 		public AssetFileConnection Create(AssetFileConnection assetFileConnection)
 		{
-			return BaseCreate(assetFileConnection);
+			return CreateAsync(assetFileConnection).Result;
 		}
 
 		/// <summary>
@@ -54,7 +54,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the assetFileConnection to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id.ToString());
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
@@ -63,7 +63,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of assetFileConnections</returns>
 		public EntityCollection<AssetFileConnection> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<AssetFileConnection>> FindAsync()

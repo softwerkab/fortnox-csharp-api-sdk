@@ -42,12 +42,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found asset</returns>
 		public Asset Get(string id)
 		{
-            FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
-
-            var result = BaseGet(id);
-
-            FixResponseContent = null;
-            return result;
+            return GetAsync(id).Result;
         }
 
 		/// <summary>
@@ -57,16 +52,8 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated asset</returns>
 		public Asset Update(Asset asset)
         {
-            var id = asset.Id;
-            asset.Id = null;
-            FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
-
-            var result = BaseUpdate(asset, id);
-
-            FixResponseContent = null;
-            asset.Id = id;
-            return result;
-		}
+            return UpdateAsync(asset).Result;
+        }
 
 		/// <summary>
 		/// Creates a new asset
@@ -75,12 +62,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created asset</returns>
 		public Asset Create(Asset asset)
         {
-            FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
-
-            var result = BaseCreate(asset);
-
-            FixResponseContent = null;
-            return result;
+            return CreateAsync(asset).Result;
         }
 
 		/// <summary>
@@ -89,7 +71,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the asset to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id.ToString());
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
@@ -98,7 +80,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of assets</returns>
 		public EntityCollection<AssetSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<AssetSubset>> FindAsync()

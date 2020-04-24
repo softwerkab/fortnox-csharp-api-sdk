@@ -35,7 +35,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found account</returns>
 		public Account Get(int? id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated account</returns>
 		public Account Update(Account account)
 		{
-			return BaseUpdate(account, account.Number.ToString());
+			return UpdateAsync(account).Result;
 		}
 
 		/// <summary>
@@ -55,7 +55,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created account</returns>
 		public Account Create(Account account)
 		{
-			return BaseCreate(account);
+			return CreateAsync(account).Result;
 		}
 
 		/// <summary>
@@ -64,7 +64,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the account to delete</param>
 		public void Delete(int? id)
 		{
-			BaseDelete(id.ToString());
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
@@ -73,7 +73,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of accounts</returns>
 		public EntityCollection<AccountSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<AccountSubset>> FindAsync()

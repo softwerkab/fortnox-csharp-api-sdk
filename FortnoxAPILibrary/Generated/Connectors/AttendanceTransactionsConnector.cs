@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The found attendanceTransaction</returns>
         public AttendanceTransaction Get(string employeeId, DateTime? date, AttendanceCauseCode? code)
         {
-            return BaseGet(employeeId, date?.ToString(APIConstants.DateFormat), code?.GetStringValue());
+			return GetAsync(employeeId, date, code).Result;
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The updated attendanceTransaction</returns>
         public AttendanceTransaction Update(AttendanceTransaction attendanceTransaction)
         {
-            return BaseUpdate(attendanceTransaction, attendanceTransaction.EmployeeId, attendanceTransaction.Date?.ToString(APIConstants.DateFormat), attendanceTransaction.CauseCode?.GetStringValue());
+			return UpdateAsync(attendanceTransaction).Result;
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The created attendanceTransaction</returns>
         public AttendanceTransaction Create(AttendanceTransaction attendanceTransaction)
         {
-            return BaseCreate(attendanceTransaction);
+			return CreateAsync(attendanceTransaction).Result;
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <param name="code"></param>
         public void Delete(string employeeId, DateTime? date, AttendanceCauseCode? code)
         {
-            BaseDelete(employeeId, date?.ToString(APIConstants.DateFormat), code?.GetStringValue());
+			DeleteAsync(employeeId, date, code).Wait();
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>A list of attendanceTransactions</returns>
         public EntityCollection<AttendanceTransactionSubset> Find()
         {
-            return BaseFind();
+			return FindAsync().Result;
         }
 
         public async Task<EntityCollection<AttendanceTransactionSubset>> FindAsync()

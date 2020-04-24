@@ -66,7 +66,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found contract</returns>
 		public Contract Get(int? id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -76,7 +76,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated contract</returns>
 		public Contract Update(Contract contract)
 		{
-			return BaseUpdate(contract, contract.DocumentNumber.ToString());
+			return UpdateAsync(contract).Result;
 		}
 
 		/// <summary>
@@ -86,7 +86,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created contract</returns>
 		public Contract Create(Contract contract)
 		{
-			return BaseCreate(contract);
+			return CreateAsync(contract).Result;
 		}
 
 		/// <summary>
@@ -95,7 +95,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of contracts</returns>
 		public EntityCollection<ContractSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 		
 		/// <summary>

@@ -36,7 +36,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found articleFileConnection</returns>
 		public ArticleFileConnection Get(string id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -46,7 +46,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created articleFileConnection</returns>
 		public ArticleFileConnection Create(ArticleFileConnection articleFileConnection)
 		{
-			return BaseCreate(articleFileConnection);
+			return CreateAsync(articleFileConnection).Result;
 		}
 
 		/// <summary>
@@ -55,7 +55,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the articleFileConnection to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id.ToString());
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
@@ -64,7 +64,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of articleFileConnections</returns>
 		public EntityCollection<ArticleFileConnection> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<ArticleFileConnection>> FindAsync()

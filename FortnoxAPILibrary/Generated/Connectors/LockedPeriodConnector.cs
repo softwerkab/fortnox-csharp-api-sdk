@@ -25,12 +25,12 @@ namespace FortnoxAPILibrary.Connectors
 
         public LockedPeriod Get()
         {
-            return BaseFind()?.Entity;
+			return GetAsync().Result;
         }
 
         public async Task<LockedPeriod> GetAsync()
         {
-            return await BaseFind()?.Entity;
+            return (await BaseFind())?.Entity;
         }
     }
 }

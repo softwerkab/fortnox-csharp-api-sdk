@@ -22,12 +22,12 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public CompanyInformation Get()
         {
-            return BaseFind()?.Entity;
+			return GetAsync().Result;
         }
 
 		public async Task<CompanyInformation> GetAsync()
         {
-            return await BaseFind()?.Entity;
+            return (await BaseFind())?.Entity;
         }
 	}
 }

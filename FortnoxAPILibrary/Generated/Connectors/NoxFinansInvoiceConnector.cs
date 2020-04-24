@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of noxFinansInvoices</returns>
 		public EntityCollection<NoxFinansInvoiceSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<NoxFinansInvoiceSubset>> FindAsync()

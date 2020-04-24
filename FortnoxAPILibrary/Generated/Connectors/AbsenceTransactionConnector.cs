@@ -39,7 +39,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The found absenceTransaction</returns>
         public AbsenceTransaction Get(string employeeId, DateTime? date, AbsenceCauseCode? code)
 		{
-			return BaseGet(employeeId, date?.ToString(APIConstants.DateFormat), code?.GetStringValue());
+			return GetAsync(employeeId, date, code).Result;
 		}
 
 		/// <summary>
@@ -49,7 +49,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated absenceTransaction</returns>
 		public AbsenceTransaction Update(AbsenceTransaction absenceTransaction)
 		{
-			return BaseUpdate(absenceTransaction, absenceTransaction.EmployeeId, absenceTransaction.Date?.ToString(APIConstants.DateFormat), absenceTransaction.CauseCode?.GetStringValue());
+			return UpdateAsync(absenceTransaction).Result;
 		}
 
 		/// <summary>
@@ -59,7 +59,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created absenceTransaction</returns>
 		public AbsenceTransaction Create(AbsenceTransaction absenceTransaction)
 		{
-			return BaseCreate(absenceTransaction);
+			return CreateAsync(absenceTransaction).Result;
 		}
 
 		/// <summary>
@@ -70,7 +70,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <param name="code"></param>
 		public void Delete(string employeeId, DateTime? date, AbsenceCauseCode? code)
 		{
-			BaseDelete(employeeId, date?.ToString(APIConstants.DateFormat), code?.GetStringValue());
+			DeleteAsync(employeeId, date, code).Wait();
 		}
 
 		/// <summary>
@@ -79,7 +79,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of absenceTransactions</returns>
 		public EntityCollection<AbsenceTransaction> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<AbsenceTransaction>> FindAsync()

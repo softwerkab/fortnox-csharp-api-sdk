@@ -35,7 +35,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found taxReduction</returns>
 		public TaxReduction Get(string id)
 		{
-			return BaseGet(id.ToString());
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated taxReduction</returns>
 		public TaxReduction Update(TaxReduction taxReduction)
 		{
-			return BaseUpdate(taxReduction, taxReduction.Id.ToString());
+			return UpdateAsync(taxReduction).Result;
 		}
 
 		/// <summary>
@@ -55,7 +55,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created taxReduction</returns>
 		public TaxReduction Create(TaxReduction taxReduction)
 		{
-			return BaseCreate(taxReduction);
+			return CreateAsync(taxReduction).Result;
 		}
 
 		/// <summary>
@@ -64,7 +64,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the taxReduction to delete</param>
 		public void Delete(string id)
 		{
-			BaseDelete(id.ToString());
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
@@ -73,7 +73,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of taxReductions</returns>
 		public EntityCollection<TaxReductionSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
 
 		public async Task<EntityCollection<TaxReductionSubset>> FindAsync()

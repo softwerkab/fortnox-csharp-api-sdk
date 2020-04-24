@@ -30,7 +30,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created trustedEmailSenders</returns>
 		public TrustedEmailSender Create(TrustedEmailSender trustedEmailSenders)
 		{
-			return BaseCreate(trustedEmailSenders);
+			return CreateAsync(trustedEmailSenders).Result;
 		}
 
 		/// <summary>
@@ -39,7 +39,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the trustedEmailSenders to delete</param>
 		public void Delete(int? id)
 		{
-			BaseDelete(id.ToString());
+			DeleteAsync(id).Wait();
 		}
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace FortnoxAPILibrary.Connectors
         public async Task<EmailSenders> FindAsync()
         {
             Resource = "emailsenders";
-            var res = await BaseFind()?.Entity;
+            var res = (await BaseFind())?.Entity;
             Resource = "emailsenders/trusted";
             return res;
         }
