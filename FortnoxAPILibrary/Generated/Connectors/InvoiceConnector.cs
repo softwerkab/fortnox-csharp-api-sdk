@@ -1,6 +1,8 @@
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
@@ -244,6 +246,23 @@ namespace FortnoxAPILibrary.Connectors
 		public Invoice Preview(int? id)
 		{
 			return DoAction(id.ToString(), "preview");
+		}
+
+		public async Task<EntityCollection<InvoiceSubset>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task<Invoice> CreateAsync(Invoice invoice)
+		{
+			return await BaseCreate(invoice);
+		}
+		public async Task<Invoice> UpdateAsync(Invoice invoice)
+		{
+			return await BaseUpdate(invoice, invoice.DocumentNumber.ToString());
+		}
+		public async Task<Invoice> GetAsync(int? id)
+		{
+			return await BaseGet(id.ToString());
 		}
 	}
 }

@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
@@ -80,5 +82,33 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseFind();
 		}
+
+		public async Task<EntityCollection<VoucherSubset>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task<Voucher> CreateAsync(Voucher voucher)
+		{
+			return await BaseCreate(voucher);
+		}
+        public async Task<Voucher> GetAsync(int? id, string seriesId, int? financialYearId)
+		{
+            await BaseGetParametersInjection = new Dictionary<string, string>();
+            if (financialYearId != null)
+            {
+                await BaseGetParametersInjection = new Dictionary<string, string>
+                {
+                    {"financialyear", financialYearId.ToString()}
+                };
+            }
+
+            return await BaseGet(seriesId.ToString(), id.ToString());
+        }
+
+		/// <summary>
+		/// Creates a new voucher
+		/// </summary>
+		/// <param name="voucher">The voucher to create</param>
+		/// <returns>The created voucher</returns>
     }
 }

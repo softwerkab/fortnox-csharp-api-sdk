@@ -2,6 +2,8 @@ using System;
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
@@ -56,5 +58,18 @@ namespace FortnoxAPILibrary.Connectors
         {
             return BaseUpdate(null, employeeId, date?.ToString(APIConstants.DateFormat), "resetday");
         }
+
+        public async Task<ScheduleTimes> UpdateAsync(ScheduleTimes scheduleTime)
+        {
+            return await BaseUpdate(scheduleTime,scheduleTime.EmployeeId, scheduleTime.Date?.ToString(APIConstants.DateFormat));
+        }
+		public async Task<ScheduleTimes> GetAsync(string employeeId, DateTime? date)
+        {
+            return await BaseGet(employeeId, date?.ToString(APIConstants.DateFormat));
+        }
+		public async Task<EntityCollection<ScheduleTimes>> FindAsync()
+		{
+			return await BaseFind();
+		}
 	}
 }

@@ -1,6 +1,8 @@
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
@@ -27,6 +29,11 @@ namespace FortnoxAPILibrary.Connectors
 		public EntityCollection<PrintTemplate> Find()
 		{
 			return BaseFind();
+		}
+
+		public async Task<EntityCollection<PrintTemplate>> FindAsync()
+		{
+			return await BaseFind();
 		}
 	}
 }

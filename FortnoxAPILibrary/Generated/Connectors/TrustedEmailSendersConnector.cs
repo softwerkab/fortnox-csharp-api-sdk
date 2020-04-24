@@ -2,6 +2,8 @@ using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Reused;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
@@ -46,10 +48,25 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>Collection of emails with id </returns>
         public EmailSenders Find()
         {
-			Resource = "emailsenders";
-            var res = BaseFind()?.Entity;
+            return FindAsync().Result;
+        }
+
+        public async Task<TrustedEmailSender> CreateAsync(TrustedEmailSender trustedEmailSenders)
+        {
+            return await BaseCreate(trustedEmailSenders);
+        }
+
+        public async Task DeleteAsync(int? id)
+        {
+            await BaseDelete(id.ToString());
+        }
+
+        public async Task<EmailSenders> FindAsync()
+        {
+            Resource = "emailsenders";
+            var res = await BaseFind()?.Entity;
             Resource = "emailsenders/trusted";
             return res;
-		}
+        }
 	}
 }

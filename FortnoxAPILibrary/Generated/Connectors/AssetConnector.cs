@@ -2,6 +2,8 @@ using System.Text.RegularExpressions;
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
@@ -98,5 +100,56 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return BaseFind();
 		}
+
+		public async Task<EntityCollection<AssetSubset>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task DeleteAsync(string id)
+		{
+			await BaseDelete(id.ToString());
+		}
+		public async Task<Asset> CreateAsync(Asset asset)
+        {
+            FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
+
+            var result = await BaseCreate(asset);
+
+            FixResponseContent = null;
+            return result;
+        }
+		public async Task<Asset> UpdateAsync(Asset asset)
+        {
+            var id = asset.Id;
+            asset.Id = null;
+            FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
+
+            var result = await BaseUpdate(asset, id);
+
+            FixResponseContent = null;
+            asset.Id = id;
+            return result;
+		}
+
+		/// <summary>
+		/// Creates a new asset
+		/// </summary>
+		/// <param name="asset">The asset to create</param>
+		/// <returns>The created asset</returns>
+		public async Task<Asset> GetAsync(string id)
+		{
+            FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
+
+            var result = await BaseGet(id);
+
+            FixResponseContent = null;
+            return result;
+        }
+
+		/// <summary>
+		/// Updates a asset
+		/// </summary>
+		/// <param name="asset">The asset to update</param>
+		/// <returns>The updated asset</returns>
 	}
 }

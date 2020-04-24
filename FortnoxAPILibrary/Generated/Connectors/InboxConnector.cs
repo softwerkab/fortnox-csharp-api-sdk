@@ -6,5 +6,6 @@ namespace FortnoxAPILibrary.Connectors
         {
             Resource = "inbox";
         }
+
     }
 }

@@ -6,6 +6,8 @@ using System.Web;
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
@@ -173,5 +175,6 @@ namespace FortnoxAPILibrary.Connectors
         {
             return Guid.TryParse(str, out _);
         }
+
     }
 }

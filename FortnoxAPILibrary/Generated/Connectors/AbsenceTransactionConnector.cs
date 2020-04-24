@@ -2,6 +2,8 @@ using System;
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
@@ -78,6 +80,27 @@ namespace FortnoxAPILibrary.Connectors
 		public EntityCollection<AbsenceTransaction> Find()
 		{
 			return BaseFind();
+		}
+
+		public async Task<EntityCollection<AbsenceTransaction>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task DeleteAsync(string employeeId, DateTime? date, AbsenceCauseCode? code)
+		{
+			await BaseDelete(employeeId, date?.ToString(APIConstants.DateFormat), code?.GetStringValue());
+		}
+		public async Task<AbsenceTransaction> CreateAsync(AbsenceTransaction absenceTransaction)
+		{
+			return await BaseCreate(absenceTransaction);
+		}
+		public async Task<AbsenceTransaction> UpdateAsync(AbsenceTransaction absenceTransaction)
+		{
+			return await BaseUpdate(absenceTransaction, absenceTransaction.EmployeeId, absenceTransaction.Date?.ToString(APIConstants.DateFormat), absenceTransaction.CauseCode?.GetStringValue());
+		}
+        public async Task<AbsenceTransaction> GetAsync(string employeeId, DateTime? date, AbsenceCauseCode? code)
+		{
+			return await BaseGet(employeeId, date?.ToString(APIConstants.DateFormat), code?.GetStringValue());
 		}
 	}
 }

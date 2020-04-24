@@ -1,6 +1,8 @@
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
@@ -57,6 +59,23 @@ namespace FortnoxAPILibrary.Connectors
 		public EntityCollection<EmployeeSubset> Find()
 		{
 			return BaseFind();
+		}
+
+		public async Task<EntityCollection<EmployeeSubset>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task<Employee> CreateAsync(Employee employee)
+		{
+			return await BaseCreate(employee);
+		}
+		public async Task<Employee> UpdateAsync(Employee employee)
+		{
+			return await BaseUpdate(employee, employee.EmployeeId.ToString());
+		}
+		public async Task<Employee> GetAsync(string id)
+		{
+			return await BaseGet(id.ToString());
 		}
 	}
 }

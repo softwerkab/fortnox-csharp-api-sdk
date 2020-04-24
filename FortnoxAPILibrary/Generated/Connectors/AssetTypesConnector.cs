@@ -7,6 +7,8 @@ using FortnoxAPILibrary.Entities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
@@ -102,5 +104,55 @@ namespace FortnoxAPILibrary.Connectors
             FixResponseContent = null;
 			return result;
         }
+
+        public async Task<EntityCollection<AssetTypesSubset>> FindAsync()
+        {
+            FixResponseContent = (json) =>
+            {
+                var structure = JObject.Parse(json);
+
+                structure["MetaInformation"] = structure["Types"][0]["MetaInformation"]; //copy meta-info node to root
+                structure["Types"][0].Remove(); //remove the array element with meta-info node
+
+				var fixedJson = structure.ToString();
+                return fixedJson;
+            };
+
+            var result = await BaseFind();
+
+            FixResponseContent = null;
+			return result;
+        }
+		public async Task DeleteAsync(int? id)
+		{
+			await BaseDelete(id.ToString());
+		}
+		public async Task<AssetType> CreateAsync(AssetType assetType)
+		{
+            FixResponseContent = (json) => new Regex("Type").Replace(json, "AssetType", 1);
+
+            var result = await BaseCreate(assetType);
+
+            FixResponseContent = null;
+            return result;
+		}
+		public async Task<AssetType> UpdateAsync(AssetType assetTypes)
+		{
+			FixResponseContent = (json) => new Regex("Type").Replace(json, "AssetType", 1);
+
+			var result = await BaseUpdate(assetTypes, assetTypes.Id.ToString());
+
+			FixResponseContent = null;
+            return result;
+		}
+		public async Task<AssetType> GetAsync(int? id)
+		{
+			FixResponseContent = (json) => new Regex("Type").Replace(json, "AssetType", 1);
+
+			var result = await BaseGet(id.ToString());
+
+            FixResponseContent = null;
+            return result;
+		}
     }
 }
