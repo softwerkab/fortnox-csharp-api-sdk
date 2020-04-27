@@ -1,3 +1,4 @@
+using System;
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
+	[Obsolete("Connector in current state does not work")]
 	public class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConnection, EntityCollection<InvoiceFileConnectionSubset>, Sort.By.InvoiceFileConnection?>, IInvoiceFileConnectionConnector
 	{
 		/// <summary>

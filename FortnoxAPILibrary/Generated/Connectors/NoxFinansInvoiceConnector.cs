@@ -1,3 +1,4 @@
+using System;
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
@@ -7,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace FortnoxAPILibrary.Connectors
 {
-    /// <remarks/>
-    public class NoxFinansInvoiceConnector : EntityConnector<NoxFinansInvoice, EntityCollection<NoxFinansInvoiceSubset>, Sort.By.NoxFinansInvoice?>, INoxFinansInvoiceConnector
+	/// <remarks/>
+	[Obsolete("Connector in currently not supported")]
+	public class NoxFinansInvoiceConnector : EntityConnector<NoxFinansInvoice, EntityCollection<NoxFinansInvoiceSubset>, Sort.By.NoxFinansInvoice?>, INoxFinansInvoiceConnector
 	{
 	    /// <summary>
         /// Use with Find() to limit the search result
