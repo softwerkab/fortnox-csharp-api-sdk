@@ -1,4 +1,5 @@
-﻿using FortnoxAPILibrary.Connectors;
+﻿using System;
+using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -35,5 +36,29 @@ namespace FortnoxAPILibrary.Tests
             Assert.IsTrue(connector.HasError);
             Assert.IsNull(createdCustomer);
         }
+
+        [TestMethod]
+        public void Test_NoRateLimiter_TooManyRequest_Error()
+        {
+            ConnectionSettings.UseRateLimiter = false;
+            var connector = new CustomerConnector();
+
+            ErrorInformation error = null;
+            for (var i = 0; i < 200; i++)
+            {
+                connector.Find();
+                if (connector.HasError)
+                {
+                    error = connector.Error;
+                    break;
+                }
+            }
+
+            //Restore settings
+            ConnectionSettings.UseRateLimiter = true;
+
+            //Assert
+            Assert.IsNotNull(error);
+            Assert.IsTrue(error.Message.Contains("Too Many Requests")); }
     }
 }

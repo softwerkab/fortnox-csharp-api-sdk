@@ -107,7 +107,7 @@ namespace FortnoxAPILibrary
         protected string GetUrl(string index = "")
         {
             string[] str = {
-				ConnectionCredentials.FortnoxAPIServer,
+				ConnectionSettings.FortnoxAPIServer,
 				Resource,
 				index
 			};
@@ -124,7 +124,8 @@ namespace FortnoxAPILibrary
         /// </summary>
         protected async Task RateLimit()
         {
-            await RateLimiter;
+            if (ConnectionSettings.UseRateLimiter)
+                await RateLimiter;
         }
 
         /// <summary>
