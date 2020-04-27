@@ -308,7 +308,7 @@ namespace FortnoxAPILibrary
         {
             if (we.Response == null)
             {
-                throw new Exception("Inget svar från Fortnox API. Kontrollera inre exception.", we);
+                throw new Exception("Connection to server failed. Check inner exception.", we);
             }
 
             using var response = (HttpWebResponse)we.Response;
