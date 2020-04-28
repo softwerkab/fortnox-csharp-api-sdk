@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FortnoxAPILibrary.Connectors
 {
-    public interface IAccountConnector : IEntityConnector<Sort.By.Account>
+    public interface IAccountConnector : IFinancialYearBasedEntityConnector<Sort.By.Account, Accounts, Sort.By.Account>
     {
         /// <summary>
         /// Use with Find() to limit the search result
