@@ -158,5 +158,29 @@ namespace FortnoxAPILibrary.Tests
             watch.Stop();
             Console.WriteLine(@"Total time: "+watch.ElapsedMilliseconds);
         }
+
+        [TestMethod]
+        public void Test_issue84_fixed() //Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/84
+        {
+            //Arrange
+            IArchiveConnector conn = new ArchiveConnector();
+            var testRootFolder = conn.GetFolder("TestArchive") ?? conn.CreateFolder("TestArchive");
+
+            //Act
+            IArchiveConnector connector = new ArchiveConnector();
+
+            var data = Resource.fortnox_image;
+            var randomFileName = TestUtils.RandomString() + "åöä.txt";
+
+            var fortnoxFile = connector.UploadFile(randomFileName, data, testRootFolder.Name);
+            MyAssert.HasNoError(connector);
+
+            //Assert
+            Assert.AreEqual(randomFileName, fortnoxFile.Name);
+
+            //Clean
+            connector.DeleteFile(fortnoxFile.Id);
+            MyAssert.HasNoError(connector);
+        }
     }
 }
