@@ -1,17 +1,20 @@
 using System;
-using FortnoxAPILibrary;
+using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
+using System.Web;
 
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	[Obsolete("Connector in current state does not work")]
-	public class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConnection, EntityCollection<InvoiceFileConnectionSubset>, Sort.By.InvoiceFileConnection?>, IInvoiceFileConnectionConnector
-	{
+    public class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConnection, EntityCollection<InvoiceFileConnectionSubset>, Sort.By.InvoiceFileConnection?>, IInvoiceFileConnectionConnector
+    {
+        public override string BaseUrl => base.BaseUrl.Replace("3", "api");
+
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
@@ -22,20 +25,15 @@ namespace FortnoxAPILibrary.Connectors
 		/// <remarks/>
 		public InvoiceFileConnectionConnector()
 		{
-			Resource = "invoicefileconnections";
+			Resource = "fileattachments/attachments-v1";
 		}
 
-		/// <summary>
-		/// Find a invoiceFileConnection based on id
-		/// </summary>
-		/// <param name="id">Identifier of the invoiceFileConnection to find</param>
-		/// <returns>The found invoiceFileConnection</returns>
-		public InvoiceFileConnection Get(string id)
-		{
-			return GetAsync(id).Result;
-		}
+        public List<InvoiceFileConnection> GetConnections(long? entityId, EntityType? entityType)
+        {
+            return GetConnectionsAsync(entityId, entityType).Result;
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Updates a invoiceFileConnection
 		/// </summary>
 		/// <param name="invoiceFileConnection">The invoiceFileConnection to update</param>
@@ -64,34 +62,64 @@ namespace FortnoxAPILibrary.Connectors
 			DeleteAsync(id).Wait();
 		}
 
-		/// <summary>
-		/// Gets a list of invoiceFileConnections
-		/// </summary>
-		/// <returns>A list of invoiceFileConnections</returns>
-		public EntityCollection<InvoiceFileConnectionSubset> Find()
-		{
-			return FindAsync().Result;
-		}
-
-		public async Task<EntityCollection<InvoiceFileConnectionSubset>> FindAsync()
-		{
-			return await BaseFind();
-		}
 		public async Task DeleteAsync(string id)
 		{
 			await BaseDelete(id);
 		}
 		public async Task<InvoiceFileConnection> CreateAsync(InvoiceFileConnection invoiceFileConnection)
-		{
-			return await BaseCreate(invoiceFileConnection);
-		}
-		public async Task<InvoiceFileConnection> UpdateAsync(InvoiceFileConnection invoiceFileConnection)
-		{
-			return await BaseUpdate(invoiceFileConnection, invoiceFileConnection.Id);
-		}
-		public async Task<InvoiceFileConnection> GetAsync(string id)
-		{
-			return await BaseGet(id);
-		}
-	}
+        {
+            Parameters = new Dictionary<string, string>();
+            var requestUriString = GetUrl();
+            requestUriString = AddParameters(requestUriString);
+
+            Method = "POST";
+            ResponseType = RequestResponseType.JSON;
+            RequestUriString = requestUriString;
+
+            var entity = new List<InvoiceFileConnection>() { invoiceFileConnection };
+            var result = await DoRequest(entity);
+            return result?.FirstOrDefault();
+        }
+
+        public async Task<InvoiceFileConnection> UpdateAsync(InvoiceFileConnection invoiceFileConnection)
+        {
+            Parameters = new Dictionary<string, string>();
+            var indices = new [] { invoiceFileConnection.Id };
+            var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
+            var requestUriString = GetUrl(searchValue);
+            requestUriString = AddParameters(requestUriString);
+
+            Method = "PUT";
+            ResponseType = RequestResponseType.JSON;
+            RequestUriString = requestUriString;
+
+            var limitedEntity = new InvoiceFileConnection()
+            {
+                IncludeOnSend = invoiceFileConnection.IncludeOnSend
+            };
+
+            var result = await DoRequest(limitedEntity);
+            return result;
+        }
+
+        public async Task<List<InvoiceFileConnection>> GetConnectionsAsync(long? entityId, EntityType? entityType)
+        {
+            Parameters = new Dictionary<string, string>
+            {
+                {"entityid", entityId?.ToString()}, 
+                {"entitytype", entityType?.GetStringValue()}
+            };
+            var indices = Array.Empty<string>();
+            var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
+            var requestUriString = GetUrl(searchValue);
+            requestUriString = AddParameters(requestUriString);
+
+            Method = "GET";
+            ResponseType = RequestResponseType.JSON;
+            RequestUriString = requestUriString;
+
+            var result = await DoRequest<List<InvoiceFileConnection>>();
+            return result;
+        }
+    }
 }

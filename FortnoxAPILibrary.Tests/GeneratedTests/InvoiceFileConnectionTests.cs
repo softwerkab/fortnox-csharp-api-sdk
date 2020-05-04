@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection.Metadata;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
@@ -20,7 +21,6 @@ namespace FortnoxAPILibrary.GeneratedTests
             ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
         }
 
-        [Ignore("Wrong json structure")]
         [TestMethod]
         public void Test_InvoiceFileConnection_CRUD()
         {
@@ -38,16 +38,17 @@ namespace FortnoxAPILibrary.GeneratedTests
                     new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 2, Price = 10},
                 }
             });
-            var tmpFile = new ArchiveConnector().UploadFile("tmpImage.png", Resource.fortnox_image);
+            var c = new InboxConnector();
+            var tmpFile = c.UploadFile("tmpInvoiceFile.pdf", Resource.invoice_example, StaticFolders.CustomerInvoices);
             #endregion Arrange
 
-            IInvoiceFileConnectionConnector connector = new InvoiceFileConnectionConnector();
+            /*IInvoiceFileConnectionConnector*/ var connector = new InvoiceFileConnectionConnector();
 
             #region CREATE
             var newInvoiceFileConnection = new InvoiceFileConnection()
             {
                 EntityId = tmpInvoice.DocumentNumber,
-                FileId = tmpFile.Id,
+                FileId = tmpFile.ArchiveFileId,
                 IncludeOnSend = false,
                 EntityType = EntityType.Invoice
             };
@@ -70,7 +71,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             #region READ / GET
 
-            var retrievedInvoiceFileConnection = connector.Get(createdInvoiceFileConnection.Id);
+            var retrievedInvoiceFileConnection = connector.GetConnections(createdInvoiceFileConnection.EntityId, createdInvoiceFileConnection.EntityType)?.FirstOrDefault();
             MyAssert.HasNoError(connector);
             Assert.AreEqual(true, retrievedInvoiceFileConnection.IncludeOnSend);
 
@@ -81,7 +82,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             connector.Delete(createdInvoiceFileConnection.Id);
             MyAssert.HasNoError(connector);
 
-            retrievedInvoiceFileConnection = connector.Get(createdInvoiceFileConnection.FileId);
+            retrievedInvoiceFileConnection = connector.GetConnections(createdInvoiceFileConnection.EntityId, createdInvoiceFileConnection.EntityType)?.FirstOrDefault();
             Assert.AreEqual(null, retrievedInvoiceFileConnection, "Entity still exists after Delete!");
 
             #endregion DELETE
@@ -89,6 +90,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region Delete arranged resources
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
             new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            new InboxConnector().DeleteFile(tmpFile.Id);
             #endregion Delete arranged resources
         }
     }

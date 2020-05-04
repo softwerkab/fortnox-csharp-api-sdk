@@ -92,9 +92,11 @@ namespace FortnoxAPILibrary
         public string Method { get; protected set; }
         public string RequestUriString { get; protected set; }
         public string LocalPath { get; protected set; }
+        public virtual string BaseUrl => ConnectionSettings.FortnoxAPIServer;
 
         public RequestResponseType ResponseType { get; protected set; }
 
+        protected Func<string, string> FixRequestContent; //Needed for fixing irregular json requests
         protected Func<string, string> FixResponseContent; //Needed for fixing irregular json responses
 
         /// <remarks />
@@ -107,7 +109,7 @@ namespace FortnoxAPILibrary
         protected string GetUrl(string index = "")
         {
             string[] str = {
-				ConnectionSettings.FortnoxAPIServer,
+				BaseUrl,
 				Resource,
 				index
 			};
@@ -341,7 +343,13 @@ namespace FortnoxAPILibrary
 
         protected string Serialize<T>(T entity)
         {
-            return serializer.Serialize(entity);
+            var json = serializer.Serialize(entity);
+
+            if (FixRequestContent != null)
+                json = FixRequestContent(json);
+
+            FixRequestContent = null;
+            return json;
         }
 
         protected T Deserialize<T>(string content)
@@ -350,6 +358,7 @@ namespace FortnoxAPILibrary
             {
                 if (FixResponseContent != null)
                     content = FixResponseContent(content);
+                FixResponseContent = null;
                 return serializer.Deserialize<T>(content);
             }
             catch (Exception e)

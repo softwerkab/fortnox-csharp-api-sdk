@@ -113,11 +113,6 @@ namespace FortnoxAPILibrary.Connectors
             return result;
 		}
 
-		/// <summary>
-		/// Creates a new asset
-		/// </summary>
-		/// <param name="asset">The asset to create</param>
-		/// <returns>The created asset</returns>
 		public async Task<Asset> GetAsync(string id)
 		{
             FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
@@ -127,11 +122,5 @@ namespace FortnoxAPILibrary.Connectors
             FixResponseContent = null;
             return result;
         }
-
-		/// <summary>
-		/// Updates a asset
-		/// </summary>
-		/// <param name="asset">The asset to update</param>
-		/// <returns>The updated asset</returns>
-	}
+    }
 }

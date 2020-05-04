@@ -69,5 +69,15 @@ namespace FortnoxAPILibrary.Tests {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] invoice_example {
+            get {
+                object obj = ResourceManager.GetObject("invoice_example", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

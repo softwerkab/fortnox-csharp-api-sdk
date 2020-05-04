@@ -1,5 +1,6 @@
 using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 // ReSharper disable UnusedMember.Global
@@ -15,14 +16,12 @@ namespace FortnoxAPILibrary.Connectors
 
 		InvoiceFileConnection Update(InvoiceFileConnection invoiceFileConnection);
 		InvoiceFileConnection Create(InvoiceFileConnection invoiceFileConnection);
-		InvoiceFileConnection Get(string id);
-		void Delete(string id);
-		EntityCollection<InvoiceFileConnectionSubset> Find();
+        void Delete(string id);
+        List<InvoiceFileConnection> GetConnections(long? entityId, EntityType? entityType);
 
 		Task<InvoiceFileConnection> UpdateAsync(InvoiceFileConnection invoiceFileConnection);
 		Task<InvoiceFileConnection> CreateAsync(InvoiceFileConnection invoiceFileConnection);
-		Task<InvoiceFileConnection> GetAsync(string id);
-		Task DeleteAsync(string id);
-		Task<EntityCollection<InvoiceFileConnectionSubset>> FindAsync();
+        Task DeleteAsync(string id);
+        Task<List<InvoiceFileConnection>> GetConnectionsAsync(long? entityId, EntityType? entityType);
 	}
 }
