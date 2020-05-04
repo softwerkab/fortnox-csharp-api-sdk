@@ -37,6 +37,10 @@ namespace FortnoxAPILibrary.Entities
         [JsonProperty]
         public DateTime? DeliveryDate { get; set; }
 
+        ///<summary> Document number </summary>
+        [JsonProperty]
+        public int? DocumentNumber { get; set; }
+
         ///<summary> External invoice reference 1 </summary>
         [JsonProperty]
         public string ExternalInvoiceReference1 { get; set; }
