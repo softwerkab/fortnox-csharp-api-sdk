@@ -72,7 +72,7 @@ namespace FortnoxAPILibrary.Connectors
             var requestUriString = GetUrl();
             requestUriString = AddParameters(requestUriString);
 
-            Method = "POST";
+            Method = RequestMethod.Post;
             ResponseType = RequestResponseType.JSON;
             RequestUriString = requestUriString;
 
@@ -89,7 +89,7 @@ namespace FortnoxAPILibrary.Connectors
             var requestUriString = GetUrl(searchValue);
             requestUriString = AddParameters(requestUriString);
 
-            Method = "PUT";
+            Method = RequestMethod.Put;
             ResponseType = RequestResponseType.JSON;
             RequestUriString = requestUriString;
 
@@ -114,7 +114,7 @@ namespace FortnoxAPILibrary.Connectors
             var requestUriString = GetUrl(searchValue);
             requestUriString = AddParameters(requestUriString);
 
-            Method = "GET";
+            Method = RequestMethod.Get;
             ResponseType = RequestResponseType.JSON;
             RequestUriString = requestUriString;
 

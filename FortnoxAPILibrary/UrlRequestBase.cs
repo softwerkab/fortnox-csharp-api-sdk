@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using ComposableAsync;
 using FortnoxAPILibrary.Entities;
@@ -29,17 +29,8 @@ namespace FortnoxAPILibrary
         /// <exception cref="Exception">Exception will be thrown if client secret is not set.</exception>
         public string ClientSecret
 		{
-			get
-			{
-				if (!string.IsNullOrEmpty(clientSecret))
-                    return clientSecret;
-
-                if (!string.IsNullOrEmpty(ConnectionCredentials.ClientSecret))
-                    return ConnectionCredentials.ClientSecret;
-
-                throw new Exception("Fortnox Client Secret must be set.");
-			}
-			set => clientSecret = value;
+			get => !string.IsNullOrEmpty(clientSecret) ? clientSecret : ConnectionCredentials.ClientSecret;
+            set => clientSecret = value;
         }
 
 		/// <summary>
@@ -48,17 +39,8 @@ namespace FortnoxAPILibrary
 		/// /// <exception cref="Exception">Exception will be thrown if access token is not set.</exception>
 		public string AccessToken
 		{
-			get
-			{
-				if (!string.IsNullOrEmpty(accessToken))
-                    return accessToken;
-
-                if (!string.IsNullOrEmpty(ConnectionCredentials.AccessToken))
-                    return ConnectionCredentials.AccessToken;
-
-                throw new Exception("Fortnox Access Token must be set.");
-			}
-			set => accessToken = value;
+			get => !string.IsNullOrEmpty(accessToken) ? accessToken : ConnectionCredentials.AccessToken;
+            set => accessToken = value;
         }
 
 		/// <summary>
@@ -89,7 +71,7 @@ namespace FortnoxAPILibrary
         public bool HasError => Error != null;
 
         public string Resource { get; protected set; }
-        public string Method { get; protected set; }
+        public RequestMethod Method { get; protected set; }
         public string RequestUriString { get; protected set; }
         public string LocalPath { get; protected set; }
         public virtual string BaseUrl => ConnectionSettings.FortnoxAPIServer;
@@ -142,8 +124,13 @@ namespace FortnoxAPILibrary
         /// <para>DELETE</para>
         /// </param>
         /// <returns></returns>
-        protected HttpWebRequest SetupRequest(string requestUriString, string method)
+        protected HttpWebRequest SetupRequest(string requestUriString, RequestMethod method)
         {
+            if (string.IsNullOrEmpty(ClientSecret))
+                throw new Exception("Fortnox Client Secret must be set.");
+            if (string.IsNullOrEmpty(AccessToken))
+                throw new Exception("Fortnox Access Token must be set.");
+
             Error = null;
 
             var wr = (HttpWebRequest)WebRequest.Create(requestUriString);
@@ -151,7 +138,7 @@ namespace FortnoxAPILibrary
             wr.Headers.Add("client-secret", ClientSecret);
             wr.ContentType = "application/json";
             wr.Accept = "application/json";
-            wr.Method = method;
+            wr.Method = method.GetStringValue();
             wr.Timeout = Timeout;            
 
             return wr;
@@ -167,11 +154,6 @@ namespace FortnoxAPILibrary
             try
             {
                 await RateLimit();
-
-                if (Method != "GET")
-                {
-                    using (wr.GetRequestStream()) { } //TODO: What is the purpose of this?
-                }
 
                 using var response = (HttpWebResponse) wr.GetResponse();
                 HttpStatusCode = response.StatusCode;
@@ -196,14 +178,14 @@ namespace FortnoxAPILibrary
             {
                 await RateLimit();
 
-                if (Method != "GET")
+                if (Method != RequestMethod.Get)
                 {
                     using var requestStream = wr.GetRequestStream();
                     var json = Serialize(entity);
                     requestStream.WriteText(json);
                 }
 
-                if (Method == "POST" || Method == "PUT")
+                if (Method == RequestMethod.Post || Method == RequestMethod.Put)
                 {
                     RequestContent = Serialize(entity);
                 }
@@ -227,7 +209,7 @@ namespace FortnoxAPILibrary
                         case RequestResponseType.JSON:
                             ResponseContent = responseStream.ToText();
                             return Deserialize<T>(ResponseContent);
-                        case RequestResponseType.EMAIL:
+                        case RequestResponseType.Email:
                             return default;
                         default:
                             responseStream.ToFile(LocalPath);
@@ -258,7 +240,7 @@ namespace FortnoxAPILibrary
                 var header = Encoding.UTF8.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + fileName + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
                 var trailer = Encoding.UTF8.GetBytes("\r\n--" + boundary + "--\r\n");
 
-                var request = SetupRequest(RequestUriString, "POST");
+                var request = SetupRequest(RequestUriString, RequestMethod.Post);
                 request.ContentType = "multipart/form-data; boundary=" + boundary;
 
                 using var dataStream = request.GetRequestStream();
@@ -289,7 +271,7 @@ namespace FortnoxAPILibrary
             {
                 await RateLimit();
 
-                var request = SetupRequest(RequestUriString, "GET");
+                var request = SetupRequest(RequestUriString, RequestMethod.Get);
 
                 using var response = (HttpWebResponse) request.GetResponse();
                 HttpStatusCode = response.StatusCode;
@@ -372,7 +354,19 @@ namespace FortnoxAPILibrary
             JSON,
             PDF,
             File,
-            EMAIL
+            Email
+        }
+
+        public enum RequestMethod
+        {
+            [StringValue("GET")]
+            Get,
+            [StringValue("POST")]
+            Post,
+            [StringValue("PUT")]
+            Put,
+            [StringValue("DELETE")]
+            Delete
         }
     }
 }

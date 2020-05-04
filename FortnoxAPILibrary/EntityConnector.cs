@@ -62,7 +62,7 @@ namespace FortnoxAPILibrary
 
             requestUriString = AddParameters(requestUriString);
 
-            Method = "POST";
+            Method = RequestMethod.Post;
             ResponseType = RequestResponseType.JSON;
             RequestUriString = requestUriString;
 
@@ -81,7 +81,7 @@ namespace FortnoxAPILibrary
 
             requestUriString = AddParameters(requestUriString);
 
-            Method = "PUT";
+            Method = RequestMethod.Put;
             ResponseType = RequestResponseType.JSON;
             RequestUriString = requestUriString;
 
@@ -102,7 +102,7 @@ namespace FortnoxAPILibrary
 
             requestUriString = AddParameters(requestUriString);
 
-            Method = "DELETE";
+            Method = RequestMethod.Delete;
             ResponseType = RequestResponseType.JSON;
             RequestUriString = requestUriString;
 
@@ -120,7 +120,7 @@ namespace FortnoxAPILibrary
 
             requestUriString = AddParameters(requestUriString);
 
-            Method = "GET";
+            Method = RequestMethod.Get;
             ResponseType = RequestResponseType.JSON;
             RequestUriString = requestUriString;
 
@@ -139,7 +139,7 @@ namespace FortnoxAPILibrary
 
             requestUriString = AddParameters(requestUriString);
 
-            Method = "GET";
+            Method = RequestMethod.Get;
             ResponseType = RequestResponseType.JSON;
             RequestUriString = requestUriString;
 
@@ -199,19 +199,19 @@ namespace FortnoxAPILibrary
                 case "print":
                 case "preview":
                 case "eprint":
-                    Method = "GET";
+                    Method = RequestMethod.Get;
                     ResponseType = RequestResponseType.PDF;
                     break;
                 case "externalprint":
-                    Method = "PUT";
+                    Method = RequestMethod.Put;
                     ResponseType = RequestResponseType.JSON;
                     break;
                 case "email":
-                    Method = "GET";
-                    ResponseType = RequestResponseType.EMAIL;
+                    Method = RequestMethod.Get;
+                    ResponseType = RequestResponseType.Email;
                     break;
                 default:
-                    Method = "PUT";
+                    Method = RequestMethod.Put;
                     break;
             }
             RequestUriString = requestUriString;
