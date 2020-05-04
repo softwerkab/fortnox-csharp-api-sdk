@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
@@ -138,6 +139,57 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to delete temporary resources
 
             #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void HouseWorkArticle_AllTypes()
+        {
+            var values = Enum.GetValues(typeof(HouseworkType)).Cast<HouseworkType>().ToList();
+            Assert.AreEqual(20,values.Count);
+
+            var connector = new ArticleConnector();
+            var article = connector.Create(new Article(){ Description = "HouseworkArticleTest", Housework = true });
+            MyAssert.HasNoError(connector);
+
+            foreach (var houseworkType in values)
+            {
+                if (houseworkType == HouseworkType.Empty) 
+                    continue;
+                if (houseworkType == HouseworkType.COOKING || houseworkType == HouseworkType.TUTORING)
+                    continue;
+
+                article.HouseworkType = houseworkType;
+                article = connector.Update(article);
+                if (connector.HasError)
+                    Console.WriteLine("");
+                MyAssert.HasNoError(connector);
+                Assert.AreEqual(houseworkType, article.HouseworkType);
+            }
+
+            connector.Delete(article.ArticleNumber);
+            MyAssert.HasNoError(connector);
+        }
+
+        [TestMethod]
+        public void HouseWorkArticle_Empty()
+        {
+            var connector = new ArticleConnector();
+            var article = connector.Create(new Article()
+            {
+                Description = "HouseworkArticleTest", 
+                Housework = true,
+                HouseworkType = HouseworkType.CLEANING
+            });
+            MyAssert.HasNoError(connector);
+            Assert.AreEqual(HouseworkType.CLEANING, article.HouseworkType);
+
+            article.HouseworkType = HouseworkType.Empty;
+            var updatedArticle = connector.Update(article);
+            MyAssert.HasNoError(connector);
+            Assert.AreEqual(null, updatedArticle.HouseworkType);
+
+            connector.Delete(article.ArticleNumber);
+            MyAssert.HasNoError(connector);
         }
     }
 }

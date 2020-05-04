@@ -219,7 +219,7 @@ namespace FortnoxAPILibrary.Entities
         [JsonProperty]
         public List<InvoiceRow> InvoiceRows { get; set; }
 
-        ///<summary> The type of invoice. Can be INVOICE AGREEMENTINVOICE INTRESTINVOICE  SUMMARYINVOICE or CASHINVOICE. </summary>
+        ///<summary> The type of invoice.</summary>
         [JsonProperty]
         public InvoiceType? InvoiceType { get; set; }
 

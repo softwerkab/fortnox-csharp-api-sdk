@@ -56,9 +56,9 @@ namespace FortnoxAPILibrary.Entities
         [JsonProperty]
         public int? HouseWorkHoursToReport { get; set; }
 
-        ///<summary> The type of house work. Can be  CONSTRUCTIONELECTRICITYGLASSMETALWORK  GROUNDDRAINAGEWORKMASONRY  PAINTINGWALLPAPERINGHVACMAJORAPPLIANCEREPAIR  MOVINGSERVICESITSERVICESCLEANINGTEXTILECLOTHINGSNOWPLOWING  GARDENINGBABYSITTINGOTHERCAREOTHERCOSTS or empty. </summary>
+        ///<summary> The type of house work. </summary>
         [JsonProperty]
-        public HouseWorkType? HouseWorkType { get; set; }
+        public HouseworkType? HouseWorkType { get; set; }
 
         ///<summary> Price per unit </summary>
         [JsonProperty]

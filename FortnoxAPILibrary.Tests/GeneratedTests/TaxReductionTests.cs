@@ -33,9 +33,9 @@ namespace FortnoxAPILibrary.GeneratedTests
                 Comments = "TestInvoice",
                 InvoiceRows = new List<InvoiceRow>()
                 {
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, HouseWorkHoursToReport = 10, Price = 1000, HouseWorkType = HouseWorkType.GARDENING, HouseWork = true},
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, HouseWorkHoursToReport = 20, Price = 1000, HouseWorkType = HouseWorkType.GARDENING, HouseWork = true},
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, HouseWorkHoursToReport = 15, Price = 1000, HouseWorkType = HouseWorkType.GARDENING, HouseWork = true}
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, HouseWorkHoursToReport = 10, Price = 1000, HouseWorkType = HouseworkType.GARDENING, HouseWork = true},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, HouseWorkHoursToReport = 20, Price = 1000, HouseWorkType = HouseworkType.GARDENING, HouseWork = true},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, HouseWorkHoursToReport = 15, Price = 1000, HouseWorkType = HouseworkType.GARDENING, HouseWork = true}
                 }
             });
             #endregion Arrange
@@ -118,9 +118,9 @@ namespace FortnoxAPILibrary.GeneratedTests
                 Comments = "TestInvoice",
                 InvoiceRows = new List<InvoiceRow>()
                 {
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, HouseWorkHoursToReport = 10, Price = 1000, HouseWorkType = HouseWorkType.GARDENING, HouseWork = true},
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, HouseWorkHoursToReport = 20, Price = 1000, HouseWorkType = HouseWorkType.GARDENING, HouseWork = true},
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, HouseWorkHoursToReport = 15, Price = 1000, HouseWorkType = HouseWorkType.GARDENING, HouseWork = true}
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, HouseWorkHoursToReport = 10, Price = 1000, HouseWorkType = HouseworkType.GARDENING, HouseWork = true},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, HouseWorkHoursToReport = 20, Price = 1000, HouseWorkType = HouseworkType.GARDENING, HouseWork = true},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, HouseWorkHoursToReport = 15, Price = 1000, HouseWorkType = HouseworkType.GARDENING, HouseWork = true}
                 }
             });
             #endregion Arrange

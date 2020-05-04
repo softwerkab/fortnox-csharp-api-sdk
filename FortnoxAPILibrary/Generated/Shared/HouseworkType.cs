@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
 {
-    public enum HouseWorkType
+    public enum HouseworkType
     {
         [EnumMember(Value = "CONSTRUCTION")]
         CONSTRUCTION,
@@ -18,17 +18,15 @@ namespace FortnoxAPILibrary.Entities
         GROUNDDRAINAGEWORK,
         [EnumMember(Value = "MASONRY")]
         MASONRY,
-        [EnumMember(Value = "PAINTING")]
-        PAINTING,
-        [EnumMember(Value = "WALLPAPERING")]
-        WALLPAPERING,
+        [EnumMember(Value = "PAINTINGWALLPAPERING")]
+        PAINTINGWALLPAPERING,
         [EnumMember(Value = "HVAC")]
         HVAC,
         [EnumMember(Value = "MAJORAPPLIANCEREPAIR")]
         MAJORAPPLIANCEREPAIR,
-        [EnumMember(Value = "MOVINGSERVICE")]
-        MOVINGSERVICE,
-        [EnumMember(Value = "SITSERVICES")]
+        [EnumMember(Value = "MOVINGSERVICES")]
+        MOVINGSERVICES,
+        [EnumMember(Value = "ITSERVICES")]
         SITSERVICES,
         [EnumMember(Value = "CLEANING")]
         CLEANING,
@@ -44,7 +42,14 @@ namespace FortnoxAPILibrary.Entities
         OTHERCARE,
         [EnumMember(Value = "OTHERCOSTS")]
         OTHERCOSTS,
-        [EnumMember(Value = "")]
-        Empty
+        [EnumMember(Value = "API_BLANK")]
+        Empty,
+
+        [Obsolete]
+        [EnumMember(Value = "COOKING")]
+        COOKING,
+        [Obsolete]
+        [EnumMember(Value = "TUTORING")]
+        TUTORING,
     }
 }

@@ -68,7 +68,7 @@ namespace FortnoxAPILibrary.Entities
         [JsonProperty]
         public bool? Housework { get; set; }
 
-        ///<summary> The type of house work. Can be CONSTRUCTION ELECTRICITY GLASSMETALWORK  GROUNDDRAINAGEWORK MASONRY PAINTINGWALLPAPERING  HVAC CLEANING TEXTILECLOTHING COOKING  SNOWPLOWING GARDENING BABYSITTING OTHERCARE  TUTORING OTHERCOSTS or empty. </summary>
+        ///<summary> The type of house work. </summary>
         [JsonProperty]
         public HouseworkType? HouseworkType { get; set; }
 
