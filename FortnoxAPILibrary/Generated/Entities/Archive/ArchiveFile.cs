@@ -39,5 +39,10 @@ namespace FortnoxAPILibrary.Entities
         [ReadOnly]
         [JsonProperty]
         public string Size { get; private set; }
+
+        ///<summary> Id of the file in Archive. Only defined if obtained from Inbox connector</summary>
+        [ReadOnly]
+        [JsonProperty]
+        public string ArchiveFileId { get; set; }
     }
 }

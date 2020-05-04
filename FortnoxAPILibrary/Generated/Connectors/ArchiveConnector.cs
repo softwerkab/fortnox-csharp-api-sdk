@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
-using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
@@ -61,14 +60,15 @@ namespace FortnoxAPILibrary.Connectors
             if (!Path.HasExtension(name))
                 throw new ArgumentException("File name with extention must be set.");
 
+            if (string.IsNullOrEmpty(folderPathOrId))
+                folderPathOrId = "root";
+
             var urlParams = new Dictionary<string, string>();
-            if (folderPathOrId != null)
-            {
-                if (IsArchiveId(folderPathOrId))
-                    urlParams.Add("folderId", folderPathOrId);
-				else
-                    urlParams.Add("path", folderPathOrId);
-            }
+
+            if (IsArchiveId(folderPathOrId) || IsPredefinedFolder(folderPathOrId))
+                urlParams.Add("folderid", folderPathOrId);
+            else
+                urlParams.Add("path", folderPathOrId);
 
             return BaseUpload(name, data, urlParams);
         }
@@ -100,7 +100,10 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns></returns>
         public ArchiveFolder GetFolder(string pathOrId = null)
         {
-            if (IsArchiveId(pathOrId))
+            if (string.IsNullOrEmpty(pathOrId))
+                pathOrId = "root";
+
+            if (IsArchiveId(pathOrId) || IsPredefinedFolder(pathOrId))
                 return BaseGet(pathOrId).Result;
             else
             {
@@ -227,5 +230,38 @@ namespace FortnoxAPILibrary.Connectors
             return Guid.TryParse(str, out _);
         }
 
+        private static bool IsPredefinedFolder(string str)
+        {
+            switch (str)
+            {
+                case StaticFolders.Root:
+                case StaticFolders.AssetRegister:
+                case StaticFolders.DailyTakings:
+                case StaticFolders.SupplierInvoices:
+                case StaticFolders.Vouchers:
+                case StaticFolders.BankFiles:
+                case StaticFolders.Salary:
+                case StaticFolders.CustomerInvoices:
+                case StaticFolders.Orders:
+                case StaticFolders.Offers:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+    }
+
+    public class StaticFolders
+    {
+        public const string Root = "root";
+        public const string AssetRegister = "inbox_a";
+        public const string DailyTakings = "inbox_d";
+        public const string SupplierInvoices = "inbox_s";
+        public const string Vouchers = "inbox_v";
+        public const string BankFiles = "inbox_b";
+        public const string Salary = "inbox_l";
+        public const string CustomerInvoices = "inbox_kf";
+        public const string Orders = "inbox_o";
+        public const string Offers = "inbox_of"; //"quotes"
     }
 }

@@ -41,7 +41,7 @@ namespace FortnoxAPILibrary.GeneratedTests
                     new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100}
                 }
             });
-            var tmpFile = new InboxConnector().UploadFile("tmpImage.png", Resource.fortnox_image, "inbox_s");
+            var tmpFile = new InboxConnector().UploadFile("tmpImage.png", Resource.fortnox_image, StaticFolders.SupplierInvoices);
             #endregion Arrange
 
             ISupplierInvoiceFileConnectionConnector connector = new SupplierInvoiceFileConnectionConnector();
