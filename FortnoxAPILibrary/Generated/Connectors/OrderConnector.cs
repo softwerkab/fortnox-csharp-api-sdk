@@ -135,7 +135,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Order CreateInvoice(int? id)
 		{
-			return DoAction(id.ToString(), "createinvoice");
+			return DoAction(id.ToString(), Action.CreateInvoice);
 		}
 		
 		/// <summary>
@@ -145,7 +145,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Order Cancel(int? id)
 		{
-			return DoAction(id.ToString(), "cancel");
+			return DoAction(id.ToString(), Action.Cancel);
 		}
 		
 		/// <summary>
@@ -155,7 +155,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Order Email(int? id)
 		{
-			return DoAction(id.ToString(), "email");
+			return DoAction(id.ToString(), Action.Email);
 		}
 		
 		/// <summary>
@@ -165,7 +165,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Order Print(int? id)
 		{
-			return DoAction(id.ToString(), "print");
+			return DoAction(id.ToString(), Action.Print);
 		}
 		
 		/// <summary>
@@ -175,7 +175,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Order ExternalPrint(int? id)
 		{
-			return DoAction(id.ToString(), "externalprint");
+			return DoAction(id.ToString(), Action.ExternalPrint);
 		}
 		
 		/// <summary>
@@ -185,7 +185,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Order Preview(int? id)
 		{
-			return DoAction(id.ToString(), "preview");
+			return DoAction(id.ToString(), Action.Preview);
 		}
 
 		public async Task<EntityCollection<OrderSubset>> FindAsync()

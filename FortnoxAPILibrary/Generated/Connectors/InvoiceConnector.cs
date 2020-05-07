@@ -165,7 +165,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Invoice Bookkeep(int? id)
 		{
-			return DoAction(id.ToString(), "bookkeep");
+			return DoAction(id.ToString(), Action.Bookkeep);
 		}
 		
 		/// <summary>
@@ -175,7 +175,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Invoice Cancel(int? id)
 		{
-			return DoAction(id.ToString(), "cancel");
+			return DoAction(id.ToString(), Action.Cancel);
 		}
 		
 		/// <summary>
@@ -185,7 +185,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Invoice CreditInvoice(int? id)
 		{
-			return DoAction(id.ToString(), "credit");
+			return DoAction(id.ToString(), Action.Credit);
 		}
 		
 		/// <summary>
@@ -195,7 +195,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Invoice Email(int? id)
 		{
-			return DoAction(id.ToString(), "email");
+			return DoAction(id.ToString(), Action.Email);
 		}
 		
 		/// <summary>
@@ -205,7 +205,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Invoice EInvoice(int? id)
 		{
-			return DoAction(id.ToString(), "einvoice");
+			return DoAction(id.ToString(), Action.EInvoice);
 		}
 		
 		/// <summary>
@@ -215,7 +215,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Invoice Print(int? id)
 		{
-			return DoAction(id.ToString(), "print");
+			return DoAction(id.ToString(), Action.Print);
 		}
 		
 		/// <summary>
@@ -225,7 +225,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Invoice PrintReminder(int? id)
 		{
-			return DoAction(id.ToString(), "printreminder");
+			return DoAction(id.ToString(), Action.PrintReminder);
 		}
 		
 		/// <summary>
@@ -235,7 +235,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Invoice ExternalPrint(int? id)
 		{
-			return DoAction(id.ToString(), "externalprint");
+			return DoAction(id.ToString(), Action.ExternalPrint);
 		}
 		
 		/// <summary>
@@ -245,7 +245,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Invoice Preview(int? id)
 		{
-			return DoAction(id.ToString(), "preview");
+			return DoAction(id.ToString(), Action.Preview);
 		}
 
 		public async Task<EntityCollection<InvoiceSubset>> FindAsync()

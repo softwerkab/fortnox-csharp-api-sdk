@@ -117,7 +117,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Offer CreateOrder(int? id)
 		{
-			return DoAction(id.ToString(), "createorder");
+			return DoAction(id.ToString(), Action.CreateOrder);
 		}
 		
 		/// <summary>
@@ -127,7 +127,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Offer Cancel(int? id)
 		{
-			return DoAction(id.ToString(), "cancel");
+			return DoAction(id.ToString(), Action.Cancel);
 		}
 		
 		/// <summary>
@@ -137,7 +137,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Offer Email(int? id)
 		{
-			return DoAction(id.ToString(), "email");
+			return DoAction(id.ToString(), Action.Email);
 		}
 		
 		/// <summary>
@@ -147,7 +147,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Offer Print(int? id)
 		{
-			return DoAction(id.ToString(), "print");
+			return DoAction(id.ToString(), Action.Print);
 		}
 		
 		/// <summary>
@@ -157,7 +157,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Offer ExternalPrint(int? id)
 		{
-			return DoAction(id.ToString(), "externalprint");
+			return DoAction(id.ToString(), Action.ExternalPrint);
 		}
 		
 		/// <summary>
@@ -167,7 +167,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Offer Preview(int? id)
 		{
-			return DoAction(id.ToString(), "preview");
+			return DoAction(id.ToString(), Action.Preview);
 		}
 
 		public async Task<EntityCollection<OfferSubset>> FindAsync()

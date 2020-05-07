@@ -81,7 +81,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		public void Bookkeep(int? id)
         {
-            DoAction(id.ToString(), "bookkeep");
+            DoAction(id.ToString(), Action.Bookkeep);
         }
 
 		public async Task<EntityCollection<SupplierInvoicePaymentSubset>> FindAsync()

@@ -105,7 +105,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Contract Finish(int? id)
 		{
-			return DoAction(id.ToString(), "finish");
+			return DoAction(id.ToString(), Action.Finish);
 		}
 		
 		/// <summary>
@@ -115,7 +115,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Contract CreateInvoice(int? id)
 		{
-			return DoAction(id.ToString(), "createinvoice");
+			return DoAction(id.ToString(), Action.CreateInvoice);
 		}
 		
 		/// <summary>
@@ -125,7 +125,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Contract IncreaseInvoiceCount(int? id)
 		{
-			return DoAction(id.ToString(), "increaseinvoicecount");
+			return DoAction(id.ToString(), Action.IncreaseInvoiceCount);
 		}
 
 		public async Task<EntityCollection<ContractSubset>> FindAsync()

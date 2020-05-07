@@ -56,5 +56,10 @@ namespace FortnoxAPILibrary
             using var streamWriter = new StreamWriter(stream);
             streamWriter.Write(value);
         }
+
+        public static void WriteBytes(this Stream stream, byte[] data)
+        {
+            stream.Write(data, 0,data.Length);
+        }
     }
 }

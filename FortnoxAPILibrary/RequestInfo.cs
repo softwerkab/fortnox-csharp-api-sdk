@@ -18,7 +18,6 @@ namespace FortnoxAPILibrary
         public Dictionary<string, string> SearchParameters { get; set; } = new Dictionary<string, string>();
 
         public RequestResponseType ResponseType { get; set; }
-        public string LocalPath { get; set; }
 
         public string AbsoluteUrl => BuildUrl();
 

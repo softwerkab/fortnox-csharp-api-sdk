@@ -93,7 +93,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public SupplierInvoice Bookkeep(long? id)
 		{
-			return DoAction(id.ToString(), "bookkeep");
+			return DoAction(id.ToString(), Action.Bookkeep);
 		}
 		
 		/// <summary>
@@ -103,7 +103,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public SupplierInvoice Cancel(long? id)
 		{
-			return DoAction(id.ToString(), "cancel");
+			return DoAction(id.ToString(), Action.Cancel);
 		}
 		
 		/// <summary>
@@ -113,7 +113,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public SupplierInvoice Credit(long? id)
 		{
-			return DoAction(id.ToString(), "credit");
+			return DoAction(id.ToString(), Action.Credit);
 		}
 		
 		/// <summary>
@@ -123,7 +123,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public SupplierInvoice ApprovalPayment(long? id)
 		{
-			return DoAction(id.ToString(), "approvalpayment");
+			return DoAction(id.ToString(), Action.ApprovalPayment);
 		}
 		
 		/// <summary>
@@ -133,7 +133,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public SupplierInvoice ApprovalBookkeep(long? id)
 		{
-			return DoAction(id.ToString(), "approvalbookkeep");
+			return DoAction(id.ToString(), Action.ApprovalBookkeep);
 		}
 
 		public async Task<EntityCollection<SupplierInvoiceSubset>> FindAsync()

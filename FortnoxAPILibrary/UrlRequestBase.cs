@@ -156,7 +156,30 @@ namespace FortnoxAPILibrary
         /// <typeparam name="T">The type of entity to create, read, update or delete.</typeparam>
         /// <param name="entity">The entity</param>
         /// <returns>An entity</returns>
-        protected async Task<T> DoRequest<T>(T entity = default)
+        protected async Task<T> DoEntityRequest<T>(T entity = default)
+        {
+            if (RequestInfo.ResponseType != RequestResponseType.JSON)
+                throw new Exception("Unexpected request");
+
+            var requestJson = entity == null ? string.Empty : Serialize(entity);
+            RequestContent = requestJson;
+
+            var requestData = Encoding.UTF8.GetBytes(requestJson);
+            var responseData = await DoSimpleRequest(requestData);
+
+            if (responseData == null)
+            {
+                ResponseContent = string.Empty;
+                return default;
+            }
+
+            var responseJson = Encoding.UTF8.GetString(responseData);
+            ResponseContent = responseJson;
+
+            return Deserialize<T>(responseJson);
+        }
+
+        protected async Task<byte[]> DoSimpleRequest(byte[] data = null)
         {
             var wr = SetupRequest(RequestInfo.AbsoluteUrl, RequestInfo.Method);
             ResponseContent = "";
@@ -164,44 +187,16 @@ namespace FortnoxAPILibrary
             {
                 await RateLimit();
 
-                if (RequestInfo.Method != RequestMethod.Get)
+                if (data != null && RequestInfo.Method != RequestMethod.Get)
                 {
                     using var requestStream = wr.GetRequestStream();
-                    var json = Serialize(entity);
-                    requestStream.WriteText(json);
+                    requestStream.WriteBytes(data);
                 }
 
-                if (RequestInfo.Method == RequestMethod.Post || RequestInfo.Method == RequestMethod.Put)
-                {
-                    RequestContent = Serialize(entity);
-                }
-
-                using var response = (HttpWebResponse) wr.GetResponse();
+                using var response = (HttpWebResponse)wr.GetResponse();
                 HttpStatusCode = response.StatusCode;
                 using var responseStream = response.GetResponseStream();
-                if (RequestInfo.ResponseType == RequestResponseType.PDF)
-                {
-                    responseStream.ToFile(RequestInfo.LocalPath);
-                }
-                else
-                {
-                    if (response.Headers["Content-Disposition"] != null && response.Headers["Content-Disposition"].Split(';')[0] == "attachment")
-                    {
-                        throw new Exception("The specified path is a file. Use DownloadFile() to download the file.");
-                    }
-
-                    switch (RequestInfo.ResponseType)
-                    {
-                        case RequestResponseType.JSON:
-                            ResponseContent = responseStream.ToText();
-                            return Deserialize<T>(ResponseContent);
-                        case RequestResponseType.Email:
-                            return default;
-                        default:
-                            responseStream.ToFile(RequestInfo.LocalPath);
-                            return default;
-                    }
-                }
+                return responseStream.ToBytes();
             }
             catch (WebException we)
             {

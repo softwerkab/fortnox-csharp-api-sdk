@@ -78,7 +78,7 @@ namespace FortnoxAPILibrary.Connectors
             };
 
             var entity = new List<InvoiceFileConnection>() { invoiceFileConnection };
-            var result = await DoRequest(entity);
+            var result = await DoEntityRequest(entity);
             return result?.FirstOrDefault();
         }
 
@@ -98,7 +98,7 @@ namespace FortnoxAPILibrary.Connectors
                 IncludeOnSend = invoiceFileConnection.IncludeOnSend
             };
 
-            var result = await DoRequest(limitedEntity);
+            var result = await DoEntityRequest(limitedEntity);
             return result;
         }
 
@@ -117,7 +117,7 @@ namespace FortnoxAPILibrary.Connectors
                 ResponseType = RequestResponseType.JSON
             };
 
-            var result = await DoRequest<List<InvoiceFileConnection>>();
+            var result = await DoEntityRequest<List<InvoiceFileConnection>>();
             return result;
         }
     }
