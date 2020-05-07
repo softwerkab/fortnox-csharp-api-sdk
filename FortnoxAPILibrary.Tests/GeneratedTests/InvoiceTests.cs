@@ -142,5 +142,50 @@ namespace FortnoxAPILibrary.GeneratedTests
             new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
+
+        [TestMethod]
+        public void Invoice_DueDate()
+        {
+            #region Arrange
+            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+            #endregion Arrange
+
+            IInvoiceConnector connector = new InvoiceConnector();
+            var newInvoice = new Invoice()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                Comments = "TestInvoice",
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, Price = 100},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, Price = 100},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, Price = 100}
+                }
+            };
+
+            var createdInvoice = connector.Create(newInvoice);
+            MyAssert.HasNoError(connector);
+            Assert.AreEqual("2019-01-20", createdInvoice.InvoiceDate?.ToString(APIConstants.DateFormat));
+            Assert.AreEqual("2019-02-19", createdInvoice.DueDate?.ToString(APIConstants.DateFormat));
+
+            var newInvoiceDate = new DateTime(2019, 1, 1);
+            var dateChange = newInvoiceDate - newInvoice.InvoiceDate.Value;
+            var newDueDate = createdInvoice.DueDate.Value.AddDays(dateChange.Days);
+
+            createdInvoice.InvoiceDate = newInvoiceDate;
+            createdInvoice.DueDate = newDueDate;
+
+            var updatedInvoice = connector.Update(createdInvoice);
+            MyAssert.HasNoError(connector);
+            Assert.AreEqual("2019-01-01", updatedInvoice.InvoiceDate?.ToString(APIConstants.DateFormat));
+            Assert.AreEqual("2019-01-31", updatedInvoice.DueDate?.ToString(APIConstants.DateFormat));
+
+            #region Delete arranged resources
+            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            #endregion Delete arranged resources
+        }
     }
 }
