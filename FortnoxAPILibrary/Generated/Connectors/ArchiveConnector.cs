@@ -80,7 +80,7 @@ namespace FortnoxAPILibrary.Connectors
 
         public ArchiveFile UploadFile(string localPath, string folderPathOrId = null)
         {
-            return UploadFile(Path.GetFileName(localPath), System.IO.File.ReadAllBytes(localPath), folderPathOrId);
+            return UploadFile(Path.GetFileName(localPath), File.ReadAllBytes(localPath), folderPathOrId);
         }
 
         /// <summary>
@@ -107,8 +107,8 @@ namespace FortnoxAPILibrary.Connectors
                 return BaseGet(pathOrId).Result;
             else
             {
-                BaseGetParametersInjection = new Dictionary<string, string>();
-                BaseGetParametersInjection.Add("path", pathOrId);
+                ParametersInjection = new Dictionary<string, string>();
+                ParametersInjection.Add("path", pathOrId);
                 return BaseGet().Result;
             }
         }
@@ -126,11 +126,10 @@ namespace FortnoxAPILibrary.Connectors
         {
             var folder = new ArchiveFolder(){ Name = folderName };
 
-            var urlParams = new Dictionary<string, string>();
             if (path != null)
-                urlParams.Add("path", path);
+                ParametersInjection = new Dictionary<string, string> {{"path", path}};
 
-            return BaseCreate(folder, urlParams).Result;
+            return BaseCreate(folder).Result;
         }
 
         /// <summary>
@@ -143,8 +142,7 @@ namespace FortnoxAPILibrary.Connectors
                 BaseDelete(pathOrId).Wait();
             else
             {
-                BaseDeleteParametersInjection = new Dictionary<string, string>();
-                BaseDeleteParametersInjection.Add("path", pathOrId);
+                ParametersInjection = new Dictionary<string, string> {{"path", pathOrId}};
                 BaseDelete().Wait();
             }
         }
@@ -201,26 +199,27 @@ namespace FortnoxAPILibrary.Connectors
 
         private ArchiveFile BaseUpload(string name, byte[] data, Dictionary<string, string> parameters, params string[] indices)
         {
-            Parameters = parameters ?? new Dictionary<string, string>();
-
-            var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
-            var requestUriString = GetUrl(searchValue);
-            requestUriString = AddParameters(requestUriString);
-
-            RequestUriString = requestUriString;
+            RequestInfo = new RequestInfo()
+            {
+                Parameters = parameters ?? new Dictionary<string, string>(),
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = indices
+            };
 
             return UploadFile<ArchiveFile>(data, name).Result;
         }
 
         private byte[] BaseDownload(Dictionary<string, string> parameters, params string[] indices)
         {
-            Parameters = parameters ?? new Dictionary<string, string>();
-
-            var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
-            var requestUriString = GetUrl(searchValue);
-            requestUriString = AddParameters(requestUriString);
-
-            RequestUriString = requestUriString;
+            RequestInfo = new RequestInfo()
+            {
+                Parameters = parameters ?? new Dictionary<string, string>(),
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                //SearchParameters = GetSearchParameters(),
+                Indices = indices
+            };
 
             return DownloadFile().Result;
         }

@@ -38,17 +38,17 @@ namespace FortnoxAPILibrary.Tests
 
             connector.Find();
             MyAssert.HasNoError(connector);
-            Assert.IsTrue(connector.RequestUriString.Contains("name=TestName"));
-            Assert.IsTrue(connector.RequestUriString.Contains("city=TestCity"));
-            Assert.IsTrue(connector.RequestUriString.Contains("filter=active"));
-            Assert.IsTrue(connector.RequestUriString.Contains("sortby=name"));
-            Assert.IsTrue(connector.RequestUriString.Contains("sortorder=ascending"));
+            Assert.IsTrue(connector.RequestInfo.AbsoluteUrl.Contains("name=TestName"));
+            Assert.IsTrue(connector.RequestInfo.AbsoluteUrl.Contains("city=TestCity"));
+            Assert.IsTrue(connector.RequestInfo.AbsoluteUrl.Contains("filter=active"));
+            Assert.IsTrue(connector.RequestInfo.AbsoluteUrl.Contains("sortby=name"));
+            Assert.IsTrue(connector.RequestInfo.AbsoluteUrl.Contains("sortorder=ascending"));
             Assert.IsTrue(
-                connector.RequestUriString.Contains(
+                connector.RequestInfo.AbsoluteUrl.Contains(
                     "lastmodified=2000-01-01+20%3a10%3a05")); //"lastmodified=2000-01-20 20:10:05" in URL encoding
-            Assert.IsTrue(connector.RequestUriString.Contains("limit=10"));
-            Assert.IsTrue(connector.RequestUriString.Contains("offset=0"));
-            Assert.IsTrue(connector.RequestUriString.Contains("page=1"));
+            Assert.IsTrue(connector.RequestInfo.AbsoluteUrl.Contains("limit=10"));
+            Assert.IsTrue(connector.RequestInfo.AbsoluteUrl.Contains("offset=0"));
+            Assert.IsTrue(connector.RequestInfo.AbsoluteUrl.Contains("page=1"));
         }
 
         [TestMethod]
@@ -59,14 +59,14 @@ namespace FortnoxAPILibrary.Tests
 
             connector.Find();
             MyAssert.HasNoError(connector);
-            Assert.IsFalse(connector.RequestUriString.Contains("city="));
-            Assert.IsFalse(connector.RequestUriString.Contains("filter="));
-            Assert.IsFalse(connector.RequestUriString.Contains("sortby="));
-            Assert.IsFalse(connector.RequestUriString.Contains("sortorder="));
-            Assert.IsFalse(connector.RequestUriString.Contains("lastmodified="));
-            Assert.IsFalse(connector.RequestUriString.Contains("limit="));
-            Assert.IsFalse(connector.RequestUriString.Contains("offset="));
-            Assert.IsFalse(connector.RequestUriString.Contains("page="));
+            Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("city="));
+            Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("filter="));
+            Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("sortby="));
+            Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("sortorder="));
+            Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("lastmodified="));
+            Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("limit="));
+            Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("offset="));
+            Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("page="));
         }
 
         [TestMethod]
@@ -87,14 +87,14 @@ namespace FortnoxAPILibrary.Tests
 
             connector.Find();
             MyAssert.HasNoError(connector);
-            Assert.IsFalse(connector.RequestUriString.Contains("city="));
-            Assert.IsFalse(connector.RequestUriString.Contains("filter="));
-            Assert.IsFalse(connector.RequestUriString.Contains("sortby="));
-            Assert.IsFalse(connector.RequestUriString.Contains("sortorder="));
-            Assert.IsFalse(connector.RequestUriString.Contains("lastmodified="));
-            Assert.IsFalse(connector.RequestUriString.Contains("limit="));
-            Assert.IsFalse(connector.RequestUriString.Contains("offset="));
-            Assert.IsFalse(connector.RequestUriString.Contains("page="));
+            Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("city="));
+            Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("filter="));
+            Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("sortby="));
+            Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("sortorder="));
+            Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("lastmodified="));
+            Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("limit="));
+            Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("offset="));
+            Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("page="));
         }
 
         [TestMethod]

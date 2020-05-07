@@ -23,6 +23,12 @@ namespace FortnoxAPILibrary
 
         private readonly JsonEntitySerializer serializer;
 
+        protected string Resource { get; set; }
+        protected virtual string BaseUrl => ConnectionSettings.FortnoxAPIServer;
+
+        protected Func<string, string> FixRequestContent; //Needed for fixing irregular json requests
+        protected Func<string, string> FixResponseContent; //Needed for fixing irregular json responses
+
         /// <summary>
         /// Optional Fortnox Client Secret, if used it will override the static version.
         /// </summary>
@@ -70,16 +76,10 @@ namespace FortnoxAPILibrary
         /// </summary>
         public bool HasError => Error != null;
 
-        public string Resource { get; protected set; }
-        public RequestMethod Method { get; protected set; }
-        public string RequestUriString { get; protected set; }
-        public string LocalPath { get; protected set; }
-        public virtual string BaseUrl => ConnectionSettings.FortnoxAPIServer;
-
-        public RequestResponseType ResponseType { get; protected set; }
-
-        protected Func<string, string> FixRequestContent; //Needed for fixing irregular json requests
-        protected Func<string, string> FixResponseContent; //Needed for fixing irregular json responses
+        /// <summary>
+        /// Aggregate data used for request setup
+        /// </summary>
+        public RequestInfo RequestInfo { get; protected set; }
 
         /// <remarks />
         public UrlRequestBase()
@@ -88,21 +88,7 @@ namespace FortnoxAPILibrary
             serializer = new JsonEntitySerializer();
         }
 
-        protected string GetUrl(string index = "")
-        {
-            string[] str = {
-				BaseUrl,
-				Resource,
-				index
-			};
-
-            str = str.Where(s => s != "").ToArray();
-
-            string requestUriString = string.Join("/", str);
-
-            return requestUriString;
-        }
-
+        
         /// <summary>
         /// This method is used to throttle every call to Fortnox. 
         /// </summary>
@@ -149,7 +135,7 @@ namespace FortnoxAPILibrary
         /// </summary>
         protected async Task DoRequest()
         {
-            var wr = SetupRequest(RequestUriString, Method);
+            var wr = SetupRequest(RequestInfo.AbsoluteUrl, RequestInfo.Method);
 
             try
             {
@@ -172,20 +158,20 @@ namespace FortnoxAPILibrary
         /// <returns>An entity</returns>
         protected async Task<T> DoRequest<T>(T entity = default)
         {
-            var wr = SetupRequest(RequestUriString, Method);
+            var wr = SetupRequest(RequestInfo.AbsoluteUrl, RequestInfo.Method);
             ResponseContent = "";
             try
             {
                 await RateLimit();
 
-                if (Method != RequestMethod.Get)
+                if (RequestInfo.Method != RequestMethod.Get)
                 {
                     using var requestStream = wr.GetRequestStream();
                     var json = Serialize(entity);
                     requestStream.WriteText(json);
                 }
 
-                if (Method == RequestMethod.Post || Method == RequestMethod.Put)
+                if (RequestInfo.Method == RequestMethod.Post || RequestInfo.Method == RequestMethod.Put)
                 {
                     RequestContent = Serialize(entity);
                 }
@@ -193,9 +179,9 @@ namespace FortnoxAPILibrary
                 using var response = (HttpWebResponse) wr.GetResponse();
                 HttpStatusCode = response.StatusCode;
                 using var responseStream = response.GetResponseStream();
-                if (ResponseType == RequestResponseType.PDF)
+                if (RequestInfo.ResponseType == RequestResponseType.PDF)
                 {
-                    responseStream.ToFile(LocalPath);
+                    responseStream.ToFile(RequestInfo.LocalPath);
                 }
                 else
                 {
@@ -204,7 +190,7 @@ namespace FortnoxAPILibrary
                         throw new Exception("The specified path is a file. Use DownloadFile() to download the file.");
                     }
 
-                    switch (ResponseType)
+                    switch (RequestInfo.ResponseType)
                     {
                         case RequestResponseType.JSON:
                             ResponseContent = responseStream.ToText();
@@ -212,7 +198,7 @@ namespace FortnoxAPILibrary
                         case RequestResponseType.Email:
                             return default;
                         default:
-                            responseStream.ToFile(LocalPath);
+                            responseStream.ToFile(RequestInfo.LocalPath);
                             return default;
                     }
                 }
@@ -240,7 +226,7 @@ namespace FortnoxAPILibrary
                 var header = Encoding.UTF8.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + fileName + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
                 var trailer = Encoding.UTF8.GetBytes("\r\n--" + boundary + "--\r\n");
 
-                var request = SetupRequest(RequestUriString, RequestMethod.Post);
+                var request = SetupRequest(RequestInfo.AbsoluteUrl, RequestMethod.Post);
                 request.ContentType = "multipart/form-data; boundary=" + boundary;
 
                 using var dataStream = request.GetRequestStream();
@@ -271,7 +257,7 @@ namespace FortnoxAPILibrary
             {
                 await RateLimit();
 
-                var request = SetupRequest(RequestUriString, RequestMethod.Get);
+                var request = SetupRequest(RequestInfo.AbsoluteUrl, RequestMethod.Get);
 
                 using var response = (HttpWebResponse) request.GetResponse();
                 HttpStatusCode = response.StatusCode;
@@ -347,26 +333,6 @@ namespace FortnoxAPILibrary
             {
                 throw new SerializationException("An error occured while deserializing the response. Check ResponseContent.", e.InnerException);
             }
-        }
-
-        public enum RequestResponseType
-        {
-            JSON,
-            PDF,
-            File,
-            Email
-        }
-
-        public enum RequestMethod
-        {
-            [StringValue("GET")]
-            Get,
-            [StringValue("POST")]
-            Post,
-            [StringValue("PUT")]
-            Put,
-            [StringValue("DELETE")]
-            Delete
         }
     }
 }

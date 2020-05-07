@@ -89,7 +89,7 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<PriceSubset>> FindAsync(string priceListId, string articleId = null)
 		{
-			return await BaseFind(null, "sublist", priceListId, articleId);
+			return await BaseFind("sublist", priceListId, articleId);
 		}
         public async Task DeleteAsync(string priceListCode, string articleNumber, decimal? fromQuantity = null)
         {

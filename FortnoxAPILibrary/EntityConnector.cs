@@ -48,23 +48,20 @@ namespace FortnoxAPILibrary
         [SearchParameter]
         public int? Offset { get; set; }
 
-        /// <remarks/>
-        protected Dictionary<string, string> Parameters = new Dictionary<string, string>();
+        protected Dictionary<string, string> ParametersInjection { get; set; } //TODO: Remove, temporary workaround
 
-        protected Dictionary<string, string> BaseGetParametersInjection = new Dictionary<string, string>(); //TODO: Remove, only temporary workaround (BaseGet has no parameters injection)
-        protected Dictionary<string, string> BaseDeleteParametersInjection = new Dictionary<string, string>(); //TODO: Remove, only temporary workaround (BaseGet has no parameters injection)
-
-        protected async Task<TEntity> BaseCreate(TEntity entity, Dictionary<string, string> parameters = null)
+        protected async Task<TEntity> BaseCreate(TEntity entity)
         {
-            Parameters = parameters ?? new Dictionary<string, string>();
-
-            var requestUriString = GetUrl();
-
-            requestUriString = AddParameters(requestUriString);
-
-            Method = RequestMethod.Post;
-            ResponseType = RequestResponseType.JSON;
-            RequestUriString = requestUriString;
+            RequestInfo = new RequestInfo()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = Array.Empty<string>(),
+                Parameters = ParametersInjection ?? new Dictionary<string, string>(),
+                Method = RequestMethod.Post,
+                ResponseType = RequestResponseType.JSON
+            };
+            ParametersInjection = null;
 
             var wrappedEntity = new EntityWrapper<TEntity>() {Entity = entity};
             var result = await DoRequest(wrappedEntity);
@@ -73,17 +70,16 @@ namespace FortnoxAPILibrary
 
         protected async Task<TEntity> BaseUpdate(TEntity entity, params string[] indices)
         {
-            Parameters = new Dictionary<string, string>();
-
-            var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
-
-            var requestUriString = GetUrl(searchValue);
-
-            requestUriString = AddParameters(requestUriString);
-
-            Method = RequestMethod.Put;
-            ResponseType = RequestResponseType.JSON;
-            RequestUriString = requestUriString;
+            RequestInfo = new RequestInfo()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = indices,
+                Parameters = ParametersInjection ?? new Dictionary<string, string>(),
+                Method = RequestMethod.Put,
+                ResponseType = RequestResponseType.JSON
+            };
+            ParametersInjection = null;
 
             var wrappedEntity = new EntityWrapper<TEntity>() { Entity = entity };
 
@@ -93,62 +89,59 @@ namespace FortnoxAPILibrary
 
         protected async Task BaseDelete(params string[] indices)
         {
-            Parameters = new Dictionary<string, string>();
-            Parameters = BaseDeleteParametersInjection;
-
-            var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
-
-            var requestUriString = GetUrl(searchValue);
-
-            requestUriString = AddParameters(requestUriString);
-
-            Method = RequestMethod.Delete;
-            ResponseType = RequestResponseType.JSON;
-            RequestUriString = requestUriString;
+            RequestInfo = new RequestInfo()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = indices,
+                Parameters = ParametersInjection ?? new Dictionary<string, string>(),
+                Method = RequestMethod.Delete,
+                ResponseType = RequestResponseType.JSON,
+            };
+            ParametersInjection = null;
 
             await DoRequest();
         }
 
         protected async Task<TEntity> BaseGet(params string[] indices)
         {
-            Parameters = new Dictionary<string, string>();
-            Parameters = BaseGetParametersInjection;
-
-            var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
-
-            var requestUriString = GetUrl(searchValue);
-
-            requestUriString = AddParameters(requestUriString);
-
-            Method = RequestMethod.Get;
-            ResponseType = RequestResponseType.JSON;
-            RequestUriString = requestUriString;
+            RequestInfo = new RequestInfo()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = indices,
+                Parameters = ParametersInjection ?? new Dictionary<string, string>(),
+                Method = RequestMethod.Get,
+                ResponseType = RequestResponseType.JSON
+            };
+            ParametersInjection = null;
 
             var result = await DoRequest<EntityWrapper<TEntity>>();
             return result?.Entity;
         }
 
-        protected async Task<TEntityCollection> BaseFind(Dictionary<string, string> parameters = null, params string[] indices)
+        protected async Task<TEntityCollection> BaseFind(params string[] indices)
         {
-            Parameters = parameters ?? new Dictionary<string, string>();
-
-            AddSearchParameters();
-            var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
-
-            var requestUriString = GetUrl(searchValue);
-
-            requestUriString = AddParameters(requestUriString);
-
-            Method = RequestMethod.Get;
-            ResponseType = RequestResponseType.JSON;
-            RequestUriString = requestUriString;
+            RequestInfo = new RequestInfo()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = indices,
+                Parameters = ParametersInjection ?? new Dictionary<string, string>(),
+                SearchParameters = GetSearchParameters(),
+                Method = RequestMethod.Get,
+                ResponseType = RequestResponseType.JSON
+            };
+            ParametersInjection = null;
 
             var result = await DoRequest<TEntityCollection>();
             return result;
         }
 
-        protected void AddSearchParameters()
+        protected Dictionary<string, string> GetSearchParameters()
         {
+            var searchParams = new Dictionary<string, string>();
+
             foreach (var property in GetType().GetProperties())
             {
                 var isSearchParameter = property.HasAttribute<SearchParameter>();
@@ -161,8 +154,10 @@ namespace FortnoxAPILibrary
                 var searchAttribute = property.GetAttribute<SearchParameter>();
                 var paramName = searchAttribute.Name ?? property.Name;
 
-                Parameters.Add(paramName.ToLower(), strValue);
+                searchParams.Add(paramName.ToLower(), strValue);
             }
+
+            return searchParams;
         }
 
         private static string GetStringValue(object value, Type type)
@@ -185,49 +180,39 @@ namespace FortnoxAPILibrary
         {
             return DoActionAsync(documentNumber, action).Result;
         }
+
         protected async Task<TEntity> DoActionAsync(string documentNumber, string action)
         {
-            string requestUriString = GetUrl(documentNumber);
-
-            requestUriString = requestUriString + "/" + action;
-
-            requestUriString = AddParameters(requestUriString);
-
+            RequestInfo = new RequestInfo()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = new [] { documentNumber, action }
+            };
 
             switch (action)
             {
                 case "print":
                 case "preview":
                 case "eprint":
-                    Method = RequestMethod.Get;
-                    ResponseType = RequestResponseType.PDF;
+                    RequestInfo.Method = RequestMethod.Get;
+                    RequestInfo.ResponseType = RequestResponseType.PDF;
                     break;
                 case "externalprint":
-                    Method = RequestMethod.Put;
-                    ResponseType = RequestResponseType.JSON;
+                    RequestInfo.Method = RequestMethod.Put;
+                    RequestInfo.ResponseType = RequestResponseType.JSON;
                     break;
                 case "email":
-                    Method = RequestMethod.Get;
-                    ResponseType = RequestResponseType.Email;
+                    RequestInfo.Method = RequestMethod.Get;
+                    RequestInfo.ResponseType = RequestResponseType.Email;
                     break;
                 default:
-                    Method = RequestMethod.Put;
+                    RequestInfo.Method = RequestMethod.Put;
                     break;
             }
-            RequestUriString = requestUriString;
 
             var result = await DoRequest<EntityWrapper<TEntity>>();
             return result?.Entity;
-        }
-        
-        protected string AddParameters(string requestUriString)
-        {
-            if (Parameters.Count > 0)
-            {
-                requestUriString += "/?" + string.Join("&", Parameters.Select(p => p.Key + "=" + HttpUtility.UrlEncode(p.Value)));
-            }
-
-            return requestUriString;
         }
     }
 }

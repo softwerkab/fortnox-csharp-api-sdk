@@ -13,7 +13,7 @@ namespace FortnoxAPILibrary.Connectors
 	/// <remarks/>
     public class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConnection, EntityCollection<InvoiceFileConnectionSubset>, Sort.By.InvoiceFileConnection?>, IInvoiceFileConnectionConnector
     {
-        public override string BaseUrl => base.BaseUrl.Replace("3", "api");
+        protected override string BaseUrl => base.BaseUrl.Replace("3", "api");
 
 		/// <summary>
 		/// Use with Find() to limit the search result
@@ -68,13 +68,14 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task<InvoiceFileConnection> CreateAsync(InvoiceFileConnection invoiceFileConnection)
         {
-            Parameters = new Dictionary<string, string>();
-            var requestUriString = GetUrl();
-            requestUriString = AddParameters(requestUriString);
-
-            Method = RequestMethod.Post;
-            ResponseType = RequestResponseType.JSON;
-            RequestUriString = requestUriString;
+            RequestInfo = new RequestInfo()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = Array.Empty<string>(),
+                Method = RequestMethod.Post,
+                ResponseType = RequestResponseType.JSON
+            };
 
             var entity = new List<InvoiceFileConnection>() { invoiceFileConnection };
             var result = await DoRequest(entity);
@@ -83,15 +84,14 @@ namespace FortnoxAPILibrary.Connectors
 
         public async Task<InvoiceFileConnection> UpdateAsync(InvoiceFileConnection invoiceFileConnection)
         {
-            Parameters = new Dictionary<string, string>();
-            var indices = new [] { invoiceFileConnection.Id };
-            var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
-            var requestUriString = GetUrl(searchValue);
-            requestUriString = AddParameters(requestUriString);
-
-            Method = RequestMethod.Put;
-            ResponseType = RequestResponseType.JSON;
-            RequestUriString = requestUriString;
+            RequestInfo = new RequestInfo()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = new[] {invoiceFileConnection.Id},
+                Method = RequestMethod.Put,
+                ResponseType = RequestResponseType.JSON
+            };
 
             var limitedEntity = new InvoiceFileConnection()
             {
@@ -104,19 +104,18 @@ namespace FortnoxAPILibrary.Connectors
 
         public async Task<List<InvoiceFileConnection>> GetConnectionsAsync(long? entityId, EntityType? entityType)
         {
-            Parameters = new Dictionary<string, string>
+            RequestInfo = new RequestInfo()
             {
-                {"entityid", entityId?.ToString()}, 
-                {"entitytype", entityType?.GetStringValue()}
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Parameters = new Dictionary<string, string>
+                {
+                    {"entityid", entityId?.ToString()},
+                    {"entitytype", entityType?.GetStringValue()}
+                },
+                Method = RequestMethod.Get,
+                ResponseType = RequestResponseType.JSON
             };
-            var indices = Array.Empty<string>();
-            var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
-            var requestUriString = GetUrl(searchValue);
-            requestUriString = AddParameters(requestUriString);
-
-            Method = RequestMethod.Get;
-            ResponseType = RequestResponseType.JSON;
-            RequestUriString = requestUriString;
 
             var result = await DoRequest<List<InvoiceFileConnection>>();
             return result;

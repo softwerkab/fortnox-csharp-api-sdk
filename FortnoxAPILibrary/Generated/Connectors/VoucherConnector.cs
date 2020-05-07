@@ -84,10 +84,9 @@ namespace FortnoxAPILibrary.Connectors
 		}
         public async Task<Voucher> GetAsync(int? id, string seriesId, int? financialYearId)
 		{
-            BaseGetParametersInjection = new Dictionary<string, string>();
             if (financialYearId != null)
             {
-                BaseGetParametersInjection = new Dictionary<string, string>
+                ParametersInjection = new Dictionary<string, string>
                 {
                     {"financialyear", financialYearId.ToString()}
                 };
@@ -95,11 +94,5 @@ namespace FortnoxAPILibrary.Connectors
 
             return await BaseGet(seriesId.ToString(), id.ToString());
         }
-
-		/// <summary>
-		/// Creates a new voucher
-		/// </summary>
-		/// <param name="voucher">The voucher to create</param>
-		/// <returns>The created voucher</returns>
     }
 }

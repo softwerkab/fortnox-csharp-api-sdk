@@ -41,7 +41,7 @@ namespace FortnoxAPILibrary.GeneratedTests
                 }
             });
             invoiceConnector.Bookkeep(tmpInvoice.DocumentNumber);
-
+            MyAssert.HasNoError(invoiceConnector);
             #endregion Arrange
 
             IInvoicePaymentConnector connector = new InvoicePaymentConnector();
