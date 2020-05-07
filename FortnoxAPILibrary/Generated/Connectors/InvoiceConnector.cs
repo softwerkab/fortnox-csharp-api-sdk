@@ -211,11 +211,11 @@ namespace FortnoxAPILibrary.Connectors
 		/// <summary>
 		/// This action returns a PDF document with the current template that is used by the specific document. Note that this action also sets the property Sent as true.
 		/// <param name="id"></param>
-		/// <returns></returns>
+        /// <returns></returns>
 		/// </summary>
-		public Invoice Print(int? id)
+		public byte[] Print(int? id)
 		{
-			return DoAction(id.ToString(), Action.Print);
+			return DoDownloadAction(id.ToString(), Action.Print);
 		}
 		
 		/// <summary>
@@ -223,9 +223,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Invoice PrintReminder(int? id)
+		public byte[] PrintReminder(int? id)
 		{
-			return DoAction(id.ToString(), Action.PrintReminder);
+			return DoDownloadAction(id.ToString(), Action.PrintReminder);
 		}
 		
 		/// <summary>
@@ -243,9 +243,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Invoice Preview(int? id)
+		public byte[] Preview(int? id)
 		{
-			return DoAction(id.ToString(), Action.Preview);
+			return DoDownloadAction(id.ToString(), Action.Preview);
 		}
 
 		public async Task<EntityCollection<InvoiceSubset>> FindAsync()

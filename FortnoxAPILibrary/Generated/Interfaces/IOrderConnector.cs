@@ -31,9 +31,9 @@ namespace FortnoxAPILibrary.Connectors
 		Order CreateInvoice(int? id);
 		Order Cancel(int? id);
 		Order Email(int? id);
-		Order Print(int? id);
+		byte[] Print(int? id);
 		Order ExternalPrint(int? id);
-		Order Preview(int? id);
+		byte[] Preview(int? id);
 
 		Task<Order> UpdateAsync(Order order);
 		Task<Order> CreateAsync(Order order);

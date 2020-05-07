@@ -163,9 +163,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Order Print(int? id)
+		public byte[] Print(int? id)
 		{
-			return DoAction(id.ToString(), Action.Print);
+			return DoDownloadAction(id.ToString(), Action.Print);
 		}
 		
 		/// <summary>
@@ -183,9 +183,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Order Preview(int? id)
+		public byte[] Preview(int? id)
 		{
-			return DoAction(id.ToString(), Action.Preview);
+			return DoDownloadAction(id.ToString(), Action.Preview);
 		}
 
 		public async Task<EntityCollection<OrderSubset>> FindAsync()

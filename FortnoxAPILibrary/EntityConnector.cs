@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -181,8 +182,36 @@ namespace FortnoxAPILibrary
             return DoActionAsync(documentNumber, action).Result;
         }
 
+        protected byte[] DoDownloadAction(string documentNumber, Action action, string localPath = null)
+        {
+            return DoDownloadActionAsync(documentNumber, action, localPath).Result;
+        }
+
+        protected async Task<byte[]> DoDownloadActionAsync(string documentNumber, Action action, string localPath = null)
+        {
+            if (!IsDownloadAction(action))
+                throw new Exception("Invalid action type");
+
+            RequestInfo = new RequestInfo()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = new[] { documentNumber, action.GetStringValue() },
+                Method = RequestMethod.Get,
+                ResponseType = RequestResponseType.PDF
+            };
+
+            var data = await DoSimpleRequest();
+            if (localPath != null)
+                File.WriteAllBytes(localPath, data);
+            return data;
+        }
+
         protected async Task<TEntity> DoActionAsync(string documentNumber, Action action)
         {
+            if (IsDownloadAction(action))
+                throw new Exception("Invalid action type");
+
             RequestInfo = new RequestInfo()
             {
                 BaseUrl = BaseUrl,
@@ -192,12 +221,6 @@ namespace FortnoxAPILibrary
 
             switch (action)
             {
-                case Action.Print:
-                case Action.Preview:
-                case Action.EPrint:
-                    RequestInfo.Method = RequestMethod.Get;
-                    RequestInfo.ResponseType = RequestResponseType.PDF;
-                    break;
                 case Action.ExternalPrint:
                     RequestInfo.Method = RequestMethod.Put;
                     RequestInfo.ResponseType = RequestResponseType.JSON;
@@ -213,6 +236,20 @@ namespace FortnoxAPILibrary
 
             var result = await DoEntityRequest<EntityWrapper<TEntity>>();
             return result?.Entity;
+        }
+
+        private static bool IsDownloadAction(Action action)
+        {
+            switch (action)
+            {
+                case Action.Print:
+                case Action.PrintReminder:
+                case Action.Preview:
+                case Action.EPrint:
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 

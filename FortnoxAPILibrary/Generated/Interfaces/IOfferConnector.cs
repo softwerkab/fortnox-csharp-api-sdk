@@ -28,9 +28,9 @@ namespace FortnoxAPILibrary.Connectors
 		Offer CreateOrder(int? id);
 		Offer Cancel(int? id);
 		Offer Email(int? id);
-		Offer Print(int? id);
+        byte[] Print(int? id);
 		Offer ExternalPrint(int? id);
-		Offer Preview(int? id);
+		byte[] Preview(int? id);
 
 		Task<Offer> UpdateAsync(Offer offer);
 		Task<Offer> CreateAsync(Offer offer);

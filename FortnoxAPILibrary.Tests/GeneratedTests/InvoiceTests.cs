@@ -187,5 +187,39 @@ namespace FortnoxAPILibrary.GeneratedTests
             new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
+
+        [TestMethod]
+        public void Invoice_Print()
+        {
+            #region Arrange
+            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+            #endregion Arrange
+
+            IInvoiceConnector connector = new InvoiceConnector();
+
+            var newInvoice = new Invoice()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
+                InvoiceType = InvoiceType.CASHINVOICE,
+                PaymentWay = PaymentWay.CASH,
+                Comments = "TestInvoice",
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, Price = 100},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, Price = 100},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, Price = 100}
+                }
+            };
+
+            var createdInvoice = connector.Create(newInvoice);
+            MyAssert.HasNoError(connector);
+
+            var fileData = connector.Print(createdInvoice.DocumentNumber);
+            MyAssert.HasNoError(connector);
+            Assert.IsTrue(fileData.Length > 10000);
+        }
     }
 }

@@ -38,10 +38,10 @@ namespace FortnoxAPILibrary.Connectors
 		Invoice CreditInvoice(int? id);
 		Invoice Email(int? id);
 		Invoice EInvoice(int? id);
-		Invoice Print(int? id);
-		Invoice PrintReminder(int? id);
+        byte[] Print(int? id);
+        byte[] PrintReminder(int? id);
 		Invoice ExternalPrint(int? id);
-		Invoice Preview(int? id);
+		byte[] Preview(int? id);
 
 		Task<Invoice> UpdateAsync(Invoice invoice);
 		Task<Invoice> CreateAsync(Invoice invoice);
