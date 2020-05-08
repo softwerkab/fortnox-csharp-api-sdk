@@ -144,7 +144,7 @@ namespace FortnoxAPILibrary.GeneratedTests
         }
 
         [TestMethod]
-        public void Invoice_DueDate()
+        public void Test_DueDate()
         {
             #region Arrange
             var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
@@ -189,11 +189,15 @@ namespace FortnoxAPILibrary.GeneratedTests
         }
 
         [TestMethod]
-        public void Invoice_Print()
+        public void Test_Print()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+            var cc = new CustomerConnector();
+            var ac = new ArticleConnector();
+            var tmpCustomer = cc.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = ac.Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+            MyAssert.HasNoError(cc);
+            MyAssert.HasNoError(ac);
             #endregion Arrange
 
             IInvoiceConnector connector = new InvoiceConnector();
@@ -219,7 +223,55 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             var fileData = connector.Print(createdInvoice.DocumentNumber);
             MyAssert.HasNoError(connector);
-            Assert.IsTrue(fileData.Length > 10000);
+            MyAssert.IsPDF(fileData);
+
+            #region Delete arranged resources
+            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_Email()
+        {
+            #region Arrange
+            var cc = new CustomerConnector();
+            var ac = new ArticleConnector();
+            var tmpCustomer = cc.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "richard.randak@softwerk.se" });
+            var tmpArticle = ac.Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+            MyAssert.HasNoError(cc);
+            MyAssert.HasNoError(ac);
+            #endregion Arrange
+
+            IInvoiceConnector connector = new InvoiceConnector();
+
+            var newInvoice = new Invoice()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
+                InvoiceType = InvoiceType.CASHINVOICE,
+                PaymentWay = PaymentWay.CASH,
+                Comments = "Testing invoice email feature",
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, Price = 100},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, Price = 100},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, Price = 100}
+                }
+            };
+
+            var createdInvoice = connector.Create(newInvoice);
+            MyAssert.HasNoError(connector);
+
+            var emailedInvoice = connector.Email(createdInvoice.DocumentNumber);
+            MyAssert.HasNoError(connector);
+            Assert.AreEqual(emailedInvoice.DocumentNumber, createdInvoice.DocumentNumber);
+
+            #region Delete arranged resources
+            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            #endregion Delete arranged resources
         }
     }
 }

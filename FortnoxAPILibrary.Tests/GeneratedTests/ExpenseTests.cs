@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Tests;
@@ -19,21 +20,23 @@ namespace FortnoxAPILibrary.GeneratedTests
             ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
         }
 
-        [Ignore("CAN NOT UPDATE OR DELETE")]
         [TestMethod]
         public void Test_Expense_CRUD()
         {
             #region Arrange
-            new AccountConnector().Create(new Account() {Number = 0123, Description = "TmpAccount"});
+            var ac = new AccountConnector();
+            if (ac.Get(0123) == null) //account 123 does not exist
+                ac.Create(new Account() {Number = 0123, Description = "TmpAccount"});
             #endregion Arrange
 
             IExpenseConnector connector = new ExpenseConnector();
 
             #region CREATE
+
             var newExpense = new Expense()
             {
                 Text = "TestExpense",
-                Code = "TST",
+                Code = TestUtils.RandomString(6),
                 Account = 0123
             };
 
@@ -44,7 +47,9 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion CREATE
 
             #region UPDATE
+
             //Not supported
+
             #endregion UPDATE
 
             #region READ / GET
@@ -56,13 +61,55 @@ namespace FortnoxAPILibrary.GeneratedTests
             #endregion READ / GET
 
             #region DELETE
+
             //Not supported
+
             #endregion DELETE
 
             #region Delete arranged resources
-            var accConnector = new AccountConnector();
-            accConnector.Delete(0123);
-            MyAssert.HasNoError(accConnector);
+            ac.Delete(0123);
+            MyAssert.HasNoError(ac);
+
+            #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_Expense_Find()
+        {
+            #region Arrange
+            var ac = new AccountConnector();
+            if (ac.Get(0123) == null) //account 123 does not exist
+                ac.Create(new Account() { Number = 0123, Description = "TmpAccount" });
+            #endregion Arrange
+
+            var timeStamp = DateTime.Now;
+            var remark = TestUtils.RandomString();
+
+            var newExpense = new Expense()
+            {
+                Text = remark,
+                Account = 0123
+            };
+
+            IExpenseConnector connector = new ExpenseConnector();
+            for (var i = 0; i < 2; i++)
+            {
+                newExpense.Code = TestUtils.RandomString(6);
+                connector.Create(newExpense);
+                MyAssert.HasNoError(connector);
+            }
+
+            connector.LastModified = timeStamp; //does not seem to work
+            var expensesCollection = connector.Find();
+
+            var filteredExpenses = expensesCollection.Entities.Where(x => x.Text == remark).ToList();
+            MyAssert.HasNoError(connector);
+            Assert.AreEqual(2, filteredExpenses.Count);
+            Assert.IsNotNull(filteredExpenses.First().Url);
+
+            #region Delete arranged resources
+            ac.Delete(0123);
+            MyAssert.HasNoError(ac);
             #endregion Delete arranged resources
         }
     }

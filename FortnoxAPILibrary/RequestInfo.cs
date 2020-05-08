@@ -54,8 +54,7 @@ namespace FortnoxAPILibrary
     {
         JSON,
         PDF,
-        File,
-        Email
+        File
     }
 
     public enum RequestMethod

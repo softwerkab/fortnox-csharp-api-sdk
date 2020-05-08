@@ -227,7 +227,7 @@ namespace FortnoxAPILibrary
                     break;
                 case Action.Email:
                     RequestInfo.Method = RequestMethod.Get;
-                    RequestInfo.ResponseType = RequestResponseType.Email;
+                    RequestInfo.ResponseType = RequestResponseType.JSON;
                     break;
                 default:
                     RequestInfo.Method = RequestMethod.Put;

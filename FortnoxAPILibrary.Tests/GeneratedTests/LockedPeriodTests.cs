@@ -42,6 +42,8 @@ namespace FortnoxAPILibrary.GeneratedTests
             MyAssert.HasNoError(connector);
             Assert.IsNotNull(retrievedLockedPeriod);
 
+            Assert.IsNull(retrievedLockedPeriod.EndDate); //No period is locked
+
             #endregion READ / GET
 
             #region DELETE

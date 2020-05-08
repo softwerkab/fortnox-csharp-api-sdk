@@ -136,5 +136,75 @@ namespace FortnoxAPILibrary.GeneratedTests
             new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
+
+        [TestMethod]
+        public void Test_Print()
+        {
+            #region Arrange
+            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+            #endregion Arrange
+
+            IOrderConnector connector = new OrderConnector();
+            var newOrder = new Order()
+            {
+                Comments = "TestOrder",
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                OrderDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                OrderRows = new List<OrderRow>()
+                {
+                    new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = 20, DeliveredQuantity = 10},
+                    new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = 20, DeliveredQuantity = 20},
+                    new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = 20, DeliveredQuantity = 15}
+                }
+            };
+
+            var createdOrder = connector.Create(newOrder);
+            MyAssert.HasNoError(connector);
+
+            var fileData = connector.Print(createdOrder.DocumentNumber);
+            MyAssert.HasNoError(connector);
+            MyAssert.IsPDF(fileData);
+
+            #region Delete arranged resources
+            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_Email()
+        {
+            #region Arrange
+            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "richard.randak@softwerk.se" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+            #endregion Arrange
+
+            IOrderConnector connector = new OrderConnector();
+            var newOrder = new Order()
+            {
+                Comments = "TestOrder",
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                OrderDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                OrderRows = new List<OrderRow>()
+                {
+                    new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = 20, DeliveredQuantity = 10},
+                    new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = 20, DeliveredQuantity = 20},
+                    new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = 20, DeliveredQuantity = 15}
+                }
+            };
+
+            var createdOrder = connector.Create(newOrder);
+            MyAssert.HasNoError(connector);
+
+            var emailedInvoice = connector.Email(createdOrder.DocumentNumber);
+            MyAssert.HasNoError(connector);
+            Assert.AreEqual(emailedInvoice.DocumentNumber, createdOrder.DocumentNumber);
+
+            #region Delete arranged resources
+            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            #endregion Delete arranged resources
+        }
     }
 }
