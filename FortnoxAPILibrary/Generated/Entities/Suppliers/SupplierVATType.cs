@@ -8,14 +8,20 @@ namespace FortnoxAPILibrary.Entities
 {
     public enum SupplierVATType
     {
-        ///<summary> No property description </summary>
+        [EnumMember(Value = "25")]
+        VAT25,
+        [EnumMember(Value = "12")]
+        VAT12,
+        [EnumMember(Value = "6")]
+        VAT6,
+        [EnumMember(Value = "0")]
+        VAT0,
         [EnumMember(Value = "REVERSE")]
         REVERSE,
-        ///<summary> No property description </summary>
+        [Obsolete]
         [EnumMember(Value = "NORMAL")]
         NORMAL,
-        ///<summary> No property description </summary>
         [EnumMember(Value = "UIF")]
-        UIF,
+        UIF
     }
 }

@@ -146,5 +146,31 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Add code to delete temporary resources
             #endregion Delete arranged resources
         }
+
+        [TestMethod]
+        public void VatType_Supported()
+        {
+            var vatTypes = Enum.GetValues(typeof(SupplierVATType)).Cast<SupplierVATType>().ToList();
+
+            ISupplierConnector connector = new SupplierConnector();
+
+            var newSupplier = new Supplier()
+            {
+                Name = "TestSupplier"
+            };
+
+            var supplier = connector.Create(newSupplier);
+            MyAssert.HasNoError(connector);
+
+            foreach (var vat in vatTypes)
+            {
+                supplier.VATType = vat;
+                supplier = connector.Update(supplier);
+                MyAssert.HasNoError(connector);
+                Assert.AreEqual(vat, supplier.VATType);
+            }
+
+            connector.Delete(supplier.SupplierNumber);
+        }
     }
 }
