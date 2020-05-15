@@ -27,19 +27,21 @@ namespace FortnoxAPILibrary.Connectors
 			Resource = "archive";
 		}
 
-		/// <summary>
-		/// Downloads the specified file
-		/// </summary>
-		/// <param name="id">Identifier of the file to download</param>
-		/// <returns>The found file</returns>
-		public byte[] DownloadFile(string id)
-		{
-            return BaseDownload(null, id);
+        #region SYNC Interface Methods
+
+        /// <summary>
+        /// Downloads the specified file
+        /// </summary>
+        /// <param name="id">Identifier of the file to download</param>
+        /// <returns>The found file</returns>
+        public byte[] DownloadFile(string id)
+        {
+            return DownloadFileAsync(id).Result;
         }
 
         public void DownloadFile(string id, string localPath)
         {
-            DownloadFile(id).ToFile(localPath).Wait();
+            DownloadFileAsync(id, localPath).Wait();
         }
 
         /// <summary>
@@ -50,7 +52,80 @@ namespace FortnoxAPILibrary.Connectors
         /// <param name="folderPathOrId">Path or id of the folder where file should be located</param>
 		/// <returns>The created file</returns>
 		public ArchiveFile UploadFile(string name, byte[] data, string folderPathOrId = null)
+        {
+            return UploadFileAsync(name, data, folderPathOrId).Result;
+        }
+
+        public ArchiveFile UploadFile(string name, Stream stream, string folderPathOrId = null)
+        {
+            return UploadFileAsync(name, stream, folderPathOrId).Result;
+        }
+
+        public ArchiveFile UploadFile(string localPath, string folderPathOrId = null)
+        {
+            return UploadFileAsync(localPath, folderPathOrId).Result;
+        }
+
+        /// <summary>
+		/// Deletes a file
+		/// Note: If the specified id belongs to a folder, the folder will be deleted instead!
+		/// </summary>
+		/// <param name="id">Id of the file delete</param>
+        public void DeleteFile(string id)
 		{
+            DeleteFileAsync(id).Wait();
+        }
+
+        /// <summary>
+        /// Retrieves a folder. If no path or id is specified, root folder will be retrieved
+        /// </summary>
+        /// <param name="pathOrId"></param>
+        /// <returns></returns>
+        public ArchiveFolder GetFolder(string pathOrId = null)
+        {
+            return GetFolderAsync(pathOrId).Result;
+        }
+
+        /// <summary>
+        /// Retrieves the root folder.
+        /// </summary>
+        /// <returns></returns>
+        public ArchiveFolder GetRoot()
+        {
+            return GetRootAsync().Result;
+        }
+
+        public ArchiveFolder CreateFolder(string folderName, string path = null)
+        {
+            return CreateFolderAsync(folderName, path).Result;
+        }
+
+        /// <summary>
+        /// Deletes a folder
+        /// </summary>
+        /// <param name="pathOrId">Id or path of the folder to delete</param>
+        public void DeleteFolder(string pathOrId)
+        {
+            DeleteFolderAsync(pathOrId).Wait();
+        }
+
+        #endregion SYNC Interface Methods
+
+        #region ASYNC Interface Methods
+
+        public async Task<byte[]> DownloadFileAsync(string id)
+        {
+            return await BaseDownload(null, id);
+        }
+
+        public async Task DownloadFileAsync(string id, string localPath)
+        {
+            var data = await DownloadFileAsync(id);
+            await data.ToFile(localPath);
+        }
+
+        public async Task<ArchiveFile> UploadFileAsync(string name, byte[] data, string folderPathOrId = null)
+        {
             if (data == null)
                 throw new ArgumentException("File data must be set.");
 
@@ -70,135 +145,69 @@ namespace FortnoxAPILibrary.Connectors
             else
                 urlParams.Add("path", folderPathOrId);
 
-            return BaseUpload(name, data, urlParams);
+            return await BaseUpload(name, data, urlParams);
         }
 
-        public ArchiveFile UploadFile(string name, Stream stream, string folderPathOrId = null)
+        public async Task<ArchiveFile> UploadFileAsync(string name, Stream stream, string folderPathOrId = null)
         {
-            return UploadFile(name, stream.ToBytes().Result, folderPathOrId);
+            return await UploadFileAsync(name, await stream.ToBytes(), folderPathOrId);
         }
 
-        public ArchiveFile UploadFile(string localPath, string folderPathOrId = null)
+        public async Task<ArchiveFile> UploadFileAsync(string localPath, string folderPathOrId = null)
         {
             var fileInfo = new FileInfo(localPath);
-            return UploadFile(fileInfo.Name, fileInfo.ToBytes().Result, folderPathOrId);
+            return await UploadFileAsync(fileInfo.Name, fileInfo.ToBytes().Result, folderPathOrId);
         }
 
-        /// <summary>
-		/// Deletes a file
-		/// Note: If the specified id belongs to a folder, the folder will be deleted instead!
-		/// </summary>
-		/// <param name="id">Id of the file delete</param>
-        public void DeleteFile(string id)
-		{
-            BaseDelete(id).Wait();
+        public async Task DeleteFileAsync(string id)
+        {
+            await BaseDelete(id);
         }
 
-        /// <summary>
-        /// Retrieves a folder. If no path or id is specified, root folder will be retrieved
-        /// </summary>
-        /// <param name="pathOrId"></param>
-        /// <returns></returns>
-        public ArchiveFolder GetFolder(string pathOrId = null)
+        public async Task<ArchiveFolder> GetFolderAsync(string pathOrId = null)
         {
             if (string.IsNullOrEmpty(pathOrId))
                 pathOrId = "root";
 
             if (IsArchiveId(pathOrId) || IsPredefinedFolder(pathOrId))
-                return BaseGet(pathOrId).Result;
+                return await BaseGet(pathOrId);
             else
             {
                 ParametersInjection = new Dictionary<string, string>();
                 ParametersInjection.Add("path", pathOrId);
-                return BaseGet().Result;
+                return await BaseGet();
             }
         }
 
-        /// <summary>
-        /// Retrieves the root folder.
-        /// </summary>
-        /// <returns></returns>
-        public ArchiveFolder GetRoot()
-        { 
-            return GetFolder();
+        public async Task<ArchiveFolder> GetRootAsync()
+        {
+            return await GetFolderAsync();
         }
 
-        public ArchiveFolder CreateFolder(string folderName, string path = null)
+        public async Task<ArchiveFolder> CreateFolderAsync(string folderName, string path = null)
         {
-            var folder = new ArchiveFolder(){ Name = folderName };
+            var folder = new ArchiveFolder() { Name = folderName };
 
             if (path != null)
-                ParametersInjection = new Dictionary<string, string> {{"path", path}};
+                ParametersInjection = new Dictionary<string, string> { { "path", path } };
 
-            return BaseCreate(folder).Result;
+            return await BaseCreate(folder);
         }
 
-        /// <summary>
-        /// Deletes a folder
-        /// </summary>
-        /// <param name="pathOrId">Id or path of the folder to delete</param>
-        public void DeleteFolder(string pathOrId)
+        public async Task DeleteFolderAsync(string pathOrId)
         {
             if (IsArchiveId(pathOrId))
-                BaseDelete(pathOrId).Wait();
+                await BaseDelete(pathOrId);
             else
             {
-                ParametersInjection = new Dictionary<string, string> {{"path", pathOrId}};
-                BaseDelete().Wait();
+                ParametersInjection = new Dictionary<string, string> { { "path", pathOrId } };
+                await BaseDelete();
             }
         }
 
-        public Task<byte[]> DownloadFileAsync(string id)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion ASYNC Interface Methods
 
-        public Task DownloadFileAsync(string id, string localPath)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ArchiveFile> UploadFileAsync(string name, byte[] data, string folderPathOrId = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ArchiveFile> UploadFileAsync(string name, Stream stream, string folderPathOrId = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ArchiveFile> UploadFileAsync(string localPath, string folderPathOrId = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteFileAsync(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ArchiveFolder> GetFolderAsync(string pathOrId = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ArchiveFolder> GetRootAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ArchiveFolder> CreateFolderAsync(string folderName, string path = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteFolderAsync(string pathOrId)
-        {
-            throw new NotImplementedException();
-        }
-
-        private ArchiveFile BaseUpload(string name, byte[] data, Dictionary<string, string> parameters, params string[] indices)
+        private async Task<ArchiveFile> BaseUpload(string name, byte[] data, Dictionary<string, string> parameters, params string[] indices)
         {
             RequestInfo = new RequestInfo()
             {
@@ -208,21 +217,20 @@ namespace FortnoxAPILibrary.Connectors
                 Indices = indices
             };
 
-            return UploadFile<ArchiveFile>(data, name).Result;
+            return await UploadFile<ArchiveFile>(data, name);
         }
 
-        private byte[] BaseDownload(Dictionary<string, string> parameters, params string[] indices)
+        private async Task<byte[]> BaseDownload(Dictionary<string, string> parameters, params string[] indices)
         {
             RequestInfo = new RequestInfo()
             {
                 Parameters = parameters ?? new Dictionary<string, string>(),
                 BaseUrl = BaseUrl,
                 Resource = Resource,
-                //SearchParameters = GetSearchParameters(),
                 Indices = indices
             };
 
-            return DownloadFile().Result;
+            return await DownloadFile();
         }
 
         private static bool IsArchiveId(string str)
