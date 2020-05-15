@@ -19,7 +19,6 @@ namespace FortnoxAPILibrary.GeneratedTests
             ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
         }
 
-        [Ignore("Domain not understood")]
         [TestMethod]
         public void Test_SalaryTransaction_CRUD()
         {
@@ -35,23 +34,23 @@ namespace FortnoxAPILibrary.GeneratedTests
                 EmployeeId = tmpEmployee.EmployeeId,
                 SalaryCode = "11", //Arbetstid
                 Date = new DateTime(2020,1,1),
-                Amount = 1250.50m,
                 Number = 10,
+                TextRow = "TestSalaryRow"
             };
 
             var createdSalaryTransaction = connector.Create(newSalaryTransaction);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(1250.5, createdSalaryTransaction.Amount);
+            Assert.AreEqual("TestSalaryRow", createdSalaryTransaction.TextRow);
 
             #endregion CREATE
 
             #region UPDATE
 
-            createdSalaryTransaction.Amount = 1500;
+            createdSalaryTransaction.TextRow = "UpdatedTestSalaryRow";
 
             var updatedSalaryTransaction = connector.Update(createdSalaryTransaction); 
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(1500, updatedSalaryTransaction.Amount);
+            Assert.AreEqual("UpdatedTestSalaryRow", updatedSalaryTransaction.TextRow);
 
             #endregion UPDATE
 
@@ -59,7 +58,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             var retrievedSalaryTransaction = connector.Get(createdSalaryTransaction.SalaryRow);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(1500, retrievedSalaryTransaction.Amount);
+            Assert.AreEqual("UpdatedTestSalaryRow", retrievedSalaryTransaction.TextRow);
 
             #endregion READ / GET
 
