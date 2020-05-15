@@ -39,9 +39,15 @@ namespace FortnoxAPILibrary.Connectors
             return DownloadFileAsync(id).Result;
         }
 
-        public void DownloadFile(string id, string localPath)
+        /// <summary>
+        /// Downloads the specified file and saves it to a provided location
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="localPath"></param>
+        /// <returns></returns>
+        public FileInfo DownloadFile(string id, string localPath)
         {
-            DownloadFileAsync(id, localPath).Wait();
+            return DownloadFileAsync(id, localPath).Result;
         }
 
         /// <summary>
@@ -95,6 +101,12 @@ namespace FortnoxAPILibrary.Connectors
             return GetRootAsync().Result;
         }
 
+        /// <summary>
+        /// Creates a folder
+        /// </summary>
+        /// <param name="folderName"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public ArchiveFolder CreateFolder(string folderName, string path = null)
         {
             return CreateFolderAsync(folderName, path).Result;
@@ -118,10 +130,10 @@ namespace FortnoxAPILibrary.Connectors
             return await BaseDownload(null, id);
         }
 
-        public async Task DownloadFileAsync(string id, string localPath)
+        public async Task<FileInfo> DownloadFileAsync(string id, string localPath)
         {
             var data = await DownloadFileAsync(id);
-            await data.ToFile(localPath);
+            return await data.ToFile(localPath);
         }
 
         public async Task<ArchiveFile> UploadFileAsync(string name, byte[] data, string folderPathOrId = null)

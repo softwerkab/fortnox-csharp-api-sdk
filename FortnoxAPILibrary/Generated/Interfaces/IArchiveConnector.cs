@@ -15,7 +15,7 @@ namespace FortnoxAPILibrary.Connectors
         Filter.Archive? FilterBy { get; set; }
 
         byte[] DownloadFile(string id);
-        void DownloadFile(string id, string localPath);
+        FileInfo DownloadFile(string id, string localPath);
         ArchiveFile UploadFile(string name, byte[] data, string folderPathOrId = null);
         ArchiveFile UploadFile(string name, Stream stream, string folderPathOrId = null);
         ArchiveFile UploadFile(string localPath, string folderPathOrId = null);
@@ -28,7 +28,7 @@ namespace FortnoxAPILibrary.Connectors
 
 
         Task<byte[]> DownloadFileAsync(string id);
-        Task DownloadFileAsync(string id, string localPath);
+        Task<FileInfo> DownloadFileAsync(string id, string localPath);
         Task<ArchiveFile> UploadFileAsync(string name, byte[] data, string folderPathOrId = null);
         Task<ArchiveFile> UploadFileAsync(string name, Stream stream, string folderPathOrId = null);
         Task<ArchiveFile> UploadFileAsync(string localPath, string folderPathOrId = null);
