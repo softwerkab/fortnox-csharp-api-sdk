@@ -203,7 +203,7 @@ namespace FortnoxAPILibrary
 
             var data = await DoSimpleRequest();
             if (localPath != null)
-                File.WriteAllBytes(localPath, data);
+                await data.ToFile(localPath);
             return data;
         }
 

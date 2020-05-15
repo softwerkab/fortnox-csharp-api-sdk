@@ -39,7 +39,7 @@ namespace FortnoxAPILibrary.Connectors
 
         public void DownloadFile(string id, string localPath)
         {
-            File.WriteAllBytes(localPath, DownloadFile(id));
+            DownloadFile(id).ToFile(localPath).Wait();
         }
 
         /// <summary>
@@ -75,12 +75,13 @@ namespace FortnoxAPILibrary.Connectors
 
         public ArchiveFile UploadFile(string name, Stream stream, string folderPathOrId = null)
         {
-            return UploadFile(name, stream.ToBytes(), folderPathOrId);
+            return UploadFile(name, stream.ToBytes().Result, folderPathOrId);
         }
 
         public ArchiveFile UploadFile(string localPath, string folderPathOrId = null)
         {
-            return UploadFile(Path.GetFileName(localPath), File.ReadAllBytes(localPath), folderPathOrId);
+            var fileInfo = new FileInfo(localPath);
+            return UploadFile(fileInfo.Name, fileInfo.ToBytes().Result, folderPathOrId);
         }
 
         /// <summary>

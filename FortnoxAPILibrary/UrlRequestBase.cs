@@ -190,13 +190,13 @@ namespace FortnoxAPILibrary
                 if (data != null && RequestInfo.Method != RequestMethod.Get)
                 {
                     using var requestStream = wr.GetRequestStream();
-                    requestStream.WriteBytes(data);
+                    await requestStream.WriteBytes(data);
                 }
 
                 using var response = (HttpWebResponse)wr.GetResponse();
                 HttpStatusCode = response.StatusCode;
                 using var responseStream = response.GetResponseStream();
-                return responseStream.ToBytes();
+                return await responseStream.ToBytes();
             }
             catch (WebException we)
             {
@@ -226,14 +226,14 @@ namespace FortnoxAPILibrary
 
                 using var dataStream = request.GetRequestStream();
                 dataStream.Write(header, 0, header.Length);
-                dataStream.Write(fileData, 0, fileData.Length);
+                await dataStream.WriteAsync(fileData, 0, fileData.Length);
                 dataStream.Write(trailer, 0, trailer.Length);
                 dataStream.Close();
 
                 // Read the response
                 using var response = request.GetResponse();
                 using var responseStream = response.GetResponseStream();
-                ResponseContent = responseStream.ToText();
+                ResponseContent = responseStream.ToText().Result;
                 result = Deserialize<EntityWrapper<T>>(ResponseContent).Entity;
             }
             catch (WebException we)
@@ -258,8 +258,7 @@ namespace FortnoxAPILibrary
                 HttpStatusCode = response.StatusCode;
                 using var responseStream = response.GetResponseStream();
 
-                //var contentType = response.Headers["Content-Type"];
-                var data = responseStream.ToBytes();
+                var data = await responseStream.ToBytes();
                 return data;
             }
             catch (WebException we)
@@ -285,7 +284,7 @@ namespace FortnoxAPILibrary
             }
 
             using var responseStream = response.GetResponseStream();
-            string errorJson = responseStream.ToText();
+            string errorJson = responseStream.ToText().Result;
 
             try
             {
