@@ -1,4 +1,3 @@
-using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
@@ -61,7 +60,7 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task<Expense> GetAsync(string id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id);
 		}
 	}
 }

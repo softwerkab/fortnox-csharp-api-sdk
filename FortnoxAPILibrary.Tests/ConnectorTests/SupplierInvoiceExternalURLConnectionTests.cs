@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
-using FortnoxAPILibrary.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxAPILibrary.GeneratedTests
+namespace FortnoxAPILibrary.Tests.ConnectorTests
 {
     [TestClass]
     public class SupplierInvoiceExternalURLConnectionTests
@@ -22,8 +21,6 @@ namespace FortnoxAPILibrary.GeneratedTests
         [TestMethod]
         public void Test_SupplierInvoiceExternalURLConnection_CRUD()
         {
-            var x = new SupplierInvoiceExternalURLConnectionConnector().Find();
-
             #region Arrange
             var tmpSupplier = new SupplierConnector().Create(new Supplier() { Name = "TmpSupplier" });
             var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });

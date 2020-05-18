@@ -1,4 +1,3 @@
-using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
@@ -82,7 +81,7 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task DeleteAsync(string id)
 		{
-			await BaseDelete(id.ToString());
+			await BaseDelete(id);
 		}
 		public async Task<ModeOfPayment> CreateAsync(ModeOfPayment modeOfPayment)
 		{
@@ -90,11 +89,11 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task<ModeOfPayment> UpdateAsync(ModeOfPayment modeOfPayment)
 		{
-			return await BaseUpdate(modeOfPayment, modeOfPayment.Code.ToString());
+			return await BaseUpdate(modeOfPayment, modeOfPayment.Code);
 		}
 		public async Task<ModeOfPayment> GetAsync(string id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id);
 		}
 	}
 }

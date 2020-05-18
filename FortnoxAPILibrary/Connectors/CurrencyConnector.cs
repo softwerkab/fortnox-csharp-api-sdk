@@ -1,4 +1,3 @@
-using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
@@ -76,7 +75,7 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task DeleteAsync(string id)
 		{
-			await BaseDelete(id.ToString());
+			await BaseDelete(id);
 		}
 		public async Task<Currency> CreateAsync(Currency currency)
 		{
@@ -84,11 +83,11 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task<Currency> UpdateAsync(Currency currency)
 		{
-			return await BaseUpdate(currency, currency.Code.ToString());
+			return await BaseUpdate(currency, currency.Code);
 		}
 		public async Task<Currency> GetAsync(string id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id);
 		}
 	}
 }

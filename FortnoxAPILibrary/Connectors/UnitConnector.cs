@@ -1,4 +1,3 @@
-using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
@@ -76,7 +75,7 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task DeleteAsync(string id)
 		{
-			await BaseDelete(id.ToString());
+			await BaseDelete(id);
 		}
 		public async Task<Unit> CreateAsync(Unit unit)
 		{
@@ -84,11 +83,11 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task<Unit> UpdateAsync(Unit unit)
 		{
-			return await BaseUpdate(unit, unit.Code.ToString());
+			return await BaseUpdate(unit, unit.Code);
 		}
 		public async Task<Unit> GetAsync(string id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id);
 		}
 	}
 }

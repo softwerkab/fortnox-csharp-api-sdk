@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 using System.Threading.Tasks;
 

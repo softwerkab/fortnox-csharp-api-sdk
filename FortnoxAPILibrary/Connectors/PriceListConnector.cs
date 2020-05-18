@@ -1,4 +1,3 @@
-using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
@@ -83,11 +82,11 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task<PriceList> UpdateAsync(PriceList priceList)
 		{
-			return await BaseUpdate(priceList, priceList.Code.ToString());
+			return await BaseUpdate(priceList, priceList.Code);
 		}
 		public async Task<PriceList> GetAsync(string id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id);
 		}
 	}
 }

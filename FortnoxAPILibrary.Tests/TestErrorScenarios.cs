@@ -1,5 +1,4 @@
-﻿using System;
-using FortnoxAPILibrary.Connectors;
+﻿using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

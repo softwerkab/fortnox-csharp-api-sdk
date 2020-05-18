@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
@@ -92,7 +91,7 @@ namespace FortnoxAPILibrary.Connectors
                 };
             }
 
-            return await BaseGet(seriesId.ToString(), id.ToString());
+            return await BaseGet(seriesId, id.ToString());
         }
     }
 }

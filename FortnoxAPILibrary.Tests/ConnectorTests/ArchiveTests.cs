@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
-using FortnoxAPILibrary.Tests;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.Resources;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxAPILibrary.GeneratedTests
+namespace FortnoxAPILibrary.Tests.ConnectorTests
 {
     [TestClass]
     public class ArchiveTests
@@ -88,7 +84,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             IArchiveConnector connector2 = new ArchiveConnector();
             var folder2 = connector2.GetFolder(StaticFolders.SupplierInvoices);
-            Assert.AreEqual("inbox_s", folder1.Id);
+            Assert.AreEqual("inbox_s", folder2.Id);
         }
 
         [TestMethod]
@@ -153,7 +149,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             MyAssert.HasNoError(connector);
 
             //Act
-            var localFilePath = Path.GetTempFileName();
+            var localFilePath = TestUtils.GenerateTmpFilePath();
             var fileInfo = connector.DownloadFile(fortnoxFile.Id, localFilePath);
             MyAssert.HasNoError(connector);
             Assert.IsTrue(fileInfo.Exists);
@@ -172,7 +168,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             //Arrange
             var data = Resource.fortnox_image;
-            var localFilePath = Path.GetTempFileName();
+            var localFilePath = TestUtils.GenerateTmpFilePath();
             File.WriteAllBytes(localFilePath, data);
 
             //Act

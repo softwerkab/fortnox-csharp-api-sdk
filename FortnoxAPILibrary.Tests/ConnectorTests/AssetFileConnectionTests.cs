@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
-using FortnoxAPILibrary.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxAPILibrary.GeneratedTests
+namespace FortnoxAPILibrary.Tests.ConnectorTests
 {
     [TestClass]
     public class AssetFileConnectionTests

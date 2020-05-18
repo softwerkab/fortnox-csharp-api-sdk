@@ -1,4 +1,3 @@
-using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
@@ -85,7 +84,7 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task DeleteAsync(string id)
 		{
-			await BaseDelete(id.ToString());
+			await BaseDelete(id);
 		}
 		public async Task<VoucherFileConnection> CreateAsync(VoucherFileConnection voucherFileConnection)
 		{
@@ -93,7 +92,7 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task<VoucherFileConnection> GetAsync(string id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id);
 		}
 	}
 }

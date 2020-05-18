@@ -1,4 +1,3 @@
-using System;
 using FortnoxAPILibrary.Serialization;
 using Newtonsoft.Json;
 

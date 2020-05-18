@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
-using FortnoxAPILibrary.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxAPILibrary.GeneratedTests
+namespace FortnoxAPILibrary.Tests.ConnectorTests
 {
     [TestClass]
     public class InvoiceFileConnectionTests
@@ -73,7 +71,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             var retrievedInvoiceFileConnection = connector.GetConnections(createdInvoiceFileConnection.EntityId, createdInvoiceFileConnection.EntityType)?.FirstOrDefault();
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(true, retrievedInvoiceFileConnection.IncludeOnSend);
+            Assert.AreEqual(true, retrievedInvoiceFileConnection?.IncludeOnSend);
 
             #endregion READ / GET
 

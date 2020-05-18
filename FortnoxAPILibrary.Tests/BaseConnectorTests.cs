@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

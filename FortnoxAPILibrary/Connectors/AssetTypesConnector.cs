@@ -1,10 +1,5 @@
-using System;
-using System.Net.Http.Headers;
-using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
-using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using System.Threading.Tasks;

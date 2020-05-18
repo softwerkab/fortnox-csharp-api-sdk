@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Serialization;
 using Newtonsoft.Json;
 

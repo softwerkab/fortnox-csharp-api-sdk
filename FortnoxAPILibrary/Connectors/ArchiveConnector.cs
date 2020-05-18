@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Web;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
@@ -11,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace FortnoxAPILibrary.Connectors
 {
-    //TODO: Implement Async methods
     /// <remarks/>
     public class ArchiveConnector : EntityConnector<ArchiveFolder, EntityWrapper<ArchiveFolder>, Sort.By.Archive?>, IArchiveConnector
 	{

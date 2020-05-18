@@ -1,7 +1,3 @@
-using FortnoxAPILibrary.Serialization;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
@@ -38,7 +34,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Worker, Tobacco Industry </summary>
         [EnumMember(Value = "A54")]
         A54,
-        ///<summary> Worker, Company Agreement for V&S Vin & Sprit AB </summary>
+        ///<summary> Worker, Company Agreement for V&amp;S Vin & Sprit AB </summary>
         [EnumMember(Value = "A55")]
         A55,
         ///<summary> Worker, Coffee Roasters and Spice Factories </summary>

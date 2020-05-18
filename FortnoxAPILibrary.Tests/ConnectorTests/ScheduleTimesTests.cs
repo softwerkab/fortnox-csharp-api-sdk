@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
-using FortnoxAPILibrary.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxAPILibrary.GeneratedTests
+namespace FortnoxAPILibrary.Tests.ConnectorTests
 {
     [TestClass]
     public class ScheduleTimesTests
@@ -29,8 +27,6 @@ namespace FortnoxAPILibrary.GeneratedTests
             IScheduleTimesConnector connector = new ScheduleTimesConnector();
 
             #region CREATE
-
-            var abc = connector.Get(tmpEmployee.EmployeeId, new DateTime(2000, 10, 10));
 
             //Create method is not supported
             var newScheduleTimes = new ScheduleTimes()

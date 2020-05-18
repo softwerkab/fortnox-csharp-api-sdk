@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.Tests
             }
             catch (AssertFailedException)
             {
-                throw new AssertFailedException($"File is not valid PDF file.");
+                throw new AssertFailedException("File is not valid PDF file.");
             }
         }
     }

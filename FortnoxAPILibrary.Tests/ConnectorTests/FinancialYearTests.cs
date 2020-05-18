@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
-using FortnoxAPILibrary.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxAPILibrary.GeneratedTests
+namespace FortnoxAPILibrary.Tests.ConnectorTests
 {
     [TestClass]
     public class FinancialYearTests
@@ -44,7 +42,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             var createdFinancialYear = connector.Create(newFinancialYear);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(new DateTime(2010, 1, 1).ToString(), createdFinancialYear.FromDate?.ToString());
+            Assert.AreEqual(new DateTime(2010, 1, 1), createdFinancialYear.FromDate);
 
             #endregion CREATE
 
@@ -58,7 +56,7 @@ namespace FortnoxAPILibrary.GeneratedTests
 
             var retrievedFinancialYear = connector.Get(createdFinancialYear.Id);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(new DateTime(2010, 1, 1).ToString(), retrievedFinancialYear.FromDate?.ToString());
+            Assert.AreEqual(new DateTime(2010, 1, 1), retrievedFinancialYear.FromDate);
 
             #endregion READ / GET
 

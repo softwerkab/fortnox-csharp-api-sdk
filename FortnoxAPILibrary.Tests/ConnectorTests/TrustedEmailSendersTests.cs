@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
-using FortnoxAPILibrary.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxAPILibrary.GeneratedTests
+namespace FortnoxAPILibrary.Tests.ConnectorTests
 {
     [TestClass]
     public class TrustedEmailSendersTests
@@ -48,7 +45,7 @@ namespace FortnoxAPILibrary.GeneratedTests
             //Single get is not supported, full list is used instead
             var retrievedTrustedEmailSender = connector.Find().TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("test1.testasson@test.tst", retrievedTrustedEmailSender.Email);
+            Assert.AreEqual("test1.testasson@test.tst", retrievedTrustedEmailSender?.Email);
             #endregion READ / GET
 
             #region DELETE

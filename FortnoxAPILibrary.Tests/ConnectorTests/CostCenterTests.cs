@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
-using FortnoxAPILibrary.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxAPILibrary.GeneratedTests
+namespace FortnoxAPILibrary.Tests.ConnectorTests
 {
     [TestClass]
     public class CostCenterTests
@@ -82,8 +80,6 @@ namespace FortnoxAPILibrary.GeneratedTests
             #region Arrange
             //Add code to create required resources
             #endregion Arrange
-
-            var testKeyMark = TestUtils.RandomInt();
 
             ICostCenterConnector connector = new CostCenterConnector();
             var newCostCenter = new CostCenter()

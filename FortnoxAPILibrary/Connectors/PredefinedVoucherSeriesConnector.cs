@@ -1,4 +1,3 @@
-using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
@@ -58,11 +57,11 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task<PredefinedVoucherSeries> UpdateAsync(PredefinedVoucherSeries predefinedVoucherSeries)
 		{
-			return await BaseUpdate(predefinedVoucherSeries, predefinedVoucherSeries.Name.ToString());
+			return await BaseUpdate(predefinedVoucherSeries, predefinedVoucherSeries.Name);
 		}
 		public async Task<PredefinedVoucherSeries> GetAsync(string id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id);
 		}
 	}
 }

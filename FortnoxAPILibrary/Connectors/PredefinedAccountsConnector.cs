@@ -1,4 +1,3 @@
-using FortnoxAPILibrary;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
@@ -58,11 +57,11 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task<PredefinedAccount> UpdateAsync(PredefinedAccount predefinedAccount)
 		{
-			return await BaseUpdate(predefinedAccount, predefinedAccount.Name.ToString());
+			return await BaseUpdate(predefinedAccount, predefinedAccount.Name);
 		}
 		public async Task<PredefinedAccount> GetAsync(string id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id);
 		}
 	}
 }
