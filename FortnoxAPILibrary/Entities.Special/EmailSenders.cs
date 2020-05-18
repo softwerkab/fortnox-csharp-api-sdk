@@ -3,7 +3,7 @@ using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Serialization;
 using Newtonsoft.Json;
 
-namespace FortnoxAPILibrary.Reused
+namespace FortnoxAPILibrary.Entities
 {
     [Entity(SingularName = "EmailSenders")]
     public class EmailSenders

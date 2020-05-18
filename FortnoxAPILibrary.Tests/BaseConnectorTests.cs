@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace FortnoxAPILibrary.Tests
 {
     [TestClass]
-    public class ConnectorTests
+    public class BaseConnectorTests
     {
         [TestInitialize]
         public void Init()

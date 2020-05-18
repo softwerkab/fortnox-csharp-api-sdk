@@ -32,7 +32,6 @@ namespace FortnoxAPILibrary
         /// <summary>
         /// Optional Fortnox Client Secret, if used it will override the static version.
         /// </summary>
-        /// <exception cref="Exception">Exception will be thrown if client secret is not set.</exception>
         public string ClientSecret
 		{
 			get => !string.IsNullOrEmpty(clientSecret) ? clientSecret : ConnectionCredentials.ClientSecret;

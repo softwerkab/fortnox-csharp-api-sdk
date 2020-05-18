@@ -18,12 +18,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Connectors\**" />
-    <Compile Remove="Entities\**" />
-    <EmbeddedResource Remove="Connectors\**" />
-    <EmbeddedResource Remove="Entities\**" />
-    <None Remove="Connectors\**" />
-    <None Remove="Entities\**" />
     <None Include="..\Repository\fortnox1.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
@@ -31,18 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Filter.cs" />
-    <Compile Remove="Sort.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MediaTypeMap.Core" Version="2.3.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="RateLimiter" Version="2.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Generated\Entities\Inbox\" />
   </ItemGroup>
 
 </Project>
