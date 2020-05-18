@@ -37,15 +37,12 @@ namespace FortnoxAPILibrary.Entities
     public enum EntityType
     {
         /// <summary> Invoice </summary>
-        [StringValue("F")]
         [EnumMember(Value = "F")]
         Invoice,
         /// <summary> Order </summary>
-        [StringValue("O")]
         [EnumMember(Value = "O")]
         Order,
         /// <summary> Offer </summary>
-        [StringValue("OF")]
         [EnumMember(Value = "OF")]
         Offer
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 
 namespace FortnoxAPILibrary
@@ -57,13 +58,13 @@ namespace FortnoxAPILibrary
 
     public enum RequestMethod
     {
-        [StringValue("GET")]
+        [EnumMember(Value = "GET")]
         Get,
-        [StringValue("POST")]
+        [EnumMember(Value = "POST")]
         Post,
-        [StringValue("PUT")]
+        [EnumMember(Value = "PUT")]
         Put,
-        [StringValue("DELETE")]
+        [EnumMember(Value = "DELETE")]
         Delete
     }
 }

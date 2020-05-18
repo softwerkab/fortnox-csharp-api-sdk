@@ -1,6 +1,8 @@
 
 // ReSharper disable UnusedMember.Global
 
+using System.Runtime.Serialization;
+
 namespace FortnoxAPILibrary
 {
     /// <remarks/>
@@ -10,13 +12,13 @@ namespace FortnoxAPILibrary
 		public enum Contract
 		{
 			/// <remarks/>
-			[StringValue("active")]
+			[EnumMember(Value = "active")]
 			Active,
 			/// <remarks/>
-			[StringValue("inactive")]
+			[EnumMember(Value = "inactive")]
 			Inactive,
 			/// <remarks/>
-			[StringValue("finished")]
+			[EnumMember(Value = "finished")]
 			Finished
 		}
 
@@ -24,19 +26,19 @@ namespace FortnoxAPILibrary
 		public enum Invoice
 		{
 			/// <remarks/>
-			[StringValue("fullypaid")]
+			[EnumMember(Value = "fullypaid")]
 			FullyPaid,
 			/// <remarks/>
-			[StringValue("cancelled")]
+			[EnumMember(Value = "cancelled")]
 			Cancelled,
 			/// <remarks/>
-			[StringValue("unpaid")]
+			[EnumMember(Value = "unpaid")]
 			Unpaid,
 			/// <remarks/>
-			[StringValue("unpaidoverdue")]
+			[EnumMember(Value = "unpaidoverdue")]
 			UnpaidOverdue,
 			/// <remarks/>
-			[StringValue("unbooked")]
+			[EnumMember(Value = "unbooked")]
 			Unbooked
 		}
 
@@ -44,25 +46,25 @@ namespace FortnoxAPILibrary
 		public enum SupplierInvoice
 		{
 			/// <remarks/>
-			[StringValue("fullypaid")]
+			[EnumMember(Value = "fullypaid")]
 			FullyPaid,
 			/// <remarks/>
-			[StringValue("cancelled")]
+			[EnumMember(Value = "cancelled")]
 			Cancelled,
 			/// <remarks/>
-			[StringValue("unpaid")]
+			[EnumMember(Value = "unpaid")]
 			Unpaid,
 			/// <remarks/>
-			[StringValue("unpaidoverdue")]
+			[EnumMember(Value = "unpaidoverdue")]
 			UnpaidOverdue,
 			/// <remarks/>
-			[StringValue("unbooked")]
+			[EnumMember(Value = "unbooked")]
 			Unbooked,
 			/// <remarks/>
-			[StringValue("pendingpayment")]
+			[EnumMember(Value = "pendingpayment")]
 			PendingPayment,
 			/// <remarks/>
-			[StringValue("authorizepending")]
+			[EnumMember(Value = "authorizepending")]
 			AuthorizePending
 		}
 
@@ -70,16 +72,16 @@ namespace FortnoxAPILibrary
 		public enum Offer
 		{
 			/// <remarks/>
-			[StringValue("cancelled")]
+			[EnumMember(Value = "cancelled")]
 			Cancelled,
 			/// <remarks/>
-			[StringValue("expired")]
+			[EnumMember(Value = "expired")]
 			Expired,
 			/// <remarks/>
-			[StringValue("ordercreated")]
+			[EnumMember(Value = "ordercreated")]
 			OrderCreated,
 			/// <remarks/>
-			[StringValue("ordernotcreated")]
+			[EnumMember(Value = "ordernotcreated")]
 			OrderNotCreated
 		}
 
@@ -87,16 +89,16 @@ namespace FortnoxAPILibrary
 		public enum Order
 		{
 			/// <remarks/>
-			[StringValue("cancelled")]
+			[EnumMember(Value = "cancelled")]
 			Cancelled,
 			/// <remarks/>
-			[StringValue("expired")]
+			[EnumMember(Value = "expired")]
 			Expired,
 			/// <remarks/>
-			[StringValue("invoicecreated")]
+			[EnumMember(Value = "invoicecreated")]
 			InvoiceCreated,
 			/// <remarks/>
-			[StringValue("invoicenotcreated")]
+			[EnumMember(Value = "invoicenotcreated")]
 			InvoiceNotCreated
 		}
 
@@ -104,13 +106,13 @@ namespace FortnoxAPILibrary
 		public enum TaxReduction
 		{
 			/// <remarks/>
-			[StringValue("invoices")]
+			[EnumMember(Value = "invoices")]
 			Invoices,
 			/// <remarks/>
-			[StringValue("offers")]
+			[EnumMember(Value = "offers")]
 			Offers,
 			/// <remarks/>
-			[StringValue("orders")]
+			[EnumMember(Value = "orders")]
 			Orders
 		}
 
@@ -118,10 +120,10 @@ namespace FortnoxAPILibrary
 		public enum Customer
 		{
 			/// <remarks/>
-			[StringValue("active")]
+			[EnumMember(Value = "active")]
 			Active,
 			/// <remarks/>
-			[StringValue("inactive")]
+			[EnumMember(Value = "inactive")]
 			Inactive
 		}
 
@@ -129,10 +131,10 @@ namespace FortnoxAPILibrary
 		public enum Article
 		{
 			/// <remarks/>
-			[StringValue("active")]
+			[EnumMember(Value = "active")]
 			Active,
 			/// <remarks/>
-			[StringValue("inactive")]
+			[EnumMember(Value = "inactive")]
 			Inactive
 		}
 
@@ -168,22 +170,22 @@ namespace FortnoxAPILibrary
 		public enum Asset
 		{
 			/// <summary> Retrieves all active assets </summary>
-			[StringValue("active")]
+			[EnumMember(Value = "active")]
 			Active,
 			/// <summary>Retrieves all inactive assets </summary>
-			[StringValue("inactive")]
+			[EnumMember(Value = "inactive")]
 			Inactive,
 			/// <summary> Retrieves all fully depreciated assets </summary>
-			[StringValue("fully_depreciated")]
+			[EnumMember(Value = "fully_depreciated")]
 			FullyDepreciated,
 			/// <summary> Retrieves all sold assets </summary>
-			[StringValue("sold")]
+			[EnumMember(Value = "sold")]
 			Sold,    
 			/// <summary> Retrieves all scrapped assets </summary>
-			[StringValue("scrapped")]
+			[EnumMember(Value = "scrapped")]
 			Scrapped,
 			/// <summary> Retrieves all voided assets </summary>
-			[StringValue("voided")]
+			[EnumMember(Value = "voided")]
 			Voided
 		}
 		public enum AttendanceTransactions
@@ -216,9 +218,9 @@ namespace FortnoxAPILibrary
 		}
         public enum Employee
 		{
-            [StringValue("active")]
+            [EnumMember(Value = "active")]
 			Active,
-            [StringValue("inactive")]
+            [EnumMember(Value = "inactive")]
 			Inactive
 		}
 		public enum Expense
@@ -275,11 +277,11 @@ namespace FortnoxAPILibrary
 		}
 		public enum PrintTemplate
 		{
-            [StringValue("order")]
+            [EnumMember(Value = "order")]
             Order,
-            [StringValue("offer")]
+            [EnumMember(Value = "offer")]
             Offer,
-            [StringValue("invoice")]
+            [EnumMember(Value = "invoice")]
             Invoice
 		}
 		public enum Project

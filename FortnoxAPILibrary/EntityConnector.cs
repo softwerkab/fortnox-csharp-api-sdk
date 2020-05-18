@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using FortnoxAPILibrary.Entities;
 
@@ -252,37 +253,37 @@ namespace FortnoxAPILibrary
 
     public enum Action
     {
-        [StringValue("print")]
+        [EnumMember(Value = "print")]
         Print,
-        [StringValue("preview")]
+        [EnumMember(Value = "preview")]
         Preview,
-        [StringValue("eprint")]
+        [EnumMember(Value = "eprint")]
         EPrint,
-        [StringValue("externalprint")]
+        [EnumMember(Value = "externalprint")]
         ExternalPrint,
-        [StringValue("email")]
+        [EnumMember(Value = "email")]
         Email,
-        [StringValue("finish")]
+        [EnumMember(Value = "finish")]
         Finish,
-        [StringValue("createinvoice")]
+        [EnumMember(Value = "createinvoice")]
         CreateInvoice,
-        [StringValue("increaseinvoicecount")]
+        [EnumMember(Value = "increaseinvoicecount")]
         IncreaseInvoiceCount,
-        [StringValue("bookkeep")]
+        [EnumMember(Value = "bookkeep")]
         Bookkeep,
-        [StringValue("cancel")]
+        [EnumMember(Value = "cancel")]
         Cancel,
-        [StringValue("credit")]
+        [EnumMember(Value = "credit")]
         Credit,
-        [StringValue("printreminder")]
+        [EnumMember(Value = "printreminder")]
         PrintReminder,
-        [StringValue("approvalbookkeep")]
+        [EnumMember(Value = "approvalbookkeep")]
         ApprovalBookkeep,
-        [StringValue("approvalpayment")]
+        [EnumMember(Value = "approvalpayment")]
         ApprovalPayment,
-        [StringValue("einvoice")]
+        [EnumMember(Value = "einvoice")]
         EInvoice,
-        [StringValue("createorder")]
+        [EnumMember(Value = "createorder")]
         CreateOrder
     }
 }

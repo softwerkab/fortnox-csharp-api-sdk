@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,8 +26,8 @@ namespace FortnoxAPILibrary
             var type = enumObj.GetType();
             var memberInfo = type.GetMember(enumObj.ToString()).First();
 
-            if (memberInfo.HasAttribute<StringValueAttribute>())
-                return memberInfo.GetAttribute<StringValueAttribute>().RealValue;
+            if (memberInfo.HasAttribute<EnumMemberAttribute>())
+                return memberInfo.GetAttribute<EnumMemberAttribute>().Value;
             else
                 return enumObj.ToString();
         }

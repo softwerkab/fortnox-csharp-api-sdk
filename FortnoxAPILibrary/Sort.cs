@@ -1,6 +1,8 @@
 
 // ReSharper disable UnusedMember.Global
 
+using System.Runtime.Serialization;
+
 namespace FortnoxAPILibrary
 {
 	//TODO: Fix plurals
@@ -18,7 +20,7 @@ namespace FortnoxAPILibrary
 			}
 			public enum Account
 			{
-				[StringValue("number")]
+				[EnumMember(Value = "number")]
 				Number,
 			}
 			public enum Archive
@@ -29,13 +31,13 @@ namespace FortnoxAPILibrary
 			}
 			public enum Article
 			{
-				[StringValue("articlenumber")]
+				[EnumMember(Value = "articlenumber")]
 				ArticleNumber,
-				[StringValue("quantityinstock")]
+				[EnumMember(Value = "quantityinstock")]
 				QuantityInStock,
-				[StringValue("reservedquantity")]
+				[EnumMember(Value = "reservedquantity")]
 				ReservedQuantity,
-				[StringValue("stockvalue")]
+				[EnumMember(Value = "stockvalue")]
 				StockValue,
 			}
 			public enum AssetFileConnection
@@ -64,28 +66,28 @@ namespace FortnoxAPILibrary
 			}
 			public enum Contract
 			{
-				[StringValue("customername")]
+				[EnumMember(Value = "customername")]
 				CustomerName,
-				[StringValue("customernumber")]
+				[EnumMember(Value = "customernumber")]
 				CustomerNumber,
-				[StringValue("documentnumber")]
+				[EnumMember(Value = "documentnumber")]
 				DocumentNumber,
-				[StringValue("invoicesremaining")]
+				[EnumMember(Value = "invoicesremaining")]
 				InvoicesRemaining,
-				[StringValue("lastinvoicedate")]
+				[EnumMember(Value = "lastinvoicedate")]
 				LastInvoiceDate,
-				[StringValue("periodend")]
+				[EnumMember(Value = "periodend")]
 				PeriodEnd,
-				[StringValue("periodstart")]
+				[EnumMember(Value = "periodstart")]
 				PeriodStart,
-				[StringValue("templatenumber")]
+				[EnumMember(Value = "templatenumber")]
 				TemplateNumber,
-				[StringValue("total")]
+				[EnumMember(Value = "total")]
 				Total,
 			}
 			public enum CostCenter
 			{
-				[StringValue("code")]
+				[EnumMember(Value = "code")]
 				Code,
 			}
 			public enum Currency
@@ -93,9 +95,9 @@ namespace FortnoxAPILibrary
 			}
 			public enum Customer
 			{
-				[StringValue("customernumber")]
+				[EnumMember(Value = "customernumber")]
 				CustomerNumber,
-				[StringValue("name")]
+				[EnumMember(Value = "name")]
 				Name,
 			}
 			public enum Employee
@@ -106,11 +108,11 @@ namespace FortnoxAPILibrary
 			}
 			public enum FinancialYear
 			{
-				[StringValue("id")]
+				[EnumMember(Value = "id")]
 				Id,
-				[StringValue("fromdate")]
+				[EnumMember(Value = "fromdate")]
 				FromDate,
-				[StringValue("todate")]
+				[EnumMember(Value = "todate")]
 				ToDate,
 			}
 			public enum InvoiceAccrual
@@ -124,17 +126,17 @@ namespace FortnoxAPILibrary
 			}
 			public enum Invoice
 			{
-				[StringValue("customername")]
+				[EnumMember(Value = "customername")]
 				CustomerName,
-				[StringValue("customernumber")]
+				[EnumMember(Value = "customernumber")]
 				CustomerNumber,
-				[StringValue("documentnumber")]
+				[EnumMember(Value = "documentnumber")]
 				DocumentNumber,
-				[StringValue("invoicedate")]
+				[EnumMember(Value = "invoicedate")]
 				InvoiceDate,
-				[StringValue("ocr")]
+				[EnumMember(Value = "ocr")]
 				OCR,
-				[StringValue("total")]
+				[EnumMember(Value = "total")]
 				Total,
 			}
 			public enum Label
@@ -145,7 +147,7 @@ namespace FortnoxAPILibrary
 			}
 			public enum ModeOfPayment
 			{
-				[StringValue("code")]
+				[EnumMember(Value = "code")]
 				Code,
 			}
 			public enum NoxFinansInvoice
@@ -153,24 +155,24 @@ namespace FortnoxAPILibrary
 			}
 			public enum Offer
 			{
-				[StringValue("customername")]
+				[EnumMember(Value = "customername")]
 				CustomerName,
-				[StringValue("customernumber")]
+				[EnumMember(Value = "customernumber")]
 				CustomerNumber,
-				[StringValue("documentnumber")]
+				[EnumMember(Value = "documentnumber")]
 				DocumentNumber,
-				[StringValue("offerdate")]
+				[EnumMember(Value = "offerdate")]
 				OfferDate,
 			}
 			public enum Order
 			{
-				[StringValue("customername")]
+				[EnumMember(Value = "customername")]
 				CustomerName,
-				[StringValue("customernumber")]
+				[EnumMember(Value = "customernumber")]
 				CustomerNumber,
-				[StringValue("documentnumber")]
+				[EnumMember(Value = "documentnumber")]
 				DocumentNumber,
-				[StringValue("orderdate")]
+				[EnumMember(Value = "orderdate")]
 				OrderDate,
 			}
 			public enum PredefinedAccounts
@@ -181,16 +183,16 @@ namespace FortnoxAPILibrary
 			}
 			public enum PriceList
 			{
-				[StringValue("code")]
+				[EnumMember(Value = "code")]
 				Code,
-				[StringValue("comments")]
+				[EnumMember(Value = "comments")]
 				Comments,
 			}
 			public enum Price
 			{
-				[StringValue("articlenumber")]
+				[EnumMember(Value = "articlenumber")]
 				ArticleNumber,
-				[StringValue("pricelist")]
+				[EnumMember(Value = "pricelist")]
 				PriceList,
 			}
 			public enum PrintTemplate
@@ -222,26 +224,26 @@ namespace FortnoxAPILibrary
 			}
 			public enum Supplier
 			{
-				[StringValue("name")]
+				[EnumMember(Value = "name")]
 				Name,
-				[StringValue("suppliernumber")]
+				[EnumMember(Value = "suppliernumber")]
 				SupplierNumber,
 			}
 			public enum TaxReduction
 			{
-				[StringValue("customername")]
+				[EnumMember(Value = "customername")]
 				CustomerName,
-				[StringValue("id")]
+				[EnumMember(Value = "id")]
 				Id,
 			}
 			public enum TermsOfDelivery
 			{
-				[StringValue("code")]
+				[EnumMember(Value = "code")]
 				Code,
 			}
 			public enum TermsOfPayment
 			{
-				[StringValue("code")]
+				[EnumMember(Value = "code")]
 				Code,
 			}
 			public enum TrustedEmailDomains
@@ -252,7 +254,7 @@ namespace FortnoxAPILibrary
 			}
 			public enum Unit
 			{
-				[StringValue("code")]
+				[EnumMember(Value = "code")]
 				Code,
 			}
 			public enum VoucherFileConnection
@@ -260,30 +262,30 @@ namespace FortnoxAPILibrary
 			}
 			public enum VoucherSeries
 			{
-				[StringValue("code")]
+				[EnumMember(Value = "code")]
 				Code,
 			}
 			public enum Voucher
 			{
-				[StringValue("referencenumber")]
+				[EnumMember(Value = "referencenumber")]
 				ReferenceNumber,
-				[StringValue("vouchernumber")]
+				[EnumMember(Value = "vouchernumber")]
 				VoucherNumber,
-				[StringValue("voucherseries")]
+				[EnumMember(Value = "voucherseries")]
 				VoucherSeries,
 			}
 			public enum WayOfDelivery
 			{
-				[StringValue("code")]
+				[EnumMember(Value = "code")]
 				Code,
 			}
 		}
 
 		public enum Order
 		{
-            [StringValue("ascending")]
+            [EnumMember(Value = "ascending")]
             Ascending,
-            [StringValue("descending")]
+            [EnumMember(Value = "descending")]
             Descending
 		}
 	}
