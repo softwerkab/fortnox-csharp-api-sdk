@@ -4,14 +4,11 @@ namespace FortnoxAPILibrary.Entities
 {
     public enum SupplierInvoiceVATType
     {
-        ///<summary> No property description </summary>
         [EnumMember(Value = "NORMAL")]
-        NORMAL,
-        ///<summary> No property description </summary>
+        Normal,
         [EnumMember(Value = "EUINTERNAL")]
-        EUINTERNAL,
-        ///<summary> No property description </summary>
+        EUInternal,
         [EnumMember(Value = "REVERSE")]
-        REVERSE,
+        Reverse,
     }
 }

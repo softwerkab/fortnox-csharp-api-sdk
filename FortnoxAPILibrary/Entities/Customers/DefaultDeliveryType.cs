@@ -3,15 +3,12 @@ using System.Runtime.Serialization;
 namespace FortnoxAPILibrary.Entities
 {
     public enum DefaultDeliveryType
-    {
-        ///<summary> No property description </summary>
+    { 
         [EnumMember(Value = "PRINT")]
-        PRINT,
-        ///<summary> No property description </summary>
+        Print,
         [EnumMember(Value = "EMAIL")]
-        EMAIL,
-        ///<summary> No property description </summary>
+        Email,
         [EnumMember(Value = "PRINTSERVICE")]
-        PRINTSERVICE,
+        PrintService,
     }
 }

@@ -32,7 +32,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 Comments = "InvoiceComments",
                 InvoiceDate = new DateTime(2020, 1, 20), //"2019-01-20",
                 DueDate = new DateTime(2020, 6, 20), //"2019-02-20",
-                SalesType = SalesType.STOCK,
+                SalesType = SalesType.Stock,
                 //OCR = "123456789",
                 Total = 6000,
                 SupplierInvoiceRows = new List<SupplierInvoiceRow>()

@@ -4,11 +4,9 @@ namespace FortnoxAPILibrary.Entities
 {
     public enum AccountingMethod
     {
-        ///<summary> No property description </summary>
         [EnumMember(Value = "ACCRUAL")]
-        ACCRUAL,
-        ///<summary> No property description </summary>
+        Accrual,
         [EnumMember(Value = "CASH")]
-        CASH,
+        Cash,
     }
 }

@@ -4,14 +4,11 @@ namespace FortnoxAPILibrary.Entities
 {
     public enum ReferenceDocumentType
     {
-        ///<summary> No property description </summary>
         [EnumMember(Value = "OFFER")]
-        OFFER,
-        ///<summary> No property description </summary>
+        Offer,
         [EnumMember(Value = "ORDER")]
-        ORDER,
-        ///<summary> No property description </summary>
+        Order,
         [EnumMember(Value = "INVOICE")]
-        INVOICE,
+        Invoice,
     }
 }

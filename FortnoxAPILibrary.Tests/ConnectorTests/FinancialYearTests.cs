@@ -37,7 +37,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 FromDate = new DateTime(2010, 1, 1),
                 ToDate = new DateTime(2010, 12, 31),
                 AccountChartType = existingAccountChartType.Name,
-                AccountingMethod = AccountingMethod.CASH
+                AccountingMethod = AccountingMethod.Cash
             };
 
             var createdFinancialYear = connector.Create(newFinancialYear);

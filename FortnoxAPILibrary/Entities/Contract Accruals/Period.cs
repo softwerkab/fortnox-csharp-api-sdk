@@ -4,20 +4,15 @@ namespace FortnoxAPILibrary.Entities
 {
     public enum Period
     {
-        ///<summary> No property description </summary>
         [EnumMember(Value = "MONTHLY")]
-        MONTHLY,
-        ///<summary> No property description </summary>
+        Monthly,
         [EnumMember(Value = "BIMONTHLY")]
-        BIMONTHLY,
-        ///<summary> No property description </summary>
+        BiMonthly,
         [EnumMember(Value = "QUARTERLY")]
-        QUARTERLY,
-        ///<summary> No property description </summary>
+        Quaterly,
         [EnumMember(Value = "SEMIANNUALLY")]
-        SEMIANNUALLY,
-        ///<summary> No property description </summary>
+        SemiAnnually,
         [EnumMember(Value = "ANNUALLY")]
-        ANNUALLY,
+        Annualy,
     }
 }

@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         {
             #region Arrange
             var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
             IInvoiceConnector connector = new InvoiceConnector();
@@ -35,8 +35,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
                 DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
-                InvoiceType = InvoiceType.CASHINVOICE,
-                PaymentWay = PaymentWay.CASH,
+                InvoiceType = InvoiceType.CashInvoice,
+                PaymentWay = PaymentWay.Cash,
                 Comments = "TestInvoice",
                 InvoiceRows = new List<InvoiceRow>()
                 {
@@ -87,7 +87,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         {
             #region Arrange
             var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
             IInvoiceConnector connector = new InvoiceConnector();
@@ -96,8 +96,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
                 DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
-                InvoiceType = InvoiceType.CASHINVOICE,
-                PaymentWay = PaymentWay.CASH,
+                InvoiceType = InvoiceType.CashInvoice,
+                PaymentWay = PaymentWay.Cash,
                 Comments = "TestInvoice",
                 InvoiceRows = new List<InvoiceRow>()
                 {
@@ -147,7 +147,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         {
             #region Arrange
             var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
             IInvoiceConnector connector = new InvoiceConnector();
@@ -194,7 +194,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var cc = new CustomerConnector();
             var ac = new ArticleConnector();
             var tmpCustomer = cc.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = ac.Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+            var tmpArticle = ac.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             MyAssert.HasNoError(cc);
             MyAssert.HasNoError(ac);
             #endregion Arrange
@@ -206,8 +206,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
                 DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
-                InvoiceType = InvoiceType.CASHINVOICE,
-                PaymentWay = PaymentWay.CASH,
+                InvoiceType = InvoiceType.CashInvoice,
+                PaymentWay = PaymentWay.Cash,
                 Comments = "TestInvoice",
                 InvoiceRows = new List<InvoiceRow>()
                 {
@@ -237,7 +237,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var cc = new CustomerConnector();
             var ac = new ArticleConnector();
             var tmpCustomer = cc.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "richard.randak@softwerk.se" });
-            var tmpArticle = ac.Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+            var tmpArticle = ac.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             MyAssert.HasNoError(cc);
             MyAssert.HasNoError(ac);
             #endregion Arrange
@@ -249,8 +249,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
                 DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
-                InvoiceType = InvoiceType.CASHINVOICE,
-                PaymentWay = PaymentWay.CASH,
+                InvoiceType = InvoiceType.CashInvoice,
+                PaymentWay = PaymentWay.Cash,
                 Comments = "Testing invoice email feature",
                 InvoiceRows = new List<InvoiceRow>()
                 {

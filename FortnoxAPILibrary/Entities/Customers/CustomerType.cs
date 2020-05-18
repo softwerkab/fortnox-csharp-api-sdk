@@ -4,11 +4,9 @@ namespace FortnoxAPILibrary.Entities
 {
     public enum CustomerType
     {
-        ///<summary> No property description </summary>
         [EnumMember(Value = "PRIVATE")]
-        PRIVATE,
-        ///<summary> No property description </summary>
+        Private,
         [EnumMember(Value = "COMPANY")]
-        COMPANY,
+        Company,
     }
 }

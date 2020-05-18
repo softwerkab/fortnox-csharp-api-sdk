@@ -31,7 +31,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var newProject = new Project()
             {
                 Description = "TestProject",
-                Status = Status.ONGOING,
+                Status = Status.Ongoing,
                 StartDate = new DateTime(2019, 10, 10),
                 EndDate = new DateTime(2021, 10, 10),
                 ProjectLeader = "TestProjectLeader",
@@ -92,7 +92,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var newProject = new Project()
             {
                 Description = testKeyMark,
-                Status = Status.ONGOING,
+                Status = Status.Ongoing,
                 StartDate = new DateTime(2019, 10, 10),
                 EndDate = new DateTime(2021, 10, 10),
                 ProjectLeader = "TestProjectLeader",

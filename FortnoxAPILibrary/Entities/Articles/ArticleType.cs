@@ -4,11 +4,9 @@ namespace FortnoxAPILibrary.Entities
 {
     public enum ArticleType
     {
-        ///<summary> No property description </summary>
         [EnumMember(Value = "STOCK")]
-        STOCK,
-        ///<summary> No property description </summary>
+        Stock,
         [EnumMember(Value = "SERVICE")]
-        SERVICE,
+        Service,
     }
 }

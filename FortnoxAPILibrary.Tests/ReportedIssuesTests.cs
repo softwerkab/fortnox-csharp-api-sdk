@@ -35,7 +35,7 @@ namespace FortnoxAPILibrary.Tests
                 InvoiceDate = new DateTime(2019,1,20), //"2019-01-20",
                 DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
                 CustomerNumber = tmpCustomer.CustomerNumber,
-                InvoiceType = InvoiceType.INVOICE,
+                InvoiceType = InvoiceType.Invoice,
                 InvoiceRows = new List<InvoiceRow>()
                 { //Add Empty rows
                     new InvoiceRow(), //Empty Row
@@ -109,12 +109,12 @@ namespace FortnoxAPILibrary.Tests
         public void Test_issue50_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/50
         {
             var connector = new CustomerConnector();
-            var newCustomer = connector.Create(new Customer() { Name = "TestCustomer", City = "Växjö", Type = CustomerType.COMPANY });
+            var newCustomer = connector.Create(new Customer() { Name = "TestCustomer", City = "Växjö", Type = CustomerType.Company });
             MyAssert.HasNoError(connector);
 
             var updatedCustomer = connector.Update(new Customer() { CustomerNumber = newCustomer.CustomerNumber, City = "Stockholm" });
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(CustomerType.COMPANY, updatedCustomer.Type);
+            Assert.AreEqual(CustomerType.Company, updatedCustomer.Type);
 
             connector.Delete(newCustomer.CustomerNumber);
             MyAssert.HasNoError(connector);

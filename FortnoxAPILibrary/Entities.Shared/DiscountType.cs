@@ -4,11 +4,9 @@ namespace FortnoxAPILibrary.Entities
 {
     public enum DiscountType
     {
-        ///<summary> No property description </summary>
         [EnumMember(Value = "AMOUNT")]
-        AMOUNT,
-        ///<summary> No property description </summary>
+        Amount,
         [EnumMember(Value = "PERCENT")]
-        PERCENT,
+        Percent,
     }
 }

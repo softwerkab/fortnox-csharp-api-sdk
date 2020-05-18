@@ -4,20 +4,15 @@ namespace FortnoxAPILibrary.Entities
 {
     public enum InvoiceType
     {
-        ///<summary> No property description </summary>
         [EnumMember(Value = "INVOICE")]
-        INVOICE,
-        ///<summary> No property description </summary>
+        Invoice,
         [EnumMember(Value = "AGREEMENTINVOICE")]
-        AGREEMENTINVOICE,
-        ///<summary> No property description </summary>
+        AgreementInvoice,
         [EnumMember(Value = "INTRESTINVOICE")]
-        INTRESTINVOICE,
-        ///<summary> No property description </summary>
+        IntrestInvoice,
         [EnumMember(Value = "SUMMARYINVOICE")]
-        SUMMARYINVOICE,
-        ///<summary> No property description </summary>
+        SummaryInvoice,
         [EnumMember(Value = "CASHINVOICE")]
-        CASHINVOICE,
+        CashInvoice,
     }
 }

@@ -14,10 +14,11 @@ namespace FortnoxAPILibrary.Entities
         [EnumMember(Value = "0")]
         VAT0,
         [EnumMember(Value = "REVERSE")]
-        REVERSE,
+        Reverse,
         [Obsolete]
         [EnumMember(Value = "NORMAL")]
-        NORMAL,
+        Normal,
+        /// <summary> Unionsinternt förvärv </summary>
         [EnumMember(Value = "UIF")]
         UIF
     }

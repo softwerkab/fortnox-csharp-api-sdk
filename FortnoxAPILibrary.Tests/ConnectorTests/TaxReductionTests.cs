@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         {
             #region Arrange
             var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.SERVICE, PurchasePrice = 1000 });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Service, PurchasePrice = 1000 });
             var tmpInvoice = new InvoiceConnector().Create(new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
@@ -32,9 +32,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 Comments = "TestInvoice",
                 InvoiceRows = new List<InvoiceRow>()
                 {
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, HouseWorkHoursToReport = 10, Price = 1000, HouseWorkType = HouseworkType.GARDENING, HouseWork = true},
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, HouseWorkHoursToReport = 20, Price = 1000, HouseWorkType = HouseworkType.GARDENING, HouseWork = true},
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, HouseWorkHoursToReport = 15, Price = 1000, HouseWorkType = HouseworkType.GARDENING, HouseWork = true}
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, HouseWorkHoursToReport = 10, Price = 1000, HouseWorkType = HouseworkType.Gardening, HouseWork = true},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, HouseWorkHoursToReport = 20, Price = 1000, HouseWorkType = HouseworkType.Gardening, HouseWork = true},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, HouseWorkHoursToReport = 15, Price = 1000, HouseWorkType = HouseworkType.Gardening, HouseWork = true}
                 }
             });
             #endregion Arrange
@@ -50,7 +50,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 AskedAmount = 100,
                 SocialSecurityNumber = "760412-0852",
                 ReferenceNumber = tmpInvoice.DocumentNumber,
-                ReferenceDocumentType = ReferenceDocumentType.INVOICE
+                ReferenceDocumentType = ReferenceDocumentType.Invoice
             };
 
             var createdTaxReduction = connector.Create(newTaxReduction);
@@ -86,7 +86,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 AskedAmount = 200,
                 SocialSecurityNumber = "880515-2033",
                 ReferenceNumber = tmpInvoice.DocumentNumber,
-                ReferenceDocumentType = ReferenceDocumentType.INVOICE
+                ReferenceDocumentType = ReferenceDocumentType.Invoice
             });
 
             connector.Delete(createdTaxReduction.Id);
@@ -108,7 +108,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         {
             #region Arrange
             var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.SERVICE, PurchasePrice = 1000 });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Service, PurchasePrice = 1000 });
             var tmpInvoice = new InvoiceConnector().Create(new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
@@ -117,9 +117,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 Comments = "TestInvoice",
                 InvoiceRows = new List<InvoiceRow>()
                 {
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, HouseWorkHoursToReport = 10, Price = 1000, HouseWorkType = HouseworkType.GARDENING, HouseWork = true},
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, HouseWorkHoursToReport = 20, Price = 1000, HouseWorkType = HouseworkType.GARDENING, HouseWork = true},
-                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, HouseWorkHoursToReport = 15, Price = 1000, HouseWorkType = HouseworkType.GARDENING, HouseWork = true}
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, HouseWorkHoursToReport = 10, Price = 1000, HouseWorkType = HouseworkType.Gardening, HouseWork = true},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, HouseWorkHoursToReport = 20, Price = 1000, HouseWorkType = HouseworkType.Gardening, HouseWork = true},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, HouseWorkHoursToReport = 15, Price = 1000, HouseWorkType = HouseworkType.Gardening, HouseWork = true}
                 }
             });
             #endregion Arrange
@@ -132,7 +132,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 CustomerName = "TmpCustomer",
                 AskedAmount = 200,
                 ReferenceNumber = tmpInvoice.DocumentNumber,
-                ReferenceDocumentType = ReferenceDocumentType.INVOICE
+                ReferenceDocumentType = ReferenceDocumentType.Invoice
             };
 
             //Add entries

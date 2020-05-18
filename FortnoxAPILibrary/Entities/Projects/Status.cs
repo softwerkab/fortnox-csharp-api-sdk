@@ -4,14 +4,11 @@ namespace FortnoxAPILibrary.Entities
 {
     public enum Status
     {
-        ///<summary> No property description </summary>
         [EnumMember(Value = "NOTSTARTED")]
-        NOTSTARTED,
-        ///<summary> No property description </summary>
+        NotStarted,
         [EnumMember(Value = "ONGOING")]
-        ONGOING,
-        ///<summary> No property description </summary>
+        Ongoing,
         [EnumMember(Value = "COMPLETED")]
-        COMPLETED,
+        Completed,
     }
 }

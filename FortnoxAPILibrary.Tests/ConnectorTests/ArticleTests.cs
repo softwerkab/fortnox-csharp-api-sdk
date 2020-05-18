@@ -33,7 +33,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 Description = "Test Article",
                 Height = 60,
                 Width = 150,
-                Type = ArticleType.STOCK,
+                Type = ArticleType.Stock,
                 PurchasePrice = 2499.50m,
                 FreightCost = 200,
                 OtherCost = 210,
@@ -94,7 +94,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 Description = testKeyMark,
                 Height = 60,
                 Width = 150,
-                Type = ArticleType.STOCK,
+                Type = ArticleType.Stock,
                 PurchasePrice = 2499.50m,
                 FreightCost = 200,
                 OtherCost = 210,
@@ -152,7 +152,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             {
                 if (houseworkType == HouseworkType.Empty) 
                     continue;
-                if (houseworkType == HouseworkType.COOKING || houseworkType == HouseworkType.TUTORING)
+                if (houseworkType == HouseworkType.Cooking || houseworkType == HouseworkType.Tutoring)
                     continue;
 
                 article.HouseworkType = houseworkType;
@@ -175,10 +175,10 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             {
                 Description = "HouseworkArticleTest", 
                 Housework = true,
-                HouseworkType = HouseworkType.CLEANING
+                HouseworkType = HouseworkType.Cleaning
             });
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(HouseworkType.CLEANING, article.HouseworkType);
+            Assert.AreEqual(HouseworkType.Cleaning, article.HouseworkType);
 
             article.HouseworkType = HouseworkType.Empty;
             var updatedArticle = connector.Update(article);

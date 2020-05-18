@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var tmpCustomer = new CustomerConnector().Create(new Customer()
                 {Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"});
             var tmpArticle = new ArticleConnector().Create(new Article()
-                {Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100});
+                {Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100});
             var tmpContract = new ContractConnector().Create(new Contract()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 Continuous = true,
                 Currency = "SEK",
                 VATIncluded = false,
-                Language = Language.EN,
+                Language = Language.English,
                 InvoiceRows = new List<ContractInvoiceRow>()
                 {
                     new ContractInvoiceRow()
@@ -117,7 +117,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region Arrange
 
             var tmpCustomer = new CustomerConnector().Create(new Customer() {Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"});
-            var tmpArticle = new ArticleConnector().Create(new Article() {Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100});
+            var tmpArticle = new ArticleConnector().Create(new Article() {Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100});
             var tmpContract = new ContractConnector().Create(new Contract()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
@@ -128,7 +128,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 Continuous = true,
                 Currency = "SEK",
                 VATIncluded = false,
-                Language = Language.EN,
+                Language = Language.English,
                 InvoiceRows = new List<ContractInvoiceRow>()
                 {
                     new ContractInvoiceRow()

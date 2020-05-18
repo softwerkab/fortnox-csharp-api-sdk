@@ -6,9 +6,9 @@ namespace FortnoxAPILibrary.Entities
     {
         ///<summary> Monthly salary </summary>
         [EnumMember(Value = "MAN")]
-        MAN,
+        Monthly,
         ///<summary> Hourly pay </summary>
         [EnumMember(Value = "TIM")]
-        TIM,
+        Hourly,
     }
 }

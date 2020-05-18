@@ -4,14 +4,11 @@ namespace FortnoxAPILibrary.Entities
 {
     public enum TransactionInformationSettings
     {
-        ///<summary> No property description </summary>
         [EnumMember(Value = "ALLOWED")]
-        ALLOWED,
-        ///<summary> No property description </summary>
+        Allowed,
         [EnumMember(Value = "MANDATORY")]
-        MANDATORY,
-        ///<summary> No property description </summary>
+        Mandatory,
         [EnumMember(Value = "NOTALLOWED")]
-        NOTALLOWED,
+        NotAllowed,
     }
 }

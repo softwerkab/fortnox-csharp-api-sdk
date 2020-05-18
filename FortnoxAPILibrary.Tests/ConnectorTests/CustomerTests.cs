@@ -35,7 +35,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 City = "Testopolis",
                 CountryCode = "SE", //CountryCode needs to be valid
                 Email = "testCustomer@test.com",
-                Type = CustomerType.PRIVATE,
+                Type = CustomerType.Private,
                 Active = false
             };
 
@@ -97,7 +97,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 City = testKeyMark,
                 CountryCode = "SE", //CountryCode needs to be valid
                 Email = "testCustomer@test.com",
-                Type = CustomerType.PRIVATE,
+                Type = CustomerType.Private,
                 Active = false,
                 Comments = testKeyMark
             };

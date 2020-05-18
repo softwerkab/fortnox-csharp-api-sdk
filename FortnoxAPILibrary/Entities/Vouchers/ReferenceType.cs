@@ -4,26 +4,19 @@ namespace FortnoxAPILibrary.Entities
 {
     public enum ReferenceType
     {
-        ///<summary> No property description </summary>
         [EnumMember(Value = "INVOICE")]
-        INVOICE,
-        ///<summary> No property description </summary>
+        Invoice,
         [EnumMember(Value = "SUPPLIERINVOICE")]
-        SUPPLIERINVOICE,
-        ///<summary> No property description </summary>
+        SupplierInvoice,
         [EnumMember(Value = "INVOICEPAYMENT")]
-        INVOICEPAYMENT,
-        ///<summary> No property description </summary>
+        InvoicePayment,
         [EnumMember(Value = "SUPPLIERPAYMENT")]
-        SUPPLIERPAYMENT,
-        ///<summary> No property description </summary>
+        SupplierPayment,
         [EnumMember(Value = "MANUAL")]
-        MANUAL,
-        ///<summary> No property description </summary>
+        Manual,
         [EnumMember(Value = "CASHINVOICE")]
-        CASHINVOICE,
-        ///<summary> No property description </summary>
+        CashInvoice,
         [EnumMember(Value = "ACCRUAL")]
-        ACCRUAL,
+        Accrual,
     }
 }

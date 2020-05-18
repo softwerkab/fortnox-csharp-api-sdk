@@ -4,20 +4,15 @@ namespace FortnoxAPILibrary.Entities
 {
     public enum CustomerVATType
     {
-        ///<summary> No property description </summary>
         [EnumMember(Value = "SEVAT")]
-        SEVAT,
-        ///<summary> No property description </summary>
+        SE_VAT,
         [EnumMember(Value = "SEREVERSEDVAT")]
-        SEREVERSEDVAT,
-        ///<summary> No property description </summary>
+        SE_ReversedVAT,
         [EnumMember(Value = "EUREVERSEDVAT")]
-        EUREVERSEDVAT,
-        ///<summary> No property description </summary>
+        EU_ReversedVAT,
         [EnumMember(Value = "EUVAT")]
-        EUVAT,
-        ///<summary> No property description </summary>
+        EU_VAT,
         [EnumMember(Value = "EXPORT")]
-        EXPORT,
+        Export,
     }
 }

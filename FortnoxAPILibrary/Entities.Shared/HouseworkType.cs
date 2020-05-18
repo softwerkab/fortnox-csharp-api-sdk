@@ -6,47 +6,47 @@ namespace FortnoxAPILibrary.Entities
     public enum HouseworkType
     {
         [EnumMember(Value = "CONSTRUCTION")]
-        CONSTRUCTION,
+        Construction,
         [EnumMember(Value = "ELECTRICITY")]
-        ELECTRICITY,
+        Electricity,
         [EnumMember(Value = "GLASSMETALWORK")]
-        GLASSMETALWORK,
+        GlassMetalWork,
         [EnumMember(Value = "GROUNDDRAINAGEWORK")]
-        GROUNDDRAINAGEWORK,
+        GroundDrainageWork,
         [EnumMember(Value = "MASONRY")]
-        MASONRY,
+        Masonry,
         [EnumMember(Value = "PAINTINGWALLPAPERING")]
-        PAINTINGWALLPAPERING,
+        PaintingWallpapering,
         [EnumMember(Value = "HVAC")]
         HVAC,
         [EnumMember(Value = "MAJORAPPLIANCEREPAIR")]
-        MAJORAPPLIANCEREPAIR,
+        MajorApplianceRepair,
         [EnumMember(Value = "MOVINGSERVICES")]
-        MOVINGSERVICES,
+        MovingServices,
         [EnumMember(Value = "ITSERVICES")]
-        SITSERVICES,
+        ITServices,
         [EnumMember(Value = "CLEANING")]
-        CLEANING,
+        Cleaning,
         [EnumMember(Value = "TEXTILECLOTHING")]
-        TEXTILECLOTHING,
+        TextileClothing,
         [EnumMember(Value = "SNOWPLOWING")]
-        SNOWPLOWING,
+        Snowplowing,
         [EnumMember(Value = "GARDENING")]
-        GARDENING,
+        Gardening,
         [EnumMember(Value = "BABYSITTING")]
-        BABYSITTING,
+        Babysitting,
         [EnumMember(Value = "OTHERCARE")]
-        OTHERCARE,
+        OtherCare,
         [EnumMember(Value = "OTHERCOSTS")]
-        OTHERCOSTS,
+        OtherCosts,
         [EnumMember(Value = "API_BLANK")]
         Empty,
 
         [Obsolete]
         [EnumMember(Value = "COOKING")]
-        COOKING,
+        Cooking,
         [Obsolete]
         [EnumMember(Value = "TUTORING")]
-        TUTORING,
+        Tutoring,
     }
 }

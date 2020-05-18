@@ -28,8 +28,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 Description = "Test Account",
                 Active = false,
                 Number = GetUnusedAccountNumber(),
-                CostCenterSettings = CostCenterSettings.ALLOWED,
-                ProjectSettings = ProjectSettings.ALLOWED,
+                CostCenterSettings = CostCenterSettings.Allowed,
+                ProjectSettings = ProjectSettings.Allowed,
                 SRU = 123
             };
 
@@ -86,8 +86,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             {
                 Description = "Test Account",
                 Active = false,
-                CostCenterSettings = CostCenterSettings.ALLOWED,
-                ProjectSettings = ProjectSettings.ALLOWED,
+                CostCenterSettings = CostCenterSettings.Allowed,
+                ProjectSettings = ProjectSettings.Allowed,
                 SRU = testKeyMark
             };
 

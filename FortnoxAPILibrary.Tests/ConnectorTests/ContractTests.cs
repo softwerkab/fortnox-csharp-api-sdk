@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         {
             #region Arrange
             var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
             IContractConnector connector = new ContractConnector();
@@ -39,7 +39,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 ContractLength = 4,
                 Continuous = true,
                 Currency = "SEK",
-                Language = Language.EN,
+                Language = Language.English,
                 InvoiceRows = new List<ContractInvoiceRow>()
                 {
                     new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "10"},
@@ -89,7 +89,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         {
             #region Arrange
             var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.STOCK, PurchasePrice = 100 });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
             IContractConnector connector = new ContractConnector();
@@ -103,7 +103,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 ContractLength = 4,
                 Continuous = true,
                 Currency = "SEK",
-                Language = Language.EN,
+                Language = Language.English,
                 InvoiceRows = new List<ContractInvoiceRow>()
                 {
                     new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "10"},
