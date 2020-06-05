@@ -14,12 +14,4 @@ namespace FortnoxAPILibrary.Entities
         [JsonProperty]
         public string AccessToken { get; set; }
     }
-
-    /// <remarks/>
-    public class AuthorizationContainer
-    {
-        /// <remarks/>
-        [JsonProperty]
-        public Authorization Authorization { get; set; }
-    }
 }
