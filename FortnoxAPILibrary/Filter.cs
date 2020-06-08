@@ -1,66 +1,70 @@
-﻿// ReSharper disable UnusedMember.Global
+
+// ReSharper disable UnusedMember.Global
+
+using System.Runtime.Serialization;
+
 namespace FortnoxAPILibrary
 {
-	/// <remarks/>
-	public class Filter
-    {
-        /// <remarks/>
-        public enum Contract
-        {
-            /// <remarks/>
-            [StringValue("active")]
-            Active,
-            /// <remarks/>
-            [StringValue("inactive")]
-            Inactive,
-            /// <remarks/>
-            [StringValue("finished")]
-            Finished
-        }
+    /// <remarks/>
+    public class Filter
+	{
+		/// <remarks/>
+		public enum Contract
+		{
+			/// <remarks/>
+			[EnumMember(Value = "active")]
+			Active,
+			/// <remarks/>
+			[EnumMember(Value = "inactive")]
+			Inactive,
+			/// <remarks/>
+			[EnumMember(Value = "finished")]
+			Finished
+		}
 
 		/// <remarks/>
 		public enum Invoice
 		{
 			/// <remarks/>
-			[StringValue("fullypaid")]
+			[EnumMember(Value = "fullypaid")]
 			FullyPaid,
 			/// <remarks/>
-			[StringValue("cancelled")]
+			[EnumMember(Value = "cancelled")]
 			Cancelled,
 			/// <remarks/>
-			[StringValue("unpaid")]
+			[EnumMember(Value = "unpaid")]
 			Unpaid,
 			/// <remarks/>
-			[StringValue("unpaidoverdue")]
+			[EnumMember(Value = "unpaidoverdue")]
 			UnpaidOverdue,
 			/// <remarks/>
-			[StringValue("unbooked")]
+			[EnumMember(Value = "unbooked")]
 			Unbooked
 		}
 
-        /// <remarks/>
-        public enum SupplierInvoice
-        {
-            /// <remarks/>
-            [StringValue("fullypaid")]
-            FullyPaid,
-            /// <remarks/>
-            [StringValue("cancelled")]
-            Cancelled,
-            /// <remarks/>
-            [StringValue("unpaid")]
-            Unpaid,
-            /// <remarks/>
-            [StringValue("unpaidoverdue")]
-            UnpaidOverdue,
-            /// <remarks/>
-            [StringValue("unbooked")]
-            Unbooked,
+		/// <remarks/>
+		public enum SupplierInvoice
+		{
 			/// <remarks/>
-			[StringValue("pendingpayment")]
+			[EnumMember(Value = "fullypaid")]
+			FullyPaid,
+			/// <remarks/>
+			[EnumMember(Value = "cancelled")]
+			Cancelled,
+			/// <remarks/>
+			[EnumMember(Value = "unpaid")]
+			Unpaid,
+			/// <remarks/>
+			[EnumMember(Value = "unpaidoverdue")]
+			UnpaidOverdue,
+			/// <remarks/>
+			[EnumMember(Value = "unbooked")]
+			Unbooked,
+			/// <remarks/>
+			[EnumMember(Value = "pendingpayment")]
 			PendingPayment,
 			/// <remarks/>
-			[StringValue("authorizepending")]
+			[EnumMember(Value = "authorizepending")]
 			AuthorizePending
 		}
 
@@ -68,16 +72,16 @@ namespace FortnoxAPILibrary
 		public enum Offer
 		{
 			/// <remarks/>
-			[StringValue("cancelled")]
+			[EnumMember(Value = "cancelled")]
 			Cancelled,
 			/// <remarks/>
-			[StringValue("expired")]
+			[EnumMember(Value = "expired")]
 			Expired,
 			/// <remarks/>
-			[StringValue("ordercreated")]
+			[EnumMember(Value = "ordercreated")]
 			OrderCreated,
 			/// <remarks/>
-			[StringValue("ordernotcreated")]
+			[EnumMember(Value = "ordernotcreated")]
 			OrderNotCreated
 		}
 
@@ -85,16 +89,16 @@ namespace FortnoxAPILibrary
 		public enum Order
 		{
 			/// <remarks/>
-			[StringValue("cancelled")]
+			[EnumMember(Value = "cancelled")]
 			Cancelled,
 			/// <remarks/>
-			[StringValue("expired")]
+			[EnumMember(Value = "expired")]
 			Expired,
 			/// <remarks/>
-			[StringValue("invoicecreated")]
+			[EnumMember(Value = "invoicecreated")]
 			InvoiceCreated,
 			/// <remarks/>
-			[StringValue("invoicenotcreated")]
+			[EnumMember(Value = "invoicenotcreated")]
 			InvoiceNotCreated
 		}
 
@@ -102,13 +106,13 @@ namespace FortnoxAPILibrary
 		public enum TaxReduction
 		{
 			/// <remarks/>
-			[StringValue("invoices")]
+			[EnumMember(Value = "invoices")]
 			Invoices,
 			/// <remarks/>
-			[StringValue("offers")]
+			[EnumMember(Value = "offers")]
 			Offers,
 			/// <remarks/>
-			[StringValue("orders")]
+			[EnumMember(Value = "orders")]
 			Orders
 		}
 
@@ -116,10 +120,10 @@ namespace FortnoxAPILibrary
 		public enum Customer
 		{
 			/// <remarks/>
-			[StringValue("active")]
+			[EnumMember(Value = "active")]
 			Active,
 			/// <remarks/>
-			[StringValue("inactive")]
+			[EnumMember(Value = "inactive")]
 			Inactive
 		}
 
@@ -127,12 +131,226 @@ namespace FortnoxAPILibrary
 		public enum Article
 		{
 			/// <remarks/>
-			[StringValue("active")]
+			[EnumMember(Value = "active")]
 			Active,
 			/// <remarks/>
-			[StringValue("inactive")]
+			[EnumMember(Value = "inactive")]
 			Inactive
 		}
 
+		public enum AbsenceTransaction
+		{
+
+		}
+		public enum AccountChart
+		{
+
+		}
+		public enum Account
+		{
+
+		}
+		public enum Archive
+		{
+
+		}
+		public enum ArticleFileConnection
+		{
+
+		}
+
+        public enum AssetFileConnection
+		{
+
+		}
+		public enum AssetTypes
+		{
+
+		}
+		public enum Asset
+		{
+			/// <summary> Retrieves all active assets </summary>
+			[EnumMember(Value = "active")]
+			Active,
+			/// <summary>Retrieves all inactive assets </summary>
+			[EnumMember(Value = "inactive")]
+			Inactive,
+			/// <summary> Retrieves all fully depreciated assets </summary>
+			[EnumMember(Value = "fully_depreciated")]
+			FullyDepreciated,
+			/// <summary> Retrieves all sold assets </summary>
+			[EnumMember(Value = "sold")]
+			Sold,    
+			/// <summary> Retrieves all scrapped assets </summary>
+			[EnumMember(Value = "scrapped")]
+			Scrapped,
+			/// <summary> Retrieves all voided assets </summary>
+			[EnumMember(Value = "voided")]
+			Voided
+		}
+		public enum AttendanceTransactions
+		{
+
+		}
+		public enum CompanyInformation
+		{
+
+		}
+		public enum CompanySettings
+		{
+
+		}
+		public enum ContractAccrual
+		{
+
+		}
+		public enum ContractTemplate
+		{
+
+		}
+        public enum CostCenter
+		{
+
+		}
+		public enum Currency
+		{
+
+		}
+        public enum Employee
+		{
+            [EnumMember(Value = "active")]
+			Active,
+            [EnumMember(Value = "inactive")]
+			Inactive
+		}
+		public enum Expense
+		{
+
+		}
+		public enum FinancialYear
+		{
+
+		}
+		public enum InvoiceAccrual
+		{
+
+		}
+		public enum InvoiceFileConnection
+		{
+
+		}
+		public enum InvoicePayment
+		{
+
+		}
+        public enum Label
+		{
+
+		}
+		public enum LockedPeriod
+		{
+
+		}
+		public enum ModeOfPayment
+		{
+
+		}
+		public enum NoxFinansInvoice
+		{
+
+		}
+        public enum PredefinedAccounts
+		{
+
+		}
+		public enum PredefinedVoucherSeries
+		{
+
+		}
+		public enum PriceList
+		{
+
+		}
+		public enum Price
+		{
+
+		}
+		public enum PrintTemplate
+		{
+            [EnumMember(Value = "order")]
+            Order,
+            [EnumMember(Value = "offer")]
+            Offer,
+            [EnumMember(Value = "invoice")]
+            Invoice
+		}
+		public enum Project
+		{
+
+		}
+		public enum SalaryTransaction
+		{
+
+		}
+		public enum ScheduleTimes
+		{
+
+		}
+		public enum SupplierInvoiceAccrual
+		{
+
+		}
+		public enum SupplierInvoiceExternalURLConnection
+		{
+
+		}
+		public enum SupplierInvoiceFileConnection
+		{
+
+		}
+		public enum SupplierInvoicePayment
+		{
+
+		}
+        public enum Supplier
+		{
+
+		}
+        public enum TermsOfDelivery
+		{
+
+		}
+		public enum TermsOfPayment
+		{
+
+		}
+		public enum TrustedEmailDomains
+		{
+
+		}
+		public enum TrustedEmailSenders
+		{
+
+		}
+		public enum Unit
+		{
+
+		}
+		public enum VoucherFileConnection
+		{
+
+		}
+		public enum VoucherSeries
+		{
+
+		}
+		public enum Voucher
+		{
+
+		}
+		public enum WayOfDelivery
+		{
+
+		}
 	}
 }

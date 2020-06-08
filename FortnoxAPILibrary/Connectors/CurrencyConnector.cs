@@ -1,66 +1,93 @@
-
 using FortnoxAPILibrary.Entities;
+
+using System.Threading.Tasks;
 
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class CurrencyConnector : EntityConnector<Currency, EntityCollection<CurrencySubset>, Sort.By.Currency?>
+    /// <remarks/>
+    public class CurrencyConnector : EntityConnector<Currency, EntityCollection<Currency>, Sort.By.Currency?>, ICurrencyConnector
 	{
+	    /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter("filter")]
+		public Filter.Currency? FilterBy { get; set; }
+
+
 		/// <remarks/>
 		public CurrencyConnector()
 		{
 			Resource = "currencies";
 		}
-
 		/// <summary>
-		/// Gets a currency based on currency code
+		/// Find a currency based on id
 		/// </summary>
-		/// <param name="currencyCode"></param>
-		/// <returns></returns>
-		public Currency Get(string currencyCode)
+		/// <param name="id">Identifier of the currency to find</param>
+		/// <returns>The found currency</returns>
+		public Currency Get(string id)
 		{
-			return BaseGet(currencyCode);
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
 		/// Updates a currency
 		/// </summary>
-		/// <param name="currency">The currency entity to update</param>
-		/// <returns>The updated currency entity</returns>
+		/// <param name="currency">The currency to update</param>
+		/// <returns>The updated currency</returns>
 		public Currency Update(Currency currency)
 		{
-			return BaseUpdate(currency, currency.Code);
+			return UpdateAsync(currency).Result;
 		}
 
 		/// <summary>
-		/// Create a new currency
+		/// Creates a new currency
 		/// </summary>
-		/// <param name="currency">The currency entity to create</param>
-		/// <returns>The created currency entity</returns>
+		/// <param name="currency">The currency to create</param>
+		/// <returns>The created currency</returns>
 		public Currency Create(Currency currency)
 		{
-			return BaseCreate(currency);
+			return CreateAsync(currency).Result;
 		}
 
 		/// <summary>
 		/// Deletes a currency
 		/// </summary>
-		/// <param name="currencyCode">The currency code to delete</param>
-		/// <returns>If the currency was deleted or not</returns>
-		public void Delete(string currencyCode)
+		/// <param name="id">Identifier of the currency to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(currencyCode);
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
-		/// Gets at list of currencies
+		/// Gets a list of currencys
 		/// </summary>
-		/// <returns>A list of currencies</returns>
-		public EntityCollection<CurrencySubset> Find()
+		/// <returns>A list of currencys</returns>
+		public EntityCollection<Currency> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
+		}
+
+		public async Task<EntityCollection<Currency>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task DeleteAsync(string id)
+		{
+			await BaseDelete(id);
+		}
+		public async Task<Currency> CreateAsync(Currency currency)
+		{
+			return await BaseCreate(currency);
+		}
+		public async Task<Currency> UpdateAsync(Currency currency)
+		{
+			return await BaseUpdate(currency, currency.Code);
+		}
+		public async Task<Currency> GetAsync(string id)
+		{
+			return await BaseGet(id);
 		}
 	}
 }

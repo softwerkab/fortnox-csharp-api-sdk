@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Runtime.Serialization;
+using System.Threading.Tasks;
 using FortnoxAPILibrary.Entities;
 
 namespace FortnoxAPILibrary
@@ -47,101 +47,100 @@ namespace FortnoxAPILibrary
         [SearchParameter]
         public int? Offset { get; set; }
 
-        /// <remarks/>
-        protected Dictionary<string, string> Parameters = new Dictionary<string, string>();
+        protected Dictionary<string, string> ParametersInjection { get; set; } //TODO: Remove, temporary workaround
 
-        protected TEntity BaseCreate(TEntity entity, Dictionary<string, string> parameters = null)
+        protected async Task<TEntity> BaseCreate(TEntity entity)
         {
-            Parameters = parameters ?? new Dictionary<string, string>();
-
-            var requestUriString = GetUrl();
-
-            requestUriString = AddParameters(requestUriString);
-
-            Method = "POST";
-            ResponseType = RequestResponseType.JSON;
-            RequestUriString = requestUriString;
+            RequestInfo = new RequestInfo()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = Array.Empty<string>(),
+                Parameters = ParametersInjection ?? new Dictionary<string, string>(),
+                Method = RequestMethod.Post,
+                ResponseType = RequestResponseType.JSON
+            };
+            ParametersInjection = null;
 
             var wrappedEntity = new EntityWrapper<TEntity>() {Entity = entity};
-            return DoRequest(wrappedEntity)?.Entity;
-        }
-
-        protected TEntity BaseUpdate(TEntity entity, params string[] indices)
-        {
-            Parameters = new Dictionary<string, string>();
-
-            var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
-
-            var requestUriString = GetUrl(searchValue);
-
-            requestUriString = AddParameters(requestUriString);
-
-            Method = "PUT";
-            ResponseType = RequestResponseType.JSON;
-            RequestUriString = requestUriString;
-
-            var wrappedEntity = new EntityWrapper<TEntity>() { Entity = entity };
-            return DoRequest(wrappedEntity)?.Entity;
-        }
-
-        protected void BaseDelete(string index)
-        {
-            Parameters = new Dictionary<string, string>();
-
-            var requestUriString = GetUrl(index);
-
-            requestUriString = AddParameters(requestUriString);
-
-            Method = "DELETE";
-            ResponseType = RequestResponseType.JSON;
-            RequestUriString = requestUriString;
-
-            DoRequest();
-        }
-
-        protected TEntity BaseGet(params string[] indices)
-        {
-            Parameters = new Dictionary<string, string>();
-
-            var searchValue = string.Join("/", indices.Select(HttpUtility.UrlEncode));
-
-            if (string.IsNullOrWhiteSpace(searchValue))
-            {
-                throw new Exception("Ett sökvärde har inte angivits.");
-            }
-
-            var requestUriString = GetUrl(searchValue);
-
-            requestUriString = AddParameters(requestUriString);
-
-            Method = "GET";
-            ResponseType = RequestResponseType.JSON;
-            RequestUriString = requestUriString;
-
-            var result = DoRequest<EntityWrapper<TEntity>>();
+            var result = await DoEntityRequest(wrappedEntity);
             return result?.Entity;
         }
 
-        protected TEntityCollection BaseFind(Dictionary<string, string> parameters = null)
+        protected async Task<TEntity> BaseUpdate(TEntity entity, params string[] indices)
         {
-            Parameters = parameters ?? new Dictionary<string, string>();
+            RequestInfo = new RequestInfo()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = indices,
+                Parameters = ParametersInjection ?? new Dictionary<string, string>(),
+                Method = RequestMethod.Put,
+                ResponseType = RequestResponseType.JSON
+            };
+            ParametersInjection = null;
 
-            AddSearchParameters();
+            var wrappedEntity = new EntityWrapper<TEntity>() { Entity = entity };
 
-            var requestUriString = GetUrl();
+            var result = await DoEntityRequest(wrappedEntity);
+            return result?.Entity;
+        }
 
-            requestUriString = AddParameters(requestUriString);
+        protected async Task BaseDelete(params string[] indices)
+        {
+            RequestInfo = new RequestInfo()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = indices,
+                Parameters = ParametersInjection ?? new Dictionary<string, string>(),
+                Method = RequestMethod.Delete,
+                ResponseType = RequestResponseType.JSON,
+            };
+            ParametersInjection = null;
 
-            Method = "GET";
-            ResponseType = RequestResponseType.JSON;
-            RequestUriString = requestUriString;
+            await DoRequest();
+        }
 
-            var result = DoRequest<TEntityCollection>();
+        protected async Task<TEntity> BaseGet(params string[] indices)
+        {
+            RequestInfo = new RequestInfo()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = indices,
+                Parameters = ParametersInjection ?? new Dictionary<string, string>(),
+                Method = RequestMethod.Get,
+                ResponseType = RequestResponseType.JSON
+            };
+            ParametersInjection = null;
+
+            var result = await DoEntityRequest<EntityWrapper<TEntity>>();
+            return result?.Entity;
+        }
+
+        protected async Task<TEntityCollection> BaseFind(params string[] indices)
+        {
+            RequestInfo = new RequestInfo()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = indices,
+                Parameters = ParametersInjection ?? new Dictionary<string, string>(),
+                SearchParameters = GetSearchParameters(),
+                Method = RequestMethod.Get,
+                ResponseType = RequestResponseType.JSON
+            };
+            ParametersInjection = null;
+
+            var result = await DoEntityRequest<TEntityCollection>();
             return result;
         }
 
-        protected void AddSearchParameters()
+        protected Dictionary<string, string> GetSearchParameters()
         {
+            var searchParams = new Dictionary<string, string>();
+
             foreach (var property in GetType().GetProperties())
             {
                 var isSearchParameter = property.HasAttribute<SearchParameter>();
@@ -154,8 +153,10 @@ namespace FortnoxAPILibrary
                 var searchAttribute = property.GetAttribute<SearchParameter>();
                 var paramName = searchAttribute.Name ?? property.Name;
 
-                Parameters.Add(paramName.ToLower(), strValue);
+                searchParams.Add(paramName.ToLower(), strValue);
             }
+
+            return searchParams;
         }
 
         private static string GetStringValue(object value, Type type)
@@ -174,49 +175,115 @@ namespace FortnoxAPILibrary
             return value.ToString().ToLower();
         }
 
-        protected TEntity DoAction(string documentNumber, string action)
+        protected TEntity DoAction(string documentNumber, Action action)
         {
-            string requestUriString = GetUrl(documentNumber);
+            return DoActionAsync(documentNumber, action).Result;
+        }
 
-            requestUriString = requestUriString + "/" + action;
+        protected byte[] DoDownloadAction(string documentNumber, Action action, string localPath = null)
+        {
+            return DoDownloadActionAsync(documentNumber, action, localPath).Result;
+        }
 
-            requestUriString = AddParameters(requestUriString);
+        protected async Task<byte[]> DoDownloadActionAsync(string documentNumber, Action action, string localPath = null)
+        {
+            if (!IsDownloadAction(action))
+                throw new Exception("Invalid action type");
 
+            RequestInfo = new RequestInfo()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = new[] { documentNumber, action.GetStringValue() },
+                Method = RequestMethod.Get,
+                ResponseType = RequestResponseType.PDF
+            };
+
+            var data = await DoSimpleRequest();
+            if (localPath != null)
+                await data.ToFile(localPath);
+            return data;
+        }
+
+        protected async Task<TEntity> DoActionAsync(string documentNumber, Action action)
+        {
+            if (IsDownloadAction(action))
+                throw new Exception("Invalid action type");
+
+            RequestInfo = new RequestInfo()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = new [] { documentNumber, action.GetStringValue() }
+            };
 
             switch (action)
             {
-                case "print":
-                case "preview":
-                case "eprint":
-                    Method = "GET";
-                    ResponseType = RequestResponseType.PDF;
+                case Action.ExternalPrint:
+                    RequestInfo.Method = RequestMethod.Put;
+                    RequestInfo.ResponseType = RequestResponseType.JSON;
                     break;
-                case "externalprint":
-                    Method = "PUT";
-                    ResponseType = RequestResponseType.JSON;
-                    break;
-                case "email":
-                    Method = "GET";
-                    ResponseType = RequestResponseType.EMAIL;
+                case Action.Email:
+                    RequestInfo.Method = RequestMethod.Get;
+                    RequestInfo.ResponseType = RequestResponseType.JSON;
                     break;
                 default:
-                    Method = "PUT";
+                    RequestInfo.Method = RequestMethod.Put;
                     break;
             }
-            RequestUriString = requestUriString;
 
-            var result = DoRequest<EntityWrapper<TEntity>>();
+            var result = await DoEntityRequest<EntityWrapper<TEntity>>();
             return result?.Entity;
         }
-        
-        protected string AddParameters(string requestUriString)
-        {
-            if (Parameters.Count > 0)
-            {
-                requestUriString += "/?" + string.Join("&", Parameters.Select(p => p.Key + "=" + HttpUtility.UrlEncode(p.Value)));
-            }
 
-            return requestUriString;
+        private static bool IsDownloadAction(Action action)
+        {
+            switch (action)
+            {
+                case Action.Print:
+                case Action.PrintReminder:
+                case Action.Preview:
+                case Action.EPrint:
+                    return true;
+                default:
+                    return false;
+            }
         }
+    }
+
+    public enum Action
+    {
+        [EnumMember(Value = "print")]
+        Print,
+        [EnumMember(Value = "preview")]
+        Preview,
+        [EnumMember(Value = "eprint")]
+        EPrint,
+        [EnumMember(Value = "externalprint")]
+        ExternalPrint,
+        [EnumMember(Value = "email")]
+        Email,
+        [EnumMember(Value = "finish")]
+        Finish,
+        [EnumMember(Value = "createinvoice")]
+        CreateInvoice,
+        [EnumMember(Value = "increaseinvoicecount")]
+        IncreaseInvoiceCount,
+        [EnumMember(Value = "bookkeep")]
+        Bookkeep,
+        [EnumMember(Value = "cancel")]
+        Cancel,
+        [EnumMember(Value = "credit")]
+        Credit,
+        [EnumMember(Value = "printreminder")]
+        PrintReminder,
+        [EnumMember(Value = "approvalbookkeep")]
+        ApprovalBookkeep,
+        [EnumMember(Value = "approvalpayment")]
+        ApprovalPayment,
+        [EnumMember(Value = "einvoice")]
+        EInvoice,
+        [EnumMember(Value = "createorder")]
+        CreateOrder
     }
 }

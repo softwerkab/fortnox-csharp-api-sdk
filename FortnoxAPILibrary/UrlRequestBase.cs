@@ -1,44 +1,39 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Net;
+using System.Runtime.Serialization;
 using System.Text;
-using System.Threading;
+using System.Threading.Tasks;
+using ComposableAsync;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Serialization;
-using File = FortnoxAPILibrary.Entities.File;
+using RateLimiter;
 
 namespace FortnoxAPILibrary
 {
     /// <remarks/>
     public class UrlRequestBase
     {
-		private string clientSecret;
+        private const int LimitPerSecond = 3;
+        private static readonly TimeLimiter RateLimiter = TimeLimiter.GetFromMaxCountByInterval(LimitPerSecond, TimeSpan.FromSeconds(1));
+
+        private string clientSecret;
         private string accessToken;
 
-        private const int MaxRequestsPerSecond = 3;
-        private static DateTime firstRequest = DateTime.Now;
-        private static int currentRequestsPerSecond;
-
         private readonly JsonEntitySerializer serializer;
+
+        protected string Resource { get; set; }
+        protected virtual string BaseUrl => ConnectionSettings.FortnoxAPIServer;
+
+        protected Func<string, string> FixRequestContent; //Needed for fixing irregular json requests
+        protected Func<string, string> FixResponseContent; //Needed for fixing irregular json responses
 
         /// <summary>
         /// Optional Fortnox Client Secret, if used it will override the static version.
         /// </summary>
-        /// <exception cref="Exception">Exception will be thrown if client secret is not set.</exception>
         public string ClientSecret
 		{
-			get
-			{
-				if (!string.IsNullOrEmpty(clientSecret))
-                    return clientSecret;
-
-                if (!string.IsNullOrEmpty(ConnectionCredentials.ClientSecret))
-                    return ConnectionCredentials.ClientSecret;
-
-                throw new Exception("Fortnox Client Secret must be set.");
-			}
-			set => clientSecret = value;
+			get => !string.IsNullOrEmpty(clientSecret) ? clientSecret : ConnectionCredentials.ClientSecret;
+            set => clientSecret = value;
         }
 
 		/// <summary>
@@ -47,17 +42,8 @@ namespace FortnoxAPILibrary
 		/// /// <exception cref="Exception">Exception will be thrown if access token is not set.</exception>
 		public string AccessToken
 		{
-			get
-			{
-				if (!string.IsNullOrEmpty(accessToken))
-                    return accessToken;
-
-                if (!string.IsNullOrEmpty(ConnectionCredentials.AccessToken))
-                    return ConnectionCredentials.AccessToken;
-
-                throw new Exception("Fortnox Access Token must be set.");
-			}
-			set => accessToken = value;
+			get => !string.IsNullOrEmpty(accessToken) ? accessToken : ConnectionCredentials.AccessToken;
+            set => accessToken = value;
         }
 
 		/// <summary>
@@ -87,12 +73,10 @@ namespace FortnoxAPILibrary
         /// </summary>
         public bool HasError => Error != null;
 
-        public string Resource { get; protected set; }
-        public string Method { get; protected set; }
-        public string RequestUriString { get; protected set; }
-        public string LocalPath { get; protected set; }
-
-        public RequestResponseType ResponseType { get; protected set; }
+        /// <summary>
+        /// Aggregate data used for request setup
+        /// </summary>
+        public RequestInfo RequestInfo { get; protected set; }
 
         /// <remarks />
         public UrlRequestBase()
@@ -101,43 +85,14 @@ namespace FortnoxAPILibrary
             serializer = new JsonEntitySerializer();
         }
 
-        protected string GetUrl(string index = "")
-        {
-            string[] str = {
-                ConnectionSettings.FortnoxAPIServer,
-				Resource,
-				index
-			};
-
-            str = str.Where(s => s != "").ToArray();
-
-            string requestUriString = string.Join("/", str);
-
-            return requestUriString;
-        }
-
+        
         /// <summary>
         /// This method is used to throttle every call to Fortnox. 
         /// </summary>
-        protected static void RateLimit()
+        protected async Task RateLimit()
         {
-            bool reset = false;
-
-            currentRequestsPerSecond++;
-
-            if ((DateTime.Now - firstRequest).TotalMilliseconds >= 1000.0) reset = true;
-            else if (currentRequestsPerSecond >= MaxRequestsPerSecond)
-            {
-                // Wait out remainder of current second
-                Thread.Sleep(Convert.ToInt32(1000.0 - (DateTime.Now - firstRequest).TotalMilliseconds));
-                reset = true;
-            }
-
-            if (reset)
-            {
-                currentRequestsPerSecond = 0;
-                firstRequest = DateTime.Now;
-            }
+            if (ConnectionSettings.UseRateLimiter)
+                await RateLimiter;
         }
 
         /// <summary>
@@ -152,8 +107,13 @@ namespace FortnoxAPILibrary
         /// <para>DELETE</para>
         /// </param>
         /// <returns></returns>
-        protected HttpWebRequest SetupRequest(string requestUriString, string method)
+        protected HttpWebRequest SetupRequest(string requestUriString, RequestMethod method)
         {
+            if (string.IsNullOrEmpty(ClientSecret))
+                throw new Exception("Fortnox Client Secret must be set.");
+            if (string.IsNullOrEmpty(AccessToken))
+                throw new Exception("Fortnox Access Token must be set.");
+
             Error = null;
 
             var wr = (HttpWebRequest)WebRequest.Create(requestUriString);
@@ -161,7 +121,7 @@ namespace FortnoxAPILibrary
             wr.Headers.Add("client-secret", ClientSecret);
             wr.ContentType = "application/json";
             wr.Accept = "application/json";
-            wr.Method = method;
+            wr.Method = method.GetStringValue();
             wr.Timeout = Timeout;            
 
             return wr;
@@ -170,19 +130,13 @@ namespace FortnoxAPILibrary
         /// <summary>
         /// Perform the request to Fortnox API
         /// </summary>
-        protected void DoRequest()
+        protected async Task DoRequest()
         {
-            var wr = SetupRequest(RequestUriString, Method);
+            var wr = SetupRequest(RequestInfo.AbsoluteUrl, RequestInfo.Method);
 
             try
             {
-                if (ConnectionSettings.UseRateLimiter)
-                    RateLimit();
-
-                if (Method != "GET")
-                {
-                    using (wr.GetRequestStream()) { } //TODO: What is the purpose of this?
-                }
+                await RateLimit();
 
                 using var response = (HttpWebResponse) wr.GetResponse();
                 HttpStatusCode = response.StatusCode;
@@ -199,53 +153,47 @@ namespace FortnoxAPILibrary
         /// <typeparam name="T">The type of entity to create, read, update or delete.</typeparam>
         /// <param name="entity">The entity</param>
         /// <returns>An entity</returns>
-        protected T DoRequest<T>(T entity = default)
+        protected async Task<T> DoEntityRequest<T>(T entity = default)
         {
-            var wr = SetupRequest(RequestUriString, Method);
+            if (RequestInfo.ResponseType != RequestResponseType.JSON)
+                throw new Exception("Unexpected request");
+
+            var requestJson = entity == null ? string.Empty : Serialize(entity);
+            RequestContent = requestJson;
+
+            var requestData = Encoding.UTF8.GetBytes(requestJson);
+            var responseData = await DoSimpleRequest(requestData);
+
+            if (responseData == null)
+            {
+                ResponseContent = string.Empty;
+                return default;
+            }
+
+            var responseJson = Encoding.UTF8.GetString(responseData);
+            ResponseContent = responseJson;
+
+            return Deserialize<T>(responseJson);
+        }
+
+        protected async Task<byte[]> DoSimpleRequest(byte[] data = null)
+        {
+            var wr = SetupRequest(RequestInfo.AbsoluteUrl, RequestInfo.Method);
             ResponseContent = "";
             try
             {
-                if (ConnectionSettings.UseRateLimiter)
-                    RateLimit();
+                await RateLimit();
 
-                if (Method != "GET")
+                if (data != null && RequestInfo.Method != RequestMethod.Get)
                 {
                     using var requestStream = wr.GetRequestStream();
-                    var json = Serialize(entity);
-                    requestStream.WriteText(json);
+                    await requestStream.WriteBytes(data);
                 }
 
-                if (Method == "POST" || Method == "PUT")
-                {
-                    RequestContent = Serialize(entity);
-                }
-
-                using var response = (HttpWebResponse) wr.GetResponse();
+                using var response = (HttpWebResponse)wr.GetResponse();
                 HttpStatusCode = response.StatusCode;
                 using var responseStream = response.GetResponseStream();
-                if (ResponseType == RequestResponseType.PDF)
-                {
-                    responseStream.ToFile(LocalPath);
-                }
-                else
-                {
-                    if (response.Headers["Content-Disposition"] != null && response.Headers["Content-Disposition"].Split(';')[0] == "attachment")
-                    {
-                        throw new Exception("The specified path is a file. Use DownloadFile() to download the file.");
-                    }
-
-                    switch (ResponseType)
-                    {
-                        case RequestResponseType.JSON:
-                            ResponseContent = responseStream.ToText();
-                            return Deserialize<T>(ResponseContent);
-                        case RequestResponseType.EMAIL:
-                            return default;
-                        default:
-                            responseStream.ToFile(LocalPath);
-                            return default;
-                    }
-                }
+                return await responseStream.ToBytes();
             }
             catch (WebException we)
             {
@@ -255,7 +203,7 @@ namespace FortnoxAPILibrary
             return default;
         }
 
-        protected T UploadFile<T>(string localPath, byte[] fileData = null, string fileName = null)
+        protected async Task<T> UploadFile<T>(byte[] fileData = null, string fileName = null)
         {
             ResponseContent = "";
 
@@ -263,31 +211,26 @@ namespace FortnoxAPILibrary
 
             try
             {
-				// prepp name and data
-				if (fileData == null)
-				{
-					fileName = Path.GetFileName(localPath);
-					fileData = System.IO.File.ReadAllBytes(localPath);
-				}
+                await RateLimit();
 
                 var rand = new Random();
                 var boundary = "----boundary" + rand.Next();
-                var header = Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + fileName + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
-                var trailer = Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
+                var header = Encoding.UTF8.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + fileName + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
+                var trailer = Encoding.UTF8.GetBytes("\r\n--" + boundary + "--\r\n");
 
-                var request = SetupRequest(RequestUriString, "POST");
+                var request = SetupRequest(RequestInfo.AbsoluteUrl, RequestMethod.Post);
                 request.ContentType = "multipart/form-data; boundary=" + boundary;
 
                 using var dataStream = request.GetRequestStream();
                 dataStream.Write(header, 0, header.Length);
-                dataStream.Write(fileData, 0, fileData.Length);
+                await dataStream.WriteAsync(fileData, 0, fileData.Length);
                 dataStream.Write(trailer, 0, trailer.Length);
                 dataStream.Close();
 
                 // Read the response
                 using var response = request.GetResponse();
                 using var responseStream = response.GetResponseStream();
-                ResponseContent = responseStream.ToText();
+                ResponseContent = responseStream.ToText().Result;
                 result = Deserialize<EntityWrapper<T>>(ResponseContent).Entity;
             }
             catch (WebException we)
@@ -298,81 +241,35 @@ namespace FortnoxAPILibrary
             return result;
         }
 
-        protected void DownloadFile(string idOrPath, string localPath, File file = null)
+        protected async Task<byte[]> DownloadFile()
         {
             ResponseContent = "";
 
             try
             {
-                string url;
-                
-                if (Guid.TryParse(idOrPath, out var unused))
-                    url = GetUrl(idOrPath);
-                else
-                    url = GetUrl() + "?path=" + Uri.EscapeDataString(idOrPath);
+                await RateLimit();
 
-                LocalPath = localPath;
-
-                var request = SetupRequest(url, "GET");
+                var request = SetupRequest(RequestInfo.AbsoluteUrl, RequestMethod.Get);
 
                 using var response = (HttpWebResponse) request.GetResponse();
                 HttpStatusCode = response.StatusCode;
                 using var responseStream = response.GetResponseStream();
-                if (file == null)
-                {
-                    // hdd
-                    responseStream.ToFile(LocalPath);
-                }
-                else
-                {
-                    // memory                          
-                    file.ContentType = response.Headers["Content-Type"];
-                    file.Data = responseStream.ToBytes();
-                }
+
+                var data = await responseStream.ToBytes();
+                return data;
             }
             catch (WebException we)
             {
                 Error = HandleException(we);
+                return null;
             }
         }
 
-        protected File MoveFile(string fileId, string destination)
-        {
-            ResponseContent = "";
-
-            try
-            {
-                var url = ConnectionSettings.FortnoxAPIServer + "/" + Resource + "/move/" + fileId;
-
-                if (string.IsNullOrWhiteSpace(destination) || Guid.TryParse(destination, out var unused))
-                {
-                    url += "/" + destination;
-                }
-                else
-                {
-                    url += "/?destination=" + Uri.EscapeDataString(destination);
-                }
-
-                var request = SetupRequest(url, "PUT");
-                using var response = (HttpWebResponse)request.GetResponse();
-                HttpStatusCode = response.StatusCode;
-                using var responseStream = response.GetResponseStream();
-                ResponseContent = responseStream.ToText();
-                return Deserialize<EntityWrapper<File>>(ResponseContent).Entity;
-            }
-            catch (WebException we)
-            {
-                Error = HandleException(we);
-            }
-
-            return null;
-        }
-        
         protected ErrorInformation HandleException(WebException we)
         {
             if (we.Response == null)
             {
-                throw new Exception("Inget svar från Fortnox API. Kontrollera inre exception.", we);
+                throw new Exception("Connection to server failed. Check inner exception.", we);
             }
 
             using var response = (HttpWebResponse)we.Response;
@@ -384,7 +281,7 @@ namespace FortnoxAPILibrary
             }
 
             using var responseStream = response.GetResponseStream();
-            string errorJson = responseStream.ToText();
+            string errorJson = responseStream.ToText().Result;
 
             try
             {
@@ -399,33 +296,34 @@ namespace FortnoxAPILibrary
             catch (Exception)
             {
                 //Could not interpret error message from Fortnox API.
-                throw we;
+                return new ErrorInformation() { Message = we.Message };
             }
         }
 
         protected string Serialize<T>(T entity)
         {
-            return serializer.Serialize(entity);
+            var json = serializer.Serialize(entity);
+
+            if (FixRequestContent != null)
+                json = FixRequestContent(json);
+
+            FixRequestContent = null;
+            return json;
         }
 
         protected T Deserialize<T>(string content)
         {
             try
             {
+                if (FixResponseContent != null)
+                    content = FixResponseContent(content);
+                FixResponseContent = null;
                 return serializer.Deserialize<T>(content);
             }
             catch (Exception e)
             {
-                throw new Exception("An error occured while deserializing the response. Check ResponseContent.", e.InnerException);
+                throw new SerializationException("An error occured while deserializing the response. Check ResponseContent.", e.InnerException);
             }
-        }
-
-        public enum RequestResponseType
-        {
-            JSON,
-            PDF,
-            File,
-            EMAIL
         }
     }
 }

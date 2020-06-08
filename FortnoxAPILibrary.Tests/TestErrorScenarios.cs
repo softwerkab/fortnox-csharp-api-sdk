@@ -1,8 +1,6 @@
 ﻿using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Net;
 
 namespace FortnoxAPILibrary.Tests
 {
@@ -44,50 +42,22 @@ namespace FortnoxAPILibrary.Tests
             ConnectionSettings.UseRateLimiter = false;
             var connector = new CustomerConnector();
 
-            Exception exception = null;
-            try
+            ErrorInformation error = null;
+            for (var i = 0; i < 200; i++)
             {
-                for (var i = 0; i < 200; i++)
+                connector.Find();
+                if (connector.HasError)
                 {
-                    connector.Find();
+                    error = connector.Error;
+                    break;
                 }
-            }
-            catch (Exception ex)
-            {
-                exception = ex;
             }
 
             //Restore settings
             ConnectionSettings.UseRateLimiter = true;
 
             //Assert
-            Assert.IsNotNull(exception);
-            Assert.IsTrue(exception.Message.Contains("Too Many Requests"));
-        }
-
-        [TestMethod]
-        public void Test_TlsConnection_NotEstablishd_Error()
-        {
-            var defaultTlsSettings = ServicePointManager.SecurityProtocol;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11;
-            var connector = new CustomerConnector();
-
-            Exception exception = null;
-            try
-            {
-                connector.Find();
-            }
-            catch (Exception ex)
-            {
-                exception = ex;
-            }
-
-            //Restore settings
-            ServicePointManager.SecurityProtocol = defaultTlsSettings;
-
-            //Assert
-            Assert.IsNotNull(exception);
-            Assert.IsTrue(exception.InnerException.Message.Contains("The SSL connection could not be established"));
-        }
+            Assert.IsNotNull(error);
+            Assert.IsTrue(error.Message.Contains("Too Many Requests")); }
     }
 }

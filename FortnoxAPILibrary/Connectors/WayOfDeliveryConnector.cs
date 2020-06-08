@@ -1,71 +1,93 @@
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class WayOfDeliveryConnector : EntityConnector<WayOfDelivery, EntityCollection<WayOfDeliverySubset>, Sort.By.WayOfDelivery?>
+    public class WayOfDeliveryConnector : EntityConnector<WayOfDelivery, EntityCollection<WayOfDelivery>, Sort.By.WayOfDelivery?>, IWayOfDeliveryConnector
 	{
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-        [SearchParameter]
-		public string Code { get; set; }
+	    /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter("filter")]
+		public Filter.WayOfDelivery? FilterBy { get; set; }
+
 
 		/// <remarks/>
 		public WayOfDeliveryConnector()
 		{
 			Resource = "wayofdeliveries";
 		}
-
 		/// <summary>
-		/// Find a way of delivery based on way of delivery code
+		/// Find a wayOfDelivery based on id
 		/// </summary>
-		/// <param name="wayOfDeliveryCode">The way of deliverycode to find</param>
-		/// <returns>The resulting way of deliverycode</returns>
-		public WayOfDelivery Get(string wayOfDeliveryCode)
+		/// <param name="id">Identifier of the wayOfDelivery to find</param>
+		/// <returns>The found wayOfDelivery</returns>
+		public WayOfDelivery Get(string id)
 		{
-			return BaseGet(wayOfDeliveryCode);
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
-		/// Updates a way of delivery
+		/// Updates a wayOfDelivery
 		/// </summary>
-		/// <param name="wayOfDelivery">The way of delivery to update</param>
-		/// <returns>The updated way of delivery</returns>
+		/// <param name="wayOfDelivery">The wayOfDelivery to update</param>
+		/// <returns>The updated wayOfDelivery</returns>
 		public WayOfDelivery Update(WayOfDelivery wayOfDelivery)
 		{
-			return BaseUpdate(wayOfDelivery, wayOfDelivery.Code);
+			return UpdateAsync(wayOfDelivery).Result;
 		}
 
 		/// <summary>
-		/// Create a new way of delivery
+		/// Creates a new wayOfDelivery
 		/// </summary>
-		/// <param name="wayOfDelivery">The way of delivery to create</param>
-		/// <returns>The created way of delivery</returns>
+		/// <param name="wayOfDelivery">The wayOfDelivery to create</param>
+		/// <returns>The created wayOfDelivery</returns>
 		public WayOfDelivery Create(WayOfDelivery wayOfDelivery)
 		{
-			return BaseCreate(wayOfDelivery);
+			return CreateAsync(wayOfDelivery).Result;
 		}
 
 		/// <summary>
-		/// Deletes a way of Delivery
+		/// Deletes a wayOfDelivery
 		/// </summary>
-		/// <param name="wayOfDeliveryCode">The way of delivery code to delete</param>
-		/// <returns>If the way of delivery was deleted or not</returns>
-		public void Delete(string wayOfDeliveryCode)
+		/// <param name="id">Identifier of the wayOfDelivery to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(wayOfDeliveryCode);
+			DeleteAsync(id).Wait();
 		}
 
-        /// <summary>
-        /// Gets a list of way of deliveries
-        /// </summary>
-        /// <returns>A list of way of deliveries</returns>
-        public EntityCollection<WayOfDeliverySubset> Find()
+		/// <summary>
+		/// Gets a list of wayOfDeliverys
+		/// </summary>
+		/// <returns>A list of wayOfDeliverys</returns>
+		public EntityCollection<WayOfDelivery> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
+		}
+
+		public async Task<EntityCollection<WayOfDelivery>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task DeleteAsync(string id)
+		{
+			await BaseDelete(id);
+		}
+		public async Task<WayOfDelivery> CreateAsync(WayOfDelivery wayOfDelivery)
+		{
+			return await BaseCreate(wayOfDelivery);
+		}
+		public async Task<WayOfDelivery> UpdateAsync(WayOfDelivery wayOfDelivery)
+		{
+			return await BaseUpdate(wayOfDelivery, wayOfDelivery.Code);
+		}
+		public async Task<WayOfDelivery> GetAsync(string id)
+		{
+			return await BaseGet(id);
 		}
 	}
 }

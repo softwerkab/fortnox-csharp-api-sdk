@@ -1,23 +1,20 @@
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ProjectConnector : EntityConnector<Project, EntityCollection<ProjectSubset>, Sort.By.Project?>
+    public class ProjectConnector : EntityConnector<Project, EntityCollection<ProjectSubset>, Sort.By.Project?>, IProjectConnector
 	{
-        /// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-        [SearchParameter]
-		public string Description { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
+	    /// <summary>
+        /// Use with Find() to limit the search result
         /// </summary>
-        [SearchParameter]
-		public string ProjectLeader { get; set; }
+        [SearchParameter("filter")]
+		public Filter.Project? FilterBy { get; set; }
+
 
 		/// <remarks/>
 		public ProjectConnector()
@@ -26,13 +23,13 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Gets a project based on project number
+		/// Find a project based on id
 		/// </summary>
-		/// <param name="projectNumber">The project number to find</param>
+		/// <param name="id">Identifier of the project to find</param>
 		/// <returns>The found project</returns>
-		public Project Get(string projectNumber)
+		public Project Get(string id)
 		{
-			return BaseGet(projectNumber);
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
@@ -42,36 +39,56 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated project</returns>
 		public Project Update(Project project)
 		{
-			return BaseUpdate(project, project.ProjectNumber);
+			return UpdateAsync(project).Result;
 		}
 
 		/// <summary>
 		/// Creates a new project
 		/// </summary>
-		/// <param name="project"> The project to Create</param>
+		/// <param name="project">The project to create</param>
 		/// <returns>The created project</returns>
 		public Project Create(Project project)
 		{
-			return BaseCreate(project);
+			return CreateAsync(project).Result;
 		}
 
 		/// <summary>
 		/// Deletes a project
 		/// </summary>
-		/// <param name="projectNumber">The project number of the project to delete</param>
-		/// <returns>If the project was deleted or not</returns>
-		public void Delete(string projectNumber)
+		/// <param name="id">Identifier of the project to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(projectNumber);
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
-		/// Gets at list of project, use the properties of ProjectConnector to limit the search
+		/// Gets a list of projects
 		/// </summary>
 		/// <returns>A list of projects</returns>
 		public EntityCollection<ProjectSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
+		}
+
+		public async Task<EntityCollection<ProjectSubset>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task DeleteAsync(string id)
+		{
+			await BaseDelete(id);
+		}
+		public async Task<Project> CreateAsync(Project project)
+		{
+			return await BaseCreate(project);
+		}
+		public async Task<Project> UpdateAsync(Project project)
+		{
+			return await BaseUpdate(project, project.ProjectNumber);
+		}
+		public async Task<Project> GetAsync(string id)
+		{
+			return await BaseGet(id);
 		}
 	}
 }

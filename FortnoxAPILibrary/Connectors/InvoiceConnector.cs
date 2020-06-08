@@ -1,68 +1,89 @@
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class InvoiceConnector : FinancialYearBasedEntityConnector<Invoice, EntityCollection<InvoiceSubset>, Sort.By.Invoice>
-    {
-        /// <summary>
+    public class InvoiceConnector : EntityConnector<Invoice, EntityCollection<InvoiceSubset>, Sort.By.Invoice?>, IInvoiceConnector
+	{
+	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
-        [SearchParameter]
-        public string FromDate { get; set; }
+        [SearchParameter("filter")]
+		public Filter.Invoice? FilterBy { get; set; }
+
 
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter]
-        public string ToDate { get; set; }
+		public string Credit { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
+        /// <summary>
+        /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter]
 		public string CostCenter { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string Currency { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
         [SearchParameter]
 		public string CustomerName { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
+        /// <summary>
+        /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter]
 		public string CustomerNumber { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
+        /// <summary>
+        /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter]
 		public string DocumentNumber { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
+        /// <summary>
+        /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter]
 		public string ExternalInvoiceReference1 { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
+        /// <summary>
+        /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter]
 		public string ExternalInvoiceReference2 { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string InvoiceType { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string NotCompleted { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter]
 		public string OCR { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
+        /// <summary>
+        /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter]
 		public string OurReference { get; set; }
@@ -71,179 +92,176 @@ namespace FortnoxAPILibrary.Connectors
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter]
-        public string InvoiceDate { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
 		public string Project { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string YourReference { get; set; }
 
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter]
-        public string Label { get; set; }
+		public string Sent { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
+        /// <summary>
+        /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter]
-		public bool? Sent { get; set; }
+		public string YourOrderNumber { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
+        /// <summary>
+        /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter]
-		public bool? NotCompleted { get; set; }
+		public string YourReference { get; set; }
 
-        /// <remarks/>
-        [SearchParameter("filter")]
-		public Filter.Invoice? FilterBy { get; set; }
-
-        /// <remarks/>
+		/// <remarks/>
 		public InvoiceConnector()
 		{
 			Resource = "invoices";
 		}
 
 		/// <summary>
-		/// Find an invoice
+		/// Find a invoice based on id
 		/// </summary>
-		/// <param name="documentNumber">The document number of the invoice to find</param>
+		/// <param name="id">Identifier of the invoice to find</param>
 		/// <returns>The found invoice</returns>
-		public Invoice Get(string documentNumber)
+		public Invoice Get(int? id)
 		{
-			return BaseGet(documentNumber);
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
-		/// Updates an Invoice
+		/// Updates a invoice
 		/// </summary>
 		/// <param name="invoice">The invoice to update</param>
 		/// <returns>The updated invoice</returns>
 		public Invoice Update(Invoice invoice)
 		{
-			return BaseUpdate(invoice, invoice.DocumentNumber);
+			return UpdateAsync(invoice).Result;
 		}
 
 		/// <summary>
-		/// Create a new invoice
+		/// Creates a new invoice
 		/// </summary>
 		/// <param name="invoice">The invoice to create</param>
 		/// <returns>The created invoice</returns>
 		public Invoice Create(Invoice invoice)
 		{
-			return BaseCreate(invoice);
+			return CreateAsync(invoice).Result;
 		}
 
         /// <summary>
-        /// Gets at list of Invoices
-        /// </summary>
-        /// <returns>A list of invoices</returns>
-        public EntityCollection<InvoiceSubset> Find()
-		{
-			return BaseFind();
-		}
-
-		/// <summary>
-		/// Bookkeep an invoice
+		/// Gets a list of invoices
 		/// </summary>
-		/// <param name="documentNumber">The document number of the invoice to bookkeep.</param>
-		/// <returns>The bookkept invoice</returns>
-		public Invoice Bookkeep(string documentNumber)
+		/// <returns>A list of invoices</returns>
+		public EntityCollection<InvoiceSubset> Find()
 		{
-			return DoAction(documentNumber, "bookkeep");
+			return FindAsync().Result;
 		}
-
+		
 		/// <summary>
-		/// Cancel an invoice
+		/// Bookkeeps an invoice
+		/// <param name="id"></param>
+		/// <returns></returns>
 		/// </summary>
-		/// <param name="documentNumber">The document number of the invoice to cancel</param>
-		/// <returns>The cancelled invoice</returns>
-		public Invoice Cancel(string documentNumber)
+		public Invoice Bookkeep(int? id)
 		{
-			return DoAction(documentNumber, "cancel");
+			return DoAction(id.ToString(), Action.Bookkeep);
 		}
-
+		
 		/// <summary>
-		/// Credit an invoice
+		/// Cancels an invoice
+		/// <param name="id"></param>
+		/// <returns></returns>
 		/// </summary>
-		/// <param name="documentNumber">The document number of the invoice to credit</param>
-		/// <returns>The credited invoice</returns>
-		public Invoice Credit(string documentNumber)
+		public Invoice Cancel(int? id)
 		{
-			return DoAction(documentNumber, "credit");
+			return DoAction(id.ToString(), Action.Cancel);
 		}
-
+		
 		/// <summary>
-		/// Emails an invoice
+		/// Creates a credit invoice from the provided invoice. The created credit invoice will be referenced in the property CreditInvoiceReference.
+		/// <param name="id"></param>
+		/// <returns></returns>
 		/// </summary>
-		/// <param name="documentNumber">The document number of the invoice to be emailed</param>
-		public void Email(string documentNumber)
+		public Invoice CreditInvoice(int? id)
 		{
-			DoAction(documentNumber, "email");
+			return DoAction(id.ToString(), Action.Credit);
 		}
-
+		
 		/// <summary>
-		/// Print an invoice to pdf
+		/// Sends an e-mail to the customer with an attached PDF document of the invoice. You can use the properties in the EmailInformation to customize the e-mail message on each invoice.
+		/// <param name="id"></param>
+		/// <returns></returns>
 		/// </summary>
-		/// <param name="documentNumber">The document number of the invoice to print</param>
-		/// <param name="localPath">The path where to save the generated pdf. If omitted the invoice will be set to printed (i.e Sent = true) and no pdf is returned. </param>
-		public void Print(string documentNumber, string localPath = "")
+		public Invoice Email(int? id)
 		{
-			if (string.IsNullOrEmpty(localPath))
-			{
-				DoAction(documentNumber, "externalprint");
-			}
-			else
-			{
-				LocalPath = localPath;
-				DoAction(documentNumber, "print");
-			}
+			return DoAction(id.ToString(), Action.Email);
 		}
-        
-        /// <param name="documentNumber">The document number of the invoice to print</param>
-        public void EPrint(string documentNumber)
-        {
-            DoAction(documentNumber, "eprint");
-        }
-
+		
 		/// <summary>
-		/// Prints a reminder to pdf and increments <Reminders></Reminders> on the invoice
+		/// Sends an e-invoice to the customer with an attached PDF document of the invoice. Note that this action also sets the property Sent as true.
+		/// <param name="id"></param>
+		/// <returns></returns>
 		/// </summary>
-		/// <param name="documentNumber"></param>
-		/// <param name="localPath">The path where to save the reminder </param>
-		public void PrintReminder(string documentNumber, string localPath)
+		public Invoice EInvoice(int? id)
 		{
-			LocalPath = localPath;
-			DoAction(documentNumber, "printreminder");
+			return DoAction(id.ToString(), Action.EInvoice);
+		}
+		
+		/// <summary>
+		/// This action returns a PDF document with the current template that is used by the specific document. Note that this action also sets the property Sent as true.
+		/// <param name="id"></param>
+        /// <returns></returns>
+		/// </summary>
+		public byte[] Print(int? id)
+		{
+			return DoDownloadAction(id.ToString(), Action.Print);
+		}
+		
+		/// <summary>
+		/// This action returns a PDF document with the current reminder template that is used by the specific document. Note that this action also sets the property Sent as true.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public byte[] PrintReminder(int? id)
+		{
+			return DoDownloadAction(id.ToString(), Action.PrintReminder);
+		}
+		
+		/// <summary>
+		/// This action is used to set the field Sent as true from an external system without generating a PDF.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Invoice ExternalPrint(int? id)
+		{
+			return DoAction(id.ToString(), Action.ExternalPrint);
+		}
+		
+		/// <summary>
+		/// This action returns a PDF document with the current template that is used by the specific document. Unliike the action print, this action doesn’t set the property Sent as true.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public byte[] Preview(int? id)
+		{
+			return DoDownloadAction(id.ToString(), Action.Preview);
 		}
 
-        /// <summary>
-        /// Prints a preview as pdf
-        /// </summary>
-        /// <param name="documentNumber"></param>
-        /// <param name="localPath">The path where to save the preview</param>
-        public void Preview(string documentNumber, string localPath)
-        {
-            LocalPath = localPath;
-            DoAction(documentNumber, "preview");
-        }
-
-        /// <summary>
-        /// Marks the document as externally printed
-        /// </summary>
-        /// <param name="documentNumber"></param>
-        public void ExternalPrint(string documentNumber)
-        {
-            DoAction(documentNumber, "externalprint");
-        }
+		public async Task<EntityCollection<InvoiceSubset>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task<Invoice> CreateAsync(Invoice invoice)
+		{
+			return await BaseCreate(invoice);
+		}
+		public async Task<Invoice> UpdateAsync(Invoice invoice)
+		{
+			return await BaseUpdate(invoice, invoice.DocumentNumber.ToString());
+		}
+		public async Task<Invoice> GetAsync(int? id)
+		{
+			return await BaseGet(id.ToString());
+		}
 	}
 }

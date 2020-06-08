@@ -1,97 +1,97 @@
+using System.Collections.Generic;
 using FortnoxAPILibrary.Entities;
+
+using System.Threading.Tasks;
 
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class VoucherConnector : FinancialYearBasedEntityConnector<Voucher, EntityCollection<VoucherSubset>, Sort.By.Voucher?>
-    {
-        /// <summary>
+    public class VoucherConnector : EntityConnector<Voucher, EntityCollection<VoucherSubset>, Sort.By.Voucher?>, IVoucherConnector
+	{
+	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
-        public string VoucherSeries { get; set; }
-
-        /// <remarks/>
-        public enum ReferenceType
-        {
-            /// <remarks/>
-            INVOICE,
-            /// <remarks/>
-            INVOICEPAYMENT,
-            /// <remarks/>
-            SUPPLIERINVOICE,
-            /// <remarks/>
-            SUPPLIERINVOICEPAYMENT,
-            /// <remarks/>
-            MANUAL,
-            /// <remarks/>
-            CASHINVOICE
-        }
+        [SearchParameter("filter")]
+		public Filter.Voucher? FilterBy { get; set; }
 
         /// <summary>
-        /// Use with Find() to limit the search result
+        /// <para>Use FinancialYearDate to select the financial year to use.</para>
+        /// <para>If omitted the default financial year will be selected</para>
         /// </summary>
-        [SearchParameter]
-        public string CostCenter { get; set; }
+        [SearchParameter("financialyeardate")]
+        public string FinancialYearDate { get; set; }
 
         /// <summary>
-        /// Use with Find() to limit the search result
+        /// <para>Use FinancialYearID to select the financial year to use.</para>
+        /// <para>If omitted the default financial year will be selected</para>
         /// </summary>
-        [SearchParameter]
-        public string FromDate { get; set; }
+        [SearchParameter("financialyear")]
+        public string FinancialYearID { get; set; }
+
+		/// <summary>
+		/// Use with Find() to limit the search result
+		/// </summary>
+		[SearchParameter]
+		public string CostCenter { get; set; }
+
+		/// <remarks/>
+		public VoucherConnector()
+		{
+			Resource = "vouchers";
+		}
 
         /// <summary>
-        /// Use with Find() to limit the search result
+        /// Find a voucher based on id
         /// </summary>
-        [SearchParameter]
-        public string ToDate { get; set; }
-
-        /// <remarks/>
-        public VoucherConnector()
-        {
-            Resource = "vouchers";
-        }
-
-        /// <summary>
-        /// Gets a voucher
-        /// </summary>
-        /// <param name="voucherSeries">The series of the voucher to get</param>
-        /// <param name="voucherNumber">The number of the voucher to get</param>
+        /// <param name="id">Identifier of the voucher to find</param>
+        /// <param name="seriesId">Idendifier of the voucher series</param>
+        /// <param name="financialYearId">Identifier of the financial year</param>
         /// <returns>The found voucher</returns>
-        public Voucher Get(string voucherSeries, string voucherNumber)
-        {
-            Resource = "vouchers";
-
-            return BaseGet(voucherSeries, voucherNumber);
+        public Voucher Get(int? id, string seriesId, int? financialYearId)
+		{
+			return GetAsync(id, seriesId, financialYearId).Result;
         }
 
-        /// <summary>
-        /// Create a new voucher
-        /// </summary>
-        /// <param name="voucher">The voucher to create</param>
-        /// <returns>The created voucher</returns>
-        public Voucher Create(Voucher voucher)
-        {
-            Resource = "vouchers";
+		/// <summary>
+		/// Creates a new voucher
+		/// </summary>
+		/// <param name="voucher">The voucher to create</param>
+		/// <returns>The created voucher</returns>
+		public Voucher Create(Voucher voucher)
+		{
+			return CreateAsync(voucher).Result;
+		}
 
-            return BaseCreate(voucher);
-        }
+		/// <summary>
+		/// Gets a list of vouchers
+		/// </summary>
+		/// <returns>A list of vouchers</returns>
+		public EntityCollection<VoucherSubset> Find()
+		{
+			return FindAsync().Result;
+		}
 
-        /// <summary>
-        /// Gets a list of vouchers
-        /// </summary>
-        /// <returns>A list of vouchers</returns>
-        public EntityCollection<VoucherSubset> Find()
-        {
-            Resource = "vouchers/sublist";
-
-            if (!string.IsNullOrEmpty(VoucherSeries))
+		public async Task<EntityCollection<VoucherSubset>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task<Voucher> CreateAsync(Voucher voucher)
+		{
+			return await BaseCreate(voucher);
+		}
+        public async Task<Voucher> GetAsync(int? id, string seriesId, int? financialYearId)
+		{
+            if (financialYearId != null)
             {
-                Resource += VoucherSeries;
+                ParametersInjection = new Dictionary<string, string>
+                {
+                    {"financialyear", financialYearId.ToString()}
+                };
             }
 
-            return BaseFind();
+            return await BaseGet(seriesId, id.ToString());
         }
     }
 }

@@ -8,7 +8,7 @@ namespace FortnoxAPILibrary.Tests
     public class ConnectionTests
     {
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(AggregateException))]
         public void TestConnection_WithoutCredenials_Error()
         {
             //Arrange
@@ -16,7 +16,7 @@ namespace FortnoxAPILibrary.Tests
             ConnectionCredentials.ClientSecret = "";
 
             //Act
-            var cc = new CustomerConnector();
+            ICustomerConnector cc = new CustomerConnector();
             cc.AccessToken = "";
             cc.ClientSecret = "";
             cc.Find();
@@ -30,7 +30,7 @@ namespace FortnoxAPILibrary.Tests
             ConnectionCredentials.ClientSecret = "";
 
             //Act
-            var connector = new CustomerConnector();
+            ICustomerConnector connector = new CustomerConnector();
             connector.AccessToken = TestCredentials.Access_Token;
             connector.ClientSecret = TestCredentials.Client_Secret;
 
@@ -47,7 +47,7 @@ namespace FortnoxAPILibrary.Tests
             ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
 
             //Act
-            var connector = new CustomerConnector();
+            ICustomerConnector connector = new CustomerConnector();
             connector.AccessToken = "";
             connector.ClientSecret = "";
 
@@ -62,11 +62,11 @@ namespace FortnoxAPILibrary.Tests
             ConnectionCredentials.AccessToken = "123";
             ConnectionCredentials.ClientSecret = "456";
 
-            var connector1 = new CustomerConnector();
+            ICustomerConnector connector1 = new CustomerConnector();
             connector1.AccessToken = "A";
             connector1.ClientSecret = "B";
 
-            var connector2 = new CustomerConnector();
+            ICustomerConnector connector2 = new CustomerConnector();
             connector2.AccessToken = "AA";
             connector2.ClientSecret = "BB";
 

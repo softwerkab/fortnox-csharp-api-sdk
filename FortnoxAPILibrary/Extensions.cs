@@ -2,7 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FortnoxAPILibrary
 {
@@ -24,37 +26,63 @@ namespace FortnoxAPILibrary
             var type = enumObj.GetType();
             var memberInfo = type.GetMember(enumObj.ToString()).First();
 
-            if (memberInfo.HasAttribute<StringValueAttribute>())
-                return memberInfo.GetAttribute<StringValueAttribute>().RealValue;
+            if (memberInfo.HasAttribute<EnumMemberAttribute>())
+                return memberInfo.GetAttribute<EnumMemberAttribute>().Value;
             else
                 return enumObj.ToString();
         }
 
-        public static byte[] ToBytes(this Stream stream)
+        public static async Task<byte[]> ToBytes(this Stream stream)
         {
             using var memory = new MemoryStream();
-            stream.CopyTo(memory);
+            await stream.CopyToAsync(memory);
+            memory.Position = 0;
 
-            return memory.ToArray();
+            var bytes = new byte[(int)memory.Length];
+            await memory.ReadAsync(bytes, 0, bytes.Length);
+
+            return bytes;
         }
 
-        public static string ToText(this Stream stream)
+        public static async Task<string> ToText(this Stream stream)
         {
-            return Encoding.UTF8.GetString(stream.ToBytes());
+            using var reader = new StreamReader(stream, Encoding.UTF8);
+            return await reader.ReadToEndAsync();
         }
 
-        public static FileInfo ToFile(this Stream stream, string path)
+        public static async Task<FileInfo> ToFile(this Stream stream, string path)
         {
             using var file = File.Create(path);
-            stream.CopyTo(file);
+            await stream.CopyToAsync(file);
 
             return new FileInfo(path);
         }
 
-        public static void WriteText(this Stream stream, string value)
+        public static async Task WriteText(this Stream stream, string value)
         {
             using var streamWriter = new StreamWriter(stream);
-            streamWriter.Write(value);
+            await streamWriter.WriteAsync(value);
+        }
+
+        public static async Task WriteBytes(this Stream stream, byte[] data)
+        {
+            await stream.WriteAsync(data, 0,data.Length);
+        }
+
+        public static async Task<byte[]> ToBytes(this FileInfo fileInfo)
+        {
+            var path = fileInfo.FullName;
+
+            using var file = File.OpenRead(path);
+            return await file.ToBytes();
+        }
+
+        public static async Task<FileInfo> ToFile(this byte[] data, string path)
+        {
+            using var file = File.Create(path);
+            await file.WriteAsync(data, 0, data.Length);
+
+            return new FileInfo(path);
         }
     }
 }

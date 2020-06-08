@@ -1,25 +1,32 @@
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-    /// <remarks />
-    public class CompanySettingsConnector : EntityConnector<CompanySettings, EntityWrapper<CompanySettings>, Sort.By.CompanySettings?>
-    {
-        /// <remarks />
-        public CompanySettingsConnector()
-        {
-            Resource = "settings/company";
-        }
+    /// <remarks/>
+    public class CompanySettingsConnector : EntityConnector<CompanySettings, EntityWrapper<CompanySettings>, Sort.By.CompanySettings?>, ICompanySettingsConnector
+	{
+		/// <remarks/>
+		public CompanySettingsConnector()
+		{
+			Resource = "settings/company";
+		}
 
         /// <summary>
-        /// Gets the company settings
+        /// Retrieves the company settings.
         /// </summary>
-        /// <returns>The company settings</returns>
+        /// <returns></returns>
         public CompanySettings Get()
         {
-            return BaseFind()?.Entity;
+			return GetAsync().Result;
+        }
+
+        public async Task<CompanySettings> GetAsync()
+        {
+            return (await BaseFind())?.Entity;
         }
     }
 }

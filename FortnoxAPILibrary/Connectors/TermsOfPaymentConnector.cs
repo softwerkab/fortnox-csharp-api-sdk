@@ -1,71 +1,93 @@
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class TermsOfPaymentConnector : EntityConnector<TermsOfPayment, EntityCollection<TermsOfPaymentSubset>, Sort.By.TermsOfPayment?>
-    {
-        /// <summary>
+    public class TermsOfPaymentConnector : EntityConnector<TermsOfPayment, EntityCollection<TermsOfPayment>, Sort.By.TermsOfPayment?>, ITermsOfPaymentConnector
+	{
+	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
-        [SearchParameter]
-        public string Code { get; set; }
+        [SearchParameter("filter")]
+		public Filter.TermsOfPayment? FilterBy { get; set; }
+
 
 		/// <remarks/>
 		public TermsOfPaymentConnector()
 		{
 			Resource = "termsofpayments";
 		}
-
 		/// <summary>
-		/// Gets a Terms of payment by code
+		/// Find a termsOfPayment based on id
 		/// </summary>
-		/// <param name="termsOfPaymentCode"></param>
-		/// <returns></returns>
-		public TermsOfPayment Get(string termsOfPaymentCode)
+		/// <param name="id">Identifier of the termsOfPayment to find</param>
+		/// <returns>The found termsOfPayment</returns>
+		public TermsOfPayment Get(string id)
 		{
-			return BaseGet(termsOfPaymentCode);
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
-		/// Updates a terms of payment
+		/// Updates a termsOfPayment
 		/// </summary>
-		/// <param name="termsOfPayment"></param>
-		/// <returns></returns>
+		/// <param name="termsOfPayment">The termsOfPayment to update</param>
+		/// <returns>The updated termsOfPayment</returns>
 		public TermsOfPayment Update(TermsOfPayment termsOfPayment)
 		{
-			return BaseUpdate(termsOfPayment, termsOfPayment.Code);
+			return UpdateAsync(termsOfPayment).Result;
 		}
 
 		/// <summary>
-		/// Create a new Terms of payment
+		/// Creates a new termsOfPayment
 		/// </summary>
-		/// <param name="termsOfPayment">The terms of payment entity to create</param>
-		/// <returns>The created terms of payment.</returns>
+		/// <param name="termsOfPayment">The termsOfPayment to create</param>
+		/// <returns>The created termsOfPayment</returns>
 		public TermsOfPayment Create(TermsOfPayment termsOfPayment)
 		{
-			return BaseCreate(termsOfPayment);
+			return CreateAsync(termsOfPayment).Result;
 		}
 
 		/// <summary>
-		/// Delete a terms of payment
+		/// Deletes a termsOfPayment
 		/// </summary>
-		/// <param name="termsOfPaymentCode">The terms of payemnt code to delete</param>
-		/// <returns>If the terms of payment was deleted. </returns>
-		public void Delete(string termsOfPaymentCode)
+		/// <param name="id">Identifier of the termsOfPayment to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(termsOfPaymentCode);
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
-		/// Gets a list of terms of payments
+		/// Gets a list of termsOfPayments
 		/// </summary>
-		/// <returns>A list of terms of payments</returns>
-		public EntityCollection<TermsOfPaymentSubset> Find()
-        {
-			return BaseFind();
+		/// <returns>A list of termsOfPayments</returns>
+		public EntityCollection<TermsOfPayment> Find()
+		{
+			return FindAsync().Result;
+		}
+
+		public async Task<EntityCollection<TermsOfPayment>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task DeleteAsync(string id)
+		{
+			await BaseDelete(id);
+		}
+		public async Task<TermsOfPayment> CreateAsync(TermsOfPayment termsOfPayment)
+		{
+			return await BaseCreate(termsOfPayment);
+		}
+		public async Task<TermsOfPayment> UpdateAsync(TermsOfPayment termsOfPayment)
+		{
+			return await BaseUpdate(termsOfPayment, termsOfPayment.Code);
+		}
+		public async Task<TermsOfPayment> GetAsync(string id)
+		{
+			return await BaseGet(id);
 		}
 	}
 }

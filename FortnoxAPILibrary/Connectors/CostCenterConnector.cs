@@ -1,66 +1,93 @@
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-	/// <remarks/>
-	public class CostCenterConnector : EntityConnector<CostCenter, EntityCollection<CostCenterSubset>, Sort.By.CostCenter?>
+    /// <remarks/>
+    public class CostCenterConnector : EntityConnector<CostCenter, EntityCollection<CostCenter>, Sort.By.CostCenter?>, ICostCenterConnector
 	{
+	    /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter("filter")]
+		public Filter.CostCenter? FilterBy { get; set; }
+
+
 		/// <remarks/>
 		public CostCenterConnector()
 		{
 			Resource = "costcenters";
 		}
-
 		/// <summary>
-		/// Finds a cost center based on cost center code
+		/// Find a costCenter based on id
 		/// </summary>
-		/// <param name="costCenterCode">The cost center code to find</param>
-		/// <returns>The resulting cost center</returns>
-		public CostCenter Get(string costCenterCode)
+		/// <param name="id">Identifier of the costCenter to find</param>
+		/// <returns>The found costCenter</returns>
+		public CostCenter Get(string id)
 		{
-			return BaseGet(costCenterCode);
+			return GetAsync(id).Result;
 		}
 
-
 		/// <summary>
-		/// Updates a cost center
+		/// Updates a costCenter
 		/// </summary>
-		/// <param name="costCenter">The cost center entity to update</param>
-		/// <returns>The updated CostCenter</returns>
+		/// <param name="costCenter">The costCenter to update</param>
+		/// <returns>The updated costCenter</returns>
 		public CostCenter Update(CostCenter costCenter)
 		{
-			return BaseUpdate(costCenter, costCenter.Code);
+			return UpdateAsync(costCenter).Result;
 		}
 
 		/// <summary>
-		/// Creates a new cost center
+		/// Creates a new costCenter
 		/// </summary>
-		/// <param name="costCenter"></param>
-		/// <returns></returns>
+		/// <param name="costCenter">The costCenter to create</param>
+		/// <returns>The created costCenter</returns>
 		public CostCenter Create(CostCenter costCenter)
 		{
-			return BaseCreate(costCenter);
+			return CreateAsync(costCenter).Result;
 		}
 
 		/// <summary>
-		/// Deletes a cost center
+		/// Deletes a costCenter
 		/// </summary>
-		/// <param name="costCenterCode">The cost center to delete</param>
-		/// <returns>If the cost center was deleted or not</returns>
-		public void Delete(string costCenterCode)
+		/// <param name="id">Identifier of the costCenter to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(costCenterCode);
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
-		/// Gets a list of cost centers
+		/// Gets a list of costCenters
 		/// </summary>
-		/// <returns>A list of cost centers</returns>
-		public EntityCollection<CostCenterSubset> Find()
+		/// <returns>A list of costCenters</returns>
+		public EntityCollection<CostCenter> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
+		}
+
+		public async Task<EntityCollection<CostCenter>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task DeleteAsync(string id)
+		{
+			await BaseDelete(id);
+		}
+		public async Task<CostCenter> CreateAsync(CostCenter costCenter)
+		{
+			return await BaseCreate(costCenter);
+		}
+		public async Task<CostCenter> UpdateAsync(CostCenter costCenter)
+		{
+			return await BaseUpdate(costCenter, costCenter.Code);
+		}
+		public async Task<CostCenter> GetAsync(string id)
+		{
+			return await BaseGet(id);
 		}
 	}
 }

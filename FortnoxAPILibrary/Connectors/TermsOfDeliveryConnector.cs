@@ -1,15 +1,24 @@
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class TermsOfDeliveryConnector : EntityConnector<TermsOfDelivery, EntityCollection<TermsOfDeliverySubset>, Sort.By.TermsOfDelivery?>
+    public class TermsOfDeliveryConnector : EntityConnector<TermsOfDelivery, EntityCollection<TermsOfDelivery>, Sort.By.TermsOfDelivery?>, ITermsOfDeliveryConnector
 	{
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
+	    /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter("filter")]
+		public Filter.TermsOfDelivery? FilterBy { get; set; }
+
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
         [SearchParameter]
 		public string Code { get; set; }
 
@@ -18,55 +27,73 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "termsofdeliveries";
 		}
-
 		/// <summary>
-		/// Find a terms of delivery based on terms of delivery code
+		/// Find a termsOfDelivery based on id
 		/// </summary>
-		/// <param name="termsOfDeliveryCode">The terms of deliverycode to find</param>
-		/// <returns>The resulting terms of delivery</returns>
-		public TermsOfDelivery Get(string termsOfDeliveryCode)
+		/// <param name="id">Identifier of the termsOfDelivery to find</param>
+		/// <returns>The found termsOfDelivery</returns>
+		public TermsOfDelivery Get(string id)
 		{
-			return BaseGet(termsOfDeliveryCode);
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
-		/// Updates a terms of delivery
+		/// Updates a termsOfDelivery
 		/// </summary>
-		/// <param name="termsOfDelivery">The terms of delivery entity to update</param>
-		/// <returns>The updated terms of delivery</returns>
+		/// <param name="termsOfDelivery">The termsOfDelivery to update</param>
+		/// <returns>The updated termsOfDelivery</returns>
 		public TermsOfDelivery Update(TermsOfDelivery termsOfDelivery)
 		{
-			return BaseUpdate(termsOfDelivery, termsOfDelivery.Code);
+			return UpdateAsync(termsOfDelivery).Result;
 		}
 
 		/// <summary>
-		/// Create a new terms of delivery
+		/// Creates a new termsOfDelivery
 		/// </summary>
-		/// <param name="termsOfDelivery">The terms of delivery entity to create</param>
-		/// <returns>The created terms of delivery</returns>
+		/// <param name="termsOfDelivery">The termsOfDelivery to create</param>
+		/// <returns>The created termsOfDelivery</returns>
 		public TermsOfDelivery Create(TermsOfDelivery termsOfDelivery)
 		{
-			return BaseCreate(termsOfDelivery);
-		}
-
-
-		/// <summary>
-		/// Deletes a terms of delivery
-		/// </summary>
-		/// <param name="termsOfDeliveryCode">The terms of delivery code to delete</param>
-		/// <returns>If the terms of delivery was deleted or not</returns>
-		public void Delete(string termsOfDeliveryCode)
-		{
-			BaseDelete(termsOfDeliveryCode);
+			return CreateAsync(termsOfDelivery).Result;
 		}
 
 		/// <summary>
-		/// Gets a list of terms of deliveries
+		/// Deletes a termsOfDelivery
 		/// </summary>
-		/// <returns>A list of terms of deliveries</returns>
-		public EntityCollection<TermsOfDeliverySubset> Find()
+		/// <param name="id">Identifier of the termsOfDelivery to delete</param>
+		public void Delete(string id)
 		{
-			return BaseFind();
+			DeleteAsync(id).Wait();
+		}
+
+		/// <summary>
+		/// Gets a list of termsOfDeliverys
+		/// </summary>
+		/// <returns>A list of termsOfDeliverys</returns>
+		public EntityCollection<TermsOfDelivery> Find()
+		{
+			return FindAsync().Result;
+		}
+
+		public async Task<EntityCollection<TermsOfDelivery>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task DeleteAsync(string id)
+		{
+			await BaseDelete(id);
+		}
+		public async Task<TermsOfDelivery> CreateAsync(TermsOfDelivery termsOfDelivery)
+		{
+			return await BaseCreate(termsOfDelivery);
+		}
+		public async Task<TermsOfDelivery> UpdateAsync(TermsOfDelivery termsOfDelivery)
+		{
+			return await BaseUpdate(termsOfDelivery, termsOfDelivery.Code);
+		}
+		public async Task<TermsOfDelivery> GetAsync(string id)
+		{
+			return await BaseGet(id);
 		}
 	}
 }

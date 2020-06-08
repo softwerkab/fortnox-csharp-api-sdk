@@ -1,12 +1,20 @@
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class PrintTemplateConnector : EntityConnector<PrintTemplate, EntityCollection<PrintTemplate>, Sort.By.PrintTemplate?>
+    public class PrintTemplateConnector : EntityConnector<PrintTemplate, EntityCollection<PrintTemplate>, Sort.By.PrintTemplate?>, IPrintTemplateConnector
 	{
+	    /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter("type")]
+		public Filter.PrintTemplate? FilterBy { get; set; }
+
 		/// <remarks/>
 		public PrintTemplateConnector()
 		{
@@ -14,12 +22,17 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Gets a list of print templates
+		/// Gets a list of printTemplates
 		/// </summary>
-		/// <returns>A list of print templates</returns>
+		/// <returns>A list of printTemplates</returns>
 		public EntityCollection<PrintTemplate> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
+		}
+
+		public async Task<EntityCollection<PrintTemplate>> FindAsync()
+		{
+			return await BaseFind();
 		}
 	}
 }

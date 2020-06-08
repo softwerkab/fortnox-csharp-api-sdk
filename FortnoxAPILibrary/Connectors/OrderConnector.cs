@@ -1,108 +1,86 @@
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-
     /// <remarks/>
-    public class OrderConnector : FinancialYearBasedEntityConnector<Order, EntityCollection<OrderSubset>, Sort.By.Order?>
+    public class OrderConnector : EntityConnector<Order, EntityCollection<OrderSubset>, Sort.By.Order?>, IOrderConnector
 	{
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string FromDate { get; set; }
+	    /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter("filter")]
+		public Filter.Order? FilterBy { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string ToDate { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string CostCenter { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string CustomerName { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string CustomerNumber { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		public string DocumentNumber { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string ExternalInvoiceReference1 { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string ExternalInvoiceReference2 { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string OurReference { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string Project { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string YourReference { get; set; }
 
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter]
-        public string Label { get; set; }
+		public string CostCenter { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public bool? Sent { get; set; }
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string CustomerName { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public bool? NotCompleted { get; set; }
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string CustomerNumber { get; set; }
 
-		/// <remarks/>
-		[SearchParameter("filter")]
-		public Filter.Order? FilterBy { get; set; }
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string DocumentNumber { get; set; }
 
-		/// <remarks/>
-		public enum DiscountType
-		{
-			/// <remarks/>
-			AMOUNT,
-			/// <remarks/>
-			PERCENT
-		}
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string ExternalInvoiceReference1 { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string ExternalInvoiceReference2 { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string OrderDate { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string OurReference { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string Project { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string Sent { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string YourReference { get; set; }
 
 		/// <remarks/>
 		public OrderConnector()
@@ -110,25 +88,24 @@ namespace FortnoxAPILibrary.Connectors
 			Resource = "orders";
 		}
 
-
 		/// <summary>
-		/// Gets an order
+		/// Find a order based on id
 		/// </summary>
-		/// <param name="documentNumber">The document number of the order to find</param>
-		/// <returns>An order</returns>
-		public Order Get(string documentNumber)
+		/// <param name="id">Identifier of the order to find</param>
+		/// <returns>The found order</returns>
+		public Order Get(int? id)
 		{
-			return BaseGet(documentNumber);
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
-		/// Updates an order
+		/// Updates a order
 		/// </summary>
 		/// <param name="order">The order to update</param>
 		/// <returns>The updated order</returns>
 		public Order Update(Order order)
 		{
-			return BaseUpdate(order, order.DocumentNumber);
+			return UpdateAsync(order).Result;
 		}
 
 		/// <summary>
@@ -138,7 +115,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created order</returns>
 		public Order Create(Order order)
 		{
-			return BaseCreate(order);
+			return CreateAsync(order).Result;
 		}
 
 		/// <summary>
@@ -147,64 +124,84 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of orders</returns>
 		public EntityCollection<OrderSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
-
+		
 		/// <summary>
-		/// Cancel an order
-		/// </summary>
-		/// <param name="documentNumber">The document number of the order to canceld</param>
-		/// <returns>The cancelled order</returns>
-		public Order Cancel(string documentNumber)
-		{
-			return DoAction(documentNumber, "cancel");
-		}
-
-		/// <summary>
-		/// Emails an order
-		/// </summary>
-		/// <param name="documentNumber">The document number of the order to be emailed</param>
-		public void Email(string documentNumber)
-		{
-			DoAction(documentNumber, "email");
-		}
-
-
-		/// <summary>
-		/// Print an order
-		/// </summary>
-		/// <param name="documentNumber">The document number of the order to print</param>
-		/// <param name="localPath">Where to save the printed order. If omitted the order will be set to printed (i.e Sent = true) and no pdf is returned. </param>
-		public void Print(string documentNumber, string localPath = "")
-		{
-			if (string.IsNullOrEmpty(localPath))
-			{
-				DoAction(documentNumber, "externalprint");
-			}
-			else
-			{
-				LocalPath = localPath;
-				DoAction(documentNumber, "print");
-			}
-		}
-
-		/// <summary>
-		/// Creates an invoice from the specified order
-		/// </summary>
-		/// <param name="documentNumber">The document number of the order to create invoice from</param>
+		/// Creates an invoice from the order
+		/// <param name="id"></param>
 		/// <returns></returns>
-		public Order CreateInvoice(string documentNumber)
+		/// </summary>
+		public Order CreateInvoice(int? id)
 		{
-			return DoAction(documentNumber, "createinvoice");
+			return DoAction(id.ToString(), Action.CreateInvoice);
+		}
+		
+		/// <summary>
+		/// Cancels an order
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Order Cancel(int? id)
+		{
+			return DoAction(id.ToString(), Action.Cancel);
+		}
+		
+		/// <summary>
+		/// Sends an e-mail to the customer with an attached PDF document of the invoice. You can use the field EmailInformation to customize the e-mail message on each invoice.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Order Email(int? id)
+		{
+			return DoAction(id.ToString(), Action.Email);
+		}
+		
+		/// <summary>
+		/// This action returns a PDF document with the current template that is used by the specific document. Note that this action also sets the field Sent as true.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public byte[] Print(int? id)
+		{
+			return DoDownloadAction(id.ToString(), Action.Print);
+		}
+		
+		/// <summary>
+		/// This action is used to set the field Sent as true from an external system without generating a PDF.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Order ExternalPrint(int? id)
+		{
+			return DoAction(id.ToString(), Action.ExternalPrint);
+		}
+		
+		/// <summary>
+		/// This action returns a PDF document with the current template that is used by the specific document. Apart from the action print, this action doesn’t set the field Sent as true.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public byte[] Preview(int? id)
+		{
+			return DoDownloadAction(id.ToString(), Action.Preview);
 		}
 
-        /// <summary>
-        /// Marks the document as externally printed
-        /// </summary>
-        /// <param name="documentNumber"></param>
-        public void ExternalPrint(string documentNumber)
-        {
-            DoAction(documentNumber, "externalprint");
-        }
+		public async Task<EntityCollection<OrderSubset>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task<Order> CreateAsync(Order order)
+		{
+			return await BaseCreate(order);
+		}
+		public async Task<Order> UpdateAsync(Order order)
+		{
+			return await BaseUpdate(order, order.DocumentNumber.ToString());
+		}
+		public async Task<Order> GetAsync(int? id)
+		{
+			return await BaseGet(id.ToString());
+		}
 	}
 }

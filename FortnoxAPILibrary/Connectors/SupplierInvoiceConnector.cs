@@ -1,99 +1,44 @@
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class SupplierInvoiceConnector : FinancialYearBasedEntityConnector<SupplierInvoice, EntityCollection<SupplierInvoiceSubset>, Sort.By.SupplierInvoice?>
+    public class SupplierInvoiceConnector : EntityConnector<SupplierInvoice, EntityCollection<SupplierInvoiceSubset>, Sort.By.SupplierInvoice?>, ISupplierInvoiceConnector
 	{
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
+	    /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter("filter")]
+		public Filter.SupplierInvoice? FilterBy { get; set; }
+
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string CostCenter { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string OCR { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string Project { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
         [SearchParameter]
 		public string SupplierNumber { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-        [SearchParameter]
-		public string SupplierName { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string OrganisationNumber { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string Phone { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-        [SearchParameter]
-		public string ZipCode { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string City { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-        public string Email { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-        public string OCR { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-        public string InvoiceNumber { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-        public string SerialNumber { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-        public string CostCenter { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-        public string Project { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-        public string OurReference { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-        public string YourReference { get; set; }
-
-        /// <remarks/>
-        [SearchParameter("filter")]
-        public Filter.SupplierInvoice? FilterBy { get; set; }
 
 		/// <remarks/>
 		public SupplierInvoiceConnector()
@@ -101,94 +46,110 @@ namespace FortnoxAPILibrary.Connectors
 			Resource = "supplierinvoices";
 		}
 
-
 		/// <summary>
-		/// Get a supplier invoice based on document number
+		/// Find a supplierInvoice based on id
 		/// </summary>
-		/// <param name="documentNumber">The document number to find</param>
-		/// <returns></returns>
-		public SupplierInvoice Get(string documentNumber)
+		/// <param name="id">Identifier of the supplierInvoice to find</param>
+		/// <returns>The found supplierInvoice</returns>
+		public SupplierInvoice Get(long? id)
 		{
-			return BaseGet(documentNumber);
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
-		/// Updates a supplier invoice
+		/// Updates a supplierInvoice
 		/// </summary>
-		/// <param name="supplierInvoice">the supplier invoice to update</param>
-		/// <returns></returns>
+		/// <param name="supplierInvoice">The supplierInvoice to update</param>
+		/// <returns>The updated supplierInvoice</returns>
 		public SupplierInvoice Update(SupplierInvoice supplierInvoice)
 		{
-			return BaseUpdate(supplierInvoice, supplierInvoice.GivenNumber);
+			return UpdateAsync(supplierInvoice).Result;
 		}
 
 		/// <summary>
-		/// Create a new supplier invoice
+		/// Creates a new supplierInvoice
 		/// </summary>
-		/// <param name="supplierInvoice">The supplier invoice to create</param>
-		/// <returns>The created supplier invoice</returns>
+		/// <param name="supplierInvoice">The supplierInvoice to create</param>
+		/// <returns>The created supplierInvoice</returns>
 		public SupplierInvoice Create(SupplierInvoice supplierInvoice)
 		{
-			return BaseCreate(supplierInvoice);
+			return CreateAsync(supplierInvoice).Result;
 		}
 
 		/// <summary>
-		/// Gets at list of supplier invoices
+		/// Gets a list of supplierInvoices
 		/// </summary>
-		/// <returns>A list of supplier invoices</returns>
+		/// <returns>A list of supplierInvoices</returns>
 		public EntityCollection<SupplierInvoiceSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
-
+		
 		/// <summary>
-		/// Bookkeeps a supplier invoice
-		/// </summary>
-		/// <param name="documentNumber">The document number of the invoice to bookkeep.</param>
-		/// <returns>The bookkept invoice</returns>
-		public SupplierInvoice Bookkeep(string documentNumber)
-		{
-			return DoAction(documentNumber, "bookkeep");
-		}
-
-		/// <summary>
-		/// Cancels a supplier invoice
-		/// </summary>
-		/// <param name="documentNumber">The document number of the invoice to be cancelled</param>
-		/// <returns>The cancelled invoice</returns>
-		public SupplierInvoice Cancel(string documentNumber)
-		{
-			return DoAction(documentNumber, "cancel");
-		}
-
-		/// <summary>
-		/// Credits a supplier invoice
-		/// </summary>
-		/// <param name="documentNumber">The document number of the supplier invoice to credit</param>
-		/// <returns>The credited supplier invoice</returns>
-		public SupplierInvoice Credit(string documentNumber)
-		{
-			return DoAction(documentNumber, "credit");
-		}
-
-		/// <summary>
-		/// Approves a payment
-		/// </summary>
-		/// <param name="documentNumber">The doucment number of the supplier invoice to approve</param>
+		/// Bookkeeps the supplier invoice
+		/// <param name="id"></param>
 		/// <returns></returns>
-		public SupplierInvoice ApprovalPayment(string documentNumber)
+		/// </summary>
+		public SupplierInvoice Bookkeep(long? id)
 		{
-			return DoAction(documentNumber, "approvalpayment");
+			return DoAction(id.ToString(), Action.Bookkeep);
+		}
+		
+		/// <summary>
+		/// Cancels the supplier invoice
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public SupplierInvoice Cancel(long? id)
+		{
+			return DoAction(id.ToString(), Action.Cancel);
+		}
+		
+		/// <summary>
+		/// Creates a credit of the supplier invoice
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public SupplierInvoice Credit(long? id)
+		{
+			return DoAction(id.ToString(), Action.Credit);
+		}
+		
+		/// <summary>
+		/// Approval of payment of the supplier invoice
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public SupplierInvoice ApprovalPayment(long? id)
+		{
+			return DoAction(id.ToString(), Action.ApprovalPayment);
+		}
+		
+		/// <summary>
+		/// Approval of bookkeep of the supplier invoice
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public SupplierInvoice ApprovalBookkeep(long? id)
+		{
+			return DoAction(id.ToString(), Action.ApprovalBookkeep);
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="documentNumber"></param>
-		/// <returns></returns>
-		public SupplierInvoice ApprovalBookkeep(string documentNumber)
+		public async Task<EntityCollection<SupplierInvoiceSubset>> FindAsync()
 		{
-			return DoAction(documentNumber, "approvalbookkeep");
+			return await BaseFind();
+		}
+		public async Task<SupplierInvoice> CreateAsync(SupplierInvoice supplierInvoice)
+		{
+			return await BaseCreate(supplierInvoice);
+		}
+		public async Task<SupplierInvoice> UpdateAsync(SupplierInvoice supplierInvoice)
+		{
+			return await BaseUpdate(supplierInvoice, supplierInvoice.GivenNumber.ToString());
+		}
+		public async Task<SupplierInvoice> GetAsync(long? id)
+		{
+			return await BaseGet(id.ToString());
 		}
 	}
 }

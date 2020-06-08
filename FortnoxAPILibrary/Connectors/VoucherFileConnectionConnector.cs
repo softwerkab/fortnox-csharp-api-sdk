@@ -1,27 +1,37 @@
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
-    public class VoucherFileConnectionConnector : EntityConnector<VoucherFileConnection, EntityCollection<VoucherFileConnectionSubset>, Sort.By.VoucherFileConnection?>
+	/// <remarks/>
+	public class VoucherFileConnectionConnector : EntityConnector<VoucherFileConnection, EntityCollection<VoucherFileConnection>, Sort.By.VoucherFileConnection?>, IVoucherFileConnectionConnector
 	{
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-        [SearchParameter]
+		[SearchParameter("filter")]
+		public Filter.VoucherFileConnection? FilterBy { get; set; }
+
+
+		/// <summary>
+		/// Use with Find() to limit the search result
+		/// </summary>
+		[SearchParameter]
 		public string VoucherDescription { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-        [SearchParameter]
+		[SearchParameter]
 		public string VoucherNumber { get; set; }
 
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
-        [SearchParameter]
+		[SearchParameter]
 		public string VoucherSeries { get; set; }
 
 		/// <remarks/>
@@ -31,41 +41,58 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Get a voucher file connection based on fileId
+		/// Find a voucherFileConnection based on id
 		/// </summary>
-		/// <param name="fileId">The id of the file to find.</param>
-		/// <returns>The found voucher file connection</returns>
-		public VoucherFileConnection Get(string fileId)
+		/// <param name="id">Identifier of the voucherFileConnection to find</param>
+		/// <returns>The found voucherFileConnection</returns>
+		public VoucherFileConnection Get(string id)
 		{
-			return BaseGet(fileId);
+			return GetAsync(id).Result;
 		}
-
+		
 		/// <summary>
-		/// Creates a new connection between a file and a voucher.
+		/// Creates a new voucherFileConnection
 		/// </summary>
-		/// <param name="voucherFileConnection">The voucher file connection to create</param>
-		/// <returns>The created voucher file connection</returns>
+		/// <param name="voucherFileConnection">The voucherFileConnection to create</param>
+		/// <returns>The created voucherFileConnection</returns>
 		public VoucherFileConnection Create(VoucherFileConnection voucherFileConnection)
 		{
-			return BaseCreate(voucherFileConnection);
+			return CreateAsync(voucherFileConnection).Result;
 		}
 
 		/// <summary>
-		/// Deletes a connected file from a voucher
+		/// Deletes a voucherFileConnection
 		/// </summary>
-		/// <param name="fileId"></param>
-		public void Delete(string fileId)
+		/// <param name="id">Identifier of the voucherFileConnection to delete</param>
+		public void Delete(string id)
 		{
-			BaseDelete(fileId);
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
-		/// Gets a list of VoucherFile Connections
+		/// Gets a list of voucherFileConnections
 		/// </summary>
-		/// <returns></returns>
-		public EntityCollection<VoucherFileConnectionSubset> Find()
+		/// <returns>A list of voucherFileConnections</returns>
+		public EntityCollection<VoucherFileConnection> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
+		}
+
+		public async Task<EntityCollection<VoucherFileConnection>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task DeleteAsync(string id)
+		{
+			await BaseDelete(id);
+		}
+		public async Task<VoucherFileConnection> CreateAsync(VoucherFileConnection voucherFileConnection)
+		{
+			return await BaseCreate(voucherFileConnection);
+		}
+		public async Task<VoucherFileConnection> GetAsync(string id)
+		{
+			return await BaseGet(id);
 		}
 	}
 }

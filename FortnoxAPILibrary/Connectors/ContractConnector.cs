@@ -1,132 +1,147 @@
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ContractConnector : FinancialYearBasedEntityConnector<Contract, EntityCollection<ContractSubset>, Sort.By.Contract>
-    {
-        /// <remarks/>
-        [SearchParameter]
-        public string DocumentNumber { get; set; }
-
-        /// <remarks/>
-        [SearchParameter]
-        public string CustomerNumber { get; set; }
-
-        /// <remarks/>
-        [SearchParameter]
-        public string CustomerName { get; set; }
-
-        /// <remarks/>
-        [SearchParameter]
-        public string TemplateNumber { get; set; }
-
-        /// <remarks/>
-        [SearchParameter]
-        public string ContractLength { get; set; }
-
-        /// <remarks/>
-        [SearchParameter]
-        public string InvoiceInterval { get; set; }
-
-        /// <remarks/>
-        public string LastInvoiceDate { get; set; }
-
-        /// <remarks/>
-        [SearchParameter]
-        public string Total { get; set; }
-
-        /// <remarks/>
-        [SearchParameter]
-        public string InvoicesRemaining { get; set; }
-
-        /// <remarks/>
-        [SearchParameter]
-        public string PeriodStart { get; set; }
-
-        /// <remarks/>
-        [SearchParameter]
-        public string PeriodEnd { get; set; }
-
-        /// <remarks/>
+    public class ContractConnector : EntityConnector<Contract, EntityCollection<ContractSubset>, Sort.By.Contract?>, IContractConnector
+	{
+	    /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
         [SearchParameter("filter")]
-        public Filter.Contract? FilterBy { get; set; }
+		public Filter.Contract? FilterBy { get; set; }
 
-        /// <remarks/>
-        public ContractConnector()
-        {
-            Resource = "contracts";
-        }
-        
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string CustomerNumber { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string DocumentNumber { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string InvoicesRemaining { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string PeriodEnd { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string PeriodStart { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string TemplateNumber { get; set; }
+
+		/// <remarks/>
+		public ContractConnector()
+		{
+			Resource = "contracts";
+		}
+
 		/// <summary>
-		/// Find a Contract
+		/// Find a contract based on id
 		/// </summary>
-		/// <param name="documentNumber">The document number of the Contract to find</param>
-		/// <returns>The found Contract</returns>
-        public Contract Get(string documentNumber)
-        {
-            return BaseGet(documentNumber);
-        }
+		/// <param name="id">Identifier of the contract to find</param>
+		/// <returns>The found contract</returns>
+		public Contract Get(int? id)
+		{
+			return GetAsync(id).Result;
+		}
 
-        /// <summary>
-        /// Updates a Contract
-        /// </summary>
-        /// <param name="contract">The Contract to update</param>
-        /// <returns>The updated Contract</returns>
-        public Contract Update(Contract contract)
-        {
-            return BaseUpdate(contract, contract.DocumentNumber);
-        }
+		/// <summary>
+		/// Updates a contract
+		/// </summary>
+		/// <param name="contract">The contract to update</param>
+		/// <returns>The updated contract</returns>
+		public Contract Update(Contract contract)
+		{
+			return UpdateAsync(contract).Result;
+		}
 
-        /// <summary>
-        /// Create a new Contract
-        /// </summary>
-        /// <param name="contract">The Contract to create</param>
-        /// <returns>The created Contract</returns>
-        public Contract Create(Contract contract)
-        {
-            return BaseCreate(contract);
-        }
+		/// <summary>
+		/// Creates a new contract
+		/// </summary>
+		/// <param name="contract">The contract to create</param>
+		/// <returns>The created contract</returns>
+		public Contract Create(Contract contract)
+		{
+			return CreateAsync(contract).Result;
+		}
 
-        /// <summary>
-        /// Gets at list of Contracts
-        /// </summary>
-        /// <returns>A list of Contracts</returns>
-        public EntityCollection<ContractSubset> Find()
-        {
-            return BaseFind();
-        }
+		/// <summary>
+		/// Gets a list of contracts
+		/// </summary>
+		/// <returns>A list of contracts</returns>
+		public EntityCollection<ContractSubset> Find()
+		{
+			return FindAsync().Result;
+		}
+		
+		/// <summary>
+		/// Set a contract as finished
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Contract Finish(int? id)
+		{
+			return DoAction(id.ToString(), Action.Finish);
+		}
+		
+		/// <summary>
+		/// Create invoice from contract
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Contract CreateInvoice(int? id)
+		{
+			return DoAction(id.ToString(), Action.CreateInvoice);
+		}
+		
+		/// <summary>
+		/// Increases the invoice count without creating an invoice
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Contract IncreaseInvoiceCount(int? id)
+		{
+			return DoAction(id.ToString(), Action.IncreaseInvoiceCount);
+		}
 
-        /// <summary>
-        /// Finish a contract
-        /// </summary>
-        /// <param name="documentNumber">The document number of the contract to finish.</param>
-        /// <returns>The finished contract</returns>
-        public Contract Finish(string documentNumber)
-        {
-            return DoAction(documentNumber, "finish");
-        }
-
-        /// <summary>
-        /// Create an invoice from a contract
-        /// </summary>
-        /// <param name="documentNumber">The document number of the contract to create an Invoice from.</param>
-        /// <returns>The Contract that the Invoice was created from</returns>
-        public Contract CreateInvoice(string documentNumber)
-        {
-            return DoAction(documentNumber, "createinvoice");
-        }
-
-        /// <summary>
-        /// Increase the Invoice count for the Contract
-        /// </summary>
-        /// <param name="documentNumber">The document number of the Contract to increase the Invoice.</param>
-        /// <returns>The Contract that the Invoice was created from</returns>
-        public Contract IncreaseInvoiceCount(string documentNumber)
-        {
-            return DoAction(documentNumber, "increaseinvoicecount");
-        }
-    }
+		public async Task<EntityCollection<ContractSubset>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task<Contract> CreateAsync(Contract contract)
+		{
+			return await BaseCreate(contract);
+		}
+		public async Task<Contract> UpdateAsync(Contract contract)
+		{
+			return await BaseUpdate(contract, contract.DocumentNumber.ToString());
+		}
+		public async Task<Contract> GetAsync(int? id)
+		{
+			return await BaseGet(id.ToString());
+		}
+	}
 }

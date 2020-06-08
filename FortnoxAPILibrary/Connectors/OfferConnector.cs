@@ -1,84 +1,69 @@
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class OfferConnector : FinancialYearBasedEntityConnector<Offer, EntityCollection<OfferSubset>, Sort.By.Offer?>
+    public class OfferConnector : EntityConnector<Offer, EntityCollection<OfferSubset>, Sort.By.Offer?>, IOfferConnector
 	{
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string FromDate { get; set; }
+	    /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter("filter")]
+		public Filter.Offer? FilterBy { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string ToDate { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string CostCenter { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string CustomerName { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		public string CustomerNumber { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string DocumentNumber { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string OurReference { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string Project { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string YourReference { get; set; }
 
         /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
         [SearchParameter]
-        public string Label { get; set; }
+		public string CostCenter { get; set; }
 
-		/// <remarks/>
-		[SearchParameter]
-		public bool? Sent { get; set; }
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string CustomerName { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		public bool? NotCompleted { get; set; }
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string CustomerNumber { get; set; }
 
-		/// <remarks/>
-		[SearchParameter("filter")]
-		public Filter.Offer? FilterBy { get; set; }
-        
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string DocumentNumber { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string OfferDate { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string OurReference { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string Project { get; set; }
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter]
+		public string YourReference { get; set; }
+
 		/// <remarks/>
 		public OfferConnector()
 		{
@@ -86,33 +71,33 @@ namespace FortnoxAPILibrary.Connectors
 		}
 
 		/// <summary>
-		/// Gets an offer
+		/// Find a offer based on id
 		/// </summary>
-		/// <param name="documentNumber">The document number of the offer to find</param>
-		/// <returns>An offer</returns>
-		public Offer Get(string documentNumber)
+		/// <param name="id">Identifier of the offer to find</param>
+		/// <returns>The found offer</returns>
+		public Offer Get(int? id)
 		{
-			return BaseGet(documentNumber);
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
-		/// Updates an offer
+		/// Updates a offer
 		/// </summary>
 		/// <param name="offer">The offer to update</param>
 		/// <returns>The updated offer</returns>
 		public Offer Update(Offer offer)
 		{
-			return BaseUpdate(offer, offer.DocumentNumber);
+			return UpdateAsync(offer).Result;
 		}
 
 		/// <summary>
-		/// Create a new offer
+		/// Creates a new offer
 		/// </summary>
 		/// <param name="offer">The offer to create</param>
 		/// <returns>The created offer</returns>
 		public Offer Create(Offer offer)
 		{
-			return BaseCreate(offer);
+			return CreateAsync(offer).Result;
 		}
 
 		/// <summary>
@@ -121,63 +106,84 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of offers</returns>
 		public EntityCollection<OfferSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
 		}
-
+		
 		/// <summary>
-		/// Cancel an offer
-		/// </summary>
-		/// <param name="documentNumber">The document number of the offer to cancel</param>
-		/// <returns>The cancelled offer</returns>
-		public Offer Cancel(string documentNumber)
-		{
-			return DoAction(documentNumber, "cancel");
-		}
-
-		/// <summary>
-		/// Emails an offer
-		/// </summary>
-		/// <param name="documentNumber">The document number of the offer to be emailed</param>
-		public void Email(string documentNumber)
-		{
-			DoAction(documentNumber, "email");
-		}
-
-		/// <summary>
-		/// Prints an offer
-		/// </summary>
-		/// <param name="documentNumber">The document number of the offer to print</param>
-		/// <param name="localPath">Where to save the printed offer. If omitted the offer will be set to printed (i.e Sent = true) and no pdf is returned. </param>
-		public void Print(string documentNumber, string localPath = "")
-		{
-			if (string.IsNullOrEmpty(localPath))
-			{
-				DoAction(documentNumber, "externalprint");
-			}
-			else
-			{
-				LocalPath = localPath;
-				DoAction(documentNumber, "print");
-			}
-		}
-
-        /// <summary>
-        /// Marks the document as externally printed
-        /// </summary>
-        /// <param name="documentNumber"></param>
-        public void ExternalPrint(string documentNumber)
-        {
-            DoAction(documentNumber, "externalprint");
-        }
-
-		/// <summary>
-		/// Creates an order from the specified offer
-		/// </summary>
-		/// <param name="documentNumber">The document number of the offer to create order from</param>
+		/// Creates an order from the offer
+		/// <param name="id"></param>
 		/// <returns></returns>
-		public Offer CreateOrder(string documentNumber)
+		/// </summary>
+		public Offer CreateOrder(int? id)
 		{
-			return DoAction(documentNumber, "createorder");
+			return DoAction(id.ToString(), Action.CreateOrder);
+		}
+		
+		/// <summary>
+		/// Cancels an offer
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Offer Cancel(int? id)
+		{
+			return DoAction(id.ToString(), Action.Cancel);
+		}
+		
+		/// <summary>
+		/// Sends an e-mail to the customer with an attached PDF document of the offer. You can use the fieldEmailInformation to customize the e-mail message on each offer.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Offer Email(int? id)
+		{
+			return DoAction(id.ToString(), Action.Email);
+		}
+		
+		/// <summary>
+		/// This action returns a PDF document with the current template that is used by the specific document. Note that this action also sets the field Sent as true.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public byte[] Print(int? id)
+		{
+			return DoDownloadAction(id.ToString(), Action.Print);
+		}
+		
+		/// <summary>
+		/// This action is used to set the field Sent as true from an external system without generating a PDF.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public Offer ExternalPrint(int? id)
+		{
+			return DoAction(id.ToString(), Action.ExternalPrint);
+		}
+		
+		/// <summary>
+		/// This action returns a PDF document with the current template that is used by the specific document. Apart from the action print, this action doesn’t set the field Sent as true.
+		/// <param name="id"></param>
+		/// <returns></returns>
+		/// </summary>
+		public byte[] Preview(int? id)
+		{
+			return DoDownloadAction(id.ToString(), Action.Preview);
+		}
+
+		public async Task<EntityCollection<OfferSubset>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task<Offer> CreateAsync(Offer offer)
+		{
+			return await BaseCreate(offer);
+		}
+		public async Task<Offer> UpdateAsync(Offer offer)
+		{
+			return await BaseUpdate(offer, offer.DocumentNumber.ToString());
+		}
+		public async Task<Offer> GetAsync(int? id)
+		{
+			return await BaseGet(id.ToString());
 		}
 	}
 }

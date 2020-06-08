@@ -1,15 +1,24 @@
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class AccountConnector : FinancialYearBasedEntityConnector<Account, EntityCollection<AccountSubset>, Sort.By.Account?>
+    public class AccountConnector : EntityConnector<Account, EntityCollection<AccountSubset>, Sort.By.Account?>, IAccountConnector
 	{
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
+	    /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter("filter")]
+		public Filter.Account? FilterBy { get; set; }
+
+
+        /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
         [SearchParameter]
 		public string SRU { get; set; }
 
@@ -18,54 +27,73 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			Resource = "accounts";
 		}
-
 		/// <summary>
-		/// Find an account based on account number
+		/// Find a account based on id
 		/// </summary>
-		/// <param name="accountNumber">Tha account number to find</param>
+		/// <param name="id">Identifier of the account to find</param>
 		/// <returns>The found account</returns>
-		public Account Get(string accountNumber)
+		public Account Get(int? id)
 		{
-			return BaseGet(accountNumber);
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
-		/// Updates an account
+		/// Updates a account
 		/// </summary>
-		/// <param name="account">Account to update</param>
+		/// <param name="account">The account to update</param>
 		/// <returns>The updated account</returns>
 		public Account Update(Account account)
 		{
-			return BaseUpdate(account, account.Number);
+			return UpdateAsync(account).Result;
 		}
 
 		/// <summary>
-		/// Create a new account
+		/// Creates a new account
 		/// </summary>
 		/// <param name="account">The account to create</param>
 		/// <returns>The created account</returns>
 		public Account Create(Account account)
 		{
-			return BaseCreate(account);
+			return CreateAsync(account).Result;
 		}
 
 		/// <summary>
-		/// Deletes an account
+		/// Deletes a account
 		/// </summary>
-		/// <param name="accountNumber">The account number to delete</param>
-		/// <returns>If the account was deleted or not</returns>
-		public void Delete(string accountNumber)
+		/// <param name="id">Identifier of the account to delete</param>
+		public void Delete(int? id)
 		{
-			BaseDelete(accountNumber);
+			DeleteAsync(id).Wait();
 		}
 
 		/// <summary>
-		/// Gets at list of accounts
+		/// Gets a list of accounts
 		/// </summary>
 		/// <returns>A list of accounts</returns>
 		public EntityCollection<AccountSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
+		}
+
+		public async Task<EntityCollection<AccountSubset>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task DeleteAsync(int? id)
+		{
+			await BaseDelete(id.ToString());
+		}
+		public async Task<Account> CreateAsync(Account account)
+		{
+			return await BaseCreate(account);
+		}
+		public async Task<Account> UpdateAsync(Account account)
+		{
+			return await BaseUpdate(account, account.Number.ToString());
+		}
+		public async Task<Account> GetAsync(int? id)
+		{
+			return await BaseGet(id.ToString());
 		}
 	}
 }

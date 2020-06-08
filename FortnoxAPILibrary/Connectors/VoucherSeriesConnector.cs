@@ -1,56 +1,80 @@
 using FortnoxAPILibrary.Entities;
 
+using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Global
 
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class VoucherSeriesConnector : FinancialYearBasedEntityConnector<VoucherSeries, EntityCollection<VoucherSeriesSubset>, Sort.By.VoucherSeries?>
+    public class VoucherSeriesConnector : EntityConnector<VoucherSeries, EntityCollection<VoucherSeriesSubset>, Sort.By.VoucherSeries?>, IVoucherSeriesConnector
 	{
+	    /// <summary>
+        /// Use with Find() to limit the search result
+        /// </summary>
+        [SearchParameter("filter")]
+		public Filter.VoucherSeries? FilterBy { get; set; }
+
+
 		/// <remarks/>
 		public VoucherSeriesConnector()
 		{
 			Resource = "voucherseries";
 		}
-
 		/// <summary>
-		/// Find a Voucher series by code
+		/// Find a voucherSeries based on id
 		/// </summary>
-		/// <param name="code">The voucher series code to find</param>
-		/// <returns>The found voucher series</returns>
-		public VoucherSeries Get(string code)
+		/// <param name="id">Identifier of the voucherSeries to find</param>
+		/// <returns>The found voucherSeries</returns>
+		public VoucherSeries Get(string id)
 		{
-			return BaseGet(code);
+			return GetAsync(id).Result;
 		}
 
 		/// <summary>
-		/// Updates a vocuher series
+		/// Updates a voucherSeries
 		/// </summary>
-		/// <param name="voucherSeries">The voucher series to update</param>
-		/// <returns>The updated voucher series</returns>
+		/// <param name="voucherSeries">The voucherSeries to update</param>
+		/// <returns>The updated voucherSeries</returns>
 		public VoucherSeries Update(VoucherSeries voucherSeries)
 		{
-
-			return BaseUpdate(voucherSeries, voucherSeries.Code);
+			return UpdateAsync(voucherSeries).Result;
 		}
 
 		/// <summary>
-		/// Creates a new voucher series
+		/// Creates a new voucherSeries
 		/// </summary>
-		/// <param name="voucherseries">The voucher series to create</param>
-		/// <returns>The created voucher series</returns>
-		public VoucherSeries Create(VoucherSeries voucherseries)
+		/// <param name="voucherSeries">The voucherSeries to create</param>
+		/// <returns>The created voucherSeries</returns>
+		public VoucherSeries Create(VoucherSeries voucherSeries)
 		{
-			return BaseCreate(voucherseries);
+			return CreateAsync(voucherSeries).Result;
 		}
 
-		/// <summary>
-		/// Gets a list of voucher series
+        /// <summary>
+		/// Gets a list of voucherSeriess
 		/// </summary>
-		/// <returns>A list of voucher series</returns>
+		/// <returns>A list of voucherSeriess</returns>
 		public EntityCollection<VoucherSeriesSubset> Find()
 		{
-			return BaseFind();
+			return FindAsync().Result;
+		}
+
+		public async Task<EntityCollection<VoucherSeriesSubset>> FindAsync()
+		{
+			return await BaseFind();
+		}
+		public async Task<VoucherSeries> CreateAsync(VoucherSeries voucherSeries)
+		{
+			return await BaseCreate(voucherSeries);
+		}
+		public async Task<VoucherSeries> UpdateAsync(VoucherSeries voucherSeries)
+		{
+			return await BaseUpdate(voucherSeries, voucherSeries.Code);
+		}
+		public async Task<VoucherSeries> GetAsync(string id)
+		{
+			return await BaseGet(id);
 		}
 	}
 }
