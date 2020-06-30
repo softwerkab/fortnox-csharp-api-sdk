@@ -11,11 +11,14 @@ namespace FortnoxAPILibrary.Connectors
         //Error Handling
         bool HasError { get; }
         ErrorInformation Error { get; }
+    }
+
+    public interface IEntityConnector : IConnector
+    {
         //Base search params
         int? Limit { get; set; }
         DateTime? LastModified { get; set; }
         int? Page { get; set; }
         int? Offset { get; set; }
-
     }
 }

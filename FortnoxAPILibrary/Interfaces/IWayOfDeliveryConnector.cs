@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IWayOfDeliveryConnector : IConnector
+    public interface IWayOfDeliveryConnector : IEntityConnector
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.WayOfDelivery? SortBy { get; set; }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface ISalaryTransactionConnector : IConnector
+    public interface ISalaryTransactionConnector : IEntityConnector
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.SalaryTransaction? SortBy { get; set; }

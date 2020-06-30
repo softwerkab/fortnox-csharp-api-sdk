@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IPrintTemplateConnector : IConnector
+    public interface IPrintTemplateConnector : IEntityConnector
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.PrintTemplate? SortBy { get; set; }

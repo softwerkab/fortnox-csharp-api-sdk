@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface ISupplierInvoiceExternalURLConnectionConnector : IConnector
+    public interface ISupplierInvoiceExternalURLConnectionConnector : IEntityConnector
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.SupplierInvoiceExternalURLConnection? SortBy { get; set; }

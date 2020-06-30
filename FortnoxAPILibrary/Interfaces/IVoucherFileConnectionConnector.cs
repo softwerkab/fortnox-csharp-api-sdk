@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IVoucherFileConnectionConnector : IConnector
+    public interface IVoucherFileConnectionConnector : IEntityConnector
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.VoucherFileConnection? SortBy { get; set; }

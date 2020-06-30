@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface ISupplierInvoiceAccrualConnector : IConnector
+    public interface ISupplierInvoiceAccrualConnector : IEntityConnector
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.SupplierInvoiceAccrual? SortBy { get; set; }

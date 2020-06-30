@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IPredefinedAccountsConnector : IConnector
+    public interface IPredefinedAccountsConnector : IEntityConnector
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.PredefinedAccounts? SortBy { get; set; }

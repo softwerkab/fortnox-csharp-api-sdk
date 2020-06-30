@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface ITrustedEmailSendersConnector : IConnector
+    public interface ITrustedEmailSendersConnector : IEntityConnector
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.TrustedEmailSenders? SortBy { get; set; }

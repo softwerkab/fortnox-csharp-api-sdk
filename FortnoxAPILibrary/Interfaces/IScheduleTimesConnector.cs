@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IScheduleTimesConnector : IConnector
+    public interface IScheduleTimesConnector : IEntityConnector
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.ScheduleTimes? SortBy { get; set; }

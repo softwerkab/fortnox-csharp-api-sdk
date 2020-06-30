@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IArticleFileConnectionConnector : IConnector
+    public interface IArticleFileConnectionConnector : IEntityConnector
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.ArticleFileConnection? SortBy { get; set; }

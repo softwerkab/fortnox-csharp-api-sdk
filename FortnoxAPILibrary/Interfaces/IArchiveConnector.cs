@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 // ReSharper disable UnusedMember.Global
 namespace FortnoxAPILibrary.Connectors
 {
-    public interface IArchiveConnector : IConnector
+    public interface IArchiveConnector : IEntityConnector
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.Archive? SortBy { get; set; }

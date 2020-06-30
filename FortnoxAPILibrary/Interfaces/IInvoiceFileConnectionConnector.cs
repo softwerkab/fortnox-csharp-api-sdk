@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IInvoiceFileConnectionConnector : IConnector
+    public interface IInvoiceFileConnectionConnector : IEntityConnector
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.InvoiceFileConnection? SortBy { get; set; }

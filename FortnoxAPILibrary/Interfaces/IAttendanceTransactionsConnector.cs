@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IAttendanceTransactionsConnector : IConnector
+    public interface IAttendanceTransactionsConnector : IEntityConnector
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.AttendanceTransactions? SortBy { get; set; }

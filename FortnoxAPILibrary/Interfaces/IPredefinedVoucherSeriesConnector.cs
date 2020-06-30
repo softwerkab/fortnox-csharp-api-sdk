@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IPredefinedVoucherSeriesConnector : IConnector
+    public interface IPredefinedVoucherSeriesConnector : IEntityConnector
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.PredefinedVoucherSeries? SortBy { get; set; }

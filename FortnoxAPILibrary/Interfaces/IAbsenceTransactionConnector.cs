@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public interface IAbsenceTransactionConnector : IConnector
+    public interface IAbsenceTransactionConnector : IEntityConnector
 	{
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.AbsenceTransaction? SortBy { get; set; }
