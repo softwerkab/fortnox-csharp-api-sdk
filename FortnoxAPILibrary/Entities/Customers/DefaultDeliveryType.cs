@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
@@ -10,5 +11,8 @@ namespace FortnoxAPILibrary.Entities
         Email,
         [EnumMember(Value = "PRINTSERVICE")]
         PrintService,
+        [Obsolete]
+        [EnumMember(Value = "ELECTRONICINVOICE")]
+        ElectronicInvoice
     }
 }

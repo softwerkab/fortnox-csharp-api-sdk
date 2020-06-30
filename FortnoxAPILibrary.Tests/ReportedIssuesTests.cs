@@ -182,5 +182,30 @@ namespace FortnoxAPILibrary.Tests
             connector.DeleteFile(fortnoxFile.Id);
             MyAssert.HasNoError(connector);
         }
+
+        [TestMethod]
+        public void Test_Issue95_fixed() //Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/95
+        {
+            //Arrange
+            //Creates a customer with ElectronicInvoice option for deliviery type
+            var connector = new CustomerConnector();
+            var tmpCustomer = connector.Create(new Customer()
+            {
+                Name = "TestCustomer",
+                DefaultDeliveryTypes = new DefaultDeliveryTypes()
+                {
+                    Invoice = DefaultDeliveryType.ElectronicInvoice
+                }
+            });
+            MyAssert.HasNoError(connector);
+
+            //Act && Assert
+            var customer = connector.Get(tmpCustomer.CustomerNumber);
+            MyAssert.HasNoError(connector);
+
+            //Clean
+            connector.Delete(tmpCustomer.CustomerNumber);
+            MyAssert.HasNoError(connector);
+        }
     }
 }
