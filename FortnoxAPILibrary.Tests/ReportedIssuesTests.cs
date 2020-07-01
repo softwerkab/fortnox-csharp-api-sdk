@@ -202,6 +202,7 @@ namespace FortnoxAPILibrary.Tests
             //Act && Assert
             var customer = connector.Get(tmpCustomer.CustomerNumber);
             MyAssert.HasNoError(connector);
+            Assert.AreEqual(DefaultDeliveryType.ElectronicInvoice, customer.DefaultDeliveryTypes.Invoice);
 
             //Clean
             connector.Delete(tmpCustomer.CustomerNumber);
