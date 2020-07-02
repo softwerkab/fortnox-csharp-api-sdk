@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> If the invoice is cancelled </summary>
         [ReadOnly]
-        [JsonProperty] //TODO: Check if "Cancelled" or "Cancel"
+        [JsonProperty("Cancel")]
         public bool? Cancelled { get; private set; }
 
         ///<summary> Cost Center </summary>

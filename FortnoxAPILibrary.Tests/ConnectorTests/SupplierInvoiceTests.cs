@@ -79,7 +79,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            //Add code to delete temporary resources
+            new CustomerConnector().Delete(tmpSupplier.SupplierNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 

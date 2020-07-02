@@ -208,5 +208,50 @@ namespace FortnoxAPILibrary.Tests
             connector.Delete(tmpCustomer.CustomerNumber);
             MyAssert.HasNoError(connector);
         }
+
+        [TestMethod]
+        public void Test_Issue96_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/96
+        {
+            #region Arrange
+            var tmpSupplier = new SupplierConnector().Create(new Supplier() { Name = "TmpSupplier" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
+            #endregion Arrange
+
+            var connector = new SupplierInvoiceConnector();
+
+            var createdInvoice = connector.Create(new SupplierInvoice()
+            {
+                SupplierNumber = tmpSupplier.SupplierNumber,
+                Comments = "InvoiceComments",
+                InvoiceDate = new DateTime(2010, 1, 1),
+                DueDate = new DateTime(2010, 2, 1),
+                SalesType = SalesType.Stock,
+                OCR = "123456789",
+                Total = 5000,
+                SupplierInvoiceRows = new List<SupplierInvoiceRow>()
+                {
+                    new SupplierInvoiceRow() {ArticleNumber = tmpArticle.ArticleNumber, Quantity = 10, Price = 100},
+                    new SupplierInvoiceRow() {ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100},
+                    new SupplierInvoiceRow() {ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100}
+                }
+            });
+            MyAssert.HasNoError(connector);
+            Assert.AreEqual(false, createdInvoice.Cancelled);
+
+            var retrievedInvoice = connector.Get(createdInvoice.GivenNumber);
+            MyAssert.HasNoError(connector);
+            Assert.AreEqual(false, retrievedInvoice.Cancelled);
+
+            connector.LastModified = DateTime.Today;
+            var invoiceSubsets = connector.Find().Entities;
+            MyAssert.HasNoError(connector);
+            foreach (var supplierInvoiceSubset in invoiceSubsets)
+                Assert.IsNotNull(supplierInvoiceSubset.Cancelled);
+
+            #region Delete arranged resources
+            new CustomerConnector().Delete(tmpSupplier.SupplierNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            #endregion Delete arranged resources
+        }
     }
 }
