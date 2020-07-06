@@ -63,7 +63,7 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task DeleteAsync(string id)
 		{
-			await BaseDelete(id);
+			await BaseDelete(id).ConfigureAwait(false);
 		}
 		public async Task<InvoiceFileConnection> CreateAsync(InvoiceFileConnection invoiceFileConnection)
         {
@@ -77,7 +77,7 @@ namespace FortnoxAPILibrary.Connectors
             };
 
             var entity = new List<InvoiceFileConnection>() { invoiceFileConnection };
-            var result = await DoEntityRequest(entity);
+            var result = await DoEntityRequest(entity).ConfigureAwait(false);
             return result?.FirstOrDefault();
         }
 
@@ -97,7 +97,7 @@ namespace FortnoxAPILibrary.Connectors
                 IncludeOnSend = invoiceFileConnection.IncludeOnSend
             };
 
-            var result = await DoEntityRequest(limitedEntity);
+            var result = await DoEntityRequest(limitedEntity).ConfigureAwait(false);
             return result;
         }
 
@@ -116,7 +116,7 @@ namespace FortnoxAPILibrary.Connectors
                 ResponseType = RequestResponseType.JSON
             };
 
-            var result = await DoEntityRequest<List<InvoiceFileConnection>>();
+            var result = await DoEntityRequest<List<InvoiceFileConnection>>().ConfigureAwait(false);
             return result;
         }
     }

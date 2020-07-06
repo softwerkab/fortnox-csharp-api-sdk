@@ -77,23 +77,23 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<TaxReductionSubset>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{
-			await BaseDelete(id);
+			await BaseDelete(id).ConfigureAwait(false);
 		}
 		public async Task<TaxReduction> CreateAsync(TaxReduction taxReduction)
 		{
-			return await BaseCreate(taxReduction);
+			return await BaseCreate(taxReduction).ConfigureAwait(false);
 		}
 		public async Task<TaxReduction> UpdateAsync(TaxReduction taxReduction)
 		{
-			return await BaseUpdate(taxReduction, taxReduction.Id);
+			return await BaseUpdate(taxReduction, taxReduction.Id).ConfigureAwait(false);
 		}
 		public async Task<TaxReduction> GetAsync(string id)
 		{
-			return await BaseGet(id);
+			return await BaseGet(id).ConfigureAwait(false);
 		}
 	}
 }

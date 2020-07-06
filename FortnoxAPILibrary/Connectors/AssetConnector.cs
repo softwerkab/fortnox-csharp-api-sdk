@@ -84,17 +84,17 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<AssetSubset>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{
-			await BaseDelete(id);
+			await BaseDelete(id).ConfigureAwait(false);
 		}
 		public async Task<Asset> CreateAsync(Asset asset)
         {
             FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
 
-            var result = await BaseCreate(asset);
+            var result = await BaseCreate(asset).ConfigureAwait(false);
 
             FixResponseContent = null;
             return result;
@@ -105,7 +105,7 @@ namespace FortnoxAPILibrary.Connectors
             asset.Id = null;
             FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
 
-            var result = await BaseUpdate(asset, id);
+            var result = await BaseUpdate(asset, id).ConfigureAwait(false);
 
             FixResponseContent = null;
             asset.Id = id;
@@ -116,7 +116,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
             FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
 
-            var result = await BaseGet(id);
+            var result = await BaseGet(id).ConfigureAwait(false);
 
             FixResponseContent = null;
             return result;

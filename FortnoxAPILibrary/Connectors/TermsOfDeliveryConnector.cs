@@ -77,23 +77,23 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<TermsOfDelivery>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{
-			await BaseDelete(id);
+			await BaseDelete(id).ConfigureAwait(false);
 		}
 		public async Task<TermsOfDelivery> CreateAsync(TermsOfDelivery termsOfDelivery)
 		{
-			return await BaseCreate(termsOfDelivery);
+			return await BaseCreate(termsOfDelivery).ConfigureAwait(false);
 		}
 		public async Task<TermsOfDelivery> UpdateAsync(TermsOfDelivery termsOfDelivery)
 		{
-			return await BaseUpdate(termsOfDelivery, termsOfDelivery.Code);
+			return await BaseUpdate(termsOfDelivery, termsOfDelivery.Code).ConfigureAwait(false);
 		}
 		public async Task<TermsOfDelivery> GetAsync(string id)
 		{
-			return await BaseGet(id);
+			return await BaseGet(id).ConfigureAwait(false);
 		}
 	}
 }

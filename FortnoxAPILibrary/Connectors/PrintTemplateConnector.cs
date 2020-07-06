@@ -32,7 +32,7 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<PrintTemplate>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 	}
 }

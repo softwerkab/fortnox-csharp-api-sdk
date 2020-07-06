@@ -77,23 +77,23 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<ModeOfPayment>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{
-			await BaseDelete(id);
+			await BaseDelete(id).ConfigureAwait(false);
 		}
 		public async Task<ModeOfPayment> CreateAsync(ModeOfPayment modeOfPayment)
 		{
-			return await BaseCreate(modeOfPayment);
+			return await BaseCreate(modeOfPayment).ConfigureAwait(false);
 		}
 		public async Task<ModeOfPayment> UpdateAsync(ModeOfPayment modeOfPayment)
 		{
-			return await BaseUpdate(modeOfPayment, modeOfPayment.Code);
+			return await BaseUpdate(modeOfPayment, modeOfPayment.Code).ConfigureAwait(false);
 		}
 		public async Task<ModeOfPayment> GetAsync(string id)
 		{
-			return await BaseGet(id);
+			return await BaseGet(id).ConfigureAwait(false);
 		}
 	}
 }

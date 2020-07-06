@@ -82,23 +82,23 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<SalaryTransactionSubset>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(int? id)
 		{
-			await BaseDelete(id.ToString());
+			await BaseDelete(id.ToString()).ConfigureAwait(false);
 		}
 		public async Task<SalaryTransaction> CreateAsync(SalaryTransaction salaryTransaction)
 		{
-			return await BaseCreate(salaryTransaction);
+			return await BaseCreate(salaryTransaction).ConfigureAwait(false);
 		}
 		public async Task<SalaryTransaction> UpdateAsync(SalaryTransaction salaryTransaction)
 		{
-			return await BaseUpdate(salaryTransaction, salaryTransaction.SalaryRow.ToString());
+			return await BaseUpdate(salaryTransaction, salaryTransaction.SalaryRow.ToString()).ConfigureAwait(false);
 		}
 		public async Task<SalaryTransaction> GetAsync(int? id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}
 	}
 }

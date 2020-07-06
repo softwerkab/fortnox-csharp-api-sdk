@@ -189,19 +189,19 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<OrderSubset>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task<Order> CreateAsync(Order order)
 		{
-			return await BaseCreate(order);
+			return await BaseCreate(order).ConfigureAwait(false);
 		}
 		public async Task<Order> UpdateAsync(Order order)
 		{
-			return await BaseUpdate(order, order.DocumentNumber.ToString());
+			return await BaseUpdate(order, order.DocumentNumber.ToString()).ConfigureAwait(false);
 		}
 		public async Task<Order> GetAsync(int? id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}
 	}
 }

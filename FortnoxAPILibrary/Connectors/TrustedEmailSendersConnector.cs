@@ -51,18 +51,18 @@ namespace FortnoxAPILibrary.Connectors
 
         public async Task<TrustedEmailSender> CreateAsync(TrustedEmailSender trustedEmailSenders)
         {
-            return await BaseCreate(trustedEmailSenders);
+            return await BaseCreate(trustedEmailSenders).ConfigureAwait(false);
         }
 
         public async Task DeleteAsync(int? id)
         {
-            await BaseDelete(id.ToString());
+            await BaseDelete(id.ToString()).ConfigureAwait(false);
         }
 
         public async Task<EmailSenders> FindAsync()
         {
             Resource = "emailsenders";
-            var res = (await BaseFind())?.Entity;
+            var res = (await BaseFind().ConfigureAwait(false))?.Entity;
             Resource = "emailsenders/trusted";
             return res;
         }

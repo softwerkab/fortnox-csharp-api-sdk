@@ -80,19 +80,19 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<VoucherFileConnection>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{
-			await BaseDelete(id);
+			await BaseDelete(id).ConfigureAwait(false);
 		}
 		public async Task<VoucherFileConnection> CreateAsync(VoucherFileConnection voucherFileConnection)
 		{
-			return await BaseCreate(voucherFileConnection);
+			return await BaseCreate(voucherFileConnection).ConfigureAwait(false);
 		}
 		public async Task<VoucherFileConnection> GetAsync(string id)
 		{
-			return await BaseGet(id);
+			return await BaseGet(id).ConfigureAwait(false);
 		}
 	}
 }

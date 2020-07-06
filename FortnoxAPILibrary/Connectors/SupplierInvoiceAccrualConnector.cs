@@ -72,23 +72,23 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<SupplierInvoiceAccrualSubset>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(int? id)
 		{
-			await BaseDelete(id.ToString());
+			await BaseDelete(id.ToString()).ConfigureAwait(false);
 		}
 		public async Task<SupplierInvoiceAccrual> CreateAsync(SupplierInvoiceAccrual supplierInvoiceAccrual)
 		{
-			return await BaseCreate(supplierInvoiceAccrual);
+			return await BaseCreate(supplierInvoiceAccrual).ConfigureAwait(false);
 		}
 		public async Task<SupplierInvoiceAccrual> UpdateAsync(SupplierInvoiceAccrual supplierInvoiceAccrual)
 		{
-			return await BaseUpdate(supplierInvoiceAccrual, supplierInvoiceAccrual.SupplierInvoiceNumber.ToString());
+			return await BaseUpdate(supplierInvoiceAccrual, supplierInvoiceAccrual.SupplierInvoiceNumber.ToString()).ConfigureAwait(false);
 		}
 		public async Task<SupplierInvoiceAccrual> GetAsync(int? id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}
 	}
 }

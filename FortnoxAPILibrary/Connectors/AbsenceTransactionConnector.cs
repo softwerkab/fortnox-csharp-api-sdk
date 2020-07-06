@@ -83,23 +83,23 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<AbsenceTransaction>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string employeeId, DateTime? date, AbsenceCauseCode? code)
 		{
-			await BaseDelete(employeeId, date?.ToString(APIConstants.DateFormat), code?.GetStringValue());
+			await BaseDelete(employeeId, date?.ToString(APIConstants.DateFormat), code?.GetStringValue()).ConfigureAwait(false);
 		}
 		public async Task<AbsenceTransaction> CreateAsync(AbsenceTransaction absenceTransaction)
 		{
-			return await BaseCreate(absenceTransaction);
+			return await BaseCreate(absenceTransaction).ConfigureAwait(false);
 		}
 		public async Task<AbsenceTransaction> UpdateAsync(AbsenceTransaction absenceTransaction)
 		{
-			return await BaseUpdate(absenceTransaction, absenceTransaction.EmployeeId, absenceTransaction.Date?.ToString(APIConstants.DateFormat), absenceTransaction.CauseCode?.GetStringValue());
+			return await BaseUpdate(absenceTransaction, absenceTransaction.EmployeeId, absenceTransaction.Date?.ToString(APIConstants.DateFormat), absenceTransaction.CauseCode?.GetStringValue()).ConfigureAwait(false);
 		}
         public async Task<AbsenceTransaction> GetAsync(string employeeId, DateTime? date, AbsenceCauseCode? code)
 		{
-			return await BaseGet(employeeId, date?.ToString(APIConstants.DateFormat), code?.GetStringValue());
+			return await BaseGet(employeeId, date?.ToString(APIConstants.DateFormat), code?.GetStringValue()).ConfigureAwait(false);
 		}
 	}
 }

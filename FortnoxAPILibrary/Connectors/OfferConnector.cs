@@ -171,19 +171,19 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<OfferSubset>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task<Offer> CreateAsync(Offer offer)
 		{
-			return await BaseCreate(offer);
+			return await BaseCreate(offer).ConfigureAwait(false);
 		}
 		public async Task<Offer> UpdateAsync(Offer offer)
 		{
-			return await BaseUpdate(offer, offer.DocumentNumber.ToString());
+			return await BaseUpdate(offer, offer.DocumentNumber.ToString()).ConfigureAwait(false);
 		}
 		public async Task<Offer> GetAsync(int? id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}
 	}
 }

@@ -61,19 +61,19 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<TrustedEmailDomain>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(int? id)
 		{
-			await BaseDelete(id.ToString());
+			await BaseDelete(id.ToString()).ConfigureAwait(false);
 		}
 		public async Task<TrustedEmailDomain> CreateAsync(TrustedEmailDomain trustedEmailDomains)
 		{
-			return await BaseCreate(trustedEmailDomains);
+			return await BaseCreate(trustedEmailDomains).ConfigureAwait(false);
 		}
 		public async Task<TrustedEmailDomain> GetAsync(int? id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}
     }
 }

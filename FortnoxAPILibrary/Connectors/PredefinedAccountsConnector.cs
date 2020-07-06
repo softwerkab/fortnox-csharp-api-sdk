@@ -53,15 +53,15 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<PredefinedAccount>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task<PredefinedAccount> UpdateAsync(PredefinedAccount predefinedAccount)
 		{
-			return await BaseUpdate(predefinedAccount, predefinedAccount.Name);
+			return await BaseUpdate(predefinedAccount, predefinedAccount.Name).ConfigureAwait(false);
 		}
 		public async Task<PredefinedAccount> GetAsync(string id)
 		{
-			return await BaseGet(id);
+			return await BaseGet(id).ConfigureAwait(false);
 		}
 	}
 }

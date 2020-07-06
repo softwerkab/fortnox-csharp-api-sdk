@@ -35,11 +35,11 @@ namespace FortnoxAPILibrary
         public static async Task<byte[]> ToBytes(this Stream stream)
         {
             using var memory = new MemoryStream();
-            await stream.CopyToAsync(memory);
+            await stream.CopyToAsync(memory).ConfigureAwait(false);
             memory.Position = 0;
 
             var bytes = new byte[(int)memory.Length];
-            await memory.ReadAsync(bytes, 0, bytes.Length);
+            await memory.ReadAsync(bytes, 0, bytes.Length).ConfigureAwait(false);
 
             return bytes;
         }
@@ -47,13 +47,13 @@ namespace FortnoxAPILibrary
         public static async Task<string> ToText(this Stream stream)
         {
             using var reader = new StreamReader(stream, Encoding.UTF8);
-            return await reader.ReadToEndAsync();
+            return await reader.ReadToEndAsync().ConfigureAwait(false);
         }
 
         public static async Task<FileInfo> ToFile(this Stream stream, string path)
         {
             using var file = File.Create(path);
-            await stream.CopyToAsync(file);
+            await stream.CopyToAsync(file).ConfigureAwait(false);
 
             return new FileInfo(path);
         }
@@ -61,12 +61,12 @@ namespace FortnoxAPILibrary
         public static async Task WriteText(this Stream stream, string value)
         {
             using var streamWriter = new StreamWriter(stream);
-            await streamWriter.WriteAsync(value);
+            await streamWriter.WriteAsync(value).ConfigureAwait(false);
         }
 
         public static async Task WriteBytes(this Stream stream, byte[] data)
         {
-            await stream.WriteAsync(data, 0,data.Length);
+            await stream.WriteAsync(data, 0,data.Length).ConfigureAwait(false);
         }
 
         public static async Task<byte[]> ToBytes(this FileInfo fileInfo)
@@ -74,13 +74,13 @@ namespace FortnoxAPILibrary
             var path = fileInfo.FullName;
 
             using var file = File.OpenRead(path);
-            return await file.ToBytes();
+            return await file.ToBytes().ConfigureAwait(false);
         }
 
         public static async Task<FileInfo> ToFile(this byte[] data, string path)
         {
             using var file = File.Create(path);
-            await file.WriteAsync(data, 0, data.Length);
+            await file.WriteAsync(data, 0, data.Length).ConfigureAwait(false);
 
             return new FileInfo(path);
         }

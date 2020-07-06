@@ -119,23 +119,23 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<SupplierSubset>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{
-			await BaseDelete(id);
+			await BaseDelete(id).ConfigureAwait(false);
 		}
 		public async Task<Supplier> CreateAsync(Supplier supplier)
 		{
-			return await BaseCreate(supplier);
+			return await BaseCreate(supplier).ConfigureAwait(false);
 		}
 		public async Task<Supplier> UpdateAsync(Supplier supplier)
 		{
-			return await BaseUpdate(supplier, supplier.SupplierNumber);
+			return await BaseUpdate(supplier, supplier.SupplierNumber).ConfigureAwait(false);
 		}
 		public async Task<Supplier> GetAsync(string id)
 		{
-			return await BaseGet(id);
+			return await BaseGet(id).ConfigureAwait(false);
 		}
 	}
 }
