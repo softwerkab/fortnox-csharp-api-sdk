@@ -77,23 +77,23 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<AccountSubset>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(int? id)
 		{
-			await BaseDelete(id.ToString());
+			await BaseDelete(id.ToString()).ConfigureAwait(false);
 		}
 		public async Task<Account> CreateAsync(Account account)
 		{
-			return await BaseCreate(account);
+			return await BaseCreate(account).ConfigureAwait(false);
 		}
 		public async Task<Account> UpdateAsync(Account account)
 		{
-			return await BaseUpdate(account, account.Number.ToString());
+			return await BaseUpdate(account, account.Number.ToString()).ConfigureAwait(false);
 		}
 		public async Task<Account> GetAsync(int? id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}
 	}
 }

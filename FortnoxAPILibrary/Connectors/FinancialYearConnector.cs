@@ -57,15 +57,15 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<FinancialYearSubset>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task<FinancialYear> CreateAsync(FinancialYear financialYear)
 		{
-			return await BaseCreate(financialYear);
+			return await BaseCreate(financialYear).ConfigureAwait(false);
 		}
 		public async Task<FinancialYear> GetAsync(int? id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}
 	}
 }

@@ -62,19 +62,19 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<Label>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(int? id)
 		{
-			await BaseDelete(id.ToString());
+			await BaseDelete(id.ToString()).ConfigureAwait(false);
 		}
 		public async Task<Label> CreateAsync(Label label)
 		{
-			return await BaseCreate(label);
+			return await BaseCreate(label).ConfigureAwait(false);
 		}
 		public async Task<Label> UpdateAsync(Label label)
 		{
-			return await BaseUpdate(label, label.Id.ToString());
+			return await BaseUpdate(label, label.Id.ToString()).ConfigureAwait(false);
 		}
 	}
 }

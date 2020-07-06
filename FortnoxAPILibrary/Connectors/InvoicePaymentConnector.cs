@@ -86,23 +86,23 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<InvoicePaymentSubset>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(int? id)
 		{
-			await BaseDelete(id.ToString());
+			await BaseDelete(id.ToString()).ConfigureAwait(false);
 		}
 		public async Task<InvoicePayment> CreateAsync(InvoicePayment invoicePayment)
 		{
-			return await BaseCreate(invoicePayment);
+			return await BaseCreate(invoicePayment).ConfigureAwait(false);
 		}
 		public async Task<InvoicePayment> UpdateAsync(InvoicePayment invoicePayment)
 		{
-			return await BaseUpdate(invoicePayment, invoicePayment.Number.ToString());
+			return await BaseUpdate(invoicePayment, invoicePayment.Number.ToString()).ConfigureAwait(false);
 		}
 		public async Task<InvoicePayment> GetAsync(int? id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}
 	}
 }

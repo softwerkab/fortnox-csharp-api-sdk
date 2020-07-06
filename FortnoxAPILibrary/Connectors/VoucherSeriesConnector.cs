@@ -62,19 +62,19 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<VoucherSeriesSubset>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task<VoucherSeries> CreateAsync(VoucherSeries voucherSeries)
 		{
-			return await BaseCreate(voucherSeries);
+			return await BaseCreate(voucherSeries).ConfigureAwait(false);
 		}
 		public async Task<VoucherSeries> UpdateAsync(VoucherSeries voucherSeries)
 		{
-			return await BaseUpdate(voucherSeries, voucherSeries.Code);
+			return await BaseUpdate(voucherSeries, voucherSeries.Code).ConfigureAwait(false);
 		}
 		public async Task<VoucherSeries> GetAsync(string id)
 		{
-			return await BaseGet(id);
+			return await BaseGet(id).ConfigureAwait(false);
 		}
 	}
 }

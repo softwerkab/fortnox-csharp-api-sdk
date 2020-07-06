@@ -71,23 +71,23 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<SupplierInvoiceExternalURLConnection>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(int? id)
 		{
-			await BaseDelete(id.ToString());
+			await BaseDelete(id.ToString()).ConfigureAwait(false);
 		}
 		public async Task<SupplierInvoiceExternalURLConnection> CreateAsync(SupplierInvoiceExternalURLConnection supplierInvoiceExternalURLConnection)
 		{
-			return await BaseCreate(supplierInvoiceExternalURLConnection);
+			return await BaseCreate(supplierInvoiceExternalURLConnection).ConfigureAwait(false);
 		}
 		public async Task<SupplierInvoiceExternalURLConnection> UpdateAsync(SupplierInvoiceExternalURLConnection supplierInvoiceExternalURLConnection)
 		{
-			return await BaseUpdate(supplierInvoiceExternalURLConnection, supplierInvoiceExternalURLConnection.Id.ToString());
+			return await BaseUpdate(supplierInvoiceExternalURLConnection, supplierInvoiceExternalURLConnection.Id.ToString()).ConfigureAwait(false);
 		}
 		public async Task<SupplierInvoiceExternalURLConnection> GetAsync(int? id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}
 	}
 }

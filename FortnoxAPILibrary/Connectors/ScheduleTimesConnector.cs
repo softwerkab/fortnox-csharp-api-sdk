@@ -60,19 +60,19 @@ namespace FortnoxAPILibrary.Connectors
 
         public async Task<ScheduleTimes> ResetAsync(string employeeId, DateTime? date)
         {
-            return await BaseUpdate(null, employeeId, date?.ToString(APIConstants.DateFormat), "resetday");
+            return await BaseUpdate(null, employeeId, date?.ToString(APIConstants.DateFormat), "resetday").ConfigureAwait(false);
         }
         public async Task<ScheduleTimes> UpdateAsync(ScheduleTimes scheduleTime)
         {
-            return await BaseUpdate(scheduleTime,scheduleTime.EmployeeId, scheduleTime.Date?.ToString(APIConstants.DateFormat));
+            return await BaseUpdate(scheduleTime,scheduleTime.EmployeeId, scheduleTime.Date?.ToString(APIConstants.DateFormat)).ConfigureAwait(false);
         }
 		public async Task<ScheduleTimes> GetAsync(string employeeId, DateTime? date)
         {
-            return await BaseGet(employeeId, date?.ToString(APIConstants.DateFormat));
+            return await BaseGet(employeeId, date?.ToString(APIConstants.DateFormat)).ConfigureAwait(false);
         }
 		public async Task<EntityCollection<ScheduleTimes>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 	}
 }

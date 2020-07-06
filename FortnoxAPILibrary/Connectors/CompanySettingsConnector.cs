@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.Connectors
 
         public async Task<CompanySettings> GetAsync()
         {
-            return (await BaseFind())?.Entity;
+            return (await BaseFind().ConfigureAwait(false))?.Entity;
         }
     }
 }

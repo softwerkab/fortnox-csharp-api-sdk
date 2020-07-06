@@ -249,19 +249,19 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<InvoiceSubset>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task<Invoice> CreateAsync(Invoice invoice)
 		{
-			return await BaseCreate(invoice);
+			return await BaseCreate(invoice).ConfigureAwait(false);
 		}
 		public async Task<Invoice> UpdateAsync(Invoice invoice)
 		{
-			return await BaseUpdate(invoice, invoice.DocumentNumber.ToString());
+			return await BaseUpdate(invoice, invoice.DocumentNumber.ToString()).ConfigureAwait(false);
 		}
 		public async Task<Invoice> GetAsync(int? id)
 		{
-			return await BaseGet(id.ToString());
+			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}
 	}
 }

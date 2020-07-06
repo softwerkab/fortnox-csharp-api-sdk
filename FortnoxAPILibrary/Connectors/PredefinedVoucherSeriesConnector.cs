@@ -53,15 +53,15 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<PredefinedVoucherSeries>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task<PredefinedVoucherSeries> UpdateAsync(PredefinedVoucherSeries predefinedVoucherSeries)
 		{
-			return await BaseUpdate(predefinedVoucherSeries, predefinedVoucherSeries.Name);
+			return await BaseUpdate(predefinedVoucherSeries, predefinedVoucherSeries.Name).ConfigureAwait(false);
 		}
 		public async Task<PredefinedVoucherSeries> GetAsync(string id)
 		{
-			return await BaseGet(id);
+			return await BaseGet(id).ConfigureAwait(false);
 		}
 	}
 }

@@ -63,7 +63,7 @@ namespace FortnoxAPILibrary
             ParametersInjection = null;
 
             var wrappedEntity = new EntityWrapper<TEntity>() {Entity = entity};
-            var result = await DoEntityRequest(wrappedEntity);
+            var result = await DoEntityRequest(wrappedEntity).ConfigureAwait(false);
             return result?.Entity;
         }
 
@@ -82,7 +82,7 @@ namespace FortnoxAPILibrary
 
             var wrappedEntity = new EntityWrapper<TEntity>() { Entity = entity };
 
-            var result = await DoEntityRequest(wrappedEntity);
+            var result = await DoEntityRequest(wrappedEntity).ConfigureAwait(false);
             return result?.Entity;
         }
 
@@ -99,7 +99,7 @@ namespace FortnoxAPILibrary
             };
             ParametersInjection = null;
 
-            await DoRequest();
+            await DoRequest().ConfigureAwait(false);
         }
 
         protected async Task<TEntity> BaseGet(params string[] indices)
@@ -115,7 +115,7 @@ namespace FortnoxAPILibrary
             };
             ParametersInjection = null;
 
-            var result = await DoEntityRequest<EntityWrapper<TEntity>>();
+            var result = await DoEntityRequest<EntityWrapper<TEntity>>().ConfigureAwait(false);
             return result?.Entity;
         }
 
@@ -133,7 +133,7 @@ namespace FortnoxAPILibrary
             };
             ParametersInjection = null;
 
-            var result = await DoEntityRequest<TEntityCollection>();
+            var result = await DoEntityRequest<TEntityCollection>().ConfigureAwait(false);
             return result;
         }
 
@@ -199,9 +199,9 @@ namespace FortnoxAPILibrary
                 ResponseType = RequestResponseType.PDF
             };
 
-            var data = await DoSimpleRequest();
+            var data = await DoSimpleRequest().ConfigureAwait(false);
             if (localPath != null)
-                await data.ToFile(localPath);
+                await data.ToFile(localPath).ConfigureAwait(false);
             return data;
         }
 
@@ -232,7 +232,7 @@ namespace FortnoxAPILibrary
                     break;
             }
 
-            var result = await DoEntityRequest<EntityWrapper<TEntity>>();
+            var result = await DoEntityRequest<EntityWrapper<TEntity>>().ConfigureAwait(false);
             return result?.Entity;
         }
 

@@ -52,15 +52,15 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<ExpenseSubset>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task<Expense> CreateAsync(Expense expense)
 		{
-			return await BaseCreate(expense);
+			return await BaseCreate(expense).ConfigureAwait(false);
 		}
 		public async Task<Expense> GetAsync(string id)
 		{
-			return await BaseGet(id);
+			return await BaseGet(id).ConfigureAwait(false);
 		}
 	}
 }

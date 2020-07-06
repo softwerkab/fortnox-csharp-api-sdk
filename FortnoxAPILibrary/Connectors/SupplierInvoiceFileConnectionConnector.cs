@@ -67,19 +67,19 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<SupplierInvoiceFileConnection>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{
-			await BaseDelete(id);
+			await BaseDelete(id).ConfigureAwait(false);
 		}
 		public async Task<SupplierInvoiceFileConnection> CreateAsync(SupplierInvoiceFileConnection supplierInvoiceFileConnection)
 		{
-			return await BaseCreate(supplierInvoiceFileConnection);
+			return await BaseCreate(supplierInvoiceFileConnection).ConfigureAwait(false);
 		}
 		public async Task<SupplierInvoiceFileConnection> GetAsync(string id)
 		{
-			return await BaseGet(id);
+			return await BaseGet(id).ConfigureAwait(false);
 		}
 	}
 }

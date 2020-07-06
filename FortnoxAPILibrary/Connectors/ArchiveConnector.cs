@@ -124,13 +124,13 @@ namespace FortnoxAPILibrary.Connectors
 
         public async Task<byte[]> DownloadFileAsync(string id)
         {
-            return await BaseDownload(null, id);
+            return await BaseDownload(null, id).ConfigureAwait(false);
         }
 
         public async Task<FileInfo> DownloadFileAsync(string id, string localPath)
         {
-            var data = await DownloadFileAsync(id);
-            return await data.ToFile(localPath);
+            var data = await DownloadFileAsync(id).ConfigureAwait(false);
+            return await data.ToFile(localPath).ConfigureAwait(false);
         }
 
         public async Task<ArchiveFile> UploadFileAsync(string name, byte[] data, string folderPathOrId = null)
@@ -154,23 +154,23 @@ namespace FortnoxAPILibrary.Connectors
             else
                 urlParams.Add("path", folderPathOrId);
 
-            return await BaseUpload(name, data, urlParams);
+            return await BaseUpload(name, data, urlParams).ConfigureAwait(false);
         }
 
         public async Task<ArchiveFile> UploadFileAsync(string name, Stream stream, string folderPathOrId = null)
         {
-            return await UploadFileAsync(name, await stream.ToBytes(), folderPathOrId);
+            return await UploadFileAsync(name, await stream.ToBytes(), folderPathOrId).ConfigureAwait(false);
         }
 
         public async Task<ArchiveFile> UploadFileAsync(string localPath, string folderPathOrId = null)
         {
             var fileInfo = new FileInfo(localPath);
-            return await UploadFileAsync(fileInfo.Name, fileInfo.ToBytes().Result, folderPathOrId);
+            return await UploadFileAsync(fileInfo.Name, fileInfo.ToBytes().Result, folderPathOrId).ConfigureAwait(false);
         }
 
         public async Task DeleteFileAsync(string id)
         {
-            await BaseDelete(id);
+            await BaseDelete(id).ConfigureAwait(false);
         }
 
         public async Task<ArchiveFolder> GetFolderAsync(string pathOrId = null)
@@ -179,18 +179,18 @@ namespace FortnoxAPILibrary.Connectors
                 pathOrId = "root";
 
             if (IsArchiveId(pathOrId) || IsPredefinedFolder(pathOrId))
-                return await BaseGet(pathOrId);
+                return await BaseGet(pathOrId).ConfigureAwait(false);
             else
             {
                 ParametersInjection = new Dictionary<string, string>();
                 ParametersInjection.Add("path", pathOrId);
-                return await BaseGet();
+                return await BaseGet().ConfigureAwait(false);
             }
         }
 
         public async Task<ArchiveFolder> GetRootAsync()
         {
-            return await GetFolderAsync();
+            return await GetFolderAsync().ConfigureAwait(false);
         }
 
         public async Task<ArchiveFolder> CreateFolderAsync(string folderName, string path = null)
@@ -200,17 +200,17 @@ namespace FortnoxAPILibrary.Connectors
             if (path != null)
                 ParametersInjection = new Dictionary<string, string> { { "path", path } };
 
-            return await BaseCreate(folder);
+            return await BaseCreate(folder).ConfigureAwait(false);
         }
 
         public async Task DeleteFolderAsync(string pathOrId)
         {
             if (IsArchiveId(pathOrId))
-                await BaseDelete(pathOrId);
+                await BaseDelete(pathOrId).ConfigureAwait(false);
             else
             {
                 ParametersInjection = new Dictionary<string, string> { { "path", pathOrId } };
-                await BaseDelete();
+                await BaseDelete().ConfigureAwait(false);
             }
         }
 
@@ -226,7 +226,7 @@ namespace FortnoxAPILibrary.Connectors
                 Indices = indices
             };
 
-            return await UploadFile<ArchiveFile>(data, name);
+            return await UploadFile<ArchiveFile>(data, name).ConfigureAwait(false);
         }
 
         private async Task<byte[]> BaseDownload(Dictionary<string, string> parameters, params string[] indices)
@@ -239,7 +239,7 @@ namespace FortnoxAPILibrary.Connectors
                 Indices = indices
             };
 
-            return await DownloadFile();
+            return await DownloadFile().ConfigureAwait(false);
         }
 
         private static bool IsArchiveId(string str)

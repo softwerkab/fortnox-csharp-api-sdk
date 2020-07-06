@@ -75,11 +75,11 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<VoucherSubset>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task<Voucher> CreateAsync(Voucher voucher)
 		{
-			return await BaseCreate(voucher);
+			return await BaseCreate(voucher).ConfigureAwait(false);
 		}
         public async Task<Voucher> GetAsync(int? id, string seriesId, int? financialYearId)
 		{
@@ -91,7 +91,7 @@ namespace FortnoxAPILibrary.Connectors
                 };
             }
 
-            return await BaseGet(seriesId, id.ToString());
+            return await BaseGet(seriesId, id.ToString()).ConfigureAwait(false);
         }
     }
 }

@@ -88,23 +88,23 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<PriceSubset>> FindAsync(string priceListId, string articleId = null)
 		{
-			return await BaseFind("sublist", priceListId, articleId);
+			return await BaseFind("sublist", priceListId, articleId).ConfigureAwait(false);
 		}
         public async Task DeleteAsync(string priceListCode, string articleNumber, decimal? fromQuantity = null)
         {
-            await BaseDelete(priceListCode, articleNumber, fromQuantity?.ToString());
+            await BaseDelete(priceListCode, articleNumber, fromQuantity?.ToString()).ConfigureAwait(false);
         }
         public async Task<Price> CreateAsync(Price price)
         {
-            return await BaseCreate(price);
+            return await BaseCreate(price).ConfigureAwait(false);
         }
         public async Task<Price> UpdateAsync(Price price)
         {
-            return await BaseUpdate(price, price.PriceList, price.ArticleNumber, price.FromQuantity?.ToString());
+            return await BaseUpdate(price, price.PriceList, price.ArticleNumber, price.FromQuantity?.ToString()).ConfigureAwait(false);
         }
         public async Task<Price> GetAsync(string priceListCode, string articleNumber, decimal? fromQuantity = null)
         {
-            return await BaseGet(priceListCode, articleNumber, fromQuantity?.ToString());
+            return await BaseGet(priceListCode, articleNumber, fromQuantity?.ToString()).ConfigureAwait(false);
         }
 	}
 }

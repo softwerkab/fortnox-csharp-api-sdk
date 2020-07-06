@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors
                 Indices = new[] { type.GetStringValue() }
             };
 
-            return await DownloadFile();
+            return await DownloadFile().ConfigureAwait(false);
         }
     }
 }

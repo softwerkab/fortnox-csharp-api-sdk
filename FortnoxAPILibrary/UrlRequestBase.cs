@@ -136,7 +136,7 @@ namespace FortnoxAPILibrary
 
             try
             {
-                await RateLimit();
+                await RateLimit().ConfigureAwait(false);
 
                 using var response = (HttpWebResponse) wr.GetResponse();
                 HttpStatusCode = response.StatusCode;
@@ -162,7 +162,7 @@ namespace FortnoxAPILibrary
             RequestContent = requestJson;
 
             var requestData = Encoding.UTF8.GetBytes(requestJson);
-            var responseData = await DoSimpleRequest(requestData);
+            var responseData = await DoSimpleRequest(requestData).ConfigureAwait(false);
 
             if (responseData == null)
             {
@@ -182,18 +182,18 @@ namespace FortnoxAPILibrary
             ResponseContent = "";
             try
             {
-                await RateLimit();
+                await RateLimit().ConfigureAwait(false);
 
                 if (data != null && RequestInfo.Method != RequestMethod.Get)
                 {
                     using var requestStream = wr.GetRequestStream();
-                    await requestStream.WriteBytes(data);
+                    await requestStream.WriteBytes(data).ConfigureAwait(false);
                 }
 
                 using var response = (HttpWebResponse)wr.GetResponse();
                 HttpStatusCode = response.StatusCode;
                 using var responseStream = response.GetResponseStream();
-                return await responseStream.ToBytes();
+                return await responseStream.ToBytes().ConfigureAwait(false);
             }
             catch (WebException we)
             {
@@ -211,7 +211,7 @@ namespace FortnoxAPILibrary
 
             try
             {
-                await RateLimit();
+                await RateLimit().ConfigureAwait(false);
 
                 var rand = new Random();
                 var boundary = "----boundary" + rand.Next();
@@ -223,7 +223,7 @@ namespace FortnoxAPILibrary
 
                 using var dataStream = request.GetRequestStream();
                 dataStream.Write(header, 0, header.Length);
-                await dataStream.WriteAsync(fileData, 0, fileData.Length);
+                await dataStream.WriteAsync(fileData, 0, fileData.Length).ConfigureAwait(false);
                 dataStream.Write(trailer, 0, trailer.Length);
                 dataStream.Close();
 
@@ -247,7 +247,7 @@ namespace FortnoxAPILibrary
 
             try
             {
-                await RateLimit();
+                await RateLimit().ConfigureAwait(false);
 
                 var request = SetupRequest(RequestInfo.AbsoluteUrl, RequestMethod.Get);
 
@@ -255,7 +255,7 @@ namespace FortnoxAPILibrary
                 HttpStatusCode = response.StatusCode;
                 using var responseStream = response.GetResponseStream();
 
-                var data = await responseStream.ToBytes();
+                var data = await responseStream.ToBytes().ConfigureAwait(false);
                 return data;
             }
             catch (WebException we)

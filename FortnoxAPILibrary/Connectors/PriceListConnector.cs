@@ -74,19 +74,19 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<PriceList>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task<PriceList> CreateAsync(PriceList priceList)
 		{
-			return await BaseCreate(priceList);
+			return await BaseCreate(priceList).ConfigureAwait(false);
 		}
 		public async Task<PriceList> UpdateAsync(PriceList priceList)
 		{
-			return await BaseUpdate(priceList, priceList.Code);
+			return await BaseUpdate(priceList, priceList.Code).ConfigureAwait(false);
 		}
 		public async Task<PriceList> GetAsync(string id)
 		{
-			return await BaseGet(id);
+			return await BaseGet(id).ConfigureAwait(false);
 		}
 	}
 }

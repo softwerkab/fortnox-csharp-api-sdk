@@ -84,20 +84,20 @@ namespace FortnoxAPILibrary.Connectors
                 return fixedJson;
             };
 
-            var result = await BaseFind();
+            var result = await BaseFind().ConfigureAwait(false);
 
             FixResponseContent = null;
 			return result;
         }
 		public async Task DeleteAsync(int? id)
 		{
-			await BaseDelete(id.ToString());
+			await BaseDelete(id.ToString()).ConfigureAwait(false);
 		}
 		public async Task<AssetType> CreateAsync(AssetType assetType)
 		{
             FixResponseContent = (json) => new Regex("Type").Replace(json, "AssetType", 1);
 
-            var result = await BaseCreate(assetType);
+            var result = await BaseCreate(assetType).ConfigureAwait(false);
 
             FixResponseContent = null;
             return result;
@@ -106,7 +106,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			FixResponseContent = (json) => new Regex("Type").Replace(json, "AssetType", 1);
 
-			var result = await BaseUpdate(assetTypes, assetTypes.Id.ToString());
+			var result = await BaseUpdate(assetTypes, assetTypes.Id.ToString()).ConfigureAwait(false);
 
 			FixResponseContent = null;
             return result;
@@ -115,7 +115,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			FixResponseContent = (json) => new Regex("Type").Replace(json, "AssetType", 1);
 
-			var result = await BaseGet(id.ToString());
+			var result = await BaseGet(id.ToString()).ConfigureAwait(false);
 
             FixResponseContent = null;
             return result;

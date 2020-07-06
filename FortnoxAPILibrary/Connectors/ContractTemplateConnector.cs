@@ -62,19 +62,19 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<ContractTemplateSubset>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task<ContractTemplate> CreateAsync(ContractTemplate contractTemplate)
 		{
-			return await BaseCreate(contractTemplate);
+			return await BaseCreate(contractTemplate).ConfigureAwait(false);
 		}
 		public async Task<ContractTemplate> UpdateAsync(ContractTemplate contractTemplate)
 		{
-			return await BaseUpdate(contractTemplate, contractTemplate.TemplateNumber);
+			return await BaseUpdate(contractTemplate, contractTemplate.TemplateNumber).ConfigureAwait(false);
 		}
 		public async Task<ContractTemplate> GetAsync(string id)
 		{
-			return await BaseGet(id);
+			return await BaseGet(id).ConfigureAwait(false);
 		}
 	}
 }

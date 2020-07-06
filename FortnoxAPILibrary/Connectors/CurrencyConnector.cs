@@ -71,23 +71,23 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<Currency>> FindAsync()
 		{
-			return await BaseFind();
+			return await BaseFind().ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{
-			await BaseDelete(id);
+			await BaseDelete(id).ConfigureAwait(false);
 		}
 		public async Task<Currency> CreateAsync(Currency currency)
 		{
-			return await BaseCreate(currency);
+			return await BaseCreate(currency).ConfigureAwait(false);
 		}
 		public async Task<Currency> UpdateAsync(Currency currency)
 		{
-			return await BaseUpdate(currency, currency.Code);
+			return await BaseUpdate(currency, currency.Code).ConfigureAwait(false);
 		}
 		public async Task<Currency> GetAsync(string id)
 		{
-			return await BaseGet(id);
+			return await BaseGet(id).ConfigureAwait(false);
 		}
 	}
 }
