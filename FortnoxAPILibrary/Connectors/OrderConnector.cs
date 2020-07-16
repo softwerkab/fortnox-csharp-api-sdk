@@ -93,7 +93,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the order to find</param>
 		/// <returns>The found order</returns>
-		public Order Get(int? id)
+		public Order Get(long? id)
 		{
 			return GetAsync(id).Result;
 		}
@@ -132,7 +132,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Order CreateInvoice(int? id)
+		public Order CreateInvoice(long? id)
 		{
 			return DoAction(id.ToString(), Action.CreateInvoice);
 		}
@@ -142,7 +142,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Order Cancel(int? id)
+		public Order Cancel(long? id)
 		{
 			return DoAction(id.ToString(), Action.Cancel);
 		}
@@ -152,7 +152,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Order Email(int? id)
+		public Order Email(long? id)
 		{
 			return DoAction(id.ToString(), Action.Email);
 		}
@@ -162,7 +162,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public byte[] Print(int? id)
+		public byte[] Print(long? id)
 		{
 			return DoDownloadAction(id.ToString(), Action.Print);
 		}
@@ -172,7 +172,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Order ExternalPrint(int? id)
+		public Order ExternalPrint(long? id)
 		{
 			return DoAction(id.ToString(), Action.ExternalPrint);
 		}
@@ -182,7 +182,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public byte[] Preview(int? id)
+		public byte[] Preview(long? id)
 		{
 			return DoDownloadAction(id.ToString(), Action.Preview);
 		}
@@ -199,7 +199,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseUpdate(order, order.DocumentNumber.ToString()).ConfigureAwait(false);
 		}
-		public async Task<Order> GetAsync(int? id)
+		public async Task<Order> GetAsync(long? id)
 		{
 			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}

@@ -14,11 +14,11 @@ namespace FortnoxAPILibrary.Connectors
 		string CostCenter { get; set; }
 
         Voucher Create(Voucher voucher);
-		Voucher Get(int? id, string seriesId, int? financialYearId);
+		Voucher Get(long? id, string seriesId, long? financialYearId);
         EntityCollection<VoucherSubset> Find();
 
         Task<Voucher> CreateAsync(Voucher voucher);
-		Task<Voucher> GetAsync(int? id, string seriesId, int? financialYearId);
+		Task<Voucher> GetAsync(long? id, string seriesId, long? financialYearId);
         Task<EntityCollection<VoucherSubset>> FindAsync();
 	}
 }

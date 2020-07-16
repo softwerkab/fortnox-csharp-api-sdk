@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Account number (If empty Fortnox will use settings from the article) </summary>
         [JsonProperty]
-        public int? AccountNumber { get; set; }
+        public long? AccountNumber { get; set; }
 
         ///<summary> Article number </summary>
         [JsonProperty]
@@ -47,7 +47,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Hours to be reported if the quantity of the row should not be used as hours. </summary>
         [JsonProperty]
-        public int? HouseWorkHoursToReport { get; set; }
+        public long? HouseWorkHoursToReport { get; set; }
 
         ///<summary> The type of house work </summary>
         [JsonProperty]

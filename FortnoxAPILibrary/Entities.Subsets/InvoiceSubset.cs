@@ -56,7 +56,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> The invoice number. If no document number is provided, the next number in the series will be used. </summary>
         [JsonProperty]
-        public int? DocumentNumber { get; set; }
+        public long? DocumentNumber { get; set; }
 
         ///<summary> Due date of the invoice. Must be a valid date according to our date format. </summary>
         [JsonProperty]

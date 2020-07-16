@@ -36,7 +36,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Number of the voucher </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? VoucherNumber { get; private set; }
+        public long? VoucherNumber { get; private set; }
 
         ///<summary> Code of the voucher series. The code must be of an existing voucher series. </summary>
         [JsonProperty]
@@ -45,6 +45,6 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Id of the year of the voucher. </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? Year { get; private set; }
+        public long? Year { get; private set; }
     }
 }

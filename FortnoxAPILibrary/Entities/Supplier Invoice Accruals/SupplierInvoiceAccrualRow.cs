@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Account number </summary>
         [JsonProperty]
-        public int? Account { get; set; }
+        public long? Account { get; set; }
 
         ///<summary> Cost Center Code </summary>
         [JsonProperty]

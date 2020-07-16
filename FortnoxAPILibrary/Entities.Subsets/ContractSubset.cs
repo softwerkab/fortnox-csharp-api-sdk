@@ -21,7 +21,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Contract length </summary>
         [JsonProperty]
-        public int? ContractLength { get; set; }
+        public long? ContractLength { get; set; }
 
         ///<summary> Currency </summary>
         [JsonProperty]
@@ -37,16 +37,16 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Document number </summary>
         [JsonProperty]
-        public int? DocumentNumber { get; set; }
+        public long? DocumentNumber { get; set; }
 
         ///<summary> Invoice interval </summary>
         [JsonProperty("Interval")]
-        public int? InvoiceInterval { get; set; }
+        public long? InvoiceInterval { get; set; }
 
         ///<summary> Invoices remaining </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? InvoicesRemaining { get; private set; }
+        public long? InvoicesRemaining { get; private set; }
 
         ///<summary> Last invoice date </summary>
         [ReadOnly]
@@ -63,7 +63,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Template number </summary>
         [JsonProperty]
-        public int? TemplateNumber { get; set; }
+        public long? TemplateNumber { get; set; }
 
         ///<summary> Total </summary>
         [ReadOnly]

@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the supplierInvoiceAccrual to find</param>
 		/// <returns>The found supplierInvoiceAccrual</returns>
-		public SupplierInvoiceAccrual Get(int? id)
+		public SupplierInvoiceAccrual Get(long? id)
 		{
 			return GetAsync(id).Result;
 		}
@@ -56,7 +56,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a supplierInvoiceAccrual
 		/// </summary>
 		/// <param name="id">Identifier of the supplierInvoiceAccrual to delete</param>
-		public void Delete(int? id)
+		public void Delete(long? id)
 		{
 			DeleteAsync(id).Wait();
 		}
@@ -74,7 +74,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseFind().ConfigureAwait(false);
 		}
-		public async Task DeleteAsync(int? id)
+		public async Task DeleteAsync(long? id)
 		{
 			await BaseDelete(id.ToString()).ConfigureAwait(false);
 		}
@@ -86,7 +86,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseUpdate(supplierInvoiceAccrual, supplierInvoiceAccrual.SupplierInvoiceNumber.ToString()).ConfigureAwait(false);
 		}
-		public async Task<SupplierInvoiceAccrual> GetAsync(int? id)
+		public async Task<SupplierInvoiceAccrual> GetAsync(long? id)
 		{
 			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}

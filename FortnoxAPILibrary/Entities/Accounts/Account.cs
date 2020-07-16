@@ -39,7 +39,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Account number </summary>
         [JsonProperty]
-        public int? Number { get; set; }
+        public long? Number { get; set; }
 
         ///<summary> Number of the proposed project. The number must be of an existing project. </summary>
         [JsonProperty]
@@ -51,7 +51,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> SRU code </summary>
         [JsonProperty]
-        public int? SRU { get; set; }
+        public long? SRU { get; set; }
 
         ///<summary> Proposed transaction information </summary>
         [JsonProperty]
@@ -68,6 +68,6 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Id of the financial year. </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? Year { get; private set; }
+        public long? Year { get; private set; }
     }
 }

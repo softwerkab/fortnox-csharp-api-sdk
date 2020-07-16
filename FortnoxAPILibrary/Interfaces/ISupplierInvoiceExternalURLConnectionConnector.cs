@@ -14,14 +14,14 @@ namespace FortnoxAPILibrary.Connectors
 
 		SupplierInvoiceExternalURLConnection Update(SupplierInvoiceExternalURLConnection supplierInvoiceExternalURLConnection);
 		SupplierInvoiceExternalURLConnection Create(SupplierInvoiceExternalURLConnection supplierInvoiceExternalURLConnection);
-		SupplierInvoiceExternalURLConnection Get(int? id);
-		void Delete(int? id);
+		SupplierInvoiceExternalURLConnection Get(long? id);
+		void Delete(long? id);
 		EntityCollection<SupplierInvoiceExternalURLConnection> Find();
 
 		Task<SupplierInvoiceExternalURLConnection> UpdateAsync(SupplierInvoiceExternalURLConnection supplierInvoiceExternalURLConnection);
 		Task<SupplierInvoiceExternalURLConnection> CreateAsync(SupplierInvoiceExternalURLConnection supplierInvoiceExternalURLConnection);
-		Task<SupplierInvoiceExternalURLConnection> GetAsync(int? id);
-		Task DeleteAsync(int? id);
+		Task<SupplierInvoiceExternalURLConnection> GetAsync(long? id);
+		Task DeleteAsync(long? id);
 		Task<EntityCollection<SupplierInvoiceExternalURLConnection>> FindAsync();
 	}
 }

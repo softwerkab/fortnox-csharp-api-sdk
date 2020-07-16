@@ -26,11 +26,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Account number for construction work (special VAT rules in Sweden). The number must be of an existing account. </summary>
         [JsonProperty]
-        public int? ConstructionAccount { get; set; }
+        public long? ConstructionAccount { get; set; }
 
         ///<summary> The depth of the article in millimeters. </summary>
         [JsonProperty]
-        public int? Depth { get; set; }
+        public long? Depth { get; set; }
 
         ///<summary> The description of the article. </summary>
         [JsonProperty]
@@ -47,19 +47,19 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Account number for the sales account to EU. The number must be of an existing account. </summary>
         [JsonProperty]
-        public int? EUAccount { get; set; }
+        public long? EUAccount { get; set; }
 
         ///<summary> Account number for the sales account to EU with VAT. The number must be of an existing account. </summary>
         [JsonProperty]
-        public int? EUVATAccount { get; set; }
+        public long? EUVATAccount { get; set; }
 
         ///<summary> Account number for the sales account outside EU. The number must be of an existing account. </summary>
         [JsonProperty]
-        public int? ExportAccount { get; set; }
+        public long? ExportAccount { get; set; }
 
         ///<summary> The height of the article in millimeters. </summary>
         [JsonProperty]
-        public int? Height { get; set; }
+        public long? Height { get; set; }
 
         ///<summary> If the article is housework. </summary>
         [JsonProperty]
@@ -83,7 +83,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Account number for purchase. The number must be of an existing account. </summary>
         [JsonProperty]
-        public int? PurchaseAccount { get; set; }
+        public long? PurchaseAccount { get; set; }
 
         ///<summary> Purchase price of the article. </summary>
         [JsonProperty]
@@ -100,7 +100,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Account number for the sales account in Sweden. The number must be of an existing account. </summary>
         [JsonProperty]
-        public int? SalesAccount { get; set; }
+        public long? SalesAccount { get; set; }
 
         ///<summary> Price of article for its default price list. </summary>
         [ReadOnly]
@@ -151,11 +151,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Weight of the article in grams. </summary>
         [JsonProperty]
-        public int? Weight { get; set; }
+        public long? Weight { get; set; }
 
         ///<summary> Width of the article in millimeters. </summary>
         [JsonProperty]
-        public int? Width { get; set; }
+        public long? Width { get; set; }
 
         ///<summary> If the article has expired. </summary>
         [JsonProperty]
@@ -167,18 +167,18 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Custom bookkeeping account used for stock for the article </summary>
         [JsonProperty]
-        public int? StockAccount { get; set; }
+        public long? StockAccount { get; set; }
 
         ///<summary> Purchase price – Direct cost </summary>
         [JsonProperty]
-        public int? DirectCost { get; set; }
+        public long? DirectCost { get; set; }
 
         ///<summary> Purchase price – Freight cost </summary>
         [JsonProperty]
-        public int? FreightCost { get; set; }
+        public long? FreightCost { get; set; }
 
         ///<summary> Purchase price – Other cost </summary>
         [JsonProperty]
-        public int? OtherCost { get; set; }
+        public long? OtherCost { get; set; }
     }
 }

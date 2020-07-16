@@ -49,7 +49,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <param name="seriesId">Idendifier of the voucher series</param>
         /// <param name="financialYearId">Identifier of the financial year</param>
         /// <returns>The found voucher</returns>
-        public Voucher Get(int? id, string seriesId, int? financialYearId)
+        public Voucher Get(long? id, string seriesId, long? financialYearId)
 		{
 			return GetAsync(id, seriesId, financialYearId).Result;
         }
@@ -81,7 +81,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseCreate(voucher).ConfigureAwait(false);
 		}
-        public async Task<Voucher> GetAsync(int? id, string seriesId, int? financialYearId)
+        public async Task<Voucher> GetAsync(long? id, string seriesId, long? financialYearId)
 		{
             if (financialYearId != null)
             {

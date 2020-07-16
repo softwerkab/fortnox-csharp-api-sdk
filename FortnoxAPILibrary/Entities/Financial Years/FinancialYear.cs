@@ -16,7 +16,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> The ID of the financial year </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? Id { get; private set; }
+        public long? Id { get; private set; }
 
         ///<summary> Start date of the financial year </summary>
         [JsonProperty]

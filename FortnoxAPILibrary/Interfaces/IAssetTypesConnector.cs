@@ -13,14 +13,14 @@ namespace FortnoxAPILibrary.Connectors
 
 		AssetType Update(AssetType assetType);
 		AssetType Create(AssetType assetType);
-		AssetType Get(int? id);
-		void Delete(int? id);
+		AssetType Get(long? id);
+		void Delete(long? id);
 		EntityCollection<AssetTypesSubset> Find();
 
 		Task<AssetType> UpdateAsync(AssetType assetType);
 		Task<AssetType> CreateAsync(AssetType assetType);
-		Task<AssetType> GetAsync(int? id);
-		Task DeleteAsync(int? id);
+		Task<AssetType> GetAsync(long? id);
+		Task DeleteAsync(long? id);
 		Task<EntityCollection<AssetTypesSubset>> FindAsync();
 	}
 }

@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the supplierInvoiceExternalURLConnection to find</param>
 		/// <returns>The found supplierInvoiceExternalURLConnection</returns>
-		public SupplierInvoiceExternalURLConnection Get(int? id)
+		public SupplierInvoiceExternalURLConnection Get(long? id)
 		{
 			return GetAsync(id).Result;
 		}
@@ -55,7 +55,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a supplierInvoiceExternalURLConnection
 		/// </summary>
 		/// <param name="id">Identifier of the supplierInvoiceExternalURLConnection to delete</param>
-		public void Delete(int? id)
+		public void Delete(long? id)
 		{
 			DeleteAsync(id).Wait();
 		}
@@ -73,7 +73,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseFind().ConfigureAwait(false);
 		}
-		public async Task DeleteAsync(int? id)
+		public async Task DeleteAsync(long? id)
 		{
 			await BaseDelete(id.ToString()).ConfigureAwait(false);
 		}
@@ -85,7 +85,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseUpdate(supplierInvoiceExternalURLConnection, supplierInvoiceExternalURLConnection.Id.ToString()).ConfigureAwait(false);
 		}
-		public async Task<SupplierInvoiceExternalURLConnection> GetAsync(int? id)
+		public async Task<SupplierInvoiceExternalURLConnection> GetAsync(long? id)
 		{
 			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}

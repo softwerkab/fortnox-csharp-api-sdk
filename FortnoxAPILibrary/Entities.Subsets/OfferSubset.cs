@@ -34,7 +34,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Document Number </summary>
         [JsonProperty]
-        public int? DocumentNumber { get; set; }
+        public long? DocumentNumber { get; set; }
 
         ///<summary> Date of order </summary>
         [JsonProperty]

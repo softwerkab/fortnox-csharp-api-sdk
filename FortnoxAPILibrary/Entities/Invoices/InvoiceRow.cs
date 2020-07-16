@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Account number. If not provided the predefined account will be used. </summary>
         [JsonProperty]
-        public int? AccountNumber { get; set; }
+        public long? AccountNumber { get; set; }
 
         ///<summary> Article number. </summary>
         [JsonProperty]
@@ -51,7 +51,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Hours to be reported if the quantity of the row should not be used as hours.  Can only contain numeric values without decimals. </summary>
         [JsonProperty]
-        public int? HouseWorkHoursToReport { get; set; }
+        public long? HouseWorkHoursToReport { get; set; }
 
         ///<summary> The type of house work. </summary>
         [JsonProperty]
@@ -86,6 +86,6 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> VAT percentage of the row. The percentage needs to be of an existing VAT percentage. </summary>
         [JsonProperty]
-        public int? VAT { get; set; }
+        public long? VAT { get; set; }
     }
 }

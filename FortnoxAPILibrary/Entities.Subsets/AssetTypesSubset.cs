@@ -19,7 +19,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Id of asset type </summary>
         [JsonProperty]
-        public int? Id { get; set; }
+        public long? Id { get; set; }
 
         ///<summary> Description of the asset type </summary>
         [JsonProperty]

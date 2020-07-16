@@ -63,7 +63,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Invoice number </summary>
         [JsonProperty]
-        public int? InvoiceNumber { get; set; }
+        public long? InvoiceNumber { get; set; }
 
         ///<summary> Due date of the invoice </summary>
         [ReadOnly]
@@ -86,12 +86,12 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Account for the mode of payment </summary>
         [JsonProperty]
-        public int? ModeOfPaymentAccount { get; set; }
+        public long? ModeOfPaymentAccount { get; set; }
 
         ///<summary> Payment number </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? Number { get; private set; }
+        public long? Number { get; private set; }
 
         ///<summary> Date of the payment </summary>
         [JsonProperty]
@@ -100,7 +100,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Number of the voucher </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? VoucherNumber { get; private set; }
+        public long? VoucherNumber { get; private set; }
 
         ///<summary> Series of the voucher </summary>
         [ReadOnly]
@@ -110,7 +110,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Id of the voucher year </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? VoucherYear { get; private set; }
+        public long? VoucherYear { get; private set; }
 
         ///<summary> Payment source </summary>
         [ReadOnly]

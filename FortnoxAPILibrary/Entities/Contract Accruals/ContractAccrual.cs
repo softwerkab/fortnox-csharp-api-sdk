@@ -15,11 +15,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Account for the accrual </summary>
         [JsonProperty]
-        public int? AccrualAccount { get; set; }
+        public long? AccrualAccount { get; set; }
 
         ///<summary> Account for the cost </summary>
         [JsonProperty]
-        public int? CostAccount { get; set; }
+        public long? CostAccount { get; set; }
 
         ///<summary> Description </summary>
         [JsonProperty]
@@ -31,7 +31,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Document number </summary>
         [JsonProperty]
-        public int? DocumentNumber { get; set; }
+        public long? DocumentNumber { get; set; }
 
         ///<summary> Type of period </summary>
         [ReadOnly]
@@ -41,7 +41,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Total times of accruals </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? Times { get; private set; }
+        public long? Times { get; private set; }
 
         ///<summary> Total of the accrual </summary>
         [JsonProperty]

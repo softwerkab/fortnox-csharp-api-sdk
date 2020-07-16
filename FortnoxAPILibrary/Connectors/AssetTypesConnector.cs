@@ -28,7 +28,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the assetType to find</param>
 		/// <returns>The found assetType</returns>
-		public AssetType Get(int? id)
+		public AssetType Get(long? id)
 		{
             return GetAsync(id).Result;
         }
@@ -57,7 +57,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a assetTypes
 		/// </summary>
 		/// <param name="id">Identifier of the assetTypes to delete</param>
-		public void Delete(int? id)
+		public void Delete(long? id)
 		{
 			DeleteAsync(id).Wait();
 		}
@@ -89,7 +89,7 @@ namespace FortnoxAPILibrary.Connectors
             FixResponseContent = null;
 			return result;
         }
-		public async Task DeleteAsync(int? id)
+		public async Task DeleteAsync(long? id)
 		{
 			await BaseDelete(id.ToString()).ConfigureAwait(false);
 		}
@@ -111,7 +111,7 @@ namespace FortnoxAPILibrary.Connectors
 			FixResponseContent = null;
             return result;
 		}
-		public async Task<AssetType> GetAsync(int? id)
+		public async Task<AssetType> GetAsync(long? id)
 		{
 			FixResponseContent = (json) => new Regex("Type").Replace(json, "AssetType", 1);
 

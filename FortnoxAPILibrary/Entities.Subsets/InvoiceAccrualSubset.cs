@@ -20,7 +20,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Invoice number </summary>
         [JsonProperty]
-        public int? InvoiceNumber { get; set; }
+        public long? InvoiceNumber { get; set; }
 
         ///<summary> Type of period </summary>
         [JsonProperty]

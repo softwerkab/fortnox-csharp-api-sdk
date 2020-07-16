@@ -14,12 +14,12 @@ namespace FortnoxAPILibrary.Connectors
 
 		Label Update(Label label);
 		Label Create(Label label);
-		void Delete(int? id);
+		void Delete(long? id);
 		EntityCollection<Label> Find();
 
 		Task<Label> UpdateAsync(Label label);
 		Task<Label> CreateAsync(Label label);
-		Task DeleteAsync(int? id);
+		Task DeleteAsync(long? id);
 		Task<EntityCollection<Label>> FindAsync();
 	}
 }

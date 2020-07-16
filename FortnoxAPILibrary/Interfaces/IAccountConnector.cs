@@ -15,14 +15,14 @@ namespace FortnoxAPILibrary.Connectors
 
 		Account Update(Account account);
 		Account Create(Account account);
-		Account Get(int? id);
-		void Delete(int? id);
+		Account Get(long? id);
+		void Delete(long? id);
 		EntityCollection<AccountSubset> Find();
 
 		Task<Account> UpdateAsync(Account account);
 		Task<Account> CreateAsync(Account account);
-		Task<Account> GetAsync(int? id);
-		Task DeleteAsync(int? id);
+		Task<Account> GetAsync(long? id);
+		Task DeleteAsync(long? id);
 		Task<EntityCollection<AccountSubset>> FindAsync();
 	}
 }

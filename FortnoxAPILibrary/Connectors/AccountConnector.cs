@@ -32,7 +32,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the account to find</param>
 		/// <returns>The found account</returns>
-		public Account Get(int? id)
+		public Account Get(long? id)
 		{
 			return GetAsync(id).Result;
 		}
@@ -61,7 +61,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a account
 		/// </summary>
 		/// <param name="id">Identifier of the account to delete</param>
-		public void Delete(int? id)
+		public void Delete(long? id)
 		{
 			DeleteAsync(id).Wait();
 		}
@@ -79,7 +79,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseFind().ConfigureAwait(false);
 		}
-		public async Task DeleteAsync(int? id)
+		public async Task DeleteAsync(long? id)
 		{
 			await BaseDelete(id.ToString()).ConfigureAwait(false);
 		}
@@ -91,7 +91,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseUpdate(account, account.Number.ToString()).ConfigureAwait(false);
 		}
-		public async Task<Account> GetAsync(int? id)
+		public async Task<Account> GetAsync(long? id)
 		{
 			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}

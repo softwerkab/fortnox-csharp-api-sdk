@@ -75,7 +75,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the offer to find</param>
 		/// <returns>The found offer</returns>
-		public Offer Get(int? id)
+		public Offer Get(long? id)
 		{
 			return GetAsync(id).Result;
 		}
@@ -114,7 +114,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Offer CreateOrder(int? id)
+		public Offer CreateOrder(long? id)
 		{
 			return DoAction(id.ToString(), Action.CreateOrder);
 		}
@@ -124,7 +124,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Offer Cancel(int? id)
+		public Offer Cancel(long? id)
 		{
 			return DoAction(id.ToString(), Action.Cancel);
 		}
@@ -134,7 +134,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Offer Email(int? id)
+		public Offer Email(long? id)
 		{
 			return DoAction(id.ToString(), Action.Email);
 		}
@@ -144,7 +144,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public byte[] Print(int? id)
+		public byte[] Print(long? id)
 		{
 			return DoDownloadAction(id.ToString(), Action.Print);
 		}
@@ -154,7 +154,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Offer ExternalPrint(int? id)
+		public Offer ExternalPrint(long? id)
 		{
 			return DoAction(id.ToString(), Action.ExternalPrint);
 		}
@@ -164,7 +164,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public byte[] Preview(int? id)
+		public byte[] Preview(long? id)
 		{
 			return DoDownloadAction(id.ToString(), Action.Preview);
 		}
@@ -181,7 +181,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseUpdate(offer, offer.DocumentNumber.ToString()).ConfigureAwait(false);
 		}
-		public async Task<Offer> GetAsync(int? id)
+		public async Task<Offer> GetAsync(long? id)
 		{
 			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}

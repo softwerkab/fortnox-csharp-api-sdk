@@ -59,7 +59,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Reference to credit invoice, if one exists </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? CreditReference { get; private set; }
+        public long? CreditReference { get; private set; }
 
         ///<summary> Currency </summary>
         [JsonProperty]

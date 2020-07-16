@@ -45,7 +45,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Reference number </summary>
         [JsonProperty]
-        public int? ReferenceNumber { get; set; }
+        public long? ReferenceNumber { get; set; }
 
         ///<summary> Is request sent </summary>
         [ReadOnly]

@@ -15,11 +15,11 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Id of the connection </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? Id { get; private set; }
+        public long? Id { get; private set; }
 
         ///<summary> Supplier invoice number </summary>
         [JsonProperty]
-        public int? SupplierInvoiceNumber { get; set; }
+        public long? SupplierInvoiceNumber { get; set; }
 
         ///<summary> URL of the connection </summary>
         [JsonProperty]

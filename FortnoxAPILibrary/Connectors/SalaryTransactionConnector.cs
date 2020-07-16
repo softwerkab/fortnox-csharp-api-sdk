@@ -37,7 +37,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the salaryTransaction to find</param>
 		/// <returns>The found salaryTransaction</returns>
-		public SalaryTransaction Get(int? id)
+		public SalaryTransaction Get(long? id)
 		{
 			return GetAsync(id).Result;
 		}
@@ -66,7 +66,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a salaryTransaction
 		/// </summary>
 		/// <param name="id">Identifier of the salaryTransaction to delete</param>
-		public void Delete(int? id)
+		public void Delete(long? id)
 		{
 			DeleteAsync(id).Wait();
 		}
@@ -84,7 +84,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseFind().ConfigureAwait(false);
 		}
-		public async Task DeleteAsync(int? id)
+		public async Task DeleteAsync(long? id)
 		{
 			await BaseDelete(id.ToString()).ConfigureAwait(false);
 		}
@@ -96,7 +96,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseUpdate(salaryTransaction, salaryTransaction.SalaryRow.ToString()).ConfigureAwait(false);
 		}
-		public async Task<SalaryTransaction> GetAsync(int? id)
+		public async Task<SalaryTransaction> GetAsync(long? id)
 		{
 			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}

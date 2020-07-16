@@ -40,12 +40,12 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Invoice number </summary>
         [JsonProperty]
-        public int? InvoiceNumber { get; set; }
+        public long? InvoiceNumber { get; set; }
 
         ///<summary> Payment number </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? Number { get; private set; }
+        public long? Number { get; private set; }
 
         ///<summary> Date of the payment </summary>
         [JsonProperty]

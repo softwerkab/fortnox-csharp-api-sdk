@@ -38,7 +38,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Document number </summary>
         [JsonProperty]
-        public int? DocumentNumber { get; set; }
+        public long? DocumentNumber { get; set; }
 
         ///<summary> External invoice reference 1 </summary>
         [JsonProperty]

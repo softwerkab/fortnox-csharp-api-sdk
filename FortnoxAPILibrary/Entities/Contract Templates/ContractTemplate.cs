@@ -19,7 +19,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Length of the contract </summary>
         [JsonProperty]
-        public int? ContractLength { get; set; }
+        public long? ContractLength { get; set; }
 
         ///<summary> Freight </summary>
         [JsonProperty]
@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Invoice interval </summary>
         [JsonProperty]
-        public int? InvoiceInterval { get; set; }
+        public long? InvoiceInterval { get; set; }
 
         ///<summary> – </summary>
         [JsonProperty]

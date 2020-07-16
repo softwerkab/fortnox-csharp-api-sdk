@@ -14,14 +14,14 @@ namespace FortnoxAPILibrary.Connectors
 
 		InvoiceAccrual Update(InvoiceAccrual invoiceAccrual);
 		InvoiceAccrual Create(InvoiceAccrual invoiceAccrual);
-		InvoiceAccrual Get(int? id);
-		void Delete(int? id);
+		InvoiceAccrual Get(long? id);
+		void Delete(long? id);
 		EntityCollection<InvoiceAccrualSubset> Find();
 
 		Task<InvoiceAccrual> UpdateAsync(InvoiceAccrual invoiceAccrual);
 		Task<InvoiceAccrual> CreateAsync(InvoiceAccrual invoiceAccrual);
-		Task<InvoiceAccrual> GetAsync(int? id);
-		Task DeleteAsync(int? id);
+		Task<InvoiceAccrual> GetAsync(long? id);
+		Task DeleteAsync(long? id);
 		Task<EntityCollection<InvoiceAccrualSubset>> FindAsync();
 	}
 }

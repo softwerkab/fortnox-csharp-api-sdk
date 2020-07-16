@@ -15,14 +15,14 @@ namespace FortnoxAPILibrary.Connectors
 
 		SupplierInvoicePayment Update(SupplierInvoicePayment supplierInvoicePayment);
 		SupplierInvoicePayment Create(SupplierInvoicePayment supplierInvoicePayment);
-		SupplierInvoicePayment Get(int? id);
-		void Delete(int? id);
+		SupplierInvoicePayment Get(long? id);
+		void Delete(long? id);
 		EntityCollection<SupplierInvoicePaymentSubset> Find();
 
 		Task<SupplierInvoicePayment> UpdateAsync(SupplierInvoicePayment supplierInvoicePayment);
 		Task<SupplierInvoicePayment> CreateAsync(SupplierInvoicePayment supplierInvoicePayment);
-		Task<SupplierInvoicePayment> GetAsync(int? id);
-		Task DeleteAsync(int? id);
+		Task<SupplierInvoicePayment> GetAsync(long? id);
+		Task DeleteAsync(long? id);
 		Task<EntityCollection<SupplierInvoicePaymentSubset>> FindAsync();
 	}
 }

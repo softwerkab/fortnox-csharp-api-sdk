@@ -35,7 +35,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a trustedEmailSenders
 		/// </summary>
 		/// <param name="id">Identifier of the trustedEmailSenders to delete</param>
-		public void Delete(int? id)
+		public void Delete(long? id)
 		{
 			DeleteAsync(id).Wait();
 		}
@@ -54,7 +54,7 @@ namespace FortnoxAPILibrary.Connectors
             return await BaseCreate(trustedEmailSenders).ConfigureAwait(false);
         }
 
-        public async Task DeleteAsync(int? id)
+        public async Task DeleteAsync(long? id)
         {
             await BaseDelete(id.ToString()).ConfigureAwait(false);
         }

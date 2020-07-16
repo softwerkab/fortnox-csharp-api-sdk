@@ -10,7 +10,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> The ID of the label. </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? Id { get; private set; }
+        public long? Id { get; private set; }
 
         ///<summary> Description of the label </summary>
         [JsonProperty]

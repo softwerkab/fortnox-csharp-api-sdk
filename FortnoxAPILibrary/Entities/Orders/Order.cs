@@ -121,7 +121,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Document number </summary>
         [JsonProperty]
-        public int? DocumentNumber { get; set; }
+        public long? DocumentNumber { get; set; }
 
         ///<summary>  </summary>
         [JsonProperty]
@@ -157,7 +157,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Reference if an invoice is created from order </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? InvoiceReference { get; private set; }
+        public long? InvoiceReference { get; private set; }
 
         ///<summary> Net amount </summary>
         [ReadOnly]
@@ -175,7 +175,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Reference to offer number </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? OfferReference { get; private set; }
+        public long? OfferReference { get; private set; }
 
         ///<summary>  </summary>
         [JsonProperty]

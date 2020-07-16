@@ -10,7 +10,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Id of the record </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? Id { get; private set; }
+        public long? Id { get; private set; }
 
         ///<summary> Domain address of trusted </summary>
         [JsonProperty]

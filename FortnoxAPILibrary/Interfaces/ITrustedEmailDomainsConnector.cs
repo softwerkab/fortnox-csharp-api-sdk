@@ -12,13 +12,13 @@ namespace FortnoxAPILibrary.Connectors
 		Filter.TrustedEmailDomains? FilterBy { get; set; }
 
         TrustedEmailDomain Create(TrustedEmailDomain trustedEmailDomain);
-		TrustedEmailDomain Get(int? id);
-		void Delete(int? id);
+		TrustedEmailDomain Get(long? id);
+		void Delete(long? id);
 		EntityCollection<TrustedEmailDomain> Find();
 
         Task<TrustedEmailDomain> CreateAsync(TrustedEmailDomain trustedEmailDomain);
-		Task<TrustedEmailDomain> GetAsync(int? id);
-		Task DeleteAsync(int? id);
+		Task<TrustedEmailDomain> GetAsync(long? id);
+		Task DeleteAsync(long? id);
 		Task<EntityCollection<TrustedEmailDomain>> FindAsync();
     }
 }

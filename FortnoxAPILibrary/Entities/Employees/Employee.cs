@@ -110,7 +110,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Tax column </summary>
         [JsonProperty]
-        public int? TaxColumn { get; set; }
+        public long? TaxColumn { get; set; }
 
         ///<summary> Non-recurring tax % </summary>
         [JsonProperty]

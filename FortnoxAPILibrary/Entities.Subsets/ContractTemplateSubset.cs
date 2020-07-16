@@ -16,11 +16,11 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Length of the contract </summary>
         [JsonProperty]
-        public int? ContractLength { get; set; }
+        public long? ContractLength { get; set; }
 
         ///<summary> Invoice interval </summary>
         [JsonProperty]
-        public int? InvoiceInterval { get; set; }
+        public long? InvoiceInterval { get; set; }
 
         ///<summary> Name of the template </summary>
         [JsonProperty("ContractTemplateName")]

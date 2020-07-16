@@ -41,7 +41,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Contract length </summary>
         [JsonProperty]
-        public int? ContractLength { get; set; }
+        public long? ContractLength { get; set; }
 
         ///<summary> Contribution percent </summary>
         [ReadOnly]
@@ -72,7 +72,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Document number </summary>
         [JsonProperty]
-        public int? DocumentNumber { get; set; }
+        public long? DocumentNumber { get; set; }
 
         ///<summary> – </summary>
         [JsonProperty]
@@ -106,7 +106,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Invoice interval </summary>
         [JsonProperty]
-        public int? InvoiceInterval { get; set; }
+        public long? InvoiceInterval { get; set; }
 
         ///<summary> – </summary>
         [JsonProperty]
@@ -115,7 +115,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Invoices remaining </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? InvoicesRemaining { get; private set; }
+        public long? InvoicesRemaining { get; private set; }
 
         ///<summary> Language </summary>
         [JsonProperty]
@@ -167,7 +167,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Template number </summary>
         [JsonProperty]
-        public int? TemplateNumber { get; set; }
+        public long? TemplateNumber { get; set; }
 
         ///<summary> Terms of delivery code </summary>
         [JsonProperty]

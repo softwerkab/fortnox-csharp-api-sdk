@@ -47,7 +47,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Number of the voucher </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? VoucherNumber { get; private set; }
+        public long? VoucherNumber { get; private set; }
 
         ///<summary> The properties for the object in this array is listed in the table for “Voucher Rows”. </summary>
         [JsonProperty]
@@ -60,11 +60,11 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Id of the year of the voucher. </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? Year { get; private set; }
+        public long? Year { get; private set; }
 
         ///<summary> The approval state f the voucher.  Not for approval: 0  Not ready for approval: 1  Not approved: 2  Approved: 3 </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? ApprovalState { get; private set; }
+        public long? ApprovalState { get; private set; }
     }
 }

@@ -14,14 +14,14 @@ namespace FortnoxAPILibrary.Connectors
 
 		SalaryTransaction Update(SalaryTransaction salaryTransaction);
 		SalaryTransaction Create(SalaryTransaction salaryTransaction);
-		SalaryTransaction Get(int? id);
-		void Delete(int? id);
+		SalaryTransaction Get(long? id);
+		void Delete(long? id);
 		EntityCollection<SalaryTransactionSubset> Find();
 
 		Task<SalaryTransaction> UpdateAsync(SalaryTransaction salaryTransaction);
 		Task<SalaryTransaction> CreateAsync(SalaryTransaction salaryTransaction);
-		Task<SalaryTransaction> GetAsync(int? id);
-		Task DeleteAsync(int? id);
+		Task<SalaryTransaction> GetAsync(long? id);
+		Task DeleteAsync(long? id);
 		Task<EntityCollection<SalaryTransactionSubset>> FindAsync();
 	}
 }

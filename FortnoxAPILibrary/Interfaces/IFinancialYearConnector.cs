@@ -14,11 +14,11 @@ namespace FortnoxAPILibrary.Connectors
 		string Date { get; set; }
 
         FinancialYear Create(FinancialYear financialYear);
-		FinancialYear Get(int? id);
+		FinancialYear Get(long? id);
         EntityCollection<FinancialYearSubset> Find();
 
         Task<FinancialYear> CreateAsync(FinancialYear financialYear);
-		Task<FinancialYear> GetAsync(int? id);
+		Task<FinancialYear> GetAsync(long? id);
         Task<EntityCollection<FinancialYearSubset>> FindAsync();
 	}
 }

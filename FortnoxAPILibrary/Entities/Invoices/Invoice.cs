@@ -68,7 +68,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Reference to the credit invoice, if one exits. The reference must be a document number for an existing credit invoice. </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? CreditInvoiceReference { get; private set; }
+        public long? CreditInvoiceReference { get; private set; }
 
         ///<summary> City for the invoice address. </summary>
         [JsonProperty]
@@ -81,7 +81,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Reference to the contract, if one exists. </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? ContractReference { get; private set; }
+        public long? ContractReference { get; private set; }
 
         ///<summary> Invoice contribution in percent. </summary>
         [ReadOnly]
@@ -151,7 +151,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> The invoice number. If no document number is provided, the next number in the series will be used. </summary>
         [JsonProperty]
-        public int? DocumentNumber { get; set; }
+        public long? DocumentNumber { get; set; }
 
         ///<summary> Due date of the invoice. Must be a valid date according to our date format. </summary>
         [JsonProperty]
@@ -256,12 +256,12 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Reference to the offer, if one exists. </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? OfferReference { get; private set; }
+        public long? OfferReference { get; private set; }
 
         ///<summary> Reference to the order, if one exists. </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? OrderReference { get; private set; }
+        public long? OrderReference { get; private set; }
 
         ///<summary> Organisation number of the customer for the invoice. </summary>
         [ReadOnly]
@@ -303,7 +303,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Number of reminders sent to the customer. </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? Reminders { get; private set; }
+        public long? Reminders { get; private set; }
 
         ///<summary> Round off amount for the invoice. </summary>
         [ReadOnly]
@@ -318,7 +318,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> The amount of tax reduction. </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? TaxReduction { get; private set; }
+        public long? TaxReduction { get; private set; }
 
         ///<summary> Code of the terms of delivery. The code must be of an existing terms of delivery. </summary>
         [JsonProperty]
@@ -345,7 +345,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Voucher number for the invoice. This is created when the invoice is bookkept. </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? VoucherNumber { get; private set; }
+        public long? VoucherNumber { get; private set; }
 
         ///<summary> Voucher series for the invoice. This is created when the invoice is bookkept. </summary>
         [ReadOnly]
@@ -355,7 +355,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Voucher year for the invoice. This is created when the invoice is bookkept. </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? VoucherYear { get; private set; }
+        public long? VoucherYear { get; private set; }
 
         ///<summary> Code of the way of delivery. The code must be of an existing way of delivery. </summary>
         [JsonProperty]

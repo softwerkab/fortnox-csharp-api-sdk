@@ -22,18 +22,18 @@ namespace FortnoxAPILibrary.Connectors
 
 		Offer Update(Offer offer);
 		Offer Create(Offer offer);
-		Offer Get(int? id);
+		Offer Get(long? id);
         EntityCollection<OfferSubset> Find();
-		Offer CreateOrder(int? id);
-		Offer Cancel(int? id);
-		Offer Email(int? id);
-        byte[] Print(int? id);
-		Offer ExternalPrint(int? id);
-		byte[] Preview(int? id);
+		Offer CreateOrder(long? id);
+		Offer Cancel(long? id);
+		Offer Email(long? id);
+        byte[] Print(long? id);
+		Offer ExternalPrint(long? id);
+		byte[] Preview(long? id);
 
 		Task<Offer> UpdateAsync(Offer offer);
 		Task<Offer> CreateAsync(Offer offer);
-		Task<Offer> GetAsync(int? id);
+		Task<Offer> GetAsync(long? id);
         Task<EntityCollection<OfferSubset>> FindAsync();
 	}
 }

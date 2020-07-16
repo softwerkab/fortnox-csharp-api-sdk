@@ -19,7 +19,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Unique row ID </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? SalaryRow { get; private set; }
+        public long? SalaryRow { get; private set; }
 
         ///<summary> Date </summary>
         [JsonProperty]

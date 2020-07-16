@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Account number (If empty Fortnox will use settings from the article) </summary>
         [JsonProperty]
-        public int? Account { get; set; }
+        public long? Account { get; set; }
 
         ///<summary> Article number </summary>
         [JsonProperty]

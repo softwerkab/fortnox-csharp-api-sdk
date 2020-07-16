@@ -31,7 +31,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the supplierInvoicePayment to find</param>
 		/// <returns>The found supplierInvoicePayment</returns>
-		public SupplierInvoicePayment Get(int? id)
+		public SupplierInvoicePayment Get(long? id)
 		{
 			return GetAsync(id).Result;
 		}
@@ -60,7 +60,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Deletes a supplierInvoicePayment
 		/// </summary>
 		/// <param name="id">Identifier of the supplierInvoicePayment to delete</param>
-		public void Delete(int? id)
+		public void Delete(long? id)
 		{
 			DeleteAsync(id).Wait();
 		}
@@ -78,7 +78,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// Bookkeeps the supplier invoice payment
 		/// </summary>
 		/// <param name="id"></param>
-		public void Bookkeep(int? id)
+		public void Bookkeep(long? id)
         {
             DoAction(id.ToString(), Action.Bookkeep);
         }
@@ -87,7 +87,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseFind().ConfigureAwait(false);
 		}
-		public async Task DeleteAsync(int? id)
+		public async Task DeleteAsync(long? id)
 		{
 			await BaseDelete(id.ToString()).ConfigureAwait(false);
 		}
@@ -99,7 +99,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseUpdate(supplierInvoicePayment, supplierInvoicePayment.Number.ToString()).ConfigureAwait(false);
 		}
-		public async Task<SupplierInvoicePayment> GetAsync(int? id)
+		public async Task<SupplierInvoicePayment> GetAsync(long? id)
 		{
 			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}

@@ -123,7 +123,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the invoice to find</param>
 		/// <returns>The found invoice</returns>
-		public Invoice Get(int? id)
+		public Invoice Get(long? id)
 		{
 			return GetAsync(id).Result;
 		}
@@ -162,7 +162,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Invoice Bookkeep(int? id)
+		public Invoice Bookkeep(long? id)
 		{
 			return DoAction(id.ToString(), Action.Bookkeep);
 		}
@@ -172,7 +172,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Invoice Cancel(int? id)
+		public Invoice Cancel(long? id)
 		{
 			return DoAction(id.ToString(), Action.Cancel);
 		}
@@ -182,7 +182,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Invoice CreditInvoice(int? id)
+		public Invoice CreditInvoice(long? id)
 		{
 			return DoAction(id.ToString(), Action.Credit);
 		}
@@ -192,7 +192,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Invoice Email(int? id)
+		public Invoice Email(long? id)
 		{
 			return DoAction(id.ToString(), Action.Email);
 		}
@@ -202,7 +202,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Invoice EInvoice(int? id)
+		public Invoice EInvoice(long? id)
 		{
 			return DoAction(id.ToString(), Action.EInvoice);
 		}
@@ -212,7 +212,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
         /// <returns></returns>
 		/// </summary>
-		public byte[] Print(int? id)
+		public byte[] Print(long? id)
 		{
 			return DoDownloadAction(id.ToString(), Action.Print);
 		}
@@ -222,7 +222,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public byte[] PrintReminder(int? id)
+		public byte[] PrintReminder(long? id)
 		{
 			return DoDownloadAction(id.ToString(), Action.PrintReminder);
 		}
@@ -232,7 +232,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Invoice ExternalPrint(int? id)
+		public Invoice ExternalPrint(long? id)
 		{
 			return DoAction(id.ToString(), Action.ExternalPrint);
 		}
@@ -242,7 +242,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public byte[] Preview(int? id)
+		public byte[] Preview(long? id)
 		{
 			return DoDownloadAction(id.ToString(), Action.Preview);
 		}
@@ -259,7 +259,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseUpdate(invoice, invoice.DocumentNumber.ToString()).ConfigureAwait(false);
 		}
-		public async Task<Invoice> GetAsync(int? id)
+		public async Task<Invoice> GetAsync(long? id)
 		{
 			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}

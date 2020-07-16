@@ -25,18 +25,18 @@ namespace FortnoxAPILibrary.Connectors
 
 		Order Update(Order order);
 		Order Create(Order order);
-		Order Get(int? id);
+		Order Get(long? id);
         EntityCollection<OrderSubset> Find();
-		Order CreateInvoice(int? id);
-		Order Cancel(int? id);
-		Order Email(int? id);
-		byte[] Print(int? id);
-		Order ExternalPrint(int? id);
-		byte[] Preview(int? id);
+		Order CreateInvoice(long? id);
+		Order Cancel(long? id);
+		Order Email(long? id);
+		byte[] Print(long? id);
+		Order ExternalPrint(long? id);
+		byte[] Preview(long? id);
 
 		Task<Order> UpdateAsync(Order order);
 		Task<Order> CreateAsync(Order order);
-		Task<Order> GetAsync(int? id);
+		Task<Order> GetAsync(long? id);
         Task<EntityCollection<OrderSubset>> FindAsync();
 	}
 }

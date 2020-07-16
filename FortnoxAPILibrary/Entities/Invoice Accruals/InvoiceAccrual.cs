@@ -16,7 +16,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Account for the accrual </summary>
         [JsonProperty]
-        public int? AccrualAccount { get; set; }
+        public long? AccrualAccount { get; set; }
 
         ///<summary> Description of the accrual </summary>
         [JsonProperty]
@@ -32,7 +32,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Invoice number </summary>
         [JsonProperty]
-        public int? InvoiceNumber { get; set; }
+        public long? InvoiceNumber { get; set; }
 
         ///<summary> Type of period </summary>
         [JsonProperty]
@@ -40,7 +40,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Account for the revenue </summary>
         [JsonProperty]
-        public int? RevenueAccount { get; set; }
+        public long? RevenueAccount { get; set; }
 
         ///<summary> Start date </summary>
         [JsonProperty]
@@ -49,7 +49,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Total times of accruals </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? Times { get; private set; }
+        public long? Times { get; private set; }
 
         ///<summary> Total of the accrual </summary>
         [JsonProperty]

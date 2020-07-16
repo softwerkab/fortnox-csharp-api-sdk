@@ -63,7 +63,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the contract to find</param>
 		/// <returns>The found contract</returns>
-		public Contract Get(int? id)
+		public Contract Get(long? id)
 		{
 			return GetAsync(id).Result;
 		}
@@ -102,7 +102,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Contract Finish(int? id)
+		public Contract Finish(long? id)
 		{
 			return DoAction(id.ToString(), Action.Finish);
 		}
@@ -112,7 +112,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Contract CreateInvoice(int? id)
+		public Contract CreateInvoice(long? id)
 		{
 			return DoAction(id.ToString(), Action.CreateInvoice);
 		}
@@ -122,7 +122,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		/// <returns></returns>
 		/// </summary>
-		public Contract IncreaseInvoiceCount(int? id)
+		public Contract IncreaseInvoiceCount(long? id)
 		{
 			return DoAction(id.ToString(), Action.IncreaseInvoiceCount);
 		}
@@ -139,7 +139,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseUpdate(contract, contract.DocumentNumber.ToString()).ConfigureAwait(false);
 		}
-		public async Task<Contract> GetAsync(int? id)
+		public async Task<Contract> GetAsync(long? id)
 		{
 			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}

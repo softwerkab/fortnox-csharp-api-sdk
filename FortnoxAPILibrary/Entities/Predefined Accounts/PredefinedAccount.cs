@@ -19,6 +19,6 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Predefined account </summary>
         [JsonProperty]
-        public int? Account { get; set; }
+        public long? Account { get; set; }
     }
 }

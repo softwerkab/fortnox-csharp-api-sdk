@@ -12,11 +12,11 @@ namespace FortnoxAPILibrary.Connectors
 		Filter.TrustedEmailSenders? FilterBy { get; set; }
 
         TrustedEmailSender Create(TrustedEmailSender trustedEmailSenders);
-        void Delete(int? id);
+        void Delete(long? id);
         EmailSenders Find();
 
         Task<TrustedEmailSender> CreateAsync(TrustedEmailSender trustedEmailSenders);
-        Task DeleteAsync(int? id);
+        Task DeleteAsync(long? id);
         Task<EmailSenders> FindAsync();
 	}
 }

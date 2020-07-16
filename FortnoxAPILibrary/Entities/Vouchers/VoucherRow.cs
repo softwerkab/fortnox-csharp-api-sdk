@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Account number. The number must be of an existing active account. </summary>
         [JsonProperty]
-        public int? Account { get; set; }
+        public long? Account { get; set; }
 
         ///<summary> Code of the cost center. The code must be of an existing cost center. </summary>
         [JsonProperty]

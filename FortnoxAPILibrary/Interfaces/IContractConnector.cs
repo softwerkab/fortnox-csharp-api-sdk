@@ -20,15 +20,15 @@ namespace FortnoxAPILibrary.Connectors
 
 		Contract Update(Contract contract);
 		Contract Create(Contract contract);
-		Contract Get(int? id);
+		Contract Get(long? id);
         EntityCollection<ContractSubset> Find();
-		Contract Finish(int? id);
-		Contract CreateInvoice(int? id);
-		Contract IncreaseInvoiceCount(int? id);
+		Contract Finish(long? id);
+		Contract CreateInvoice(long? id);
+		Contract IncreaseInvoiceCount(long? id);
 
 		Task<Contract> UpdateAsync(Contract contract);
 		Task<Contract> CreateAsync(Contract contract);
-		Task<Contract> GetAsync(int? id);
+		Task<Contract> GetAsync(long? id);
         Task<EntityCollection<ContractSubset>> FindAsync();
 	}
 }

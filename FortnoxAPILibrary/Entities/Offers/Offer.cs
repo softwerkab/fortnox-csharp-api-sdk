@@ -121,7 +121,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Document Number </summary>
         [JsonProperty]
-        public int? DocumentNumber { get; set; }
+        public long? DocumentNumber { get; set; }
 
         ///<summary> – </summary>
         [JsonProperty]
@@ -166,7 +166,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Reference to order </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? OrderReference { get; private set; }
+        public long? OrderReference { get; private set; }
 
         ///<summary> Organisation number </summary>
         [JsonProperty]

@@ -27,11 +27,11 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Next number in the series </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? NextVoucherNumber { get; private set; }
+        public long? NextVoucherNumber { get; private set; }
 
         ///<summary> Id of the financial year </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? Year { get; private set; }
+        public long? Year { get; private set; }
     }
 }

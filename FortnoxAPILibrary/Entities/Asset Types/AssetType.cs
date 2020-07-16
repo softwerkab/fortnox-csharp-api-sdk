@@ -19,7 +19,7 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Id of asset type </summary>
         [ReadOnly]
         [JsonProperty]
-        public int? Id { get; private set; }
+        public long? Id { get; private set; }
 
         ///<summary> Description of the asset type </summary>
         [JsonProperty]
@@ -36,35 +36,35 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Id of asset account </summary>
         [JsonProperty]
-        public int? AccountAssetId { get; set; }
+        public long? AccountAssetId { get; set; }
 
         ///<summary> Id of a value loss account </summary>
         [JsonProperty]
-        public int? AccountValueLossId { get; set; }
+        public long? AccountValueLossId { get; set; }
 
         ///<summary> Id of a sale loss account </summary>
         [JsonProperty]
-        public int? AccountSaleLossId { get; set; }
+        public long? AccountSaleLossId { get; set; }
 
         ///<summary> Id of a sale win account </summary>
         [JsonProperty]
-        public int? AccountSaleWinId { get; set; }
+        public long? AccountSaleWinId { get; set; }
 
         ///<summary> Id of a revaluation account </summary>
         [JsonProperty]
-        public int? AccountRevaluationId { get; set; }
+        public long? AccountRevaluationId { get; set; }
 
         ///<summary> Id of an accumulated write-down account </summary>
         [JsonProperty]
-        public int? AccountWriteDownAckId { get; set; }
+        public long? AccountWriteDownAckId { get; set; }
 
         ///<summary> Id of a write-down account </summary>
         [JsonProperty]
-        public int? AccountWriteDownId { get; set; }
+        public long? AccountWriteDownId { get; set; }
 
         ///<summary> Id of a depreciation account </summary>
         [JsonProperty]
-        public int? AccountDepreciationId { get; set; }
+        public long? AccountDepreciationId { get; set; }
 
         ///<summary> Id and description of used account </summary>
         [ReadOnly]

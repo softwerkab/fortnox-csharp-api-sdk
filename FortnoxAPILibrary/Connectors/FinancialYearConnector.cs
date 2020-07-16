@@ -31,7 +31,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		/// <param name="id">Identifier of the financialYear to find</param>
 		/// <returns>The found financialYear</returns>
-		public FinancialYear Get(int? id)
+		public FinancialYear Get(long? id)
 		{
 			return GetAsync(id).Result;
 		}
@@ -63,7 +63,7 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseCreate(financialYear).ConfigureAwait(false);
 		}
-		public async Task<FinancialYear> GetAsync(int? id)
+		public async Task<FinancialYear> GetAsync(long? id)
 		{
 			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}
