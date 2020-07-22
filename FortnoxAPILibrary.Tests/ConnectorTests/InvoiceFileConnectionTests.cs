@@ -36,11 +36,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                     new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 2, Price = 10},
                 }
             });
-            var c = new InboxConnector();
-            var tmpFile = c.UploadFile("tmpInvoiceFile.pdf", Resource.invoice_example, StaticFolders.CustomerInvoices);
+            var inboxConnector = new InboxConnector();
+            var tmpFile = inboxConnector.UploadFile("tmpInvoiceFile.pdf", Resource.invoice_example, StaticFolders.CustomerInvoices);
             #endregion Arrange
 
-            /*IInvoiceFileConnectionConnector*/ var connector = new InvoiceFileConnectionConnector();
+            IInvoiceFileConnectionConnector connector = new InvoiceFileConnectionConnector();
 
             #region CREATE
             var newInvoiceFileConnection = new InvoiceFileConnection()

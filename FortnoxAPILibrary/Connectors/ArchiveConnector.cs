@@ -30,10 +30,11 @@ namespace FortnoxAPILibrary.Connectors
         /// Downloads the specified file
         /// </summary>
         /// <param name="id">Identifier of the file to download</param>
+        /// <param name="idType">Specify type of the provided identifier. Temporary workaround. </param>
         /// <returns>The found file</returns>
-        public byte[] DownloadFile(string id)
+        public byte[] DownloadFile(string id, IdType idType = IdType.Id)
         {
-            return DownloadFileAsync(id).Result;
+            return DownloadFileAsync(id, idType).Result;
         }
 
         /// <summary>
@@ -41,10 +42,11 @@ namespace FortnoxAPILibrary.Connectors
         /// </summary>
         /// <param name="id"></param>
         /// <param name="localPath"></param>
+        /// <param name="idType">Specify type of the provided identifier. Temporary workaround.</param>
         /// <returns></returns>
-        public FileInfo DownloadFile(string id, string localPath)
+        public FileInfo DownloadFile(string id, string localPath, IdType idType = IdType.Id)
         {
-            return DownloadFileAsync(id, localPath).Result;
+            return DownloadFileAsync(id, localPath, idType).Result;
         }
 
         /// <summary>
@@ -122,14 +124,20 @@ namespace FortnoxAPILibrary.Connectors
 
         #region ASYNC Interface Methods
 
-        public async Task<byte[]> DownloadFileAsync(string id)
+        public async Task<byte[]> DownloadFileAsync(string id, IdType idType = IdType.Id)
         {
-            return await BaseDownload(null, id).ConfigureAwait(false);
+            if (idType == IdType.Id)
+                return await BaseDownload(null, id).ConfigureAwait(false);
+            else
+            {
+                var parameters = new Dictionary<string, string>() { {"fileid", id} };
+                return await BaseDownload(parameters).ConfigureAwait(false);
+            }
         }
 
-        public async Task<FileInfo> DownloadFileAsync(string id, string localPath)
+        public async Task<FileInfo> DownloadFileAsync(string id, string localPath, IdType idType = IdType.Id)
         {
-            var data = await DownloadFileAsync(id).ConfigureAwait(false);
+            var data = await DownloadFileAsync(id, idType).ConfigureAwait(false);
             return await data.ToFile(localPath).ConfigureAwait(false);
         }
 

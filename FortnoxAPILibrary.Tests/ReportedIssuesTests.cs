@@ -250,9 +250,140 @@ namespace FortnoxAPILibrary.Tests
                 Assert.IsNotNull(supplierInvoiceSubset.Cancelled);
 
             #region Delete arranged resources
+
             new CustomerConnector().Delete(tmpSupplier.SupplierNumber);
             new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+
             #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_Issue98_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/98
+        {
+            #region Arrange
+
+            var tmpCustomer = new CustomerConnector().Create(new Customer()
+                {Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"});
+            var tmpArticle = new ArticleConnector().Create(new Article()
+                {Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100});
+
+            #endregion Arrange
+
+            IInvoiceConnector connector = new InvoiceConnector();
+
+            var largeId = (long) 2 * int.MaxValue + TestUtils.RandomInt();
+
+            var newInvoice = new Invoice()
+            {
+                DocumentNumber = largeId,
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
+                InvoiceType = InvoiceType.CashInvoice,
+                PaymentWay = PaymentWay.Cash,
+                Comments = "TestInvoice",
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow() {ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, Price = 100},
+                    new InvoiceRow() {ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, Price = 100},
+                    new InvoiceRow() {ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, Price = 100}
+                }
+            };
+
+            var createdInvoice = connector.Create(newInvoice);
+            MyAssert.HasNoError(connector);
+            Assert.AreEqual(largeId, createdInvoice.DocumentNumber);
+
+            #region Delete arranged resources
+
+            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+
+            #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_Issue99_v1_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/99
+        {
+            #region Arrange
+            IArchiveConnector ac = new ArchiveConnector();
+
+            var data = Resource.fortnox_image;
+            var randomFileName = TestUtils.RandomString() + ".txt";
+
+            var fortnoxFile = ac.UploadFile(randomFileName, data, StaticFolders.SupplierInvoices);
+            MyAssert.HasNoError(ac);
+
+            #endregion Arrange
+
+            var archiveConnector = new ArchiveConnector();
+            var case1 = archiveConnector.DownloadFile(fortnoxFile.Id, IdType.Id);
+            var case2 = archiveConnector.DownloadFile(fortnoxFile.Id, IdType.FileId);
+            var case3 = archiveConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.Id);
+            var case4 = archiveConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.FileId);
+
+            Assert.IsNotNull(case1);
+            Assert.IsNull(case2);
+            Assert.IsNull(case3);
+            Assert.IsNotNull(case4);
+
+            var inboxConnector = new InboxConnector();
+            var case5 = inboxConnector.DownloadFile(fortnoxFile.Id, IdType.Id);
+            var case6 = inboxConnector.DownloadFile(fortnoxFile.Id, IdType.FileId);
+
+            var case7 = inboxConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.Id);
+            var case8 = inboxConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.FileId);
+
+            Assert.IsNotNull(case5);
+            Assert.IsNotNull(case6); //Why not null?
+            Assert.IsNull(case7);
+            Assert.IsNotNull(case8);
+            
+            //Clean
+            archiveConnector.DeleteFile(fortnoxFile.Id);
+            MyAssert.HasNoError(archiveConnector);
+        }
+
+        [TestMethod]
+        public void Test_Issue99_v2_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/99
+        {
+            #region Arrange
+            IArchiveConnector ac = new InboxConnector();
+
+            var data = Resource.fortnox_image;
+            var randomFileName = TestUtils.RandomString() + ".txt";
+
+            var fortnoxFile = ac.UploadFile(randomFileName, data, StaticFolders.SupplierInvoices);
+            MyAssert.HasNoError(ac);
+
+            #endregion Arrange
+
+            var archiveConnector = new ArchiveConnector();
+            var case1 = archiveConnector.DownloadFile(fortnoxFile.Id, IdType.Id);
+            var case2 = archiveConnector.DownloadFile(fortnoxFile.Id, IdType.FileId);
+            var case3 = archiveConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.Id);
+            var case4 = archiveConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.FileId);
+
+            Assert.IsNotNull(case1);
+            Assert.IsNull(case2);
+            Assert.IsNull(case3);
+            Assert.IsNotNull(case4);
+
+            var inboxConnector = new InboxConnector();
+            var case5 = inboxConnector.DownloadFile(fortnoxFile.Id, IdType.Id);
+            var case6 = inboxConnector.DownloadFile(fortnoxFile.Id, IdType.FileId);
+
+            var case7 = inboxConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.Id);
+            var case8 = inboxConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.FileId);
+
+            Assert.IsNotNull(case5);
+            Assert.IsNotNull(case6); //Why not null?
+            Assert.IsNull(case7);
+            Assert.IsNotNull(case8);
+
+            //Clean
+            inboxConnector.DeleteFile(fortnoxFile.Id);
+            MyAssert.HasNoError(archiveConnector);
         }
     }
 }

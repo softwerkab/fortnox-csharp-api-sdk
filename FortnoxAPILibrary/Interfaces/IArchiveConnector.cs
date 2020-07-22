@@ -11,8 +11,8 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.Archive? SortBy { get; set; }
         Filter.Archive? FilterBy { get; set; }
 
-        byte[] DownloadFile(string id);
-        FileInfo DownloadFile(string id, string localPath);
+        byte[] DownloadFile(string id, IdType idType = IdType.Id);
+        FileInfo DownloadFile(string id, string localPath, IdType idType = IdType.Id);
         ArchiveFile UploadFile(string name, byte[] data, string folderPathOrId = null);
         ArchiveFile UploadFile(string name, Stream stream, string folderPathOrId = null);
         ArchiveFile UploadFile(string localPath, string folderPathOrId = null);
@@ -24,8 +24,8 @@ namespace FortnoxAPILibrary.Connectors
         void DeleteFolder(string pathOrId);
 
 
-        Task<byte[]> DownloadFileAsync(string id);
-        Task<FileInfo> DownloadFileAsync(string id, string localPath);
+        Task<byte[]> DownloadFileAsync(string id, IdType idType = IdType.Id);
+        Task<FileInfo> DownloadFileAsync(string id, string localPath, IdType idType = IdType.Id);
         Task<ArchiveFile> UploadFileAsync(string name, byte[] data, string folderPathOrId = null);
         Task<ArchiveFile> UploadFileAsync(string name, Stream stream, string folderPathOrId = null);
         Task<ArchiveFile> UploadFileAsync(string localPath, string folderPathOrId = null);
@@ -35,5 +35,11 @@ namespace FortnoxAPILibrary.Connectors
         Task<ArchiveFolder> GetRootAsync();
         Task<ArchiveFolder> CreateFolderAsync(string folderName, string path = null);
         Task DeleteFolderAsync(string pathOrId);
+    }
+
+    public enum IdType
+    {
+        Id,
+        FileId
     }
 }
