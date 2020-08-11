@@ -39,7 +39,14 @@ namespace FortnoxAPILibrary.Connectors
 
     public enum IdType
     {
+        /// <summary>
+        /// Primary file identificator corresponding to "Id" property of ArchiveFile.
+        /// </summary>
         Id,
+        /// <summary>
+        /// Alternative file identificator corresponding to "ArchiveFileId" property of ArchiveFile.
+        /// Use when the value was retrieved from InvoiceFileConnection "FileId" property
+        /// </summary>
         FileId
     }
 }

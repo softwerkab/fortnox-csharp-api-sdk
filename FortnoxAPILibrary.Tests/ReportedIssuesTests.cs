@@ -89,7 +89,6 @@ namespace FortnoxAPILibrary.Tests
             Console.WriteLine(@"Total time: "+watch.ElapsedMilliseconds);
         }
 
-        [Ignore] //Scenario is not yet fixed
         [TestMethod]
         public void Test_issue57_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/57
         {
