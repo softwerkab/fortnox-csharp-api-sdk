@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.Serialization;
 
 namespace FortnoxAPILibrary.Entities
@@ -8,5 +9,8 @@ namespace FortnoxAPILibrary.Entities
         Manual,
         [EnumMember(Value = "direct")]
         Direct,
+        [Obsolete]
+        [EnumMember(Value = "settle")]
+        Settle,
     }
 }
