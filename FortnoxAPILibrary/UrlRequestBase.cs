@@ -81,7 +81,7 @@ namespace FortnoxAPILibrary
         /// <remarks />
         public UrlRequestBase()
         {
-            Timeout = 300000;
+            Timeout = 30*1000;
             serializer = new JsonEntitySerializer();
         }
 
@@ -138,7 +138,7 @@ namespace FortnoxAPILibrary
             {
                 await RateLimit().ConfigureAwait(false);
 
-                using var response = (HttpWebResponse) wr.GetResponse();
+                using var response = (HttpWebResponse) await wr.GetResponseAsync().ConfigureAwait(false);
                 HttpStatusCode = response.StatusCode;
             }
             catch (WebException we)
@@ -190,7 +190,7 @@ namespace FortnoxAPILibrary
                     await requestStream.WriteBytes(data).ConfigureAwait(false);
                 }
 
-                using var response = (HttpWebResponse)wr.GetResponse();
+                using var response = (HttpWebResponse) await wr.GetResponseAsync().ConfigureAwait(false);
                 HttpStatusCode = response.StatusCode;
                 using var responseStream = response.GetResponseStream();
                 return await responseStream.ToBytes().ConfigureAwait(false);
@@ -228,7 +228,7 @@ namespace FortnoxAPILibrary
                 dataStream.Close();
 
                 // Read the response
-                using var response = request.GetResponse();
+                using var response = await request.GetResponseAsync().ConfigureAwait(false);
                 using var responseStream = response.GetResponseStream();
                 ResponseContent = responseStream.ToText().Result;
                 result = Deserialize<EntityWrapper<T>>(ResponseContent).Entity;
@@ -251,7 +251,7 @@ namespace FortnoxAPILibrary
 
                 var request = SetupRequest(RequestInfo.AbsoluteUrl, RequestMethod.Get);
 
-                using var response = (HttpWebResponse) request.GetResponse();
+                using var response = (HttpWebResponse) await request.GetResponseAsync().ConfigureAwait(false);
                 HttpStatusCode = response.StatusCode;
                 using var responseStream = response.GetResponseStream();
 

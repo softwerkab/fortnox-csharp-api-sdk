@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Threading.Tasks;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Entities.Special;
 
@@ -19,15 +20,20 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The Access-Token to use with Fortnox</returns>
         public string GetAccessToken(string authorizationCode, string clientSecret)
         {
+            return GetAccessTokenAsync(authorizationCode, clientSecret).Result;
+        }
+
+        public async Task<string> GetAccessTokenAsync(string authorizationCode, string clientSecret)
+        {
             if (string.IsNullOrEmpty(authorizationCode) || string.IsNullOrEmpty(clientSecret))
             {
                 return string.Empty;
             }
 
             try
-            { 
+            {
                 var wr = SetupRequest(ConnectionSettings.FortnoxAPIServer, authorizationCode, clientSecret);
-                using var response = wr.GetResponse();
+                using var response = await wr.GetResponseAsync().ConfigureAwait(false);
                 using var responseStream = response.GetResponseStream();
                 var json = responseStream.ToText().Result;
                 var result = Deserialize<EntityWrapper<AuthorizationData>>(json);
