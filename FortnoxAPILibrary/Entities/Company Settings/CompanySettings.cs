@@ -87,10 +87,10 @@ namespace FortnoxAPILibrary.Entities
         [JsonProperty]
         public string Name { get; private set; }
 
-        ///<summary> Organisation number </summary>
+        ///<summary> Organization number </summary>
         [ReadOnly]
         [JsonProperty]
-        public string OrganisationNumber { get; private set; }
+        public string OrganizationNumber { get; private set; }
 
         ///<summary> Plusgiro </summary>
         [ReadOnly]
