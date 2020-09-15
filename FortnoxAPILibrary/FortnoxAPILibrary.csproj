@@ -4,14 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
 	<LangVersion>8</LangVersion>
 	<PackageId>Fortnox.NET.SDK</PackageId>
-	<Version>3.3.4</Version>
+	<Version>3.3.5</Version>
 	<Authors>Richard Randak</Authors>
-	<Company>Fortnox AB</Company>
+	<Company>Softwerk AB</Company>
 	<Description>Official .NET SDK for Fortnox API. This package is on behalf of Fortnox AB developed and maintained by Softwerk AB. For more information please visit our repository on Github.</Description>
 	<RepositoryUrl>https://github.com/FortnoxAB/csharp-api-sdk</RepositoryUrl>
 	<PackageIcon>fortnox1.png</PackageIcon>
-	<PackageTags>Fortnox, SDK, API, C#, .NET</PackageTags>
-	<Copyright>Copyright (c) 2020 Fortnox AB</Copyright>
+	<PackageTags>Fortnox, SDK, API, C#, .NET, REST, Softwerk</PackageTags>
+	<Copyright>Copyright (c) 2020 Softwerk AB</Copyright>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<PackageProjectUrl>https://github.com/FortnoxAB/csharp-api-sdk</PackageProjectUrl>
