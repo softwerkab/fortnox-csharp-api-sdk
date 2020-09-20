@@ -214,6 +214,11 @@ namespace FortnoxAPILibrary.Entities
         [JsonProperty]
         public DateTime? InvoicePeriodEnd { get; private set; }
 
+        ///<summary>Reference to the invoice, if one exits. The reference must be a document number for an existing invoice </summary>
+        [ReadOnly]
+        [JsonProperty]
+        public long? InvoiceReference { get; private set; }
+
         ///<summary> The properties for the object in this array is listed in the table “Invoice Rows”. </summary>
         [JsonProperty]
         public List<InvoiceRow> InvoiceRows { get; set; }
