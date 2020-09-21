@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Entities.Special;
@@ -26,37 +25,39 @@ namespace FortnoxAPILibrary.Connectors
 
         public async Task<string> GetAccessTokenAsync(string authorizationCode, string clientSecret)
         {
-            if (string.IsNullOrEmpty(authorizationCode) || string.IsNullOrEmpty(clientSecret))
-            {
+            if (string.IsNullOrEmpty(authorizationCode))
                 return string.Empty;
-            }
+            if (string.IsNullOrEmpty(clientSecret))
+                return string.Empty;
 
             try
             {
-                var wr = SetupRequest(ConnectionSettings.FortnoxAPIServer, authorizationCode, clientSecret);
+                var wr = SetupRequest(BaseUrl, authorizationCode, clientSecret);
                 using var response = await HttpClient.SendAsync(wr).ConfigureAwait(false);
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    HandleError(response);
+                    Error = ErrorHandler.HandleError(response);
                     return string.Empty;
                 }
 
                 var json = response.Content.ReadAsStringAsync().Result;
-                var result = Deserialize<EntityWrapper<AuthorizationData>>(json);
+                var result = Serializer.Deserialize<EntityWrapper<AuthorizationData>>(json);
 
                 var accessToken = result?.Entity.AccessToken;
                 return accessToken;
             }
             catch (HttpRequestException we)
             {
-                Error = HandleConnectionException(we);
+                Error = ErrorHandler.HandleConnectionException(we);
                 return string.Empty;
             }
         }
 
-        private static HttpRequestMessage SetupRequest(string requestUriString, string authorizationCode, string clientSecret)
+        private HttpRequestMessage SetupRequest(string requestUriString, string authorizationCode, string clientSecret)
         {
+            Error = null;
+
             var wr = new HttpRequestMessage(HttpMethod.Get,  requestUriString);
             wr.Headers.Add("authorization-code", authorizationCode);
             wr.Headers.Add("client-secret", clientSecret);

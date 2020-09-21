@@ -1,16 +1,20 @@
-
 using System;
 using FortnoxAPILibrary.Entities;
+
 namespace FortnoxAPILibrary.Connectors
 {
-    public interface IConnector
+    public interface IBaseConnector
+    {
+        //Error Handling
+        bool HasError { get; }
+        ErrorInformation Error { get; }
+    }
+
+    public interface IConnector : IBaseConnector //TODO: Rename to IResourceConnector
     {
         // Credentials
         string AccessToken { get; set; }
         string ClientSecret { get; set; }
-        //Error Handling
-        bool HasError { get; }
-        ErrorInformation Error { get; }
     }
 
     public interface IEntityConnector : IConnector

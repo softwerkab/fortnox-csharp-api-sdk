@@ -1,68 +1,28 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using ComposableAsync;
 using FortnoxAPILibrary.Entities;
-using FortnoxAPILibrary.Serialization;
-using RateLimiter;
 
 namespace FortnoxAPILibrary
 {
     /// <remarks/>
-    public class UrlRequestBase
+    public class UrlRequestBase : BaseClient
     {
-        private const int LimitPerSecond = 3;
-        private static readonly TimeLimiter RateLimiter = TimeLimiter.GetFromMaxCountByInterval(LimitPerSecond, TimeSpan.FromSeconds(1));
-
-        private string clientSecret;
-        private string accessToken;
-
-        private readonly JsonEntitySerializer serializer;
+        protected BaseClient HttpClient { get; set; }
+        protected ErrorHandler ErrorHandler { get; set; }
+        protected AdaptableSerializer Serializer { get; set; }
 
         protected string Resource { get; set; }
-        protected virtual string BaseUrl => ConnectionSettings.FortnoxAPIServer;
-
-        protected Func<string, string> FixRequestContent; //Needed for fixing irregular json requests
-        protected Func<string, string> FixResponseContent; //Needed for fixing irregular json responses
-
-        /// <summary>
-        /// Http client used under-the-hood for all request (except file upload due to a server-side limitation)
-        /// </summary>
-        public HttpClient HttpClient { get; set; }
-
-        /// <summary>
-        /// Optional Fortnox Client Secret, if used it will override the static version.
-        /// </summary>
-        public string ClientSecret
-		{
-			get => !string.IsNullOrEmpty(clientSecret) ? clientSecret : ConnectionCredentials.ClientSecret;
-            set => clientSecret = value;
-        }
-
-		/// <summary>
-		/// Optional Fortnox Access Token, if used it will override the static version.
-		/// </summary>
-		/// /// <exception cref="Exception">Exception will be thrown if access token is not set.</exception>
-		public string AccessToken
-		{
-			get => !string.IsNullOrEmpty(accessToken) ? accessToken : ConnectionCredentials.AccessToken;
-            set => accessToken = value;
-        }
-
-        /// <summary>
-        /// Timeout of requests sent to the Fortnox API in miliseconds
-        /// </summary>
-        public int Timeout
-        {
-            get => (int)HttpClient.Timeout.TotalMilliseconds;
-            set => HttpClient.Timeout = TimeSpan.FromMilliseconds(value);
-        }
 
         /// <remarks/>
         public ErrorInformation Error { get; protected set; }
+
+        /// <summary>
+        /// True if something went wrong with the request. Otherwise false.
+        /// </summary>
+        public bool HasError => Error != null;
 
         /// <summary>
         /// The HttpStatusCode returned by Fortnox API.
@@ -79,11 +39,6 @@ namespace FortnoxAPILibrary
         public string ResponseContent { get; protected set; }
 
         /// <summary>
-        /// True if something went wrong with the request. Otherwise false.
-        /// </summary>
-        public bool HasError => Error != null;
-
-        /// <summary>
         /// Aggregate data used for request setup
         /// </summary>
         public RequestInfo RequestInfo { get; protected set; }
@@ -91,45 +46,17 @@ namespace FortnoxAPILibrary
         /// <remarks />
         public UrlRequestBase()
         {
-            HttpClient = new HttpClient();
-            Timeout = 30 * 1000;
-            serializer = new JsonEntitySerializer();
+            HttpClient = this;
+            Serializer = new AdaptableSerializer();
+            ErrorHandler = new ErrorHandler();
         }
 
-        /// <summary>
-        /// This method is used to throttle every call to Fortnox. 
-        /// </summary>
-        protected async Task RateLimit()
-        {
-            if (ConnectionSettings.UseRateLimiter)
-                await RateLimiter;
-        }
-
-        /// <summary>
-        /// This method is used to setup the WebRequest used in every call to Fortnox. 
-        /// </summary>
-        /// <param name="requestUriString">The url to the resource</param>
-        /// <param name="method">
-        /// <para>The method to use:</para>
-        /// <para>GET</para>
-        /// <para>POST</para>
-        /// <para>PUT</para>
-        /// <para>DELETE</para>
-        /// </param>
-        /// <returns></returns>
         protected HttpRequestMessage SetupRequest(string requestUriString, HttpMethod method)
         {
-            if (string.IsNullOrEmpty(ClientSecret))
-                throw new Exception("Fortnox Client Secret must be set.");
-            if (string.IsNullOrEmpty(AccessToken))
-                throw new Exception("Fortnox Access Token must be set.");
-
             Error = null;
-            
-            var request = new HttpRequestMessage(method, requestUriString);
-            request.Headers.Add("access-token", AccessToken);
-            request.Headers.Add("client-secret", ClientSecret);
+            ResponseContent = string.Empty;
 
+            var request = new HttpRequestMessage(method, requestUriString);
             return request;
         }
         
@@ -142,19 +69,15 @@ namespace FortnoxAPILibrary
 
             try
             {
-                await RateLimit().ConfigureAwait(false);
-
-
                 using var response = await HttpClient.SendAsync(wr).ConfigureAwait(false);
                 HttpStatusCode = response.StatusCode;
 
                 if (!response.IsSuccessStatusCode)
-                    HandleError(response);
-
+                    Error = ErrorHandler.HandleError(response);
             }
             catch (HttpRequestException we)
             {
-                HandleConnectionException(we);
+                ErrorHandler.HandleConnectionException(we);
             }
         }
 
@@ -166,7 +89,7 @@ namespace FortnoxAPILibrary
         /// <returns>An entity</returns>
         protected async Task<T> DoEntityRequest<T>(T entity = default)
         {
-            var requestJson = entity == null ? string.Empty : Serialize(entity);
+            var requestJson = entity == null ? string.Empty : Serializer.Serialize(entity);
             RequestContent = requestJson;
 
             var requestData = Encoding.UTF8.GetBytes(requestJson);
@@ -181,17 +104,15 @@ namespace FortnoxAPILibrary
             var responseJson = Encoding.UTF8.GetString(responseData);
             ResponseContent = responseJson;
 
-            return Deserialize<T>(responseJson);
+            return Serializer.Deserialize<T>(responseJson);
         }
 
         protected async Task<byte[]> DoSimpleRequest(byte[] data = null)
         {
             var wr = SetupRequest(RequestInfo.AbsoluteUrl, RequestInfo.Method);
-            ResponseContent = "";
+
             try
             {
-                await RateLimit().ConfigureAwait(false);
-
                 if (data != null && RequestInfo.Method != HttpMethod.Get) 
                     wr.Content = new ByteArrayContent(data);
 
@@ -200,7 +121,7 @@ namespace FortnoxAPILibrary
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    HandleError(response);
+                    Error = ErrorHandler.HandleError(response);
                     return default;
                 }
 
@@ -208,33 +129,22 @@ namespace FortnoxAPILibrary
             }
             catch (HttpRequestException we)
             {
-                HandleConnectionException(we);
+                ErrorHandler.HandleConnectionException(we);
                 return default;
             }
         }
 
         protected async Task<T> UploadFile<T>(byte[] fileData = null, string fileName = null)
         {
+            Error = null;
             ResponseContent = "";
 
             T result = default;
 
             try
             {
-                await RateLimit().ConfigureAwait(false);
-
-                if (string.IsNullOrEmpty(ClientSecret))
-                    throw new Exception("Fortnox Client Secret must be set.");
-                if (string.IsNullOrEmpty(AccessToken))
-                    throw new Exception("Fortnox Access Token must be set.");
-
-                Error = null;
-
                 var wr = (HttpWebRequest)WebRequest.Create(RequestInfo.AbsoluteUrl);
-                wr.Headers.Add("access-token", AccessToken);
-                wr.Headers.Add("client-secret", ClientSecret);
                 wr.Method = "POST";
-                wr.Timeout = Timeout;
 
                 var request = wr;
 
@@ -252,17 +162,17 @@ namespace FortnoxAPILibrary
                 dataStream.Close();
 
                 // Read the response
-                using var response = await request.GetResponseAsync().ConfigureAwait(false);
+                using var response = await HttpClient.SendAsync(wr).ConfigureAwait(false);
                 using var responseStream = response.GetResponseStream();
                 ResponseContent = responseStream.ToText().Result;
-                result = Deserialize<EntityWrapper<T>>(ResponseContent).Entity;
+                result = Serializer.Deserialize<EntityWrapper<T>>(ResponseContent).Entity;
             }
             catch (WebException we)
             {
                 if (we.Response != null)
-                    HandleError(we.Response as HttpWebResponse);
+                    ErrorHandler.HandleError(we.Response as HttpWebResponse);
                 else
-                    HandleConnectionException(we);
+                    ErrorHandler.HandleConnectionException(we);
             }
 
             return result;
@@ -270,20 +180,16 @@ namespace FortnoxAPILibrary
 
         protected async Task<byte[]> DownloadFile()
         {
-            ResponseContent = "";
+            var request = SetupRequest(RequestInfo.AbsoluteUrl, HttpMethod.Get);
 
             try
             {
-                await RateLimit().ConfigureAwait(false);
-
-                var request = SetupRequest(RequestInfo.AbsoluteUrl, HttpMethod.Get);
-
                 using var response = await HttpClient.SendAsync(request).ConfigureAwait(false);
                 HttpStatusCode = response.StatusCode;
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    HandleError(response);
+                    Error = ErrorHandler.HandleError(response);
                     return null;
                 }
 
@@ -292,68 +198,8 @@ namespace FortnoxAPILibrary
             }
             catch (HttpRequestException we)
             {
-                HandleConnectionException(we);
+                ErrorHandler.HandleConnectionException(we);
                 return null;
-            }
-        }
-
-        protected ErrorInformation HandleConnectionException(Exception we)
-        {
-            throw new Exception("Connection to server failed. Check inner exception.", we);
-        }
-        
-        protected void HandleError(HttpWebResponse response)
-        {
-            using var responseStream = response.GetResponseStream();
-            string errorJson = responseStream.ToText().Result;
-
-            try
-            {
-                Error = Deserialize<EntityWrapper<ErrorInformation>>(errorJson).Entity;
-            }
-            catch (Exception)
-            {
-                Error = new ErrorInformation() { Message = $"Could not interpret error information. Response: '{errorJson}'" };
-            }
-        }
-
-        protected void HandleError(HttpResponseMessage response)
-        {
-            var errorJson = response.Content.ReadAsStringAsync().Result;
-
-            try
-            {
-                Error = Deserialize<EntityWrapper<ErrorInformation>>(errorJson).Entity;
-            }
-            catch (Exception)
-            {
-                Error = new ErrorInformation() { Message = $"Could not interpret error information. Response: '{errorJson}'"  };
-            }
-        }
-
-        protected string Serialize<T>(T entity)
-        {
-            var json = serializer.Serialize(entity);
-
-            if (FixRequestContent != null)
-                json = FixRequestContent(json);
-
-            FixRequestContent = null;
-            return json;
-        }
-
-        protected T Deserialize<T>(string content)
-        {
-            try
-            {
-                if (FixResponseContent != null)
-                    content = FixResponseContent(content);
-                FixResponseContent = null;
-                return serializer.Deserialize<T>(content);
-            }
-            catch (Exception e)
-            {
-                throw new SerializationException("An error occured while deserializing the response. Check ResponseContent.", e.InnerException);
             }
         }
     }

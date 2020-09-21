@@ -92,33 +92,33 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task<Asset> CreateAsync(Asset asset)
         {
-            FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
+            Serializer.FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
 
             var result = await BaseCreate(asset).ConfigureAwait(false);
 
-            FixResponseContent = null;
+            Serializer.FixResponseContent = null;
             return result;
         }
 		public async Task<Asset> UpdateAsync(Asset asset)
         {
             var id = asset.Id;
             asset.Id = null;
-            FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
+            Serializer.FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
 
             var result = await BaseUpdate(asset, id).ConfigureAwait(false);
 
-            FixResponseContent = null;
+            Serializer.FixResponseContent = null;
             asset.Id = id;
             return result;
 		}
 
 		public async Task<Asset> GetAsync(string id)
 		{
-            FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
+            Serializer.FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
 
             var result = await BaseGet(id).ConfigureAwait(false);
 
-            FixResponseContent = null;
+            Serializer.FixResponseContent = null;
             return result;
         }
     }

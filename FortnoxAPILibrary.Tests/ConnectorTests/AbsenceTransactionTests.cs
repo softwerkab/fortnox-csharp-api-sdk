@@ -27,6 +27,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var tmpCostCenter = new CostCenterConnector().Get("TMP") ??  new CostCenterConnector().Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
             
             Assert.IsNotNull(tmpEmployee, $"Temporary employee not created.");
+            Assert.IsNotNull(tmpProject, $"Temporary project not created.");
+            Assert.IsNotNull(tmpCostCenter, $"Temporary costcenter not created.");
             #endregion Arrange
 
 

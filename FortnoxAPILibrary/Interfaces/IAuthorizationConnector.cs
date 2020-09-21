@@ -2,7 +2,7 @@
 
 namespace FortnoxAPILibrary.Connectors
 {
-    public interface IAuthorizationConnector : IConnector
+    public interface IAuthorizationConnector : IBaseConnector
     {
         string GetAccessToken(string authorizationCode, string clientSecret);
         Task<string> GetAccessTokenAsync(string authorizationCode, string clientSecret);

@@ -73,7 +73,7 @@ namespace FortnoxAPILibrary.Connectors
 
         public async Task<EntityCollection<AssetTypesSubset>> FindAsync()
         {
-            FixResponseContent = (json) =>
+            Serializer.FixResponseContent = (json) =>
             {
                 var structure = JObject.Parse(json);
 
@@ -86,7 +86,7 @@ namespace FortnoxAPILibrary.Connectors
 
             var result = await BaseFind().ConfigureAwait(false);
 
-            FixResponseContent = null;
+            Serializer.FixResponseContent = null;
 			return result;
         }
 		public async Task DeleteAsync(long? id)
@@ -95,29 +95,29 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task<AssetType> CreateAsync(AssetType assetType)
 		{
-            FixResponseContent = (json) => new Regex("Type").Replace(json, "AssetType", 1);
+            Serializer.FixResponseContent = (json) => new Regex("Type").Replace(json, "AssetType", 1);
 
             var result = await BaseCreate(assetType).ConfigureAwait(false);
 
-            FixResponseContent = null;
+            Serializer.FixResponseContent = null;
             return result;
 		}
 		public async Task<AssetType> UpdateAsync(AssetType assetTypes)
 		{
-			FixResponseContent = (json) => new Regex("Type").Replace(json, "AssetType", 1);
+            Serializer.FixResponseContent = (json) => new Regex("Type").Replace(json, "AssetType", 1);
 
 			var result = await BaseUpdate(assetTypes, assetTypes.Id.ToString()).ConfigureAwait(false);
 
-			FixResponseContent = null;
+            Serializer.FixResponseContent = null;
             return result;
 		}
 		public async Task<AssetType> GetAsync(long? id)
 		{
-			FixResponseContent = (json) => new Regex("Type").Replace(json, "AssetType", 1);
+            Serializer.FixResponseContent = (json) => new Regex("Type").Replace(json, "AssetType", 1);
 
 			var result = await BaseGet(id.ToString()).ConfigureAwait(false);
 
-            FixResponseContent = null;
+            Serializer.FixResponseContent = null;
             return result;
 		}
     }

@@ -1,5 +1,9 @@
 ﻿namespace FortnoxAPILibrary
 {
+    /// <summary>
+    /// Default (global) connection settings. 
+    /// <remarks>Changes are not applied to already created connectors.</remarks>
+    /// </summary>
     public static class ConnectionSettings
     {
         /// <summary>

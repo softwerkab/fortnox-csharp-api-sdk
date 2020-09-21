@@ -1,5 +1,4 @@
-﻿using System;
-using FortnoxAPILibrary.Connectors;
+﻿using FortnoxAPILibrary.Connectors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests
@@ -8,8 +7,21 @@ namespace FortnoxAPILibrary.Tests
     public class ConnectionTests
     {
         [TestMethod]
-        [ExpectedException(typeof(AggregateException))]
-        public void TestConnection_WithoutCredenials_Error()
+        public void TestConnection_NoCredenials_Error()
+        {
+            //Arrange
+            ConnectionCredentials.AccessToken = null;
+            ConnectionCredentials.ClientSecret = null;
+
+            //Act
+            ICustomerConnector cc = new CustomerConnector();
+            cc.Find();
+
+            Assert.IsTrue(cc.HasError);
+        }
+
+        [TestMethod]
+        public void TestConnection_EmptyCredenials_Error()
         {
             //Arrange
             ConnectionCredentials.AccessToken = "";
@@ -17,9 +29,23 @@ namespace FortnoxAPILibrary.Tests
 
             //Act
             ICustomerConnector cc = new CustomerConnector();
-            cc.AccessToken = "";
-            cc.ClientSecret = "";
             cc.Find();
+
+            Assert.IsTrue(cc.HasError);
+        }
+
+        [TestMethod]
+        public void TestConnection_WrongCredenials_Error()
+        {
+            //Arrange
+            ConnectionCredentials.AccessToken = "ABC";
+            ConnectionCredentials.ClientSecret = "DEF";
+
+            //Act
+            ICustomerConnector cc = new CustomerConnector();
+            cc.Find();
+
+            Assert.IsTrue(cc.HasError);
         }
 
         [TestMethod]
@@ -48,8 +74,6 @@ namespace FortnoxAPILibrary.Tests
 
             //Act
             ICustomerConnector connector = new CustomerConnector();
-            connector.AccessToken = "";
-            connector.ClientSecret = "";
 
             var customers = connector.Find();
             MyAssert.HasNoError(connector);

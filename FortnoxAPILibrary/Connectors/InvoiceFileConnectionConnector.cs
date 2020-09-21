@@ -13,20 +13,18 @@ namespace FortnoxAPILibrary.Connectors
 	/// <remarks/>
     public class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConnection, EntityCollection<InvoiceFileConnectionSubset>, Sort.By.InvoiceFileConnection?>, IInvoiceFileConnectionConnector
     {
-        protected override string BaseUrl => base.BaseUrl.Replace("3", "api");
-
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
 		[SearchParameter("filter")]
 		public Filter.InvoiceFileConnection? FilterBy { get; set; }
 
-
-		/// <remarks/>
+        /// <remarks/>
 		public InvoiceFileConnectionConnector()
 		{
 			Resource = "fileattachments/attachments-v1";
-		}
+            BaseUrl = BaseUrl.Replace("3", "api");
+        }
 
         public List<InvoiceFileConnection> GetConnections(long? entityId, EntityType? entityType)
         {
