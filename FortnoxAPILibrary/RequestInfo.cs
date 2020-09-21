@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
+using System.Net.Http;
 using System.Web;
 
 namespace FortnoxAPILibrary
 {
     public class RequestInfo
     {
-        public RequestMethod Method { get; set; }
+        public HttpMethod Method { get; set; }
         
         public string BaseUrl { get; set; }
         public string Resource { get; set; }
@@ -54,17 +54,5 @@ namespace FortnoxAPILibrary
         JSON,
         PDF,
         File
-    }
-
-    public enum RequestMethod
-    {
-        [EnumMember(Value = "GET")]
-        Get,
-        [EnumMember(Value = "POST")]
-        Post,
-        [EnumMember(Value = "PUT")]
-        Put,
-        [EnumMember(Value = "DELETE")]
-        Delete
     }
 }

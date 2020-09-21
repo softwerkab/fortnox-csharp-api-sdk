@@ -117,7 +117,7 @@ namespace FortnoxAPILibrary
         /// <para>DELETE</para>
         /// </param>
         /// <returns></returns>
-        protected HttpRequestMessage SetupRequest(string requestUriString, RequestMethod method)
+        protected HttpRequestMessage SetupRequest(string requestUriString, HttpMethod method)
         {
             if (string.IsNullOrEmpty(ClientSecret))
                 throw new Exception("Fortnox Client Secret must be set.");
@@ -125,63 +125,15 @@ namespace FortnoxAPILibrary
                 throw new Exception("Fortnox Access Token must be set.");
 
             Error = null;
-
-            /*var wr = (HttpWebRequest)WebRequest.Create(requestUriString);
-            wr.Headers.Add("access-token", AccessToken);
-            wr.Headers.Add("client-secret", ClientSecret);
-            wr.ContentType = "application/json";
-            wr.Accept = "application/json";
-            wr.Method = method.GetStringValue();
-            wr.Timeout = Timeout;            
-
-            return wr;*/
-
-            HttpMethod m;
-            switch (method)
-            {
-                case RequestMethod.Get:
-                    m = HttpMethod.Get;
-                    break;
-                case RequestMethod.Post:
-                    m = HttpMethod.Post;
-                    break;
-                case RequestMethod.Put:
-                    m = HttpMethod.Put;
-                    break;
-                case RequestMethod.Delete:
-                    m = HttpMethod.Delete;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(method), method, null);
-            }
-            var request = new HttpRequestMessage(m, requestUriString);
+            
+            var request = new HttpRequestMessage(method, requestUriString);
             request.Headers.Add("access-token", AccessToken);
             request.Headers.Add("client-secret", ClientSecret);
             request.Headers.Add("Accept", "application/json");
 
             return request;
         }
-
-        protected HttpWebRequest SetupRequestLegacy(string requestUriString, RequestMethod method)
-        {
-            if (string.IsNullOrEmpty(ClientSecret))
-                throw new Exception("Fortnox Client Secret must be set.");
-            if (string.IsNullOrEmpty(AccessToken))
-                throw new Exception("Fortnox Access Token must be set.");
-
-            Error = null;
-
-            var wr = (HttpWebRequest)WebRequest.Create(requestUriString);
-            wr.Headers.Add("access-token", AccessToken);
-            wr.Headers.Add("client-secret", ClientSecret);
-            wr.ContentType = "application/json";
-            wr.Accept = "application/json";
-            wr.Method = method.GetStringValue();
-            wr.Timeout = Timeout;            
-
-            return wr;
-        }
-
+        
         /// <summary>
         /// Perform the request to Fortnox API
         /// </summary>
@@ -244,7 +196,7 @@ namespace FortnoxAPILibrary
             {
                 await RateLimit().ConfigureAwait(false);
 
-                if (data != null && RequestInfo.Method != RequestMethod.Get) 
+                if (data != null && RequestInfo.Method != HttpMethod.Get) 
                     wr.Content = new ByteArrayContent(data);
 
                 using var response = await HttpClient.SendAsync(wr).ConfigureAwait(false);
@@ -275,12 +227,25 @@ namespace FortnoxAPILibrary
             {
                 await RateLimit().ConfigureAwait(false);
 
+                if (string.IsNullOrEmpty(ClientSecret))
+                    throw new Exception("Fortnox Client Secret must be set.");
+                if (string.IsNullOrEmpty(AccessToken))
+                    throw new Exception("Fortnox Access Token must be set.");
+
+                Error = null;
+
+                var wr = (HttpWebRequest)WebRequest.Create(RequestInfo.AbsoluteUrl);
+                wr.Headers.Add("access-token", AccessToken);
+                wr.Headers.Add("client-secret", ClientSecret);
+                wr.Method = "POST";
+                wr.Timeout = Timeout;
+
+                var request = wr;
+
                 var rand = new Random();
                 var boundary = "----boundary" + rand.Next();
                 var header = Encoding.UTF8.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + fileName + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
                 var trailer = Encoding.UTF8.GetBytes("\r\n--" + boundary + "--\r\n");
-
-                var request = SetupRequestLegacy(RequestInfo.AbsoluteUrl, RequestMethod.Post);
 
                 request.ContentType = "multipart/form-data; boundary=" + boundary;
 
@@ -315,7 +280,7 @@ namespace FortnoxAPILibrary
             {
                 await RateLimit().ConfigureAwait(false);
 
-                var request = SetupRequest(RequestInfo.AbsoluteUrl, RequestMethod.Get);
+                var request = SetupRequest(RequestInfo.AbsoluteUrl, HttpMethod.Get);
 
                 using var response = await HttpClient.SendAsync(request).ConfigureAwait(false);
                 HttpStatusCode = response.StatusCode;

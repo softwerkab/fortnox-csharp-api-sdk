@@ -4,6 +4,7 @@ using System.Linq;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
+using System.Net.Http;
 
 // ReSharper disable UnusedMember.Global
 
@@ -72,7 +73,7 @@ namespace FortnoxAPILibrary.Connectors
                 BaseUrl = BaseUrl,
                 Resource = Resource,
                 Indices = Array.Empty<string>(),
-                Method = RequestMethod.Post,
+                Method = HttpMethod.Post,
                 ResponseType = RequestResponseType.JSON
             };
 
@@ -88,7 +89,7 @@ namespace FortnoxAPILibrary.Connectors
                 BaseUrl = BaseUrl,
                 Resource = Resource,
                 Indices = new[] {invoiceFileConnection.Id},
-                Method = RequestMethod.Put,
+                Method = HttpMethod.Put,
                 ResponseType = RequestResponseType.JSON
             };
 
@@ -112,7 +113,7 @@ namespace FortnoxAPILibrary.Connectors
                     {"entityid", entityId?.ToString()},
                     {"entitytype", entityType?.GetStringValue()}
                 },
-                Method = RequestMethod.Get,
+                Method = HttpMethod.Get,
                 ResponseType = RequestResponseType.JSON
             };
 

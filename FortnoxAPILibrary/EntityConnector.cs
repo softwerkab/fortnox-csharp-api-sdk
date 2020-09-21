@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using FortnoxAPILibrary.Entities;
@@ -57,7 +58,7 @@ namespace FortnoxAPILibrary
                 Resource = Resource,
                 Indices = Array.Empty<string>(),
                 Parameters = ParametersInjection ?? new Dictionary<string, string>(),
-                Method = RequestMethod.Post,
+                Method = HttpMethod.Post,
                 ResponseType = RequestResponseType.JSON
             };
             ParametersInjection = null;
@@ -75,7 +76,7 @@ namespace FortnoxAPILibrary
                 Resource = Resource,
                 Indices = indices,
                 Parameters = ParametersInjection ?? new Dictionary<string, string>(),
-                Method = RequestMethod.Put,
+                Method = HttpMethod.Put,
                 ResponseType = RequestResponseType.JSON
             };
             ParametersInjection = null;
@@ -94,7 +95,7 @@ namespace FortnoxAPILibrary
                 Resource = Resource,
                 Indices = indices,
                 Parameters = ParametersInjection ?? new Dictionary<string, string>(),
-                Method = RequestMethod.Delete,
+                Method = HttpMethod.Delete,
                 ResponseType = RequestResponseType.JSON,
             };
             ParametersInjection = null;
@@ -110,7 +111,7 @@ namespace FortnoxAPILibrary
                 Resource = Resource,
                 Indices = indices,
                 Parameters = ParametersInjection ?? new Dictionary<string, string>(),
-                Method = RequestMethod.Get,
+                Method = HttpMethod.Get,
                 ResponseType = RequestResponseType.JSON
             };
             ParametersInjection = null;
@@ -128,7 +129,7 @@ namespace FortnoxAPILibrary
                 Indices = indices,
                 Parameters = ParametersInjection ?? new Dictionary<string, string>(),
                 SearchParameters = GetSearchParameters(),
-                Method = RequestMethod.Get,
+                Method = HttpMethod.Get,
                 ResponseType = RequestResponseType.JSON
             };
             ParametersInjection = null;
@@ -195,7 +196,7 @@ namespace FortnoxAPILibrary
                 BaseUrl = BaseUrl,
                 Resource = Resource,
                 Indices = new[] { documentNumber, action.GetStringValue() },
-                Method = RequestMethod.Get,
+                Method = HttpMethod.Get,
                 ResponseType = RequestResponseType.PDF
             };
 
@@ -220,15 +221,15 @@ namespace FortnoxAPILibrary
             switch (action)
             {
                 case Action.ExternalPrint:
-                    RequestInfo.Method = RequestMethod.Put;
+                    RequestInfo.Method = HttpMethod.Put;
                     RequestInfo.ResponseType = RequestResponseType.JSON;
                     break;
                 case Action.Email:
-                    RequestInfo.Method = RequestMethod.Get;
+                    RequestInfo.Method = HttpMethod.Get;
                     RequestInfo.ResponseType = RequestResponseType.JSON;
                     break;
                 default:
-                    RequestInfo.Method = RequestMethod.Put;
+                    RequestInfo.Method = HttpMethod.Put;
                     break;
             }
 
