@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,11 @@ namespace FortnoxAPILibrary
         protected Func<string, string> FixResponseContent; //Needed for fixing irregular json responses
 
         /// <summary>
+        /// Http client used under-the-hood for all request (except file upload due to a server-side limitation)
+        /// </summary>
+        public HttpClient HttpClient { get; set; }
+
+        /// <summary>
         /// Optional Fortnox Client Secret, if used it will override the static version.
         /// </summary>
         public string ClientSecret
@@ -46,10 +52,14 @@ namespace FortnoxAPILibrary
             set => accessToken = value;
         }
 
-		/// <summary>
-		/// Timeout of requests sent to the Fortnox API in miliseconds
-		/// </summary>
-		public int Timeout { get; set; }
+        /// <summary>
+        /// Timeout of requests sent to the Fortnox API in miliseconds
+        /// </summary>
+        public int Timeout
+        {
+            get => (int)HttpClient.Timeout.TotalMilliseconds;
+            set => HttpClient.Timeout = TimeSpan.FromMilliseconds(value);
+        }
 
         /// <remarks/>
         public ErrorInformation Error { get; protected set; }
@@ -81,11 +91,11 @@ namespace FortnoxAPILibrary
         /// <remarks />
         public UrlRequestBase()
         {
-            Timeout = 30*1000;
+            HttpClient = new HttpClient();
+            Timeout = 30 * 1000;
             serializer = new JsonEntitySerializer();
         }
 
-        
         /// <summary>
         /// This method is used to throttle every call to Fortnox. 
         /// </summary>
@@ -107,7 +117,52 @@ namespace FortnoxAPILibrary
         /// <para>DELETE</para>
         /// </param>
         /// <returns></returns>
-        protected HttpWebRequest SetupRequest(string requestUriString, RequestMethod method)
+        protected HttpRequestMessage SetupRequest(string requestUriString, RequestMethod method)
+        {
+            if (string.IsNullOrEmpty(ClientSecret))
+                throw new Exception("Fortnox Client Secret must be set.");
+            if (string.IsNullOrEmpty(AccessToken))
+                throw new Exception("Fortnox Access Token must be set.");
+
+            Error = null;
+
+            /*var wr = (HttpWebRequest)WebRequest.Create(requestUriString);
+            wr.Headers.Add("access-token", AccessToken);
+            wr.Headers.Add("client-secret", ClientSecret);
+            wr.ContentType = "application/json";
+            wr.Accept = "application/json";
+            wr.Method = method.GetStringValue();
+            wr.Timeout = Timeout;            
+
+            return wr;*/
+
+            HttpMethod m;
+            switch (method)
+            {
+                case RequestMethod.Get:
+                    m = HttpMethod.Get;
+                    break;
+                case RequestMethod.Post:
+                    m = HttpMethod.Post;
+                    break;
+                case RequestMethod.Put:
+                    m = HttpMethod.Put;
+                    break;
+                case RequestMethod.Delete:
+                    m = HttpMethod.Delete;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(method), method, null);
+            }
+            var request = new HttpRequestMessage(m, requestUriString);
+            request.Headers.Add("access-token", AccessToken);
+            request.Headers.Add("client-secret", ClientSecret);
+            request.Headers.Add("Accept", "application/json");
+
+            return request;
+        }
+
+        protected HttpWebRequest SetupRequestLegacy(string requestUriString, RequestMethod method)
         {
             if (string.IsNullOrEmpty(ClientSecret))
                 throw new Exception("Fortnox Client Secret must be set.");
@@ -138,12 +193,17 @@ namespace FortnoxAPILibrary
             {
                 await RateLimit().ConfigureAwait(false);
 
-                using var response = (HttpWebResponse) await wr.GetResponseAsync().ConfigureAwait(false);
+
+                using var response = await HttpClient.SendAsync(wr).ConfigureAwait(false);
                 HttpStatusCode = response.StatusCode;
+
+                if (!response.IsSuccessStatusCode)
+                    HandleError(response);
+
             }
-            catch (WebException we)
+            catch (HttpRequestException we)
             {
-                Error = HandleException(we);
+                HandleConnectionException(we);
             }
         }
 
@@ -184,23 +244,25 @@ namespace FortnoxAPILibrary
             {
                 await RateLimit().ConfigureAwait(false);
 
-                if (data != null && RequestInfo.Method != RequestMethod.Get)
+                if (data != null && RequestInfo.Method != RequestMethod.Get) 
+                    wr.Content = new ByteArrayContent(data);
+
+                using var response = await HttpClient.SendAsync(wr).ConfigureAwait(false);
+                HttpStatusCode = response.StatusCode;
+
+                if (!response.IsSuccessStatusCode)
                 {
-                    using var requestStream = wr.GetRequestStream();
-                    await requestStream.WriteBytes(data).ConfigureAwait(false);
+                    HandleError(response);
+                    return default;
                 }
 
-                using var response = (HttpWebResponse) await wr.GetResponseAsync().ConfigureAwait(false);
-                HttpStatusCode = response.StatusCode;
-                using var responseStream = response.GetResponseStream();
-                return await responseStream.ToBytes().ConfigureAwait(false);
+                return await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
             }
-            catch (WebException we)
+            catch (HttpRequestException we)
             {
-                Error = HandleException(we);
+                HandleConnectionException(we);
+                return default;
             }
-
-            return default;
         }
 
         protected async Task<T> UploadFile<T>(byte[] fileData = null, string fileName = null)
@@ -218,13 +280,14 @@ namespace FortnoxAPILibrary
                 var header = Encoding.UTF8.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + fileName + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
                 var trailer = Encoding.UTF8.GetBytes("\r\n--" + boundary + "--\r\n");
 
-                var request = SetupRequest(RequestInfo.AbsoluteUrl, RequestMethod.Post);
+                var request = SetupRequestLegacy(RequestInfo.AbsoluteUrl, RequestMethod.Post);
+
                 request.ContentType = "multipart/form-data; boundary=" + boundary;
 
                 using var dataStream = request.GetRequestStream();
-                dataStream.Write(header, 0, header.Length);
+                await dataStream.WriteAsync(header, 0, header.Length);
                 await dataStream.WriteAsync(fileData, 0, fileData.Length).ConfigureAwait(false);
-                dataStream.Write(trailer, 0, trailer.Length);
+                await dataStream.WriteAsync(trailer, 0, trailer.Length);
                 dataStream.Close();
 
                 // Read the response
@@ -235,7 +298,10 @@ namespace FortnoxAPILibrary
             }
             catch (WebException we)
             {
-                Error = HandleException(we);
+                if (we.Response != null)
+                    HandleError(we.Response as HttpWebResponse);
+                else
+                    HandleConnectionException(we);
             }
 
             return result;
@@ -251,52 +317,56 @@ namespace FortnoxAPILibrary
 
                 var request = SetupRequest(RequestInfo.AbsoluteUrl, RequestMethod.Get);
 
-                using var response = (HttpWebResponse) await request.GetResponseAsync().ConfigureAwait(false);
+                using var response = await HttpClient.SendAsync(request).ConfigureAwait(false);
                 HttpStatusCode = response.StatusCode;
-                using var responseStream = response.GetResponseStream();
 
-                var data = await responseStream.ToBytes().ConfigureAwait(false);
+                if (!response.IsSuccessStatusCode)
+                {
+                    HandleError(response);
+                    return null;
+                }
+
+                var data = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
                 return data;
             }
-            catch (WebException we)
+            catch (HttpRequestException we)
             {
-                Error = HandleException(we);
+                HandleConnectionException(we);
                 return null;
             }
         }
 
-        protected ErrorInformation HandleException(WebException we)
+        protected ErrorInformation HandleConnectionException(Exception we)
         {
-            if (we.Response == null)
-            {
-                throw new Exception("Connection to server failed. Check inner exception.", we);
-            }
-
-            using var response = (HttpWebResponse)we.Response;
-            HttpStatusCode = response.StatusCode;
-
-            if (response == null || HttpStatusCode == HttpStatusCode.InternalServerError)
-            {
-                throw we;
-            }
-
+            throw new Exception("Connection to server failed. Check inner exception.", we);
+        }
+        
+        protected void HandleError(HttpWebResponse response)
+        {
             using var responseStream = response.GetResponseStream();
             string errorJson = responseStream.ToText().Result;
 
             try
             {
                 Error = Deserialize<EntityWrapper<ErrorInformation>>(errorJson).Entity;
-                if (Error.Code == "2001392")
-                {
-                    Error.Message = "No information was provided for the entity.";
-                }
-
-                return Error;
             }
             catch (Exception)
             {
-                //Could not interpret error message from Fortnox API.
-                return new ErrorInformation() { Message = we.Message };
+                Error = new ErrorInformation() { Message = $"Could not interpret error information. Response: '{errorJson}'" };
+            }
+        }
+
+        protected void HandleError(HttpResponseMessage response)
+        {
+            var errorJson = response.Content.ReadAsStringAsync().Result;
+
+            try
+            {
+                Error = Deserialize<EntityWrapper<ErrorInformation>>(errorJson).Entity;
+            }
+            catch (Exception)
+            {
+                Error = new ErrorInformation() { Message = $"Could not interpret error information. Response: '{errorJson}'"  };
             }
         }
 

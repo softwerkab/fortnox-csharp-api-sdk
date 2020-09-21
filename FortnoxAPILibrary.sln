@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FortnoxAPILibrary", "FortnoxAPILibrary\FortnoxAPILibrary.csproj", "{294C70D9-0197-43F8-A04C-0612F1414C3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortnoxAPILibrary.Tests", "FortnoxAPILibrary.Tests\FortnoxAPILibrary.Tests.csproj", "{B6510808-4670-46DD-A2EC-4061DC5BEF7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FortnoxAPILibrary.Tests", "FortnoxAPILibrary.Tests\FortnoxAPILibrary.Tests.csproj", "{B6510808-4670-46DD-A2EC-4061DC5BEF7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

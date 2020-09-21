@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Entities.Special;
@@ -33,28 +34,33 @@ namespace FortnoxAPILibrary.Connectors
             try
             {
                 var wr = SetupRequest(ConnectionSettings.FortnoxAPIServer, authorizationCode, clientSecret);
-                using var response = await wr.GetResponseAsync().ConfigureAwait(false);
-                using var responseStream = response.GetResponseStream();
-                var json = responseStream.ToText().Result;
+                using var response = await HttpClient.SendAsync(wr).ConfigureAwait(false);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    HandleError(response);
+                    return string.Empty;
+                }
+
+                var json = response.Content.ReadAsStringAsync().Result;
                 var result = Deserialize<EntityWrapper<AuthorizationData>>(json);
+
                 var accessToken = result?.Entity.AccessToken;
                 return accessToken;
             }
-            catch (WebException we)
+            catch (HttpRequestException we)
             {
-                Error = HandleException(we);
+                Error = HandleConnectionException(we);
                 return string.Empty;
             }
         }
 
-        private static HttpWebRequest SetupRequest(string requestUriString, string authorizationCode, string clientSecret)
+        private static HttpRequestMessage SetupRequest(string requestUriString, string authorizationCode, string clientSecret)
         {
-            var wr = (HttpWebRequest)WebRequest.Create(requestUriString);
+            var wr = new HttpRequestMessage(HttpMethod.Get,  requestUriString);
             wr.Headers.Add("authorization-code", authorizationCode);
             wr.Headers.Add("client-secret", clientSecret);
-            wr.ContentType = "application/json";
-            wr.Accept = "application/json";
-            wr.Method = "GET";
+            wr.Headers.Add("Accept", "application/json");
             return wr;
         }
     }

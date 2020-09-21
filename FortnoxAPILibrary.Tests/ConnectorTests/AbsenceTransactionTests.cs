@@ -25,7 +25,10 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var tmpEmployee = new EmployeeConnector().Get("TEST_EMP") ?? new EmployeeConnector().Create(new Employee() { EmployeeId = "TEST_EMP" });
             var tmpProject = new ProjectConnector().Create(new Project() { Description = "TmpProject" });
             var tmpCostCenter = new CostCenterConnector().Get("TMP") ??  new CostCenterConnector().Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
+            
+            Assert.IsNotNull(tmpEmployee, $"Temporary employee not created.");
             #endregion Arrange
+
 
             IAbsenceTransactionConnector connector = new AbsenceTransactionConnector();
 
