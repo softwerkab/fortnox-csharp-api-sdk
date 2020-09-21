@@ -74,7 +74,6 @@ namespace FortnoxAPILibrary.Connectors
                 Resource = Resource,
                 Indices = Array.Empty<string>(),
                 Method = HttpMethod.Post,
-                ResponseType = RequestResponseType.JSON
             };
 
             var entity = new List<InvoiceFileConnection>() { invoiceFileConnection };
@@ -90,7 +89,6 @@ namespace FortnoxAPILibrary.Connectors
                 Resource = Resource,
                 Indices = new[] {invoiceFileConnection.Id},
                 Method = HttpMethod.Put,
-                ResponseType = RequestResponseType.JSON
             };
 
             var limitedEntity = new InvoiceFileConnection()
@@ -114,7 +112,6 @@ namespace FortnoxAPILibrary.Connectors
                     {"entitytype", entityType?.GetStringValue()}
                 },
                 Method = HttpMethod.Get,
-                ResponseType = RequestResponseType.JSON
             };
 
             var result = await DoEntityRequest<List<InvoiceFileConnection>>().ConfigureAwait(false);

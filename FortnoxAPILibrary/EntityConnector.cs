@@ -59,7 +59,6 @@ namespace FortnoxAPILibrary
                 Indices = Array.Empty<string>(),
                 Parameters = ParametersInjection ?? new Dictionary<string, string>(),
                 Method = HttpMethod.Post,
-                ResponseType = RequestResponseType.JSON
             };
             ParametersInjection = null;
 
@@ -77,7 +76,6 @@ namespace FortnoxAPILibrary
                 Indices = indices,
                 Parameters = ParametersInjection ?? new Dictionary<string, string>(),
                 Method = HttpMethod.Put,
-                ResponseType = RequestResponseType.JSON
             };
             ParametersInjection = null;
 
@@ -95,8 +93,7 @@ namespace FortnoxAPILibrary
                 Resource = Resource,
                 Indices = indices,
                 Parameters = ParametersInjection ?? new Dictionary<string, string>(),
-                Method = HttpMethod.Delete,
-                ResponseType = RequestResponseType.JSON,
+                Method = HttpMethod.Delete
             };
             ParametersInjection = null;
 
@@ -112,7 +109,6 @@ namespace FortnoxAPILibrary
                 Indices = indices,
                 Parameters = ParametersInjection ?? new Dictionary<string, string>(),
                 Method = HttpMethod.Get,
-                ResponseType = RequestResponseType.JSON
             };
             ParametersInjection = null;
 
@@ -130,7 +126,6 @@ namespace FortnoxAPILibrary
                 Parameters = ParametersInjection ?? new Dictionary<string, string>(),
                 SearchParameters = GetSearchParameters(),
                 Method = HttpMethod.Get,
-                ResponseType = RequestResponseType.JSON
             };
             ParametersInjection = null;
 
@@ -197,7 +192,6 @@ namespace FortnoxAPILibrary
                 Resource = Resource,
                 Indices = new[] { documentNumber, action.GetStringValue() },
                 Method = HttpMethod.Get,
-                ResponseType = RequestResponseType.PDF
             };
 
             var data = await DoSimpleRequest().ConfigureAwait(false);
@@ -222,11 +216,9 @@ namespace FortnoxAPILibrary
             {
                 case Action.ExternalPrint:
                     RequestInfo.Method = HttpMethod.Put;
-                    RequestInfo.ResponseType = RequestResponseType.JSON;
                     break;
                 case Action.Email:
                     RequestInfo.Method = HttpMethod.Get;
-                    RequestInfo.ResponseType = RequestResponseType.JSON;
                     break;
                 default:
                     RequestInfo.Method = HttpMethod.Put;

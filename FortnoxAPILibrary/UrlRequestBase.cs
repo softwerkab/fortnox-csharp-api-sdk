@@ -129,7 +129,6 @@ namespace FortnoxAPILibrary
             var request = new HttpRequestMessage(method, requestUriString);
             request.Headers.Add("access-token", AccessToken);
             request.Headers.Add("client-secret", ClientSecret);
-            request.Headers.Add("Accept", "application/json");
 
             return request;
         }
@@ -167,9 +166,6 @@ namespace FortnoxAPILibrary
         /// <returns>An entity</returns>
         protected async Task<T> DoEntityRequest<T>(T entity = default)
         {
-            if (RequestInfo.ResponseType != RequestResponseType.JSON)
-                throw new Exception("Unexpected request");
-
             var requestJson = entity == null ? string.Empty : Serialize(entity);
             RequestContent = requestJson;
 

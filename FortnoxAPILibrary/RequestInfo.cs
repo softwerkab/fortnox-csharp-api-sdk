@@ -16,8 +16,6 @@ namespace FortnoxAPILibrary
         public Dictionary<string, string> Parameters { get; set; } = new Dictionary<string, string>();
         public Dictionary<string, string> SearchParameters { get; set; } = new Dictionary<string, string>();
 
-        public RequestResponseType ResponseType { get; set; }
-
         public string AbsoluteUrl => BuildUrl();
 
         private string BuildUrl()
@@ -47,12 +45,5 @@ namespace FortnoxAPILibrary
 
             return requestUriString;
         }
-    }
-
-    public enum RequestResponseType
-    {
-        JSON,
-        PDF,
-        File
     }
 }
