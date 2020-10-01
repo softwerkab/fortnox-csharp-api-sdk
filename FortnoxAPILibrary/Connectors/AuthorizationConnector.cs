@@ -8,7 +8,7 @@ using FortnoxAPILibrary.Entities.Special;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class AuthorizationConnector : UrlRequestBase, IAuthorizationConnector
+    public class AuthorizationConnector : BaseConnector, IAuthorizationConnector
     {
         /// <summary>
         /// <para>Use this function to create and get your Access-Token.</para>

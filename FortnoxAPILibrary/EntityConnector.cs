@@ -8,7 +8,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary
 {
     /// <remarks/>
-    public abstract class EntityConnector<TEntity, TEntityCollection, TSort> : UrlRequestBase where TEntity : class
+    public abstract class EntityConnector<TEntity, TEntityCollection, TSort> : BaseConnector where TEntity : class
     {
         /// <summary>
         /// Sort Order, ascending or descending

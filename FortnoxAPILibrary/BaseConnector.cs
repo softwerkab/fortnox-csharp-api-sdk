@@ -8,7 +8,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary
 {
     /// <remarks/>
-    public class UrlRequestBase : BaseClient
+    public class BaseConnector : BaseClient
     {
         protected BaseClient HttpClient { get; set; }
         protected ErrorHandler ErrorHandler { get; set; }
@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary
         public RequestInfo RequestInfo { get; protected set; }
 
         /// <remarks />
-        public UrlRequestBase()
+        public BaseConnector()
         {
             HttpClient = this;
             Serializer = new AdaptableSerializer();

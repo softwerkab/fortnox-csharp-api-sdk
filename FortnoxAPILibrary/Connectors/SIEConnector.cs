@@ -2,7 +2,7 @@
 
 namespace FortnoxAPILibrary.Connectors
 {
-    public class SIEConnector : UrlRequestBase, ISIEConnector
+    public class SIEConnector : BaseConnector, ISIEConnector
     {
         public SIEConnector()
         {
