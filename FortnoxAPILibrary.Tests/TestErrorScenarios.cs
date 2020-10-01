@@ -45,6 +45,7 @@ namespace FortnoxAPILibrary.Tests
             ErrorInformation error = null;
             for (var i = 0; i < 200; i++)
             {
+                connector.City = TestUtils.RandomString();
                 connector.Find();
                 if (connector.HasError)
                 {
@@ -57,6 +58,7 @@ namespace FortnoxAPILibrary.Tests
             ConnectionSettings.UseRateLimiter = true;
 
             //Assert
+            //Assert.IsTrue(failed > 0);
             Assert.IsNotNull(error);
             Assert.IsTrue(error.Message.Contains("Too Many Requests")); }
     }
