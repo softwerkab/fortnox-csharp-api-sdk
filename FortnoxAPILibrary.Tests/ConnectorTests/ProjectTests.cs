@@ -131,5 +131,61 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             //Add code to delete temporary resources
             #endregion Delete arranged resources
         }
+
+        [TestMethod]
+        public void Test_Find_By_Description()
+        {
+            #region Arrange
+            //Add code to create required resources
+            #endregion Arrange
+
+            IProjectConnector connector = new ProjectConnector();
+            var existingEntries = connector.Find().Entities.Count;
+            var description = TestUtils.RandomString();
+
+            var newProject = new Project()
+            {
+                Description = description,
+                Status = Status.Ongoing,
+                StartDate = new DateTime(2019, 10, 10),
+                EndDate = new DateTime(2021, 10, 10),
+                ProjectLeader = "TestProjectLeader",
+                ContactPerson = "TestContactPerson",
+                Comments = "TestComments"
+            };
+
+            //Add entries
+            for (var i = 0; i < 5; i++)
+                connector.Create(newProject);
+            var otherDescription = TestUtils.RandomString();
+            newProject.Description = otherDescription;
+            for (var i = 0; i < 5; i++)
+                connector.Create(newProject);
+
+            var fullCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(existingEntries + 5 + 5, fullCollection.Entities.Count);
+            Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == description));
+            Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == otherDescription));
+
+            //Apply filter
+            connector.Description = otherDescription;
+            var filteredCollection = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(5, filteredCollection.TotalResources);
+            Assert.AreEqual(5, filteredCollection.Entities.Count);
+
+            //Delete entries
+            foreach (var entry in fullCollection.Entities)
+            {
+                connector.Delete(entry.ProjectNumber);
+            }
+
+            #region Delete arranged resources
+            //Add code to delete temporary resources
+            #endregion Delete arranged resources
+        }
     }
 }
