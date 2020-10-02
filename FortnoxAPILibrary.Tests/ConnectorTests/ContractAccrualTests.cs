@@ -42,7 +42,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 InvoiceRows = new List<ContractInvoiceRow>()
                 {
                     new ContractInvoiceRow()
-                        {ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "6", Price = "1000", VAT = "0"}
+                        {ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 6, Price = 1000, VAT = 0}
                 },
                 PeriodStart = new DateTime(2020, 01, 1),
                 PeriodEnd = new DateTime(2020, 03, 20)
@@ -132,7 +132,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 InvoiceRows = new List<ContractInvoiceRow>()
                 {
                     new ContractInvoiceRow()
-                        {ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "6", Price = "1000", VAT = "0"}
+                        {ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 6, Price = 1000, VAT = 0}
                 },
                 PeriodStart = new DateTime(2020, 01, 1),
                 PeriodEnd = new DateTime(2020, 03, 20)

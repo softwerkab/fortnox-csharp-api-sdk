@@ -42,9 +42,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 Language = Language.English,
                 InvoiceRows = new List<ContractInvoiceRow>()
                 {
-                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "10"},
-                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "20"},
-                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "15"}
+                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10},
+                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20},
+                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15}
                 },
                 PeriodStart = new DateTime(2020, 01, 01),
                 PeriodEnd = new DateTime(2020, 03, 01)
@@ -106,9 +106,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 Language = Language.English,
                 InvoiceRows = new List<ContractInvoiceRow>()
                 {
-                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "10"},
-                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "20"},
-                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = "15"}
+                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10},
+                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20},
+                    new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15}
                 },
                 PeriodStart = new DateTime(2020, 01, 01),
                 PeriodEnd = new DateTime(2020, 03, 01)
