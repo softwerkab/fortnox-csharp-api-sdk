@@ -20,9 +20,14 @@ namespace FortnoxAPILibrary.Connectors
     public interface IEntityConnector : IConnector
     {
         //Base search params
-        int? Limit { get; set; }
         DateTime? LastModified { get; set; }
+        public long? FinancialYearID { get; set; }
+        public DateTime? FinancialYearDate { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+
         int? Page { get; set; }
         int? Offset { get; set; }
+        int? Limit { get; set; }
     }
 }

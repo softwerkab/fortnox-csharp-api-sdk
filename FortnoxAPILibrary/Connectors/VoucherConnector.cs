@@ -16,20 +16,6 @@ namespace FortnoxAPILibrary.Connectors
         [SearchParameter("filter")]
 		public Filter.Voucher? FilterBy { get; set; }
 
-        /// <summary>
-        /// <para>Use FinancialYearDate to select the financial year to use.</para>
-        /// <para>If omitted the default financial year will be selected</para>
-        /// </summary>
-        [SearchParameter("financialyeardate")]
-        public string FinancialYearDate { get; set; }
-
-        /// <summary>
-        /// <para>Use FinancialYearID to select the financial year to use.</para>
-        /// <para>If omitted the default financial year will be selected</para>
-        /// </summary>
-        [SearchParameter("financialyear")]
-        public string FinancialYearID { get; set; }
-
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>

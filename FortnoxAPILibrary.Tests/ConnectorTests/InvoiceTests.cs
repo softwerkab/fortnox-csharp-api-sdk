@@ -272,5 +272,22 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
+
+        [TestMethod]
+        public void Test_Search()
+        {
+            var connector = new InvoiceConnector();
+            connector.FromDate = new DateTime(2020,10, 10);
+            connector.ToDate = new DateTime(2020, 10, 15);
+
+            var result = connector.Find();
+
+            Assert.IsTrue(result.Entities.Count > 0);
+            foreach (var invoice in result.Entities)
+            {
+                Assert.IsTrue(invoice.InvoiceDate >= connector.FromDate);
+                Assert.IsTrue(invoice.InvoiceDate <= connector.ToDate);
+            }
+        }
     }
 }

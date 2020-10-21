@@ -56,7 +56,7 @@ namespace FortnoxAPILibrary.Tests
 
             //Act & Assert
             var connector = new VoucherConnector();
-            connector.FinancialYearID = "1";
+            connector.FinancialYearID = 1;
 
             connector.Limit = 2;
             var voucherResult = connector.Find();

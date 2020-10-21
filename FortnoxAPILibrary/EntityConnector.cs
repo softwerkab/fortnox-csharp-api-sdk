@@ -35,6 +35,32 @@ namespace FortnoxAPILibrary
         /// </summary>
         [SearchParameter]
         public DateTime? LastModified { get; set; }
+        /// <summary>
+        /// Use with Find() to limit the search result.
+        /// Selects which financial year should be used.
+        /// </summary>
+        [SearchParameter("financialyear")]
+        public long? FinancialYearID { get; set; }
+        /// <summary>
+        /// Use with Find() to limit the search result.
+        /// Selects which financial year should be used by date
+        /// </summary>
+        [SearchParameter]
+        public DateTime? FinancialYearDate { get; set; }
+        /// <summary>
+        /// Use with Find() to limit the search result.
+        /// Defines a selection based on a start date.
+        /// Only available for invoices, orders, offers and vouchers
+        /// </summary>
+        [SearchParameter]
+        public DateTime? FromDate { get; set; }
+        /// <summary>
+        /// Use with Find() to limit the search result.
+        /// Defines a selection based on an end date.
+        /// Only available for invoices, orders, offers and vouchers
+        /// </summary>
+        [SearchParameter]
+        public DateTime? ToDate { get; set; }
 
         /// <summary>
         /// Use with Find() to limit the search result
@@ -166,7 +192,12 @@ namespace FortnoxAPILibrary
             if (type.IsEnum)
                return ((Enum)value).GetStringValue();
             if (type == typeof(DateTime))
-                return ((DateTime)value).ToString(APIConstants.DateAndTimeFormat);
+            {
+                if (((DateTime)value).Date == (DateTime)value) //Date without hours/minutes/seconds..
+                    return ((DateTime)value).ToString(APIConstants.DateFormat);
+
+                return ((DateTime) value).ToString(APIConstants.DateAndTimeFormat);
+            }
 
             return value.ToString().ToLower();
         }
