@@ -13,7 +13,7 @@ namespace FortnoxAPILibrary
         private const string AccessTokenHeader = "Access-Token";
         private const string ClientSecretHeader = "Client-Secret";
 
-        private const int LimitPerSecond = 3;
+        private const int LimitPerSecond = 4;
         private static readonly Dictionary<string, TimeLimiter> RateLimiters = new Dictionary<string, TimeLimiter>();
 
         /// <summary>

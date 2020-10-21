@@ -72,24 +72,6 @@ namespace FortnoxAPILibrary.Tests
         }
 
         [TestMethod]
-        public void Test_TooManyRequests_fixed()
-        {
-            var connector = new VoucherConnector();
-            connector.Limit = 2;
-
-            var watch = new Stopwatch();
-            watch.Start();
-            for (int i = 0; i < 40; i++)
-            {
-                connector.Find();
-                MyAssert.HasNoError(connector);
-            }
-
-            watch.Stop();
-            Console.WriteLine(@"Total time: "+watch.ElapsedMilliseconds);
-        }
-
-        [TestMethod]
         public void Test_issue57_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/57
         {
             var connector = new CustomerConnector();
