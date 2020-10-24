@@ -13,14 +13,11 @@ namespace FortnoxAPILibrary.Connectors
     public interface IConnector : IBaseConnector //TODO: Rename to IResourceConnector
     {
         // Credentials
-        string AccessToken { get; set; }
-        string ClientSecret { get; set; }
     }
 
     public interface IEntityConnector : IConnector
     {
         //Base search params
-        DateTime? LastModified { get; set; }
         public long? FinancialYearID { get; set; }
         public DateTime? FinancialYearDate { get; set; }
         public DateTime? FromDate { get; set; }

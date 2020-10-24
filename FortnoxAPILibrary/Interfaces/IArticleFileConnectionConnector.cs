@@ -11,8 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.ArticleFileConnection? SortBy { get; set; }
 		Filter.ArticleFileConnection? FilterBy { get; set; }
 
-		string ArticleNumber { get; set; }
-
 		ArticleFileConnection Create(ArticleFileConnection articleFileConnection);
 		ArticleFileConnection Get(string id);
 		void Delete(string id);

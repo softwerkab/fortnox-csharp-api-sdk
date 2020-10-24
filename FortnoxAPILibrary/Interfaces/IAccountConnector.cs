@@ -11,8 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.Account? SortBy { get; set; }
 		Filter.Account? FilterBy { get; set; }
 
-		string SRU { get; set; }
-
 		Account Update(Account account);
 		Account Create(Account account);
 		Account Get(long? id);

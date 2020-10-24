@@ -11,18 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.Order? SortBy { get; set; }
 		Filter.Order? FilterBy { get; set; }
 
-		string CostCenter { get; set; }
-		string CustomerName { get; set; }
-		string CustomerNumber { get; set; }
-		string DocumentNumber { get; set; }
-		string ExternalInvoiceReference1 { get; set; }
-		string ExternalInvoiceReference2 { get; set; }
-		string OrderDate { get; set; }
-		string OurReference { get; set; }
-		string Project { get; set; }
-		string Sent { get; set; }
-		string YourReference { get; set; }
-
 		Order Update(Order order);
 		Order Create(Order order);
 		Order Get(long? id);

@@ -11,9 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.Price? SortBy { get; set; }
 		Filter.Price? FilterBy { get; set; }
 
-		string ArticleNumber { get; set; }
-		string FromQuantity { get; set; }
-
 		Price Update(Price price);
 		Price Create(Price price);
 		Price Get(string priceListCode, string articleNumber, decimal? fromQuantity = null);

@@ -11,16 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.Customer? SortBy { get; set; }
 		Filter.Customer? FilterBy { get; set; }
 
-		string City { get; set; }
-		string CustomerNumber { get; set; }
-		string Email { get; set; }
-		string GLN { get; set; }
-		string GLNDelivery { get; set; }
-		string Name { get; set; }
-		string OrganisationNumber { get; set; }
-		string Phone1 { get; set; }
-		string ZipCode { get; set; }
-
 		Customer Update(Customer customer);
 		Customer Create(Customer customer);
 		Customer Get(string id);

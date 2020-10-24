@@ -11,8 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.TaxReduction? SortBy { get; set; }
 		Filter.TaxReduction? FilterBy { get; set; }
 
-		string ReferenceNumber { get; set; }
-
 		TaxReduction Update(TaxReduction taxReduction);
 		TaxReduction Create(TaxReduction taxReduction);
 		TaxReduction Get(string id);

@@ -11,10 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.VoucherFileConnection? SortBy { get; set; }
 		Filter.VoucherFileConnection? FilterBy { get; set; }
 
-		string VoucherDescription { get; set; }
-		string VoucherNumber { get; set; }
-		string VoucherSeries { get; set; }
-
         VoucherFileConnection Create(VoucherFileConnection voucherFileConnection);
 		VoucherFileConnection Get(string id);
 		void Delete(string id);

@@ -12,8 +12,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.AttendanceTransactions? SortBy { get; set; }
 		Filter.AttendanceTransactions? FilterBy { get; set; }
 
-		string EmployeeId { get; set; }
-        DateTime? Date { get; set; }
 		AttendanceTransaction Update(AttendanceTransaction attendanceTransaction);
 		AttendanceTransaction Create(AttendanceTransaction attendanceTransaction);
 		AttendanceTransaction Get(string employeeId, DateTime? date, AttendanceCauseCode? code);

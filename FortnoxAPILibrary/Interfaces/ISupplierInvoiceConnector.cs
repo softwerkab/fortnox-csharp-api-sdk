@@ -11,11 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.SupplierInvoice? SortBy { get; set; }
 		Filter.SupplierInvoice? FilterBy { get; set; }
 
-		string CostCenter { get; set; }
-		string OCR { get; set; }
-		string Project { get; set; }
-		string SupplierNumber { get; set; }
-
 		SupplierInvoice Update(SupplierInvoice supplierInvoice);
 		SupplierInvoice Create(SupplierInvoice supplierInvoice);
 		SupplierInvoice Get(long? id);

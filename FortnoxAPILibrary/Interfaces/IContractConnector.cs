@@ -11,13 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.Contract? SortBy { get; set; }
 		Filter.Contract? FilterBy { get; set; }
 
-		string CustomerNumber { get; set; }
-		string DocumentNumber { get; set; }
-		string InvoicesRemaining { get; set; }
-		string PeriodEnd { get; set; }
-		string PeriodStart { get; set; }
-		string TemplateNumber { get; set; }
-
 		Contract Update(Contract contract);
 		Contract Create(Contract contract);
 		Contract Get(long? id);

@@ -11,8 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.Voucher? SortBy { get; set; }
 		Filter.Voucher? FilterBy { get; set; }
 
-		string CostCenter { get; set; }
-
         Voucher Create(Voucher voucher);
 		Voucher Get(long? id, string seriesId, long? financialYearId);
         EntityCollection<VoucherSubset> Find();

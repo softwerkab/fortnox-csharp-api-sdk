@@ -12,9 +12,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.AbsenceTransaction? SortBy { get; set; }
 		Filter.AbsenceTransaction? FilterBy { get; set; }
 
-        string EmployeeId { get; set; }
-        DateTime? Date { get; set; }
-
 		AbsenceTransaction Update(AbsenceTransaction absenceTransaction);
 		AbsenceTransaction Create(AbsenceTransaction absenceTransaction);
 		AbsenceTransaction Get(string employeeId, DateTime? date, AbsenceCauseCode? code);

@@ -11,9 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.PriceList? SortBy { get; set; }
 		Filter.PriceList? FilterBy { get; set; }
 
-		string Code { get; set; }
-		string Comments { get; set; }
-
 		PriceList Update(PriceList priceList);
 		PriceList Create(PriceList priceList);
 		PriceList Get(string id);

@@ -11,8 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.AssetFileConnection? SortBy { get; set; }
 		Filter.AssetFileConnection? FilterBy { get; set; }
 
-		string AssetId { get; set; }
-
         AssetFileConnection Create(AssetFileConnection assetFileConnection);
 		AssetFileConnection Get(string id);
 		void Delete(string id);

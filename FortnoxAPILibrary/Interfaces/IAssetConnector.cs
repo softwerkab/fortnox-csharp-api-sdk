@@ -11,9 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.Asset? SortBy { get; set; }
 		Filter.Asset? FilterBy { get; set; }
 
-		string Description { get; set; }
-		string Type { get; set; }
-
 		Asset Update(Asset asset);
 		Asset Create(Asset asset);
 		Asset Get(string id);

@@ -11,8 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.SupplierInvoiceFileConnection? SortBy { get; set; }
 		Filter.SupplierInvoiceFileConnection? FilterBy { get; set; }
 
-		string SupplierInvoiceNumber { get; set; }
-
         SupplierInvoiceFileConnection Create(SupplierInvoiceFileConnection supplierInvoiceFileConnection);
 		SupplierInvoiceFileConnection Get(string id);
 		void Delete(string id);

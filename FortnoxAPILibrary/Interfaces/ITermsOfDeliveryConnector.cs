@@ -11,8 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.TermsOfDelivery? SortBy { get; set; }
 		Filter.TermsOfDelivery? FilterBy { get; set; }
 
-		string Code { get; set; }
-
 		TermsOfDelivery Update(TermsOfDelivery termsOfDelivery);
 		TermsOfDelivery Create(TermsOfDelivery termsOfDelivery);
 		TermsOfDelivery Get(string id);

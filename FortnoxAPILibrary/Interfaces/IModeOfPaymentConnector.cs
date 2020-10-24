@@ -11,8 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 		Sort.By.ModeOfPayment? SortBy { get; set; }
 		Filter.ModeOfPayment? FilterBy { get; set; }
 
-		string Code { get; set; }
-
 		ModeOfPayment Update(ModeOfPayment modeOfPayment);
 		ModeOfPayment Create(ModeOfPayment modeOfPayment);
 		ModeOfPayment Get(string id);
