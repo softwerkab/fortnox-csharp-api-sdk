@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IPredefinedAccountsConnector : IEntityConnector
 	{
+		PredefinedAccountsSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.PredefinedAccounts? SortBy { get; set; }
 		Filter.PredefinedAccounts? FilterBy { get; set; }

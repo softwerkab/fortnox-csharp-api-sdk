@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IWayOfDeliveryConnector : IEntityConnector
 	{
+		WayOfDeliverySearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.WayOfDelivery? SortBy { get; set; }
 		Filter.WayOfDelivery? FilterBy { get; set; }

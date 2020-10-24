@@ -8,6 +8,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IAttendanceTransactionsConnector : IEntityConnector
 	{
+		AttendanceTransactionsSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.AttendanceTransactions? SortBy { get; set; }
 		Filter.AttendanceTransactions? FilterBy { get; set; }

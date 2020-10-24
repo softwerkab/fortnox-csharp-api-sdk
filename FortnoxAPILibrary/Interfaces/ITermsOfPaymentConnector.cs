@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface ITermsOfPaymentConnector : IEntityConnector
 	{
+		TermsOfPaymentSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.TermsOfPayment? SortBy { get; set; }
 		Filter.TermsOfPayment? FilterBy { get; set; }

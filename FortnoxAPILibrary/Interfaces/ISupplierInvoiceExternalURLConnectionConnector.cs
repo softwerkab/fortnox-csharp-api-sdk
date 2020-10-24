@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface ISupplierInvoiceExternalURLConnectionConnector : IEntityConnector
 	{
+		SupplierInvoiceExternalURLConnectionSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.SupplierInvoiceExternalURLConnection? SortBy { get; set; }
 		Filter.SupplierInvoiceExternalURLConnection? FilterBy { get; set; }

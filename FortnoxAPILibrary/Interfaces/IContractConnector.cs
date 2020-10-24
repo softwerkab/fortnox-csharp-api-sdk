@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IContractConnector : IEntityConnector
 	{
+		ContractSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.Contract? SortBy { get; set; }
 		Filter.Contract? FilterBy { get; set; }

@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IVoucherSeriesConnector : IEntityConnector
 	{
+		VoucherSeriesSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.VoucherSeries? SortBy { get; set; }
 		Filter.VoucherSeries? FilterBy { get; set; }

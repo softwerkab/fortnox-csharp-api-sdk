@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface ITrustedEmailSendersConnector : IEntityConnector
 	{
+		TrustedEmailSendersSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.TrustedEmailSenders? SortBy { get; set; }
 		Filter.TrustedEmailSenders? FilterBy { get; set; }

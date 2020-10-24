@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IVoucherFileConnectionConnector : IEntityConnector
 	{
+		VoucherFileConnectionSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.VoucherFileConnection? SortBy { get; set; }
 		Filter.VoucherFileConnection? FilterBy { get; set; }

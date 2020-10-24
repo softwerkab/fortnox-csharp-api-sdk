@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface ISalaryTransactionConnector : IEntityConnector
 	{
+		SalaryTransactionSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.SalaryTransaction? SortBy { get; set; }
 		Filter.SalaryTransaction? FilterBy { get; set; }

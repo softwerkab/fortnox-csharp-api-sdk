@@ -17,11 +17,7 @@ namespace FortnoxAPILibrary.Connectors
 
     public interface IEntityConnector : IConnector
     {
-        //Base search params
-        public long? FinancialYearID { get; set; }
-        public DateTime? FinancialYearDate { get; set; }
-        public DateTime? FromDate { get; set; }
-        public DateTime? ToDate { get; set; }
+        //BaseSearch Search { get; set; }
 
         int? Page { get; set; }
         int? Offset { get; set; }

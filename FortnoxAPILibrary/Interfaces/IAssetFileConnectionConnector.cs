@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IAssetFileConnectionConnector : IEntityConnector
 	{
+		AssetFileConnectionSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.AssetFileConnection? SortBy { get; set; }
 		Filter.AssetFileConnection? FilterBy { get; set; }

@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IUnitConnector : IEntityConnector
 	{
+		UnitSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.Unit? SortBy { get; set; }
 		Filter.Unit? FilterBy { get; set; }

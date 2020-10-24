@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IExpenseConnector : IEntityConnector
 	{
+		ExpenseSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.Expense? SortBy { get; set; }
 		Filter.Expense? FilterBy { get; set; }

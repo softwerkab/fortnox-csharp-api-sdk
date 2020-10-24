@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IPrintTemplateConnector : IEntityConnector
 	{
+		PrintTemplateSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.PrintTemplate? SortBy { get; set; }
 		Filter.PrintTemplate? FilterBy { get; set; }

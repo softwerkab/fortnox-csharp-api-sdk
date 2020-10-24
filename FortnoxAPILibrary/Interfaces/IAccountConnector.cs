@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IAccountConnector : IEntityConnector
 	{
+		AccountSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.Account? SortBy { get; set; }
 		Filter.Account? FilterBy { get; set; }

@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IOrderConnector : IEntityConnector
 	{
+		OrderSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.Order? SortBy { get; set; }
 		Filter.Order? FilterBy { get; set; }

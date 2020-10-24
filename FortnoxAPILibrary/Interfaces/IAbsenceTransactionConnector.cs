@@ -8,6 +8,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IAbsenceTransactionConnector : IEntityConnector
 	{
+		AbsenceTransactionSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.AbsenceTransaction? SortBy { get; set; }
 		Filter.AbsenceTransaction? FilterBy { get; set; }

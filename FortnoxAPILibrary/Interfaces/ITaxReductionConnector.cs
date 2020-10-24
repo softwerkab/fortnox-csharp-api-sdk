@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface ITaxReductionConnector : IEntityConnector
 	{
+		TaxReductionSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.TaxReduction? SortBy { get; set; }
 		Filter.TaxReduction? FilterBy { get; set; }

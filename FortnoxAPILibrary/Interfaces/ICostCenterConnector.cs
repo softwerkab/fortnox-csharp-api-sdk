@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface ICostCenterConnector : IEntityConnector
 	{
+		CostCenterSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.CostCenter? SortBy { get; set; }
 		Filter.CostCenter? FilterBy { get; set; }

@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IPriceConnector : IEntityConnector
 	{
+		PriceSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.Price? SortBy { get; set; }
 		Filter.Price? FilterBy { get; set; }

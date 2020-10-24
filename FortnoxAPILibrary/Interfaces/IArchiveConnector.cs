@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
 {
     public interface IArchiveConnector : IEntityConnector
 	{
+		ArchiveSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.Archive? SortBy { get; set; }
         Filter.Archive? FilterBy { get; set; }

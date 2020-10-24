@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IAccountChartConnector : IEntityConnector
 	{
+		AccountChartSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.AccountChart? SortBy { get; set; }
 		Filter.AccountChart? FilterBy { get; set; }

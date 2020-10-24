@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IEmployeeConnector : IEntityConnector
 	{
+		EmployeeSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.Employee? SortBy { get; set; }
 		Filter.Employee? FilterBy { get; set; }

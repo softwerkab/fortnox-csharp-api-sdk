@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface ICompanyInformationConnector : IEntityConnector
 	{
+		CompanyInformationSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.CompanyInformation? SortBy { get; set; }
 

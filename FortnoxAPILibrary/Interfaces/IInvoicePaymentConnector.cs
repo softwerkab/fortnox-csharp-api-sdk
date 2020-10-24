@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IInvoicePaymentConnector : IEntityConnector
 	{
+		InvoicePaymentSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.InvoicePayment? SortBy { get; set; }
 		Filter.InvoicePayment? FilterBy { get; set; }

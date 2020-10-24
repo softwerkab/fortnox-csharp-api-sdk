@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface ISupplierConnector : IEntityConnector
 	{
+		SupplierSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.Supplier? SortBy { get; set; }
 		Filter.Supplier? FilterBy { get; set; }

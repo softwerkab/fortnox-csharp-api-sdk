@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IPredefinedVoucherSeriesConnector : IEntityConnector
 	{
+		PredefinedVoucherSeriesSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.PredefinedVoucherSeries? SortBy { get; set; }
 		Filter.PredefinedVoucherSeries? FilterBy { get; set; }

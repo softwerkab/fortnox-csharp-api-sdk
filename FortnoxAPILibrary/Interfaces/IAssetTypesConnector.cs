@@ -7,6 +7,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IAssetTypesConnector : IEntityConnector
 	{
+		AssetTypesSearch Search { get; set; }
+
 		Sort.Order? SortOrder { get; set; }
 		Sort.By.AssetTypes? SortBy { get; set; }
 		Filter.AssetTypes? FilterBy { get; set; }
