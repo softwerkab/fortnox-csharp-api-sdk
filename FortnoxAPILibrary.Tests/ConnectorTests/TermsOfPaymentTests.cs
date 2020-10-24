@@ -91,7 +91,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             //Filter not supported
-            connector.LastModified = DateTime.Now.AddMinutes(-5);
+            connector.Search.LastModified = DateTime.Now.AddMinutes(-5);
             var fullCollection = connector.Find();
             MyAssert.HasNoError(connector);
 

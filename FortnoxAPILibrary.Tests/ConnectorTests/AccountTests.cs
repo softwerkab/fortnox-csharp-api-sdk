@@ -100,7 +100,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             //Apply base test filter
-            connector.SRU = testKeyMark.ToString();
+            connector.Search.SRU = testKeyMark.ToString();
             var fullCollection = connector.Find();
             MyAssert.HasNoError(connector);
 

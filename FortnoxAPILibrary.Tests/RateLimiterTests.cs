@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.Tests
             watch.Start();
             for (var i = 0; i < 200; i++)
             {
-                connector.City = TestUtils.RandomString(); //Needs to be random to make unique GET request
+                connector.Search.City = TestUtils.RandomString(); //Needs to be random to make unique GET request
                 connector.Find();
                 MyAssert.HasNoError(connector);
             }
@@ -45,7 +45,7 @@ namespace FortnoxAPILibrary.Tests
             ErrorInformation error = null;
             for (var i = 0; i < 200; i++)
             {
-                connector.City = TestUtils.RandomString();
+                connector.Search.City = TestUtils.RandomString();
                 connector.Find();
                 if (connector.HasError)
                 {

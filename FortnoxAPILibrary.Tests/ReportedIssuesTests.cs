@@ -78,7 +78,7 @@ namespace FortnoxAPILibrary.Tests
             var specificCustomer = connector.Create(new Customer() { Name = "TestCustomer", OrganisationNumber = "123456789" });
             Assert.IsFalse(connector.HasError);
 
-            connector.OrganisationNumber = "123456789";
+            connector.Search.OrganisationNumber = "123456789";
             var customers = connector.Find().Entities;
             var customer = customers.FirstOrDefault(c => c.CustomerNumber == specificCustomer.CustomerNumber);
             Assert.IsNotNull(customer);

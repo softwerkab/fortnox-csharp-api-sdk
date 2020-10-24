@@ -104,7 +104,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 MyAssert.HasNoError(connector);
             }
 
-            connector.LastModified = DateTime.Now.AddMinutes(-5);
+            connector.Search.LastModified = DateTime.Now.AddMinutes(-5);
             var templates = connector.Find();
             MyAssert.HasNoError(connector);
 

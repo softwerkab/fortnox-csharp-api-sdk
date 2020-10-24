@@ -170,7 +170,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == otherDescription));
 
             //Apply filter
-            connector.Description = otherDescription;
+            connector.Search.Description = otherDescription;
             var filteredCollection = connector.Find();
             MyAssert.HasNoError(connector);
 

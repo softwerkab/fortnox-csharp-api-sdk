@@ -120,7 +120,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             //Apply base test filter
-            connector.Description = testKeyMark;
+            connector.Search.Description = testKeyMark;
             var fullCollection = connector.Find();
             MyAssert.HasNoError(connector);
 

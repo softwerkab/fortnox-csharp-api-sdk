@@ -117,7 +117,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 MyAssert.HasNoError(connector);
             }
 
-            connector.EmployeeId = tmpEmployee.EmployeeId;
+            connector.Search.EmployeeId = tmpEmployee.EmployeeId;
             var fullCollection = connector.Find();
             MyAssert.HasNoError(connector);
 

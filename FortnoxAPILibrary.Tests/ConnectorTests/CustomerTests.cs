@@ -109,7 +109,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             //Apply base test filter
-            connector.City = testKeyMark;
+            connector.Search.City = testKeyMark;
             var fullCollection = connector.Find();
             MyAssert.HasNoError(connector);
 

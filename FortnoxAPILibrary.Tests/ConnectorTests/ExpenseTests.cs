@@ -97,7 +97,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 MyAssert.HasNoError(connector);
             }
 
-            connector.LastModified = timeStamp; //does not seem to work
+            connector.Search.LastModified = timeStamp; //does not seem to work
             connector.Limit = 500;
             var expensesCollection = connector.Find();
 

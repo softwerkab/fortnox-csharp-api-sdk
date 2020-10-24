@@ -118,7 +118,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             //Apply base test filter
-            connector.SupplierNumber = tmpSupplier.SupplierNumber;
+            connector.Search.SupplierNumber = tmpSupplier.SupplierNumber;
             var fullCollection = connector.Find();
             MyAssert.HasNoError(connector);
 

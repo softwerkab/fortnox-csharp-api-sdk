@@ -115,7 +115,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             //Apply base test filter
-            connector.CustomerNumber = tmpCustomer.CustomerNumber;
+            connector.Search.CustomerNumber = tmpCustomer.CustomerNumber;
             var fullCollection = connector.Find();
             MyAssert.HasNoError(connector);
 

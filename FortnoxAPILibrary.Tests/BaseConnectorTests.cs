@@ -23,12 +23,14 @@ namespace FortnoxAPILibrary.Tests
         {
             var connector = new CustomerConnector
             {
-                Name = "TestName",
-                City = "TestCity",
+                Search = new CustomerSearch(){
+                    Name = "TestName",
+                    City = "TestCity",
+                    LastModified = new DateTime(2000, 01, 01, 20, 10, 05), //2000-01-20 20:10:05
+                },
                 FilterBy = Filter.Customer.Active,
                 SortBy = Sort.By.Customer.Name,
                 SortOrder = Sort.Order.Ascending,
-                LastModified = new DateTime(2000, 01, 01, 20, 10, 05), //2000-01-20 20:10:05
                 Limit = 10,
                 Offset = 0,
                 Page = 1
@@ -53,7 +55,7 @@ namespace FortnoxAPILibrary.Tests
         public void Test_Find_ParamsNotAdded()
         {
             var connector = new CustomerConnector();
-            connector.Name = "TestName";
+            connector.Search.Name = "TestName";
 
             connector.Find();
             MyAssert.HasNoError(connector);
@@ -72,8 +74,11 @@ namespace FortnoxAPILibrary.Tests
         {
             var connector = new CustomerConnector()
             {
-                Name = "TestName",
-                City = null,
+                Search = new CustomerSearch()
+                {
+                    Name = "TestName",
+                    City = null
+                },
                 FilterBy = null,
                 SortBy = null,
                 SortOrder = null,

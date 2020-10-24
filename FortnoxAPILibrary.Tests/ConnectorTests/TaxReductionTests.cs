@@ -144,7 +144,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             //Apply base test filter
-            connector.ReferenceNumber = tmpInvoice.DocumentNumber.ToString();
+            connector.Search.ReferenceNumber = tmpInvoice.DocumentNumber.ToString();
             var fullCollection = connector.Find();
             MyAssert.HasNoError(connector);
 
