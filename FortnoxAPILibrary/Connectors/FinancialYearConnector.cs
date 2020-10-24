@@ -15,12 +15,6 @@ namespace FortnoxAPILibrary.Connectors
         [SearchParameter("filter")]
 		public Filter.FinancialYear? FilterBy { get; set; }
 
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-        public string Date { get; set; }
-
 		/// <remarks/>
 		public FinancialYearConnector()
 		{

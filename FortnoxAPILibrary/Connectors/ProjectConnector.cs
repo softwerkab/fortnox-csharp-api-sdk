@@ -15,12 +15,6 @@ namespace FortnoxAPILibrary.Connectors
         [SearchParameter("filter")]
 		public Filter.Project? FilterBy { get; set; }
 
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("description")]
-		public string Description { get; set; }
-
         /// <remarks/>
 		public ProjectConnector()
 		{

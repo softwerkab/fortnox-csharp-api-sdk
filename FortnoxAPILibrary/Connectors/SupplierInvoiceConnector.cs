@@ -16,30 +16,6 @@ namespace FortnoxAPILibrary.Connectors
 		public Filter.SupplierInvoice? FilterBy { get; set; }
 
 
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string CostCenter { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string OCR { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string Project { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string SupplierNumber { get; set; }
-
 		/// <remarks/>
 		public SupplierInvoiceConnector()
 		{

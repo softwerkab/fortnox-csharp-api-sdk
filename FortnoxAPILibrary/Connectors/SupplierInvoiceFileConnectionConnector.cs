@@ -15,12 +15,6 @@ namespace FortnoxAPILibrary.Connectors
 		[SearchParameter("filter")]
 		public Filter.SupplierInvoiceFileConnection? FilterBy { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string SupplierInvoiceNumber { get; set; }
-
 		/// <remarks/>
 		public SupplierInvoiceFileConnectionConnector()
 		{

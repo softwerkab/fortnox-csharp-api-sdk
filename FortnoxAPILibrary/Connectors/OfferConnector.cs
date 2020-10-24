@@ -16,54 +16,6 @@ namespace FortnoxAPILibrary.Connectors
 		public Filter.Offer? FilterBy { get; set; }
 
 
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string CostCenter { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string CustomerName { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string CustomerNumber { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string DocumentNumber { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string OfferDate { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string OurReference { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string Project { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string YourReference { get; set; }
-
 		/// <remarks/>
 		public OfferConnector()
 		{

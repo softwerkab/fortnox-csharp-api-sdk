@@ -16,18 +16,6 @@ namespace FortnoxAPILibrary.Connectors
 		public Filter.PriceList? FilterBy { get; set; }
 
 
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string Code { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string Comments { get; set; }
-
 		/// <remarks/>
 		public PriceListConnector()
 		{

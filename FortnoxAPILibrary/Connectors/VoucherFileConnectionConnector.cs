@@ -16,24 +16,6 @@ namespace FortnoxAPILibrary.Connectors
 		public Filter.VoucherFileConnection? FilterBy { get; set; }
 
 
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string VoucherDescription { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string VoucherNumber { get; set; }
-
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string VoucherSeries { get; set; }
-
 		/// <remarks/>
 		public VoucherFileConnectionConnector()
 		{

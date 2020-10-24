@@ -16,12 +16,6 @@ namespace FortnoxAPILibrary.Connectors
 		public Filter.Account? FilterBy { get; set; }
 
 
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-		public string SRU { get; set; }
-
 		/// <remarks/>
 		public AccountConnector()
 		{

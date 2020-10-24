@@ -16,12 +16,6 @@ namespace FortnoxAPILibrary.Connectors
         [SearchParameter("filter")]
 		public Filter.Voucher? FilterBy { get; set; }
 
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter]
-		public string CostCenter { get; set; }
-
 		/// <remarks/>
 		public VoucherConnector()
 		{
