@@ -277,16 +277,16 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         public void Test_Search()
         {
             var connector = new InvoiceConnector();
-            connector.FromDate = new DateTime(2020,10, 10);
-            connector.ToDate = new DateTime(2020, 10, 15);
+            connector.Search.FromDate = new DateTime(2020,10, 10);
+            connector.Search.ToDate = new DateTime(2020, 10, 15);
 
             var result = connector.Find();
 
             Assert.IsTrue(result.Entities.Count > 0);
             foreach (var invoice in result.Entities)
             {
-                Assert.IsTrue(invoice.InvoiceDate >= connector.FromDate);
-                Assert.IsTrue(invoice.InvoiceDate <= connector.ToDate);
+                Assert.IsTrue(invoice.InvoiceDate >= connector.Search.FromDate);
+                Assert.IsTrue(invoice.InvoiceDate <= connector.Search.ToDate);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
@@ -29,38 +30,6 @@ namespace FortnoxAPILibrary
         /// </summary>
         [SearchParameter]
         public int? Limit { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-        public DateTime? LastModified { get; set; }
-        /// <summary>
-        /// Use with Find() to limit the search result.
-        /// Selects which financial year should be used.
-        /// </summary>
-        [SearchParameter("financialyear")]
-        public long? FinancialYearID { get; set; }
-        /// <summary>
-        /// Use with Find() to limit the search result.
-        /// Selects which financial year should be used by date
-        /// </summary>
-        [SearchParameter]
-        public DateTime? FinancialYearDate { get; set; }
-        /// <summary>
-        /// Use with Find() to limit the search result.
-        /// Defines a selection based on a start date.
-        /// Only available for invoices, orders, offers and vouchers
-        /// </summary>
-        [SearchParameter]
-        public DateTime? FromDate { get; set; }
-        /// <summary>
-        /// Use with Find() to limit the search result.
-        /// Defines a selection based on an end date.
-        /// Only available for invoices, orders, offers and vouchers
-        /// </summary>
-        [SearchParameter]
-        public DateTime? ToDate { get; set; }
 
         /// <summary>
         /// Use with Find() to limit the search result
@@ -161,14 +130,24 @@ namespace FortnoxAPILibrary
 
         protected Dictionary<string, string> GetSearchParameters()
         {
+            var searchObjProperty = GetType().GetProperty("Search");
+            var searchObj = searchObjProperty.GetValue(this);
+            var searchProperties = GetSearchParameters(searchObj).ToList();
+            var other = GetSearchParameters(this).ToList();
+
+            return searchProperties.Concat(other).ToDictionary(x => x.Key, x => x.Value);
+        }
+
+        protected static Dictionary<string, string> GetSearchParameters(object obj)
+        {
             var searchParams = new Dictionary<string, string>();
 
-            foreach (var property in GetType().GetProperties())
+            foreach (var property in obj.GetType().GetProperties())
             {
                 var isSearchParameter = property.HasAttribute<SearchParameter>();
                 if (!isSearchParameter) continue;
 
-                var value = property.GetValue(this);
+                var value = property.GetValue(obj);
                 var strValue = GetStringValue(value, property.PropertyType);
                 if (string.IsNullOrWhiteSpace(strValue)) continue;
 

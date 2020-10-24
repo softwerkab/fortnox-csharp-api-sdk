@@ -56,7 +56,7 @@ namespace FortnoxAPILibrary.Tests
 
             //Act & Assert
             var connector = new VoucherConnector();
-            connector.FinancialYearID = 1;
+            connector.Search.FinancialYearID = 1;
 
             connector.Limit = 2;
             var voucherResult = connector.Find();
@@ -224,7 +224,7 @@ namespace FortnoxAPILibrary.Tests
             MyAssert.HasNoError(connector);
             Assert.AreEqual(false, retrievedInvoice.Cancelled);
 
-            connector.LastModified = DateTime.Today;
+            connector.Search.LastModified = DateTime.Today;
             var invoiceSubsets = connector.Find().Entities;
             MyAssert.HasNoError(connector);
             foreach (var supplierInvoiceSubset in invoiceSubsets)

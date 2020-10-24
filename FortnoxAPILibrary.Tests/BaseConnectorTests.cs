@@ -77,12 +77,12 @@ namespace FortnoxAPILibrary.Tests
                 Search = new CustomerSearch()
                 {
                     Name = "TestName",
-                    City = null
+                    City = null,
+                    LastModified = null
                 },
                 FilterBy = null,
                 SortBy = null,
                 SortOrder = null,
-                LastModified = null,
                 Limit = null,
                 Offset = null,
                 Page = null
