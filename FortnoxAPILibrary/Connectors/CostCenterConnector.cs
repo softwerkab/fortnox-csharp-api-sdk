@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class CostCenterConnector : EntityConnector<CostCenter, EntityCollection<CostCenter>, Sort.By.CostCenter?>, ICostCenterConnector
 	{
+		public CostCenterSearch Search { get; set; } = new CostCenterSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class ContractConnector : EntityConnector<Contract, EntityCollection<ContractSubset>, Sort.By.Contract?>, IContractConnector
 	{
+		public ContractSearch Search { get; set; } = new ContractSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class InvoiceAccrualConnector : EntityConnector<InvoiceAccrual, EntityCollection<InvoiceAccrualSubset>, Sort.By.InvoiceAccrual?>, IInvoiceAccrualConnector
 	{
+		public InvoiceAccrualSearch Search { get; set; } = new InvoiceAccrualSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

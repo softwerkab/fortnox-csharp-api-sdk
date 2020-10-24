@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class PriceConnector : EntityConnector<Price, EntityCollection<PriceSubset>, Sort.By.Price?>, IPriceConnector
 	{
+		public PriceSearch Search { get; set; } = new PriceSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

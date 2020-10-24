@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
 	/// <remarks/>
 	public class PredefinedAccountsConnector : EntityConnector<PredefinedAccount, EntityCollection<PredefinedAccount>, Sort.By.PredefinedAccounts?>, IPredefinedAccountsConnector
 	{
+		public PredefinedAccountsSearch Search { get; set; } = new PredefinedAccountsSearch();
+
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>

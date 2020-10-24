@@ -10,6 +10,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class AttendanceTransactionsConnector : EntityConnector<AttendanceTransaction, EntityCollection<AttendanceTransactionSubset>, Sort.By.AttendanceTransactions?>, IAttendanceTransactionsConnector
 	{
+		public AttendanceTransactionsSearch Search { get; set; } = new AttendanceTransactionsSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

@@ -10,6 +10,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class AuthorizationConnector : BaseConnector, IAuthorizationConnector
     {
+		public AuthorizationSearch Search { get; set; } = new AuthorizationSearch();
+
         /// <summary>
         /// <para>Use this function to create and get your Access-Token.</para>
         /// <para>NOTE!</para>

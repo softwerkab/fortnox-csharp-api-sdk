@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class ExpenseConnector : EntityConnector<Expense, EntityCollection<ExpenseSubset>, Sort.By.Expense?>, IExpenseConnector
 	{
+		public ExpenseSearch Search { get; set; } = new ExpenseSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

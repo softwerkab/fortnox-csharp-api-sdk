@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class WayOfDeliveryConnector : EntityConnector<WayOfDelivery, EntityCollection<WayOfDelivery>, Sort.By.WayOfDelivery?>, IWayOfDeliveryConnector
 	{
+		public WayOfDeliverySearch Search { get; set; } = new WayOfDeliverySearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

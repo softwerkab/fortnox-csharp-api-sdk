@@ -10,6 +10,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class VoucherConnector : EntityConnector<Voucher, EntityCollection<VoucherSubset>, Sort.By.Voucher?>, IVoucherConnector
 	{
+		public VoucherSearch Search { get; set; } = new VoucherSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

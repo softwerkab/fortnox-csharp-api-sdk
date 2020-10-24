@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class EmployeeConnector : EntityConnector<Employee, EntityCollection<EmployeeSubset>, Sort.By.Employee?>, IEmployeeConnector
 	{
+		public EmployeeSearch Search { get; set; } = new EmployeeSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

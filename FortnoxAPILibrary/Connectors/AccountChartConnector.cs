@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class AccountChartConnector : EntityConnector<AccountChart, EntityCollection<AccountChart>, Sort.By.AccountChart?>, IAccountChartConnector
 	{
+		public AccountChartSearch Search { get; set; } = new AccountChartSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

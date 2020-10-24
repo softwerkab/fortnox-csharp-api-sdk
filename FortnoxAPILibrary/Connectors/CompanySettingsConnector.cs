@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class CompanySettingsConnector : EntityConnector<CompanySettings, EntityWrapper<CompanySettings>, Sort.By.CompanySettings?>, ICompanySettingsConnector
 	{
+		public CompanySettingsSearch Search { get; set; } = new CompanySettingsSearch();
+
 		/// <remarks/>
 		public CompanySettingsConnector()
 		{

@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class AssetFileConnectionConnector : EntityConnector<AssetFileConnection, EntityCollection<AssetFileConnection>, Sort.By.AssetFileConnection?>, IAssetFileConnectionConnector
 	{
+		public AssetFileConnectionSearch Search { get; set; } = new AssetFileConnectionSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

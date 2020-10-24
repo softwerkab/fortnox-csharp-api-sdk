@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class TrustedEmailDomainsConnector : EntityConnector<TrustedEmailDomain, EntityCollection<TrustedEmailDomain>, Sort.By.TrustedEmailDomains?>, ITrustedEmailDomainsConnector
 	{
+		public TrustedEmailDomainsSearch Search { get; set; } = new TrustedEmailDomainsSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

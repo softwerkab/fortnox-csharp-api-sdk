@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
 	/// <remarks/>
 	public class VoucherFileConnectionConnector : EntityConnector<VoucherFileConnection, EntityCollection<VoucherFileConnection>, Sort.By.VoucherFileConnection?>, IVoucherFileConnectionConnector
 	{
+		public VoucherFileConnectionSearch Search { get; set; } = new VoucherFileConnectionSearch();
+
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>

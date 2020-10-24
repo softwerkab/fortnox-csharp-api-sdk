@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class TermsOfPaymentConnector : EntityConnector<TermsOfPayment, EntityCollection<TermsOfPayment>, Sort.By.TermsOfPayment?>, ITermsOfPaymentConnector
 	{
+		public TermsOfPaymentSearch Search { get; set; } = new TermsOfPaymentSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

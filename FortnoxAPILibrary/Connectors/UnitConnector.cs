@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class UnitConnector : EntityConnector<Unit, EntityCollection<Unit>, Sort.By.Unit?>, IUnitConnector
 	{
+		public UnitSearch Search { get; set; } = new UnitSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class SupplierInvoiceExternalURLConnectionConnector : EntityConnector<SupplierInvoiceExternalURLConnection, EntityCollection<SupplierInvoiceExternalURLConnection>, Sort.By.SupplierInvoiceExternalURLConnection?>, ISupplierInvoiceExternalURLConnectionConnector
 	{
+		public SupplierInvoiceExternalURLConnectionSearch Search { get; set; } = new SupplierInvoiceExternalURLConnectionSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

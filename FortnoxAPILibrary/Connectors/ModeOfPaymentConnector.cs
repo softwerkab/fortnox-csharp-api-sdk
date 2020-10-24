@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class ModeOfPaymentConnector : EntityConnector<ModeOfPayment, EntityCollection<ModeOfPayment>, Sort.By.ModeOfPayment?>, IModeOfPaymentConnector
 	{
+		public ModeOfPaymentSearch Search { get; set; } = new ModeOfPaymentSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

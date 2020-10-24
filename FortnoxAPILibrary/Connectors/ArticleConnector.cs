@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class ArticleConnector : EntityConnector<Article, EntityCollection<ArticleSubset>, Sort.By.Article?>, IArticleConnector
 	{
+		public ArticleSearch Search { get; set; } = new ArticleSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

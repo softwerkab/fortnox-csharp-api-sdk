@@ -10,6 +10,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class ScheduleTimesConnector : EntityConnector<ScheduleTimes, EntityCollection<ScheduleTimes>, Sort.By.ScheduleTimes?>, IScheduleTimesConnector
 	{
+		public ScheduleTimesSearch Search { get; set; } = new ScheduleTimesSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

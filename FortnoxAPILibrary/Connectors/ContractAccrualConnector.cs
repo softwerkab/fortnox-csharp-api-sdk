@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class ContractAccrualConnector : EntityConnector<ContractAccrual, EntityCollection<ContractAccrualSubset>, Sort.By.ContractAccrual?>, IContractAccrualConnector
 	{
+		public ContractAccrualSearch Search { get; set; } = new ContractAccrualSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

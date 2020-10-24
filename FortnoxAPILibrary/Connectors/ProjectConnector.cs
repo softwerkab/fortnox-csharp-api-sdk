@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class ProjectConnector : EntityConnector<Project, EntityCollection<ProjectSubset>, Sort.By.Project?>, IProjectConnector
 	{
+		public ProjectSearch Search { get; set; } = new ProjectSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

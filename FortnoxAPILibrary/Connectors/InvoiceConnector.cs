@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class InvoiceConnector : EntityConnector<Invoice, EntityCollection<InvoiceSubset>, Sort.By.Invoice?>, IInvoiceConnector
 	{
+		public InvoiceSearch Search { get; set; } = new InvoiceSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class TaxReductionConnector : EntityConnector<TaxReduction, EntityCollection<TaxReductionSubset>, Sort.By.TaxReduction?>, ITaxReductionConnector
 	{
+		public TaxReductionSearch Search { get; set; } = new TaxReductionSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

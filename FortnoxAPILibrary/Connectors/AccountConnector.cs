@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class AccountConnector : EntityConnector<Account, EntityCollection<AccountSubset>, Sort.By.Account?>, IAccountConnector
 	{
+		public AccountSearch Search { get; set; } = new AccountSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

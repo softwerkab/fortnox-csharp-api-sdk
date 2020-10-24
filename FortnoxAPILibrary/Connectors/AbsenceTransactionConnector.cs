@@ -10,6 +10,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class AbsenceTransactionConnector : EntityConnector<AbsenceTransaction, EntityCollection<AbsenceTransaction>, Sort.By.AbsenceTransaction?>, IAbsenceTransactionConnector
 	{
+		public AbsenceTransactionSearch Search { get; set; } = new AbsenceTransactionSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

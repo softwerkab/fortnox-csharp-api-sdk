@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class OrderConnector : EntityConnector<Order, EntityCollection<OrderSubset>, Sort.By.Order?>, IOrderConnector
 	{
+		public OrderSearch Search { get; set; } = new OrderSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

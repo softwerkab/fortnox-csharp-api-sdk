@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class TermsOfDeliveryConnector : EntityConnector<TermsOfDelivery, EntityCollection<TermsOfDelivery>, Sort.By.TermsOfDelivery?>, ITermsOfDeliveryConnector
 	{
+		public TermsOfDeliverySearch Search { get; set; } = new TermsOfDeliverySearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

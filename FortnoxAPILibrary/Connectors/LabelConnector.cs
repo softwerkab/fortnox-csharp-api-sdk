@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class LabelConnector : EntityConnector<Label, EntityCollection<Label>, Sort.By.Label?>, ILabelConnector
 	{
+		public LabelSearch Search { get; set; } = new LabelSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

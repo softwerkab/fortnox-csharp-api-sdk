@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class SupplierConnector : EntityConnector<Supplier, EntityCollection<SupplierSubset>, Sort.By.Supplier?>, ISupplierConnector
 	{
+		public SupplierSearch Search { get; set; } = new SupplierSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

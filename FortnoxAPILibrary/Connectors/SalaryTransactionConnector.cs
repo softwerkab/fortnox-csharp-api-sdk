@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class SalaryTransactionConnector : EntityConnector<SalaryTransaction, EntityCollection<SalaryTransactionSubset>, Sort.By.SalaryTransaction?>, ISalaryTransactionConnector
 	{
+		public SalaryTransactionSearch Search { get; set; } = new SalaryTransactionSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

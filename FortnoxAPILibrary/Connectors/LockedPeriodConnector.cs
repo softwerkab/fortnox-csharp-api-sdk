@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class LockedPeriodConnector : EntityConnector<LockedPeriod, EntityWrapper<LockedPeriod>, Sort.By.LockedPeriod?>, ILockedPeriodConnector
 	{
+		public LockedPeriodSearch Search { get; set; } = new LockedPeriodSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

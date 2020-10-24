@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class OfferConnector : EntityConnector<Offer, EntityCollection<OfferSubset>, Sort.By.Offer?>, IOfferConnector
 	{
+		public OfferSearch Search { get; set; } = new OfferSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

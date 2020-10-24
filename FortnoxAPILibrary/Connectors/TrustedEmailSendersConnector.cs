@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class TrustedEmailSendersConnector : EntityConnector<TrustedEmailSender, EntityWrapper<EmailSenders>, Sort.By.TrustedEmailSenders?>, ITrustedEmailSendersConnector
 	{
+		public TrustedEmailSendersSearch Search { get; set; } = new TrustedEmailSendersSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

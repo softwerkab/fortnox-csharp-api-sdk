@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class CurrencyConnector : EntityConnector<Currency, EntityCollection<Currency>, Sort.By.Currency?>, ICurrencyConnector
 	{
+		public CurrencySearch Search { get; set; } = new CurrencySearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

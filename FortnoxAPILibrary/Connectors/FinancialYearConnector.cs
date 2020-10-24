@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class FinancialYearConnector : EntityConnector<FinancialYear, EntityCollection<FinancialYearSubset>, Sort.By.FinancialYear?>, IFinancialYearConnector
 	{
+		public FinancialYearSearch Search { get; set; } = new FinancialYearSearch();
+
 	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>

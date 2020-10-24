@@ -9,6 +9,8 @@ namespace FortnoxAPILibrary.Connectors
 	/// <remarks/>
 	public class PredefinedVoucherSeriesConnector : EntityConnector<PredefinedVoucherSeries, EntityCollection<PredefinedVoucherSeries>, Sort.By.PredefinedVoucherSeries?>, IPredefinedVoucherSeriesConnector
 	{
+		public PredefinedVoucherSeriesSearch Search { get; set; } = new PredefinedVoucherSeriesSearch();
+
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>

@@ -13,6 +13,8 @@ namespace FortnoxAPILibrary.Connectors
 	/// <remarks/>
     public class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConnection, EntityCollection<InvoiceFileConnectionSubset>, Sort.By.InvoiceFileConnection?>, IInvoiceFileConnectionConnector
     {
+		public InvoiceFileConnectionSearch Search { get; set; } = new InvoiceFileConnectionSearch();
+
 		/// <summary>
 		/// Use with Find() to limit the search result
 		/// </summary>
