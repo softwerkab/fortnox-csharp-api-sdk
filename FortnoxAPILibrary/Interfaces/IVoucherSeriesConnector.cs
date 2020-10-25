@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		VoucherSeriesSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.VoucherSeries? SortBy { get; set; }
-		Filter.VoucherSeries? FilterBy { get; set; }
-
 
 		VoucherSeries Update(VoucherSeries voucherSeries);
 		VoucherSeries Create(VoucherSeries voucherSeries);

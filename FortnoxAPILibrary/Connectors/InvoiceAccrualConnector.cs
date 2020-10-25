@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public InvoiceAccrualSearch Search { get; set; } = new InvoiceAccrualSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.InvoiceAccrual? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public InvoiceAccrualConnector()

@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		ContractTemplateSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.ContractTemplate? SortBy { get; set; }
-		Filter.ContractTemplate? FilterBy { get; set; }
-
 
 		ContractTemplate Update(ContractTemplate contractTemplate);
 		ContractTemplate Create(ContractTemplate contractTemplate);

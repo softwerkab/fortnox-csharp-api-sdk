@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		AccountChartSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.AccountChart? SortBy { get; set; }
-		Filter.AccountChart? FilterBy { get; set; }
-
 		EntityCollection<AccountChart> Find();
 
 		Task<EntityCollection<AccountChart>> FindAsync();

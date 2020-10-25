@@ -27,13 +27,13 @@ namespace FortnoxAPILibrary.Tests
                     Name = "TestName",
                     City = "TestCity",
                     LastModified = new DateTime(2000, 01, 01, 20, 10, 05), //2000-01-20 20:10:05
-                },
-                FilterBy = Filter.Customer.Active,
-                SortBy = Sort.By.Customer.Name,
-                SortOrder = Sort.Order.Ascending,
-                Limit = 10,
-                Offset = 0,
-                Page = 1
+                    FilterBy = Filter.Customer.Active,
+                    SortBy = Sort.By.Customer.Name,
+                    SortOrder = Sort.Order.Ascending,
+                    Limit = 10,
+                    Offset = 0,
+                    Page = 1
+                }
             };
 
             connector.Find();
@@ -78,14 +78,14 @@ namespace FortnoxAPILibrary.Tests
                 {
                     Name = "TestName",
                     City = null,
-                    LastModified = null
+                    LastModified = null,
+                    FilterBy = null,
+                    SortBy = null,
+                    SortOrder = null,
+                    Limit = null,
+                    Offset = null,
+                    Page = null
                 },
-                FilterBy = null,
-                SortBy = null,
-                SortOrder = null,
-                Limit = null,
-                Offset = null,
-                Page = null
             };
 
             connector.Find();
@@ -154,9 +154,9 @@ namespace FortnoxAPILibrary.Tests
             const int small = 5;
 
             var connector = new CustomerConnector();
-            connector.Limit = large;
-            connector.SortBy = Sort.By.Customer.CustomerNumber;
-            connector.SortOrder = Sort.Order.Ascending;
+            connector.Search.Limit = large;
+            connector.Search.SortBy = Sort.By.Customer.CustomerNumber;
+            connector.Search.SortOrder = Sort.Order.Ascending;
 
             var largeCustomerCollection = connector.Find(); //get up to 'large' number of entities
             var totalCustomers = largeCustomerCollection.TotalResources;
@@ -166,8 +166,8 @@ namespace FortnoxAPILibrary.Tests
 
             for (int i = 0; i < neededPages; i++)
             {
-                connector.Limit = small;
-                connector.Page = i + 1;
+                connector.Search.Limit = small;
+                connector.Search.Page = i + 1;
                 var smallCustomerCollection = connector.Find();
                 mergedCollection.AddRange(smallCustomerCollection.Entities);
             }

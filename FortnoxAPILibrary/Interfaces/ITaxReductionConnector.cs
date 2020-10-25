@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		TaxReductionSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.TaxReduction? SortBy { get; set; }
-		Filter.TaxReduction? FilterBy { get; set; }
-
 		TaxReduction Update(TaxReduction taxReduction);
 		TaxReduction Create(TaxReduction taxReduction);
 		TaxReduction Get(string id);

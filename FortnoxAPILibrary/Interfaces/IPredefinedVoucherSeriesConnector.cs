@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		PredefinedVoucherSeriesSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.PredefinedVoucherSeries? SortBy { get; set; }
-		Filter.PredefinedVoucherSeries? FilterBy { get; set; }
-
 
 		PredefinedVoucherSeries Update(PredefinedVoucherSeries predefinedVoucherSeries);
         PredefinedVoucherSeries Get(string id);

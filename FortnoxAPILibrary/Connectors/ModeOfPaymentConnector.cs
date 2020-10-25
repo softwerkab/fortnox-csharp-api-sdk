@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public ModeOfPaymentSearch Search { get; set; } = new ModeOfPaymentSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.ModeOfPayment? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public ModeOfPaymentConnector()

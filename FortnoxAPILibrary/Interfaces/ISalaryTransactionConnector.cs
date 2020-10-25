@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		SalaryTransactionSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.SalaryTransaction? SortBy { get; set; }
-		Filter.SalaryTransaction? FilterBy { get; set; }
-
 
 		SalaryTransaction Update(SalaryTransaction salaryTransaction);
 		SalaryTransaction Create(SalaryTransaction salaryTransaction);

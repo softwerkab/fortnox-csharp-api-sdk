@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public PredefinedVoucherSeriesSearch Search { get; set; } = new PredefinedVoucherSeriesSearch();
 
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter("filter")]
-		public Filter.PredefinedVoucherSeries? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public PredefinedVoucherSeriesConnector()

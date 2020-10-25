@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		PrintTemplateSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.PrintTemplate? SortBy { get; set; }
-		Filter.PrintTemplate? FilterBy { get; set; }
-
 		EntityCollection<PrintTemplate> Find();
 
 		Task<EntityCollection<PrintTemplate>> FindAsync();

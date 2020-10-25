@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public AccountChartSearch Search { get; set; } = new AccountChartSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.AccountChart? FilterBy { get; set; }
-
 		/// <remarks/>
 		public AccountChartConnector()
 		{

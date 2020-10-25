@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public SupplierInvoicePaymentSearch Search { get; set; } = new SupplierInvoicePaymentSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.SupplierInvoicePayment? FilterBy { get; set; }
-
 		/// <remarks/>
 		public SupplierInvoicePaymentConnector()
 		{

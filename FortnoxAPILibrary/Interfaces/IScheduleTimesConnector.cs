@@ -10,10 +10,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		ScheduleTimesSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.ScheduleTimes? SortBy { get; set; }
-		Filter.ScheduleTimes? FilterBy { get; set; }
-
 
 		ScheduleTimes Update(ScheduleTimes scheduleTimes);
         ScheduleTimes Get(string employeeId, DateTime? date);

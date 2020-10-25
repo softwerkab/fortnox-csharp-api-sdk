@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		ArchiveSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.Archive? SortBy { get; set; }
-        Filter.Archive? FilterBy { get; set; }
-
         byte[] DownloadFile(string id, IdType idType = IdType.Id);
         FileInfo DownloadFile(string id, string localPath, IdType idType = IdType.Id);
         ArchiveFile UploadFile(string name, byte[] data, string folderPathOrId = null);

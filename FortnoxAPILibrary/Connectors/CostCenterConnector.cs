@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public CostCenterSearch Search { get; set; } = new CostCenterSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.CostCenter? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public CostCenterConnector()

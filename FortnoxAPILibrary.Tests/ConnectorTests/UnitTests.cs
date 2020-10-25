@@ -97,7 +97,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual(5, fullCollection.Entities.Count(x => x.Code.StartsWith(marks)));
 
             //Limit not supported
-            connector.Limit = 2;
+            connector.Search.Limit = 2;
             var limitedCollection = connector.Find();
             Assert.AreEqual(2, limitedCollection.Entities.Count);
 

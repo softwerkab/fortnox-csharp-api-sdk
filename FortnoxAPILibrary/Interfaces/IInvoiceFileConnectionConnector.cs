@@ -10,10 +10,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		InvoiceFileConnectionSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.InvoiceFileConnection? SortBy { get; set; }
-		Filter.InvoiceFileConnection? FilterBy { get; set; }
-
 
 		InvoiceFileConnection Update(InvoiceFileConnection invoiceFileConnection);
 		InvoiceFileConnection Create(InvoiceFileConnection invoiceFileConnection);

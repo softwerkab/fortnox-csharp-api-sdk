@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		LabelSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.Label? SortBy { get; set; }
-		Filter.Label? FilterBy { get; set; }
-
 
 		Label Update(Label label);
 		Label Create(Label label);

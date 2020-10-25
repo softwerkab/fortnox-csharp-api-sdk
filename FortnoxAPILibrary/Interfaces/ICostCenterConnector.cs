@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		CostCenterSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.CostCenter? SortBy { get; set; }
-		Filter.CostCenter? FilterBy { get; set; }
-
 
 		CostCenter Update(CostCenter costCenter);
 		CostCenter Create(CostCenter costCenter);

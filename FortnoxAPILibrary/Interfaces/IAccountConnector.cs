@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		AccountSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.Account? SortBy { get; set; }
-		Filter.Account? FilterBy { get; set; }
-
 		Account Update(Account account);
 		Account Create(Account account);
 		Account Get(long? id);

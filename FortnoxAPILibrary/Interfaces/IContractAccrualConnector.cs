@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		ContractAccrualSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.ContractAccrual? SortBy { get; set; }
-		Filter.ContractAccrual? FilterBy { get; set; }
-
 
 		ContractAccrual Update(ContractAccrual contractAccrual);
 		ContractAccrual Create(ContractAccrual contractAccrual);

@@ -2,6 +2,13 @@ namespace FortnoxAPILibrary
 {
     public class CustomerSearch : BaseSearch
     {
+		[SearchParameter("sortby")]
+		public Sort.By.Customer? SortBy { get; set; }
+
+		[SearchParameter("filter")]
+		public Filter.Customer? FilterBy { get; set; }
+
+
         [SearchParameter]
 		public string City { get; set; }
 

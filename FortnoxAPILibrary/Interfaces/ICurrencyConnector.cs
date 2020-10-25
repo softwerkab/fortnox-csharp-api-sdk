@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		CurrencySearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.Currency? SortBy { get; set; }
-		Filter.Currency? FilterBy { get; set; }
-
 
 		Currency Update(Currency currency);
 		Currency Create(Currency currency);

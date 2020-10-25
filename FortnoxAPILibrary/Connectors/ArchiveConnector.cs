@@ -14,12 +14,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public ArchiveSearch Search { get; set; } = new ArchiveSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.Archive? FilterBy { get; set; }
-
 		/// <remarks/>
 		public ArchiveConnector()
 		{

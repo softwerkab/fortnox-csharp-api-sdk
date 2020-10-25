@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public SupplierSearch Search { get; set; } = new SupplierSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.Supplier? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public SupplierConnector()

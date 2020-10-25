@@ -10,10 +10,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		AbsenceTransactionSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.AbsenceTransaction? SortBy { get; set; }
-		Filter.AbsenceTransaction? FilterBy { get; set; }
-
 		AbsenceTransaction Update(AbsenceTransaction absenceTransaction);
 		AbsenceTransaction Create(AbsenceTransaction absenceTransaction);
 		AbsenceTransaction Get(string employeeId, DateTime? date, AbsenceCauseCode? code);

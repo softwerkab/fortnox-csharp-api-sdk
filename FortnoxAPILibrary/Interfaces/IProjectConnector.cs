@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		ProjectSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.Project? SortBy { get; set; }
-		Filter.Project? FilterBy { get; set; }
-
 		Project Update(Project project);
 		Project Create(Project project);
 		Project Get(string id);

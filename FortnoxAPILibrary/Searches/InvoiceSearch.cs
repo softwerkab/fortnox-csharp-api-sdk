@@ -2,6 +2,13 @@ namespace FortnoxAPILibrary
 {
     public class InvoiceSearch : BaseSearch
     {
+		[SearchParameter("sortby")]
+		public Sort.By.Invoice? SortBy { get; set; }
+
+		[SearchParameter("filter")]
+		public Filter.Invoice? FilterBy { get; set; }
+
+
         [SearchParameter]
 		public string Credit { get; set; }
 

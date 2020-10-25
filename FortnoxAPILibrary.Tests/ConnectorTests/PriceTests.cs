@@ -113,7 +113,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual("TST_PR", fullCollection.Entities.First().PriceList);
 
             //Apply Limit
-            connector.Limit = 2;
+            connector.Search.Limit = 2;
             var limitedCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber);
             MyAssert.HasNoError(connector);
 

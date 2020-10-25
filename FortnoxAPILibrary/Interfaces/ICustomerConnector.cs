@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		CustomerSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.Customer? SortBy { get; set; }
-		Filter.Customer? FilterBy { get; set; }
-
 		Customer Update(Customer customer);
 		Customer Create(Customer customer);
 		Customer Get(string id);

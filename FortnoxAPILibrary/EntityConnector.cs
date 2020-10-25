@@ -11,38 +11,6 @@ namespace FortnoxAPILibrary
     /// <remarks/>
     public abstract class EntityConnector<TEntity, TEntityCollection, TSort> : BaseConnector where TEntity : class
     {
-        /// <summary>
-        /// Sort Order, ascending or descending
-        /// </summary>
-        [SearchParameter]
-        public Sort.Order? SortOrder { get; set; }
-
-        /// <summary>
-        /// Sort the result
-        /// </summary>
-        [SearchParameter]
-        public TSort SortBy { get; set; }
-
-        /// <summary>
-        /// <para>Use with Find() to limit the search result</para>
-        /// <para>Default is 100</para>
-        /// <para>Max is 500</para>
-        /// </summary>
-        [SearchParameter]
-        public int? Limit { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-        public int? Page { get; set; }
-
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter]
-        public int? Offset { get; set; }
-
         protected Dictionary<string, string> ParametersInjection { get; set; } //TODO: Remove, temporary workaround
 
         protected async Task<TEntity> BaseCreate(TEntity entity)

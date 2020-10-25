@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public SalaryTransactionSearch Search { get; set; } = new SalaryTransactionSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.SalaryTransaction? FilterBy { get; set; }
-
 		/// <remarks/>
 		public SalaryTransactionConnector()
 		{

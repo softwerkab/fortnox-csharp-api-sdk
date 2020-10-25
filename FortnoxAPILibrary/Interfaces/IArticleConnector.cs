@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		ArticleSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.Article? SortBy { get; set; }
-		Filter.Article? FilterBy { get; set; }
-
 		Article Update(Article article);
 		Article Create(Article article);
 		Article Get(string id);

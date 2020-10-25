@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace FortnoxAPILibrary
 {
@@ -18,5 +18,18 @@ namespace FortnoxAPILibrary
 
         [SearchParameter]
         public DateTime? ToDate { get; set; }
+
+
+        [SearchParameter]
+        public Sort.Order? SortOrder { get; set; }
+
+        [SearchParameter]
+        public int? Limit { get; set; }
+
+        [SearchParameter]
+        public int? Page { get; set; }
+
+        [SearchParameter]
+        public int? Offset { get; set; }
     }
 }

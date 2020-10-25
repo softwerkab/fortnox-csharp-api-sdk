@@ -13,12 +13,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public AssetTypesSearch Search { get; set; } = new AssetTypesSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.AssetTypes? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public AssetTypesConnector()

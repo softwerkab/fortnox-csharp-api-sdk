@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		FinancialYearSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.FinancialYear? SortBy { get; set; }
-		Filter.FinancialYear? FilterBy { get; set; }
-
         FinancialYear Create(FinancialYear financialYear);
 		FinancialYear Get(long? id);
         EntityCollection<FinancialYearSubset> Find();

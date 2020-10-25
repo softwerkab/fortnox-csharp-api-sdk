@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		UnitSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.Unit? SortBy { get; set; }
-		Filter.Unit? FilterBy { get; set; }
-
 
 		Unit Update(Unit unit);
 		Unit Create(Unit unit);

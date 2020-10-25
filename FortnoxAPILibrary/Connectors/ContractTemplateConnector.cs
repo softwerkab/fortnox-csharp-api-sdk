@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public ContractTemplateSearch Search { get; set; } = new ContractTemplateSearch();
 
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter("filter")]
-		public Filter.ContractTemplate? FilterBy { get; set; }
-
         /// <remarks/>
 		public ContractTemplateConnector()
 		{

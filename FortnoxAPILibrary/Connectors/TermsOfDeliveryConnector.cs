@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public TermsOfDeliverySearch Search { get; set; } = new TermsOfDeliverySearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.TermsOfDelivery? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public TermsOfDeliveryConnector()

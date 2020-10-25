@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public TaxReductionSearch Search { get; set; } = new TaxReductionSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.TaxReduction? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public TaxReductionConnector()

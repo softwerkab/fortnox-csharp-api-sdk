@@ -9,9 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		CompanyInformationSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.CompanyInformation? SortBy { get; set; }
-
 		CompanyInformation Get();
 
 		Task<CompanyInformation> GetAsync();

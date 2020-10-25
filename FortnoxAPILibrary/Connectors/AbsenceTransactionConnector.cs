@@ -12,12 +12,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public AbsenceTransactionSearch Search { get; set; } = new AbsenceTransactionSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.AbsenceTransaction? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public AbsenceTransactionConnector()

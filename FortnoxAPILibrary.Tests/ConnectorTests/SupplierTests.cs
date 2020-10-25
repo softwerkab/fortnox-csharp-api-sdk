@@ -126,7 +126,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual(testKeyMark, fullCollection.Entities.First().City);
 
             //Apply Limit
-            connector.Limit = 2;
+            connector.Search.Limit = 2;
             var limitedCollection = connector.Find();
             MyAssert.HasNoError(connector);
 

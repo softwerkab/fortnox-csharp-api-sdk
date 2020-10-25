@@ -98,7 +98,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             connector.Search.LastModified = timeStamp; //does not seem to work
-            connector.Limit = 500;
+            connector.Search.Limit = 500;
             var expensesCollection = connector.Find();
 
             var filteredExpenses = expensesCollection.Entities.Where(x => x.Text == remark).ToList();

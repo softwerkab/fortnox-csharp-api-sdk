@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public LabelSearch Search { get; set; } = new LabelSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.Label? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public LabelConnector()

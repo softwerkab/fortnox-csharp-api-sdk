@@ -117,7 +117,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual(1, fullCollection.TotalPages);
 
             //Apply Limit
-            connector.Limit = 2;
+            connector.Search.Limit = 2;
             var limitedCollection = connector.Find();
             MyAssert.HasNoError(connector);
 

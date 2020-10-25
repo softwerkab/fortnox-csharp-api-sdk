@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		EmployeeSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.Employee? SortBy { get; set; }
-		Filter.Employee? FilterBy { get; set; }
-
 
 		Employee Update(Employee employee);
 		Employee Create(Employee employee);

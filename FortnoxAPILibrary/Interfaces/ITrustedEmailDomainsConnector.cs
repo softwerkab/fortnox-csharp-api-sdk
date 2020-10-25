@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		TrustedEmailDomainsSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.TrustedEmailDomains? SortBy { get; set; }
-		Filter.TrustedEmailDomains? FilterBy { get; set; }
-
         TrustedEmailDomain Create(TrustedEmailDomain trustedEmailDomain);
 		TrustedEmailDomain Get(long? id);
 		void Delete(long? id);

@@ -58,15 +58,15 @@ namespace FortnoxAPILibrary.Tests
             var connector = new VoucherConnector();
             connector.Search.FinancialYearID = 1;
 
-            connector.Limit = 2;
+            connector.Search.Limit = 2;
             var voucherResult = connector.Find();
             MyAssert.HasNoError(connector);
 
-            connector.Page = 2;
+            connector.Search.Page = 2;
             var voucherResult2 = connector.Find();
             MyAssert.HasNoError(connector);
 
-            connector.Page = 3;
+            connector.Search.Page = 3;
             var voucherResult3 = connector.Find();
             MyAssert.HasNoError(connector);
         }
@@ -119,7 +119,7 @@ namespace FortnoxAPILibrary.Tests
         public void Test_issue73_async_non_blockable()
         {
             var connector = new CustomerConnector();
-            connector.Limit = 2;
+            connector.Search.Limit = 2;
             var watch = new Stopwatch();
             watch.Start();
 

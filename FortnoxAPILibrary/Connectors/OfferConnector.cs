@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public OfferSearch Search { get; set; } = new OfferSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.Offer? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public OfferConnector()

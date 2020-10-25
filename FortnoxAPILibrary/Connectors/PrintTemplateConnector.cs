@@ -17,12 +17,6 @@ namespace FortnoxAPILibrary.Connectors
 			Resource = "printtemplates";
 		}
 
-        /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("type")]
-        public Filter.PrintTemplate? FilterBy { get; set; }
-
 		/// <summary>
 		/// Gets a list of printTemplates
 		/// </summary>

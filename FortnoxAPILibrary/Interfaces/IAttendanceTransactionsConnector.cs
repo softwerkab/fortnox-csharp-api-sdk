@@ -10,10 +10,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		AttendanceTransactionsSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.AttendanceTransactions? SortBy { get; set; }
-		Filter.AttendanceTransactions? FilterBy { get; set; }
-
 		AttendanceTransaction Update(AttendanceTransaction attendanceTransaction);
 		AttendanceTransaction Create(AttendanceTransaction attendanceTransaction);
 		AttendanceTransaction Get(string employeeId, DateTime? date, AttendanceCauseCode? code);

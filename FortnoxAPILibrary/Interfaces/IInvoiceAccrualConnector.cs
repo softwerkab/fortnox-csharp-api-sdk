@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		InvoiceAccrualSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.InvoiceAccrual? SortBy { get; set; }
-		Filter.InvoiceAccrual? FilterBy { get; set; }
-
 
 		InvoiceAccrual Update(InvoiceAccrual invoiceAccrual);
 		InvoiceAccrual Create(InvoiceAccrual invoiceAccrual);

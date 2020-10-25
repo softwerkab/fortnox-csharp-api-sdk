@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public ContractAccrualSearch Search { get; set; } = new ContractAccrualSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.ContractAccrual? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public ContractAccrualConnector()

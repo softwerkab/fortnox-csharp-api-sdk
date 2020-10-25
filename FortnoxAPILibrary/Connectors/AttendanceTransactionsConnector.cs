@@ -12,12 +12,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public AttendanceTransactionsSearch Search { get; set; } = new AttendanceTransactionsSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.AttendanceTransactions? FilterBy { get; set; }
-
         /// <remarks/>
         public AttendanceTransactionsConnector()
 		{

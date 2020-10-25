@@ -54,7 +54,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual(42, fullCollection.Entities.Count);
             Assert.IsNotNull(fullCollection.Entities.First().Name);
 
-            connector.Limit = 2;
+            connector.Search.Limit = 2;
             var limitedCollection = connector.Find();
             MyAssert.HasNoError(connector);
 

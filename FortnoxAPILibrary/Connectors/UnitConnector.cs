@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public UnitSearch Search { get; set; } = new UnitSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.Unit? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public UnitConnector()

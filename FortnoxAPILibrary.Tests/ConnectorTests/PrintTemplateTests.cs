@@ -41,19 +41,19 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         {
             IPrintTemplateConnector connector = new PrintTemplateConnector();
 
-            connector.FilterBy = Filter.PrintTemplate.Order;
+            connector.Search.FilterBy = Filter.PrintTemplate.Order;
             var orderTemplates = connector.Find();
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(4, orderTemplates.Entities.Count);
 
-            connector.FilterBy = Filter.PrintTemplate.Offer;
+            connector.Search.FilterBy = Filter.PrintTemplate.Offer;
             var offerTemplates = connector.Find();
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(1, offerTemplates.Entities.Count);
 
-            connector.FilterBy = Filter.PrintTemplate.Invoice;
+            connector.Search.FilterBy = Filter.PrintTemplate.Invoice;
             var invoiceTemplates = connector.Find();
             MyAssert.HasNoError(connector);
 

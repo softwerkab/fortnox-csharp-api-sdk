@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public LockedPeriodSearch Search { get; set; } = new LockedPeriodSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.LockedPeriod? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public LockedPeriodConnector()

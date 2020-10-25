@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		OfferSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.Offer? SortBy { get; set; }
-		Filter.Offer? FilterBy { get; set; }
-
 		Offer Update(Offer offer);
 		Offer Create(Offer offer);
 		Offer Get(long? id);

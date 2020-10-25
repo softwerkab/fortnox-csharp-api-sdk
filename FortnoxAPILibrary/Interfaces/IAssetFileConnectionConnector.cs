@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		AssetFileConnectionSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.AssetFileConnection? SortBy { get; set; }
-		Filter.AssetFileConnection? FilterBy { get; set; }
-
         AssetFileConnection Create(AssetFileConnection assetFileConnection);
 		AssetFileConnection Get(string id);
 		void Delete(string id);

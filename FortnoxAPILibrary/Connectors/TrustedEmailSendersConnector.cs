@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public TrustedEmailSendersSearch Search { get; set; } = new TrustedEmailSendersSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.TrustedEmailSenders? FilterBy { get; set; }
-
 		/// <remarks/>
 		public TrustedEmailSendersConnector()
 		{

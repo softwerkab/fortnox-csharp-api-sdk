@@ -99,7 +99,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual("TestDeliveryTerms", fullCollection.Entities[0].Description);
 
             //Apply Limit
-            connector.Limit = 2;
+            connector.Search.Limit = 2;
             var limitedCollection = connector.Find();
             MyAssert.HasNoError(connector);
 

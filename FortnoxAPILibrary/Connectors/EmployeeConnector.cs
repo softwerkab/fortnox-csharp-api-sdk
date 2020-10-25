@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public EmployeeSearch Search { get; set; } = new EmployeeSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.Employee? FilterBy { get; set; }
-
         /// <remarks/>
 		public EmployeeConnector()
 		{

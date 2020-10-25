@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		ContractSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.Contract? SortBy { get; set; }
-		Filter.Contract? FilterBy { get; set; }
-
 		Contract Update(Contract contract);
 		Contract Create(Contract contract);
 		Contract Get(long? id);

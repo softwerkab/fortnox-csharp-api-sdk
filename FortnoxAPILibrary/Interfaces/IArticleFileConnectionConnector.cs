@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		ArticleFileConnectionSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.ArticleFileConnection? SortBy { get; set; }
-		Filter.ArticleFileConnection? FilterBy { get; set; }
-
 		ArticleFileConnection Create(ArticleFileConnection articleFileConnection);
 		ArticleFileConnection Get(string id);
 		void Delete(string id);

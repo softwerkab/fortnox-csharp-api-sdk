@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		OrderSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.Order? SortBy { get; set; }
-		Filter.Order? FilterBy { get; set; }
-
 		Order Update(Order order);
 		Order Create(Order order);
 		Order Get(long? id);

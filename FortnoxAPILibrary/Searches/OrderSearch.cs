@@ -2,6 +2,13 @@ namespace FortnoxAPILibrary
 {
     public class OrderSearch : BaseSearch
     {
+		[SearchParameter("sortby")]
+		public Sort.By.Order? SortBy { get; set; }
+
+		[SearchParameter("filter")]
+		public Filter.Order? FilterBy { get; set; }
+
+
         [SearchParameter]
 		public string CostCenter { get; set; }
 

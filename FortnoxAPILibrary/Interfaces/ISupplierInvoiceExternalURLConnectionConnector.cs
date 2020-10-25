@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		SupplierInvoiceExternalURLConnectionSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.SupplierInvoiceExternalURLConnection? SortBy { get; set; }
-		Filter.SupplierInvoiceExternalURLConnection? FilterBy { get; set; }
-
 
 		SupplierInvoiceExternalURLConnection Update(SupplierInvoiceExternalURLConnection supplierInvoiceExternalURLConnection);
 		SupplierInvoiceExternalURLConnection Create(SupplierInvoiceExternalURLConnection supplierInvoiceExternalURLConnection);

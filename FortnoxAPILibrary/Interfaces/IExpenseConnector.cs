@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		ExpenseSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.Expense? SortBy { get; set; }
-		Filter.Expense? FilterBy { get; set; }
-
 
         Expense Create(Expense expense);
 		Expense Get(string id);

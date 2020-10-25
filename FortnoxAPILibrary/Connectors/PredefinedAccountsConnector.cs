@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public PredefinedAccountsSearch Search { get; set; } = new PredefinedAccountsSearch();
 
-		/// <summary>
-		/// Use with Find() to limit the search result
-		/// </summary>
-		[SearchParameter("filter")]
-		public Filter.PredefinedAccounts? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public PredefinedAccountsConnector()

@@ -12,12 +12,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public ScheduleTimesSearch Search { get; set; } = new ScheduleTimesSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.ScheduleTimes? FilterBy { get; set; }
-
         /// <remarks/>
 		public ScheduleTimesConnector()
 		{

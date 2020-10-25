@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public VoucherSeriesSearch Search { get; set; } = new VoucherSeriesSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.VoucherSeries? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public VoucherSeriesConnector()

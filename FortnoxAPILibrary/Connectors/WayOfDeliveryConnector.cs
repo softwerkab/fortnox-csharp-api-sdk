@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public WayOfDeliverySearch Search { get; set; } = new WayOfDeliverySearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.WayOfDelivery? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public WayOfDeliveryConnector()

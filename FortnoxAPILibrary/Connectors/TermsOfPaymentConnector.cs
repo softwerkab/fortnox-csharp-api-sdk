@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public TermsOfPaymentSearch Search { get; set; } = new TermsOfPaymentSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.TermsOfPayment? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public TermsOfPaymentConnector()

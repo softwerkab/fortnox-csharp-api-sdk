@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		TermsOfPaymentSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.TermsOfPayment? SortBy { get; set; }
-		Filter.TermsOfPayment? FilterBy { get; set; }
-
 
 		TermsOfPayment Update(TermsOfPayment termsOfPayment);
 		TermsOfPayment Create(TermsOfPayment termsOfPayment);

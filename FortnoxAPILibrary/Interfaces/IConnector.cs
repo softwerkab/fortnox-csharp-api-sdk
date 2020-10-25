@@ -20,9 +20,5 @@ namespace FortnoxAPILibrary.Connectors
     public interface IEntityConnector : IConnector
     {
         //BaseSearch Search { get; set; }
-
-        int? Page { get; set; }
-        int? Offset { get; set; }
-        int? Limit { get; set; }
     }
 }

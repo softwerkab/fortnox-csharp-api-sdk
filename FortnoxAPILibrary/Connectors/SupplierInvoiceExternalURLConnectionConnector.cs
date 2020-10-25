@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public SupplierInvoiceExternalURLConnectionSearch Search { get; set; } = new SupplierInvoiceExternalURLConnectionSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.SupplierInvoiceExternalURLConnection? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public SupplierInvoiceExternalURLConnectionConnector()

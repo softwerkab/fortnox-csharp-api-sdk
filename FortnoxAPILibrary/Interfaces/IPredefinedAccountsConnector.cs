@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		PredefinedAccountsSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.PredefinedAccounts? SortBy { get; set; }
-		Filter.PredefinedAccounts? FilterBy { get; set; }
-
 		PredefinedAccount Update(PredefinedAccount predefinedAccounts);
         PredefinedAccount Get(string id);
 		EntityCollection<PredefinedAccount> Find();

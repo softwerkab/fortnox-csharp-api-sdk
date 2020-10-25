@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		SupplierInvoicePaymentSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.SupplierInvoicePayment? SortBy { get; set; }
-		Filter.SupplierInvoicePayment? FilterBy { get; set; }
-
 		SupplierInvoicePayment Update(SupplierInvoicePayment supplierInvoicePayment);
 		SupplierInvoicePayment Create(SupplierInvoicePayment supplierInvoicePayment);
 		SupplierInvoicePayment Get(long? id);

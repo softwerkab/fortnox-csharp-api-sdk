@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public CurrencySearch Search { get; set; } = new CurrencySearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.Currency? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public CurrencyConnector()

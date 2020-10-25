@@ -9,9 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		LockedPeriodSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.LockedPeriod? SortBy { get; set; }
-
         LockedPeriod Get();
 
         Task<LockedPeriod> GetAsync();

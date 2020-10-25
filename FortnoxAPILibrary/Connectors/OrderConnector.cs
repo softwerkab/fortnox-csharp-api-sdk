@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public OrderSearch Search { get; set; } = new OrderSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.Order? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public OrderConnector()

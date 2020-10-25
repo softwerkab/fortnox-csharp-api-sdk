@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		PriceListSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.PriceList? SortBy { get; set; }
-		Filter.PriceList? FilterBy { get; set; }
-
 		PriceList Update(PriceList priceList);
 		PriceList Create(PriceList priceList);
 		PriceList Get(string id);

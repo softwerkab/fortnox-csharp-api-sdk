@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		AssetSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.Asset? SortBy { get; set; }
-		Filter.Asset? FilterBy { get; set; }
-
 		Asset Update(Asset asset);
 		Asset Create(Asset asset);
 		Asset Get(string id);

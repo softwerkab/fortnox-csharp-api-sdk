@@ -123,7 +123,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual(tmpEmployee.EmployeeId, fullCollection.Entities.First().EmployeeId);
 
             //Apply Limit
-            connector.Limit = 2;
+            connector.Search.Limit = 2;
             var limitedCollection = connector.Find();
             MyAssert.HasNoError(connector);
 

@@ -9,10 +9,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		TrustedEmailSendersSearch Search { get; set; }
 
-		Sort.Order? SortOrder { get; set; }
-		Sort.By.TrustedEmailSenders? SortBy { get; set; }
-		Filter.TrustedEmailSenders? FilterBy { get; set; }
-
         TrustedEmailSender Create(TrustedEmailSender trustedEmailSenders);
         void Delete(long? id);
         EmailSenders Find();

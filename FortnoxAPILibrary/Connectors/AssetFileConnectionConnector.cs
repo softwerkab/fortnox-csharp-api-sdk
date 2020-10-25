@@ -11,12 +11,6 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		public AssetFileConnectionSearch Search { get; set; } = new AssetFileConnectionSearch();
 
-	    /// <summary>
-        /// Use with Find() to limit the search result
-        /// </summary>
-        [SearchParameter("filter")]
-		public Filter.AssetFileConnection? FilterBy { get; set; }
-
 
 		/// <remarks/>
 		public AssetFileConnectionConnector()
