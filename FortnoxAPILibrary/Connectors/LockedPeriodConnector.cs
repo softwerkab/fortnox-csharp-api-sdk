@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class LockedPeriodConnector : EntityConnector<LockedPeriod, EntityWrapper<LockedPeriod>, Sort.By.LockedPeriod?>, ILockedPeriodConnector
+    public class LockedPeriodConnector : EntityConnector<LockedPeriod, EntityWrapper<LockedPeriod>>, ILockedPeriodConnector
 	{
 		public LockedPeriodSearch Search { get; set; } = new LockedPeriodSearch();
 

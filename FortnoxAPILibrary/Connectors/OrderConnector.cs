@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class OrderConnector : EntityConnector<Order, EntityCollection<OrderSubset>, Sort.By.Order?>, IOrderConnector
+    public class OrderConnector : EntityConnector<Order, EntityCollection<OrderSubset>>, IOrderConnector
 	{
 		public OrderSearch Search { get; set; } = new OrderSearch();
 

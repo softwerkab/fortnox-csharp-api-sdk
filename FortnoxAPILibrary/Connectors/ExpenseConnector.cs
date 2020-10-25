@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ExpenseConnector : EntityConnector<Expense, EntityCollection<ExpenseSubset>, Sort.By.Expense?>, IExpenseConnector
+    public class ExpenseConnector : EntityConnector<Expense, EntityCollection<ExpenseSubset>>, IExpenseConnector
 	{
 		public ExpenseSearch Search { get; set; } = new ExpenseSearch();
 

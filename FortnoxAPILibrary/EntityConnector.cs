@@ -9,7 +9,7 @@ using FortnoxAPILibrary.Entities;
 namespace FortnoxAPILibrary
 {
     /// <remarks/>
-    public abstract class EntityConnector<TEntity, TEntityCollection, TSort> : BaseConnector where TEntity : class
+    public abstract class EntityConnector<TEntity, TEntityCollection> : BaseConnector where TEntity : class
     {
         protected Dictionary<string, string> ParametersInjection { get; set; } //TODO: Remove, temporary workaround
 

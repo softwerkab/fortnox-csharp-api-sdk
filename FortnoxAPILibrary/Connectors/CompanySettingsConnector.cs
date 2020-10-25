@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class CompanySettingsConnector : EntityConnector<CompanySettings, EntityWrapper<CompanySettings>, Sort.By.CompanySettings?>, ICompanySettingsConnector
+    public class CompanySettingsConnector : EntityConnector<CompanySettings, EntityWrapper<CompanySettings>>, ICompanySettingsConnector
 	{
 		public CompanySettingsSearch Search { get; set; } = new CompanySettingsSearch();
 

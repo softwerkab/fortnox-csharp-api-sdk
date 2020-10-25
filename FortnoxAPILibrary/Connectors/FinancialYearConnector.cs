@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class FinancialYearConnector : EntityConnector<FinancialYear, EntityCollection<FinancialYearSubset>, Sort.By.FinancialYear?>, IFinancialYearConnector
+    public class FinancialYearConnector : EntityConnector<FinancialYear, EntityCollection<FinancialYearSubset>>, IFinancialYearConnector
 	{
 		public FinancialYearSearch Search { get; set; } = new FinancialYearSearch();
 

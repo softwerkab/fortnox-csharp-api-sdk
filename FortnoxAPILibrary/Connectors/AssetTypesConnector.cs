@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class AssetTypesConnector : EntityConnector<AssetType, EntityCollection<AssetTypesSubset>, Sort.By.AssetTypes?>, IAssetTypesConnector
+    public class AssetTypesConnector : EntityConnector<AssetType, EntityCollection<AssetTypesSubset>>, IAssetTypesConnector
 	{
 		public AssetTypesSearch Search { get; set; } = new AssetTypesSearch();
 

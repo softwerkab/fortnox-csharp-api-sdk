@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class CurrencyConnector : EntityConnector<Currency, EntityCollection<Currency>, Sort.By.Currency?>, ICurrencyConnector
+    public class CurrencyConnector : EntityConnector<Currency, EntityCollection<Currency>>, ICurrencyConnector
 	{
 		public CurrencySearch Search { get; set; } = new CurrencySearch();
 

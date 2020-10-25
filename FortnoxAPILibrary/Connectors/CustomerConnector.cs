@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class CustomerConnector : EntityConnector<Customer, EntityCollection<CustomerSubset>, Sort.By.Customer?>, ICustomerConnector
+    public class CustomerConnector : EntityConnector<Customer, EntityCollection<CustomerSubset>>, ICustomerConnector
 	{
 		public CustomerSearch Search { get; set; } = new CustomerSearch();
 

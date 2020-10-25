@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ArchiveConnector : EntityConnector<ArchiveFolder, EntityWrapper<ArchiveFolder>, Sort.By.Archive?>, IArchiveConnector
+    public class ArchiveConnector : EntityConnector<ArchiveFolder, EntityWrapper<ArchiveFolder>>, IArchiveConnector
 	{
 		public ArchiveSearch Search { get; set; } = new ArchiveSearch();
 
