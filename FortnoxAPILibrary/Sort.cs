@@ -43,6 +43,10 @@ namespace FortnoxAPILibrary
 			{
 
 			}
+			
+			public enum CompanyInformation
+			{
+			}
 
             /// <remarks/>
             public enum CompanySettings

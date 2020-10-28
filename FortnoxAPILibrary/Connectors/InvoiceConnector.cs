@@ -176,23 +176,24 @@ namespace FortnoxAPILibrary.Connectors
         void PrintReminder(string documentNumber, string localPath);
 
         /// <summary>
-        /// Prints a preview as pdf
-        /// </summary>
-        /// <param name="documentNumber"></param>
-        /// <param name="localPath">The path where to save the preview</param>
-        void Preview(string documentNumber, string localPath);
-
-        /// <summary>
         /// Marks the document as externally printed
         /// </summary>
         /// <param name="documentNumber"></param>
         void ExternalPrint(string documentNumber);
+        
+        /// <summary>
+        /// This action returns a PDF document with the current template that is used by the specific document. Unliike the action print, this action doesn’t set the property Sent as true.
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// </summary>
+        byte[] Preview(long? id);
     }
 
     /// <remarks/>
 	public class InvoiceConnector : FinancialYearBasedEntityConnector<Invoice, Invoices, Sort.By.Invoice>, IInvoiceConnector
     {
-        /// <summary>
+	    private readonly InvoiceAsyncConnector _invoiceAsyncConnector = new InvoiceAsyncConnector();
+	    /// <summary>
         /// Use with Find() to limit the search result
         /// </summary>
         [FilterProperty]
@@ -520,15 +521,14 @@ namespace FortnoxAPILibrary.Connectors
 			base.DoAction(documentNumber, "printreminder");
 		}
 
-        /// <summary>
-        /// Prints a preview as pdf
+		/// <summary>
+        /// This action returns a PDF document with the current template that is used by the specific document. Unliike the action print, this action doesn’t set the property Sent as true.
+        /// <param name="id"></param>
+        /// <returns></returns>
         /// </summary>
-        /// <param name="documentNumber"></param>
-        /// <param name="localPath">The path where to save the preview</param>
-        public void Preview(string documentNumber, string localPath)
+        public byte[] Preview(long? id)
         {
-            base.LocalPath = localPath;
-            base.DoAction(documentNumber, "preview");
+	        return _invoiceAsyncConnector.Preview(id);
         }
 
         /// <summary>
