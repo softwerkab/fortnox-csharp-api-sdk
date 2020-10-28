@@ -249,13 +249,11 @@ namespace FortnoxAPILibrary.Tests
             invoice.CostCenter = "101";
             invoice.YourReference = "ABC";
             invoice.OurReference = "DEF";
-            invoice.Project = "1";
             invoice = connector.Update(invoice);
 
             Assert.IsFalse(connector.HasError);
             Assert.IsTrue(invoice.PaymentPending == "true");
             Assert.IsTrue(invoice.CostCenter == "101");
-            Assert.IsTrue(invoice.Project == "1");
             Assert.IsTrue(invoice.YourReference == "ABC");
             Assert.IsTrue(invoice.OurReference == "DEF");
 
