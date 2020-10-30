@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace FortnoxAPILibrary
 {
@@ -31,5 +32,28 @@ namespace FortnoxAPILibrary
 
         [SearchParameter]
         public int? Offset { get; set; }
+
+
+        internal Dictionary<string, string> GetSearchParameters()
+        {
+            var searchParams = new Dictionary<string, string>();
+
+            foreach (var property in GetType().GetProperties())
+            {
+                var isSearchParameter = property.HasAttribute<SearchParameter>();
+                if (!isSearchParameter) continue;
+
+                var value = property.GetValue(this);
+                var strValue = Utils.GetStringValue(value, property.PropertyType);
+                if (string.IsNullOrWhiteSpace(strValue)) continue;
+
+                var searchAttribute = property.GetAttribute<SearchParameter>();
+                var paramName = searchAttribute.Name ?? property.Name;
+
+                searchParams.Add(paramName.ToLower(), strValue);
+            }
+
+            return searchParams;
+        }
     }
 }
