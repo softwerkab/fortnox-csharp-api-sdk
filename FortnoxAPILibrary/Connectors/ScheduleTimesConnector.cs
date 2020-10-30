@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ScheduleTimesConnector : EntityConnector<ScheduleTimes, EntityCollection<ScheduleTimes>>, IScheduleTimesConnector
+    public class ScheduleTimesConnector : SearchableEntityConnector<ScheduleTimes, ScheduleTimes>, IScheduleTimesConnector
 	{
 		public ScheduleTimesSearch Search { get; set; } = new ScheduleTimesSearch();
 

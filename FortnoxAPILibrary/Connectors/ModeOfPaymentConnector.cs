@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ModeOfPaymentConnector : EntityConnector<ModeOfPayment, EntityCollection<ModeOfPayment>>, IModeOfPaymentConnector
+    public class ModeOfPaymentConnector : SearchableEntityConnector<ModeOfPayment, ModeOfPayment>, IModeOfPaymentConnector
 	{
 		public ModeOfPaymentSearch Search { get; set; } = new ModeOfPaymentSearch();
 

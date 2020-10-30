@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class OfferConnector : EntityConnector<Offer, EntityCollection<OfferSubset>>, IOfferConnector
+    public class OfferConnector : SearchableEntityConnector<Offer, OfferSubset>, IOfferConnector
 	{
 		public OfferSearch Search { get; set; } = new OfferSearch();
 

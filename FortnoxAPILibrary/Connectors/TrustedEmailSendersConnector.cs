@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class TrustedEmailSendersConnector : EntityConnector<TrustedEmailSender, EntityWrapper<EmailSenders>>, ITrustedEmailSendersConnector
+    public class TrustedEmailSendersConnector : SearchableEntityConnector<TrustedEmailSender, EntityWrapper<EmailSenders>>, ITrustedEmailSendersConnector
 	{
 		public TrustedEmailSendersSearch Search { get; set; } = new TrustedEmailSendersSearch();
 
@@ -57,10 +57,11 @@ namespace FortnoxAPILibrary.Connectors
 
         public async Task<EmailSenders> FindAsync()
         {
-            Resource = "emailsenders";
+            return null; //TODO: Fix
+            /*Resource = "emailsenders";
             var res = (await BaseFind().ConfigureAwait(false))?.Entity;
             Resource = "emailsenders/trusted";
-            return res;
+            return res;*/
         }
 	}
 }

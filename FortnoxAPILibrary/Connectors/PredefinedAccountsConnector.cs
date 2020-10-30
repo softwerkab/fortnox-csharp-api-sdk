@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	public class PredefinedAccountsConnector : EntityConnector<PredefinedAccount, EntityCollection<PredefinedAccount>>, IPredefinedAccountsConnector
+	public class PredefinedAccountsConnector : SearchableEntityConnector<PredefinedAccount, PredefinedAccount>, IPredefinedAccountsConnector
 	{
 		public PredefinedAccountsSearch Search { get; set; } = new PredefinedAccountsSearch();
 

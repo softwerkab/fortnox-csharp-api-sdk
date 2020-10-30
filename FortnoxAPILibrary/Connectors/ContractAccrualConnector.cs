@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ContractAccrualConnector : EntityConnector<ContractAccrual, EntityCollection<ContractAccrualSubset>>, IContractAccrualConnector
+    public class ContractAccrualConnector : SearchableEntityConnector<ContractAccrual, ContractAccrualSubset>, IContractAccrualConnector
 	{
 		public ContractAccrualSearch Search { get; set; } = new ContractAccrualSearch();
 

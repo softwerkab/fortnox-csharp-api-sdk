@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class UnitConnector : EntityConnector<Unit, EntityCollection<Unit>>, IUnitConnector
+    public class UnitConnector : SearchableEntityConnector<Unit, Unit>, IUnitConnector
 	{
 		public UnitSearch Search { get; set; } = new UnitSearch();
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class CompanyInformationConnector : EntityConnector<CompanyInformation, EntityWrapper<CompanyInformation>>, ICompanyInformationConnector
+    public class CompanyInformationConnector : EntityConnector<CompanyInformation>, ICompanyInformationConnector
 	{
 		public CompanyInformationSearch Search { get; set; } = new CompanyInformationSearch();
 
@@ -28,7 +28,7 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<CompanyInformation> GetAsync()
         {
-            return (await BaseFind().ConfigureAwait(false))?.Entity;
+            return await BaseGet().ConfigureAwait(false);
         }
 	}
 }

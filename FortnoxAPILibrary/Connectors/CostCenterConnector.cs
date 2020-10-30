@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class CostCenterConnector : EntityConnector<CostCenter, EntityCollection<CostCenter>>, ICostCenterConnector
+    public class CostCenterConnector : SearchableEntityConnector<CostCenter, CostCenter>, ICostCenterConnector
 	{
 		public CostCenterSearch Search { get; set; } = new CostCenterSearch();
 

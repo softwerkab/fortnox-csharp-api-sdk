@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class LabelConnector : EntityConnector<Label, EntityCollection<Label>>, ILabelConnector
+    public class LabelConnector : SearchableEntityConnector<Label, Label>, ILabelConnector
 	{
 		public LabelSearch Search { get; set; } = new LabelSearch();
 

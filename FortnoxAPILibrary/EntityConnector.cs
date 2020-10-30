@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using FortnoxAPILibrary.Entities;
 
 namespace FortnoxAPILibrary
 {
     /// <remarks/>
-    public abstract class EntityConnector<TEntity, TEntityCollection> : BaseConnector where TEntity : class
+    public abstract class EntityConnector<TEntity> : BaseConnector where TEntity : class
     {
         protected Dictionary<string, string> ParametersInjection { get; set; } //TODO: Remove, temporary workaround
 
@@ -78,24 +76,7 @@ namespace FortnoxAPILibrary
             var result = await DoEntityRequest<EntityWrapper<TEntity>>().ConfigureAwait(false);
             return result?.Entity;
         }
-
-        protected async Task<TEntityCollection> BaseFind(params string[] indices)
-        {
-            RequestInfo = new RequestInfo()
-            {
-                BaseUrl = BaseUrl,
-                Resource = Resource,
-                Indices = indices,
-                Parameters = ParametersInjection ?? new Dictionary<string, string>(),
-                SearchParameters = GetSearchParameters(),
-                Method = HttpMethod.Get,
-            };
-            ParametersInjection = null;
-
-            var result = await DoEntityRequest<TEntityCollection>().ConfigureAwait(false);
-            return result;
-        }
-
+        
         protected TEntity DoAction(string documentNumber, Action action)
         {
             return DoActionAsync(documentNumber, action).Result;
@@ -140,13 +121,6 @@ namespace FortnoxAPILibrary
 
             var result = await DoEntityRequest<EntityWrapper<TEntity>>().ConfigureAwait(false);
             return result?.Entity;
-        }
-
-        protected Dictionary<string, string> GetSearchParameters()
-        {
-            var searchObjProperty = GetType().GetProperty("Search");
-            var searchObj = (BaseSearch)searchObjProperty.GetValue(this);
-            return searchObj.GetSearchParameters();
         }
     }
 }

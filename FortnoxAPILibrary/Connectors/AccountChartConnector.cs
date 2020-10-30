@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class AccountChartConnector : EntityConnector<AccountChart, EntityCollection<AccountChart>>, IAccountChartConnector
+    public class AccountChartConnector : SearchableEntityConnector<AccountChart, AccountChart>, IAccountChartConnector
 	{
 		public AccountChartSearch Search { get; set; } = new AccountChartSearch();
 

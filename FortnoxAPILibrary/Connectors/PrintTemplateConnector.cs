@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class PrintTemplateConnector : EntityConnector<PrintTemplate, EntityCollection<PrintTemplate>>, IPrintTemplateConnector
+    public class PrintTemplateConnector : SearchableEntityConnector<PrintTemplate, PrintTemplate>, IPrintTemplateConnector
 	{
 		public PrintTemplateSearch Search { get; set; } = new PrintTemplateSearch();
 

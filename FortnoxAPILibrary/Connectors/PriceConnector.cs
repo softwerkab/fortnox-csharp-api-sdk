@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class PriceConnector : EntityConnector<Price, EntityCollection<PriceSubset>>, IPriceConnector
+    public class PriceConnector : SearchableEntityConnector<Price, PriceSubset>, IPriceConnector
 	{
 		public PriceSearch Search { get; set; } = new PriceSearch();
 

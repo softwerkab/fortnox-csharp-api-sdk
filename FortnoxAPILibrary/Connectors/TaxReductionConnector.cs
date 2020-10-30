@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class TaxReductionConnector : EntityConnector<TaxReduction, EntityCollection<TaxReductionSubset>>, ITaxReductionConnector
+    public class TaxReductionConnector : SearchableEntityConnector<TaxReduction, TaxReductionSubset>, ITaxReductionConnector
 	{
 		public TaxReductionSearch Search { get; set; } = new TaxReductionSearch();
 

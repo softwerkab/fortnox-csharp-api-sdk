@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class LockedPeriodConnector : EntityConnector<LockedPeriod, EntityWrapper<LockedPeriod>>, ILockedPeriodConnector
+    public class LockedPeriodConnector : EntityConnector<LockedPeriod>, ILockedPeriodConnector
 	{
 		public LockedPeriodSearch Search { get; set; } = new LockedPeriodSearch();
 
@@ -25,7 +25,7 @@ namespace FortnoxAPILibrary.Connectors
 
         public async Task<LockedPeriod> GetAsync()
         {
-            return (await BaseFind().ConfigureAwait(false))?.Entity;
+            return await BaseGet().ConfigureAwait(false);
         }
     }
 }

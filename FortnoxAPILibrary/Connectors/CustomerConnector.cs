@@ -1,3 +1,4 @@
+using System;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class CustomerConnector : EntityConnector<Customer, EntityCollection<CustomerSubset>>, ICustomerConnector
+    public class CustomerConnector : SearchableEntityConnector<Customer, CustomerSubset>, ICustomerConnector
 	{
 		public CustomerSearch Search { get; set; } = new CustomerSearch();
 
@@ -85,5 +86,5 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseGet(id).ConfigureAwait(false);
 		}
-	}
+    }
 }

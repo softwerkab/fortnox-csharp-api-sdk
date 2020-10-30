@@ -11,7 +11,7 @@ namespace FortnoxAPILibrary.Entities
         public List<T> Entities { get; set; }
 
         [JsonProperty]
-        private MetaInformation MetaInformation { get; set; }
+        internal MetaInformation MetaInformation { get; set; }
 
         /// <remarks/>
         public int TotalResources => MetaInformation.TotalResources;

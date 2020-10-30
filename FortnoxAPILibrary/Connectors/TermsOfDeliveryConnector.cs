@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class TermsOfDeliveryConnector : EntityConnector<TermsOfDelivery, EntityCollection<TermsOfDelivery>>, ITermsOfDeliveryConnector
+    public class TermsOfDeliveryConnector : SearchableEntityConnector<TermsOfDelivery, TermsOfDelivery>, ITermsOfDeliveryConnector
 	{
 		public TermsOfDeliverySearch Search { get; set; } = new TermsOfDeliverySearch();
 
