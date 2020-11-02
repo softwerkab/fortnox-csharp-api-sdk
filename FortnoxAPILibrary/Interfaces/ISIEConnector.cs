@@ -5,8 +5,6 @@ namespace FortnoxAPILibrary.Connectors
 {
     public interface ISIEConnector : IConnector
     {
-		SIESearch Search { get; set; }
-
         byte[] Get(SIEType type);
         Task<byte[]> GetAsync(SIEType type);
     }

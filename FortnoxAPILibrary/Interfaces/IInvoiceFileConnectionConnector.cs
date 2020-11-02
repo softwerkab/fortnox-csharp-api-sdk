@@ -8,9 +8,6 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IInvoiceFileConnectionConnector : IEntityConnector
 	{
-		InvoiceFileConnectionSearch Search { get; set; }
-
-
 		InvoiceFileConnection Update(InvoiceFileConnection invoiceFileConnection);
 		InvoiceFileConnection Create(InvoiceFileConnection invoiceFileConnection);
         void Delete(string id);

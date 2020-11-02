@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class WayOfDeliveryConnector : SearchableEntityConnector<WayOfDelivery, WayOfDelivery>, IWayOfDeliveryConnector
+    public class WayOfDeliveryConnector : SearchableEntityConnector<WayOfDelivery, WayOfDelivery, WayOfDeliverySearch>, IWayOfDeliveryConnector
 	{
-		public WayOfDeliverySearch Search { get; set; } = new WayOfDeliverySearch();
 
 
 		/// <remarks/>

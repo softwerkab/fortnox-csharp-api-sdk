@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class SalaryTransactionConnector : SearchableEntityConnector<SalaryTransaction, SalaryTransactionSubset>, ISalaryTransactionConnector
+    public class SalaryTransactionConnector : SearchableEntityConnector<SalaryTransaction, SalaryTransactionSubset, SalaryTransactionSearch>, ISalaryTransactionConnector
 	{
-		public SalaryTransactionSearch Search { get; set; } = new SalaryTransactionSearch();
 
 		/// <remarks/>
 		public SalaryTransactionConnector()

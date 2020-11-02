@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-	public class SupplierInvoiceAccrualConnector : SearchableEntityConnector<SupplierInvoiceAccrual, SupplierInvoiceAccrualSubset>, ISupplierInvoiceAccrualConnector
+	public class SupplierInvoiceAccrualConnector : SearchableEntityConnector<SupplierInvoiceAccrual, SupplierInvoiceAccrualSubset, SupplierInvoiceAccrualSearch>, ISupplierInvoiceAccrualConnector
 	{
-		public SupplierInvoiceAccrualSearch Search { get; set; } = new SupplierInvoiceAccrualSearch();
 
 
 		/// <remarks/>

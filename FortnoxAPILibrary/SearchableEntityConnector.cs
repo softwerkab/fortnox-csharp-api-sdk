@@ -5,30 +5,39 @@ using FortnoxAPILibrary.Entities;
 
 namespace FortnoxAPILibrary
 {
-    public class SearchableEntityConnector<TEntity, TEntitySubset> : EntityConnector<TEntity> where TEntity : class
+    public class SearchableEntityConnector<TEntity, TEntitySubset, TSearchSettings> : EntityConnector<TEntity> 
+        where TEntity : class 
+        where TSearchSettings : BaseSearch, new()
     {
+        public TSearchSettings Search { get; set; } = new TSearchSettings();
+
         internal async Task<EntityCollection<TEntitySubset>> BaseFind(params string[] indices)
         {
-            var search = GetSearchSettings().Clone();
-            if (search.Page != APIConstants.AllInOnePage)
-                return await BaseFindSpecificPage(search, indices);
+            var searchSettings = Search.Clone();
+            if (searchSettings.Page == APIConstants.AllInOnePage)
+                return await GetAllInOnePage(searchSettings, indices);
+            else
+                return await GetSinglePage(searchSettings, indices);
+        }
 
-            search.Limit = APIConstants.MaxLimit;
-            search.Page = 1;
+        private async Task<EntityCollection<TEntitySubset>> GetAllInOnePage(BaseSearch searchSettings, string[] indices)
+        {
+            searchSettings.Limit = APIConstants.MaxLimit;
+            searchSettings.Page = 1;
 
             var allEntities = new List<TEntitySubset>();
             while (true)
             {
-                var result = await BaseFindSpecificPage(search, indices);
+                var result = await GetSinglePage(searchSettings, indices);
                 if (HasError)
                     return null;
                 allEntities.AddRange(result.Entities);
                 if (result.CurrentPage >= result.TotalPages)
                     break;
-                search.Page++;
+                searchSettings.Page++;
             }
 
-            return new EntityCollection<TEntitySubset>()
+            var collection = new EntityCollection<TEntitySubset>()
             {
                 Entities = allEntities,
                 MetaInformation = new MetaInformation()
@@ -38,8 +47,10 @@ namespace FortnoxAPILibrary
                     TotalResources = allEntities.Count
                 }
             };
+            return collection;
         }
-        private async Task<EntityCollection<TEntitySubset>> BaseFindSpecificPage(BaseSearch searchSettings, params string[] indices)
+
+        private async Task<EntityCollection<TEntitySubset>> GetSinglePage(BaseSearch searchSettings, string[] indices)
         {
             RequestInfo = new RequestInfo()
             {
@@ -55,7 +66,5 @@ namespace FortnoxAPILibrary
             var result = await DoEntityRequest<EntityCollection<TEntitySubset>>().ConfigureAwait(false);
             return result;
         }
-        
-        protected BaseSearch GetSearchSettings() => (BaseSearch) GetType().GetProperty("Search").GetValue(this);
     }
 }

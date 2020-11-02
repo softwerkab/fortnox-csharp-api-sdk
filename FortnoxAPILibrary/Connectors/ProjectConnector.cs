@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class ProjectConnector : SearchableEntityConnector<Project, ProjectSubset>, IProjectConnector
+    public class ProjectConnector : SearchableEntityConnector<Project, ProjectSubset, ProjectSearch>, IProjectConnector
 	{
-		public ProjectSearch Search { get; set; } = new ProjectSearch();
 
         /// <remarks/>
 		public ProjectConnector()

@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class CurrencyConnector : SearchableEntityConnector<Currency, Currency>, ICurrencyConnector
+    public class CurrencyConnector : SearchableEntityConnector<Currency, Currency, CurrencySearch>, ICurrencyConnector
 	{
-		public CurrencySearch Search { get; set; } = new CurrencySearch();
 
 
 		/// <remarks/>

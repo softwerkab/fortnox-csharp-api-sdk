@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class AssetFileConnectionConnector : SearchableEntityConnector<AssetFileConnection, AssetFileConnection>, IAssetFileConnectionConnector
+    public class AssetFileConnectionConnector : SearchableEntityConnector<AssetFileConnection, AssetFileConnection, AssetFileConnectionSearch>, IAssetFileConnectionConnector
 	{
-		public AssetFileConnectionSearch Search { get; set; } = new AssetFileConnectionSearch();
 
 
 		/// <remarks/>

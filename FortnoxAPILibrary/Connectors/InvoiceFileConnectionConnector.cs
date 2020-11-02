@@ -11,9 +11,8 @@ using System.Net.Http;
 namespace FortnoxAPILibrary.Connectors
 {
 	/// <remarks/>
-    public class InvoiceFileConnectionConnector : SearchableEntityConnector<InvoiceFileConnection, EntityCollection<InvoiceFileConnectionSubset>>, IInvoiceFileConnectionConnector
+    public class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConnection>, IInvoiceFileConnectionConnector
     {
-		public InvoiceFileConnectionSearch Search { get; set; } = new InvoiceFileConnectionSearch();
 
         /// <remarks/>
 		public InvoiceFileConnectionConnector()

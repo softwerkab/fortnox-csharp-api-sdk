@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class TrustedEmailDomainsConnector : SearchableEntityConnector<TrustedEmailDomain, TrustedEmailDomain>, ITrustedEmailDomainsConnector
+    public class TrustedEmailDomainsConnector : SearchableEntityConnector<TrustedEmailDomain, TrustedEmailDomain, TrustedEmailDomainsSearch>, ITrustedEmailDomainsConnector
 	{
-		public TrustedEmailDomainsSearch Search { get; set; } = new TrustedEmailDomainsSearch();
 
         /// <remarks/>
 		public TrustedEmailDomainsConnector()

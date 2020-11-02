@@ -12,7 +12,6 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class TrustedEmailSendersConnector : EntityConnector<TrustedEmailSender>, ITrustedEmailSendersConnector
 	{
-		public TrustedEmailSendersSearch Search { get; set; } = new TrustedEmailSendersSearch();
 
 		/// <remarks/>
 		public TrustedEmailSendersConnector()

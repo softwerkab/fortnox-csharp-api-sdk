@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class CustomerConnector : SearchableEntityConnector<Customer, CustomerSubset>, ICustomerConnector
+    public class CustomerConnector : SearchableEntityConnector<Customer, CustomerSubset, CustomerSearch>, ICustomerConnector
 	{
-		public CustomerSearch Search { get; set; } = new CustomerSearch();
 
 
 		/// <remarks/>

@@ -7,8 +7,6 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface ITrustedEmailSendersConnector : IEntityConnector
 	{
-		TrustedEmailSendersSearch Search { get; set; }
-
         TrustedEmailSender Create(TrustedEmailSender trustedEmailSenders);
         void Delete(long? id);
         EmailSenders GetAll();

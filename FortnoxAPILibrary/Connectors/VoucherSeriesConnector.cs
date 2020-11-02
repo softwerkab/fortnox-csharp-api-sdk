@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class VoucherSeriesConnector : SearchableEntityConnector<VoucherSeries, VoucherSeriesSubset>, IVoucherSeriesConnector
+    public class VoucherSeriesConnector : SearchableEntityConnector<VoucherSeries, VoucherSeriesSubset, VoucherSeriesSearch>, IVoucherSeriesConnector
 	{
-		public VoucherSeriesSearch Search { get; set; } = new VoucherSeriesSearch();
 
 
 		/// <remarks/>

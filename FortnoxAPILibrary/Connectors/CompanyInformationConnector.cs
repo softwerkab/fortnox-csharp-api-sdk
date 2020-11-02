@@ -9,7 +9,6 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class CompanyInformationConnector : EntityConnector<CompanyInformation>, ICompanyInformationConnector
 	{
-		public CompanyInformationSearch Search { get; set; } = new CompanyInformationSearch();
 
 		/// <remarks/>
 		public CompanyInformationConnector()

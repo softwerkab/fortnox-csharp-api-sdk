@@ -4,7 +4,6 @@ namespace FortnoxAPILibrary.Connectors
 {
     public class SIEConnector : BaseConnector, ISIEConnector
     {
-		public SIESearch Search { get; set; } = new SIESearch();
 
         public SIEConnector()
         {

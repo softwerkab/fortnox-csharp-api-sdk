@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class AbsenceTransactionConnector : SearchableEntityConnector<AbsenceTransaction, AbsenceTransaction>, IAbsenceTransactionConnector
+    public class AbsenceTransactionConnector : SearchableEntityConnector<AbsenceTransaction, AbsenceTransaction, AbsenceTransactionSearch>, IAbsenceTransactionConnector
 	{
-		public AbsenceTransactionSearch Search { get; set; } = new AbsenceTransactionSearch();
 
 
 		/// <remarks/>

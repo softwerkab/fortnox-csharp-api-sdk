@@ -176,6 +176,24 @@ namespace FortnoxAPILibrary.Tests
                 Assert.AreEqual(largeCustomerCollection.Entities[i].CustomerNumber, mergedCollection[i].CustomerNumber);
         }
 
+        [TestMethod]
+        public void Test_AllInOnePage()
+        {
+            //To make this test make sense, over 100 customers must exist, ideally over 500
+
+            ICustomerConnector connector = new CustomerConnector();
+            var result = connector.Find();
+            MyAssert.HasNoError(connector);
+            Assert.IsTrue(result.TotalPages > 1);
+
+            connector.Search.Page = APIConstants.AllInOnePage;
+            var allInOneResult = connector.Find();
+            MyAssert.HasNoError(connector);
+
+            Assert.AreEqual(1, allInOneResult.TotalPages);
+            Assert.AreEqual(result.TotalResources, allInOneResult.Entities.Count);
+        }
+
         private static int GetNeededPages(int totalSize, int pageSize)
         {
             return (int) Math.Ceiling(totalSize / (float) pageSize);

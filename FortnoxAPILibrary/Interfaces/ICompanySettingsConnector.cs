@@ -7,9 +7,7 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface ICompanySettingsConnector : IEntityConnector
 	{
-		CompanySettingsSearch Search { get; set; }
-
-		CompanySettings Get();
+        CompanySettings Get();
 
 		Task<CompanySettings> GetAsync();
 	}
