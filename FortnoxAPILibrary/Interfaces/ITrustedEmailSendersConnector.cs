@@ -11,10 +11,10 @@ namespace FortnoxAPILibrary.Connectors
 
         TrustedEmailSender Create(TrustedEmailSender trustedEmailSenders);
         void Delete(long? id);
-        EmailSenders Find();
+        EmailSenders GetAll();
 
         Task<TrustedEmailSender> CreateAsync(TrustedEmailSender trustedEmailSenders);
         Task DeleteAsync(long? id);
-        Task<EmailSenders> FindAsync();
+        Task<EmailSenders> GetAllAsync();
 	}
 }

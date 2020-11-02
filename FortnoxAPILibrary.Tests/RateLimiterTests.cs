@@ -43,7 +43,8 @@ namespace FortnoxAPILibrary.Tests
             var connector = new CustomerConnector();
 
             ErrorInformation error = null;
-            for (var i = 0; i < 200; i++)
+            int i;
+            for (i = 0; i < 200; i++)
             {
                 connector.Search.City = TestUtils.RandomString();
                 connector.Find();
@@ -59,6 +60,7 @@ namespace FortnoxAPILibrary.Tests
 
             //Assert
             //Assert.IsTrue(failed > 0);
+            Console.WriteLine($@"Succesful requests: {i}");
             Assert.IsNotNull(error);
             Assert.IsTrue(error.Message.Contains("Too Many Requests"));
         }

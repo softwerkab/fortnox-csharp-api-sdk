@@ -25,15 +25,16 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             ITrustedEmailSendersConnector connector = new TrustedEmailSendersConnector();
 
+            var randomAddress = $"{TestUtils.RandomString()}@test.tst";
             #region CREATE
             var newTrustedEmailSender = new TrustedEmailSender()
             {
-                Email = "test1.testasson@test.tst"
+                Email = randomAddress
             };
 
             var createdTrustedEmailSender = connector.Create(newTrustedEmailSender);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("test1.testasson@test.tst", createdTrustedEmailSender.Email);
+            Assert.AreEqual(randomAddress, createdTrustedEmailSender.Email);
 
             #endregion CREATE
 
@@ -43,9 +44,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             #region READ / GET
             //Single get is not supported, full list is used instead
-            var retrievedTrustedEmailSender = connector.Find().TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
+            var retrievedTrustedEmailSender = connector.GetAll().TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
             MyAssert.HasNoError(connector);
-            Assert.AreEqual("test1.testasson@test.tst", retrievedTrustedEmailSender?.Email);
+            Assert.AreEqual(randomAddress, retrievedTrustedEmailSender?.Email);
             #endregion READ / GET
 
             #region DELETE
@@ -53,7 +54,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             connector.Delete(createdTrustedEmailSender.Id);
             MyAssert.HasNoError(connector);
 
-            retrievedTrustedEmailSender = connector.Find().TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
+            retrievedTrustedEmailSender = connector.GetAll().TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
             Assert.AreEqual(null, retrievedTrustedEmailSender);
 
             #endregion DELETE

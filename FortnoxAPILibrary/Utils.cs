@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Reflection;
 
 namespace FortnoxAPILibrary
 {
-    public class Utils
+    public static class Utils
     {
         internal static string GetStringValue(object value, Type type)
         {
@@ -23,6 +24,12 @@ namespace FortnoxAPILibrary
             }
 
             return value.ToString().ToLower();
+        }
+
+        internal static T Clone<T>(this T obj)
+        {
+            var memberwiseClone = obj.GetType().GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic);
+            return (T)memberwiseClone.Invoke(obj, null);
         }
     }
 }

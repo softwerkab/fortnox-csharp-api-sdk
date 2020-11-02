@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Data;
-using System.Threading.Tasks;
 using FortnoxAPILibrary.Entities;
 
 namespace FortnoxAPILibrary.Connectors
@@ -21,19 +18,10 @@ namespace FortnoxAPILibrary.Connectors
 
     public interface IEntityConnector : IConnector
     {
-        //BaseSearch Search { get; set; }
     }
 
-    public interface ISearchable<TSearch> : IConnector where TSearch : BaseSearch
+    public interface ISearchableEntityConnector<TSearchSettings> : IEntityConnector where TSearchSettings : BaseSearch
     {
-        TSearch Search { get; set; }
-        void Find<TSearchOptions>(TSearchOptions search) where TSearchOptions : BaseSearch;
-    }
-
-    public interface ISearchResult<out TEntity>
-    {
-        //TSearch SearchSettings { get; }
-        IEnumerable<TEntity> GetPage(int page);
-        IEnumerable<TEntity> GetAll();
+        TSearchSettings Search { get; set; }
     }
 }

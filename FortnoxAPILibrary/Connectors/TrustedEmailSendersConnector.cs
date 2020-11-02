@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
@@ -7,7 +10,7 @@ using System.Threading.Tasks;
 namespace FortnoxAPILibrary.Connectors
 {
     /// <remarks/>
-    public class TrustedEmailSendersConnector : SearchableEntityConnector<TrustedEmailSender, EntityWrapper<EmailSenders>>, ITrustedEmailSendersConnector
+    public class TrustedEmailSendersConnector : EntityConnector<TrustedEmailSender>, ITrustedEmailSendersConnector
 	{
 		public TrustedEmailSendersSearch Search { get; set; } = new TrustedEmailSendersSearch();
 
@@ -40,9 +43,9 @@ namespace FortnoxAPILibrary.Connectors
         /// Retrieves all trusted and rejected emails with id.
         /// </summary>
         /// <returns>Collection of emails with id </returns>
-        public EmailSenders Find()
+        public EmailSenders GetAll()
         {
-            return FindAsync().Result;
+            return GetAllAsync().Result;
         }
 
         public async Task<TrustedEmailSender> CreateAsync(TrustedEmailSender trustedEmailSenders)
@@ -55,13 +58,23 @@ namespace FortnoxAPILibrary.Connectors
             await BaseDelete(id.ToString()).ConfigureAwait(false);
         }
 
-        public async Task<EmailSenders> FindAsync()
+        public async Task<EmailSenders> GetAllAsync()
         {
-            return null; //TODO: Fix
-            /*Resource = "emailsenders";
-            var res = (await BaseFind().ConfigureAwait(false))?.Entity;
-            Resource = "emailsenders/trusted";
-            return res;*/
+            //This method is inconsistent with others, as it should be part of a new connector with single Get similar to CompanySettingsConnector
+            //It returns a single entity, containing both trusted and refused email senders.
+           
+            RequestInfo = new RequestInfo()
+            {
+                BaseUrl = BaseUrl,
+                Resource = "emailsenders",
+                Indices = Array.Empty<string>(),
+                Parameters = new Dictionary<string, string>(),
+                Method = HttpMethod.Get,
+            };
+            ParametersInjection = null;
+
+            var result = await DoEntityRequest<EntityWrapper<EmailSenders>>().ConfigureAwait(false);
+            return result?.Entity;
         }
-	}
+    }
 }
