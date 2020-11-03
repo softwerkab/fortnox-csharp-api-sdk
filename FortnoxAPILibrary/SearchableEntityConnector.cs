@@ -14,7 +14,7 @@ namespace FortnoxAPILibrary
         internal async Task<EntityCollection<TEntitySubset>> BaseFind(params string[] indices)
         {
             var searchSettings = Search.Clone();
-            if (searchSettings.Page == APIConstants.AllInOnePage)
+            if (searchSettings.Limit == APIConstants.Unlimited)
                 return await GetAllInOnePage(searchSettings, indices);
             else
                 return await GetSinglePage(searchSettings, indices);

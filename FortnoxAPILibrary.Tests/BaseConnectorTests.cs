@@ -186,7 +186,7 @@ namespace FortnoxAPILibrary.Tests
             MyAssert.HasNoError(connector);
             Assert.IsTrue(result.TotalPages > 1);
 
-            connector.Search.Page = APIConstants.AllInOnePage;
+            connector.Search.Limit = APIConstants.Unlimited;
             var allInOneResult = connector.Find();
             MyAssert.HasNoError(connector);
 
