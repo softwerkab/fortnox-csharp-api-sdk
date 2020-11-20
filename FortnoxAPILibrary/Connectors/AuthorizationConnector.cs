@@ -27,19 +27,19 @@ namespace FortnoxAPILibrary.Connectors
         public async Task<string> GetAccessTokenAsync(string authorizationCode, string clientSecret)
         {
             if (string.IsNullOrEmpty(authorizationCode))
-                return string.Empty;
+                return null;
             if (string.IsNullOrEmpty(clientSecret))
-                return string.Empty;
+                return null;
 
             try
             {
                 var wr = SetupRequest(BaseUrl, authorizationCode, clientSecret);
-                using var response = await HttpClient.SendAsync(wr).ConfigureAwait(false);
+                using var response = await HttpClient.SendAsync(wr, false).ConfigureAwait(false);
 
                 if (!response.IsSuccessStatusCode)
                 {
                     Error = ErrorHandler.HandleError(response);
-                    return string.Empty;
+                    return null;
                 }
 
                 var json = response.Content.ReadAsStringAsync().Result;
@@ -51,7 +51,7 @@ namespace FortnoxAPILibrary.Connectors
             catch (HttpRequestException we)
             {
                 Error = ErrorHandler.HandleConnectionException(we);
-                return string.Empty;
+                return null;
             }
         }
 
@@ -60,8 +60,8 @@ namespace FortnoxAPILibrary.Connectors
             Error = null;
 
             var wr = new HttpRequestMessage(HttpMethod.Get,  requestUriString);
-            wr.Headers.Add("authorization-code", authorizationCode);
-            wr.Headers.Add("client-secret", clientSecret);
+            wr.Headers.Add("Authorization-Code", authorizationCode);
+            wr.Headers.Add("Client-Secret", clientSecret);
             wr.Headers.Add("Accept", "application/json");
             return wr;
         }

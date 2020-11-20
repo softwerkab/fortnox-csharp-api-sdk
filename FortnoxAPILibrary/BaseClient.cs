@@ -48,10 +48,13 @@ namespace FortnoxAPILibrary
             UseRateLimiter = ConnectionSettings.UseRateLimiter;
         }
 
-        public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
+        public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, bool addAuthHeaders = true)
         {
-            request.Headers.Add(AccessTokenHeader, AccessToken);
-            request.Headers.Add(ClientSecretHeader, ClientSecret);
+            if (addAuthHeaders)
+            {
+                request.Headers.Add(AccessTokenHeader, AccessToken);
+                request.Headers.Add(ClientSecretHeader, ClientSecret);
+            }
 
             if (UseRateLimiter)
                 await Throttle();

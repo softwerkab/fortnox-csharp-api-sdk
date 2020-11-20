@@ -9,7 +9,7 @@ namespace FortnoxAPILibrary.Tests
         /// Checks if the last request was successfull
         /// </summary>
         /// <param name="connector"></param>
-        public static void HasNoError(IConnector connector)
+        public static void HasNoError(IBaseConnector connector)
         {
             if (connector.HasError)
                 throw new AssertFailedException($"Request failed due to '{connector.Error.Message}'.");

@@ -23,7 +23,8 @@ namespace FortnoxAPILibrary.Tests
         {
             var connector = new CustomerConnector
             {
-                Search = new CustomerSearch(){
+                Search = new CustomerSearch()
+                {
                     Name = "TestName",
                     City = "TestCity",
                     LastModified = new DateTime(2000, 01, 01, 20, 10, 05), //2000-01-20 20:10:05
@@ -197,6 +198,18 @@ namespace FortnoxAPILibrary.Tests
         private static int GetNeededPages(int totalSize, int pageSize)
         {
             return (int) Math.Ceiling(totalSize / (float) pageSize);
+        }
+
+        [Ignore("Requires new authorization code.")]
+        [TestMethod]
+        public void TestAuth()
+        {
+            var authorizationCode = "Placeholder";
+            var authConnector = new AuthorizationConnector();
+            var token = authConnector.GetAccessToken(authorizationCode, TestCredentials.Client_Secret);
+
+            MyAssert.HasNoError(authConnector);
+            Assert.IsNotNull(token);
         }
     }
 }
