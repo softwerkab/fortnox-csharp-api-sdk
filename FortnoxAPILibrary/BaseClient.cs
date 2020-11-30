@@ -79,11 +79,20 @@ namespace FortnoxAPILibrary
             if (string.IsNullOrEmpty(AccessToken))
                 return;
 
-            //Add ratelimiter for access token if does not exist
-            if (!RateLimiters.ContainsKey(AccessToken))
-                RateLimiters.Add(AccessToken, TimeLimiter.GetFromMaxCountByInterval(LimitPerSecond, TimeSpan.FromSeconds(1)));
+            var limiter = SelectRateLimiter(AccessToken);
+            await limiter;
+        }
 
-            await RateLimiters[AccessToken];
+        private static TimeLimiter SelectRateLimiter(string accessToken)
+        {
+            lock (RateLimiters)
+            {
+                //Add ratelimiter for access token if does not exist
+                if (!RateLimiters.ContainsKey(accessToken))
+                    RateLimiters.Add(accessToken, TimeLimiter.GetFromMaxCountByInterval(LimitPerSecond, TimeSpan.FromSeconds(1)));
+
+                return RateLimiters[accessToken];
+            }
         }
     }
 }
