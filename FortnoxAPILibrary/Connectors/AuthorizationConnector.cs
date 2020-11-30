@@ -10,6 +10,10 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class AuthorizationConnector : BaseConnector, IAuthorizationConnector
     {
+        public AuthorizationConnector()
+        {
+            Resource = "";
+        }
 
         /// <summary>
         /// <para>Use this function to create and get your Access-Token.</para>
@@ -33,7 +37,7 @@ namespace FortnoxAPILibrary.Connectors
 
             try
             {
-                var wr = SetupRequest(BaseUrl, authorizationCode, clientSecret);
+                var wr = SetupRequest(BaseUrl+"/"+Resource, authorizationCode, clientSecret);
                 using var response = await HttpClient.SendAsync(wr, false).ConfigureAwait(false);
 
                 if (!response.IsSuccessStatusCode)
