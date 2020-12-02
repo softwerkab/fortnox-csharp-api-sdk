@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found customer</returns>
 		public Customer Get(string id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -34,7 +34,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated customer</returns>
 		public Customer Update(Customer customer)
 		{
-			return UpdateAsync(customer).Result;
+			return UpdateAsync(customer).GetResult();
 		}
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created customer</returns>
 		public Customer Create(Customer customer)
 		{
-			return CreateAsync(customer).Result;
+			return CreateAsync(customer).GetResult();
 		}
 
 		/// <summary>
@@ -53,19 +53,19 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the customer to delete</param>
 		public void Delete(string id)
 		{
-			DeleteAsync(id).Wait();
+			DeleteAsync(id).GetResult();
 		}
 
-		/// <summary>
-		/// Gets a list of customers
-		/// </summary>
-		/// <returns>A list of customers</returns>
-		public EntityCollection<CustomerSubset> Find()
-		{
-			return FindAsync().Result;
-		}
+        /// <summary>
+        /// Gets a list of customers
+        /// </summary>
+        /// <returns>A list of customers</returns>
+        public EntityCollection<CustomerSubset> Find()
+        {
+            return FindAsync().GetResult();
+        }
 
-		public async Task<EntityCollection<CustomerSubset>> FindAsync()
+        public async Task<EntityCollection<CustomerSubset>> FindAsync()
 		{
 			return await BaseFind().ConfigureAwait(false);
 		}

@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found voucherSeries</returns>
 		public VoucherSeries Get(string id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated voucherSeries</returns>
 		public VoucherSeries Update(VoucherSeries voucherSeries)
 		{
-			return UpdateAsync(voucherSeries).Result;
+			return UpdateAsync(voucherSeries).GetResult();
 		}
 
 		/// <summary>
@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created voucherSeries</returns>
 		public VoucherSeries Create(VoucherSeries voucherSeries)
 		{
-			return CreateAsync(voucherSeries).Result;
+			return CreateAsync(voucherSeries).GetResult();
 		}
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of voucherSeriess</returns>
 		public EntityCollection<VoucherSeriesSubset> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<VoucherSeriesSubset>> FindAsync()

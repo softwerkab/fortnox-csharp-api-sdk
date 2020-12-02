@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found modeOfPayment</returns>
 		public ModeOfPayment Get(string id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated modeOfPayment</returns>
 		public ModeOfPayment Update(ModeOfPayment modeOfPayment)
 		{
-			return UpdateAsync(modeOfPayment).Result;
+			return UpdateAsync(modeOfPayment).GetResult();
 		}
 
 		/// <summary>
@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created modeOfPayment</returns>
 		public ModeOfPayment Create(ModeOfPayment modeOfPayment)
 		{
-			return CreateAsync(modeOfPayment).Result;
+			return CreateAsync(modeOfPayment).GetResult();
 		}
 
 		/// <summary>
@@ -52,7 +52,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the modeOfPayment to delete</param>
 		public void Delete(string id)
 		{
-			DeleteAsync(id).Wait();
+			DeleteAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of modeOfPayments</returns>
 		public EntityCollection<ModeOfPayment> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<ModeOfPayment>> FindAsync()

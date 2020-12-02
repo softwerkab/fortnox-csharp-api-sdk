@@ -29,9 +29,8 @@ namespace FortnoxAPILibrary
             while (true)
             {
                 var result = await GetSinglePage(searchSettings, indices);
-                if (HasError)
-                    return null;
                 allEntities.AddRange(result.Entities);
+
                 if (result.CurrentPage >= result.TotalPages)
                     break;
                 searchSettings.Page++;

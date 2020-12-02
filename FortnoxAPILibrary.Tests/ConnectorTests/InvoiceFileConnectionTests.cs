@@ -86,8 +86,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
+            new InvoiceConnector().Cancel(tmpInvoice.DocumentNumber);
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             new InboxConnector().DeleteFile(tmpFile.Id);
             #endregion Delete arranged resources
         }

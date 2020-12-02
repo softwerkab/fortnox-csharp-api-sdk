@@ -1,6 +1,9 @@
+using System;
 using System.Linq;
+using System.Threading;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests.ConnectorTests
@@ -22,7 +25,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         {
             #region Arrange
             var tmpArticle = new ArticleConnector().Create(new Article() {Description = "TmpArticle"});
-            var tmpPriceList = new PriceListConnector().Get("TST_PR") ?? new PriceListConnector().Create(new PriceList() {Code = "TST_PR", Description = "TmpPriceList"});
+            var tmpPriceList = new PriceListConnector().Get("TST_PR");
             #endregion Arrange
 
             IPriceConnector connector = new PriceConnector();
@@ -65,8 +68,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             connector.Delete(createdPrice.PriceList, createdPrice.ArticleNumber, createdPrice.FromQuantity);
             MyAssert.HasNoError(connector);
 
-            retrievedPrice = connector.Get(createdPrice.PriceList, createdPrice.ArticleNumber, createdPrice.FromQuantity);
-            Assert.AreEqual(null, retrievedPrice, "Entity still exists after Delete!");
+            Assert.ThrowsException<FortnoxApiException>(
+                () => connector.Get(createdPrice.PriceList, createdPrice.ArticleNumber, createdPrice.FromQuantity),
+                "Entity still exists after Delete!");
 
             #endregion DELETE
 
@@ -78,9 +82,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
+            var dateStamp = DateTime.Now;
+
             #region Arrange
             var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", PurchasePrice = 10});
-            var tmpPriceList = new PriceListConnector().Get("TST_PR") ?? new PriceListConnector().Create(new PriceList() { Code = "TST_PR", Description = "TmpPriceList" });
+            var tmpPriceList = new PriceListConnector().Get("TST_PR");
             #endregion Arrange
             
             IPriceConnector connector = new PriceConnector();
@@ -92,22 +98,21 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 PriceValue = 100,
                 FromQuantity = 0
             };
-            connector.Create(newPrice);
-            
+
             //Add entries
             for (var i = 0; i < 5; i++)
             {
-                connector.Create(newPrice);
-
                 newPrice.PriceValue -= 10;
                 newPrice.FromQuantity += 10;
+                connector.Create(newPrice);
             }
 
+            connector.Search.LastModified = dateStamp.AddSeconds(-1);
             var fullCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber);
             MyAssert.HasNoError(connector);
 
-            Assert.AreEqual(5, fullCollection.TotalResources);
-            Assert.AreEqual(5, fullCollection.Entities.Count);
+            Assert.AreEqual(5+1, fullCollection.TotalResources);
+            Assert.AreEqual(5+1, fullCollection.Entities.Count);
             Assert.AreEqual(1, fullCollection.TotalPages);
 
             Assert.AreEqual("TST_PR", fullCollection.Entities.First().PriceList);
@@ -117,13 +122,15 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var limitedCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber);
             MyAssert.HasNoError(connector);
 
-            Assert.AreEqual(5, limitedCollection.TotalResources);
+            Assert.AreEqual(5+1, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
             Assert.AreEqual(3, limitedCollection.TotalPages);
 
             //Delete entries
             foreach (var entry in fullCollection.Entities)
             {
+                if (entry.FromQuantity == 0)
+                    continue; //base price
                 connector.Delete(entry.PriceList, entry.ArticleNumber, entry.FromQuantity);
             }
 

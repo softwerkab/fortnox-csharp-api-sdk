@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The found voucher</returns>
         public Voucher Get(long? id, string seriesId, long? financialYearId)
 		{
-			return GetAsync(id, seriesId, financialYearId).Result;
+			return GetAsync(id, seriesId, financialYearId).GetResult();
         }
 
 		/// <summary>
@@ -36,7 +36,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created voucher</returns>
 		public Voucher Create(Voucher voucher)
 		{
-			return CreateAsync(voucher).Result;
+			return CreateAsync(voucher).GetResult();
 		}
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of vouchers</returns>
 		public EntityCollection<VoucherSubset> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<VoucherSubset>> FindAsync()

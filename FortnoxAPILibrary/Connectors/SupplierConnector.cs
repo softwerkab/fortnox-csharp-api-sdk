@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found supplier</returns>
 		public Supplier Get(string id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated supplier</returns>
 		public Supplier Update(Supplier supplier)
 		{
-			return UpdateAsync(supplier).Result;
+			return UpdateAsync(supplier).GetResult();
 		}
 
 		/// <summary>
@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created supplier</returns>
 		public Supplier Create(Supplier supplier)
 		{
-			return CreateAsync(supplier).Result;
+			return CreateAsync(supplier).GetResult();
 		}
 
 		/// <summary>
@@ -52,7 +52,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the supplier to delete</param>
 		public void Delete(string id)
 		{
-			DeleteAsync(id).Wait();
+			DeleteAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of suppliers</returns>
 		public EntityCollection<SupplierSubset> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<SupplierSubset>> FindAsync()

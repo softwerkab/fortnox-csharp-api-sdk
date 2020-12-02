@@ -22,7 +22,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of accountCharts</returns>
 		public EntityCollection<AccountChart> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<AccountChart>> FindAsync()

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests.ConnectorTests
@@ -93,9 +94,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             connector.Delete(createdSupplierInvoiceAccrual.SupplierInvoiceNumber);
             MyAssert.HasNoError(connector);
 
-            retrievedSupplierInvoiceAccrual = connector.Get(createdSupplierInvoiceAccrual.SupplierInvoiceNumber);
-            Assert.AreEqual(null, retrievedSupplierInvoiceAccrual, "Entity still exists after Delete!");
-
+            Assert.ThrowsException<FortnoxApiException>(
+                () => connector.Get(createdSupplierInvoiceAccrual.SupplierInvoiceNumber),
+                "Entity still exists after Delete!");
             #endregion DELETE
 
             #region Delete arranged resources

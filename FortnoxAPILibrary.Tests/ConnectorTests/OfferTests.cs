@@ -71,11 +71,15 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             #region DELETE
             //Not allowed
+            connector.Cancel(createdOffer.DocumentNumber);
+
+            var cancelledOffer = connector.Get(createdOffer.DocumentNumber);
+            Assert.AreEqual(true, cancelledOffer.Cancelled);
             #endregion DELETE
 
             #region Delete arranged resources
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -129,10 +133,12 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual(3, limitedCollection.TotalPages);
 
             //Delete entries (DELETE not supported)
+            foreach (var offer in fullCollection.Entities)
+                connector.Cancel(offer.DocumentNumber);
 
             #region Delete arranged resources
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -165,9 +171,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             MyAssert.HasNoError(connector);
             MyAssert.IsPDF(fileData);
 
+            connector.Cancel(createdOffer.DocumentNumber);
+
             #region Delete arranged resources
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -200,9 +208,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             MyAssert.HasNoError(connector);
             Assert.AreEqual(emailedInvoice.DocumentNumber, createdOffer.DocumentNumber);
 
+            connector.Cancel(createdOffer.DocumentNumber);
+
             #region Delete arranged resources
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

@@ -1,6 +1,7 @@
 using System;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests.ConnectorTests
@@ -21,7 +22,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         public void Test_Asset_CRUD()
         {
             #region Arrange
-            var tmpCostCenter = new CostCenterConnector().Get("TMP") ?? new CostCenterConnector().Create(new CostCenter(){ Code = "TMP", Description = "TmpCostCenter"});
+            var tmpCostCenter = new CostCenterConnector().Create(new CostCenter(){ Code = "TMP", Description = "TmpCostCenter"});
             var tmpAssetType = new AssetTypesConnector().Create(new AssetType() {Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
             #endregion Arrange
 
@@ -74,8 +75,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             connector.Delete(createdAsset.Id);
             MyAssert.HasNoError(connector);
 
-            retrievedAsset = connector.Get(createdAsset.Id);
-            Assert.AreEqual(null, retrievedAsset, "Entity still exists after Delete!");
+            Assert.ThrowsException<FortnoxApiException>(
+                () => connector.Get(createdAsset.Id),
+                "Entity still exists after Delete!");
 
             #endregion DELETE
 
@@ -89,7 +91,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         public void Test_Find()
         {
             #region Arrange
-            var tmpCostCenter = new CostCenterConnector().Get("TMP") ?? new CostCenterConnector().Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
+            var tmpCostCenter = new CostCenterConnector().Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
             var tmpAssetType = new AssetTypesConnector().Create(new AssetType() { Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
             #endregion Arrange
 
@@ -139,9 +141,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             //Delete entries
             foreach (var entry in fullCollection.Entities)
-            {
                 connector.Delete(entry.Id);
-            }
 
             #region Delete arranged resources
             new CostCenterConnector().Delete(tmpCostCenter.Code);

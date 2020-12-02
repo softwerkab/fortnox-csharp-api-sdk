@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found offer</returns>
 		public Offer Get(long? id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -34,7 +34,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated offer</returns>
 		public Offer Update(Offer offer)
 		{
-			return UpdateAsync(offer).Result;
+			return UpdateAsync(offer).GetResult();
 		}
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created offer</returns>
 		public Offer Create(Offer offer)
 		{
-			return CreateAsync(offer).Result;
+			return CreateAsync(offer).GetResult();
 		}
 
 		/// <summary>
@@ -53,7 +53,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of offers</returns>
 		public EntityCollection<OfferSubset> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 		
 		/// <summary>

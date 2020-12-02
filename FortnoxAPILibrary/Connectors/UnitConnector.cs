@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found unit</returns>
 		public Unit Get(string id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated unit</returns>
 		public Unit Update(Unit unit)
 		{
-			return UpdateAsync(unit).Result;
+			return UpdateAsync(unit).GetResult();
 		}
 
 		/// <summary>
@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created unit</returns>
 		public Unit Create(Unit unit)
 		{
-			return CreateAsync(unit).Result;
+			return CreateAsync(unit).GetResult();
 		}
 
 		/// <summary>
@@ -52,7 +52,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the unit to delete</param>
 		public void Delete(string id)
 		{
-			DeleteAsync(id).Wait();
+			DeleteAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of units</returns>
 		public EntityCollection<Unit> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<Unit>> FindAsync()

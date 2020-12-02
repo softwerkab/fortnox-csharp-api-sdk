@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found order</returns>
 		public Order Get(long? id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -34,7 +34,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated order</returns>
 		public Order Update(Order order)
 		{
-			return UpdateAsync(order).Result;
+			return UpdateAsync(order).GetResult();
 		}
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created order</returns>
 		public Order Create(Order order)
 		{
-			return CreateAsync(order).Result;
+			return CreateAsync(order).GetResult();
 		}
 
 		/// <summary>
@@ -53,7 +53,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of orders</returns>
 		public EntityCollection<OrderSubset> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 		
 		/// <summary>

@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found contractTemplate</returns>
 		public ContractTemplate Get(string id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated contractTemplate</returns>
 		public ContractTemplate Update(ContractTemplate contractTemplate)
 		{
-			return UpdateAsync(contractTemplate).Result;
+			return UpdateAsync(contractTemplate).GetResult();
 		}
 
 		/// <summary>
@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created contractTemplate</returns>
 		public ContractTemplate Create(ContractTemplate contractTemplate)
 		{
-			return CreateAsync(contractTemplate).Result;
+			return CreateAsync(contractTemplate).GetResult();
 		}
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of contractTemplates</returns>
 		public EntityCollection<ContractTemplateSubset> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<ContractTemplateSubset>> FindAsync()

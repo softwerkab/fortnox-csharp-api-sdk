@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using FortnoxAPILibrary.Connectors;
+using FortnoxAPILibrary.Exceptions;
 
 namespace FortnoxAPILibrary.Tests
 {
@@ -77,6 +79,32 @@ namespace FortnoxAPILibrary.Tests
                 return "0";
             }
             return (10 - (sum % 10)).ToString();
+        }
+
+        public static int GetUnusedAccountNumber()
+        {
+            for (var j = 0; j < 10; j++) //try 10x times to create unique account number
+            {
+                var number = TestUtils.RandomInt(0, 9999);
+
+                if (!AccountExists(number))
+                    return number;
+            }
+
+            throw new Exception("Could not generate unused account number");
+        }
+
+        private static bool AccountExists(int number)
+        {
+            try
+            {
+                new AccountConnector().Get(number);
+                return true;
+            }
+            catch (FortnoxApiException)
+            {
+                return false;
+            }
         }
     }
 }

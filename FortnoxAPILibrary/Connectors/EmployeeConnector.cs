@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found employee</returns>
 		public Employee Get(string id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated employee</returns>
 		public Employee Update(Employee employee)
 		{
-			return UpdateAsync(employee).Result;
+			return UpdateAsync(employee).GetResult();
 		}
 
 		/// <summary>
@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created employee</returns>
 		public Employee Create(Employee employee)
 		{
-			return CreateAsync(employee).Result;
+			return CreateAsync(employee).GetResult();
 		}
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of employees</returns>
 		public EntityCollection<EmployeeSubset> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<EmployeeSubset>> FindAsync()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests.ConnectorTests
@@ -98,15 +99,17 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             connector.Delete(createdContractAccrual.DocumentNumber);
             MyAssert.HasNoError(connector);
 
-            retrievedContractAccrual = connector.Get(createdContractAccrual.DocumentNumber);
-            Assert.AreEqual(null, retrievedContractAccrual, "Entity still exists after Delete!");
+            Assert.ThrowsException<FortnoxApiException>(
+                () => connector.Get(createdContractAccrual.DocumentNumber),
+                "Entity still exists after Delete!");
 
             #endregion DELETE
 
             #region Delete arranged resources
 
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            new ContractConnector().Finish(tmpContract.DocumentNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber); //Can't delete since it is used in contract
+            //new CustomerConnector().Delete(tmpCustomer.CustomerNumber); //Can't delete since it is used in contract
 
             #endregion Delete arranged resources
         }
@@ -118,7 +121,12 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             var tmpCustomer = new CustomerConnector().Create(new Customer() {Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"});
             var tmpArticle = new ArticleConnector().Create(new Article() {Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100});
-            var tmpContract = new ContractConnector().Create(new Contract()
+
+            #endregion Arrange
+
+            IContractAccrualConnector connector = new ContractAccrualConnector();
+
+            var contract = new Contract()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 ContractDate = new DateTime(2020, 1, 1),
@@ -136,10 +144,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 },
                 PeriodStart = new DateTime(2020, 01, 1),
                 PeriodEnd = new DateTime(2020, 03, 20)
-            });
-
-            #endregion Arrange
-            IContractAccrualConnector connector = new ContractAccrualConnector();
+            };
 
             var marks = TestUtils.RandomString();
             var newContractAccrual = new ContractAccrual()
@@ -158,14 +163,10 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             for (var i = 0; i < 5; i++)
             {
-                newContractAccrual.DocumentNumber = tmpContract.DocumentNumber;
+                var createdContract = new ContractConnector().Create(contract);
+                newContractAccrual.DocumentNumber = createdContract.DocumentNumber;
                 connector.Create(newContractAccrual);
                 MyAssert.HasNoError(connector);
-
-                var contractConnector = new ContractConnector();
-                tmpContract.DocumentNumber = null;
-                tmpContract = contractConnector.Create(tmpContract);
-                MyAssert.HasNoError(contractConnector);
             }
 
             var contractAccruals = connector.Find();
@@ -175,11 +176,12 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             {
                 connector.Delete(entry.DocumentNumber);
                 MyAssert.HasNoError(connector);
+                new ContractConnector().Finish(entry.DocumentNumber);
             }
             #region Delete arranged resources
 
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
 
             #endregion Delete arranged resources
         }

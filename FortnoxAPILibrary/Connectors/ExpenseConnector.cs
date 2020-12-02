@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found expense</returns>
 		public Expense Get(string id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created expense</returns>
 		public Expense Create(Expense expense)
 		{
-			return CreateAsync(expense).Result;
+			return CreateAsync(expense).GetResult();
 		}
 
 		/// <summary>
@@ -42,7 +42,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of expenses</returns>
 		public EntityCollection<ExpenseSubset> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<ExpenseSubset>> FindAsync()

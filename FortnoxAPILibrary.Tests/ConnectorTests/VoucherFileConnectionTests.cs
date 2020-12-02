@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests.ConnectorTests
@@ -71,8 +72,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             connector.Delete(createdVoucherFileConnection.FileId);
             MyAssert.HasNoError(connector);
 
-            retrievedVoucherFileConnection = connector.Get(createdVoucherFileConnection.FileId);
-            Assert.AreEqual(null, retrievedVoucherFileConnection, "Entity still exists after Delete!");
+            Assert.ThrowsException<FortnoxApiException>(
+                () => connector.Get(createdVoucherFileConnection.FileId),
+                "Entity still exists after Delete!");
 
             #endregion DELETE
 

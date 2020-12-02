@@ -1,6 +1,7 @@
 using System;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests.ConnectorTests
@@ -21,7 +22,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         public void Test_SalaryTransaction_CRUD()
         {
             #region Arrange
-            var tmpEmployee = new EmployeeConnector().Get("TEST_EMP") ?? new EmployeeConnector().Create(new Employee() { EmployeeId = "TEST_EMP" });
+            var tmpEmployee = new EmployeeConnector().Create(new Employee() { EmployeeId = TestUtils.RandomString() });
             #endregion Arrange
 
             ISalaryTransactionConnector connector = new SalaryTransactionConnector();
@@ -65,8 +66,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             connector.Delete(createdSalaryTransaction.SalaryRow);
             MyAssert.HasNoError(connector);
 
-            retrievedSalaryTransaction = connector.Get(createdSalaryTransaction.SalaryRow);
-            Assert.AreEqual(null, retrievedSalaryTransaction, "Entity still exists after Delete!");
+            Assert.ThrowsException<FortnoxApiException>(
+                () => connector.Get(createdSalaryTransaction.SalaryRow),
+                "Entity still exists after Delete!");
 
             #endregion DELETE
 

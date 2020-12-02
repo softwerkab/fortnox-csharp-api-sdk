@@ -26,13 +26,13 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             IVoucherSeriesConnector connector = new VoucherSeriesConnector();
 
             #region CREATE
+            //var digits = new char[]{ '0', '1', '2', '3', '4', '5'}
             var newVoucherSeries = new VoucherSeries()
             {
-                Code = "TST",
+                Code = TestUtils.RandomInt().ToString(),
                 Description = "TestVoucherSeries",
             };
 
-            
             var createdVoucherSeries = connector.Create(newVoucherSeries) ?? connector.Update(newVoucherSeries); //if already exists, update it instead
             MyAssert.HasNoError(connector);
             Assert.AreEqual("TestVoucherSeries", createdVoucherSeries.Description);

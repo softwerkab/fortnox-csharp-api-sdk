@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The found price</returns>
         public Price Get(string priceListCode, string articleNumber, decimal? fromQuantity = null)
         {
-			return GetAsync(priceListCode, articleNumber, fromQuantity).Result;
+			return GetAsync(priceListCode, articleNumber, fromQuantity).GetResult();
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The updated price</returns>
         public Price Update(Price price)
         {
-			return UpdateAsync(price).Result;
+			return UpdateAsync(price).GetResult();
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The created price</returns>
         public Price Create(Price price)
         {
-			return CreateAsync(price).Result;
+			return CreateAsync(price).GetResult();
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <param name="fromQuantity"></param>
         public void Delete(string priceListCode, string articleNumber, decimal? fromQuantity = null)
         {
-			DeleteAsync(priceListCode, articleNumber, fromQuantity).Wait();
+			DeleteAsync(priceListCode, articleNumber, fromQuantity).GetResult();
         }
 
 		/// <summary>
@@ -66,7 +66,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of prices</returns>
 		public EntityCollection<PriceSubset> Find(string priceListId, string articleId = null)
 		{
-			return FindAsync(priceListId, articleId).Result;
+			return FindAsync(priceListId, articleId).GetResult();
 		}
 
 		public async Task<EntityCollection<PriceSubset>> FindAsync(string priceListId, string articleId = null)

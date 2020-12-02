@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found trustedEmailDomains</returns>
 		public TrustedEmailDomain Get(long? id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created trustedEmailDomains</returns>
 		public TrustedEmailDomain Create(TrustedEmailDomain trustedEmailDomains)
 		{
-			return CreateAsync(trustedEmailDomains).Result;
+			return CreateAsync(trustedEmailDomains).GetResult();
 		}
 
 		/// <summary>
@@ -42,7 +42,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the trustedEmailDomains to delete</param>
 		public void Delete(long? id)
 		{
-			DeleteAsync(id).Wait();
+			DeleteAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -51,7 +51,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of trustedEmailDomainss</returns>
 		public EntityCollection<TrustedEmailDomain> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<TrustedEmailDomain>> FindAsync()

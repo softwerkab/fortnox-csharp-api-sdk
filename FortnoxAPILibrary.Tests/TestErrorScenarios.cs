@@ -1,5 +1,6 @@
 ﻿using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests
@@ -17,22 +18,22 @@ namespace FortnoxAPILibrary.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(FortnoxApiException))]
         public void Test_FailedCreate_NoEntity()
         {
             var connector = new CustomerConnector();
 
             var createdCustomer = connector.Create(new Customer() {Name = "TestCustomer", CountryCode = "InvalidCountryCode"});
-            Assert.IsTrue(connector.HasError);
             Assert.IsNull(createdCustomer);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(FortnoxApiException))]
         public void Test_FailedUpdate_NoEntity()
         {
             var connector = new CustomerConnector();
 
             var createdCustomer = connector.Update(new Customer() { Name = "TestCustomer", CustomerNumber = "NotExistingCustomerNumber"});
-            Assert.IsTrue(connector.HasError);
             Assert.IsNull(createdCustomer);
         }
     }

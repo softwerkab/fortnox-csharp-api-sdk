@@ -79,8 +79,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 

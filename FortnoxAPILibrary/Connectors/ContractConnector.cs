@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found contract</returns>
 		public Contract Get(long? id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -34,7 +34,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated contract</returns>
 		public Contract Update(Contract contract)
 		{
-			return UpdateAsync(contract).Result;
+			return UpdateAsync(contract).GetResult();
 		}
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created contract</returns>
 		public Contract Create(Contract contract)
 		{
-			return CreateAsync(contract).Result;
+			return CreateAsync(contract).GetResult();
 		}
 
 		/// <summary>
@@ -53,7 +53,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of contracts</returns>
 		public EntityCollection<ContractSubset> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 		
 		/// <summary>

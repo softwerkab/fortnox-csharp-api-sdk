@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The found invoiceAccrual</returns>
         public InvoiceAccrual Get(long? id)
         {
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The updated invoiceAccrual</returns>
         public InvoiceAccrual Update(InvoiceAccrual invoiceAccrual)
         {
-			return UpdateAsync(invoiceAccrual).Result;
+			return UpdateAsync(invoiceAccrual).GetResult();
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The created invoiceAccrual</returns>
         public InvoiceAccrual Create(InvoiceAccrual invoiceAccrual)
         {
-			return CreateAsync(invoiceAccrual).Result;
+			return CreateAsync(invoiceAccrual).GetResult();
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <param name="id">Identifier of the invoiceAccrual to delete</param>
         public void Delete(long? id)
         {
-			DeleteAsync(id).Wait();
+			DeleteAsync(id).GetResult();
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>A list of invoiceAccruals</returns>
         public EntityCollection<InvoiceAccrualSubset> Find()
         {
-			return FindAsync().Result;
+			return FindAsync().GetResult();
         }
 
         public async Task<EntityCollection<InvoiceAccrualSubset>> FindAsync()

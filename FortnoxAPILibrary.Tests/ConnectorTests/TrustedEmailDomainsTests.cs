@@ -1,5 +1,6 @@
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests.ConnectorTests
@@ -54,8 +55,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             connector.Delete(createdTrustedEmailDomains.Id);
             MyAssert.HasNoError(connector);
 
-            retrievedTrustedEmailDomains = connector.Get(createdTrustedEmailDomains.Id);
-            Assert.AreEqual(null, retrievedTrustedEmailDomains, "Entity still exists after Delete!");
+            Assert.ThrowsException<FortnoxApiException>(
+                () => connector.Get(createdTrustedEmailDomains.Id),
+                "Entity still exists after Delete!");
 
             #endregion DELETE
 

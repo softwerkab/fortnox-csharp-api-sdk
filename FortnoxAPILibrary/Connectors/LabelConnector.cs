@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated label</returns>
 		public Label Update(Label label)
 		{
-			return UpdateAsync(label).Result;
+			return UpdateAsync(label).GetResult();
 		}
 
 		/// <summary>
@@ -34,7 +34,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created label</returns>
 		public Label Create(Label label)
 		{
-			return CreateAsync(label).Result;
+			return CreateAsync(label).GetResult();
 		}
 
 		/// <summary>
@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the label to delete</param>
 		public void Delete(long? id)
 		{
-			DeleteAsync(id).Wait();
+			DeleteAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -52,7 +52,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of labels</returns>
 		public EntityCollection<Label> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<Label>> FindAsync()

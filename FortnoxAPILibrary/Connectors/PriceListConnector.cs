@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found priceList</returns>
 		public PriceList Get(string id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated priceList</returns>
 		public PriceList Update(PriceList priceList)
 		{
-			return UpdateAsync(priceList).Result;
+			return UpdateAsync(priceList).GetResult();
 		}
 
 		/// <summary>
@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created priceList</returns>
 		public PriceList Create(PriceList priceList)
 		{
-			return CreateAsync(priceList).Result;
+			return CreateAsync(priceList).GetResult();
 		}
 		
 		/// <summary>
@@ -52,7 +52,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of priceLists</returns>
 		public EntityCollection<PriceList> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<PriceList>> FindAsync()

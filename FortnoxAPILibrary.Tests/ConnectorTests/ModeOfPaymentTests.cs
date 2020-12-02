@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests.ConnectorTests
@@ -22,7 +23,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         public void Test_ModeOfPayment_CRUD()
         {
             #region Arrange
-            var tmpAccount = new AccountConnector().Get(0123) ?? new AccountConnector().Create(new Account(){Description = "TestAccount", Number = 0123});
+            var tmpAccount = new AccountConnector().Create(new Account(){Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber()});
             #endregion Arrange
 
             IModeOfPaymentConnector connector = new ModeOfPaymentConnector();
@@ -64,13 +65,14 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             connector.Delete(createdModeOfPayment.Code);
             MyAssert.HasNoError(connector);
 
-            retrievedModeOfPayment = connector.Get(createdModeOfPayment.Code);
-            Assert.AreEqual(null, retrievedModeOfPayment, "Entity still exists after Delete!");
+            Assert.ThrowsException<FortnoxApiException>(
+                () => connector.Get(createdModeOfPayment.Code),
+                "Entity still exists after Delete!");
 
             #endregion DELETE
 
             #region Delete arranged resources
-            new AccountConnector().Delete(0123);
+            new AccountConnector().Delete(tmpAccount.Number);
             #endregion Delete arranged resources
         }
 
@@ -78,7 +80,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         public void Test_Find()
         {
             #region Arrange
-            var tmpAccount = new AccountConnector().Get(0123) ?? new AccountConnector().Create(new Account() { Description = "TestAccount", Number = 0123 });
+            var tmpAccount = new AccountConnector().Create(new Account() { Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber() });
             #endregion Arrange
 
             IModeOfPaymentConnector connector = new ModeOfPaymentConnector();
@@ -116,7 +118,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             #region Delete arranged resources
-            new AccountConnector().Delete(0123);
+            new AccountConnector().Delete(tmpAccount.Number);
             #endregion Delete arranged resources
         }
     }

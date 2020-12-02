@@ -1,5 +1,6 @@
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests.ConnectorTests
@@ -68,8 +69,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             connector.Delete(createdCustomer.CustomerNumber);
             MyAssert.HasNoError(connector);
 
-            retrievedCustomer = connector.Get(createdCustomer.CustomerNumber);
-            Assert.AreEqual(null, retrievedCustomer, "Entity still exists after Delete!");
+            Assert.ThrowsException<FortnoxApiException>(
+                () => connector.Get(createdCustomer.CustomerNumber),
+                "Entity still exists after Delete!");
 
             #endregion DELETE
 

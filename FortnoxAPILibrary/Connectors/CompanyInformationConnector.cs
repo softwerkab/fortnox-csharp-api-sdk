@@ -22,7 +22,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		public CompanyInformation Get()
         {
-			return GetAsync().Result;
+			return GetAsync().GetResult();
         }
 
 		public async Task<CompanyInformation> GetAsync()

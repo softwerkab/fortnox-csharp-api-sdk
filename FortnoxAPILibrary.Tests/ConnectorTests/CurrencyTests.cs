@@ -1,6 +1,7 @@
 using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests.ConnectorTests
@@ -24,8 +25,15 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             //Random currency code is not accepted by the server, therefore "SKK" is used.
             var currencyConnector = new CurrencyConnector();
-            if (currencyConnector.Get("SKK") != null) //Delete currency if already exists
+            try
+            {
+                //Delete currency if already exists
                 currencyConnector.Delete("SKK");
+            }
+            catch
+            {
+                // Currency does not exists
+            }
 
             #endregion Arrange
 
@@ -70,8 +78,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             connector.Delete(createdCurrency.Code);
             MyAssert.HasNoError(connector);
 
-            retrievedCurrency = connector.Get(createdCurrency.Code);
-            Assert.AreEqual(null, retrievedCurrency, "Entity still exists after Delete!");
+            Assert.ThrowsException<FortnoxApiException>(
+                () => connector.Get(createdCurrency.Code),
+                "Entity still exists after Delete!");
 
             #endregion DELETE
 

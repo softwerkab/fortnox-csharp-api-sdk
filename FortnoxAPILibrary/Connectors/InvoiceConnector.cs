@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found invoice</returns>
 		public Invoice Get(long? id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -34,7 +34,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated invoice</returns>
 		public Invoice Update(Invoice invoice)
 		{
-			return UpdateAsync(invoice).Result;
+			return UpdateAsync(invoice).GetResult();
 		}
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created invoice</returns>
 		public Invoice Create(Invoice invoice)
 		{
-			return CreateAsync(invoice).Result;
+			return CreateAsync(invoice).GetResult();
 		}
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of invoices</returns>
 		public EntityCollection<InvoiceSubset> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 		
 		/// <summary>

@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of scheduleTimess</returns>
 		public EntityCollection<ScheduleTimes> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		/// <summary>
@@ -34,12 +34,12 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found schedule time</returns>
 		public ScheduleTimes Get(string employeeId, DateTime? date)
         {
-			return GetAsync(employeeId, date).Result;
+			return GetAsync(employeeId, date).GetResult();
         }
 
         public ScheduleTimes Update(ScheduleTimes scheduleTime)
         {
-			return UpdateAsync(scheduleTime).Result;
+			return UpdateAsync(scheduleTime).GetResult();
         }
 
 		/// <summary>
@@ -50,7 +50,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The reset schedule time</returns>
 		public ScheduleTimes Reset(string employeeId, DateTime? date)
         {
-			return ResetAsync(employeeId, date).Result;
+			return ResetAsync(employeeId, date).GetResult();
         }
 
         public async Task<ScheduleTimes> ResetAsync(string employeeId, DateTime? date)

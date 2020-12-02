@@ -22,7 +22,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found salaryTransaction</returns>
 		public SalaryTransaction Get(long? id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -32,7 +32,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated salaryTransaction</returns>
 		public SalaryTransaction Update(SalaryTransaction salaryTransaction)
 		{
-			return UpdateAsync(salaryTransaction).Result;
+			return UpdateAsync(salaryTransaction).GetResult();
 		}
 
 		/// <summary>
@@ -42,7 +42,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created salaryTransaction</returns>
 		public SalaryTransaction Create(SalaryTransaction salaryTransaction)
 		{
-			return CreateAsync(salaryTransaction).Result;
+			return CreateAsync(salaryTransaction).GetResult();
 		}
 
 		/// <summary>
@@ -51,7 +51,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the salaryTransaction to delete</param>
 		public void Delete(long? id)
 		{
-			DeleteAsync(id).Wait();
+			DeleteAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -60,7 +60,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of salaryTransactions</returns>
 		public EntityCollection<SalaryTransactionSubset> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<SalaryTransactionSubset>> FindAsync()

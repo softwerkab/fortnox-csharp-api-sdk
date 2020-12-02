@@ -2,11 +2,14 @@
 using System.Net;
 using System.Net.Http;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 
 namespace FortnoxAPILibrary
 {
     public class ErrorHandler
     {
+        private const string NoReponseMessage = @"No response from server. Check inner exception for details.";
+
         protected AdaptableSerializer Serializer { get; set; }
 
         public ErrorHandler()
@@ -14,31 +17,51 @@ namespace FortnoxAPILibrary
             Serializer = new AdaptableSerializer();
         }
 
-        public ErrorInformation HandleError(HttpWebResponse response)
+        public void HandleErrorResponse(HttpWebResponse response)
         {
             using var responseStream = response.GetResponseStream();
 
-            var errorJson = responseStream.ToText().Result;
-            return ParseError(errorJson);
+            var content = responseStream.ToText().GetResult();
+            var errorInformation = ParseError(content);
+
+            var exception = errorInformation != null ?
+                new FortnoxApiException($"Request failed: {errorInformation.Message}") :
+                new FortnoxApiException($"Request failed: {response.StatusDescription} ({(int)response.StatusCode})");
+
+            exception.ResponseContent = content;
+            exception.StatusCode = response.StatusCode;
+            exception.ErrorInfo = errorInformation;
+
+            throw exception;
         }
 
-        public ErrorInformation HandleError(HttpResponseMessage response)
+        public void HandleErrorResponse(HttpResponseMessage response)
         {
-            var errorJson = response.Content.ReadAsStringAsync().Result;
-            return ParseError(errorJson);
+            var content = response.Content.ReadAsStringAsync().GetResult();
+            var errorInformation = ParseError(content);
+
+            var exception = errorInformation != null ?
+                new FortnoxApiException($"Request failed: {errorInformation.Message}") :
+                new FortnoxApiException($"Request failed: {response.ReasonPhrase} ({(int)response.StatusCode})");
+
+            exception.ResponseContent = content;
+            exception.StatusCode = response.StatusCode;
+            exception.ErrorInfo = errorInformation;
+
+            throw exception;
         }
 
-        public ErrorInformation HandleConnectionException(WebException we)
+        public void HandleNoResponse(WebException we)
         {
-            throw new Exception("Connection to server failed. Check inner exception.", we);
+            throw new NoResponseException(NoReponseMessage, we);
         }
 
-        public ErrorInformation HandleConnectionException(HttpRequestException we)
+        public void HandleNoResponse(HttpRequestException we)
         {
-            throw new Exception("Connection to server failed. Check inner exception.", we);
+            throw new NoResponseException(NoReponseMessage, we);
         }
 
-        protected ErrorInformation ParseError(string errorJson)
+        private ErrorInformation ParseError(string errorJson)
         {
             try
             {
@@ -46,7 +69,7 @@ namespace FortnoxAPILibrary
             }
             catch (Exception)
             {
-                return new ErrorInformation() { Message = $"Could not interpret error information. Response: '{errorJson}'" };
+                return null;
             }
         }
     }

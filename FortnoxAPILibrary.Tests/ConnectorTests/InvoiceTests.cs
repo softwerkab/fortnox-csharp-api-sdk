@@ -73,12 +73,16 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #endregion READ / GET
 
             #region DELETE
-            //Not available
+            //Not available, Cancel instead
+            connector.Cancel(createdInvoice.DocumentNumber);
+
+            var cancelledInvoice = connector.Get(createdInvoice.DocumentNumber);
+            Assert.AreEqual(true, cancelledInvoice.Cancelled);
             #endregion DELETE
 
             #region Delete arranged resources
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -135,10 +139,12 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual(3, limitedCollection.TotalPages);
 
             //Delete entries (DELETE not supported)
+            foreach (var invoice in fullCollection.Entities)
+                connector.Cancel(invoice.DocumentNumber);
 
             #region Delete arranged resources
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -181,9 +187,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual("2019-01-01", updatedInvoice.InvoiceDate?.ToString(APIConstants.DateFormat));
             Assert.AreEqual("2019-01-31", updatedInvoice.DueDate?.ToString(APIConstants.DateFormat));
 
+            connector.Cancel(createdInvoice.DocumentNumber);
+
             #region Delete arranged resources
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -224,9 +232,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             MyAssert.HasNoError(connector);
             MyAssert.IsPDF(fileData);
 
+            connector.Cancel(createdInvoice.DocumentNumber);
+
             #region Delete arranged resources
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -234,12 +244,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         public void Test_Email()
         {
             #region Arrange
-            var cc = new CustomerConnector();
-            var ac = new ArticleConnector();
-            var tmpCustomer = cc.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "richard.randak@softwerk.se" });
-            var tmpArticle = ac.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
-            MyAssert.HasNoError(cc);
-            MyAssert.HasNoError(ac);
+            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "richard.randak@softwerk.se" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
             IInvoiceConnector connector = new InvoiceConnector();
@@ -267,9 +273,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             MyAssert.HasNoError(connector);
             Assert.AreEqual(emailedInvoice.DocumentNumber, createdInvoice.DocumentNumber);
 
+            connector.Cancel(createdInvoice.DocumentNumber);
+
             #region Delete arranged resources
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 

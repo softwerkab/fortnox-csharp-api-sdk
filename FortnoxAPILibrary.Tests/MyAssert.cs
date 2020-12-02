@@ -9,10 +9,10 @@ namespace FortnoxAPILibrary.Tests
         /// Checks if the last request was successfull
         /// </summary>
         /// <param name="connector"></param>
-        public static void HasNoError(IBaseConnector connector)
+        public static void HasNoError(IBaseConnector connector) //TODO: Remove
         {
-            if (connector.HasError)
-                throw new AssertFailedException($"Request failed due to '{connector.Error.Message}'.");
+            /*if (connector.HasError)
+                throw new AssertFailedException($"Request failed due to '{connector.Error.Message}'.");*/
         }
 
         public static void IsPDF(byte[] data)

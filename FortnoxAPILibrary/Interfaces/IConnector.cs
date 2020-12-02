@@ -5,8 +5,8 @@ namespace FortnoxAPILibrary.Connectors
     public interface IBaseConnector
     {
         //Error Handling
-        bool HasError { get; }
-        ErrorInformation Error { get; }
+        //bool HasError { get; }
+        //ErrorInformation Error { get; }
     }
 
     public interface IConnector : IBaseConnector //TODO: Rename to IResourceConnector

@@ -29,7 +29,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The found file</returns>
         public byte[] DownloadFile(string id, IdType idType = IdType.Id)
         {
-            return DownloadFileAsync(id, idType).Result;
+            return DownloadFileAsync(id, idType).GetResult();
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns></returns>
         public FileInfo DownloadFile(string id, string localPath, IdType idType = IdType.Id)
         {
-            return DownloadFileAsync(id, localPath, idType).Result;
+            return DownloadFileAsync(id, localPath, idType).GetResult();
         }
 
         /// <summary>
@@ -53,17 +53,17 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created file</returns>
 		public ArchiveFile UploadFile(string name, byte[] data, string folderPathOrId = null)
         {
-            return UploadFileAsync(name, data, folderPathOrId).Result;
+            return UploadFileAsync(name, data, folderPathOrId).GetResult();
         }
 
         public ArchiveFile UploadFile(string name, Stream stream, string folderPathOrId = null)
         {
-            return UploadFileAsync(name, stream, folderPathOrId).Result;
+            return UploadFileAsync(name, stream, folderPathOrId).GetResult();
         }
 
         public ArchiveFile UploadFile(string localPath, string folderPathOrId = null)
         {
-            return UploadFileAsync(localPath, folderPathOrId).Result;
+            return UploadFileAsync(localPath, folderPathOrId).GetResult();
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Id of the file delete</param>
         public void DeleteFile(string id)
 		{
-            DeleteFileAsync(id).Wait();
+            DeleteFileAsync(id).GetResult();
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns></returns>
         public ArchiveFolder GetFolder(string pathOrId = null)
         {
-            return GetFolderAsync(pathOrId).Result;
+            return GetFolderAsync(pathOrId).GetResult();
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns></returns>
         public ArchiveFolder GetRoot()
         {
-            return GetRootAsync().Result;
+            return GetRootAsync().GetResult();
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns></returns>
         public ArchiveFolder CreateFolder(string folderName, string path = null)
         {
-            return CreateFolderAsync(folderName, path).Result;
+            return CreateFolderAsync(folderName, path).GetResult();
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <param name="pathOrId">Id or path of the folder to delete</param>
         public void DeleteFolder(string pathOrId)
         {
-            DeleteFolderAsync(pathOrId).Wait();
+            DeleteFolderAsync(pathOrId).GetResult();
         }
 
         #endregion SYNC Interface Methods
@@ -168,7 +168,7 @@ namespace FortnoxAPILibrary.Connectors
         public async Task<ArchiveFile> UploadFileAsync(string localPath, string folderPathOrId = null)
         {
             var fileInfo = new FileInfo(localPath);
-            return await UploadFileAsync(fileInfo.Name, fileInfo.ToBytes().Result, folderPathOrId).ConfigureAwait(false);
+            return await UploadFileAsync(fileInfo.Name, fileInfo.ToBytes().GetResult(), folderPathOrId).ConfigureAwait(false);
         }
 
         public async Task DeleteFileAsync(string id)

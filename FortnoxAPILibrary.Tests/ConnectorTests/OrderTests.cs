@@ -71,11 +71,12 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             #region DELETE
             //Not allowed
+            connector.Cancel(createdOrder.DocumentNumber);
             #endregion DELETE
 
             #region Delete arranged resources
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -129,10 +130,12 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual(3, limitedCollection.TotalPages);
 
             //Delete entries (DELETE not supported)
+            foreach (var order in fullCollection.Entities)
+                connector.Cancel(order.DocumentNumber);
 
             #region Delete arranged resources
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -165,9 +168,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             MyAssert.HasNoError(connector);
             MyAssert.IsPDF(fileData);
 
+            connector.Cancel(createdOrder.DocumentNumber);
+
             #region Delete arranged resources
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -200,9 +205,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             MyAssert.HasNoError(connector);
             Assert.AreEqual(emailedInvoice.DocumentNumber, createdOrder.DocumentNumber);
 
+            connector.Cancel(createdOrder.DocumentNumber);
+
             #region Delete arranged resources
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

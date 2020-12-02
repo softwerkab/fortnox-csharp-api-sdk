@@ -16,34 +16,8 @@ namespace FortnoxAPILibrary
 
         protected string Resource { get; set; }
 
-        /// <remarks/>
-        public ErrorInformation Error { get; protected set; }
+        public RequestInfo RequestInfo { get; set; }
 
-        /// <summary>
-        /// True if something went wrong with the request. Otherwise false.
-        /// </summary>
-        public bool HasError => Error != null;
-
-        /// <summary>
-        /// The HttpStatusCode returned by Fortnox API.
-        /// </summary>
-        public HttpStatusCode HttpStatusCode { get; protected set; }
-
-        /// <summary>
-        /// The data sent to Fortnox in JSON-format.
-        /// </summary>
-        public string RequestContent { get; protected set; }
-        /// <summary>
-        /// The data returned from Fortnox in JSON-format. 
-        /// </summary>
-        public string ResponseContent { get; protected set; }
-
-        /// <summary>
-        /// Aggregate data used for request setup
-        /// </summary>
-        public RequestInfo RequestInfo { get; protected set; }
-
-        /// <remarks />
         public BaseConnector()
         {
             HttpClient = this;
@@ -53,9 +27,6 @@ namespace FortnoxAPILibrary
 
         protected HttpRequestMessage SetupRequest(string requestUriString, HttpMethod method)
         {
-            Error = null;
-            ResponseContent = string.Empty;
-
             var request = new HttpRequestMessage(method, requestUriString);
             return request;
         }
@@ -69,15 +40,14 @@ namespace FortnoxAPILibrary
 
             try
             {
-                using var response = await HttpClient.SendAsync(wr).ConfigureAwait(false);
-                HttpStatusCode = response.StatusCode;
+                using var httpResponse = await HttpClient.SendAsync(wr).ConfigureAwait(false);
 
-                if (!response.IsSuccessStatusCode)
-                    Error = ErrorHandler.HandleError(response);
+                if (!httpResponse.IsSuccessStatusCode)
+                    ErrorHandler.HandleErrorResponse(httpResponse);
             }
             catch (HttpRequestException we)
             {
-                ErrorHandler.HandleConnectionException(we);
+                ErrorHandler.HandleNoResponse(we);
             }
         }
 
@@ -90,19 +60,11 @@ namespace FortnoxAPILibrary
         protected async Task<T> DoEntityRequest<T>(T entity = default)
         {
             var requestJson = entity == null ? string.Empty : Serializer.Serialize(entity);
-            RequestContent = requestJson;
 
             var requestData = Encoding.UTF8.GetBytes(requestJson);
             var responseData = await DoSimpleRequest(requestData).ConfigureAwait(false);
 
-            if (responseData == null)
-            {
-                ResponseContent = string.Empty;
-                return default;
-            }
-
             var responseJson = Encoding.UTF8.GetString(responseData);
-            ResponseContent = responseJson;
 
             return Serializer.Deserialize<T>(responseJson);
         }
@@ -117,11 +79,10 @@ namespace FortnoxAPILibrary
                     wr.Content = new ByteArrayContent(data);
 
                 using var response = await HttpClient.SendAsync(wr).ConfigureAwait(false);
-                HttpStatusCode = response.StatusCode;
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    Error = ErrorHandler.HandleError(response);
+                    ErrorHandler.HandleErrorResponse(response);
                     return default;
                 }
 
@@ -129,16 +90,13 @@ namespace FortnoxAPILibrary
             }
             catch (HttpRequestException we)
             {
-                ErrorHandler.HandleConnectionException(we);
+                ErrorHandler.HandleNoResponse(we);
                 return default;
             }
         }
 
         protected async Task<T> UploadFile<T>(byte[] fileData = null, string fileName = null)
         {
-            Error = null;
-            ResponseContent = "";
-
             T result = default;
 
             try
@@ -164,15 +122,15 @@ namespace FortnoxAPILibrary
                 // Read the response
                 using var response = await HttpClient.SendAsync(wr).ConfigureAwait(false);
                 using var responseStream = response.GetResponseStream();
-                ResponseContent = responseStream.ToText().Result;
-                result = Serializer.Deserialize<EntityWrapper<T>>(ResponseContent).Entity;
+                var responseJson = responseStream.ToText().GetResult();
+                result = Serializer.Deserialize<EntityWrapper<T>>(responseJson).Entity;
             }
             catch (WebException we)
             {
                 if (we.Response != null)
-                    ErrorHandler.HandleError(we.Response as HttpWebResponse);
+                    ErrorHandler.HandleErrorResponse(we.Response as HttpWebResponse);
                 else
-                    ErrorHandler.HandleConnectionException(we);
+                    ErrorHandler.HandleNoResponse(we);
             }
 
             return result;
@@ -185,11 +143,10 @@ namespace FortnoxAPILibrary
             try
             {
                 using var response = await HttpClient.SendAsync(request).ConfigureAwait(false);
-                HttpStatusCode = response.StatusCode;
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    Error = ErrorHandler.HandleError(response);
+                    ErrorHandler.HandleErrorResponse(response);
                     return null;
                 }
 
@@ -198,7 +155,7 @@ namespace FortnoxAPILibrary
             }
             catch (HttpRequestException we)
             {
-                ErrorHandler.HandleConnectionException(we);
+                ErrorHandler.HandleNoResponse(we);
                 return null;
             }
         }

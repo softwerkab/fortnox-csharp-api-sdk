@@ -12,7 +12,7 @@ namespace FortnoxAPILibrary.Connectors
 
         public byte[] Get(SIEType type)
         {
-            return GetAsync(type).Result;
+            return GetAsync(type).GetResult();
         }
 
         public async Task<byte[]> GetAsync(SIEType type)

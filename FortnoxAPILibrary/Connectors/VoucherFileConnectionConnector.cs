@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found voucherFileConnection</returns>
 		public VoucherFileConnection Get(string id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 		
 		/// <summary>
@@ -34,7 +34,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created voucherFileConnection</returns>
 		public VoucherFileConnection Create(VoucherFileConnection voucherFileConnection)
 		{
-			return CreateAsync(voucherFileConnection).Result;
+			return CreateAsync(voucherFileConnection).GetResult();
 		}
 
 		/// <summary>
@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the voucherFileConnection to delete</param>
 		public void Delete(string id)
 		{
-			DeleteAsync(id).Wait();
+			DeleteAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -52,7 +52,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of voucherFileConnections</returns>
 		public EntityCollection<VoucherFileConnection> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<VoucherFileConnection>> FindAsync()

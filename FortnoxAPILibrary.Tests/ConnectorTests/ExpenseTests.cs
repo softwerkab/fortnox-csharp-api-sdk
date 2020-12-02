@@ -22,9 +22,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         public void Test_Expense_CRUD()
         {
             #region Arrange
-            var ac = new AccountConnector();
-            if (ac.Get(0123) == null) //account 123 does not exist
-                ac.Create(new Account() {Number = 0123, Description = "TmpAccount"});
+            var tmpAccount = new AccountConnector().Create(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
             #endregion Arrange
 
             IExpenseConnector connector = new ExpenseConnector();
@@ -35,7 +33,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             {
                 Text = "TestExpense",
                 Code = TestUtils.RandomString(6),
-                Account = 0123
+                Account = tmpAccount.Number
             };
 
             var createdExpense = connector.Create(newExpense);
@@ -65,9 +63,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            ac.Delete(0123);
-            MyAssert.HasNoError(ac);
-
+            new AccountConnector().Delete(tmpAccount.Number);
             #endregion Delete arranged resources
         }
 
@@ -75,9 +71,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         public void Test_Expense_Find()
         {
             #region Arrange
-            var ac = new AccountConnector();
-            if (ac.Get(0123) == null) //account 123 does not exist
-                ac.Create(new Account() { Number = 0123, Description = "TmpAccount" });
+            var tmpAccount = new AccountConnector().Create(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
             #endregion Arrange
 
             var timeStamp = DateTime.Now;
@@ -86,7 +80,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var newExpense = new Expense()
             {
                 Text = remark,
-                Account = 0123
+                Account = tmpAccount.Number
             };
 
             IExpenseConnector connector = new ExpenseConnector();
@@ -98,17 +92,16 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             connector.Search.LastModified = timeStamp; //does not seem to work
-            connector.Search.Limit = 500;
+            connector.Search.Limit = APIConstants.Unlimited;
             var expensesCollection = connector.Find();
 
-            var filteredExpenses = expensesCollection.Entities.Where(x => x.Text == remark).ToList();
+            var newExpenses = expensesCollection.Entities.Where(x => x.Text == remark).ToList();
             MyAssert.HasNoError(connector);
-            Assert.AreEqual(2, filteredExpenses.Count);
-            Assert.IsNotNull(filteredExpenses.First().Url);
+            Assert.AreEqual(2, newExpenses.Count);
+            Assert.IsNotNull(newExpenses.First().Url);
 
             #region Delete arranged resources
-            ac.Delete(0123);
-            MyAssert.HasNoError(ac);
+            new AccountConnector().Delete(tmpAccount.Number);
             #endregion Delete arranged resources
         }
     }

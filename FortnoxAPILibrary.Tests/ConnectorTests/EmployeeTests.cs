@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
@@ -82,12 +83,20 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         [TestMethod]
         public void Test_Employee_Find()
         {
+            var timestamp = DateTime.Now;
+            var marks = TestUtils.RandomString();
+
             IEmployeeConnector connector = new EmployeeConnector();
 
+            for (var i = 0; i < 5; i++)
+                connector.Create(new Employee() {EmployeeId = TestUtils.RandomString(), City = marks});
+
+            //connector.Search.LastModified = timestamp; //parameter is not accepted by server
+            connector.Search.Limit = APIConstants.Unlimited;
             var employees = connector.Find();
-            
-            Assert.AreEqual(1, employees.Entities.Count);
-            Assert.IsNotNull(employees.Entities.First().Url);
+
+            var newEmployees = employees.Entities.Where(e => e.City == marks).ToList();
+            Assert.AreEqual(5, newEmployees.Count);
         }
     }
 }

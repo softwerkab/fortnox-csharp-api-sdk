@@ -1,6 +1,8 @@
 using System;
+using System.Net;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests.ConnectorTests
@@ -27,7 +29,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             {
                 Description = "Test Account",
                 Active = false,
-                Number = GetUnusedAccountNumber(),
+                Number = TestUtils.GetUnusedAccountNumber(),
                 CostCenterSettings = CostCenterSettings.Allowed,
                 ProjectSettings = ProjectSettings.Allowed,
                 SRU = 123
@@ -62,8 +64,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             connector.Delete(createdAccount.Number);
             MyAssert.HasNoError(connector);
 
-            retrievedAccount = connector.Get(createdAccount.Number);
-            Assert.AreEqual(null, retrievedAccount, "Entity still exists after Delete!");
+            Assert.ThrowsException<FortnoxApiException>(
+                () => connector.Get(createdAccount.Number),
+                "Entity still exists after Delete!");
 
             #endregion DELETE
 
@@ -94,7 +97,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             //Add entries
             for (var i = 0; i < 5; i++)
             {
-                newAccount.Number = GetUnusedAccountNumber();
+                newAccount.Number = TestUtils.GetUnusedAccountNumber();
                 connector.Create(newAccount);
                 MyAssert.HasNoError(connector);
             }
@@ -127,20 +130,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             //Add code to delete temporary resources
 
             #endregion Delete arranged resources
-        }
-
-        private static int GetUnusedAccountNumber()
-        {
-            IAccountConnector connector = new AccountConnector();
-
-            for (var j = 0; j < 10; j++) //try 10x times to create unique account number
-            {
-                var number = TestUtils.RandomInt(0, 9999);
-                if (connector.Get(number) == null) //not exists
-                    return number;
-            }
-
-            throw new Exception("Could not generate unused account number");
         }
     }
 }

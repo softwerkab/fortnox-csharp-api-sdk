@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests.ConnectorTests
@@ -22,15 +23,10 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         public void Test_AbsenceTransaction_CRUD()
         {
             #region Arrange
-            var tmpEmployee = new EmployeeConnector().Get("TEST_EMP") ?? new EmployeeConnector().Create(new Employee() { EmployeeId = "TEST_EMP" });
+            var tmpEmployee = new EmployeeConnector().Create(new Employee() { EmployeeId = TestUtils.RandomString() });
             var tmpProject = new ProjectConnector().Create(new Project() { Description = "TmpProject" });
-            var tmpCostCenter = new CostCenterConnector().Get("TMP") ??  new CostCenterConnector().Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
-            
-            Assert.IsNotNull(tmpEmployee, $"Temporary employee not created.");
-            Assert.IsNotNull(tmpProject, $"Temporary project not created.");
-            Assert.IsNotNull(tmpCostCenter, $"Temporary costcenter not created.");
+            var tmpCostCenter = new CostCenterConnector().Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
             #endregion Arrange
-
 
             IAbsenceTransactionConnector connector = new AbsenceTransactionConnector();
 
@@ -74,8 +70,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             connector.Delete(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode);
             MyAssert.HasNoError(connector);
 
-            retrievedAbsenceTransaction = connector.Get(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode);
-            Assert.AreEqual(null, retrievedAbsenceTransaction, "Entity still exists after Delete!");
+            Assert.ThrowsException<FortnoxApiException>(
+                () => connector.Get(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode),
+                "Entity still exists after Delete!");
 
             #endregion DELETE
 
@@ -89,12 +86,10 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         public void Test_Find()
         {
             #region Arrange
-            var tmpEmployee = new EmployeeConnector().Get("TEST_EMP") ?? new EmployeeConnector().Create(new Employee() { EmployeeId = "TEST_EMP" });
-            var tmpProject = new ProjectConnector().Create(new Project() { Description = "TmpProject" });
-            var tmpCostCenter = new CostCenterConnector().Get("TMP") ?? new CostCenterConnector().Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
 
-            for (var i = 0; i < 5; i++)
-                new AbsenceTransactionConnector().Delete(tmpEmployee.EmployeeId, new DateTime(2018, 01, 01).AddDays(i), AbsenceCauseCode.MIL);
+            var tmpEmployee = new EmployeeConnector().Create(new Employee() { EmployeeId = TestUtils.RandomString() });
+            var tmpProject = new ProjectConnector().Create(new Project() { Description = "TmpProject" });
+            var tmpCostCenter = new CostCenterConnector().Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
             #endregion Arrange
 
             IAbsenceTransactionConnector connector = new AbsenceTransactionConnector();
@@ -138,9 +133,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             //Delete entries
             foreach (var entry in fullCollection.Entities)
-            {
                 connector.Delete(entry.EmployeeId, entry.Date, entry.CauseCode);
-            }
 
             #region Delete arranged resources
             new CostCenterConnector().Delete(tmpCostCenter.Code);

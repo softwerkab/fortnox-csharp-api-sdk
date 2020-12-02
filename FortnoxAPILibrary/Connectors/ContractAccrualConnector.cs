@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found contractAccrual</returns>
 		public ContractAccrual Get(long? id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated contractAccrual</returns>
 		public ContractAccrual Update(ContractAccrual contractAccrual)
 		{
-			return UpdateAsync(contractAccrual).Result;
+			return UpdateAsync(contractAccrual).GetResult();
 		}
 
 		/// <summary>
@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created contractAccrual</returns>
 		public ContractAccrual Create(ContractAccrual contractAccrual)
 		{
-			return CreateAsync(contractAccrual).Result;
+			return CreateAsync(contractAccrual).GetResult();
 		}
 
 		/// <summary>
@@ -52,7 +52,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the contractAccrual to delete</param>
 		public void Delete(long? id)
 		{
-			DeleteAsync(id).Wait();
+			DeleteAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of contractAccruals</returns>
 		public EntityCollection<ContractAccrualSubset> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<ContractAccrualSubset>> FindAsync()

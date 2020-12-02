@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found supplierInvoiceFileConnection</returns>
 		public SupplierInvoiceFileConnection Get(string id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created supplierInvoiceFileConnection</returns>
 		public SupplierInvoiceFileConnection Create(SupplierInvoiceFileConnection supplierInvoiceFileConnection)
 		{
-			return CreateAsync(supplierInvoiceFileConnection).Result;
+			return CreateAsync(supplierInvoiceFileConnection).GetResult();
 		}
 
 		/// <summary>
@@ -42,7 +42,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the supplierInvoiceFileConnection to delete</param>
 		public void Delete(string id)
 		{
-			DeleteAsync(id).Wait();
+			DeleteAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -51,7 +51,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of supplierInvoiceFileConnections</returns>
 		public EntityCollection<SupplierInvoiceFileConnection> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<SupplierInvoiceFileConnection>> FindAsync()

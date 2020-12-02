@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests
@@ -42,15 +43,18 @@ namespace FortnoxAPILibrary.Tests
             ConnectionSettings.UseRateLimiter = false;
             var connector = new CustomerConnector();
 
-            ErrorInformation error = null;
+            FortnoxApiException error = null;
             int i;
             for (i = 0; i < 200; i++)
             {
                 connector.Search.City = TestUtils.RandomString();
-                connector.Find();
-                if (connector.HasError)
+                try
                 {
-                    error = connector.Error;
+                    connector.Find();
+                }
+                catch (FortnoxApiException ex)
+                {
+                    error = ex;
                     break;
                 }
             }
@@ -62,6 +66,7 @@ namespace FortnoxAPILibrary.Tests
             //Assert.IsTrue(failed > 0);
             Console.WriteLine($@"Succesful requests: {i}");
             Assert.IsNotNull(error);
+            Console.WriteLine(error.Message);
             Assert.IsTrue(error.Message.Contains("Too Many Requests"));
         }
     }

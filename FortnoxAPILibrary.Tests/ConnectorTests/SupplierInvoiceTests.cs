@@ -76,10 +76,13 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             #region DELETE
             //Not supported
+            connector.Cancel(createdSupplierInvoice.GivenNumber);
+            var cancelledInvoice = connector.Get(createdSupplierInvoice.GivenNumber);
+            Assert.AreEqual(true, cancelledInvoice.Cancelled);
             #endregion DELETE
 
             #region Delete arranged resources
-            new CustomerConnector().Delete(tmpSupplier.SupplierNumber);
+            new SupplierConnector().Delete(tmpSupplier.SupplierNumber);
             new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
@@ -138,9 +141,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual(3, limitedCollection.TotalPages);
 
             //Delete entries (DELETE not supported)
+            foreach (var invoice in fullCollection.Entities)
+                connector.Cancel(invoice.GivenNumber);
 
             #region Delete arranged resources
-            new CustomerConnector().Delete(tmpSupplier.SupplierNumber);
+            new SupplierConnector().Delete(tmpSupplier.SupplierNumber);
             new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }

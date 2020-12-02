@@ -61,7 +61,7 @@ namespace FortnoxAPILibrary.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 08f85b17-4f91-42e4-8f9b-6998205d0975.
+        ///   Looks up a localized string similar to 2f7ec48c-d086-4313-b69f-e2377c880df8.
         /// </summary>
         internal static string Access_Token {
             get {
@@ -70,7 +70,7 @@ namespace FortnoxAPILibrary.Tests {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 4aiLcOuFKx.
+        ///   Looks up a localized string similar to 1Pevde6Pls.
         /// </summary>
         internal static string Client_Secret {
             get {

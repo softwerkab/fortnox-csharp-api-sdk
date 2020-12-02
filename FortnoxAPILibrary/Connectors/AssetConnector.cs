@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found asset</returns>
 		public Asset Get(string id)
 		{
-            return GetAsync(id).Result;
+            return GetAsync(id).GetResult();
         }
 
 		/// <summary>
@@ -34,7 +34,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated asset</returns>
 		public Asset Update(Asset asset)
         {
-            return UpdateAsync(asset).Result;
+            return UpdateAsync(asset).GetResult();
         }
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created asset</returns>
 		public Asset Create(Asset asset)
         {
-            return CreateAsync(asset).Result;
+            return CreateAsync(asset).GetResult();
         }
 
 		/// <summary>
@@ -53,7 +53,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the asset to delete</param>
 		public void Delete(string id)
 		{
-			DeleteAsync(id).Wait();
+			DeleteAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -62,7 +62,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of assets</returns>
 		public EntityCollection<AssetSubset> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<AssetSubset>> FindAsync()

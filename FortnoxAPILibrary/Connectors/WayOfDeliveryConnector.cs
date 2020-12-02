@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found wayOfDelivery</returns>
 		public WayOfDelivery Get(string id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated wayOfDelivery</returns>
 		public WayOfDelivery Update(WayOfDelivery wayOfDelivery)
 		{
-			return UpdateAsync(wayOfDelivery).Result;
+			return UpdateAsync(wayOfDelivery).GetResult();
 		}
 
 		/// <summary>
@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created wayOfDelivery</returns>
 		public WayOfDelivery Create(WayOfDelivery wayOfDelivery)
 		{
-			return CreateAsync(wayOfDelivery).Result;
+			return CreateAsync(wayOfDelivery).GetResult();
 		}
 
 		/// <summary>
@@ -52,7 +52,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the wayOfDelivery to delete</param>
 		public void Delete(string id)
 		{
-			DeleteAsync(id).Wait();
+			DeleteAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of wayOfDeliverys</returns>
 		public EntityCollection<WayOfDelivery> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<WayOfDelivery>> FindAsync()

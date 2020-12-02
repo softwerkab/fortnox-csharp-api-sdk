@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found termsOfPayment</returns>
 		public TermsOfPayment Get(string id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated termsOfPayment</returns>
 		public TermsOfPayment Update(TermsOfPayment termsOfPayment)
 		{
-			return UpdateAsync(termsOfPayment).Result;
+			return UpdateAsync(termsOfPayment).GetResult();
 		}
 
 		/// <summary>
@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created termsOfPayment</returns>
 		public TermsOfPayment Create(TermsOfPayment termsOfPayment)
 		{
-			return CreateAsync(termsOfPayment).Result;
+			return CreateAsync(termsOfPayment).GetResult();
 		}
 
 		/// <summary>
@@ -52,7 +52,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the termsOfPayment to delete</param>
 		public void Delete(string id)
 		{
-			DeleteAsync(id).Wait();
+			DeleteAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of termsOfPayments</returns>
 		public EntityCollection<TermsOfPayment> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<TermsOfPayment>> FindAsync()

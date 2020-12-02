@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found supplierInvoice</returns>
 		public SupplierInvoice Get(long? id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -34,7 +34,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated supplierInvoice</returns>
 		public SupplierInvoice Update(SupplierInvoice supplierInvoice)
 		{
-			return UpdateAsync(supplierInvoice).Result;
+			return UpdateAsync(supplierInvoice).GetResult();
 		}
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created supplierInvoice</returns>
 		public SupplierInvoice Create(SupplierInvoice supplierInvoice)
 		{
-			return CreateAsync(supplierInvoice).Result;
+			return CreateAsync(supplierInvoice).GetResult();
 		}
 
 		/// <summary>
@@ -53,7 +53,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of supplierInvoices</returns>
 		public EntityCollection<SupplierInvoiceSubset> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 		
 		/// <summary>

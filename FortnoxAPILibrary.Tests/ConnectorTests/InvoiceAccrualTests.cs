@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests.ConnectorTests
@@ -88,25 +89,32 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             connector.Delete(createdInvoiceAccrual.InvoiceNumber);
             MyAssert.HasNoError(connector);
 
-            retrievedInvoiceAccrual = connector.Get(createdInvoiceAccrual.InvoiceNumber);
-            Assert.AreEqual(null, retrievedInvoiceAccrual, "Entity still exists after Delete!");
+            Assert.ThrowsException<FortnoxApiException>(
+                () => connector.Get(createdInvoiceAccrual.InvoiceNumber),
+                "Entity still exists after Delete!");
 
             #endregion DELETE
 
             #region Delete arranged resources
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+
+            new InvoiceConnector().Cancel(tmpInvoice.DocumentNumber);
+            //new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
         [TestMethod]
-        public void Test_ContractAccrual_Find()
+        public void Test_InvoiceAccrual_Find()
         {
             #region Arrange
             var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
             var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
 
-            var tmpInvoice = new InvoiceConnector().Create(new Invoice()
+            #endregion Arrange
+
+            IInvoiceAccrualConnector connector = new InvoiceAccrualConnector();
+
+            var invoice = new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
@@ -116,10 +124,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 {
                     new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 6, Price = 1000},
                 }
-            });
-            #endregion Arrange
-
-            IInvoiceAccrualConnector connector = new InvoiceAccrualConnector();
+            };
 
             var marks = TestUtils.RandomString();
             var newInvoiceAccrual = new InvoiceAccrual()
@@ -140,14 +145,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             for (var i = 0; i < 5; i++)
             {
-                newInvoiceAccrual.InvoiceNumber = tmpInvoice.DocumentNumber;
+                var createdInvoice = new InvoiceConnector().Create(invoice);
+
+                newInvoiceAccrual.InvoiceNumber = createdInvoice.DocumentNumber;
                 connector.Create(newInvoiceAccrual);
                 MyAssert.HasNoError(connector);
-
-                var contractConnector = new InvoiceConnector();
-                tmpInvoice.DocumentNumber = null;
-                tmpInvoice = contractConnector.Create(tmpInvoice);
-                MyAssert.HasNoError(contractConnector);
             }
 
             var contractAccruals = connector.Find();
@@ -157,13 +159,12 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             {
                 connector.Delete(entry.InvoiceNumber);
                 MyAssert.HasNoError(connector);
+                new InvoiceConnector().Cancel(entry.InvoiceNumber);
             }
 
             #region Delete arranged resources
-
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-
             #endregion Delete arranged resources
         }
     }

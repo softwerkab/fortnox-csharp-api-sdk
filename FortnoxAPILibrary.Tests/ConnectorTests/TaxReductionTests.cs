@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests.ConnectorTests
@@ -92,14 +93,16 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             connector.Delete(createdTaxReduction.Id);
             MyAssert.HasNoError(connector);
 
-            retrievedTaxReduction = connector.Get(createdTaxReduction.Id);
-            Assert.AreEqual(null, retrievedTaxReduction, "Entity still exists after Delete!");
+            Assert.ThrowsException<FortnoxApiException>(
+                () => connector.Get(createdTaxReduction.Id),
+                "Entity still exists after Delete!");
 
             #endregion DELETE
 
             #region Delete arranged resources
+            new InvoiceConnector().Cancel(tmpInvoice.DocumentNumber);
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -161,15 +164,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual(2, limitedCollection.Entities.Count);
             Assert.AreEqual(3, limitedCollection.TotalPages);
 
-            //Delete entries
-            foreach (var entry in fullCollection.Entities)
-            {
-                connector.Delete(entry.Id);
-            }
 
             #region Delete arranged resources
+            new InvoiceConnector().Cancel(tmpInvoice.DocumentNumber);
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

@@ -23,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The found termsOfDelivery</returns>
 		public TermsOfDelivery Get(string id)
 		{
-			return GetAsync(id).Result;
+			return GetAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The updated termsOfDelivery</returns>
 		public TermsOfDelivery Update(TermsOfDelivery termsOfDelivery)
 		{
-			return UpdateAsync(termsOfDelivery).Result;
+			return UpdateAsync(termsOfDelivery).GetResult();
 		}
 
 		/// <summary>
@@ -43,7 +43,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>The created termsOfDelivery</returns>
 		public TermsOfDelivery Create(TermsOfDelivery termsOfDelivery)
 		{
-			return CreateAsync(termsOfDelivery).Result;
+			return CreateAsync(termsOfDelivery).GetResult();
 		}
 
 		/// <summary>
@@ -52,7 +52,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id">Identifier of the termsOfDelivery to delete</param>
 		public void Delete(string id)
 		{
-			DeleteAsync(id).Wait();
+			DeleteAsync(id).GetResult();
 		}
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns>A list of termsOfDeliverys</returns>
 		public EntityCollection<TermsOfDelivery> Find()
 		{
-			return FindAsync().Result;
+			return FindAsync().GetResult();
 		}
 
 		public async Task<EntityCollection<TermsOfDelivery>> FindAsync()

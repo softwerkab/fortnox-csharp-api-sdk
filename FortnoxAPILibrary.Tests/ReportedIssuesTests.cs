@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests
@@ -76,7 +77,7 @@ namespace FortnoxAPILibrary.Tests
         {
             var connector = new CustomerConnector();
             var specificCustomer = connector.Create(new Customer() { Name = "TestCustomer", OrganisationNumber = "123456789" });
-            Assert.IsFalse(connector.HasError);
+            MyAssert.HasNoError(connector);
 
             connector.Search.OrganisationNumber = "123456789";
             var customers = connector.Find().Entities;
@@ -133,7 +134,7 @@ namespace FortnoxAPILibrary.Tests
             watch.Start();
             foreach (var runningTask in runningTasks)
             {
-                var result = runningTask.Result;
+                var result = runningTask.GetAwaiter().GetResult();
                 MyAssert.HasNoError(connector);
                 Assert.IsNotNull(result);
             }
@@ -232,7 +233,8 @@ namespace FortnoxAPILibrary.Tests
 
             #region Delete arranged resources
 
-            new CustomerConnector().Delete(tmpSupplier.SupplierNumber);
+            new SupplierInvoiceConnector().Cancel(createdInvoice.GivenNumber);
+            new SupplierConnector().Delete(tmpSupplier.SupplierNumber);
             new ArticleConnector().Delete(tmpArticle.ArticleNumber);
 
             #endregion Delete arranged resources
@@ -246,7 +248,7 @@ namespace FortnoxAPILibrary.Tests
             var tmpCustomer = new CustomerConnector().Create(new Customer()
                 {Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"});
             var tmpArticle = new ArticleConnector().Create(new Article()
-                {Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100});
+                {Description = "TmpArticle", PurchasePrice = 100});
 
             #endregion Arrange
 
@@ -258,8 +260,8 @@ namespace FortnoxAPILibrary.Tests
             {
                 DocumentNumber = largeId,
                 CustomerNumber = tmpCustomer.CustomerNumber,
-                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
-                DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
+                InvoiceDate = new DateTime(2019, 1, 20),
+                DueDate = new DateTime(2019, 2, 20),
                 InvoiceType = InvoiceType.CashInvoice,
                 PaymentWay = PaymentWay.Cash,
                 Comments = "TestInvoice",
@@ -277,8 +279,9 @@ namespace FortnoxAPILibrary.Tests
 
             #region Delete arranged resources
 
+            new InvoiceConnector().Cancel(createdInvoice.DocumentNumber);
             new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
 
             #endregion Delete arranged resources
         }
@@ -298,26 +301,26 @@ namespace FortnoxAPILibrary.Tests
             #endregion Arrange
 
             var archiveConnector = new ArchiveConnector();
-            var case1 = archiveConnector.DownloadFile(fortnoxFile.Id, IdType.Id);
-            var case2 = archiveConnector.DownloadFile(fortnoxFile.Id, IdType.FileId);
-            var case3 = archiveConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.Id);
-            var case4 = archiveConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.FileId);
+            var case1 = archiveConnector.DownloadFile(fortnoxFile.Id, IdType.Id); //no error
+            Assert.ThrowsException<FortnoxApiException>(
+                () => archiveConnector.DownloadFile(fortnoxFile.Id, IdType.FileId)); //has error
+            Assert.ThrowsException<FortnoxApiException>(
+                () => archiveConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.Id)); //has error
+            var case4 = archiveConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.FileId); //no error
 
             Assert.IsNotNull(case1);
-            Assert.IsNull(case2);
-            Assert.IsNull(case3);
             Assert.IsNotNull(case4);
 
             var inboxConnector = new InboxConnector();
-            var case5 = inboxConnector.DownloadFile(fortnoxFile.Id, IdType.Id);
-            var case6 = inboxConnector.DownloadFile(fortnoxFile.Id, IdType.FileId);
+            var case5 = inboxConnector.DownloadFile(fortnoxFile.Id, IdType.Id); //no error
+            var case6 = inboxConnector.DownloadFile(fortnoxFile.Id, IdType.FileId); //no error, why?
 
-            var case7 = inboxConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.Id);
-            var case8 = inboxConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.FileId);
+            Assert.ThrowsException<FortnoxApiException>(
+                () => inboxConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.Id)); //has error
+            var case8 = inboxConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.FileId); //no error
 
             Assert.IsNotNull(case5);
-            Assert.IsNotNull(case6); //Why not null?
-            Assert.IsNull(case7);
+            Assert.IsNotNull(case6);
             Assert.IsNotNull(case8);
             
             //Clean
@@ -340,26 +343,25 @@ namespace FortnoxAPILibrary.Tests
             #endregion Arrange
 
             var archiveConnector = new ArchiveConnector();
-            var case1 = archiveConnector.DownloadFile(fortnoxFile.Id, IdType.Id);
-            var case2 = archiveConnector.DownloadFile(fortnoxFile.Id, IdType.FileId);
-            var case3 = archiveConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.Id);
-            var case4 = archiveConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.FileId);
+            var case1 = archiveConnector.DownloadFile(fortnoxFile.Id, IdType.Id); //no error
+            Assert.ThrowsException<FortnoxApiException>(
+                () => archiveConnector.DownloadFile(fortnoxFile.Id, IdType.FileId)); //has error
+            Assert.ThrowsException<FortnoxApiException>(
+                () => archiveConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.Id)); //has error
+            var case4 = archiveConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.FileId); //no error
 
             Assert.IsNotNull(case1);
-            Assert.IsNull(case2);
-            Assert.IsNull(case3);
             Assert.IsNotNull(case4);
 
             var inboxConnector = new InboxConnector();
-            var case5 = inboxConnector.DownloadFile(fortnoxFile.Id, IdType.Id);
-            var case6 = inboxConnector.DownloadFile(fortnoxFile.Id, IdType.FileId);
-
-            var case7 = inboxConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.Id);
-            var case8 = inboxConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.FileId);
+            var case5 = inboxConnector.DownloadFile(fortnoxFile.Id, IdType.Id); //no error
+            var case6 = inboxConnector.DownloadFile(fortnoxFile.Id, IdType.FileId); //no error, why?
+            Assert.ThrowsException<FortnoxApiException>(
+                () => inboxConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.Id)); //has error
+            var case8 = inboxConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.FileId); //no error
 
             Assert.IsNotNull(case5);
-            Assert.IsNotNull(case6); //Why not null?
-            Assert.IsNull(case7);
+            Assert.IsNotNull(case6);
             Assert.IsNotNull(case8);
 
             //Clean

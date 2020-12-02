@@ -1,4 +1,5 @@
 ﻿using FortnoxAPILibrary.Connectors;
+using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests
@@ -7,6 +8,7 @@ namespace FortnoxAPILibrary.Tests
     public class ConnectionTests
     {
         [TestMethod]
+        [ExpectedException(typeof(FortnoxApiException))]
         public void TestConnection_NoCredenials_Error()
         {
             //Arrange
@@ -16,11 +18,10 @@ namespace FortnoxAPILibrary.Tests
             //Act
             ICustomerConnector cc = new CustomerConnector();
             cc.Find();
-
-            Assert.IsTrue(cc.HasError);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(FortnoxApiException))]
         public void TestConnection_EmptyCredenials_Error()
         {
             //Arrange
@@ -30,11 +31,10 @@ namespace FortnoxAPILibrary.Tests
             //Act
             ICustomerConnector cc = new CustomerConnector();
             cc.Find();
-
-            Assert.IsTrue(cc.HasError);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(FortnoxApiException))]
         public void TestConnection_WrongCredenials_Error()
         {
             //Arrange
@@ -44,8 +44,6 @@ namespace FortnoxAPILibrary.Tests
             //Act
             ICustomerConnector cc = new CustomerConnector();
             cc.Find();
-
-            Assert.IsTrue(cc.HasError);
         }
 
         [TestMethod]
@@ -61,7 +59,6 @@ namespace FortnoxAPILibrary.Tests
             connector.ClientSecret = TestCredentials.Client_Secret;
 
             var customers = connector.Find();
-            MyAssert.HasNoError(connector);
             Assert.IsNotNull(customers);
         }
 
@@ -76,7 +73,6 @@ namespace FortnoxAPILibrary.Tests
             ICustomerConnector connector = new CustomerConnector();
 
             var customers = connector.Find();
-            MyAssert.HasNoError(connector);
             Assert.IsNotNull(customers);
         }
 

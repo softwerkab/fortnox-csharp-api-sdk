@@ -36,6 +36,7 @@ namespace FortnoxAPILibrary
         public string BaseUrl { get; set; }
 
         public bool UseRateLimiter { get; set; }
+        protected bool UseAuthHeaders { get; set; }
 
         public BaseClient()
         {
@@ -46,11 +47,12 @@ namespace FortnoxAPILibrary
             BaseUrl = ConnectionSettings.FortnoxAPIServer;
             Timeout = ConnectionSettings.Timeout;
             UseRateLimiter = ConnectionSettings.UseRateLimiter;
+            UseAuthHeaders = true;
         }
 
-        public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, bool addAuthHeaders = true)
+        public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
         {
-            if (addAuthHeaders)
+            if (UseAuthHeaders)
             {
                 request.Headers.Add(AccessTokenHeader, AccessToken);
                 request.Headers.Add(ClientSecretHeader, ClientSecret);
@@ -64,8 +66,12 @@ namespace FortnoxAPILibrary
 
         public async Task<HttpWebResponse> SendAsync(HttpWebRequest request)
         {
-            request.Headers.Add(AccessTokenHeader, AccessToken);
-            request.Headers.Add(ClientSecretHeader, ClientSecret);
+            if (UseAuthHeaders)
+            {
+                request.Headers.Add(AccessTokenHeader, AccessToken);
+                request.Headers.Add(ClientSecretHeader, ClientSecret);
+            }
+
             request.Timeout = Timeout;
 
             if (UseRateLimiter)

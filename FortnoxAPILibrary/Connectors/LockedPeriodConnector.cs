@@ -19,7 +19,7 @@ namespace FortnoxAPILibrary.Connectors
 
         public LockedPeriod Get()
         {
-			return GetAsync().Result;
+			return GetAsync().GetResult();
         }
 
         public async Task<LockedPeriod> GetAsync()

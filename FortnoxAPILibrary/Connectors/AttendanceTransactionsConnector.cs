@@ -26,7 +26,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The found attendanceTransaction</returns>
         public AttendanceTransaction Get(string employeeId, DateTime? date, AttendanceCauseCode? code)
         {
-			return GetAsync(employeeId, date, code).Result;
+			return GetAsync(employeeId, date, code).GetResult();
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The updated attendanceTransaction</returns>
         public AttendanceTransaction Update(AttendanceTransaction attendanceTransaction)
         {
-			return UpdateAsync(attendanceTransaction).Result;
+			return UpdateAsync(attendanceTransaction).GetResult();
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>The created attendanceTransaction</returns>
         public AttendanceTransaction Create(AttendanceTransaction attendanceTransaction)
         {
-			return CreateAsync(attendanceTransaction).Result;
+			return CreateAsync(attendanceTransaction).GetResult();
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <param name="code"></param>
         public void Delete(string employeeId, DateTime? date, AttendanceCauseCode? code)
         {
-			DeleteAsync(employeeId, date, code).Wait();
+			DeleteAsync(employeeId, date, code).GetResult();
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns>A list of attendanceTransactions</returns>
         public EntityCollection<AttendanceTransactionSubset> Find()
         {
-			return FindAsync().Result;
+			return FindAsync().GetResult();
         }
 
         public async Task<EntityCollection<AttendanceTransactionSubset>> FindAsync()
