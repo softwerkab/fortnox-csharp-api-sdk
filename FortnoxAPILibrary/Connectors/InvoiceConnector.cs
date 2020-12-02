@@ -62,9 +62,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public Invoice Bookkeep(long? id)
-		{
-			return DoAction(id.ToString(), Action.Bookkeep);
-		}
+        {
+            return BookkeepAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// Cancels an invoice
@@ -72,9 +72,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public Invoice Cancel(long? id)
-		{
-			return DoAction(id.ToString(), Action.Cancel);
-		}
+        {
+            return CancelAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// Creates a credit invoice from the provided invoice. The created credit invoice will be referenced in the property CreditInvoiceReference.
@@ -82,9 +82,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public Invoice CreditInvoice(long? id)
-		{
-			return DoAction(id.ToString(), Action.Credit);
-		}
+        {
+            return CreditInvoiceAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// Sends an e-mail to the customer with an attached PDF document of the invoice. You can use the properties in the EmailInformation to customize the e-mail message on each invoice.
@@ -92,9 +92,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public Invoice Email(long? id)
-		{
-			return DoAction(id.ToString(), Action.Email);
-		}
+        {
+            return EmailAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// Sends an e-invoice to the customer with an attached PDF document of the invoice. Note that this action also sets the property Sent as true.
@@ -102,9 +102,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public Invoice EInvoice(long? id)
-		{
-			return DoAction(id.ToString(), Action.EInvoice);
-		}
+        {
+            return EInvoiceAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// This action returns a PDF document with the current template that is used by the specific document. Note that this action also sets the property Sent as true.
@@ -112,9 +112,9 @@ namespace FortnoxAPILibrary.Connectors
         /// <returns></returns>
 		/// </summary>
 		public byte[] Print(long? id)
-		{
-			return DoDownloadAction(id.ToString(), Action.Print);
-		}
+        {
+            return PrintAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// This action returns a PDF document with the current reminder template that is used by the specific document. Note that this action also sets the property Sent as true.
@@ -122,9 +122,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public byte[] PrintReminder(long? id)
-		{
-			return DoDownloadAction(id.ToString(), Action.PrintReminder);
-		}
+        {
+            return PrintReminderAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// This action is used to set the field Sent as true from an external system without generating a PDF.
@@ -132,9 +132,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public Invoice ExternalPrint(long? id)
-		{
-			return DoAction(id.ToString(), Action.ExternalPrint);
-		}
+        {
+            return ExternalPrintAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// This action returns a PDF document with the current template that is used by the specific document. Unliike the action print, this action doesn’t set the property Sent as true.
@@ -142,9 +142,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public byte[] Preview(long? id)
-		{
-			return DoDownloadAction(id.ToString(), Action.Preview);
-		}
+        {
+            return PreviewAsync(id).GetResult();
+        }
 
 		public async Task<EntityCollection<InvoiceSubset>> FindAsync()
 		{
@@ -161,6 +161,51 @@ namespace FortnoxAPILibrary.Connectors
 		public async Task<Invoice> GetAsync(long? id)
 		{
 			return await BaseGet(id.ToString()).ConfigureAwait(false);
+		}
+
+        public async Task<Invoice> BookkeepAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.Bookkeep).ConfigureAwait(false);
+		}
+
+        public async Task<Invoice> CancelAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.Cancel).ConfigureAwait(false);
+		}
+
+        public async Task<Invoice> CreditInvoiceAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.Credit).ConfigureAwait(false);
+		}
+
+        public async Task<Invoice> EmailAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.Email).ConfigureAwait(false);
+		}
+
+        public async Task<Invoice> EInvoiceAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.EInvoice).ConfigureAwait(false);
+		}
+
+        public async Task<byte[]> PrintAsync(long? id)
+        {
+            return await DoDownloadActionAsync(id.ToString(), Action.Print).ConfigureAwait(false);
+		}
+
+        public async Task<byte[]> PrintReminderAsync(long? id)
+        {
+            return await DoDownloadActionAsync(id.ToString(), Action.PrintReminder).ConfigureAwait(false);
+		}
+
+        public async Task<Invoice> ExternalPrintAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.ExternalPrint).ConfigureAwait(false);
+		}
+
+        public async Task<byte[]> PreviewAsync(long? id)
+        {
+            return await DoDownloadActionAsync(id.ToString(), Action.Preview).ConfigureAwait(false);
 		}
 	}
 }

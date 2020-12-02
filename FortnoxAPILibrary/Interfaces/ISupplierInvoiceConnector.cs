@@ -23,5 +23,10 @@ namespace FortnoxAPILibrary.Connectors
 		Task<SupplierInvoice> CreateAsync(SupplierInvoice supplierInvoice);
 		Task<SupplierInvoice> GetAsync(long? id);
         Task<EntityCollection<SupplierInvoiceSubset>> FindAsync();
+        Task<SupplierInvoice> BookkeepAsync(long? id);
+        Task<SupplierInvoice> CancelAsync(long? id);
+        Task<SupplierInvoice> CreditAsync(long? id);
+        Task<SupplierInvoice> ApprovalPaymentAsync(long? id);
+        Task<SupplierInvoice> ApprovalBookkeepAsync(long? id);
 	}
 }

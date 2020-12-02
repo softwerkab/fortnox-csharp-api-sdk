@@ -77,16 +77,6 @@ namespace FortnoxAPILibrary
             return result?.Entity;
         }
         
-        protected TEntity DoAction(string documentNumber, Action action)
-        {
-            return DoActionAsync(documentNumber, action).GetResult();
-        }
-
-        protected byte[] DoDownloadAction(string documentNumber, Action action, string localPath = null)
-        {
-            return DoDownloadActionAsync(documentNumber, action, localPath).GetResult();
-        }
-
         protected async Task<byte[]> DoDownloadActionAsync(string documentNumber, Action action, string localPath = null)
         {
             if (!action.IsDownloadAction())

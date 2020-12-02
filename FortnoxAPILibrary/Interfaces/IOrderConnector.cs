@@ -24,5 +24,11 @@ namespace FortnoxAPILibrary.Connectors
 		Task<Order> CreateAsync(Order order);
 		Task<Order> GetAsync(long? id);
         Task<EntityCollection<OrderSubset>> FindAsync();
+        Task<Order> CreateInvoiceAsync(long? id);
+        Task<Order> CancelAsync(long? id);
+        Task<Order> EmailAsync(long? id);
+        Task<byte[]> PrintAsync(long? id);
+        Task<Order> ExternalPrintAsync(long? id);
+        Task<byte[]> PreviewAsync(long? id);
 	}
 }

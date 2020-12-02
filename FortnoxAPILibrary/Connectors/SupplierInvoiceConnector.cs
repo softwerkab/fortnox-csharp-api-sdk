@@ -62,9 +62,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public SupplierInvoice Bookkeep(long? id)
-		{
-			return DoAction(id.ToString(), Action.Bookkeep);
-		}
+        {
+            return BookkeepAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// Cancels the supplier invoice
@@ -72,9 +72,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public SupplierInvoice Cancel(long? id)
-		{
-			return DoAction(id.ToString(), Action.Cancel);
-		}
+        {
+            return CancelAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// Creates a credit of the supplier invoice
@@ -82,9 +82,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public SupplierInvoice Credit(long? id)
-		{
-			return DoAction(id.ToString(), Action.Credit);
-		}
+        {
+            return CreditAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// Approval of payment of the supplier invoice
@@ -92,9 +92,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public SupplierInvoice ApprovalPayment(long? id)
-		{
-			return DoAction(id.ToString(), Action.ApprovalPayment);
-		}
+        {
+            return ApprovalPaymentAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// Approval of bookkeep of the supplier invoice
@@ -102,9 +102,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public SupplierInvoice ApprovalBookkeep(long? id)
-		{
-			return DoAction(id.ToString(), Action.ApprovalBookkeep);
-		}
+        {
+            return ApprovalBookkeepAsync(id).GetResult();
+        }
 
 		public async Task<EntityCollection<SupplierInvoiceSubset>> FindAsync()
 		{
@@ -121,6 +121,31 @@ namespace FortnoxAPILibrary.Connectors
 		public async Task<SupplierInvoice> GetAsync(long? id)
 		{
 			return await BaseGet(id.ToString()).ConfigureAwait(false);
+		}
+
+        public async Task<SupplierInvoice> BookkeepAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.Bookkeep).ConfigureAwait(false);
+        }
+		
+        public async Task<SupplierInvoice> CancelAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.Cancel).ConfigureAwait(false);
+		}
+		
+        public async Task<SupplierInvoice> CreditAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.Credit).ConfigureAwait(false);
+		}
+
+        public async Task<SupplierInvoice> ApprovalPaymentAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.ApprovalPayment).ConfigureAwait(false);
+		}
+
+        public async Task<SupplierInvoice> ApprovalBookkeepAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.ApprovalBookkeep).ConfigureAwait(false);
 		}
 	}
 }

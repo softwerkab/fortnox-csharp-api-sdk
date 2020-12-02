@@ -70,7 +70,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// <param name="id"></param>
 		public void Bookkeep(long? id)
         {
-            DoAction(id.ToString(), Action.Bookkeep);
+            BookkeepAsync(id).GetResult();
         }
 
 		public async Task<EntityCollection<InvoicePaymentSubset>> FindAsync()
@@ -93,5 +93,10 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}
+
+        public async Task BookkeepAsync(long? id)
+        {
+            await DoActionAsync(id.ToString(), Action.Bookkeep).ConfigureAwait(false);
+        }
 	}
 }

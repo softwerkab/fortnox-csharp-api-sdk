@@ -62,9 +62,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public Order CreateInvoice(long? id)
-		{
-			return DoAction(id.ToString(), Action.CreateInvoice);
-		}
+        {
+            return CreateInvoiceAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// Cancels an order
@@ -72,9 +72,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public Order Cancel(long? id)
-		{
-			return DoAction(id.ToString(), Action.Cancel);
-		}
+        {
+            return CancelAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// Sends an e-mail to the customer with an attached PDF document of the invoice. You can use the field EmailInformation to customize the e-mail message on each invoice.
@@ -82,9 +82,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public Order Email(long? id)
-		{
-			return DoAction(id.ToString(), Action.Email);
-		}
+        {
+            return EmailAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// This action returns a PDF document with the current template that is used by the specific document. Note that this action also sets the field Sent as true.
@@ -92,9 +92,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public byte[] Print(long? id)
-		{
-			return DoDownloadAction(id.ToString(), Action.Print);
-		}
+        {
+            return PrintAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// This action is used to set the field Sent as true from an external system without generating a PDF.
@@ -102,9 +102,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public Order ExternalPrint(long? id)
-		{
-			return DoAction(id.ToString(), Action.ExternalPrint);
-		}
+        {
+            return ExternalPrintAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// This action returns a PDF document with the current template that is used by the specific document. Apart from the action print, this action doesn’t set the field Sent as true.
@@ -112,9 +112,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public byte[] Preview(long? id)
-		{
-			return DoDownloadAction(id.ToString(), Action.Preview);
-		}
+        {
+            return PreviewAsync(id).GetResult();
+        }
 
 		public async Task<EntityCollection<OrderSubset>> FindAsync()
 		{
@@ -131,6 +131,36 @@ namespace FortnoxAPILibrary.Connectors
 		public async Task<Order> GetAsync(long? id)
 		{
 			return await BaseGet(id.ToString()).ConfigureAwait(false);
+		}
+
+        public async Task<Order> CreateInvoiceAsync(long? id)
+		{
+			return await DoActionAsync(id.ToString(), Action.CreateInvoice).ConfigureAwait(false);
+		}
+
+		public async Task<Order> CancelAsync(long? id)
+		{
+			return await DoActionAsync(id.ToString(), Action.Cancel).ConfigureAwait(false);
+		}
+
+		public async Task<Order> EmailAsync(long? id)
+		{
+			return await DoActionAsync(id.ToString(), Action.Email).ConfigureAwait(false);
+		}
+
+		public async Task<byte[]> PrintAsync(long? id)
+		{
+			return await DoDownloadActionAsync(id.ToString(), Action.Print).ConfigureAwait(false);
+		}
+
+		public async Task<Order> ExternalPrintAsync(long? id)
+		{
+			return await DoActionAsync(id.ToString(), Action.ExternalPrint).ConfigureAwait(false);
+		}
+
+		public async Task<byte[]> PreviewAsync(long? id)
+		{
+			return await DoDownloadActionAsync(id.ToString(), Action.Preview).ConfigureAwait(false);
 		}
 	}
 }

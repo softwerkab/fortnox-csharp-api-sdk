@@ -63,7 +63,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Offer CreateOrder(long? id)
 		{
-			return DoAction(id.ToString(), Action.CreateOrder);
+			return CreateOrderAsync(id).GetResult(); ;
 		}
 		
 		/// <summary>
@@ -73,7 +73,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Offer Cancel(long? id)
 		{
-			return DoAction(id.ToString(), Action.Cancel);
+			return CancelAsync(id).GetResult(); ;
 		}
 		
 		/// <summary>
@@ -83,7 +83,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Offer Email(long? id)
 		{
-			return DoAction(id.ToString(), Action.Email);
+			return EmailAsync(id).GetResult(); ;
 		}
 		
 		/// <summary>
@@ -93,7 +93,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public byte[] Print(long? id)
 		{
-			return DoDownloadAction(id.ToString(), Action.Print);
+			return PrintAsync(id).GetResult(); ;
 		}
 		
 		/// <summary>
@@ -103,7 +103,7 @@ namespace FortnoxAPILibrary.Connectors
 		/// </summary>
 		public Offer ExternalPrint(long? id)
 		{
-			return DoAction(id.ToString(), Action.ExternalPrint);
+			return ExternalPrintAsync(id).GetResult(); ;
 		}
 		
 		/// <summary>
@@ -112,9 +112,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public byte[] Preview(long? id)
-		{
-			return DoDownloadAction(id.ToString(), Action.Preview);
-		}
+        {
+            return PreviewAsync(id).GetResult();
+        }
 
 		public async Task<EntityCollection<OfferSubset>> FindAsync()
 		{
@@ -132,5 +132,35 @@ namespace FortnoxAPILibrary.Connectors
 		{
 			return await BaseGet(id.ToString()).ConfigureAwait(false);
 		}
+
+        public async Task<Offer> CreateOrderAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.CreateOrder).ConfigureAwait(false);
+		}
+
+        public async Task<Offer> CancelAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.Cancel).ConfigureAwait(false);
+		}
+
+        public async Task<Offer> EmailAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.Email).ConfigureAwait(false);
+		}
+
+        public async Task<byte[]> PrintAsync(long? id)
+        {
+            return await DoDownloadActionAsync(id.ToString(), Action.Print).ConfigureAwait(false);
+		}
+
+        public async Task<Offer> ExternalPrintAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.ExternalPrint).ConfigureAwait(false);
+		}
+
+        public async Task<byte[]> PreviewAsync(long? id)
+        {
+            return await DoDownloadActionAsync(id.ToString(), Action.Preview).ConfigureAwait(false);
+        }
 	}
 }

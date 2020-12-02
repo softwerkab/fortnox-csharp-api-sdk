@@ -62,9 +62,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public Contract Finish(long? id)
-		{
-			return DoAction(id.ToString(), Action.Finish);
-		}
+        {
+            return FinishAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// Create invoice from contract
@@ -72,9 +72,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public Contract CreateInvoice(long? id)
-		{
-			return DoAction(id.ToString(), Action.CreateInvoice);
-		}
+        {
+            return CreateInvoiceAsync(id).GetResult();
+        }
 		
 		/// <summary>
 		/// Increases the invoice count without creating an invoice
@@ -82,9 +82,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// <returns></returns>
 		/// </summary>
 		public Contract IncreaseInvoiceCount(long? id)
-		{
-			return DoAction(id.ToString(), Action.IncreaseInvoiceCount);
-		}
+        {
+            return IncreaseInvoiceCountAsync(id).GetResult();
+        }
 
 		public async Task<EntityCollection<ContractSubset>> FindAsync()
 		{
@@ -101,6 +101,21 @@ namespace FortnoxAPILibrary.Connectors
 		public async Task<Contract> GetAsync(long? id)
 		{
 			return await BaseGet(id.ToString()).ConfigureAwait(false);
+		}
+		
+        public async Task<Contract> FinishAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.Finish).ConfigureAwait(false);
+        }
+
+        public async Task<Contract> CreateInvoiceAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.CreateInvoice).ConfigureAwait(false);
+		}
+
+        public async Task<Contract> IncreaseInvoiceCountAsync(long? id)
+        {
+            return await DoActionAsync(id.ToString(), Action.IncreaseInvoiceCount).ConfigureAwait(false);
 		}
 	}
 }
