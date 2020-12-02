@@ -7,7 +7,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace FortnoxAPILibrary.Serialization
 {
-    internal class JsonEntitySerializer
+    internal class JsonEntitySerializer : ISerializer
     {
         private readonly JsonSerializerSettings settings;
 

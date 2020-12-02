@@ -4,7 +4,7 @@ using FortnoxAPILibrary.Serialization;
 
 namespace FortnoxAPILibrary
 {
-    public class AdaptableSerializer
+    public class AdaptableSerializer : ISerializer
     {
         private readonly JsonEntitySerializer serializer;
 
