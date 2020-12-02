@@ -13,6 +13,7 @@ namespace FortnoxAPILibrary.Entities
         public string Url { get; private set; }
 
         ///<summary> Id of the asset </summary>
+        [ReadOnly]
         [JsonProperty]
         public string Id { get; set; }
 

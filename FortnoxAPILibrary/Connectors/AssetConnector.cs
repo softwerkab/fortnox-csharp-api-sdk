@@ -2,6 +2,7 @@ using System.Text.RegularExpressions;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
+using FortnoxAPILibrary.Serialization;
 
 // ReSharper disable UnusedMember.Global
 
@@ -10,13 +11,13 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class AssetConnector : SearchableEntityConnector<Asset, AssetSubset, AssetSearch>, IAssetConnector
 	{
-
-
-		/// <remarks/>
+        /// <remarks/>
 		public AssetConnector()
 		{
 			Resource = "assets";
-		}
+            Serializer = new AssetSerializer();
+        }
+
 		/// <summary>
 		/// Find a asset based on id
 		/// </summary>
@@ -75,34 +76,35 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task<Asset> CreateAsync(Asset asset)
         {
-            Serializer.FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
-
-            var result = await BaseCreate(asset).ConfigureAwait(false);
-
-            Serializer.FixResponseContent = null;
-            return result;
+            return await BaseCreate(asset).ConfigureAwait(false);
         }
 		public async Task<Asset> UpdateAsync(Asset asset)
         {
-            var id = asset.Id;
-            asset.Id = null;
-            Serializer.FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
-
-            var result = await BaseUpdate(asset, id).ConfigureAwait(false);
-
-            Serializer.FixResponseContent = null;
-            asset.Id = id;
-            return result;
-		}
+            return await BaseUpdate(asset, asset.Id).ConfigureAwait(false);
+        }
 
 		public async Task<Asset> GetAsync(string id)
 		{
-            Serializer.FixResponseContent = (json) => new Regex("Assets").Replace(json, "Asset", 1);
+            return await BaseGet(id).ConfigureAwait(false);
+        }
+    }
 
-            var result = await BaseGet(id).ConfigureAwait(false);
+    public class AssetSerializer : ISerializer
+    {
+		private readonly ISerializer serializer = new JsonEntitySerializer();
 
-            Serializer.FixResponseContent = null;
-            return result;
+        public string Serialize<T>(T entity)
+        {
+            return serializer.Serialize(entity);
+        }
+
+        public T Deserialize<T>(string content)
+        {
+			//in case of single single entity response, fix json root from "Assets" to "Asset"
+            content = new Regex("\"Assets\":{").Replace(content, "\"Asset\":{", 1);
+
+			return serializer.Deserialize<T>(content);
+
         }
     }
 }

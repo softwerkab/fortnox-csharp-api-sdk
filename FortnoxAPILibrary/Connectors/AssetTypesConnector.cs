@@ -3,6 +3,7 @@ using FortnoxAPILibrary.Entities;
 using Newtonsoft.Json.Linq;
 
 using System.Threading.Tasks;
+using FortnoxAPILibrary.Serialization;
 
 // ReSharper disable UnusedMember.Global
 
@@ -11,12 +12,11 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public class AssetTypesConnector : SearchableEntityConnector<AssetType, AssetTypesSubset, AssetTypesSearch>, IAssetTypesConnector
 	{
-
-
-		/// <remarks/>
+        /// <remarks/>
 		public AssetTypesConnector()
 		{
 			Resource = "assets/types";
+            Serializer = new AssetTypeSerializer();
 		}
 		/// <summary>
 		/// Find a assetType based on id
@@ -68,21 +68,7 @@ namespace FortnoxAPILibrary.Connectors
 
         public async Task<EntityCollection<AssetTypesSubset>> FindAsync()
         {
-            Serializer.FixResponseContent = (json) =>
-            {
-                var structure = JObject.Parse(json);
-
-                structure["MetaInformation"] = structure["Types"][0]["MetaInformation"]; //copy meta-info node to root
-                structure["Types"][0].Remove(); //remove the array element with meta-info node
-
-				var fixedJson = structure.ToString();
-                return fixedJson;
-            };
-
-            var result = await BaseFind().ConfigureAwait(false);
-
-            Serializer.FixResponseContent = null;
-			return result;
+            return await BaseFind().ConfigureAwait(false);
         }
 		public async Task DeleteAsync(long? id)
 		{
@@ -90,30 +76,42 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task<AssetType> CreateAsync(AssetType assetType)
 		{
-            Serializer.FixResponseContent = (json) => new Regex("Type").Replace(json, "AssetType", 1);
-
-            var result = await BaseCreate(assetType).ConfigureAwait(false);
-
-            Serializer.FixResponseContent = null;
-            return result;
-		}
+            return await BaseCreate(assetType).ConfigureAwait(false);
+        }
 		public async Task<AssetType> UpdateAsync(AssetType assetTypes)
-		{
-            Serializer.FixResponseContent = (json) => new Regex("Type").Replace(json, "AssetType", 1);
-
-			var result = await BaseUpdate(assetTypes, assetTypes.Id.ToString()).ConfigureAwait(false);
-
-            Serializer.FixResponseContent = null;
-            return result;
-		}
+        {
+            return await BaseUpdate(assetTypes, assetTypes.Id.ToString()).ConfigureAwait(false);
+        }
 		public async Task<AssetType> GetAsync(long? id)
 		{
-            Serializer.FixResponseContent = (json) => new Regex("Type").Replace(json, "AssetType", 1);
+            return await BaseGet(id.ToString()).ConfigureAwait(false);
+        }
+    }
 
-			var result = await BaseGet(id.ToString()).ConfigureAwait(false);
+    public class AssetTypeSerializer : ISerializer
+    {
+        private readonly ISerializer serializer = new JsonEntitySerializer();
 
-            Serializer.FixResponseContent = null;
-            return result;
-		}
+        public string Serialize<T>(T entity)
+        {
+            return serializer.Serialize(entity);
+        }
+
+        public T Deserialize<T>(string content)
+        {
+            //in case of single entity response, fix json root from "Type" to "AssetType"
+            content = new Regex("\"Type\":{").Replace(content, "\"AssetType\":{", 1);
+
+            //in case of entity list response, change "Types" to "AssetTypes" and move meta information out of list
+            var structure = JObject.Parse(content);
+            if (structure["Types"] != null)
+            {
+                structure["MetaInformation"] = structure["Types"][0]["MetaInformation"]; //copy meta-info node to root
+                structure["Types"][0].Remove(); //remove the array element with meta-info node
+                content = structure.ToString();
+            }
+            
+            return serializer.Deserialize<T>(content);
+        }
     }
 }

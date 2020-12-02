@@ -4,20 +4,21 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using FortnoxAPILibrary.Requests;
+using FortnoxAPILibrary.Serialization;
 
 namespace FortnoxAPILibrary
 {
     public class BaseConnector : BaseClient
     {
-        protected ErrorHandler ErrorHandler { get; set; }
-        protected AdaptableSerializer Serializer { get; set; }
+        protected ErrorHandler ErrorHandler { get; set;  }
+        protected ISerializer Serializer { get; set; }
 
         protected string Resource { get; set; }
         
         public BaseConnector()
         {
-            Serializer = new AdaptableSerializer();
-            ErrorHandler = new ErrorHandler();
+            Serializer = new JsonEntitySerializer();
+            ErrorHandler = new ErrorHandler(Serializer);
         }
         
         protected async Task<byte[]> SendAsync(FortnoxRequest fortnoxRequest)

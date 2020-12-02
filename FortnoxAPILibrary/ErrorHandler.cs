@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Exceptions;
+using FortnoxAPILibrary.Serialization;
 
 namespace FortnoxAPILibrary
 {
@@ -10,11 +11,11 @@ namespace FortnoxAPILibrary
     {
         private const string NoReponseMessage = @"No response from server. Check inner exception for details.";
 
-        protected AdaptableSerializer Serializer { get; set; }
+        protected ISerializer Serializer { get; }
 
-        public ErrorHandler()
+        public ErrorHandler(ISerializer serializer)
         {
-            Serializer = new AdaptableSerializer();
+            Serializer = serializer;
         }
 
         public void HandleErrorResponse(HttpWebResponse response)
