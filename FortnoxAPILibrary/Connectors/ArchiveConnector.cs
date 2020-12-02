@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
+using FortnoxAPILibrary.Requests;
 
 // ReSharper disable UnusedMember.Global
 
@@ -221,20 +223,25 @@ namespace FortnoxAPILibrary.Connectors
 
         private async Task<ArchiveFile> BaseUpload(string name, byte[] data, Dictionary<string, string> parameters, params string[] indices)
         {
-            RequestInfo = new RequestInfo()
+            var request = new FileUploadRequest()
             {
                 Parameters = parameters ?? new Dictionary<string, string>(),
                 BaseUrl = BaseUrl,
                 Resource = Resource,
-                Indices = indices
+                Indices = indices,
+                FileData = data,
+                FileName = name
             };
 
-            return await UploadFile<ArchiveFile>(data, name).ConfigureAwait(false);
+            var responseData = await SendAsync(request).ConfigureAwait(false);
+            var responseJson = Encoding.UTF8.GetString(responseData);
+
+            return Serializer.Deserialize<EntityWrapper<ArchiveFile>>(responseJson).Entity;
         }
 
         private async Task<byte[]> BaseDownload(Dictionary<string, string> parameters, params string[] indices)
         {
-            RequestInfo = new RequestInfo()
+            var request = new FileDownloadRequest()
             {
                 Parameters = parameters ?? new Dictionary<string, string>(),
                 BaseUrl = BaseUrl,
@@ -242,7 +249,7 @@ namespace FortnoxAPILibrary.Connectors
                 Indices = indices
             };
 
-            return await DownloadFile().ConfigureAwait(false);
+            return await SendAsync(request).ConfigureAwait(false);
         }
 
         private static bool IsArchiveId(string str)

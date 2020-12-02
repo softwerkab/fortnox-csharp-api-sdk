@@ -5,6 +5,7 @@ using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
 using System.Net.Http;
+using FortnoxAPILibrary.Requests;
 
 // ReSharper disable UnusedMember.Global
 
@@ -61,41 +62,40 @@ namespace FortnoxAPILibrary.Connectors
 		}
 		public async Task<InvoiceFileConnection> CreateAsync(InvoiceFileConnection invoiceFileConnection)
         {
-            RequestInfo = new RequestInfo()
+            var request = new EntityRequest<List<InvoiceFileConnection>>()
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
                 Indices = Array.Empty<string>(),
                 Method = HttpMethod.Post,
+                Entity = new List<InvoiceFileConnection>() { invoiceFileConnection }
             };
 
-            var entity = new List<InvoiceFileConnection>() { invoiceFileConnection };
-            var result = await DoEntityRequest(entity).ConfigureAwait(false);
+            var result = await SendAsync(request).ConfigureAwait(false);
             return result?.FirstOrDefault();
         }
 
         public async Task<InvoiceFileConnection> UpdateAsync(InvoiceFileConnection invoiceFileConnection)
         {
-            RequestInfo = new RequestInfo()
+            var request = new EntityRequest<InvoiceFileConnection>()
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
                 Indices = new[] {invoiceFileConnection.Id},
                 Method = HttpMethod.Put,
+                Entity = new InvoiceFileConnection()
+                {
+                    IncludeOnSend = invoiceFileConnection.IncludeOnSend
+                }
             };
 
-            var limitedEntity = new InvoiceFileConnection()
-            {
-                IncludeOnSend = invoiceFileConnection.IncludeOnSend
-            };
-
-            var result = await DoEntityRequest(limitedEntity).ConfigureAwait(false);
+            var result = await SendAsync(request).ConfigureAwait(false);
             return result;
         }
 
         public async Task<List<InvoiceFileConnection>> GetConnectionsAsync(long? entityId, EntityType? entityType)
         {
-            RequestInfo = new RequestInfo()
+            var request = new EntityRequest<List<InvoiceFileConnection>>()
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
@@ -107,7 +107,7 @@ namespace FortnoxAPILibrary.Connectors
                 Method = HttpMethod.Get,
             };
 
-            var result = await DoEntityRequest<List<InvoiceFileConnection>>().ConfigureAwait(false);
+            var result = await SendAsync(request).ConfigureAwait(false);
             return result;
         }
     }

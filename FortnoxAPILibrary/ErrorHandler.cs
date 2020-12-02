@@ -51,14 +51,14 @@ namespace FortnoxAPILibrary
             throw exception;
         }
 
-        public void HandleNoResponse(WebException we)
+        public void HandleNoResponse(WebException ex)
         {
-            throw new NoResponseException(NoReponseMessage, we);
+            throw new NoResponseException(NoReponseMessage, ex);
         }
 
-        public void HandleNoResponse(HttpRequestException we)
+        public void HandleNoResponse(HttpRequestException ex)
         {
-            throw new NoResponseException(NoReponseMessage, we);
+            throw new NoResponseException(NoReponseMessage, ex);
         }
 
         private ErrorInformation ParseError(string errorJson)

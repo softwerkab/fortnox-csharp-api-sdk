@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using FortnoxAPILibrary.Requests;
 
 namespace FortnoxAPILibrary.Connectors
 {
@@ -17,14 +18,14 @@ namespace FortnoxAPILibrary.Connectors
 
         public async Task<byte[]> GetAsync(SIEType type)
         {
-            RequestInfo = new RequestInfo()
+            var request = new FileDownloadRequest()
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
                 Indices = new[] { type.GetStringValue() }
             };
 
-            return await DownloadFile().ConfigureAwait(false);
+            return await SendAsync(request).ConfigureAwait(false);
         }
     }
 }

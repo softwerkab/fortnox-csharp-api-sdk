@@ -4,6 +4,7 @@ using System.Net.Http;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
+using FortnoxAPILibrary.Requests;
 
 // ReSharper disable UnusedMember.Global
 
@@ -62,17 +63,17 @@ namespace FortnoxAPILibrary.Connectors
             //This method is inconsistent with others, as it should be part of a new connector with single Get similar to CompanySettingsConnector
             //It returns a single entity, containing both trusted and refused email senders.
            
-            RequestInfo = new RequestInfo()
+            var request = new EntityRequest<EntityWrapper<EmailSenders>>()
             {
                 BaseUrl = BaseUrl,
                 Resource = "emailsenders",
                 Indices = Array.Empty<string>(),
                 Parameters = new Dictionary<string, string>(),
-                Method = HttpMethod.Get,
+                Method = HttpMethod.Get
             };
             ParametersInjection = null;
 
-            var result = await DoEntityRequest<EntityWrapper<EmailSenders>>().ConfigureAwait(false);
+            var result = await SendAsync(request).ConfigureAwait(false);
             return result?.Entity;
         }
     }

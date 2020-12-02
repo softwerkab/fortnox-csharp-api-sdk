@@ -1,7 +1,10 @@
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Entities.Special;
+using FortnoxAPILibrary.Requests;
 
 // ReSharper disable UnusedMember.Global
 
@@ -31,42 +34,25 @@ namespace FortnoxAPILibrary.Connectors
 
         public async Task<string> GetAccessTokenAsync(string authorizationCode, string clientSecret)
         {
-            if (string.IsNullOrEmpty(authorizationCode))
-                return null;
-            if (string.IsNullOrEmpty(clientSecret))
-                return null;
-
-            try
+            var fortnoxRequest = new FortnoxRequest()
             {
-                var wr = SetupRequest(BaseUrl+"/"+Resource, authorizationCode, clientSecret);
-                using var response = await HttpClient.SendAsync(wr).ConfigureAwait(false);
-
-                if (!response.IsSuccessStatusCode)
+                Method = HttpMethod.Get,
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Headers = new Dictionary<string, string>()
                 {
-                    ErrorHandler.HandleErrorResponse(response);
-                    return null;
+                    { "Authorization-Code", authorizationCode },
+                    { "Client-Secret", clientSecret },
+                    { "Accept", "application/json" }
                 }
+            };
 
-                var json = response.Content.ReadAsStringAsync().GetResult();
-                var result = Serializer.Deserialize<EntityWrapper<AuthorizationData>>(json);
+            var responseData = await SendAsync(fortnoxRequest).ConfigureAwait(false);
+            var responseJson = Encoding.UTF8.GetString(responseData);
+            var result = Serializer.Deserialize<EntityWrapper<AuthorizationData>>(responseJson);
 
-                var accessToken = result?.Entity.AccessToken;
-                return accessToken;
-            }
-            catch (HttpRequestException we)
-            {
-                ErrorHandler.HandleNoResponse(we);
-                return null;
-            }
-        }
-
-        private HttpRequestMessage SetupRequest(string requestUriString, string authorizationCode, string clientSecret)
-        {
-            var wr = new HttpRequestMessage(HttpMethod.Get,  requestUriString);
-            wr.Headers.Add("Authorization-Code", authorizationCode);
-            wr.Headers.Add("Client-Secret", clientSecret);
-            wr.Headers.Add("Accept", "application/json");
-            return wr;
+            var accessToken = result?.Entity.AccessToken;
+            return accessToken;
         }
     }
 }

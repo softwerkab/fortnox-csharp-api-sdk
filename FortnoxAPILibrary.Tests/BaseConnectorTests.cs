@@ -18,7 +18,7 @@ namespace FortnoxAPILibrary.Tests
             ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void Test_Find_ParamsAdded()
         {
             var connector = new CustomerConnector
@@ -99,7 +99,7 @@ namespace FortnoxAPILibrary.Tests
             Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("limit="));
             Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("offset="));
             Assert.IsFalse(connector.RequestInfo.AbsoluteUrl.Contains("page="));
-        }
+        }*/
 
         /*[TestMethod]
         public void Test_ReadOnlyProperty_NotSerialized()

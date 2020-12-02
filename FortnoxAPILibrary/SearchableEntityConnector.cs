@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using FortnoxAPILibrary.Entities;
+using FortnoxAPILibrary.Requests;
 
 namespace FortnoxAPILibrary
 {
@@ -51,7 +52,7 @@ namespace FortnoxAPILibrary
 
         private async Task<EntityCollection<TEntitySubset>> GetSinglePage(BaseSearch searchSettings, string[] indices)
         {
-            RequestInfo = new RequestInfo()
+            var request = new EntityRequest<EntityCollection<TEntitySubset>>()
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
@@ -62,7 +63,7 @@ namespace FortnoxAPILibrary
             };
             ParametersInjection = null;
 
-            var result = await DoEntityRequest<EntityCollection<TEntitySubset>>().ConfigureAwait(false);
+            var result = await SendAsync(request).ConfigureAwait(false);
             return result;
         }
     }

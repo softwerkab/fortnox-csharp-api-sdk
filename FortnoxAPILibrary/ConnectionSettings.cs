@@ -15,7 +15,7 @@
         /// <summary>
         /// API Server URL
         /// </summary>
-        public static string FortnoxAPIServer { get; set; } = "https://api.fortnox.se/3";
+        public static string FortnoxAPIServer { get; set; } = "https://api.fortnox.se/3"; //TODO: remove /3
 
         /// <summary>
         /// Timeout for getting response. Default value is 30 seconds
