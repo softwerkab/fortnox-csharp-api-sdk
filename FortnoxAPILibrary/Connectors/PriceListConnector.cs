@@ -50,14 +50,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of priceLists
 		/// </summary>
 		/// <returns>A list of priceLists</returns>
-		public EntityCollection<PriceList> Find()
+		public EntityCollection<PriceList> Find(PriceListSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<PriceList>> FindAsync()
+		public async Task<EntityCollection<PriceList>> FindAsync(PriceListSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task<PriceList> CreateAsync(PriceList priceList)
 		{

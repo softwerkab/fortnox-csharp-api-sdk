@@ -50,14 +50,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of employees
 		/// </summary>
 		/// <returns>A list of employees</returns>
-		public EntityCollection<EmployeeSubset> Find()
+		public EntityCollection<EmployeeSubset> Find(EmployeeSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<EmployeeSubset>> FindAsync()
+		public async Task<EntityCollection<EmployeeSubset>> FindAsync(EmployeeSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task<Employee> CreateAsync(Employee employee)
 		{

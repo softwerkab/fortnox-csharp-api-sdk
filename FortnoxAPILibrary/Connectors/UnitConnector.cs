@@ -59,14 +59,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of units
 		/// </summary>
 		/// <returns>A list of units</returns>
-		public EntityCollection<Unit> Find()
+		public EntityCollection<Unit> Find(UnitSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<Unit>> FindAsync()
+		public async Task<EntityCollection<Unit>> FindAsync(UnitSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{

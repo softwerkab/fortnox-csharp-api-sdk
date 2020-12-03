@@ -7,19 +7,18 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IWayOfDeliveryConnector : IEntityConnector
 	{
-		WayOfDeliverySearch Search { get; set; }
 
 
 		WayOfDelivery Update(WayOfDelivery wayOfDelivery);
 		WayOfDelivery Create(WayOfDelivery wayOfDelivery);
 		WayOfDelivery Get(string id);
 		void Delete(string id);
-		EntityCollection<WayOfDelivery> Find();
+		EntityCollection<WayOfDelivery> Find(WayOfDeliverySearch searchSettings);
 
 		Task<WayOfDelivery> UpdateAsync(WayOfDelivery wayOfDelivery);
 		Task<WayOfDelivery> CreateAsync(WayOfDelivery wayOfDelivery);
 		Task<WayOfDelivery> GetAsync(string id);
 		Task DeleteAsync(string id);
-		Task<EntityCollection<WayOfDelivery>> FindAsync();
+		Task<EntityCollection<WayOfDelivery>> FindAsync(WayOfDeliverySearch searchSettings);
 	}
 }

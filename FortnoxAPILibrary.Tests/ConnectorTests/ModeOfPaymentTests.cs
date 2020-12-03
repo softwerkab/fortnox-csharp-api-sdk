@@ -85,7 +85,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             IModeOfPaymentConnector connector = new ModeOfPaymentConnector();
 
-            var existingCount = connector.Find().Entities.Count;
+            var existingCount = connector.Find(null).Entities.Count;
             var testKeyMark = TestUtils.RandomString();
 
             var createdEntries = new List<ModeOfPayment>();
@@ -97,15 +97,16 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             //Filter not supported
-            var fullCollection = connector.Find();
+            var fullCollection = connector.Find(null);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);
             Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == testKeyMark));
 
             //Apply Limit
-            connector.Search.Limit = 2;
-            var limitedCollection = connector.Find();
+            var searchSettings = new ModeOfPaymentSearch();
+            searchSettings.Limit = 2;
+            var limitedCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(existingCount + 5, limitedCollection.TotalResources);

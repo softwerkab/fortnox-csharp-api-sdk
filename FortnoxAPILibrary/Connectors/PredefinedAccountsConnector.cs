@@ -41,14 +41,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of predefinedAccounts
 		/// </summary>
 		/// <returns>A list of predefinedAccounts</returns>
-		public EntityCollection<PredefinedAccount> Find()
+		public EntityCollection<PredefinedAccount> Find(PredefinedAccountsSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<PredefinedAccount>> FindAsync()
+		public async Task<EntityCollection<PredefinedAccount>> FindAsync(PredefinedAccountsSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task<PredefinedAccount> UpdateAsync(PredefinedAccount predefinedAccount)
 		{

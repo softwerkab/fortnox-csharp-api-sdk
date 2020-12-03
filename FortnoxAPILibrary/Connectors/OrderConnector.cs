@@ -51,9 +51,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of orders
 		/// </summary>
 		/// <returns>A list of orders</returns>
-		public EntityCollection<OrderSubset> Find()
+		public EntityCollection<OrderSubset> Find(OrderSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 		
 		/// <summary>
@@ -116,9 +116,9 @@ namespace FortnoxAPILibrary.Connectors
             return PreviewAsync(id).GetResult();
         }
 
-		public async Task<EntityCollection<OrderSubset>> FindAsync()
+		public async Task<EntityCollection<OrderSubset>> FindAsync(OrderSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task<Order> CreateAsync(Order order)
 		{

@@ -8,7 +8,6 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IScheduleTimesConnector : IEntityConnector
 	{
-		ScheduleTimesSearch Search { get; set; }
 
 
 		ScheduleTimes Update(ScheduleTimes scheduleTimes);

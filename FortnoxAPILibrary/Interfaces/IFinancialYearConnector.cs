@@ -7,14 +7,13 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IFinancialYearConnector : IEntityConnector
 	{
-		FinancialYearSearch Search { get; set; }
 
         FinancialYear Create(FinancialYear financialYear);
 		FinancialYear Get(long? id);
-        EntityCollection<FinancialYearSubset> Find();
+        EntityCollection<FinancialYearSubset> Find(FinancialYearSearch searchSettings);
 
         Task<FinancialYear> CreateAsync(FinancialYear financialYear);
 		Task<FinancialYear> GetAsync(long? id);
-        Task<EntityCollection<FinancialYearSubset>> FindAsync();
+        Task<EntityCollection<FinancialYearSubset>> FindAsync(FinancialYearSearch searchSettings);
 	}
 }

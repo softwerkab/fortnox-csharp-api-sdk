@@ -58,14 +58,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of articles
 		/// </summary>
 		/// <returns>A list of articles</returns>
-		public EntityCollection<ArticleSubset> Find()
+		public EntityCollection<ArticleSubset> Find(ArticleSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<ArticleSubset>> FindAsync()
+		public async Task<EntityCollection<ArticleSubset>> FindAsync(ArticleSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{

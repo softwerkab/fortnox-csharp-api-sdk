@@ -7,19 +7,18 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface ICostCenterConnector : IEntityConnector
 	{
-		CostCenterSearch Search { get; set; }
 
 
 		CostCenter Update(CostCenter costCenter);
 		CostCenter Create(CostCenter costCenter);
 		CostCenter Get(string id);
 		void Delete(string id);
-		EntityCollection<CostCenter> Find();
+		EntityCollection<CostCenter> Find(CostCenterSearch searchSettings);
 
 		Task<CostCenter> UpdateAsync(CostCenter costCenter);
 		Task<CostCenter> CreateAsync(CostCenter costCenter);
 		Task<CostCenter> GetAsync(string id);
 		Task DeleteAsync(string id);
-		Task<EntityCollection<CostCenter>> FindAsync();
+		Task<EntityCollection<CostCenter>> FindAsync(CostCenterSearch searchSettings);
 	}
 }

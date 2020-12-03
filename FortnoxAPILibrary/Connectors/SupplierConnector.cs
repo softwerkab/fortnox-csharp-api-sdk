@@ -59,14 +59,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of suppliers
 		/// </summary>
 		/// <returns>A list of suppliers</returns>
-		public EntityCollection<SupplierSubset> Find()
+		public EntityCollection<SupplierSubset> Find(SupplierSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<SupplierSubset>> FindAsync()
+		public async Task<EntityCollection<SupplierSubset>> FindAsync(SupplierSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{

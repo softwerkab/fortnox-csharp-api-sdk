@@ -59,14 +59,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of costCenters
 		/// </summary>
 		/// <returns>A list of costCenters</returns>
-		public EntityCollection<CostCenter> Find()
+		public EntityCollection<CostCenter> Find(CostCenterSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<CostCenter>> FindAsync()
+		public async Task<EntityCollection<CostCenter>> FindAsync(CostCenterSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{

@@ -72,7 +72,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         {
             ILabelConnector connector = new LabelConnector();
 
-            var existingCount = connector.Find().Entities.Count;
+            var existingCount = connector.Find(null).Entities.Count;
 
             var createdEntries = new List<Label>();
             //Add entries
@@ -83,7 +83,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             //Filter not supported
-            var fullCollection = connector.Find();
+            var fullCollection = connector.Find(null);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);

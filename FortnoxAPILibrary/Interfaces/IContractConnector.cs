@@ -7,12 +7,11 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IContractConnector : IEntityConnector
 	{
-		ContractSearch Search { get; set; }
 
 		Contract Update(Contract contract);
 		Contract Create(Contract contract);
 		Contract Get(long? id);
-        EntityCollection<ContractSubset> Find();
+        EntityCollection<ContractSubset> Find(ContractSearch searchSettings);
 		Contract Finish(long? id);
 		Contract CreateInvoice(long? id);
 		Contract IncreaseInvoiceCount(long? id);
@@ -20,7 +19,7 @@ namespace FortnoxAPILibrary.Connectors
 		Task<Contract> UpdateAsync(Contract contract);
 		Task<Contract> CreateAsync(Contract contract);
 		Task<Contract> GetAsync(long? id);
-        Task<EntityCollection<ContractSubset>> FindAsync();
+        Task<EntityCollection<ContractSubset>> FindAsync(ContractSearch searchSettings);
         Task<Contract> FinishAsync(long? id);
         Task<Contract> CreateInvoiceAsync(long? id);
         Task<Contract> IncreaseInvoiceCountAsync(long? id);

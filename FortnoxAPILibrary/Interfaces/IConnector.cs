@@ -22,6 +22,5 @@ namespace FortnoxAPILibrary.Connectors
 
     public interface ISearchableEntityConnector<TSearchSettings> : IEntityConnector where TSearchSettings : BaseSearch
     {
-        TSearchSettings Search { get; set; }
     }
 }

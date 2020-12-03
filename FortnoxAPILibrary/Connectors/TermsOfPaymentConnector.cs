@@ -59,14 +59,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of termsOfPayments
 		/// </summary>
 		/// <returns>A list of termsOfPayments</returns>
-		public EntityCollection<TermsOfPayment> Find()
+		public EntityCollection<TermsOfPayment> Find(TermsOfPaymentSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<TermsOfPayment>> FindAsync()
+		public async Task<EntityCollection<TermsOfPayment>> FindAsync(TermsOfPaymentSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{

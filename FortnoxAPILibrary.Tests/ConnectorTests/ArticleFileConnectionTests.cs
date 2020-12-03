@@ -100,8 +100,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 MyAssert.HasNoError(connector);
             }
 
-            connector.Search.ArticleNumber = tmpArticle.ArticleNumber;
-            var connections = connector.Find();
+            var searchSettings = new ArticleFileConnectionSearch();
+            searchSettings.ArticleNumber = tmpArticle.ArticleNumber;
+            var connections = connector.Find(searchSettings);
             Assert.AreEqual(5, connections.Entities.Count);
 
             foreach (var entity in connections.Entities)

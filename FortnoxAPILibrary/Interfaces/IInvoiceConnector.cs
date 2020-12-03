@@ -7,12 +7,11 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IInvoiceConnector : IEntityConnector
 	{
-		InvoiceSearch Search { get; set; }
 
 		Invoice Update(Invoice invoice);
 		Invoice Create(Invoice invoice);
 		Invoice Get(long? id);
-        EntityCollection<InvoiceSubset> Find();
+        EntityCollection<InvoiceSubset> Find(InvoiceSearch searchSettings);
 		Invoice Bookkeep(long? id);
 		Invoice Cancel(long? id);
 		Invoice CreditInvoice(long? id);
@@ -26,7 +25,7 @@ namespace FortnoxAPILibrary.Connectors
 		Task<Invoice> UpdateAsync(Invoice invoice);
 		Task<Invoice> CreateAsync(Invoice invoice);
 		Task<Invoice> GetAsync(long? id);
-        Task<EntityCollection<InvoiceSubset>> FindAsync();
+        Task<EntityCollection<InvoiceSubset>> FindAsync(InvoiceSearch searchSettings);
 
         Task<Invoice> BookkeepAsync(long? id);
         Task<Invoice> CancelAsync(long? id);

@@ -59,14 +59,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of wayOfDeliverys
 		/// </summary>
 		/// <returns>A list of wayOfDeliverys</returns>
-		public EntityCollection<WayOfDelivery> Find()
+		public EntityCollection<WayOfDelivery> Find(WayOfDeliverySearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<WayOfDelivery>> FindAsync()
+		public async Task<EntityCollection<WayOfDelivery>> FindAsync(WayOfDeliverySearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{

@@ -120,8 +120,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 MyAssert.HasNoError(connector);
             }
 
-            connector.Search.CustomerNumber = tmpCustomer.CustomerNumber;
-            var contracts = connector.Find();
+            var searchSettings = new ContractSearch();
+            searchSettings.CustomerNumber = tmpCustomer.CustomerNumber;
+            var contracts = connector.Find(searchSettings);
             Assert.AreEqual(5, contracts.Entities.Count);
             Assert.AreEqual("INACTIVE", contracts.Entities.First().Status);
         }

@@ -66,19 +66,19 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of prices
 		/// </summary>
 		/// <returns>A list of prices</returns>
-		public EntityCollection<PriceSubset> Find(string priceListId, string articleId = null)
+		public EntityCollection<PriceSubset> Find(string priceListId, string articleId, PriceSearch searchSettings)
 		{
-			return FindAsync(priceListId, articleId).GetResult();
+			return FindAsync(priceListId, articleId, searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<PriceSubset>> FindAsync(string priceListId, string articleId = null)
+		public async Task<EntityCollection<PriceSubset>> FindAsync(string priceListId, string articleId, PriceSearch searchSettings)
 		{
             var request = new SearchRequest<PriceSubset>()
             {
                 BaseUrl = BaseUrl,
                 Resource = $"{Resource}/sublist",
                 Indices = new List<string>(){ priceListId, articleId },
-                SearchSettings = Search
+                SearchSettings = searchSettings
             };
 
             return await SendAsync(request).ConfigureAwait(false);

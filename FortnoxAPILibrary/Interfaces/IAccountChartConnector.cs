@@ -7,10 +7,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IAccountChartConnector : IEntityConnector
 	{
-		AccountChartSearch Search { get; set; }
 
-		EntityCollection<AccountChart> Find();
+		EntityCollection<AccountChart> Find(AccountChartSearch searchSettings);
 
-		Task<EntityCollection<AccountChart>> FindAsync();
+		Task<EntityCollection<AccountChart>> FindAsync(AccountChartSearch searchSettings);
 	}
 }

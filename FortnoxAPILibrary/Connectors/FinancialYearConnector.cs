@@ -39,14 +39,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of financialYears
 		/// </summary>
 		/// <returns>A list of financialYears</returns>
-		public EntityCollection<FinancialYearSubset> Find()
+		public EntityCollection<FinancialYearSubset> Find(FinancialYearSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<FinancialYearSubset>> FindAsync()
+		public async Task<EntityCollection<FinancialYearSubset>> FindAsync(FinancialYearSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task<FinancialYear> CreateAsync(FinancialYear financialYear)
 		{

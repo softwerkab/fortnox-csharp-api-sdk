@@ -51,9 +51,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of contracts
 		/// </summary>
 		/// <returns>A list of contracts</returns>
-		public EntityCollection<ContractSubset> Find()
+		public EntityCollection<ContractSubset> Find(ContractSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 		
 		/// <summary>
@@ -86,9 +86,9 @@ namespace FortnoxAPILibrary.Connectors
             return IncreaseInvoiceCountAsync(id).GetResult();
         }
 
-		public async Task<EntityCollection<ContractSubset>> FindAsync()
+		public async Task<EntityCollection<ContractSubset>> FindAsync(ContractSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task<Contract> CreateAsync(Contract contract)
 		{

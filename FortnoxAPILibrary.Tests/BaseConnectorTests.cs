@@ -56,7 +56,7 @@ namespace FortnoxAPILibrary.Tests
         public void Test_Find_ParamsNotAdded()
         {
             var connector = new CustomerConnector();
-            connector.Search.Name = "TestName";
+            searchSettings.Name = "TestName";
 
             connector.Find();
             MyAssert.HasNoError(connector);
@@ -155,11 +155,12 @@ namespace FortnoxAPILibrary.Tests
             const int small = 5;
 
             var connector = new CustomerConnector();
-            connector.Search.Limit = large;
-            connector.Search.SortBy = Sort.By.Customer.CustomerNumber;
-            connector.Search.SortOrder = Sort.Order.Ascending;
+            var searchSettings = new CustomerSearch();
+            searchSettings.Limit = large;
+            searchSettings.SortBy = Sort.By.Customer.CustomerNumber;
+            searchSettings.SortOrder = Sort.Order.Ascending;
 
-            var largeCustomerCollection = connector.Find(); //get up to 'large' number of entities
+            var largeCustomerCollection = connector.Find(searchSettings); //get up to 'large' number of entities
             var totalCustomers = largeCustomerCollection.TotalResources;
 
             var neededPages = GetNeededPages(Math.Min(totalCustomers, large), small);
@@ -167,9 +168,9 @@ namespace FortnoxAPILibrary.Tests
 
             for (int i = 0; i < neededPages; i++)
             {
-                connector.Search.Limit = small;
-                connector.Search.Page = i + 1;
-                var smallCustomerCollection = connector.Find();
+                searchSettings.Limit = small;
+                searchSettings.Page = i + 1;
+                var smallCustomerCollection = connector.Find(searchSettings);
                 mergedCollection.AddRange(smallCustomerCollection.Entities);
             }
 
@@ -183,12 +184,13 @@ namespace FortnoxAPILibrary.Tests
             //To make this test make sense, over 100 customers must exist, ideally over 500
 
             ICustomerConnector connector = new CustomerConnector();
-            var result = connector.Find();
+            var result = connector.Find(null);
             MyAssert.HasNoError(connector);
             Assert.IsTrue(result.TotalPages > 1);
 
-            connector.Search.Limit = APIConstants.Unlimited;
-            var allInOneResult = connector.Find();
+            var searchSettings = new CustomerSearch();
+            searchSettings.Limit = APIConstants.Unlimited;
+            var allInOneResult = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(1, allInOneResult.TotalPages);

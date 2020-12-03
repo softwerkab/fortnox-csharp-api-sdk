@@ -48,14 +48,15 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         {
             IPredefinedAccountsConnector connector = new PredefinedAccountsConnector();
 
-            var fullCollection = connector.Find();
+            var fullCollection = connector.Find(null);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(42, fullCollection.Entities.Count);
             Assert.IsNotNull(fullCollection.Entities.First().Name);
 
-            connector.Search.Limit = 2;
-            var limitedCollection = connector.Find();
+            var searchSettings = new PredefinedAccountsSearch();
+            searchSettings.Limit = 2;
+            var limitedCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(2, limitedCollection.Entities.Count);

@@ -8,18 +8,17 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IAbsenceTransactionConnector : IEntityConnector
 	{
-		AbsenceTransactionSearch Search { get; set; }
 
 		AbsenceTransaction Update(AbsenceTransaction absenceTransaction);
 		AbsenceTransaction Create(AbsenceTransaction absenceTransaction);
 		AbsenceTransaction Get(string employeeId, DateTime? date, AbsenceCauseCode? code);
 		void Delete(string employeeId, DateTime? date, AbsenceCauseCode? code);
-		EntityCollection<AbsenceTransaction> Find();
+		EntityCollection<AbsenceTransaction> Find(AbsenceTransactionSearch searchSettings);
 
 		Task<AbsenceTransaction> UpdateAsync(AbsenceTransaction absenceTransaction);
 		Task<AbsenceTransaction> CreateAsync(AbsenceTransaction absenceTransaction);
 		Task<AbsenceTransaction> GetAsync(string employeeId, DateTime? date, AbsenceCauseCode? code);
 		Task DeleteAsync(string employeeId, DateTime? date, AbsenceCauseCode? code);
-		Task<EntityCollection<AbsenceTransaction>> FindAsync();
+		Task<EntityCollection<AbsenceTransaction>> FindAsync(AbsenceTransactionSearch searchSettings);
 	}
 }

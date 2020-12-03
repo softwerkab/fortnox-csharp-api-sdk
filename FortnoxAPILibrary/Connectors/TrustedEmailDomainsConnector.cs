@@ -49,14 +49,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of trustedEmailDomainss
 		/// </summary>
 		/// <returns>A list of trustedEmailDomainss</returns>
-		public EntityCollection<TrustedEmailDomain> Find()
+		public EntityCollection<TrustedEmailDomain> Find(TrustedEmailDomainsSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<TrustedEmailDomain>> FindAsync()
+		public async Task<EntityCollection<TrustedEmailDomain>> FindAsync(TrustedEmailDomainsSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(long? id)
 		{

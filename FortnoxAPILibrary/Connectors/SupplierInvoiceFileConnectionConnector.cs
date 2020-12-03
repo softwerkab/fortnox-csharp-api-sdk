@@ -49,14 +49,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of supplierInvoiceFileConnections
 		/// </summary>
 		/// <returns>A list of supplierInvoiceFileConnections</returns>
-		public EntityCollection<SupplierInvoiceFileConnection> Find()
+		public EntityCollection<SupplierInvoiceFileConnection> Find(SupplierInvoiceFileConnectionSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<SupplierInvoiceFileConnection>> FindAsync()
+		public async Task<EntityCollection<SupplierInvoiceFileConnection>> FindAsync(SupplierInvoiceFileConnectionSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{

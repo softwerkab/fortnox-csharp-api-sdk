@@ -49,14 +49,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of assetFileConnections
 		/// </summary>
 		/// <returns>A list of assetFileConnections</returns>
-		public EntityCollection<AssetFileConnection> Find()
+		public EntityCollection<AssetFileConnection> Find(AssetFileConnectionSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<AssetFileConnection>> FindAsync()
+		public async Task<EntityCollection<AssetFileConnection>> FindAsync(AssetFileConnectionSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{

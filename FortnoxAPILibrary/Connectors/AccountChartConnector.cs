@@ -20,14 +20,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of accountCharts
 		/// </summary>
 		/// <returns>A list of accountCharts</returns>
-		public EntityCollection<AccountChart> Find()
+		public EntityCollection<AccountChart> Find(AccountChartSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<AccountChart>> FindAsync()
+		public async Task<EntityCollection<AccountChart>> FindAsync(AccountChartSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 	}
 }

@@ -61,14 +61,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of assets
 		/// </summary>
 		/// <returns>A list of assets</returns>
-		public EntityCollection<AssetSubset> Find()
+		public EntityCollection<AssetSubset> Find(AssetSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<AssetSubset>> FindAsync()
+		public async Task<EntityCollection<AssetSubset>> FindAsync(AssetSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{

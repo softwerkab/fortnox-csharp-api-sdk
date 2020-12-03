@@ -107,8 +107,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 connector.Create(newPrice);
             }
 
-            connector.Search.LastModified = dateStamp.AddSeconds(-1);
-            var fullCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber);
+            var searchSettings = new PriceSearch();
+            searchSettings.LastModified = dateStamp.AddSeconds(-1);
+            var fullCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber, searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5+1, fullCollection.TotalResources);
@@ -118,8 +119,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual("TST_PR", fullCollection.Entities.First().PriceList);
 
             //Apply Limit
-            connector.Search.Limit = 2;
-            var limitedCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber);
+            searchSettings.Limit = 2;
+            var limitedCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber, searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5+1, limitedCollection.TotalResources);

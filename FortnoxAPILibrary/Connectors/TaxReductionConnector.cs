@@ -59,14 +59,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of taxReductions
 		/// </summary>
 		/// <returns>A list of taxReductions</returns>
-		public EntityCollection<TaxReductionSubset> Find()
+		public EntityCollection<TaxReductionSubset> Find(TaxReductionSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<TaxReductionSubset>> FindAsync()
+		public async Task<EntityCollection<TaxReductionSubset>> FindAsync(TaxReductionSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{

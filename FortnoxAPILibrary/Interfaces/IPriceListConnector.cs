@@ -7,16 +7,15 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IPriceListConnector : IEntityConnector
 	{
-		PriceListSearch Search { get; set; }
 
 		PriceList Update(PriceList priceList);
 		PriceList Create(PriceList priceList);
 		PriceList Get(string id);
-		EntityCollection<PriceList> Find();
+		EntityCollection<PriceList> Find(PriceListSearch searchSettings);
 
 		Task<PriceList> UpdateAsync(PriceList priceList);
 		Task<PriceList> CreateAsync(PriceList priceList);
 		Task<PriceList> GetAsync(string id);
-		Task<EntityCollection<PriceList>> FindAsync();
+		Task<EntityCollection<PriceList>> FindAsync(PriceListSearch searchSettings);
 	}
 }

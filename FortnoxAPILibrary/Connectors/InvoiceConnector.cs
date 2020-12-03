@@ -51,9 +51,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of invoices
 		/// </summary>
 		/// <returns>A list of invoices</returns>
-		public EntityCollection<InvoiceSubset> Find()
+		public EntityCollection<InvoiceSubset> Find(InvoiceSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 		
 		/// <summary>
@@ -146,9 +146,9 @@ namespace FortnoxAPILibrary.Connectors
             return PreviewAsync(id).GetResult();
         }
 
-		public async Task<EntityCollection<InvoiceSubset>> FindAsync()
+		public async Task<EntityCollection<InvoiceSubset>> FindAsync(InvoiceSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task<Invoice> CreateAsync(Invoice invoice)
 		{

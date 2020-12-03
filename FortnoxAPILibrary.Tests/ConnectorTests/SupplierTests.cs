@@ -118,8 +118,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             //Apply base test filter
-            connector.Search.City = testKeyMark;
-            var fullCollection = connector.Find();
+            var searchSettings = new SupplierSearch();
+            searchSettings.City = testKeyMark;
+            var fullCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
@@ -128,8 +129,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual(testKeyMark, fullCollection.Entities.First().City);
 
             //Apply Limit
-            connector.Search.Limit = 2;
-            var limitedCollection = connector.Find();
+            searchSettings.Limit = 2;
+            var limitedCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);

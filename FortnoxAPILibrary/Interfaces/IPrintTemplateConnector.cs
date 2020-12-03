@@ -7,10 +7,9 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IPrintTemplateConnector : IEntityConnector
 	{
-		PrintTemplateSearch Search { get; set; }
 
-		EntityCollection<PrintTemplate> Find();
+		EntityCollection<PrintTemplate> Find(PrintTemplateSearch searchSettings);
 
-		Task<EntityCollection<PrintTemplate>> FindAsync();
+		Task<EntityCollection<PrintTemplate>> FindAsync(PrintTemplateSearch searchSettings);
 	}
 }

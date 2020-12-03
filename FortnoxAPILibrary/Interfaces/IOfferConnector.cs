@@ -7,12 +7,11 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IOfferConnector : IEntityConnector
 	{
-		OfferSearch Search { get; set; }
 
 		Offer Update(Offer offer);
 		Offer Create(Offer offer);
 		Offer Get(long? id);
-        EntityCollection<OfferSubset> Find();
+        EntityCollection<OfferSubset> Find(OfferSearch searchSettings);
 		Offer CreateOrder(long? id);
 		Offer Cancel(long? id);
 		Offer Email(long? id);
@@ -23,7 +22,7 @@ namespace FortnoxAPILibrary.Connectors
 		Task<Offer> UpdateAsync(Offer offer);
 		Task<Offer> CreateAsync(Offer offer);
 		Task<Offer> GetAsync(long? id);
-        Task<EntityCollection<OfferSubset>> FindAsync();
+        Task<EntityCollection<OfferSubset>> FindAsync(OfferSearch searchSettings);
         Task<Offer> CreateOrderAsync(long? id);
         Task<Offer> CancelAsync(long? id);
         Task<Offer> EmailAsync(long? id);

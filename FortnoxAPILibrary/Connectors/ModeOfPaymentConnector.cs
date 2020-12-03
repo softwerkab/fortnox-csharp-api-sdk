@@ -59,14 +59,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of modeOfPayments
 		/// </summary>
 		/// <returns>A list of modeOfPayments</returns>
-		public EntityCollection<ModeOfPayment> Find()
+		public EntityCollection<ModeOfPayment> Find(ModeOfPaymentSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<ModeOfPayment>> FindAsync()
+		public async Task<EntityCollection<ModeOfPayment>> FindAsync(ModeOfPaymentSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{

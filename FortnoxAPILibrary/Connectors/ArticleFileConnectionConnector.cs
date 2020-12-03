@@ -50,14 +50,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of articleFileConnections
 		/// </summary>
 		/// <returns>A list of articleFileConnections</returns>
-		public EntityCollection<ArticleFileConnection> Find()
+		public EntityCollection<ArticleFileConnection> Find(ArticleFileConnectionSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<ArticleFileConnection>> FindAsync()
+		public async Task<EntityCollection<ArticleFileConnection>> FindAsync(ArticleFileConnectionSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{

@@ -169,7 +169,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 MyAssert.HasNoError(connector);
             }
 
-            var contractAccruals = connector.Find();
+            var contractAccruals = connector.Find(null);
             Assert.AreEqual(5,contractAccruals.Entities.Count(x => x.Description.StartsWith(marks)));
 
             foreach (var entry in contractAccruals.Entities.Where(x => x.Description.StartsWith(marks)))

@@ -20,14 +20,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of printTemplates
 		/// </summary>
 		/// <returns>A list of printTemplates</returns>
-		public EntityCollection<PrintTemplate> Find()
+		public EntityCollection<PrintTemplate> Find(PrintTemplateSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<PrintTemplate>> FindAsync()
+		public async Task<EntityCollection<PrintTemplate>> FindAsync(PrintTemplateSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 	}
 }

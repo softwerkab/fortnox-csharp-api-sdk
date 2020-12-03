@@ -98,7 +98,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             ICurrencyConnector connector = new CurrencyConnector();
 
-            var currencies = connector.Find();
+            var currencies = connector.Find(null);
 
             Assert.AreEqual(3, currencies.Entities.Count); //SEK, EUR, USD
             Assert.AreEqual(true, currencies.Entities.Any(c => c.Code == "SEK"));

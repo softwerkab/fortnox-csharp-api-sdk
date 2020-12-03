@@ -59,14 +59,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of supplierInvoiceExternalURLConnections
 		/// </summary>
 		/// <returns>A list of supplierInvoiceExternalURLConnections</returns>
-		public EntityCollection<SupplierInvoiceExternalURLConnection> Find()
+		public EntityCollection<SupplierInvoiceExternalURLConnection> Find(SupplierInvoiceExternalURLConnectionSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<SupplierInvoiceExternalURLConnection>> FindAsync()
+		public async Task<EntityCollection<SupplierInvoiceExternalURLConnection>> FindAsync(SupplierInvoiceExternalURLConnectionSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(long? id)
 		{

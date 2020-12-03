@@ -1,4 +1,5 @@
-﻿using FortnoxAPILibrary.Connectors;
+﻿using System;
+using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -17,7 +18,7 @@ namespace FortnoxAPILibrary.Tests
 
             //Act
             ICustomerConnector cc = new CustomerConnector();
-            cc.Find();
+            cc.Find(null);
         }
 
         [TestMethod]
@@ -30,7 +31,7 @@ namespace FortnoxAPILibrary.Tests
 
             //Act
             ICustomerConnector cc = new CustomerConnector();
-            cc.Find();
+            cc.Find(null);
         }
 
         [TestMethod]
@@ -43,7 +44,7 @@ namespace FortnoxAPILibrary.Tests
 
             //Act
             ICustomerConnector cc = new CustomerConnector();
-            cc.Find();
+            cc.Find(null);
         }
 
         [TestMethod]
@@ -58,7 +59,7 @@ namespace FortnoxAPILibrary.Tests
             connector.AccessToken = TestCredentials.Access_Token;
             connector.ClientSecret = TestCredentials.Client_Secret;
 
-            var customers = connector.Find();
+            var customers = connector.Find(null);
             Assert.IsNotNull(customers);
         }
 
@@ -72,7 +73,7 @@ namespace FortnoxAPILibrary.Tests
             //Act
             ICustomerConnector connector = new CustomerConnector();
 
-            var customers = connector.Find();
+            var customers = connector.Find(null);
             Assert.IsNotNull(customers);
         }
 

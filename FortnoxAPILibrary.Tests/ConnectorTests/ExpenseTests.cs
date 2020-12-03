@@ -91,9 +91,10 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 MyAssert.HasNoError(connector);
             }
 
-            connector.Search.LastModified = timeStamp; //does not seem to work
-            connector.Search.Limit = APIConstants.Unlimited;
-            var expensesCollection = connector.Find();
+            var searchSettings = new ExpenseSearch();
+            searchSettings.LastModified = timeStamp; //does not seem to work
+            searchSettings.Limit = APIConstants.Unlimited;
+            var expensesCollection = connector.Find(searchSettings);
 
             var newExpenses = expensesCollection.Entities.Where(x => x.Text == remark).ToList();
             MyAssert.HasNoError(connector);

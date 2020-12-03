@@ -110,9 +110,10 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 connector.Create(newAttendenceTransaction);
                 MyAssert.HasNoError(connector);
             }
-
-            connector.Search.EmployeeId = tmpEmployee.EmployeeId;
-            var fullCollection = connector.Find();
+            
+            var searchSettings = new AttendanceTransactionsSearch();
+            searchSettings.EmployeeId = tmpEmployee.EmployeeId;
+            var fullCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
@@ -122,8 +123,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual(tmpEmployee.EmployeeId, fullCollection.Entities.First().EmployeeId);
 
             //Apply Limit
-            connector.Search.Limit = 2;
-            var limitedCollection = connector.Find();
+            searchSettings.Limit = 2;
+            var limitedCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);

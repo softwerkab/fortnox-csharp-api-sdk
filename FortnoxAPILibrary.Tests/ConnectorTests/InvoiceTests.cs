@@ -119,8 +119,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             //Apply base test filter
-            connector.Search.CustomerNumber = tmpCustomer.CustomerNumber;
-            var fullCollection = connector.Find();
+            var searchSettings = new InvoiceSearch();
+            searchSettings.CustomerNumber = tmpCustomer.CustomerNumber;
+            var fullCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
@@ -130,8 +131,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual(tmpCustomer.CustomerNumber, fullCollection.Entities.First().CustomerNumber);
 
             //Apply Limit
-            connector.Search.Limit = 2;
-            var limitedCollection = connector.Find();
+            searchSettings.Limit = 2;
+            var limitedCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
@@ -285,16 +286,17 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         public void Test_Search()
         {
             var connector = new InvoiceConnector();
-            connector.Search.FromDate = new DateTime(2020,10, 10);
-            connector.Search.ToDate = new DateTime(2020, 10, 15);
+            var searchSettings = new InvoiceSearch();
+            searchSettings.FromDate = new DateTime(2020,10, 10);
+            searchSettings.ToDate = new DateTime(2020, 10, 15);
 
-            var result = connector.Find();
+            var result = connector.Find(searchSettings);
 
             Assert.IsTrue(result.Entities.Count > 0);
             foreach (var invoice in result.Entities)
             {
-                Assert.IsTrue(invoice.InvoiceDate >= connector.Search.FromDate);
-                Assert.IsTrue(invoice.InvoiceDate <= connector.Search.ToDate);
+                Assert.IsTrue(invoice.InvoiceDate >= searchSettings.FromDate);
+                Assert.IsTrue(invoice.InvoiceDate <= searchSettings.ToDate);
             }
         }
     }

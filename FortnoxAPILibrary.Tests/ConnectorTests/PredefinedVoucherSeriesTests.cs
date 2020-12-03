@@ -44,7 +44,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         {
             IPredefinedVoucherSeriesConnector connector = new PredefinedVoucherSeriesConnector();
 
-            var fullCollection = connector.Find();
+            var fullCollection = connector.Find(null);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(13, fullCollection.Entities.Count);

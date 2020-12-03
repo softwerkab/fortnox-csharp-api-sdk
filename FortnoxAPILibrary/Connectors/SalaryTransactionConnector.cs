@@ -58,14 +58,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of salaryTransactions
 		/// </summary>
 		/// <returns>A list of salaryTransactions</returns>
-		public EntityCollection<SalaryTransactionSubset> Find()
+		public EntityCollection<SalaryTransactionSubset> Find(SalaryTransactionSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<SalaryTransactionSubset>> FindAsync()
+		public async Task<EntityCollection<SalaryTransactionSubset>> FindAsync(SalaryTransactionSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(long? id)
 		{

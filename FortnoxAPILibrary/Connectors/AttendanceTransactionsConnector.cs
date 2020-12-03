@@ -64,14 +64,14 @@ namespace FortnoxAPILibrary.Connectors
         /// Gets a list of attendanceTransactions
         /// </summary>
         /// <returns>A list of attendanceTransactions</returns>
-        public EntityCollection<AttendanceTransactionSubset> Find()
+        public EntityCollection<AttendanceTransactionSubset> Find(AttendanceTransactionsSearch searchSettings)
         {
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
         }
 
-        public async Task<EntityCollection<AttendanceTransactionSubset>> FindAsync()
+        public async Task<EntityCollection<AttendanceTransactionSubset>> FindAsync(AttendanceTransactionsSearch searchSettings)
         {
-            return await BaseFind().ConfigureAwait(false);
+            return await BaseFind(searchSettings).ConfigureAwait(false);
         }
         public async Task DeleteAsync(string employeeId, DateTime? date, AttendanceCauseCode? code)
         {

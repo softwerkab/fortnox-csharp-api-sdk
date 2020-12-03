@@ -91,9 +91,10 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             for (var i = 0; i < 5; i++)
                 connector.Create(new Employee() {EmployeeId = TestUtils.RandomString(), City = marks});
 
-            //connector.Search.LastModified = timestamp; //parameter is not accepted by server
-            connector.Search.Limit = APIConstants.Unlimited;
-            var employees = connector.Find();
+            var searchSettings = new EmployeeSearch();
+            //searchSettings.LastModified = timestamp; //parameter is not accepted by server
+            searchSettings.Limit = APIConstants.Unlimited;
+            var employees = connector.Find(searchSettings);
 
             var newEmployees = employees.Entities.Where(e => e.City == marks).ToList();
             Assert.AreEqual(5, newEmployees.Count);

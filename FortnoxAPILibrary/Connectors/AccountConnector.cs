@@ -59,14 +59,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of accounts
 		/// </summary>
 		/// <returns>A list of accounts</returns>
-		public EntityCollection<AccountSubset> Find()
+		public EntityCollection<AccountSubset> Find(AccountSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<AccountSubset>> FindAsync()
+		public async Task<EntityCollection<AccountSubset>> FindAsync(AccountSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(long? id)
 		{

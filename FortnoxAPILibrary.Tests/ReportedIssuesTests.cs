@@ -57,18 +57,19 @@ namespace FortnoxAPILibrary.Tests
 
             //Act & Assert
             var connector = new VoucherConnector();
-            connector.Search.FinancialYearID = 1;
+            var searchSettings = new VoucherSearch();
+            searchSettings.FinancialYearID = 1;
 
-            connector.Search.Limit = 2;
-            var voucherResult = connector.Find();
+            searchSettings.Limit = 2;
+            var voucherResult = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
-            connector.Search.Page = 2;
-            var voucherResult2 = connector.Find();
+            searchSettings.Page = 2;
+            var voucherResult2 = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
-            connector.Search.Page = 3;
-            var voucherResult3 = connector.Find();
+            searchSettings.Page = 3;
+            var voucherResult3 = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
         }
 
@@ -79,8 +80,9 @@ namespace FortnoxAPILibrary.Tests
             var specificCustomer = connector.Create(new Customer() { Name = "TestCustomer", OrganisationNumber = "123456789" });
             MyAssert.HasNoError(connector);
 
-            connector.Search.OrganisationNumber = "123456789";
-            var customers = connector.Find().Entities;
+            var searchSettings = new CustomerSearch();
+            searchSettings.OrganisationNumber = "123456789";
+            var customers = connector.Find(searchSettings).Entities;
             var customer = customers.FirstOrDefault(c => c.CustomerNumber == specificCustomer.CustomerNumber);
             Assert.IsNotNull(customer);
 
@@ -120,13 +122,15 @@ namespace FortnoxAPILibrary.Tests
         public void Test_issue73_async_non_blockable()
         {
             var connector = new CustomerConnector();
-            connector.Search.Limit = 2;
+            var searchSettings = new CustomerSearch();
+            searchSettings.Limit = 2;
+
             var watch = new Stopwatch();
             watch.Start();
 
             var runningTasks = new List<Task<EntityCollection<CustomerSubset>>>();
             for (int i = 0;i<40;i++) 
-                runningTasks.Add(connector.FindAsync());
+                runningTasks.Add(connector.FindAsync(searchSettings));
 
             Console.WriteLine(@"Thread free after: "+watch.ElapsedMilliseconds);
             Assert.IsTrue(watch.ElapsedMilliseconds < 1000);
@@ -225,8 +229,9 @@ namespace FortnoxAPILibrary.Tests
             MyAssert.HasNoError(connector);
             Assert.AreEqual(false, retrievedInvoice.Cancelled);
 
-            connector.Search.LastModified = DateTime.Today;
-            var invoiceSubsets = connector.Find().Entities;
+            var searchSettings = new SupplierInvoiceSearch();
+            searchSettings.LastModified = DateTime.Today;
+            var invoiceSubsets = connector.Find(searchSettings).Entities;
             MyAssert.HasNoError(connector);
             foreach (var supplierInvoiceSubset in invoiceSubsets)
                 Assert.IsNotNull(supplierInvoiceSubset.Cancelled);

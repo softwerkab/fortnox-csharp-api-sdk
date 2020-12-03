@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         {
             IPrintTemplateConnector connector = new PrintTemplateConnector();
             
-            var fullCollection = connector.Find();
+            var fullCollection = connector.Find(null);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(9, fullCollection.Entities.Count);
@@ -40,21 +40,22 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         public void Test_Find_Filter()
         {
             IPrintTemplateConnector connector = new PrintTemplateConnector();
+            var searchSettings = new PrintTemplateSearch();
 
-            connector.Search.FilterBy = Filter.PrintTemplate.Order;
-            var orderTemplates = connector.Find();
+            searchSettings.FilterBy = Filter.PrintTemplate.Order;
+            var orderTemplates = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(4, orderTemplates.Entities.Count);
 
-            connector.Search.FilterBy = Filter.PrintTemplate.Offer;
-            var offerTemplates = connector.Find();
+            searchSettings.FilterBy = Filter.PrintTemplate.Offer;
+            var offerTemplates = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(1, offerTemplates.Entities.Count);
 
-            connector.Search.FilterBy = Filter.PrintTemplate.Invoice;
-            var invoiceTemplates = connector.Find();
+            searchSettings.FilterBy = Filter.PrintTemplate.Invoice;
+            var invoiceTemplates = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(9, invoiceTemplates.Entities.Count);

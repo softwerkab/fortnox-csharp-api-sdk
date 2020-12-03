@@ -59,14 +59,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of projects
 		/// </summary>
 		/// <returns>A list of projects</returns>
-		public EntityCollection<ProjectSubset> Find()
+		public EntityCollection<ProjectSubset> Find(ProjectSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<ProjectSubset>> FindAsync()
+		public async Task<EntityCollection<ProjectSubset>> FindAsync(ProjectSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{

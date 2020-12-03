@@ -7,16 +7,15 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IAssetFileConnectionConnector : IEntityConnector
 	{
-		AssetFileConnectionSearch Search { get; set; }
 
         AssetFileConnection Create(AssetFileConnection assetFileConnection);
 		AssetFileConnection Get(string id);
 		void Delete(string id);
-		EntityCollection<AssetFileConnection> Find();
+		EntityCollection<AssetFileConnection> Find(AssetFileConnectionSearch searchSettings);
 
         Task<AssetFileConnection> CreateAsync(AssetFileConnection assetFileConnection);
 		Task<AssetFileConnection> GetAsync(string id);
 		Task DeleteAsync(string id);
-		Task<EntityCollection<AssetFileConnection>> FindAsync();
+		Task<EntityCollection<AssetFileConnection>> FindAsync(AssetFileConnectionSearch searchSettings);
 	}
 }

@@ -28,7 +28,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #endregion Arrange
 
             IAssetTypesConnector connector = new AssetTypesConnector();
-            var entry = connector.Find().Entities.FirstOrDefault(at => at.Number == "TST");
+            var entry = connector.Find(null).Entities.FirstOrDefault(at => at.Number == "TST");
             if (entry != null)
                 connector.Delete(entry.Id);
 
@@ -111,7 +111,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 MyAssert.HasNoError(connector);
             }
 
-            var assetTypes = connector.Find();
+            var assetTypes = connector.Find(null);
             Assert.AreEqual(5, assetTypes.Entities.Count(x => x.Number.StartsWith(marks)));
 
             //restore

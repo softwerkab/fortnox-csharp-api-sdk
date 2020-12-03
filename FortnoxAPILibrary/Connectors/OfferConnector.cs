@@ -51,9 +51,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of offers
 		/// </summary>
 		/// <returns>A list of offers</returns>
-		public EntityCollection<OfferSubset> Find()
+		public EntityCollection<OfferSubset> Find(OfferSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 		
 		/// <summary>
@@ -116,9 +116,9 @@ namespace FortnoxAPILibrary.Connectors
             return PreviewAsync(id).GetResult();
         }
 
-		public async Task<EntityCollection<OfferSubset>> FindAsync()
+		public async Task<EntityCollection<OfferSubset>> FindAsync(OfferSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task<Offer> CreateAsync(Offer offer)
 		{

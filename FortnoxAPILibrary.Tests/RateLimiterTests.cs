@@ -28,8 +28,9 @@ namespace FortnoxAPILibrary.Tests
             watch.Start();
             for (var i = 0; i < 200; i++)
             {
-                connector.Search.City = TestUtils.RandomString(); //Needs to be random to make unique GET request
-                connector.Find();
+                var searchSettings = new CustomerSearch();
+                searchSettings.City = TestUtils.RandomString(); //Needs to be random to make unique GET request
+                connector.Find(searchSettings);
                 MyAssert.HasNoError(connector);
             }
 
@@ -47,10 +48,11 @@ namespace FortnoxAPILibrary.Tests
             int i;
             for (i = 0; i < 200; i++)
             {
-                connector.Search.City = TestUtils.RandomString();
+                var searchSettings = new CustomerSearch();
+                searchSettings.City = TestUtils.RandomString();
                 try
                 {
-                    connector.Find();
+                    connector.Find(searchSettings);
                 }
                 catch (FortnoxApiException ex)
                 {
@@ -59,7 +61,7 @@ namespace FortnoxAPILibrary.Tests
                 }
             }
 
-            //Restore settings
+            //Restore searchSettings
             ConnectionSettings.UseRateLimiter = true;
 
             //Assert

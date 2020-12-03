@@ -59,14 +59,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of contractAccruals
 		/// </summary>
 		/// <returns>A list of contractAccruals</returns>
-		public EntityCollection<ContractAccrualSubset> Find()
+		public EntityCollection<ContractAccrualSubset> Find(ContractAccrualSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<ContractAccrualSubset>> FindAsync()
+		public async Task<EntityCollection<ContractAccrualSubset>> FindAsync(ContractAccrualSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(long? id)
 		{

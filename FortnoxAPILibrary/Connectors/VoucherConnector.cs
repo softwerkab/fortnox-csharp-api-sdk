@@ -45,14 +45,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of vouchers
 		/// </summary>
 		/// <returns>A list of vouchers</returns>
-		public EntityCollection<VoucherSubset> Find()
+		public EntityCollection<VoucherSubset> Find(VoucherSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<VoucherSubset>> FindAsync()
+		public async Task<EntityCollection<VoucherSubset>> FindAsync(VoucherSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task<Voucher> CreateAsync(Voucher voucher)
 		{

@@ -24,7 +24,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         {
             #region Arrange
 
-            var existingAccountChartType = new AccountChartConnector().Find().Entities.First();
+            var existingAccountChartType = new AccountChartConnector().Find(null).Entities.First();
 
             #endregion Arrange
 
@@ -78,7 +78,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         {
             IFinancialYearConnector connector = new FinancialYearConnector();
             
-            var finYears = connector.Find();
+            var finYears = connector.Find(null);
             Assert.AreEqual(5, finYears.Entities.Count);
             Assert.IsNotNull(finYears.Entities.First().AccountChartType);
         }

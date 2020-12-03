@@ -101,8 +101,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             //Apply base test filter
-            connector.Search.LastModified = DateTime.Now.AddMinutes(-5);
-            var fullCollection = connector.Find();
+            var searchSettings = new CostCenterSearch();
+            searchSettings.LastModified = DateTime.Now.AddMinutes(-5);
+            var fullCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
@@ -112,8 +113,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual("TestCostCenter", fullCollection.Entities[0].Description);
 
             //Apply Limit
-            connector.Search.Limit = 2;
-            var limitedCollection = connector.Find();
+            searchSettings.Limit = 2;
+            var limitedCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);

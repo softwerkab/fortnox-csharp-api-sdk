@@ -58,9 +58,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of supplierInvoicePayments
 		/// </summary>
 		/// <returns>A list of supplierInvoicePayments</returns>
-		public EntityCollection<SupplierInvoicePaymentSubset> Find()
+		public EntityCollection<SupplierInvoicePaymentSubset> Find(SupplierInvoicePaymentSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
 		/// <summary>
@@ -72,9 +72,9 @@ namespace FortnoxAPILibrary.Connectors
             BookkeepAsync(id).GetResult();
         }
 
-		public async Task<EntityCollection<SupplierInvoicePaymentSubset>> FindAsync()
+		public async Task<EntityCollection<SupplierInvoicePaymentSubset>> FindAsync(SupplierInvoicePaymentSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(long? id)
 		{

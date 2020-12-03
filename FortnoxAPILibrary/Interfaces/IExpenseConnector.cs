@@ -7,15 +7,14 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IExpenseConnector : IEntityConnector
 	{
-		ExpenseSearch Search { get; set; }
 
 
         Expense Create(Expense expense);
 		Expense Get(string id);
-        EntityCollection<ExpenseSubset> Find();
+        EntityCollection<ExpenseSubset> Find(ExpenseSearch searchSettings);
 
         Task<Expense> CreateAsync(Expense expense);
 		Task<Expense> GetAsync(string id);
-        Task<EntityCollection<ExpenseSubset>> FindAsync();
+        Task<EntityCollection<ExpenseSubset>> FindAsync(ExpenseSearch searchSettings);
 	}
 }

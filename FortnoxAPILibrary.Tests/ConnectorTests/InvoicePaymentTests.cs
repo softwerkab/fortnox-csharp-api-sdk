@@ -136,8 +136,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 MyAssert.HasNoError(connector);
             }
 
-            connector.Search.InvoiceNumber = tmpInvoice.DocumentNumber.ToString();
-            var payments = connector.Find();
+            var searchSettings = new InvoicePaymentSearch();
+            searchSettings.InvoiceNumber = tmpInvoice.DocumentNumber.ToString();
+            var payments = connector.Find(searchSettings);
 
             Assert.AreEqual(5, payments.Entities.Count);
             Assert.AreEqual(10.5m, payments.Entities.First().Amount);

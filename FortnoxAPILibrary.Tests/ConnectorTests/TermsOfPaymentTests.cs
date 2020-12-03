@@ -93,16 +93,17 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             //Filter not supported
-            connector.Search.LastModified = DateTime.Now.AddMinutes(-5);
-            var fullCollection = connector.Find();
+            var searchSettings = new TermsOfPaymentSearch();
+            searchSettings.LastModified = DateTime.Now.AddMinutes(-5);
+            var fullCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.Entities.Count);
             Assert.AreEqual("TestPaymentTerms", fullCollection.Entities[0].Description);
 
             //Apply Limit
-            connector.Search.Limit = 2;
-            var limitedCollection = connector.Find();
+            searchSettings.Limit = 2;
+            var limitedCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(2, limitedCollection.Entities.Count);

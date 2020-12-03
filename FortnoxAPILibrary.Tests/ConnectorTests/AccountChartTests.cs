@@ -27,7 +27,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         {
             IAccountChartConnector connector = new AccountChartConnector();
 
-            var fullCollection = connector.Find();
+            var fullCollection = connector.Find(null);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(6, fullCollection.Entities.Count);

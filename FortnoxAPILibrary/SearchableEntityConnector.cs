@@ -12,15 +12,13 @@ namespace FortnoxAPILibrary
         where TEntity : class 
         where TSearchSettings : BaseSearch, new()
     {
-        public TSearchSettings Search { get; set; } = new TSearchSettings();
-
-        protected async Task<EntityCollection<TEntitySubset>> BaseFind()
+        protected async Task<EntityCollection<TEntitySubset>> BaseFind(BaseSearch searchSettings)
         {
             var request = new SearchRequest<TEntitySubset>()
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
-                SearchSettings = Search
+                SearchSettings = searchSettings
             };
 
             return await SendAsync(request).ConfigureAwait(false);
@@ -28,7 +26,7 @@ namespace FortnoxAPILibrary
         
         protected async Task<EntityCollection<T>> SendAsync<T>(SearchRequest<T> request)
         {
-            if (request.SearchSettings.Limit == APIConstants.Unlimited)
+            if (request.SearchSettings != null && request.SearchSettings.Limit == APIConstants.Unlimited)
                 return await GetAllInOnePage(request).ConfigureAwait(false);
             else
                 return await GetSinglePage(request).ConfigureAwait(false);
@@ -67,9 +65,12 @@ namespace FortnoxAPILibrary
         
         private async Task<EntityCollection<T>> GetSinglePage<T>(SearchRequest<T> request)
         {
-            var searchParameters = request.SearchSettings.GetSearchParameters();
-            foreach (var parameter in searchParameters)
-                request.Parameters.Add(parameter.Key, parameter.Value);
+            if (request.SearchSettings != null)
+            {
+                var searchParameters = request.SearchSettings.GetSearchParameters();
+                foreach (var parameter in searchParameters)
+                    request.Parameters.Add(parameter.Key, parameter.Value);
+            }
 
             var responseData = await SendAsync((BaseRequest)request).ConfigureAwait(false);
             var responseJson = Encoding.UTF8.GetString(responseData);

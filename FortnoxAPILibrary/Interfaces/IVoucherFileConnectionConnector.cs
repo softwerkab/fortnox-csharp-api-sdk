@@ -7,16 +7,15 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IVoucherFileConnectionConnector : IEntityConnector
 	{
-		VoucherFileConnectionSearch Search { get; set; }
 
         VoucherFileConnection Create(VoucherFileConnection voucherFileConnection);
 		VoucherFileConnection Get(string id);
 		void Delete(string id);
-		EntityCollection<VoucherFileConnection> Find();
+		EntityCollection<VoucherFileConnection> Find(VoucherFileConnectionSearch searchSettings);
 
         Task<VoucherFileConnection> CreateAsync(VoucherFileConnection voucherFileConnection);
 		Task<VoucherFileConnection> GetAsync(string id);
 		Task DeleteAsync(string id);
-		Task<EntityCollection<VoucherFileConnection>> FindAsync();
+		Task<EntityCollection<VoucherFileConnection>> FindAsync(VoucherFileConnectionSearch searchSettings);
 	}
 }

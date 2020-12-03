@@ -40,14 +40,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of expenses
 		/// </summary>
 		/// <returns>A list of expenses</returns>
-		public EntityCollection<ExpenseSubset> Find()
+		public EntityCollection<ExpenseSubset> Find(ExpenseSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<ExpenseSubset>> FindAsync()
+		public async Task<EntityCollection<ExpenseSubset>> FindAsync(ExpenseSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task<Expense> CreateAsync(Expense expense)
 		{

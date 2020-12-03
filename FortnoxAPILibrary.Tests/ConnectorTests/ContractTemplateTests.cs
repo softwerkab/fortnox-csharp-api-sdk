@@ -104,8 +104,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 MyAssert.HasNoError(connector);
             }
 
-            connector.Search.LastModified = DateTime.Now.AddMinutes(-5);
-            var templates = connector.Find();
+            var searchSettings = new ContractTemplateSearch();
+            searchSettings.LastModified = DateTime.Now.AddMinutes(-5);
+            var templates = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, templates.Entities.Count(c => c.TemplateName.StartsWith(marks)));

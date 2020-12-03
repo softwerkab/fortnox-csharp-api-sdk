@@ -7,12 +7,11 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IOrderConnector : IEntityConnector
 	{
-		OrderSearch Search { get; set; }
 
 		Order Update(Order order);
 		Order Create(Order order);
 		Order Get(long? id);
-        EntityCollection<OrderSubset> Find();
+        EntityCollection<OrderSubset> Find(OrderSearch searchSettings);
 		Order CreateInvoice(long? id);
 		Order Cancel(long? id);
 		Order Email(long? id);
@@ -23,7 +22,7 @@ namespace FortnoxAPILibrary.Connectors
 		Task<Order> UpdateAsync(Order order);
 		Task<Order> CreateAsync(Order order);
 		Task<Order> GetAsync(long? id);
-        Task<EntityCollection<OrderSubset>> FindAsync();
+        Task<EntityCollection<OrderSubset>> FindAsync(OrderSearch searchSettings);
         Task<Order> CreateInvoiceAsync(long? id);
         Task<Order> CancelAsync(long? id);
         Task<Order> EmailAsync(long? id);

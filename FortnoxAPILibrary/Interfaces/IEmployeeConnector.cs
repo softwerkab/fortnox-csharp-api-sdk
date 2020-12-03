@@ -7,17 +7,16 @@ namespace FortnoxAPILibrary.Connectors
     /// <remarks/>
     public interface IEmployeeConnector : IEntityConnector
 	{
-		EmployeeSearch Search { get; set; }
 
 
 		Employee Update(Employee employee);
 		Employee Create(Employee employee);
 		Employee Get(string id);
-        EntityCollection<EmployeeSubset> Find();
+        EntityCollection<EmployeeSubset> Find(EmployeeSearch searchSettings);
 
 		Task<Employee> UpdateAsync(Employee employee);
 		Task<Employee> CreateAsync(Employee employee);
 		Task<Employee> GetAsync(string id);
-        Task<EntityCollection<EmployeeSubset>> FindAsync();
+        Task<EntityCollection<EmployeeSubset>> FindAsync(EmployeeSearch searchSettings);
 	}
 }

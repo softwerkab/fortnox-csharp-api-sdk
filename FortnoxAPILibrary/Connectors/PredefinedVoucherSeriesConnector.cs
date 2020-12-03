@@ -41,14 +41,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of predefinedVoucherSeriess
 		/// </summary>
 		/// <returns>A list of predefinedVoucherSeriess</returns>
-		public EntityCollection<PredefinedVoucherSeries> Find()
+		public EntityCollection<PredefinedVoucherSeries> Find(PredefinedVoucherSeriesSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<PredefinedVoucherSeries>> FindAsync()
+		public async Task<EntityCollection<PredefinedVoucherSeries>> FindAsync(PredefinedVoucherSeriesSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task<PredefinedVoucherSeries> UpdateAsync(PredefinedVoucherSeries predefinedVoucherSeries)
 		{

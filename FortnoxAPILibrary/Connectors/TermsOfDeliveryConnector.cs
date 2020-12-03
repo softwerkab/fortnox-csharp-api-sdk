@@ -59,14 +59,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of termsOfDeliverys
 		/// </summary>
 		/// <returns>A list of termsOfDeliverys</returns>
-		public EntityCollection<TermsOfDelivery> Find()
+		public EntityCollection<TermsOfDelivery> Find(TermsOfDeliverySearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<TermsOfDelivery>> FindAsync()
+		public async Task<EntityCollection<TermsOfDelivery>> FindAsync(TermsOfDeliverySearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{

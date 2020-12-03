@@ -21,9 +21,9 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of scheduleTimess
 		/// </summary>
 		/// <returns>A list of scheduleTimess</returns>
-		public EntityCollection<ScheduleTimes> Find()
+		public EntityCollection<ScheduleTimes> Find(ScheduleTimesSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
 		/// <summary>
@@ -65,9 +65,9 @@ namespace FortnoxAPILibrary.Connectors
         {
             return await BaseGet(employeeId, date?.ToString(APIConstants.DateFormat)).ConfigureAwait(false);
         }
-		public async Task<EntityCollection<ScheduleTimes>> FindAsync()
+		public async Task<EntityCollection<ScheduleTimes>> FindAsync(ScheduleTimesSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 	}
 }

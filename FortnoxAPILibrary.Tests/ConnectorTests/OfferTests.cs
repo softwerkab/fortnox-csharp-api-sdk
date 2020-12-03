@@ -113,8 +113,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             //Apply base test filter
-            connector.Search.CustomerNumber = tmpCustomer.CustomerNumber;
-            var fullCollection = connector.Find();
+            var searchSettings = new OfferSearch();
+            searchSettings.CustomerNumber = tmpCustomer.CustomerNumber;
+            var fullCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
@@ -124,8 +125,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual(tmpCustomer.CustomerNumber, fullCollection.Entities.First().CustomerNumber);
 
             //Apply Limit
-            connector.Search.Limit = 2;
-            var limitedCollection = connector.Find();
+            searchSettings.Limit = 2;
+            var limitedCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);

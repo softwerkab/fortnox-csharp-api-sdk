@@ -80,7 +80,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         {
             IUnitConnector connector = new UnitConnector();
 
-            var existingCount = connector.Find().TotalResources;
+            var existingCount = connector.Find(null).TotalResources;
 
             var marks = TestUtils.RandomString();
             var createdEntries = new List<Unit>();
@@ -92,15 +92,16 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             //Filter not supported
-            var fullCollection = connector.Find();
+            var fullCollection = connector.Find(null);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(existingCount + 5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count(x => x.Code.StartsWith(marks)));
 
             //Limit not supported
-            connector.Search.Limit = 2;
-            var limitedCollection = connector.Find();
+            var searchSettings = new UnitSearch();
+            searchSettings.Limit = 2;
+            var limitedCollection = connector.Find(searchSettings);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
 
             //Delete entries

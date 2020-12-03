@@ -147,8 +147,9 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             //Apply base test filter
-            connector.Search.ReferenceNumber = tmpInvoice.DocumentNumber.ToString();
-            var fullCollection = connector.Find();
+            var searchSettings = new TaxReductionSearch();
+            searchSettings.ReferenceNumber = tmpInvoice.DocumentNumber.ToString();
+            var fullCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
@@ -156,8 +157,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual(1, fullCollection.TotalPages);
 
             //Apply Limit
-            connector.Search.Limit = 2;
-            var limitedCollection = connector.Find();
+            searchSettings.Limit = 2;
+            var limitedCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);

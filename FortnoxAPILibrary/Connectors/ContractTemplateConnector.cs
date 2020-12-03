@@ -50,14 +50,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of contractTemplates
 		/// </summary>
 		/// <returns>A list of contractTemplates</returns>
-		public EntityCollection<ContractTemplateSubset> Find()
+		public EntityCollection<ContractTemplateSubset> Find(ContractTemplateSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<ContractTemplateSubset>> FindAsync()
+		public async Task<EntityCollection<ContractTemplateSubset>> FindAsync(ContractTemplateSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task<ContractTemplate> CreateAsync(ContractTemplate contractTemplate)
 		{

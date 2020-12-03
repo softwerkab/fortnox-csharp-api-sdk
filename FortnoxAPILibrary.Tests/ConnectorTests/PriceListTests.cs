@@ -90,9 +90,10 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             }
 
             //Apply filter -> filter on Comments or Code not working
-            //connector.Code = "t";
-            //connector.Comments = "EntryForFindRequest";
-            var fullCollection = connector.Find();
+            var searchSettings = new PriceListSearch();
+            //searchSettings.Code = "t";
+            //searchSettings.Comments = "EntryForFindRequest";
+            var fullCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             //Assert.AreEqual(5, fullCollection.TotalResources);
@@ -101,8 +102,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Comments == "EntryForFindRequest"));
 
             //Apply Limit
-            connector.Search.Limit = 2;
-            var limitedCollection = connector.Find();
+            searchSettings.Limit = 2;
+            var limitedCollection = connector.Find(searchSettings);
             MyAssert.HasNoError(connector);
 
             //Assert.AreEqual(5, limitedCollection.TotalResources);

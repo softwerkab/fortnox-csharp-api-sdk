@@ -50,14 +50,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of voucherFileConnections
 		/// </summary>
 		/// <returns>A list of voucherFileConnections</returns>
-		public EntityCollection<VoucherFileConnection> Find()
+		public EntityCollection<VoucherFileConnection> Find(VoucherFileConnectionSearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<VoucherFileConnection>> FindAsync()
+		public async Task<EntityCollection<VoucherFileConnection>> FindAsync(VoucherFileConnectionSearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{

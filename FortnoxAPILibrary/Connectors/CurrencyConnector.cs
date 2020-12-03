@@ -59,14 +59,14 @@ namespace FortnoxAPILibrary.Connectors
 		/// Gets a list of currencys
 		/// </summary>
 		/// <returns>A list of currencys</returns>
-		public EntityCollection<Currency> Find()
+		public EntityCollection<Currency> Find(CurrencySearch searchSettings)
 		{
-			return FindAsync().GetResult();
+			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<Currency>> FindAsync()
+		public async Task<EntityCollection<Currency>> FindAsync(CurrencySearch searchSettings)
 		{
-			return await BaseFind().ConfigureAwait(false);
+			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
 		public async Task DeleteAsync(string id)
 		{
