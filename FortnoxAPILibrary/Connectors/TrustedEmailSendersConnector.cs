@@ -63,18 +63,14 @@ namespace FortnoxAPILibrary.Connectors
             //This method is inconsistent with others, as it should be part of a new connector with single Get similar to CompanySettingsConnector
             //It returns a single entity, containing both trusted and refused email senders.
            
-            var request = new EntityRequest<EntityWrapper<EmailSenders>>()
+            var request = new EntityRequest<EmailSenders>()
             {
                 BaseUrl = BaseUrl,
                 Resource = "emailsenders",
-                Indices = Array.Empty<string>(),
-                Parameters = new Dictionary<string, string>(),
                 Method = HttpMethod.Get
             };
-            ParametersInjection = null;
 
-            var result = await SendAsync(request).ConfigureAwait(false);
-            return result?.Entity;
+            return await SendAsync(request).ConfigureAwait(false);
         }
     }
 }

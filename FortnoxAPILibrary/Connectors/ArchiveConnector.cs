@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Net.Http;
 using System.Text;
 using FortnoxAPILibrary.Entities;
 
@@ -182,15 +184,20 @@ namespace FortnoxAPILibrary.Connectors
         {
             if (string.IsNullOrEmpty(pathOrId))
                 pathOrId = "root";
+            
+            var request = new EntityRequest<ArchiveFolder>()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Method = HttpMethod.Get,
+            };
 
             if (IsArchiveId(pathOrId) || IsPredefinedFolder(pathOrId))
-                return await BaseGet(pathOrId).ConfigureAwait(false);
+                request.Indices.Add(pathOrId);
             else
-            {
-                ParametersInjection = new Dictionary<string, string>();
-                ParametersInjection.Add("path", pathOrId);
-                return await BaseGet().ConfigureAwait(false);
-            }
+                request.Parameters.Add("path", pathOrId);
+
+            return await SendAsync(request).ConfigureAwait(false);
         }
 
         public async Task<ArchiveFolder> GetRootAsync()
@@ -202,21 +209,33 @@ namespace FortnoxAPILibrary.Connectors
         {
             var folder = new ArchiveFolder() { Name = folderName };
 
-            if (path != null)
-                ParametersInjection = new Dictionary<string, string> { { "path", path } };
+            var request = new EntityRequest<ArchiveFolder>()
+            {
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Method = HttpMethod.Post,
+                Entity = folder
+            };
 
-            return await BaseCreate(folder).ConfigureAwait(false);
+            if (path != null)
+                request.Parameters.Add("path", path);
+
+            return await SendAsync(request).ConfigureAwait(false);
         }
 
         public async Task DeleteFolderAsync(string pathOrId)
         {
-            if (IsArchiveId(pathOrId))
-                await BaseDelete(pathOrId).ConfigureAwait(false);
-            else
+            var request = new BaseRequest()
             {
-                ParametersInjection = new Dictionary<string, string> { { "path", pathOrId } };
-                await BaseDelete().ConfigureAwait(false);
-            }
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Method = HttpMethod.Delete
+            };
+
+            if (!IsArchiveId(pathOrId))
+                request.Parameters.Add("path", pathOrId);
+
+            await SendAsync(request).ConfigureAwait(false);
         }
 
         #endregion ASYNC Interface Methods
@@ -228,7 +247,7 @@ namespace FortnoxAPILibrary.Connectors
                 Parameters = parameters ?? new Dictionary<string, string>(),
                 BaseUrl = BaseUrl,
                 Resource = Resource,
-                Indices = indices,
+                Indices = indices.ToList(),
                 FileData = data,
                 FileName = name
             };
@@ -246,7 +265,7 @@ namespace FortnoxAPILibrary.Connectors
                 Parameters = parameters ?? new Dictionary<string, string>(),
                 BaseUrl = BaseUrl,
                 Resource = Resource,
-                Indices = indices
+                Indices = indices.ToList()
             };
 
             return await SendAsync(request).ConfigureAwait(false);

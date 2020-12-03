@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Net.Http;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
+using FortnoxAPILibrary.Requests;
 
 // ReSharper disable UnusedMember.Global
 
@@ -58,15 +60,18 @@ namespace FortnoxAPILibrary.Connectors
 		}
         public async Task<Voucher> GetAsync(long? id, string seriesId, long? financialYearId)
 		{
-            if (financialYearId != null)
+            var request = new EntityRequest<Voucher>()
             {
-                ParametersInjection = new Dictionary<string, string>
-                {
-                    {"financialyear", financialYearId.ToString()}
-                };
-            }
+                BaseUrl = BaseUrl,
+                Resource = Resource,
+                Indices = new List<string>{ seriesId, id.ToString() },
+                Method = HttpMethod.Get
+            };
 
-            return await BaseGet(seriesId, id.ToString()).ConfigureAwait(false);
+			if (financialYearId != null)
+				request.Parameters.Add("financialyear", financialYearId.ToString());
+
+			return await SendAsync(request).ConfigureAwait(false);
         }
     }
 }

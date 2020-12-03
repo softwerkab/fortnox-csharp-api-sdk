@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,51 +12,50 @@ namespace FortnoxAPILibrary
     /// <remarks/>
     public abstract class EntityConnector<TEntity> : BaseConnector where TEntity : class
     {
-        protected Dictionary<string, string> ParametersInjection { get; set; } //TODO: Remove, temporary workaround
-
-        protected async Task<T> SendAsync<T>(EntityRequest<T> fortnoxRequest)
+        protected async Task<T> SendAsync<T>(EntityRequest<T> request)
         {
-            var requestJson = fortnoxRequest.Entity == null ? string.Empty : Serializer.Serialize(fortnoxRequest.Entity);
-            fortnoxRequest.Content = Encoding.UTF8.GetBytes(requestJson);
+            if (request.Entity != null)
+            {
 
-            var responseData = await SendAsync((BaseRequest) fortnoxRequest).ConfigureAwait(false);
+                var requestJson = request.UseEntityWrapper ? 
+                    Serializer.Serialize(new EntityWrapper<T>(request.Entity)): 
+                    Serializer.Serialize(request.Entity);
+                request.Content = Encoding.UTF8.GetBytes(requestJson);
+            }
+
+            var responseData = await SendAsync((BaseRequest)request).ConfigureAwait(false);
             var responseJson = Encoding.UTF8.GetString(responseData);
 
-            return Serializer.Deserialize<T>(responseJson);
+            return request.UseEntityWrapper
+                ? Serializer.Deserialize<EntityWrapper<T>>(responseJson).Entity
+                : Serializer.Deserialize<T>(responseJson);
         }
 
         protected async Task<TEntity> BaseCreate(TEntity entity)
         {
-            var request = new EntityRequest<EntityWrapper<TEntity>>()
+            var request = new EntityRequest<TEntity>()
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
-                Indices = Array.Empty<string>(),
-                Parameters = ParametersInjection ?? new Dictionary<string, string>(),
                 Method = HttpMethod.Post,
-                Entity = new EntityWrapper<TEntity>() { Entity = entity }
+                Entity = entity
             };
-            ParametersInjection = null;
 
-            var result = await SendAsync(request).ConfigureAwait(false);
-            return result?.Entity;
+            return await SendAsync(request).ConfigureAwait(false);
         }
 
         protected async Task<TEntity> BaseUpdate(TEntity entity, params string[] indices)
         {
-            var request = new EntityRequest<EntityWrapper<TEntity>>()
+            var request = new EntityRequest<TEntity>()
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
-                Indices = indices,
-                Parameters = ParametersInjection ?? new Dictionary<string, string>(),
+                Indices = indices.ToList(),
                 Method = HttpMethod.Put,
-                Entity = new EntityWrapper<TEntity>() { Entity = entity }
+                Entity = entity
             };
-            ParametersInjection = null;
 
-            var result = await SendAsync(request).ConfigureAwait(false);
-            return result?.Entity;
+            return await SendAsync(request).ConfigureAwait(false);
         }
 
         protected async Task BaseDelete(params string[] indices)
@@ -64,29 +64,24 @@ namespace FortnoxAPILibrary
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
-                Indices = indices,
-                Parameters = ParametersInjection ?? new Dictionary<string, string>(),
+                Indices = indices.ToList(),
                 Method = HttpMethod.Delete
             };
-            ParametersInjection = null;
 
             await SendAsync(request).ConfigureAwait(false);
         }
 
         protected async Task<TEntity> BaseGet(params string[] indices)
         {
-            var request = new EntityRequest<EntityWrapper<TEntity>>()
+            var request = new EntityRequest<TEntity>()
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
-                Indices = indices,
-                Parameters = ParametersInjection ?? new Dictionary<string, string>(),
+                Indices = indices.ToList(),
                 Method = HttpMethod.Get,
             };
-            ParametersInjection = null;
 
-            var result = await SendAsync(request).ConfigureAwait(false);
-            return result?.Entity;
+            return await SendAsync(request).ConfigureAwait(false);
         }
         
         protected async Task<byte[]> DoDownloadActionAsync(string documentNumber, Action action, string localPath = null)
@@ -98,7 +93,7 @@ namespace FortnoxAPILibrary
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
-                Indices = new[] { documentNumber, action.GetStringValue() },
+                Indices = new List<string>{ documentNumber, action.GetStringValue() },
                 Method = HttpMethod.Get,
             };
 
@@ -113,16 +108,15 @@ namespace FortnoxAPILibrary
             if (action.IsDownloadAction())
                 throw new Exception("Invalid action type");
 
-            var request = new EntityRequest<EntityWrapper<TEntity>>()
+            var request = new EntityRequest<TEntity>()
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
-                Indices = new[] {documentNumber, action.GetStringValue()},
+                Indices = new List<string> {documentNumber, action.GetStringValue()},
                 Method = action.GetMethod()
             };
 
-            var result = await SendAsync(request).ConfigureAwait(false);
-            return result?.Entity;
+            return await SendAsync(request).ConfigureAwait(false);
         }
     }
 }

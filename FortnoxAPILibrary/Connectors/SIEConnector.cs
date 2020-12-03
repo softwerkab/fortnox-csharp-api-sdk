@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using FortnoxAPILibrary.Requests;
 
@@ -22,7 +23,7 @@ namespace FortnoxAPILibrary.Connectors
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
-                Indices = new[] { type.GetStringValue() }
+                Indices = new List<string> { type.GetStringValue() }
             };
 
             return await SendAsync(request).ConfigureAwait(false);

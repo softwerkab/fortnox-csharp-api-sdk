@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FortnoxAPILibrary.Entities;
@@ -56,11 +57,9 @@ namespace FortnoxAPILibrary
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
-                Indices = indices,
-                Parameters = ParametersInjection ?? new Dictionary<string, string>(),
+                Indices = indices.ToList(),
                 SearchSettings = searchSettings
             };
-            ParametersInjection = null;
 
             return await SendAsync(request).ConfigureAwait(false);
         }

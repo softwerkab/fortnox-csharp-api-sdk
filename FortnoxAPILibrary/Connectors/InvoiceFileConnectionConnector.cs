@@ -66,9 +66,9 @@ namespace FortnoxAPILibrary.Connectors
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
-                Indices = Array.Empty<string>(),
                 Method = HttpMethod.Post,
-                Entity = new List<InvoiceFileConnection>() { invoiceFileConnection }
+                Entity = new List<InvoiceFileConnection>() { invoiceFileConnection },
+                UseEntityWrapper = false
             };
 
             var result = await SendAsync(request).ConfigureAwait(false);
@@ -81,12 +81,13 @@ namespace FortnoxAPILibrary.Connectors
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
-                Indices = new[] {invoiceFileConnection.Id},
+                Indices = new List<string> { invoiceFileConnection.Id },
                 Method = HttpMethod.Put,
                 Entity = new InvoiceFileConnection()
                 {
                     IncludeOnSend = invoiceFileConnection.IncludeOnSend
-                }
+                },
+                UseEntityWrapper = false
             };
 
             var result = await SendAsync(request).ConfigureAwait(false);
@@ -105,6 +106,7 @@ namespace FortnoxAPILibrary.Connectors
                     {"entitytype", entityType?.GetStringValue()}
                 },
                 Method = HttpMethod.Get,
+                UseEntityWrapper = false
             };
 
             var result = await SendAsync(request).ConfigureAwait(false);

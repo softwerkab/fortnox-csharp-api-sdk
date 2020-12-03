@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -14,7 +13,7 @@ namespace FortnoxAPILibrary.Requests
 
         public string BaseUrl { get; set; }
         public string Resource { get; set; }
-        public string[] Indices { get; set; } = Array.Empty<string>();
+        public List<string> Indices { get; set; } = new List<string>();
         public Dictionary<string, string> Parameters { get; set; } = new Dictionary<string, string>();
 
         public string AbsoluteUrl => BuildUrl();

@@ -19,7 +19,7 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
 
             IArchiveConnector connector = new ArchiveConnector();
-            testRootFolder = connector.GetFolder("TestArchive") ?? connector.CreateFolder("TestArchive");
+            testRootFolder = connector.GetFolder("TestArchive");
         }
 
         [TestMethod]
