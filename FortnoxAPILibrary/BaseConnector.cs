@@ -21,7 +21,7 @@ namespace FortnoxAPILibrary
             ErrorHandler = new ErrorHandler(Serializer);
         }
         
-        protected async Task<byte[]> SendAsync(FortnoxRequest fortnoxRequest)
+        protected async Task<byte[]> SendAsync(BaseRequest fortnoxRequest)
         {
             try
             {
@@ -48,6 +48,11 @@ namespace FortnoxAPILibrary
                 ErrorHandler.HandleNoResponse(ex);
                 return default;
             }
+        }
+
+        protected async Task<byte[]> SendAsync(FileDownloadRequest fortnoxRequest)
+        {
+            return await SendAsync((BaseRequest) fortnoxRequest).ConfigureAwait(false);
         }
 
         protected async Task<byte[]> SendAsync(FileUploadRequest fortnoxRequest)

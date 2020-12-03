@@ -18,7 +18,7 @@ namespace FortnoxAPILibrary
             var requestJson = fortnoxRequest.Entity == null ? string.Empty : Serializer.Serialize(fortnoxRequest.Entity);
             fortnoxRequest.Content = Encoding.UTF8.GetBytes(requestJson);
 
-            var responseData = await SendAsync((FortnoxRequest) fortnoxRequest).ConfigureAwait(false);
+            var responseData = await SendAsync((BaseRequest) fortnoxRequest).ConfigureAwait(false);
             var responseJson = Encoding.UTF8.GetString(responseData);
 
             return Serializer.Deserialize<T>(responseJson);
@@ -60,7 +60,7 @@ namespace FortnoxAPILibrary
 
         protected async Task BaseDelete(params string[] indices)
         {
-            var request = new FortnoxRequest()
+            var request = new BaseRequest()
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
@@ -94,7 +94,7 @@ namespace FortnoxAPILibrary
             if (!action.IsDownloadAction())
                 throw new Exception("Invalid action type");
 
-            var request = new FortnoxRequest()
+            var request = new BaseRequest()
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,

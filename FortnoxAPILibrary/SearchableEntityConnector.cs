@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using FortnoxAPILibrary.Entities;
 using FortnoxAPILibrary.Requests;
@@ -52,19 +52,29 @@ namespace FortnoxAPILibrary
 
         private async Task<EntityCollection<TEntitySubset>> GetSinglePage(BaseSearch searchSettings, string[] indices)
         {
-            var request = new EntityRequest<EntityCollection<TEntitySubset>>()
+            var request = new SearchRequest()
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
                 Indices = indices,
                 Parameters = ParametersInjection ?? new Dictionary<string, string>(),
-                SearchParameters = searchSettings.GetSearchParameters(),
-                Method = HttpMethod.Get,
+                SearchSettings = searchSettings
             };
             ParametersInjection = null;
 
-            var result = await SendAsync(request).ConfigureAwait(false);
-            return result;
+            return await SendAsync(request).ConfigureAwait(false);
+        }
+
+        private async Task<EntityCollection<TEntitySubset>> SendAsync(SearchRequest fortnoxRequest)
+        {
+            var searchParameters = fortnoxRequest.SearchSettings.GetSearchParameters();
+            foreach (var parameter in searchParameters)
+                fortnoxRequest.Parameters.Add(parameter.Key, parameter.Value);
+            
+            var responseData = await SendAsync((BaseRequest)fortnoxRequest).ConfigureAwait(false);
+            var responseJson = Encoding.UTF8.GetString(responseData);
+
+            return Serializer.Deserialize<EntityCollection<TEntitySubset>>(responseJson);
         }
     }
 }

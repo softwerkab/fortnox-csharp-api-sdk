@@ -34,7 +34,7 @@ namespace FortnoxAPILibrary.Connectors
 
         public async Task<string> GetAccessTokenAsync(string authorizationCode, string clientSecret)
         {
-            var fortnoxRequest = new FortnoxRequest()
+            var fortnoxRequest = new BaseRequest()
             {
                 Method = HttpMethod.Get,
                 BaseUrl = BaseUrl,

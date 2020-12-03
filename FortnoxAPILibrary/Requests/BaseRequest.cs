@@ -6,7 +6,7 @@ using System.Web;
 
 namespace FortnoxAPILibrary.Requests
 {
-    public class FortnoxRequest
+    public class BaseRequest
     {
         public HttpMethod Method { get; set; }
         public Dictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
@@ -16,7 +16,6 @@ namespace FortnoxAPILibrary.Requests
         public string Resource { get; set; }
         public string[] Indices { get; set; } = Array.Empty<string>();
         public Dictionary<string, string> Parameters { get; set; } = new Dictionary<string, string>();
-        public Dictionary<string, string> SearchParameters { get; set; } = new Dictionary<string, string>();
 
         public string AbsoluteUrl => BuildUrl();
 
@@ -38,9 +37,6 @@ namespace FortnoxAPILibrary.Requests
             if (Parameters != null)
                 foreach (var keyValuePair in Parameters)
                     allParams.Add(keyValuePair.Key, keyValuePair.Value);
-            if (SearchParameters != null)
-                foreach (var keyValuePair in SearchParameters)
-                    allParams.Add(keyValuePair.Key, keyValuePair.Value);
 
             if (allParams.Count > 0)
             {
@@ -48,25 +44,6 @@ namespace FortnoxAPILibrary.Requests
             }
 
             return requestUriString;
-        }
-    }
-
-    public class EntityRequest<TEntity> : FortnoxRequest
-    {
-        public TEntity Entity { get; set; }
-    }
-
-    public class FileUploadRequest : FortnoxRequest
-    {
-        public byte[] FileData { get; set; }
-        public string FileName { get; set; }
-    }
-
-    public class FileDownloadRequest : FortnoxRequest
-    {
-        public FileDownloadRequest()
-        {
-            Method = HttpMethod.Get;
         }
     }
 }
