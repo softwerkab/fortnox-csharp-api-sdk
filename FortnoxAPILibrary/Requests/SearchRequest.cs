@@ -2,7 +2,7 @@
 
 namespace FortnoxAPILibrary.Requests
 {
-    public class SearchRequest : BaseRequest
+    public class SearchRequest<TEntity> : BaseRequest
     {
         public SearchRequest()
         {

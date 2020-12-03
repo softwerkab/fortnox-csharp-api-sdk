@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using FortnoxAPILibrary.Entities;
 
 using System.Threading.Tasks;
+using FortnoxAPILibrary.Requests;
 
 // ReSharper disable UnusedMember.Global
 
@@ -71,8 +73,16 @@ namespace FortnoxAPILibrary.Connectors
 
 		public async Task<EntityCollection<PriceSubset>> FindAsync(string priceListId, string articleId = null)
 		{
-			return await BaseFind("sublist", priceListId, articleId).ConfigureAwait(false);
-		}
+            var request = new SearchRequest<PriceSubset>()
+            {
+                BaseUrl = BaseUrl,
+                Resource = $"{Resource}/sublist",
+                Indices = new List<string>(){ priceListId, articleId },
+                SearchSettings = Search
+            };
+
+            return await SendAsync(request).ConfigureAwait(false);
+        }
         public async Task DeleteAsync(string priceListCode, string articleNumber, decimal? fromQuantity = null)
         {
             await BaseDelete(priceListCode, articleNumber, fromQuantity?.ToString()).ConfigureAwait(false);
