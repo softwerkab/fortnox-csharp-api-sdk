@@ -84,23 +84,19 @@ namespace FortnoxAPILibrary
             return await SendAsync(request).ConfigureAwait(false);
         }
         
-        protected async Task<byte[]> DoDownloadActionAsync(string documentNumber, Action action, string localPath = null)
+        protected async Task<byte[]> DoDownloadActionAsync(string documentNumber, Action action)
         {
             if (!action.IsDownloadAction())
                 throw new Exception("Invalid action type");
 
-            var request = new BaseRequest()
+            var request = new FileDownloadRequest()
             {
                 BaseUrl = BaseUrl,
                 Resource = Resource,
                 Indices = new List<string>{ documentNumber, action.GetStringValue() },
-                Method = HttpMethod.Get,
             };
 
-            var data = await SendAsync(request).ConfigureAwait(false);
-            if (localPath != null)
-                await data.ToFile(localPath).ConfigureAwait(false);
-            return data;
+            return await SendAsync(request).ConfigureAwait(false);
         }
 
         protected async Task<TEntity> DoActionAsync(string documentNumber, Action action)
