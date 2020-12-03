@@ -48,7 +48,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdSupplierInvoice = connector.Create(newSupplierInvoice);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("InvoiceComments", createdSupplierInvoice.Comments);
             Assert.AreEqual("TmpSupplier", createdSupplierInvoice.SupplierName);
             Assert.AreEqual(3 + 1, createdSupplierInvoice.SupplierInvoiceRows.Count);
@@ -61,7 +60,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdSupplierInvoice.Comments = "UpdatedInvoiceComments";
 
             var updatedSupplierInvoice = connector.Update(createdSupplierInvoice); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedInvoiceComments", updatedSupplierInvoice.Comments);
 
             #endregion UPDATE
@@ -69,7 +67,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedSupplierInvoice = connector.Get(createdSupplierInvoice.GivenNumber);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedInvoiceComments", retrievedSupplierInvoice.Comments);
 
             #endregion READ / GET
@@ -117,14 +114,12 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             for (var i = 0; i < 5; i++)
             {
                 connector.Create(newSupplierInvoice);
-                MyAssert.HasNoError(connector);
             }
 
             //Apply base test filter
             var searchSettings = new SupplierInvoiceSearch();
             searchSettings.SupplierNumber = tmpSupplier.SupplierNumber;
             var fullCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -135,7 +130,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             //Apply Limit
             searchSettings.Limit = 2;
             var limitedCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);

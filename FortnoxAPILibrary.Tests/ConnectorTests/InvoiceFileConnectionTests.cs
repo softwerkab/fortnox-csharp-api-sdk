@@ -52,7 +52,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdInvoiceFileConnection = connector.Create(newInvoiceFileConnection);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(false, createdInvoiceFileConnection.IncludeOnSend);
 
             #endregion CREATE
@@ -62,7 +61,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdInvoiceFileConnection.IncludeOnSend = true;
 
             var updatedInvoiceFileConnection = connector.Update(createdInvoiceFileConnection); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(true, updatedInvoiceFileConnection.IncludeOnSend);
 
             #endregion UPDATE
@@ -70,7 +68,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedInvoiceFileConnection = connector.GetConnections(createdInvoiceFileConnection.EntityId, createdInvoiceFileConnection.EntityType)?.FirstOrDefault();
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(true, retrievedInvoiceFileConnection?.IncludeOnSend);
 
             #endregion READ / GET
@@ -78,7 +75,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdInvoiceFileConnection.Id);
-            MyAssert.HasNoError(connector);
 
             retrievedInvoiceFileConnection = connector.GetConnections(createdInvoiceFileConnection.EntityId, createdInvoiceFileConnection.EntityType)?.FirstOrDefault();
             Assert.AreEqual(null, retrievedInvoiceFileConnection, "Entity still exists after Delete!");

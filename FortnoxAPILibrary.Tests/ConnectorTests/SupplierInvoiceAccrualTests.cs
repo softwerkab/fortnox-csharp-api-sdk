@@ -41,7 +41,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                     new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 6, Price = 1000, Account = 5820 }
                 }
             });
-            MyAssert.HasNoError(conn);
             #endregion Arrange
 
             ISupplierInvoiceAccrualConnector connector = new SupplierInvoiceAccrualConnector();
@@ -66,7 +65,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdSupplierInvoiceAccrual = connector.Create(newSupplierInvoiceAccrual);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestSupplierInvoiceAccrual", createdSupplierInvoiceAccrual.Description);
 
             #endregion CREATE
@@ -76,7 +74,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdSupplierInvoiceAccrual.Description = "UpdatedTestSupplierInvoiceAccrual";
 
             var updatedSupplierInvoiceAccrual = connector.Update(createdSupplierInvoiceAccrual); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestSupplierInvoiceAccrual", updatedSupplierInvoiceAccrual.Description);
 
             #endregion UPDATE
@@ -84,7 +81,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedSupplierInvoiceAccrual = connector.Get(createdSupplierInvoiceAccrual.SupplierInvoiceNumber);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestSupplierInvoiceAccrual", retrievedSupplierInvoiceAccrual.Description);
 
             #endregion READ / GET
@@ -92,7 +88,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdSupplierInvoiceAccrual.SupplierInvoiceNumber);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdSupplierInvoiceAccrual.SupplierInvoiceNumber),

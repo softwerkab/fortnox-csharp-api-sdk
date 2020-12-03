@@ -31,7 +31,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdNoxFinansInvoice = connector.Create(newNoxFinansInvoice);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("PropertyValue", createdNoxFinansInvoice.SomeProperty); //TODO: Adapt
 
             #endregion CREATE
@@ -41,7 +40,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdNoxFinansInvoice.SomeProperty = "UpdatedPropertyValue"; //TODO: Adapt
 
             var updatedNoxFinansInvoice = connector.Update(createdNoxFinansInvoice); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedPropertyValue", updatedNoxFinansInvoice.SomeProperty); //TODO: Adapt
 
             #endregion UPDATE
@@ -49,7 +47,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedNoxFinansInvoice = connector.Get(createdNoxFinansInvoice.ID); //TODO: Check ID property
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedPropertyValue", retrievedNoxFinansInvoice.SomeProperty); //TODO: Adapt
 
             #endregion READ / GET
@@ -57,7 +54,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdNoxFinansInvoice.ID); //TODO: Check ID property
-            MyAssert.HasNoError(connector);
 
             retrievedNoxFinansInvoice = connector.Get(createdNoxFinansInvoice.ID); //TODO: Check ID property
             Assert.AreEqual(null, retrievedNoxFinansInvoice, "Entity still exists after Delete!");

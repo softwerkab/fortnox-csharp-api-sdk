@@ -42,7 +42,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdContractTemplate = connector.Create(newContractTemplate);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestTemplate", createdContractTemplate.TemplateName);
 
             #endregion CREATE
@@ -52,7 +51,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdContractTemplate.TemplateName = "UpdatedTestTemplate";
 
             var updatedContractTemplate = connector.Update(createdContractTemplate); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestTemplate", updatedContractTemplate.TemplateName);
 
             #endregion UPDATE
@@ -60,7 +58,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedContractTemplate = connector.Get(createdContractTemplate.TemplateNumber);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestTemplate", retrievedContractTemplate.TemplateName);
 
             #endregion READ / GET
@@ -101,13 +98,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             {
                 newContractTemplate.TemplateName = marks + i;
                 connector.Create(newContractTemplate);
-                MyAssert.HasNoError(connector);
             }
 
             var searchSettings = new ContractTemplateSearch();
             searchSettings.LastModified = DateTime.Now.AddMinutes(-5);
             var templates = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, templates.Entities.Count(c => c.TemplateName.StartsWith(marks)));
 

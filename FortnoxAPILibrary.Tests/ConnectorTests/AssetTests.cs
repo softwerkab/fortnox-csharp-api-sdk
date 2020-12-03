@@ -47,7 +47,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdAsset = connector.Create(newAsset);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestAsset", createdAsset.Description); //returns entity named "Assets" instead of "asset"
 
             #endregion CREATE
@@ -57,7 +56,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdAsset.Description = "UpdatedTestAsset";
 
             var updatedAsset = connector.Update(createdAsset); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestAsset", updatedAsset.Description);
 
             #endregion UPDATE
@@ -65,7 +63,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedAsset = connector.Get(createdAsset.Id);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestAsset", retrievedAsset.Description);
 
             #endregion READ / GET
@@ -73,7 +70,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdAsset.Id);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdAsset.Id),
@@ -125,7 +121,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var searchSettings = new AssetSearch();
             searchSettings.Description = testKeyMark;
             var fullCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -134,7 +129,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             //Apply Limit
             searchSettings.Limit = 2;
             var limitedCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);

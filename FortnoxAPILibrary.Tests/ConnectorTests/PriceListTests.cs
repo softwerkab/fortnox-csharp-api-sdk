@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
@@ -28,15 +29,12 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region CREATE
             var newPriceList = new PriceList()
             {
-                Code = "TST_PR",
+                Code = TestUtils.RandomString().ToUpperInvariant(),
                 Description = "TestPriceList",
                 Comments = "Some comments"
             };
 
-            var alreadyExists = new PriceListConnector().Get("TST_PR") != null; //already created in previous test run
-
-            var createdPriceList = alreadyExists ? connector.Update(newPriceList) : connector.Create(newPriceList);
-            MyAssert.HasNoError(connector);
+            var createdPriceList = connector.Create(newPriceList);
             Assert.AreEqual("TestPriceList", createdPriceList.Description);
 
             #endregion CREATE
@@ -46,7 +44,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdPriceList.Description = "UpdatedTestPriceList";
 
             var updatedPriceList = connector.Update(createdPriceList); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestPriceList", updatedPriceList.Description);
 
             #endregion UPDATE
@@ -54,7 +51,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedPriceList = connector.Get(createdPriceList.Code);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestPriceList", retrievedPriceList.Description);
 
             #endregion READ / GET
@@ -71,6 +67,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
+            var timeStamp = DateTime.Now;
+
             IPriceListConnector connector = new PriceListConnector();
 
             var newPriceList = new PriceList()
@@ -81,30 +79,21 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             for (var i = 0; i < 5; i++)
             {
-                newPriceList.Code = "T" + i;
-                if (connector.Get(newPriceList.Code) == null) //not exists
-                    connector.Create(newPriceList);
-                else
-                    connector.Update(newPriceList);
-                MyAssert.HasNoError(connector);
+                newPriceList.Code = TestUtils.RandomString().ToUpperInvariant();
+                connector.Create(newPriceList);
             }
 
-            //Apply filter -> filter on Comments or Code not working
             var searchSettings = new PriceListSearch();
-            //searchSettings.Code = "t";
-            //searchSettings.Comments = "EntryForFindRequest";
+            searchSettings.LastModified = timeStamp;
             var fullCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
-            //Assert.AreEqual(5, fullCollection.TotalResources);
-            //Assert.AreEqual(5, fullCollection.Entities.Count);
-
+            Assert.AreEqual(5, fullCollection.TotalResources);
+            Assert.AreEqual(5, fullCollection.Entities.Count);
             Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Comments == "EntryForFindRequest"));
 
             //Apply Limit
             searchSettings.Limit = 2;
             var limitedCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             //Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);

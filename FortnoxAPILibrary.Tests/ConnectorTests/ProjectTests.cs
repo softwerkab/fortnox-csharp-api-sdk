@@ -41,7 +41,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdProject = connector.Create(newProject);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestProject", createdProject.Description);
 
             #endregion CREATE
@@ -51,7 +50,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdProject.Description = "UpdatedProject";
 
             var updatedProject = connector.Update(createdProject); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedProject", updatedProject.Description);
 
             #endregion UPDATE
@@ -59,7 +57,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedProject = connector.Get(createdProject.ProjectNumber);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedProject", retrievedProject.Description);
 
             #endregion READ / GET
@@ -67,7 +64,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdProject.ProjectNumber);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdProject.ProjectNumber),
@@ -110,7 +106,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             //No filter supported
             var fullCollection = connector.Find(null);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(existingEntries + 5, fullCollection.Entities.Count);
             Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == testKeyMark));
@@ -119,7 +114,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var searchSettings = new ProjectSearch();
             searchSettings.Limit = 2;
             var limitedCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(existingEntries + 5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -166,7 +160,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 connector.Create(newProject);
 
             var fullCollection = connector.Find(null);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(existingEntries + 5 + 5, fullCollection.Entities.Count);
             Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == description));
@@ -176,7 +169,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var searchSettings = new ProjectSearch();
             searchSettings.Description = otherDescription;
             var filteredCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, filteredCollection.TotalResources);
             Assert.AreEqual(5, filteredCollection.Entities.Count);

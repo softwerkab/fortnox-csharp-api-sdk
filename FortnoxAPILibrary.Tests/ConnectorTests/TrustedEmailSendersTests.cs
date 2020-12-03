@@ -33,7 +33,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdTrustedEmailSender = connector.Create(newTrustedEmailSender);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(randomAddress, createdTrustedEmailSender.Email);
 
             #endregion CREATE
@@ -45,14 +44,12 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
             //Single get is not supported, full list is used instead
             var retrievedTrustedEmailSender = connector.GetAll().TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(randomAddress, retrievedTrustedEmailSender?.Email);
             #endregion READ / GET
 
             #region DELETE
 
             connector.Delete(createdTrustedEmailSender.Id);
-            MyAssert.HasNoError(connector);
 
             retrievedTrustedEmailSender = connector.GetAll().TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
             Assert.AreEqual(null, retrievedTrustedEmailSender);

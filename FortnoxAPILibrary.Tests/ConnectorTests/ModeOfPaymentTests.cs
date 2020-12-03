@@ -37,7 +37,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdModeOfPayment = connector.Create(newModeOfPayment);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestMode", createdModeOfPayment.Description);
 
             #endregion CREATE
@@ -47,7 +46,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdModeOfPayment.Description = "UpdatedMode";
 
             var updatedModeOfPayment = connector.Update(createdModeOfPayment); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedMode", updatedModeOfPayment.Description);
 
             #endregion UPDATE
@@ -55,7 +53,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedModeOfPayment = connector.Get(createdModeOfPayment.Code);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedMode", retrievedModeOfPayment.Description);
 
             #endregion READ / GET
@@ -63,7 +60,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdModeOfPayment.Code);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdModeOfPayment.Code),
@@ -98,7 +94,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             //Filter not supported
             var fullCollection = connector.Find(null);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);
             Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == testKeyMark));
@@ -107,7 +102,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var searchSettings = new ModeOfPaymentSearch();
             searchSettings.Limit = 2;
             var limitedCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(existingCount + 5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);

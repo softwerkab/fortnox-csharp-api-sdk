@@ -36,7 +36,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdWayOfDelivery = connector.Create(newWayOfDelivery);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestDeliveryMethod", createdWayOfDelivery.Description);
 
             #endregion CREATE
@@ -46,7 +45,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdWayOfDelivery.Description = "UpdatedTestDeliveryMethod";
 
             var updatedWayOfDelivery = connector.Update(createdWayOfDelivery); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestDeliveryMethod", updatedWayOfDelivery.Description);
 
             #endregion UPDATE
@@ -54,7 +52,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedWayOfDelivery = connector.Get(createdWayOfDelivery.Code);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestDeliveryMethod", retrievedWayOfDelivery.Description);
 
             #endregion READ / GET
@@ -62,7 +59,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdWayOfDelivery.Code);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdWayOfDelivery.Code),
@@ -93,7 +89,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             //Filter not supported
             var fullCollection = connector.Find(null);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);
             Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == testKeyMark));
@@ -102,7 +97,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var searchSettings = new WayOfDeliverySearch();
             searchSettings.Limit = 2;
             var limitedCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(existingCount + 5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);

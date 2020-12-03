@@ -38,7 +38,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdArticleFileConnection = connector.Create(newArticleFileConnection);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(tmpArticle.ArticleNumber, createdArticleFileConnection.ArticleNumber);
 
             #endregion CREATE
@@ -52,7 +51,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedArticleFileConnection = connector.Get(createdArticleFileConnection.FileId);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(tmpArticle.ArticleNumber, retrievedArticleFileConnection.ArticleNumber);
 
             #endregion READ / GET
@@ -60,7 +58,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdArticleFileConnection.FileId);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdArticleFileConnection.FileId),
@@ -97,7 +94,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 newArticleFileConnection.FileId = tmpFile.Id;
 
                 connector.Create(newArticleFileConnection);
-                MyAssert.HasNoError(connector);
             }
 
             var searchSettings = new ArticleFileConnectionSearch();
@@ -108,7 +104,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             foreach (var entity in connections.Entities)
             {
                 connector.Delete(entity.FileId);
-                MyAssert.HasNoError(connector);
 
                 new ArchiveConnector().DeleteFile(entity.FileId);
             }

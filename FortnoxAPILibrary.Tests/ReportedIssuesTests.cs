@@ -45,8 +45,6 @@ namespace FortnoxAPILibrary.Tests
                     new InvoiceRow(), //Empty Row
                 }
             });
-
-            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -62,15 +60,12 @@ namespace FortnoxAPILibrary.Tests
 
             searchSettings.Limit = 2;
             var voucherResult = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             searchSettings.Page = 2;
             var voucherResult2 = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             searchSettings.Page = 3;
             var voucherResult3 = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -78,7 +73,6 @@ namespace FortnoxAPILibrary.Tests
         {
             var connector = new CustomerConnector();
             var specificCustomer = connector.Create(new Customer() { Name = "TestCustomer", OrganisationNumber = "123456789" });
-            MyAssert.HasNoError(connector);
 
             var searchSettings = new CustomerSearch();
             searchSettings.OrganisationNumber = "123456789";
@@ -87,7 +81,6 @@ namespace FortnoxAPILibrary.Tests
             Assert.IsNotNull(customer);
 
             connector.Delete(specificCustomer.CustomerNumber);
-            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -95,14 +88,11 @@ namespace FortnoxAPILibrary.Tests
         {
             var connector = new CustomerConnector();
             var newCustomer = connector.Create(new Customer() { Name = "TestCustomer", City = "Växjö", Type = CustomerType.Company });
-            MyAssert.HasNoError(connector);
 
             var updatedCustomer = connector.Update(new Customer() { CustomerNumber = newCustomer.CustomerNumber, City = "Stockholm" });
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(CustomerType.Company, updatedCustomer.Type);
 
             connector.Delete(newCustomer.CustomerNumber);
-            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -110,12 +100,10 @@ namespace FortnoxAPILibrary.Tests
         {
             var connector = new ArticleConnector();
             var newArticle = connector.Create(new Article() { Description = "TestArticle", FreightCost = 10, OtherCost = 10, CostCalculationMethod = "MANUAL" });
-            MyAssert.HasNoError(connector);
 
             //NOTE: Server does not create the properties FreightCost, OtherCost and CostCalculationMethod
             //Assert.AreEqual("10", newArticle.FreightCost); //Always fails
             connector.Delete(newArticle.ArticleNumber);
-            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -139,7 +127,6 @@ namespace FortnoxAPILibrary.Tests
             foreach (var runningTask in runningTasks)
             {
                 var result = runningTask.GetAwaiter().GetResult();
-                MyAssert.HasNoError(connector);
                 Assert.IsNotNull(result);
             }
             watch.Stop();
@@ -160,14 +147,12 @@ namespace FortnoxAPILibrary.Tests
             var randomFileName = TestUtils.RandomString() + "åöä.txt";
 
             var fortnoxFile = connector.UploadFile(randomFileName, data, testRootFolder.Name);
-            MyAssert.HasNoError(connector);
 
             //Assert
             Assert.AreEqual(randomFileName, fortnoxFile.Name);
 
             //Clean
             connector.DeleteFile(fortnoxFile.Id);
-            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -184,16 +169,13 @@ namespace FortnoxAPILibrary.Tests
                     Invoice = DefaultDeliveryType.ElectronicInvoice
                 }
             });
-            MyAssert.HasNoError(connector);
 
             //Act && Assert
             var customer = connector.Get(tmpCustomer.CustomerNumber);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(DefaultDeliveryType.ElectronicInvoice, customer.DefaultDeliveryTypes.Invoice);
 
             //Clean
             connector.Delete(tmpCustomer.CustomerNumber);
-            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -222,17 +204,14 @@ namespace FortnoxAPILibrary.Tests
                     new SupplierInvoiceRow() {ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100}
                 }
             });
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(false, createdInvoice.Cancelled);
 
             var retrievedInvoice = connector.Get(createdInvoice.GivenNumber);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(false, retrievedInvoice.Cancelled);
 
             var searchSettings = new SupplierInvoiceSearch();
             searchSettings.LastModified = DateTime.Today;
             var invoiceSubsets = connector.Find(searchSettings).Entities;
-            MyAssert.HasNoError(connector);
             foreach (var supplierInvoiceSubset in invoiceSubsets)
                 Assert.IsNotNull(supplierInvoiceSubset.Cancelled);
 
@@ -279,7 +258,6 @@ namespace FortnoxAPILibrary.Tests
             };
 
             var createdInvoice = connector.Create(newInvoice);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(largeId, createdInvoice.DocumentNumber);
 
             #region Delete arranged resources
@@ -301,7 +279,6 @@ namespace FortnoxAPILibrary.Tests
             var randomFileName = TestUtils.RandomString() + ".txt";
 
             var fortnoxFile = ac.UploadFile(randomFileName, data, StaticFolders.SupplierInvoices);
-            MyAssert.HasNoError(ac);
 
             #endregion Arrange
 
@@ -330,7 +307,6 @@ namespace FortnoxAPILibrary.Tests
             
             //Clean
             archiveConnector.DeleteFile(fortnoxFile.Id);
-            MyAssert.HasNoError(archiveConnector);
         }
 
         [TestMethod]
@@ -343,7 +319,6 @@ namespace FortnoxAPILibrary.Tests
             var randomFileName = TestUtils.RandomString() + ".txt";
 
             var fortnoxFile = ac.UploadFile(randomFileName, data, StaticFolders.SupplierInvoices);
-            MyAssert.HasNoError(ac);
 
             #endregion Arrange
 
@@ -371,7 +346,6 @@ namespace FortnoxAPILibrary.Tests
 
             //Clean
             inboxConnector.DeleteFile(fortnoxFile.Id);
-            MyAssert.HasNoError(archiveConnector);
         }
     }
 }

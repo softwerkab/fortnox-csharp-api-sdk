@@ -50,7 +50,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdAssetFileConnection = connector.Create(newAssetFileConnection);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(tmpAsset.Id, createdAssetFileConnection.AssetId);
 
             #endregion CREATE
@@ -62,7 +61,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedAssetFileConnection = connector.Get(createdAssetFileConnection.FileId);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(tmpAsset.Id, retrievedAssetFileConnection.AssetId);
 
             #endregion READ / GET
@@ -70,7 +68,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdAssetFileConnection.FileId);
-            MyAssert.HasNoError(connector);
 
             /*Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdAssetFileConnection.FileId),

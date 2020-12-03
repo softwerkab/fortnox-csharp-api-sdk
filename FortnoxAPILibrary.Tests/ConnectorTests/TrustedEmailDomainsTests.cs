@@ -33,7 +33,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdTrustedEmailDomains = connector.Create(newTrustedEmailDomains);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("testdomain.tst", createdTrustedEmailDomains.Domain);
 
             #endregion CREATE
@@ -45,7 +44,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedTrustedEmailDomains = connector.Get(createdTrustedEmailDomains.Id);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("testdomain.tst", retrievedTrustedEmailDomains.Domain);
 
             #endregion READ / GET
@@ -53,7 +51,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdTrustedEmailDomains.Id);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdTrustedEmailDomains.Id),

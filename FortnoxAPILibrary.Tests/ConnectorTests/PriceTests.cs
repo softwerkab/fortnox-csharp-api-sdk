@@ -40,7 +40,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdPrice = connector.Create(newPrice);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(12.5m, createdPrice.PriceValue);
 
             #endregion CREATE
@@ -50,7 +49,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdPrice.PriceValue = 15;
 
             var updatedPrice = connector.Update(createdPrice); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(15, updatedPrice.PriceValue);
 
             #endregion UPDATE
@@ -58,7 +56,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedPrice = connector.Get(createdPrice.PriceList, createdPrice.ArticleNumber, createdPrice.FromQuantity);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(15, retrievedPrice.PriceValue);
 
             #endregion READ / GET
@@ -66,7 +63,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdPrice.PriceList, createdPrice.ArticleNumber, createdPrice.FromQuantity);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdPrice.PriceList, createdPrice.ArticleNumber, createdPrice.FromQuantity),
@@ -110,7 +106,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var searchSettings = new PriceSearch();
             searchSettings.LastModified = dateStamp.AddSeconds(-1);
             var fullCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber, searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5+1, fullCollection.TotalResources);
             Assert.AreEqual(5+1, fullCollection.Entities.Count);
@@ -121,7 +116,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             //Apply Limit
             searchSettings.Limit = 2;
             var limitedCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber, searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5+1, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);

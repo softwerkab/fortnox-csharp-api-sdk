@@ -37,7 +37,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdCostCenter = connector.Create(newCostCenter);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestCostCenter", createdCostCenter.Description);
 
             #endregion CREATE
@@ -47,7 +46,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdCostCenter.Description = "UpdatedTestCostCenter";
 
             var updatedCostCenter = connector.Update(createdCostCenter); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestCostCenter", updatedCostCenter.Description);
 
             #endregion UPDATE
@@ -55,7 +53,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedCostCenter = connector.Get(createdCostCenter.Code);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestCostCenter", retrievedCostCenter.Description);
 
             #endregion READ / GET
@@ -63,7 +60,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdCostCenter.Code);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdCostCenter.Code),
@@ -97,14 +93,12 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             {
                 newCostCenter.Code = TestUtils.RandomString(5);
                 connector.Create(newCostCenter);
-                MyAssert.HasNoError(connector);
             }
 
             //Apply base test filter
             var searchSettings = new CostCenterSearch();
             searchSettings.LastModified = DateTime.Now.AddMinutes(-5);
             var fullCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -115,7 +109,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             //Apply Limit
             searchSettings.Limit = 2;
             var limitedCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);

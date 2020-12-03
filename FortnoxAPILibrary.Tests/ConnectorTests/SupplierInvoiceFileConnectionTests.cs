@@ -54,7 +54,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdSupplierInvoiceFileConnection = connector.Create(newSupplierInvoiceFileConnection);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(tmpSupplier.Name, createdSupplierInvoiceFileConnection.SupplierName);
 
             #endregion CREATE
@@ -66,7 +65,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedSupplierInvoiceFileConnection = connector.Get(createdSupplierInvoiceFileConnection.FileId);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(tmpSupplier.Name, retrievedSupplierInvoiceFileConnection.SupplierName);
 
             #endregion READ / GET
@@ -74,7 +72,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdSupplierInvoiceFileConnection.FileId);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdSupplierInvoiceFileConnection.FileId),

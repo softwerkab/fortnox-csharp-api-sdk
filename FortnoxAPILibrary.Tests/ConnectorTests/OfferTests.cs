@@ -44,7 +44,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdOffer = connector.Create(newOffer);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestOrder", createdOffer.Comments);
             Assert.AreEqual("TmpCustomer", createdOffer.CustomerName);
             Assert.AreEqual(3, createdOffer.OfferRows.Count);
@@ -56,7 +55,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdOffer.Comments = "UpdatedTestOrder";
 
             var updatedOffer = connector.Update(createdOffer); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestOrder", updatedOffer.Comments);
 
             #endregion UPDATE
@@ -64,7 +62,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedOffer = connector.Get(createdOffer.DocumentNumber);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestOrder", retrievedOffer.Comments);
 
             #endregion READ / GET
@@ -109,14 +106,12 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             for (var i = 0; i < 5; i++)
             {
                 connector.Create(newOffer);
-                MyAssert.HasNoError(connector);
             }
 
             //Apply base test filter
             var searchSettings = new OfferSearch();
             searchSettings.CustomerNumber = tmpCustomer.CustomerNumber;
             var fullCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -127,7 +122,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             //Apply Limit
             searchSettings.Limit = 2;
             var limitedCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -166,10 +160,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdOffer = connector.Create(newOffer);
-            MyAssert.HasNoError(connector);
 
             var fileData = connector.Print(createdOffer.DocumentNumber);
-            MyAssert.HasNoError(connector);
             MyAssert.IsPDF(fileData);
 
             connector.Cancel(createdOffer.DocumentNumber);
@@ -203,10 +195,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdOffer = connector.Create(newOffer);
-            MyAssert.HasNoError(connector);
 
             var emailedInvoice = connector.Email(createdOffer.DocumentNumber);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(emailedInvoice.DocumentNumber, createdOffer.DocumentNumber);
 
             connector.Cancel(createdOffer.DocumentNumber);

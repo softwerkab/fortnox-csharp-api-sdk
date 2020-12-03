@@ -23,23 +23,19 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             //Get
             var bygAccount = connector.Get("CONSTRUCTION_DEB");
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(2647, bygAccount.Account);
 
             var patentAccount = connector.Get("PRODUCT_DEB");
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(2645, patentAccount.Account);
 
             //Update
             patentAccount.Account = bygAccount.Account;
             connector.Update(patentAccount);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(2647, patentAccount.Account);
 
             //Revert
             patentAccount.Account = 2645;
             connector.Update(patentAccount);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(2645, patentAccount.Account);
         }
 
@@ -49,7 +45,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             IPredefinedAccountsConnector connector = new PredefinedAccountsConnector();
 
             var fullCollection = connector.Find(null);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(42, fullCollection.Entities.Count);
             Assert.IsNotNull(fullCollection.Entities.First().Name);
@@ -57,7 +52,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var searchSettings = new PredefinedAccountsSearch();
             searchSettings.Limit = 2;
             var limitedCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(2, limitedCollection.Entities.Count);
             Assert.AreEqual(42, limitedCollection.TotalResources);

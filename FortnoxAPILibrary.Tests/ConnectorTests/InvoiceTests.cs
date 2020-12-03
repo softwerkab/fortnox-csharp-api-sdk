@@ -47,7 +47,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdInvoice = connector.Create(newInvoice);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestInvoice", createdInvoice.Comments);
             Assert.AreEqual("TmpCustomer", createdInvoice.CustomerName);
             Assert.AreEqual(3, createdInvoice.InvoiceRows.Count);
@@ -59,7 +58,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdInvoice.Comments = "UpdatedInvoice";
 
             var updatedInvoice = connector.Update(createdInvoice); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedInvoice", updatedInvoice.Comments);
 
             #endregion UPDATE
@@ -67,7 +65,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedInvoice = connector.Get(createdInvoice.DocumentNumber);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedInvoice", retrievedInvoice.Comments);
 
             #endregion READ / GET
@@ -115,14 +112,12 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             for (var i = 0; i < 5; i++)
             {
                 connector.Create(newInvoice);
-                MyAssert.HasNoError(connector);
             }
 
             //Apply base test filter
             var searchSettings = new InvoiceSearch();
             searchSettings.CustomerNumber = tmpCustomer.CustomerNumber;
             var fullCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -133,7 +128,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             //Apply Limit
             searchSettings.Limit = 2;
             var limitedCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -172,7 +166,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdInvoice = connector.Create(newInvoice);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("2019-01-20", createdInvoice.InvoiceDate?.ToString(APIConstants.DateFormat));
             Assert.AreEqual("2019-02-19", createdInvoice.DueDate?.ToString(APIConstants.DateFormat));
 
@@ -184,7 +177,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdInvoice.DueDate = newDueDate;
 
             var updatedInvoice = connector.Update(createdInvoice);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("2019-01-01", updatedInvoice.InvoiceDate?.ToString(APIConstants.DateFormat));
             Assert.AreEqual("2019-01-31", updatedInvoice.DueDate?.ToString(APIConstants.DateFormat));
 
@@ -204,8 +196,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var ac = new ArticleConnector();
             var tmpCustomer = cc.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
             var tmpArticle = ac.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
-            MyAssert.HasNoError(cc);
-            MyAssert.HasNoError(ac);
             #endregion Arrange
 
             IInvoiceConnector connector = new InvoiceConnector();
@@ -227,10 +217,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdInvoice = connector.Create(newInvoice);
-            MyAssert.HasNoError(connector);
 
             var fileData = connector.Print(createdInvoice.DocumentNumber);
-            MyAssert.HasNoError(connector);
             MyAssert.IsPDF(fileData);
 
             connector.Cancel(createdInvoice.DocumentNumber);
@@ -268,10 +256,8 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdInvoice = connector.Create(newInvoice);
-            MyAssert.HasNoError(connector);
 
             var emailedInvoice = connector.Email(createdInvoice.DocumentNumber);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(emailedInvoice.DocumentNumber, createdInvoice.DocumentNumber);
 
             connector.Cancel(createdInvoice.DocumentNumber);

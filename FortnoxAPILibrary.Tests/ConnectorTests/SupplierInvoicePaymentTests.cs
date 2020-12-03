@@ -56,7 +56,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdSupplierInvoicePayment = connector.Create(newSupplierInvoicePayment);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(1000, createdSupplierInvoicePayment.Amount);
 
             #endregion CREATE
@@ -66,7 +65,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdSupplierInvoicePayment.Amount = 2000; 
 
             var updatedSupplierInvoicePayment = connector.Update(createdSupplierInvoicePayment); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(2000, updatedSupplierInvoicePayment.Amount);
 
             #endregion UPDATE
@@ -74,7 +72,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedSupplierInvoicePayment = connector.Get(createdSupplierInvoicePayment.Number);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(2000, retrievedSupplierInvoicePayment.Amount);
 
             #endregion READ / GET
@@ -82,7 +79,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdSupplierInvoicePayment.Number);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdSupplierInvoicePayment.Number),

@@ -50,7 +50,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdCurrency = connector.Create(newCurrency);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestCurrency", createdCurrency.Description);
 
             #endregion CREATE
@@ -60,7 +59,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdCurrency.Description = "UpdatedCurrency";
 
             var updatedCurrency = connector.Update(createdCurrency);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedCurrency", updatedCurrency.Description);
 
             #endregion UPDATE
@@ -68,7 +66,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedCurrency = connector.Get(createdCurrency.Code);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedCurrency", retrievedCurrency.Description);
 
             #endregion READ / GET
@@ -76,7 +73,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdCurrency.Code);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdCurrency.Code),

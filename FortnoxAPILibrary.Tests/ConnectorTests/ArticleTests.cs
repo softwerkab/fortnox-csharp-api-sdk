@@ -42,7 +42,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdArticle = connector.Create(newArticle);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("Test Article", createdArticle.Description);
             #endregion CREATE
 
@@ -51,7 +50,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdArticle.Description = "Updated Test Article";
 
             var updatedArticle = connector.Update(createdArticle); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("Updated Test Article", updatedArticle.Description);
 
             #endregion UPDATE
@@ -59,7 +57,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedArticle = connector.Get(createdArticle.ArticleNumber);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("Updated Test Article", retrievedArticle.Description);
 
             #endregion READ / GET
@@ -67,7 +64,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdArticle.ArticleNumber);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdArticle.ArticleNumber),
@@ -113,7 +109,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var searchSettings = new ArticleSearch();
             searchSettings.Description = testKeyMark;
             var fullCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -122,7 +117,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             //Apply Limit
             searchSettings.Limit = 2;
             var limitedCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -149,7 +143,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             var connector = new ArticleConnector();
             var article = connector.Create(new Article(){ Description = "HouseworkArticleTest", Housework = true });
-            MyAssert.HasNoError(connector);
 
             foreach (var houseworkType in values)
             {
@@ -161,12 +154,10 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 article.HouseworkType = houseworkType;
                 article = connector.Update(article);
 
-                MyAssert.HasNoError(connector);
                 Assert.AreEqual(houseworkType, article.HouseworkType);
             }
 
             connector.Delete(article.ArticleNumber);
-            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -179,16 +170,13 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 Housework = true,
                 HouseworkType = HouseworkType.Cleaning
             });
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(HouseworkType.Cleaning, article.HouseworkType);
 
             article.HouseworkType = HouseworkType.Empty;
             var updatedArticle = connector.Update(article);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(null, updatedArticle.HouseworkType);
 
             connector.Delete(article.ArticleNumber);
-            MyAssert.HasNoError(connector);
         }
     }
 }

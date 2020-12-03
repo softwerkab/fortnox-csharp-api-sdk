@@ -37,7 +37,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdExpense = connector.Create(newExpense);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestExpense", createdExpense.Text);
 
             #endregion CREATE
@@ -51,7 +50,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedExpense = connector.Get(createdExpense.Code);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestExpense", retrievedExpense.Text);
 
             #endregion READ / GET
@@ -88,7 +86,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             {
                 newExpense.Code = TestUtils.RandomString(6);
                 connector.Create(newExpense);
-                MyAssert.HasNoError(connector);
             }
 
             var searchSettings = new ExpenseSearch();
@@ -97,7 +94,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var expensesCollection = connector.Find(searchSettings);
 
             var newExpenses = expensesCollection.Entities.Where(x => x.Text == remark).ToList();
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(2, newExpenses.Count);
             Assert.IsNotNull(newExpenses.First().Url);
 

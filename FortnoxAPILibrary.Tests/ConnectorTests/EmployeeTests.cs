@@ -44,7 +44,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdEmployee = alreadyExists ? connector.Update(newEmployee) : connector.Create(newEmployee);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("Test", createdEmployee.FirstName);
 
             #endregion CREATE
@@ -54,7 +53,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdEmployee.FirstName = "UpdatedTest";
 
             var updatedEmployee = connector.Update(createdEmployee);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTest", updatedEmployee.FirstName);
 
             #endregion UPDATE
@@ -62,7 +60,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedEmployee = connector.Get(createdEmployee.EmployeeId);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTest", retrievedEmployee.FirstName);
 
             #endregion READ / GET

@@ -55,7 +55,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdTaxReduction = connector.Create(newTaxReduction);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(100, createdTaxReduction.AskedAmount);
 
             #endregion CREATE
@@ -65,7 +64,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdTaxReduction.AskedAmount = 200;
 
             var updatedTaxReduction = connector.Update(createdTaxReduction); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(200, updatedTaxReduction.AskedAmount);
 
             #endregion UPDATE
@@ -73,7 +71,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedTaxReduction = connector.Get(createdTaxReduction.Id);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(200, retrievedTaxReduction.AskedAmount);
 
             #endregion READ / GET
@@ -91,7 +88,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             });
 
             connector.Delete(createdTaxReduction.Id);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdTaxReduction.Id),
@@ -143,14 +139,12 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             {
                 newTaxReduction.SocialSecurityNumber = TestUtils.RandomPersonalNumber();
                 connector.Create(newTaxReduction);
-                MyAssert.HasNoError(connector);
             }
 
             //Apply base test filter
             var searchSettings = new TaxReductionSearch();
             searchSettings.ReferenceNumber = tmpInvoice.DocumentNumber.ToString();
             var fullCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -159,7 +153,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             //Apply Limit
             searchSettings.Limit = 2;
             var limitedCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);

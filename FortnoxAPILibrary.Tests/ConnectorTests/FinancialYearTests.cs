@@ -41,7 +41,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdFinancialYear = connector.Create(newFinancialYear);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(new DateTime(2010, 1, 1), createdFinancialYear.FromDate);
 
             #endregion CREATE
@@ -55,7 +54,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedFinancialYear = connector.Get(createdFinancialYear.Id);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(new DateTime(2010, 1, 1), retrievedFinancialYear.FromDate);
 
             #endregion READ / GET

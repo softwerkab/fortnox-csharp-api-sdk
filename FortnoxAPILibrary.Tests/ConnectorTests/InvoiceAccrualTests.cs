@@ -61,7 +61,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdInvoiceAccrual = connector.Create(newInvoiceAccrual);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestInvoiceAccrual", createdInvoiceAccrual.Description);
 
             #endregion CREATE
@@ -71,7 +70,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdInvoiceAccrual.Description = "UpdatedTestInvoiceAccrual";
 
             var updatedInvoiceAccrual = connector.Update(createdInvoiceAccrual); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestInvoiceAccrual", updatedInvoiceAccrual.Description);
 
             #endregion UPDATE
@@ -79,7 +77,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedInvoiceAccrual = connector.Get(createdInvoiceAccrual.InvoiceNumber);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestInvoiceAccrual", retrievedInvoiceAccrual.Description);
 
             #endregion READ / GET
@@ -87,7 +84,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdInvoiceAccrual.InvoiceNumber);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdInvoiceAccrual.InvoiceNumber),
@@ -149,7 +145,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
                 newInvoiceAccrual.InvoiceNumber = createdInvoice.DocumentNumber;
                 connector.Create(newInvoiceAccrual);
-                MyAssert.HasNoError(connector);
             }
 
             var contractAccruals = connector.Find(null);
@@ -158,7 +153,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             foreach (var entry in contractAccruals.Entities.Where(x => x.Description.StartsWith(marks)))
             {
                 connector.Delete(entry.InvoiceNumber);
-                MyAssert.HasNoError(connector);
                 new InvoiceConnector().Cancel(entry.InvoiceNumber);
             }
 

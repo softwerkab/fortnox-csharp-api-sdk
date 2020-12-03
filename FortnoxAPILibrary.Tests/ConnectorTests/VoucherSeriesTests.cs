@@ -34,7 +34,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdVoucherSeries = connector.Create(newVoucherSeries) ?? connector.Update(newVoucherSeries); //if already exists, update it instead
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestVoucherSeries", createdVoucherSeries.Description);
 
             #endregion CREATE
@@ -44,7 +43,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdVoucherSeries.Description = "UpdatedTestVoucherSeries";
 
             var updatedVoucherSeries = connector.Update(createdVoucherSeries); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestVoucherSeries", updatedVoucherSeries.Description);
 
             #endregion UPDATE
@@ -52,7 +50,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedVoucherSeries = connector.Get(createdVoucherSeries.Code);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestVoucherSeries", retrievedVoucherSeries.Description);
 
             #endregion READ / GET

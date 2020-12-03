@@ -41,7 +41,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdVoucher = connector.Create(newVoucher);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestVoucher", createdVoucher.Description);
 
             #endregion CREATE
@@ -52,7 +51,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             #region READ / GET
             var retrievedVoucher = connector.Get(createdVoucher.VoucherNumber, createdVoucher.VoucherSeries, createdVoucher.Year);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestVoucher", retrievedVoucher.Description);
 
             #endregion READ / GET

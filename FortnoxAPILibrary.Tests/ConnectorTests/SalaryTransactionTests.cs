@@ -38,7 +38,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdSalaryTransaction = connector.Create(newSalaryTransaction);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestSalaryRow", createdSalaryTransaction.TextRow);
 
             #endregion CREATE
@@ -48,7 +47,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdSalaryTransaction.TextRow = "UpdatedTestSalaryRow";
 
             var updatedSalaryTransaction = connector.Update(createdSalaryTransaction); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestSalaryRow", updatedSalaryTransaction.TextRow);
 
             #endregion UPDATE
@@ -56,7 +54,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedSalaryTransaction = connector.Get(createdSalaryTransaction.SalaryRow);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestSalaryRow", retrievedSalaryTransaction.TextRow);
 
             #endregion READ / GET
@@ -64,7 +61,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdSalaryTransaction.SalaryRow);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdSalaryTransaction.SalaryRow),

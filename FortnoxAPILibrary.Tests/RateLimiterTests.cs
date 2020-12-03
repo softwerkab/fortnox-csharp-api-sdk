@@ -31,7 +31,6 @@ namespace FortnoxAPILibrary.Tests
                 var searchSettings = new CustomerSearch();
                 searchSettings.City = TestUtils.RandomString(); //Needs to be random to make unique GET request
                 connector.Find(searchSettings);
-                MyAssert.HasNoError(connector);
             }
 
             watch.Stop();

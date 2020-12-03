@@ -51,7 +51,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdContract = connector.Create(newContract);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestContract", createdContract.Comments);
 
             #endregion CREATE
@@ -61,7 +60,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdContract.Comments = "UpdatedTestContract";
 
             var updatedContract = connector.Update(createdContract); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestContract", updatedContract.Comments);
 
             #endregion UPDATE
@@ -69,7 +67,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedContract = connector.Get(createdContract.DocumentNumber);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestContract", retrievedContract.Comments);
 
             #endregion READ / GET
@@ -117,7 +114,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             for (var i = 0; i < 5; i++)
             {
                 connector.Create(newContract);
-                MyAssert.HasNoError(connector);
             }
 
             var searchSettings = new ContractSearch();

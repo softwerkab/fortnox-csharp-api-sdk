@@ -71,7 +71,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdContractAccrual = connector.Create(newContractAccrual);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestContractAccrual", createdContractAccrual.Description);
 
             #endregion CREATE
@@ -81,7 +80,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdContractAccrual.Description = "UpdatedTestContractAccrual";
 
             var updatedContractAccrual = connector.Update(createdContractAccrual);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestContractAccrual", updatedContractAccrual.Description);
 
             #endregion UPDATE
@@ -89,7 +87,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedContractAccrual = connector.Get(createdContractAccrual.DocumentNumber);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestContractAccrual", retrievedContractAccrual.Description);
 
             #endregion READ / GET
@@ -97,7 +94,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdContractAccrual.DocumentNumber);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdContractAccrual.DocumentNumber),
@@ -166,7 +162,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 var createdContract = new ContractConnector().Create(contract);
                 newContractAccrual.DocumentNumber = createdContract.DocumentNumber;
                 connector.Create(newContractAccrual);
-                MyAssert.HasNoError(connector);
             }
 
             var contractAccruals = connector.Find(null);
@@ -175,7 +170,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             foreach (var entry in contractAccruals.Entities.Where(x => x.Description.StartsWith(marks)))
             {
                 connector.Delete(entry.DocumentNumber);
-                MyAssert.HasNoError(connector);
                 new ContractConnector().Finish(entry.DocumentNumber);
             }
             #region Delete arranged resources

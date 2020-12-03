@@ -36,7 +36,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdUnit = connector.Create(newUnit);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestUnit", createdUnit.Description);
 
             #endregion CREATE
@@ -46,7 +45,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdUnit.Description = "UpdatedTestUnit";
 
             var updatedUnit = connector.Update(createdUnit); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestUnit", updatedUnit.Description);
 
             #endregion UPDATE
@@ -54,7 +52,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedUnit = connector.Get(createdUnit.Code);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestUnit", retrievedUnit.Description);
 
             #endregion READ / GET
@@ -62,7 +59,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdUnit.Code);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdUnit.Code),
@@ -93,7 +89,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             //Filter not supported
             var fullCollection = connector.Find(null);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(existingCount + 5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count(x => x.Code.StartsWith(marks)));

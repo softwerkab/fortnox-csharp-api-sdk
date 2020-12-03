@@ -53,7 +53,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdSupplierInvoiceExternalURLConnection = connector.Create(newSupplierInvoiceExternalURLConnection);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("http://example.com/image.jpg", createdSupplierInvoiceExternalURLConnection.ExternalURLConnection);
 
             #endregion CREATE
@@ -63,7 +62,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdSupplierInvoiceExternalURLConnection.ExternalURLConnection = "http://example.com/image.png";
 
             var updatedSupplierInvoiceExternalURLConnection = connector.Update(createdSupplierInvoiceExternalURLConnection); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("http://example.com/image.png", updatedSupplierInvoiceExternalURLConnection.ExternalURLConnection);
 
             #endregion UPDATE
@@ -71,7 +69,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedSupplierInvoiceExternalURLConnection = connector.Get(createdSupplierInvoiceExternalURLConnection.Id);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("http://example.com/image.png", retrievedSupplierInvoiceExternalURLConnection.ExternalURLConnection);
 
             #endregion READ / GET
@@ -79,7 +76,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdSupplierInvoiceExternalURLConnection.Id);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdSupplierInvoiceExternalURLConnection.Id),

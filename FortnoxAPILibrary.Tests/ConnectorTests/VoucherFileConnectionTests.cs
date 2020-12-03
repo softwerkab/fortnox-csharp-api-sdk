@@ -50,7 +50,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdVoucherFileConnection = connector.Create(newVoucherFileConnection);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(tmpVoucher.Description, createdVoucherFileConnection.VoucherDescription);
 
             #endregion CREATE
@@ -62,7 +61,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedVoucherFileConnection = connector.Get(createdVoucherFileConnection.FileId);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(tmpVoucher.Description, retrievedVoucherFileConnection.VoucherDescription);
 
             #endregion READ / GET
@@ -70,7 +68,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdVoucherFileConnection.FileId);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdVoucherFileConnection.FileId),

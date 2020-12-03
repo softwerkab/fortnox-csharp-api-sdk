@@ -41,7 +41,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 }
             });
             invoiceConnector.Bookkeep(tmpInvoice.DocumentNumber);
-            MyAssert.HasNoError(invoiceConnector);
             #endregion Arrange
 
             IInvoicePaymentConnector connector = new InvoicePaymentConnector();
@@ -57,7 +56,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdInvoicePayment = connector.Create(newInvoicePayment);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("2020-02-01", createdInvoicePayment.PaymentDate?.ToString(APIConstants.DateFormat));
 
             #endregion CREATE
@@ -67,7 +65,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdInvoicePayment.PaymentDate = new DateTime(2020, 3, 1);
 
             var updatedInvoicePayment = connector.Update(createdInvoicePayment);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("2020-03-01", updatedInvoicePayment.PaymentDate?.ToString(APIConstants.DateFormat));
 
             #endregion UPDATE
@@ -75,7 +72,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedInvoicePayment = connector.Get(createdInvoicePayment.Number);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("2020-03-01", retrievedInvoicePayment.PaymentDate?.ToString(APIConstants.DateFormat));
 
             #endregion READ / GET
@@ -83,7 +79,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdInvoicePayment.Number);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdInvoicePayment.Number),
@@ -133,7 +128,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             for (var i = 0; i < 5; i++)
             {
                 connector.Create(newInvoicePayment);
-                MyAssert.HasNoError(connector);
             }
 
             var searchSettings = new InvoicePaymentSearch();
@@ -146,7 +140,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             foreach (var entity in payments.Entities)
             {
                 connector.Delete(entity.Number);
-                MyAssert.HasNoError(connector);
             }
         }
     }

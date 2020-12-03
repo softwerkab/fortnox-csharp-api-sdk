@@ -23,19 +23,16 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             //Get
             var predefinedVoucherSeries = connector.Get("INVOICE");
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("B", predefinedVoucherSeries.VoucherSeries);
 
             //Update
             predefinedVoucherSeries.VoucherSeries = "L"; //Lon -> "SALARY"
             connector.Update(predefinedVoucherSeries);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("L", predefinedVoucherSeries.VoucherSeries);
 
             //Reset
             predefinedVoucherSeries.VoucherSeries = "B";
             connector.Update(predefinedVoucherSeries);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("B", predefinedVoucherSeries.VoucherSeries);
         }
 
@@ -45,7 +42,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             IPredefinedVoucherSeriesConnector connector = new PredefinedVoucherSeriesConnector();
 
             var fullCollection = connector.Find(null);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(13, fullCollection.Entities.Count);
             Assert.IsNotNull(fullCollection.Entities.First().Name);

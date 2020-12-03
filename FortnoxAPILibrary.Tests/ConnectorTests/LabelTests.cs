@@ -35,7 +35,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdLabel = connector.Create(newLabel);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(randomLabel, createdLabel.Description);
 
             #endregion CREATE
@@ -46,7 +45,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdLabel.Description = updatedRandomLabel;
 
             var updatedLabel = connector.Update(createdLabel); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(updatedRandomLabel, updatedLabel.Description);
 
             #endregion UPDATE
@@ -58,7 +56,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdLabel.Id);
-            MyAssert.HasNoError(connector);
 
             #endregion DELETE
 
@@ -84,7 +81,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             //Filter not supported
             var fullCollection = connector.Find(null);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);
 

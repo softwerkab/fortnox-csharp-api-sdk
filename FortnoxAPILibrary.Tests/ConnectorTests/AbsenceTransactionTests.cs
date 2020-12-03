@@ -42,7 +42,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdAbsenceTransaction = connector.Create(newAbsenceTransaction);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(5.5m, createdAbsenceTransaction.Hours);
 
             #endregion CREATE
@@ -52,7 +51,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdAbsenceTransaction.Hours = 8;
 
             var updatedAbsenceTransaction = connector.Update(createdAbsenceTransaction); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(8, updatedAbsenceTransaction.Hours);
 
             #endregion UPDATE
@@ -60,7 +58,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedAbsenceTransaction = connector.Get(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(8, retrievedAbsenceTransaction.Hours);
 
             #endregion READ / GET
@@ -68,7 +65,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode),
@@ -109,13 +105,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             {
                 newAbsenceTransaction.Date = new DateTime(2018, 01, 01).AddDays(i);
                 connector.Create(newAbsenceTransaction);
-                MyAssert.HasNoError(connector);
             }
 
             var searchSettings = new AbsenceTransactionSearch();
             searchSettings.EmployeeId = tmpEmployee.EmployeeId;
             var fullCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -126,7 +120,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             //Apply Limit
             searchSettings.Limit = 2;
             var limitedCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -26,7 +26,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             foreach (var sieType in types)
             {
                 var data = connector.Get(sieType);
-                MyAssert.HasNoError(connector);
                 Assert.IsNotNull(data);
             }
         }

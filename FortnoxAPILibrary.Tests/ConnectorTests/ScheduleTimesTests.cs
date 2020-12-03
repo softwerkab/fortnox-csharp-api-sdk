@@ -37,7 +37,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdScheduleTimes = connector.Update(newScheduleTimes);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(6.5m, createdScheduleTimes.Hours);
 
             #endregion CREATE
@@ -47,7 +46,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdScheduleTimes.Hours = 7;
 
             var updatedScheduleTimes = connector.Update(createdScheduleTimes); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(7, updatedScheduleTimes.Hours);
 
             #endregion UPDATE
@@ -55,7 +53,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedScheduleTimes = connector.Get(createdScheduleTimes.EmployeeId, createdScheduleTimes.Date);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(7, retrievedScheduleTimes.Hours);
 
             #endregion READ / GET

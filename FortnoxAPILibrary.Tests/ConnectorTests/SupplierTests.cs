@@ -47,7 +47,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdSupplier = connector.Create(newSupplier);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestSupplier", createdSupplier.Name);
 
             #endregion CREATE
@@ -57,7 +56,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdSupplier.Name = "UpdatedSupplier";
 
             var updatedSupplier = connector.Update(createdSupplier); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedSupplier", updatedSupplier.Name);
 
             #endregion UPDATE
@@ -65,7 +63,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedSupplier = connector.Get(createdSupplier.SupplierNumber);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedSupplier", retrievedSupplier.Name);
 
             #endregion READ / GET
@@ -73,7 +70,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdSupplier.SupplierNumber);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdSupplier.SupplierNumber),
@@ -121,7 +117,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var searchSettings = new SupplierSearch();
             searchSettings.City = testKeyMark;
             var fullCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -131,7 +126,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             //Apply Limit
             searchSettings.Limit = 2;
             var limitedCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -161,13 +155,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var supplier = connector.Create(newSupplier);
-            MyAssert.HasNoError(connector);
 
             foreach (var vat in vatTypes)
             {
                 supplier.VATType = vat;
                 supplier = connector.Update(supplier);
-                MyAssert.HasNoError(connector);
                 Assert.AreEqual(vat, supplier.VATType);
             }
 

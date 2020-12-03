@@ -31,14 +31,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var randomFileName = TestUtils.RandomString()+".txt";
 
             var fortnoxFile = connector.UploadFile(randomFileName, data, testRootFolder.Name);
-            MyAssert.HasNoError(connector);
 
             var fileData = connector.DownloadFile(fortnoxFile.Id);
-            MyAssert.HasNoError(connector);
             CollectionAssert.AreEqual(data, fileData);
 
             connector.DeleteFile(fortnoxFile.Id);
-            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -48,14 +45,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var randomFolderName = TestUtils.RandomString();
 
             var createdFolder = connector.CreateFolder(randomFolderName, testRootFolder.Name);
-            MyAssert.HasNoError(connector);
 
             var retrievedFolder = connector.GetFolder(createdFolder.Id);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(randomFolderName, retrievedFolder.Name);
 
             connector.DeleteFile(retrievedFolder.Id);
-            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -65,14 +59,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var randomFolderName = TestUtils.RandomString();
 
             var createdFolder = connector.CreateFolder(randomFolderName, testRootFolder.Name);
-            MyAssert.HasNoError(connector);
 
             var retrievedFolder = connector.GetFolder(createdFolder.Id);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(randomFolderName, retrievedFolder.Name);
 
             connector.DeleteFolder(testRootFolder.Name + @"\" + retrievedFolder.Name);
-            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -96,14 +87,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var randomFileName = TestUtils.RandomString() + ".txt";
 
             var fortnoxFile = connector.UploadFile(randomFileName, data, StaticFolders.SupplierInvoices);
-            MyAssert.HasNoError(connector);
 
             var fileData = connector.DownloadFile(fortnoxFile.Id);
-            MyAssert.HasNoError(connector);
             CollectionAssert.AreEqual(data, fileData);
 
             connector.DeleteFile(fortnoxFile.Id);
-            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -117,14 +105,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
                 var randomFileName = TestUtils.RandomString() + ".txt";
 
                 var fortnoxFile = connector.UploadFile(randomFileName, data, StaticFolders.Root);
-                MyAssert.HasNoError(connector);
 
                 var fileData = connector.DownloadFile(fortnoxFile.Id);
-                MyAssert.HasNoError(connector);
                 CollectionAssert.AreEqual(data, fileData);
 
                 connector.DeleteFile(fortnoxFile.Id);
-                MyAssert.HasNoError(connector);
             }
         }
 
@@ -146,19 +131,16 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             var randomFileName = TestUtils.RandomString() + ".txt";
 
             var fortnoxFile = connector.UploadFile(randomFileName, data, testRootFolder.Name);
-            MyAssert.HasNoError(connector);
 
             //Act
             var localFilePath = TestUtils.GenerateTmpFilePath();
             var fileInfo = connector.DownloadFile(fortnoxFile.Id, localFilePath);
-            MyAssert.HasNoError(connector);
             Assert.IsTrue(fileInfo.Exists);
             Assert.AreEqual(data.Length, fileInfo.Length);
 
             //Clean
             File.Delete(localFilePath);
             connector.DeleteFile(fortnoxFile.Id);
-            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -173,13 +155,11 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
 
             //Act
             var fortnoxFile = connector.UploadFile(localFilePath, testRootFolder.Name);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual(data.Length, int.Parse(fortnoxFile.Size));
 
             //Clean
             File.Delete(localFilePath);
             connector.DeleteFile(fortnoxFile.Id);
-            MyAssert.HasNoError(connector);
         }
     }
 }

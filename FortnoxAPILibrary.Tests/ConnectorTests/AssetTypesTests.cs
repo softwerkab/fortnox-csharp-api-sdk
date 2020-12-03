@@ -46,7 +46,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdAssetTypes = connector.Create(newAssetTypes);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestAssetType",
                 createdAssetTypes.Description); //Fails due to response entity is named "Type", not "AssetType"
 
@@ -57,7 +56,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdAssetTypes.Description = "UpdatedTestAssetType";
 
             var updatedAssetTypes = connector.Update(createdAssetTypes);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestAssetType", updatedAssetTypes.Description);
 
             #endregion UPDATE
@@ -65,7 +63,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedAssetTypes = connector.Get(createdAssetTypes.Id);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestAssetType", retrievedAssetTypes.Description);
 
             #endregion READ / GET
@@ -73,7 +70,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdAssetTypes.Id);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdAssetTypes.Id),
@@ -108,7 +104,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             {
                 newAssetType.Number = marks + i;
                 connector.Create(newAssetType);
-                MyAssert.HasNoError(connector);
             }
 
             var assetTypes = connector.Find(null);
@@ -118,7 +113,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             foreach (var entity in assetTypes.Entities.Where(x => x.Number.StartsWith(marks)))
             {
                 connector.Delete(entity.Id);
-                MyAssert.HasNoError(connector);
             }
         }
     }

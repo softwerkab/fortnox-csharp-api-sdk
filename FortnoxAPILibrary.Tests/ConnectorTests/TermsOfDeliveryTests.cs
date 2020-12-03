@@ -35,7 +35,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             };
 
             var createdTermsOfDelivery = connector.Create(newTermsOfDelivery);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("TestDeliveryTerms", createdTermsOfDelivery.Description);
 
             #endregion CREATE
@@ -45,7 +44,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             createdTermsOfDelivery.Description = "UpdatedTestDeliveryTerms";
 
             var updatedTermsOfDelivery = connector.Update(createdTermsOfDelivery); 
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestDeliveryTerms", updatedTermsOfDelivery.Description);
 
             #endregion UPDATE
@@ -53,7 +51,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedTermsOfDelivery = connector.Get(createdTermsOfDelivery.Code);
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("UpdatedTestDeliveryTerms", retrievedTermsOfDelivery.Description);
 
             #endregion READ / GET
@@ -61,7 +58,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region DELETE
 
             connector.Delete(createdTermsOfDelivery.Code);
-            MyAssert.HasNoError(connector);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdTermsOfDelivery.Code),
@@ -89,14 +85,12 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             {
                 newTermsOfDelivery.Code = TestUtils.RandomString();
                 connector.Create(newTermsOfDelivery);
-                MyAssert.HasNoError(connector);
             }
 
             //Filter not supported
             var searchSettings = new TermsOfDeliverySearch();
             searchSettings.LastModified = DateTime.Now.AddMinutes(-5);
             var fullCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(5, fullCollection.Entities.Count);
             Assert.AreEqual("TestDeliveryTerms", fullCollection.Entities[0].Description);
@@ -104,7 +98,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             //Apply Limit
             searchSettings.Limit = 2;
             var limitedCollection = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(2, limitedCollection.Entities.Count);
 

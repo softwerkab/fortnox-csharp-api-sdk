@@ -125,11 +125,9 @@ namespace FortnoxAPILibrary.Tests
             ICustomerConnector connector = new CustomerConnector();
 
             var createdCustomer = connector.Create(new Customer() {Name = "TestUser", CountryCode = "SE"});
-            MyAssert.HasNoError(connector);
             Assert.AreEqual("Sverige", createdCustomer.Country);
 
             connector.Delete(createdCustomer.CustomerNumber);
-            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -142,10 +140,8 @@ namespace FortnoxAPILibrary.Tests
                 Name = "TestUser",
                 DefaultDeliveryTypes = new DefaultDeliveryTypes() //Empty Object
             });
-            MyAssert.HasNoError(connector);
 
             connector.Delete(createdCustomer.CustomerNumber);
-            MyAssert.HasNoError(connector);
         }
 
         [TestMethod]
@@ -185,13 +181,11 @@ namespace FortnoxAPILibrary.Tests
 
             ICustomerConnector connector = new CustomerConnector();
             var result = connector.Find(null);
-            MyAssert.HasNoError(connector);
             Assert.IsTrue(result.TotalPages > 1);
 
             var searchSettings = new CustomerSearch();
             searchSettings.Limit = APIConstants.Unlimited;
             var allInOneResult = connector.Find(searchSettings);
-            MyAssert.HasNoError(connector);
 
             Assert.AreEqual(1, allInOneResult.TotalPages);
             Assert.AreEqual(result.TotalResources, allInOneResult.Entities.Count);
@@ -208,9 +202,8 @@ namespace FortnoxAPILibrary.Tests
         {
             var authorizationCode = "Placeholder";
             var authConnector = new AuthorizationConnector();
-            var token = authConnector.GetAccessToken(authorizationCode, TestCredentials.Client_Secret);
 
-            MyAssert.HasNoError(authConnector);
+            var token = authConnector.GetAccessToken(authorizationCode, TestCredentials.Client_Secret);
             Assert.IsNotNull(token);
         }
     }

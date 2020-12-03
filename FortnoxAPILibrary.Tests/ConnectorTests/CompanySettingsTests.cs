@@ -35,7 +35,6 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             #region READ / GET
 
             var retrievedCompanySettings = connector.Get();
-            MyAssert.HasNoError(connector);
             Assert.IsNotNull(retrievedCompanySettings?.Name);
 
             #endregion READ / GET
