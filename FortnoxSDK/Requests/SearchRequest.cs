@@ -1,0 +1,14 @@
+﻿using System.Net.Http;
+using Fortnox.SDK.Search;
+
+namespace Fortnox.SDK.Requests
+{
+    public class SearchRequest<TEntity> : BaseRequest
+    {
+        public SearchRequest()
+        {
+            Method = HttpMethod.Get;
+        }
+        public BaseSearch SearchSettings { get; set; }
+    }
+}

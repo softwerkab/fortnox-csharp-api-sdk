@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	<LangVersion>8</LangVersion>
+	<PackageId>Fortnox.NET.SDK</PackageId>
+	<Version>4.0.0-alpha</Version>
+	<Authors>Richard Randak</Authors>
+	<Company>Softwerk AB</Company>
+	<Description>Official .NET SDK for Fortnox API. This package is on behalf of Fortnox AB developed and maintained by Softwerk AB. For more information please visit our repository on Github.</Description>
+	<RepositoryUrl>https://github.com/FortnoxAB/csharp-api-sdk</RepositoryUrl>
+	<PackageIcon>fortnoxLogo.png</PackageIcon>
+	<PackageTags>Fortnox, SDK, API, C#, .NET, REST, Softwerk</PackageTags>
+	<Copyright>Copyright (c) 2020 Softwerk AB</Copyright>
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<PackageProjectUrl>https://github.com/FortnoxAB/csharp-api-sdk</PackageProjectUrl>
+	<AssemblyName>FortnoxSDK</AssemblyName>
+	<RootNamespace>Fortnox.SDK</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\Repository\fortnoxLogo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediaTypeMap.Core" Version="2.3.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="RateLimiter" Version="2.2.0" />
+  </ItemGroup>
+
+</Project>
