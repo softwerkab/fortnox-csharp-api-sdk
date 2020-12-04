@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using ComposableAsync;
@@ -20,6 +19,7 @@ namespace Fortnox.SDK.Connectors.Base
         /// Http client used under-the-hood for all request (except file upload due to a server-side limitation)
         /// </summary>
         private HttpClient HttpClient { get; }
+        private ErrorHandler ErrorHandler { get; }
 
         public string AccessToken { get; set; }
         public string ClientSecret { get; set; }
@@ -41,6 +41,7 @@ namespace Fortnox.SDK.Connectors.Base
         public BaseClient()
         {
             HttpClient = new HttpClient();
+            ErrorHandler = new ErrorHandler();
 
             AccessToken = ConnectionCredentials.AccessToken;
             ClientSecret = ConnectionCredentials.ClientSecret;
@@ -50,34 +51,32 @@ namespace Fortnox.SDK.Connectors.Base
             UseAuthHeaders = true;
         }
 
-        public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
+        public async Task<byte[]> SendAsync(HttpRequestMessage request)
         {
-            if (UseAuthHeaders)
+            try
             {
-                request.Headers.Add(AccessTokenHeader, AccessToken);
-                request.Headers.Add(ClientSecretHeader, ClientSecret);
+                if (UseAuthHeaders)
+                {
+                    request.Headers.Add(AccessTokenHeader, AccessToken);
+                    request.Headers.Add(ClientSecretHeader, ClientSecret);
+                }
+
+                if (UseRateLimiter)
+                    await Throttle();
+
+                using var response = await HttpClient.SendAsync(request).ConfigureAwait(false);
+
+                if (response.IsSuccessStatusCode)
+                    return await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
+                
+                ErrorHandler.HandleErrorResponse(response);
+                return default;
             }
-
-            if (UseRateLimiter)
-                await Throttle();
-
-            return await HttpClient.SendAsync(request).ConfigureAwait(false);
-        }
-
-        public async Task<HttpWebResponse> SendAsync(HttpWebRequest request)
-        {
-            if (UseAuthHeaders)
+            catch (HttpRequestException ex)
             {
-                request.Headers.Add(AccessTokenHeader, AccessToken);
-                request.Headers.Add(ClientSecretHeader, ClientSecret);
+                ErrorHandler.HandleNoResponse(ex);
+                return default;
             }
-
-            request.Timeout = Timeout;
-
-            if (UseRateLimiter)
-                await Throttle();
-
-            return (HttpWebResponse) await request.GetResponseAsync().ConfigureAwait(false);
         }
 
         private async Task Throttle()

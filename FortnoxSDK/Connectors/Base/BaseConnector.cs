@@ -1,54 +1,35 @@
 ﻿using System;
-using System.Net;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Fortnox.SDK.Requests;
 using Fortnox.SDK.Serialization;
-using Fortnox.SDK.Utility;
 
 namespace Fortnox.SDK.Connectors.Base
 {
     public class BaseConnector : BaseClient
     {
-        protected ErrorHandler ErrorHandler { get; set;  }
         protected ISerializer Serializer { get; set; }
-
         protected string Resource { get; set; }
         
         public BaseConnector()
         {
             Serializer = new JsonEntitySerializer();
-            ErrorHandler = new ErrorHandler(Serializer);
         }
         
         protected async Task<byte[]> SendAsync(BaseRequest fortnoxRequest)
         {
-            try
-            {
-                var httpRequest = new HttpRequestMessage(fortnoxRequest.Method, fortnoxRequest.AbsoluteUrl);
+            var httpRequest = new HttpRequestMessage(fortnoxRequest.Method, fortnoxRequest.AbsoluteUrl);
 
-                if (fortnoxRequest.Headers != null)
-                    foreach (var header in fortnoxRequest.Headers)
-                        httpRequest.Headers.Add(header.Key, header.Value);
+            if (fortnoxRequest.Headers != null)
+                foreach (var header in fortnoxRequest.Headers)
+                    httpRequest.Headers.Add(header.Key, header.Value);
 
-                if (fortnoxRequest.Content != null && httpRequest.Method != HttpMethod.Get)
-                    httpRequest.Content = new ByteArrayContent(fortnoxRequest.Content);
+            if (fortnoxRequest.Content != null && httpRequest.Method != HttpMethod.Get)
+                httpRequest.Content = new ByteArrayContent(fortnoxRequest.Content);
 
-                using var httpResponse = await SendAsync(httpRequest).ConfigureAwait(false);
-
-                if (httpResponse.IsSuccessStatusCode)
-                    return await httpResponse.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
-
-                ErrorHandler.HandleErrorResponse(httpResponse);
-                return default;
-
-            }
-            catch (HttpRequestException ex)
-            {
-                ErrorHandler.HandleNoResponse(ex);
-                return default;
-            }
+            return await SendAsync(httpRequest).ConfigureAwait(false);
         }
 
         protected async Task<byte[]> SendAsync(FileDownloadRequest fortnoxRequest)
@@ -58,39 +39,27 @@ namespace Fortnox.SDK.Connectors.Base
 
         protected async Task<byte[]> SendAsync(FileUploadRequest fortnoxRequest)
         {
-            try
-            {
-                var httpRequest = (HttpWebRequest)WebRequest.Create(fortnoxRequest.AbsoluteUrl);
-                httpRequest.Method = "POST";
+            var boundary = "----boundary" + new Random().Next();
+            var content = new MultipartFormDataContent(boundary);
 
-                var rand = new Random();
-                var boundary = "----boundary" + rand.Next();
-                var header = Encoding.UTF8.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + fortnoxRequest.FileName + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
-                var trailer = Encoding.UTF8.GetBytes("\r\n--" + boundary + "--\r\n");
+            var fileContent = new ByteArrayContent(fortnoxRequest.FileData);
+            fileContent.Headers.Add("Content-Type", "application/octet-stream");
+            var headerValue = "form-data; name=\"Filedata\"; filename=\"" + fortnoxRequest.FileName + "\"";
 
-                httpRequest.ContentType = "multipart/form-data; boundary=" + boundary;
+            //Issue: file name can contain special characters e.g. "äöå", HttpClient follows strict HTTP standard for headers encoding, while server expects pure UTF-8
+            // Workaround inspired by https://stackoverflow.com/questions/21928982/how-to-disable-base64-encoded-filenames-in-httpclient-multipartformdatacontent
+            var bytes = Encoding.UTF8.GetBytes(headerValue);
+            var chars = bytes.Select(b => (char)b).ToArray();
+            headerValue = new string(chars);
+            //-------------End of workaround-------------//
 
-                using var dataStream = httpRequest.GetRequestStream();
-                await dataStream.WriteAsync(header, 0, header.Length);
-                await dataStream.WriteAsync(fortnoxRequest.FileData, 0, fortnoxRequest.FileData.Length).ConfigureAwait(false);
-                await dataStream.WriteAsync(trailer, 0, trailer.Length);
-                dataStream.Close();
+            fileContent.Headers.Add("Content-Disposition", headerValue);
+            content.Add(fileContent, "Filedata", fortnoxRequest.FileName);
 
-                // Read the response
-                using var response = await SendAsync(httpRequest).ConfigureAwait(false);
-                using var responseStream = response.GetResponseStream();
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, fortnoxRequest.AbsoluteUrl);
+            httpRequest.Content = content;
 
-                return await responseStream.ToBytes();
-            }
-            catch (WebException ex)
-            {
-                if (ex.Response != null)
-                    ErrorHandler.HandleErrorResponse(ex.Response as HttpWebResponse);
-                else
-                    ErrorHandler.HandleNoResponse(ex);
-
-                return default;
-            }
+            return await SendAsync(httpRequest);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -8,33 +7,15 @@ using Fortnox.SDK.Utility;
 
 namespace Fortnox.SDK.Connectors.Base
 {
-    public class ErrorHandler
+    internal class ErrorHandler
     {
         private const string NoReponseMessage = @"No response from server. Check inner exception for details.";
 
         protected ISerializer Serializer { get; }
 
-        public ErrorHandler(ISerializer serializer)
+        public ErrorHandler()
         {
-            Serializer = serializer;
-        }
-
-        public void HandleErrorResponse(HttpWebResponse response)
-        {
-            using var responseStream = response.GetResponseStream();
-
-            var content = responseStream.ToText().GetResult();
-            var errorInformation = ParseError(content);
-
-            var exception = errorInformation != null ?
-                new FortnoxApiException($"Request failed: {errorInformation.Message}") :
-                new FortnoxApiException($"Request failed: {response.StatusDescription} ({(int)response.StatusCode})");
-
-            exception.ResponseContent = content;
-            exception.StatusCode = response.StatusCode;
-            exception.ErrorInfo = errorInformation;
-
-            throw exception;
+            Serializer = new JsonEntitySerializer();
         }
 
         public void HandleErrorResponse(HttpResponseMessage response)
@@ -51,11 +32,6 @@ namespace Fortnox.SDK.Connectors.Base
             exception.ErrorInfo = errorInformation;
 
             throw exception;
-        }
-
-        public void HandleNoResponse(WebException ex)
-        {
-            throw new NoResponseException(NoReponseMessage, ex);
         }
 
         public void HandleNoResponse(HttpRequestException ex)
