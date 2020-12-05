@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading;
 using Fortnox.SDK;
 using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
@@ -70,7 +71,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
+            Thread.Sleep(1000);
             var timeStamp = DateTime.Now;
+            Thread.Sleep(1000);
 
             IPriceListConnector connector = new PriceListConnector();
 
