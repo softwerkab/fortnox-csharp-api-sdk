@@ -36,7 +36,6 @@ namespace Fortnox.SDK.Connectors.Base
         {
             var request = new EntityRequest<TEntity>()
             {
-                BaseUrl = BaseUrl,
                 Resource = Resource,
                 Method = HttpMethod.Post,
                 Entity = entity
@@ -49,7 +48,6 @@ namespace Fortnox.SDK.Connectors.Base
         {
             var request = new EntityRequest<TEntity>()
             {
-                BaseUrl = BaseUrl,
                 Resource = Resource,
                 Indices = indices.ToList(),
                 Method = HttpMethod.Put,
@@ -63,7 +61,6 @@ namespace Fortnox.SDK.Connectors.Base
         {
             var request = new BaseRequest()
             {
-                BaseUrl = BaseUrl,
                 Resource = Resource,
                 Indices = indices.ToList(),
                 Method = HttpMethod.Delete
@@ -76,7 +73,6 @@ namespace Fortnox.SDK.Connectors.Base
         {
             var request = new EntityRequest<TEntity>()
             {
-                BaseUrl = BaseUrl,
                 Resource = Resource,
                 Indices = indices.ToList(),
                 Method = HttpMethod.Get,
@@ -92,7 +88,6 @@ namespace Fortnox.SDK.Connectors.Base
 
             var request = new FileDownloadRequest()
             {
-                BaseUrl = BaseUrl,
                 Resource = Resource,
                 Indices = new List<string>{ documentNumber, action.GetStringValue() },
             };
@@ -107,7 +102,6 @@ namespace Fortnox.SDK.Connectors.Base
 
             var request = new EntityRequest<TEntity>()
             {
-                BaseUrl = BaseUrl,
                 Resource = Resource,
                 Indices = new List<string> {documentNumber, action.GetStringValue()},
                 Method = action.GetMethod()

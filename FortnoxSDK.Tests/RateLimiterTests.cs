@@ -41,8 +41,8 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_NoRateLimiter_TooManyRequest_Error()
         {
-            ConnectionSettings.UseRateLimiter = false;
             var connector = new CustomerConnector();
+            connector.UseRateLimiter = false;
 
             FortnoxApiException error = null;
             int i;
@@ -60,9 +60,6 @@ namespace FortnoxSDK.Tests
                     break;
                 }
             }
-
-            //Restore searchSettings
-            ConnectionSettings.UseRateLimiter = true;
 
             //Assert
             //Assert.IsTrue(failed > 0);

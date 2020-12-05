@@ -65,7 +65,6 @@ namespace Fortnox.SDK.Connectors
            
             var request = new EntityRequest<EmailSenders>()
             {
-                BaseUrl = BaseUrl,
                 Resource = "emailsenders",
                 Method = HttpMethod.Get
             };

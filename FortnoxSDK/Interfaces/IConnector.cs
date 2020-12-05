@@ -2,14 +2,7 @@ using Fortnox.SDK.Search;
 
 namespace Fortnox.SDK.Interfaces
 {
-    public interface IBaseConnector
-    {
-        //Error Handling
-        //bool HasError { get; }
-        //ErrorInformation Error { get; }
-    }
-
-    public interface IConnector : IBaseConnector //TODO: Rename to IResourceConnector
+    public interface IConnector
     {
         // Credentials
         string AccessToken { get; set; }

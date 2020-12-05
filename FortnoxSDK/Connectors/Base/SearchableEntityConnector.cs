@@ -17,7 +17,6 @@ namespace Fortnox.SDK.Connectors.Base
         {
             var request = new SearchRequest<TEntitySubset>()
             {
-                BaseUrl = BaseUrl,
                 Resource = Resource,
                 SearchSettings = searchSettings
             };

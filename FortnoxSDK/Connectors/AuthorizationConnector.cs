@@ -23,8 +23,7 @@ namespace Fortnox.SDK.Connectors
 
         /// <summary>
         /// <para>Use this function to create and get your Access-Token.</para>
-        /// <para>NOTE!</para>
-        /// <para>This function should be used only once to get your access-token. If used again the authorisation-code given to you by Fortnox will be invalid. </para>
+        /// <para>Note that an authorization-code can be used only once.</para> 
         /// </summary>
         /// <param name="authorizationCode">The authorisation-code given to you by Fortnox</param>
         /// <param name="clientSecret">The Client-Secret code given to you by Fortnox</param>
@@ -39,7 +38,6 @@ namespace Fortnox.SDK.Connectors
             var fortnoxRequest = new BaseRequest()
             {
                 Method = HttpMethod.Get,
-                BaseUrl = BaseUrl,
                 Resource = Resource,
                 Headers = new Dictionary<string, string>()
                 {

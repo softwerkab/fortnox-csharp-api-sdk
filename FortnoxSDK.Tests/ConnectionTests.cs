@@ -1,5 +1,9 @@
-﻿using Fortnox.SDK;
+﻿using System;
+using System.Net.Http;
+using System.Reflection;
+using Fortnox.SDK;
 using Fortnox.SDK.Connectors;
+using Fortnox.SDK.Connectors.Base;
 using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -93,6 +97,25 @@ namespace FortnoxSDK.Tests
             connector2.ClientSecret = "BB";
 
             Assert.IsTrue(connector1.AccessToken == "A" && connector2.AccessToken == "AA");
+        }
+
+        [TestMethod]
+        public void TestConnection_Using_FortnoxClient()
+        {
+            var fortnoxClient = new FortnoxClient()
+            {
+                AccessToken = "AccToken",
+                ClientSecret = "Secret",
+                UseRateLimiter = false,
+                HttpClient = new HttpClient() {Timeout = TimeSpan.FromSeconds(10)}
+            };
+
+            var connector = fortnoxClient.Get<CustomerConnector>();
+
+            Assert.AreEqual("AccToken", connector.AccessToken);
+            Assert.AreEqual("Secret", connector.ClientSecret);
+            Assert.AreEqual(false, connector.UseRateLimiter);
+            Assert.AreEqual(10, connector.HttpClient.Timeout.Seconds);
         }
     }
 }

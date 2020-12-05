@@ -78,7 +78,6 @@ namespace Fortnox.SDK.Connectors
 		{
             var request = new SearchRequest<PriceSubset>()
             {
-                BaseUrl = BaseUrl,
                 Resource = $"{Resource}/sublist",
                 Indices = new List<string>(){ priceListId, articleId },
                 SearchSettings = searchSettings

@@ -7,47 +7,32 @@ using RateLimiter;
 
 namespace Fortnox.SDK.Connectors.Base
 {
-    public class BaseClient
+    public abstract class BaseClient
     {
         private const string AccessTokenHeader = "Access-Token";
         private const string ClientSecretHeader = "Client-Secret";
 
         private const int LimitPerSecond = 4;
         private static readonly Dictionary<string, TimeLimiter> RateLimiters = new Dictionary<string, TimeLimiter>();
-
-        /// <summary>
-        /// Http client used under-the-hood for all request (except file upload due to a server-side limitation)
-        /// </summary>
-        private HttpClient HttpClient { get; }
+        
         private ErrorHandler ErrorHandler { get; }
+
+        public HttpClient HttpClient { get; set; }
 
         public string AccessToken { get; set; }
         public string ClientSecret { get; set; }
 
-        public int Timeout
-        {
-            get => (int) HttpClient.Timeout.TotalMilliseconds;
-            set => HttpClient.Timeout = TimeSpan.FromMilliseconds(value);
-        }
-
-        /// <summary>
-        /// Base fortnox server URI
-        /// </summary>
-        public string BaseUrl { get; set; }
-
         public bool UseRateLimiter { get; set; }
         protected bool UseAuthHeaders { get; set; }
 
-        public BaseClient()
+        protected BaseClient()
         {
-            HttpClient = new HttpClient();
+            HttpClient = FortnoxClient.HttpClientSharedInstance;
             ErrorHandler = new ErrorHandler();
 
             AccessToken = ConnectionCredentials.AccessToken;
             ClientSecret = ConnectionCredentials.ClientSecret;
-            BaseUrl = ConnectionSettings.FortnoxAPIServer;
-            Timeout = ConnectionSettings.Timeout;
-            UseRateLimiter = ConnectionSettings.UseRateLimiter;
+            UseRateLimiter = true;
             UseAuthHeaders = true;
         }
 

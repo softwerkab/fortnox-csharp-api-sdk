@@ -3,7 +3,12 @@ namespace Fortnox.SDK
 {
 	/// <remarks/>
 	public class APIConstants
-	{
+    {
+        /// <summary>
+        /// Base URI of Fortnox API server
+        /// </summary>
+        public const string FortnoxApi = @"https://api.fortnox.se/3"; //TODO: Remove /3
+
 		/// <summary>
 		/// Use this to make a field blank in Fortnox.
 		/// </summary>
@@ -23,14 +28,13 @@ namespace Fortnox.SDK
         /// Maximal page size (limit) offered by the API
         /// Use with Limit field in search settings
         /// </summary>
-        public static int MaxLimit = 500; //Max limit
+        public const int MaxLimit = 500; //Max limit
 
         /// <summary>
-        /// Unlimited page size. This is special search settings not supported by the server API.
+        /// Unlimited page size. This setting is not supported by the server API.
         /// When used, connector will gather all available pages, and return it as a single large page.
         /// Note that multiple HTTP requests may be send under the hood.
-        /// The properties like url or response content of a connector will contain only the last one.
         /// </summary>
-        public static int Unlimited = -1;
+        public const int Unlimited = -1;
     }
 }

@@ -189,7 +189,6 @@ namespace Fortnox.SDK.Connectors
             
             var request = new EntityRequest<ArchiveFolder>()
             {
-                BaseUrl = BaseUrl,
                 Resource = Resource,
                 Method = HttpMethod.Get,
             };
@@ -213,7 +212,6 @@ namespace Fortnox.SDK.Connectors
 
             var request = new EntityRequest<ArchiveFolder>()
             {
-                BaseUrl = BaseUrl,
                 Resource = Resource,
                 Method = HttpMethod.Post,
                 Entity = folder
@@ -229,7 +227,6 @@ namespace Fortnox.SDK.Connectors
         {
             var request = new BaseRequest()
             {
-                BaseUrl = BaseUrl,
                 Resource = Resource,
                 Method = HttpMethod.Delete
             };
@@ -247,7 +244,6 @@ namespace Fortnox.SDK.Connectors
             var request = new FileUploadRequest()
             {
                 Parameters = parameters ?? new Dictionary<string, string>(),
-                BaseUrl = BaseUrl,
                 Resource = Resource,
                 Indices = indices.ToList(),
                 FileData = data,
@@ -265,7 +261,6 @@ namespace Fortnox.SDK.Connectors
             var request = new FileDownloadRequest()
             {
                 Parameters = parameters ?? new Dictionary<string, string>(),
-                BaseUrl = BaseUrl,
                 Resource = Resource,
                 Indices = indices.ToList()
             };

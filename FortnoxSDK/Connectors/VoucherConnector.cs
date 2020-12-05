@@ -65,7 +65,6 @@ namespace Fortnox.SDK.Connectors
 		{
             var request = new EntityRequest<Voucher>()
             {
-                BaseUrl = BaseUrl,
                 Resource = Resource,
                 Indices = new List<string>{ seriesId, id.ToString() },
                 Method = HttpMethod.Get

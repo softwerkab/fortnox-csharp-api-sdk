@@ -24,7 +24,6 @@ namespace Fortnox.SDK.Connectors
         {
             var request = new FileDownloadRequest()
             {
-                BaseUrl = BaseUrl,
                 Resource = Resource,
                 Indices = new List<string> { type.GetStringValue() }
             };

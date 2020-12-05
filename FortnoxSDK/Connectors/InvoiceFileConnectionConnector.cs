@@ -20,7 +20,6 @@ namespace Fortnox.SDK.Connectors
 		public InvoiceFileConnectionConnector()
 		{
 			Resource = "fileattachments/attachments-v1";
-            BaseUrl = BaseUrl.Replace("3", "api");
         }
 
         public List<InvoiceFileConnection> GetConnections(long? entityId, EntityType? entityType)
@@ -59,13 +58,21 @@ namespace Fortnox.SDK.Connectors
 
 		public async Task DeleteAsync(string id)
 		{
-			await BaseDelete(id).ConfigureAwait(false);
-		}
+            var request = new BaseRequest
+            {
+                BaseUrl = APIConstants.FortnoxApi.Replace("3", "api"),
+                Resource = Resource,
+                Indices = new List<string>() { id },
+                Method = HttpMethod.Delete,
+            };
+
+            await SendAsync(request).ConfigureAwait(false);
+        }
 		public async Task<InvoiceFileConnection> CreateAsync(InvoiceFileConnection invoiceFileConnection)
         {
             var request = new EntityRequest<List<InvoiceFileConnection>>()
             {
-                BaseUrl = BaseUrl,
+                BaseUrl = APIConstants.FortnoxApi.Replace("3", "api"),
                 Resource = Resource,
                 Method = HttpMethod.Post,
                 Entity = new List<InvoiceFileConnection>() { invoiceFileConnection },
@@ -80,7 +87,7 @@ namespace Fortnox.SDK.Connectors
         {
             var request = new EntityRequest<InvoiceFileConnection>()
             {
-                BaseUrl = BaseUrl,
+                BaseUrl = APIConstants.FortnoxApi.Replace("3", "api"),
                 Resource = Resource,
                 Indices = new List<string> { invoiceFileConnection.Id },
                 Method = HttpMethod.Put,
@@ -99,7 +106,7 @@ namespace Fortnox.SDK.Connectors
         {
             var request = new EntityRequest<List<InvoiceFileConnection>>()
             {
-                BaseUrl = BaseUrl,
+                BaseUrl = APIConstants.FortnoxApi.Replace("3", "api"),
                 Resource = Resource,
                 Parameters = new Dictionary<string, string>
                 {

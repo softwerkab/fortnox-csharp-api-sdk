@@ -8,12 +8,12 @@ using Fortnox.SDK.Serialization;
 
 namespace Fortnox.SDK.Connectors.Base
 {
-    public class BaseConnector : BaseClient
+    public abstract class BaseConnector : BaseClient
     {
         protected ISerializer Serializer { get; set; }
         protected string Resource { get; set; }
         
-        public BaseConnector()
+        protected BaseConnector()
         {
             Serializer = new JsonEntitySerializer();
         }
