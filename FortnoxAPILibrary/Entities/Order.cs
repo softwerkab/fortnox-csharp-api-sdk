@@ -158,6 +158,8 @@ namespace FortnoxAPILibrary
 		
 		private string stockPointIdField;
 		
+		private string outboundDateField;
+		
         /// <remarks/>
         public Order()
         {
@@ -1024,6 +1026,19 @@ namespace FortnoxAPILibrary
 			set
 			{
 				this.stockPointIdField = value;
+			}
+		}
+		
+		/// <remarks/>
+		public string OutboundDate
+		{
+			get
+			{
+				return this.outboundDateField;
+			}
+			set
+			{
+				this.outboundDateField = value;
 			}
 		}
 	}
