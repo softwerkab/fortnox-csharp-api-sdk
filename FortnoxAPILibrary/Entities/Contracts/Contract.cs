@@ -203,5 +203,9 @@ namespace FortnoxAPILibrary.Entities
         ///<summary> Your order number </summary>
         [JsonProperty]
         public string YourOrderNumber { get; set; }
+
+        ///<summary> Your reference </summary>
+        [JsonProperty]
+        public string YourReference { get; set; }
     }
 }
