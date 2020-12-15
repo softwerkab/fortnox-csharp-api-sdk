@@ -36,21 +36,22 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var newContract = new Contract()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
-                ContractDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                ContractDate = new DateTime(2020, 1, 20), //"2019-01-20",
                 Active = false,
                 Comments = "TestContract",
                 ContractLength = 4,
                 Continuous = true,
                 Currency = "SEK",
                 Language = Language.English,
+                YourReference = "SDK Test",
                 InvoiceRows = new List<ContractInvoiceRow>()
                 {
                     new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10},
                     new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20},
                     new ContractInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15}
                 },
-                PeriodStart = new DateTime(2020, 01, 01),
-                PeriodEnd = new DateTime(2020, 03, 01)
+                PeriodStart = new DateTime(2020, 05, 01),
+                PeriodEnd = new DateTime(2020, 08, 01)
             };
 
             var createdContract = connector.Create(newContract);
