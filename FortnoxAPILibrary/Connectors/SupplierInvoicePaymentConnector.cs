@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace FortnoxAPILibrary.Connectors
+﻿namespace FortnoxAPILibrary.Connectors
 {
     public interface ISupplierInvoicePaymentConnector : IFinancialYearBasedEntityConnector<SupplierInvoicePayment, SupplierInvoicePayments, Sort.By.SupplierInvoicePayment>
     {
@@ -41,6 +36,12 @@ namespace FortnoxAPILibrary.Connectors
         /// </summary>
         /// <param name="supplierInvoicePaymentNumber">The number of the supplier invoice payment to bookkeep.</param>
         void Bookkeep(string supplierInvoicePaymentNumber);
+
+        /// <summary>
+        /// Delete a supplier invoice payment
+        /// </summary>
+        /// <param name="supplierInvoicePaymentNumber">The number of the supplier invoice payment to delete.</param>
+        public void Delete(string supplierInvoicePaymentNumber);
     }
 
     /// <remarks/>
@@ -102,6 +103,15 @@ namespace FortnoxAPILibrary.Connectors
 		public void Bookkeep(string supplierInvoicePaymentNumber)
 		{
 			base.DoAction(supplierInvoicePaymentNumber, "bookkeep");
+		}
+		
+		/// <summary>
+		/// Delete a supplier invoice payment
+		/// </summary>
+		/// <param name="supplierInvoicePaymentNumber">The number of the supplier invoice payment to delete.</param>
+		public void Delete(string supplierInvoicePaymentNumber)
+		{
+			base.BaseDelete(supplierInvoicePaymentNumber);
 		}
 	}
 }
