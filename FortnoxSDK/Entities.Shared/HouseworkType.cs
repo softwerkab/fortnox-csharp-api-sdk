@@ -48,5 +48,20 @@ namespace Fortnox.SDK.Entities
         [Obsolete]
         [EnumMember(Value = "TUTORING")]
         Tutoring,
+
+        [EnumMember(Value = "SOLARCELLS")]
+        SolarCells,
+        [EnumMember(Value = "STORAGESELFPRODUCEDELECTRICTY")]
+        StorageSelproducedElectricity,
+        [EnumMember(Value = "CHARGINGSTATIONELECTRICVEHICLE")]
+        ChargingStationElectricVehicle,
+        [EnumMember(Value = "HOMEMAINTENANCE")]
+        HomeMaintenance,
+        [EnumMember(Value = "FURNISHING")]
+        Furnishing,
+        [EnumMember(Value = "TRANSPORTATIONSERVICES")]
+        TransportationServices,
+        [EnumMember(Value = "WASHINGANDCAREOFCLOTHING")]
+        WashingAndCareOfClothing
     }
 }

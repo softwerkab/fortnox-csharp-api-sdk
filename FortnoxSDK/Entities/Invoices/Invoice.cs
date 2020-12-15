@@ -325,6 +325,10 @@ namespace Fortnox.SDK.Entities
         [JsonProperty]
         public long? TaxReduction { get; private set; }
 
+        /// <summary>  Tax Reduction Type </summary>
+        [JsonProperty]
+        public TaxReductionType? TaxReductionType { get; set; }
+
         ///<summary> Code of the terms of delivery. The code must be of an existing terms of delivery. </summary>
         [JsonProperty]
         public string TermsOfDelivery { get; set; }

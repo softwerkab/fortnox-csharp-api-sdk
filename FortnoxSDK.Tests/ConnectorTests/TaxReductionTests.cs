@@ -34,6 +34,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
                 DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
                 Comments = "TestInvoice",
+                TaxReductionType = TaxReductionType.RUT,
                 InvoiceRows = new List<InvoiceRow>()
                 {
                     new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, HouseWorkHoursToReport = 10, Price = 1000, HouseWorkType = HouseworkType.Gardening, HouseWork = true},
@@ -117,6 +118,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
                 DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
                 Comments = "TestInvoice",
+                TaxReductionType = TaxReductionType.RUT,
                 InvoiceRows = new List<InvoiceRow>()
                 {
                     new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, HouseWorkHoursToReport = 10, Price = 1000, HouseWorkType = HouseworkType.Gardening, HouseWork = true},

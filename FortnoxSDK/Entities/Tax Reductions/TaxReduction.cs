@@ -1,3 +1,4 @@
+using System;
 using Fortnox.SDK.Serialization;
 using Newtonsoft.Json;
 
@@ -61,6 +62,7 @@ namespace Fortnox.SDK.Entities
         public string SocialSecurityNumber { get; set; }
 
         ///<summary> Type of reduction </summary>
+        [Obsolete("Use TaxReductionType property on invoice instead. This property will be removed by Fortnox API in Q2 2021")]
         [JsonProperty]
         public TypeOfReduction? TypeOfReduction { get; set; }
 

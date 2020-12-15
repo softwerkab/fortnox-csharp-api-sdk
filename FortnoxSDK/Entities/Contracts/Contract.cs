@@ -27,6 +27,11 @@ namespace Fortnox.SDK.Entities
         [JsonProperty]
         public decimal? AdministrationFee { get; set; }
 
+        ///<summary> Basis of tax reduction. </summary>
+        [ReadOnly]
+        [JsonProperty]
+        public decimal? BasisTaxReduction { get; private set; }
+
         ///<summary> Comments </summary>
         [JsonProperty]
         public string Comments { get; set; }
@@ -155,10 +160,19 @@ namespace Fortnox.SDK.Entities
         [JsonProperty]
         public string Remarks { get; set; }
 
+        ///<summary> Round Off value </summary>
+        [ReadOnly]
+        [JsonProperty]
+        public decimal? RoundOff { get; private set; }
+
         ///<summary> Tax reduction </summary>
         [ReadOnly]
         [JsonProperty]
         public decimal? TaxReduction { get; private set; }
+
+        /// <summary>  Tax Reduction Type </summary>
+        [JsonProperty]
+        public TaxReductionType? TaxReductionType { get; set; }
 
         ///<summary> Template name </summary>
         [ReadOnly]

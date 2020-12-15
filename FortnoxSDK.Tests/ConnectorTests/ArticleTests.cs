@@ -142,19 +142,32 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void HouseWorkArticle_AllTypes()
         {
             var values = Enum.GetValues(typeof(HouseworkType)).Cast<HouseworkType>().ToList();
-            Assert.AreEqual(20,values.Count);
+            Assert.AreEqual(27,values.Count);
 
             var connector = new ArticleConnector();
             var article = connector.Create(new Article(){ Description = "HouseworkArticleTest", Housework = true });
 
             foreach (var houseworkType in values)
             {
-                if (houseworkType == HouseworkType.Empty) 
-                    continue;
-                if (houseworkType == HouseworkType.Cooking || houseworkType == HouseworkType.Tutoring)
-                    continue;
+                switch (houseworkType)
+                {
+                    case HouseworkType.Empty:
+                        continue; //Article has to have housework
+                    case HouseworkType.Cooking:
+                    case HouseworkType.Tutoring:
+                        continue; //Obsolete, no longer supported
+                    case HouseworkType.SolarCells:
+                    case HouseworkType.StorageSelproducedElectricity:
+                    case HouseworkType.ChargingStationElectricVehicle:
+                    case HouseworkType.HomeMaintenance:
+                    case HouseworkType.Furnishing:
+                    case HouseworkType.TransportationServices:
+                    case HouseworkType.WashingAndCareOfClothing:
+                        continue; //not yet supported for articles?
+                }
 
                 article.HouseworkType = houseworkType;
+                Console.Error.WriteLine(article.HouseworkType);
                 article = connector.Update(article);
 
                 Assert.AreEqual(houseworkType, article.HouseworkType);

@@ -234,6 +234,10 @@ namespace Fortnox.SDK.Entities
         [JsonProperty]
         public decimal? TaxReduction { get; private set; }
 
+        /// <summary>  Tax Reduction Type </summary>
+        [JsonProperty]
+        public TaxReductionType? TaxReductionType { get; set; }
+
         ///<summary> Terms of delivery code </summary>
         [JsonProperty]
         public string TermsOfDelivery { get; set; }
