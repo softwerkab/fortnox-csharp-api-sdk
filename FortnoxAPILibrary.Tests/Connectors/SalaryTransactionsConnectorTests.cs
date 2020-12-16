@@ -71,7 +71,8 @@ namespace FortnoxAPILibrary.Tests.Connectors
             var update = new SalaryTransaction
             {
                 SalaryRow = createResult.SalaryRow,
-                Amount = 50
+                Amount = 50,
+                Date = "2018-10-16"
             };
 
             var updateResult = _connector.Update(update);
