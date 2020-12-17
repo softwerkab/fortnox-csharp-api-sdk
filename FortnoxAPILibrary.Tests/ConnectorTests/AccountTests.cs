@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -63,6 +64,62 @@ namespace FortnoxAPILibrary.Tests.ConnectorTests
             MyAssert.HasNoError(connector);
 
             retrievedAccount = connector.Get(createdAccount.Number);
+            Assert.AreEqual(null, retrievedAccount, "Entity still exists after Delete!");
+
+            #endregion DELETE
+
+            #region Delete arranged resources
+            //Add code to delete temporary resources
+            #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_Account_CRUD_CustomFinYear()
+        {
+            var oldFinYear = new FinancialYearConnector().Find().Entities.First(y => y.FromDate?.Year == 2018);
+            IAccountConnector connector = new AccountConnector();
+
+            #region CREATE
+            var newAccount = new Account()
+            {
+                Description = "Test Account",
+                Active = false,
+                Number = GetUnusedAccountNumber(),
+                CostCenterSettings = CostCenterSettings.Allowed,
+                ProjectSettings = ProjectSettings.Allowed,
+                SRU = 123
+            };
+
+            var createdAccount = connector.Create(newAccount, oldFinYear.Id);
+            MyAssert.HasNoError(connector);
+            Assert.AreEqual("Test Account", createdAccount.Description);
+
+            #endregion CREATE
+
+            #region UPDATE
+
+            createdAccount.Description = "Updated Test Account";
+
+            var updatedAccount = connector.Update(createdAccount, oldFinYear.Id);
+            MyAssert.HasNoError(connector);
+            Assert.AreEqual("Updated Test Account", updatedAccount.Description);
+
+            #endregion UPDATE
+
+            #region READ / GET
+
+            var retrievedAccount = connector.Get(createdAccount.Number, oldFinYear.Id);
+            MyAssert.HasNoError(connector);
+            Assert.AreEqual("Updated Test Account", retrievedAccount.Description);
+
+            #endregion READ / GET
+
+            #region DELETE
+
+            connector.Delete(createdAccount.Number, oldFinYear.Id);
+            MyAssert.HasNoError(connector);
+
+            retrievedAccount = connector.Get(createdAccount.Number, oldFinYear.Id);
             Assert.AreEqual(null, retrievedAccount, "Entity still exists after Delete!");
 
             #endregion DELETE

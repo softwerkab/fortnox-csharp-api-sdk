@@ -9,16 +9,16 @@ namespace FortnoxAPILibrary.Connectors
 	{
 		AccountSearch Search { get; set; }
 
-		Account Update(Account account);
-		Account Create(Account account);
-		Account Get(long? id);
-		void Delete(long? id);
+		Account Update(Account account, long? financialYearId = null);
+		Account Create(Account account, long? financialYearId = null);
+		Account Get(long? id, long? financialYearId = null);
+		void Delete(long? id, long? financialYearId = null);
 		EntityCollection<AccountSubset> Find();
 
-		Task<Account> UpdateAsync(Account account);
-		Task<Account> CreateAsync(Account account);
-		Task<Account> GetAsync(long? id);
-		Task DeleteAsync(long? id);
+		Task<Account> UpdateAsync(Account account, long? financialYearId = null);
+		Task<Account> CreateAsync(Account account, long? financialYearId = null);
+		Task<Account> GetAsync(long? id, long? financialYearId = null);
+		Task DeleteAsync(long? id, long? financialYearId = null);
 		Task<EntityCollection<AccountSubset>> FindAsync();
 	}
 }
