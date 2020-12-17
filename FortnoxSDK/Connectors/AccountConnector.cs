@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Fortnox.SDK.Connectors.Base;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Interfaces;
+using Fortnox.SDK.Requests;
 using Fortnox.SDK.Search;
 using Fortnox.SDK.Utility;
 
@@ -19,43 +22,47 @@ namespace Fortnox.SDK.Connectors
 		{
 			Resource = "accounts";
 		}
-		/// <summary>
-		/// Find a account based on id
-		/// </summary>
-		/// <param name="id">Identifier of the account to find</param>
-		/// <returns>The found account</returns>
-		public Account Get(long? id)
+
+        /// <summary>
+        /// Find a account based on id
+        /// </summary>
+        /// <param name="id">Identifier of the account to find</param>
+        /// <param name="finYearID"></param>
+        /// <returns>The found account</returns>
+        public Account Get(long? id, long? finYearID = null)
 		{
-			return GetAsync(id).GetResult();
+			return GetAsync(id, finYearID).GetResult();
 		}
 
-		/// <summary>
-		/// Updates a account
-		/// </summary>
-		/// <param name="account">The account to update</param>
-		/// <returns>The updated account</returns>
-		public Account Update(Account account)
+        /// <summary>
+        /// Updates a account
+        /// </summary>
+        /// <param name="account">The account to update</param>
+        /// <param name="finYearID"></param>
+        /// <returns>The updated account</returns>
+        public Account Update(Account account, long? finYearID = null)
 		{
-			return UpdateAsync(account).GetResult();
+			return UpdateAsync(account, finYearID).GetResult();
 		}
 
-		/// <summary>
-		/// Creates a new account
-		/// </summary>
-		/// <param name="account">The account to create</param>
-		/// <returns>The created account</returns>
-		public Account Create(Account account)
+        /// <summary>
+        /// Creates a new account
+        /// </summary>
+        /// <param name="account">The account to create</param>
+        /// <param name="finYearID"></param>
+        /// <returns>The created account</returns>
+        public Account Create(Account account, long? finYearID = null)
 		{
-			return CreateAsync(account).GetResult();
+			return CreateAsync(account, finYearID).GetResult();
 		}
 
 		/// <summary>
 		/// Deletes a account
 		/// </summary>
 		/// <param name="id">Identifier of the account to delete</param>
-		public void Delete(long? id)
+		public void Delete(long? id, long? finYearID = null)
 		{
-			DeleteAsync(id).GetResult();
+			DeleteAsync(id, finYearID).GetResult();
 		}
 
 		/// <summary>
@@ -71,21 +78,66 @@ namespace Fortnox.SDK.Connectors
 		{
 			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
-		public async Task DeleteAsync(long? id)
+
+		public async Task DeleteAsync(long? id, long? finYearID = null)
 		{
-			await BaseDelete(id.ToString()).ConfigureAwait(false);
+            var request = new BaseRequest()
+            {
+                Resource = Resource,
+                Indices = new List<string>() { id.ToString() },
+                Method = HttpMethod.Delete
+            };
+
+            if (finYearID != null)
+                request.Parameters.Add("financialyear", finYearID.ToString());
+
+			await SendAsync(request).ConfigureAwait(false);
 		}
-		public async Task<Account> CreateAsync(Account account)
+
+		public async Task<Account> CreateAsync(Account account, long? finYearID = null)
 		{
-			return await BaseCreate(account).ConfigureAwait(false);
+            var request = new EntityRequest<Account>()
+            {
+                Resource = Resource,
+                Method = HttpMethod.Post,
+                Entity = account
+            };
+
+            if (finYearID != null)
+                request.Parameters.Add("financialyear", finYearID.ToString());
+
+			return await SendAsync(request).ConfigureAwait(false);
 		}
-		public async Task<Account> UpdateAsync(Account account)
+
+		public async Task<Account> UpdateAsync(Account account, long? finYearID = null)
 		{
-			return await BaseUpdate(account, account.Number.ToString()).ConfigureAwait(false);
-		}
-		public async Task<Account> GetAsync(long? id)
-		{
-			return await BaseGet(id.ToString()).ConfigureAwait(false);
+            var request = new EntityRequest<Account>()
+            {
+                Resource = Resource,
+                Indices = new List<string>() { account.Number.ToString() },
+                Method = HttpMethod.Put,
+                Entity = account
+            };
+
+            if (finYearID != null)
+                request.Parameters.Add("financialyear", finYearID.ToString());
+
+            return await SendAsync(request).ConfigureAwait(false);
+	    }
+
+		public async Task<Account> GetAsync(long? id, long? finYearID = null)
+		{ 
+            //return await BaseGet(id.ToString()).ConfigureAwait(false);
+            var request = new EntityRequest<Account>()
+            {
+                Resource = Resource,
+                Indices = new List<string>() { id.ToString() },
+                Method = HttpMethod.Get,
+            };
+			if (finYearID != null)
+				request.Parameters.Add("financialyear", finYearID.ToString());
+
+            return await SendAsync(request).ConfigureAwait(false);
 		}
 	}
 }
