@@ -51,8 +51,8 @@ namespace Fortnox.SDK.Entities
 
         [EnumMember(Value = "SOLARCELLS")]
         SolarCells,
-        [EnumMember(Value = "STORAGESELFPRODUCEDELECTRICTY")]
-        StorageSelproducedElectricity,
+        [EnumMember(Value = "STORAGESELFPRODUCEDELECTRICITY")]
+        StorageSelfProducedElectricity,
         [EnumMember(Value = "CHARGINGSTATIONELECTRICVEHICLE")]
         ChargingStationElectricVehicle,
         [EnumMember(Value = "HOMEMAINTENANCE")]

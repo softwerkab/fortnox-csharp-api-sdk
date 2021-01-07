@@ -156,14 +156,6 @@ namespace FortnoxSDK.Tests.ConnectorTests
                     case HouseworkType.Cooking:
                     case HouseworkType.Tutoring:
                         continue; //Obsolete, no longer supported
-                    case HouseworkType.SolarCells:
-                    case HouseworkType.StorageSelproducedElectricity:
-                    case HouseworkType.ChargingStationElectricVehicle:
-                    case HouseworkType.HomeMaintenance:
-                    case HouseworkType.Furnishing:
-                    case HouseworkType.TransportationServices:
-                    case HouseworkType.WashingAndCareOfClothing:
-                        continue; //not yet supported for articles?
                 }
 
                 article.HouseworkType = houseworkType;

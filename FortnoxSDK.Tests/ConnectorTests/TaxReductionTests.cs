@@ -170,5 +170,57 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
+
+        [Ignore("Failing due to possible server-side bug")]
+        [TestMethod]
+        public void Test_TaxReductionChanges_2021()
+        {
+            var tmpCustomer = new CustomerConnector().Create(new Customer()
+            {
+                Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"
+            });
+
+            var houseworkArticle = new ArticleConnector().Create(new Article()
+            {
+                Description = "TmpArticle", 
+                Type = ArticleType.Service, 
+                HouseworkType = HouseworkType.SolarCells, 
+                Housework = true
+            });
+
+            var houseworkInvoice = new InvoiceConnector().Create(new Invoice()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceDate = new DateTime(2021, 1, 20), //"2019-01-20",
+                DueDate = new DateTime(2021, 2, 20), //"2019-02-20",
+                Comments = "TestInvoice",
+                TaxReductionType = TaxReductionType.Green,
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow(){ ArticleNumber = houseworkArticle.ArticleNumber, DeliveredQuantity = 10, HouseWorkHoursToReport = 10, Price = 1000 },
+                    new InvoiceRow(){ ArticleNumber = houseworkArticle.ArticleNumber, DeliveredQuantity = 20, HouseWorkHoursToReport = 20, Price = 1000 },
+                    new InvoiceRow(){ ArticleNumber = houseworkArticle.ArticleNumber, DeliveredQuantity = 15, HouseWorkHoursToReport = 15, Price = 1000 }
+                }
+            });
+
+            Assert.AreEqual(true, houseworkInvoice.HouseWork);
+            Assert.AreEqual(TaxReductionType.Green, houseworkInvoice.TaxReductionType);
+
+            var createdTaxReduction = new TaxReductionConnector().Create(new TaxReduction()
+            {
+                CustomerName = "TmpCustomer",
+                AskedAmount = 100,
+                SocialSecurityNumber = "760412-0852",
+                ReferenceNumber = houseworkInvoice.DocumentNumber,
+                ReferenceDocumentType = ReferenceDocumentType.Invoice
+            });
+
+            Assert.AreEqual(100, createdTaxReduction.AskedAmount);
+
+            //Check if invoice is still the same
+            var retrievedInvoice = new InvoiceConnector().Get(houseworkInvoice.DocumentNumber);
+            Assert.AreEqual(true, retrievedInvoice.HouseWork);
+            Assert.AreEqual(TaxReductionType.Green, retrievedInvoice.TaxReductionType);
+        }
     }
 }
