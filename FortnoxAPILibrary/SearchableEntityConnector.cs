@@ -15,9 +15,9 @@ namespace FortnoxAPILibrary
         {
             var searchSettings = Search.Clone();
             if (searchSettings.Limit == APIConstants.Unlimited)
-                return await GetAllInOnePage(searchSettings, indices);
+                return await GetAllInOnePage(searchSettings, indices).ConfigureAwait(false);
             else
-                return await GetSinglePage(searchSettings, indices);
+                return await GetSinglePage(searchSettings, indices).ConfigureAwait(false);
         }
 
         private async Task<EntityCollection<TEntitySubset>> GetAllInOnePage(BaseSearch searchSettings, string[] indices)
@@ -28,7 +28,7 @@ namespace FortnoxAPILibrary
             var allEntities = new List<TEntitySubset>();
             while (true)
             {
-                var result = await GetSinglePage(searchSettings, indices);
+                var result = await GetSinglePage(searchSettings, indices).ConfigureAwait(false);
                 if (HasError)
                     return null;
                 allEntities.AddRange(result.Entities);
