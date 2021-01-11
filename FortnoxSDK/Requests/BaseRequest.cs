@@ -12,6 +12,7 @@ namespace Fortnox.SDK.Requests
         public byte[] Content { get; set; }
 
         public string BaseUrl { get; set; } = APIConstants.FortnoxApi;
+        public string Version { get; set; } = "3";
         public string Resource { get; set; }
         public List<string> Indices { get; set; } = new List<string>();
         public Dictionary<string, string> Parameters { get; set; } = new Dictionary<string, string>();
@@ -24,6 +25,7 @@ namespace Fortnox.SDK.Requests
 
             string[] str = {
                 BaseUrl,
+                Version,
                 Resource,
                 index
             };

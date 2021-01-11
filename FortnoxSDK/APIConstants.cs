@@ -7,7 +7,7 @@ namespace Fortnox.SDK
         /// <summary>
         /// Base URI of Fortnox API server
         /// </summary>
-        public const string FortnoxApi = @"https://api.fortnox.se/3"; //TODO: Remove /3
+        public const string FortnoxApi = @"https://api.fortnox.se";
 
 		/// <summary>
 		/// Use this to make a field blank in Fortnox.

@@ -60,7 +60,7 @@ namespace Fortnox.SDK.Connectors
 		{
             var request = new BaseRequest
             {
-                BaseUrl = APIConstants.FortnoxApi.Replace("3", "api"),
+                Version = "api",
                 Resource = Resource,
                 Indices = new List<string>() { id },
                 Method = HttpMethod.Delete,
@@ -72,7 +72,7 @@ namespace Fortnox.SDK.Connectors
         {
             var request = new EntityRequest<List<InvoiceFileConnection>>()
             {
-                BaseUrl = APIConstants.FortnoxApi.Replace("3", "api"),
+                Version = "api",
                 Resource = Resource,
                 Method = HttpMethod.Post,
                 Entity = new List<InvoiceFileConnection>() { invoiceFileConnection },
@@ -87,7 +87,7 @@ namespace Fortnox.SDK.Connectors
         {
             var request = new EntityRequest<InvoiceFileConnection>()
             {
-                BaseUrl = APIConstants.FortnoxApi.Replace("3", "api"),
+                Version = "api",
                 Resource = Resource,
                 Indices = new List<string> { invoiceFileConnection.Id },
                 Method = HttpMethod.Put,
@@ -106,7 +106,7 @@ namespace Fortnox.SDK.Connectors
         {
             var request = new EntityRequest<List<InvoiceFileConnection>>()
             {
-                BaseUrl = APIConstants.FortnoxApi.Replace("3", "api"),
+                Version = "api",
                 Resource = Resource,
                 Parameters = new Dictionary<string, string>
                 {
