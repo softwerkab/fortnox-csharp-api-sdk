@@ -171,7 +171,6 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion Delete arranged resources
         }
 
-        [Ignore("Failing due to possible server-side bug")]
         [TestMethod]
         public void Test_TaxReductionChanges_2021()
         {
