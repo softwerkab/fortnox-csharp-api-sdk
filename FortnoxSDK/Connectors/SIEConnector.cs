@@ -15,18 +15,20 @@ namespace Fortnox.SDK.Connectors
             Resource = "sie";
         }
 
-        public byte[] Get(SIEType type)
+        public byte[] Get(SIEType type, long? finYearID = null)
         {
-            return GetAsync(type).GetResult();
+            return GetAsync(type, finYearID).GetResult();
         }
 
-        public async Task<byte[]> GetAsync(SIEType type)
+        public async Task<byte[]> GetAsync(SIEType type, long? finYearID = null)
         {
             var request = new FileDownloadRequest()
             {
                 Resource = Resource,
                 Indices = new List<string> { type.GetStringValue() }
             };
+            if (finYearID != null)
+                request.Parameters.Add("financialyear", finYearID.ToString());
 
             return await SendAsync(request).ConfigureAwait(false);
         }

@@ -5,8 +5,8 @@ namespace Fortnox.SDK.Interfaces
 {
     public interface ISIEConnector : IConnector
     {
-        byte[] Get(SIEType type);
-        Task<byte[]> GetAsync(SIEType type);
+        byte[] Get(SIEType type, long? finYearID = null);
+        Task<byte[]> GetAsync(SIEType type, long? finYearID = null);
     }
 
     public enum SIEType
