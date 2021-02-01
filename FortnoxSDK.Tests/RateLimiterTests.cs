@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using Fortnox.SDK;
 using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Exceptions;
@@ -67,6 +68,8 @@ namespace FortnoxSDK.Tests
             Assert.IsNotNull(error);
             Console.WriteLine(error.Message);
             Assert.IsTrue(error.Message.Contains("Too Many Requests"));
+
+            Thread.Sleep(5*1000); //Sleep to cooldown/recover from "debt" (otherwise following tests will fail with TooManyRequests)
         }
     }
 }
