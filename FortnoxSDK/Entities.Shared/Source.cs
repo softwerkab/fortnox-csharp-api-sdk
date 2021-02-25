@@ -12,5 +12,7 @@ namespace Fortnox.SDK.Entities
         [Obsolete]
         [EnumMember(Value = "settle")]
         Settle,
+        [EnumMember(Value = "file")]
+        File,
     }
 }
