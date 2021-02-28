@@ -52,13 +52,14 @@ namespace FortnoxSDK.Tests.ConnectorTests
             Assert.AreEqual(42, fullCollection.Entities.Count);
             Assert.IsNotNull(fullCollection.Entities.First().Name);
 
+            /* Limit not supported
             var searchSettings = new PredefinedAccountsSearch();
             searchSettings.Limit = 2;
             var limitedCollection = connector.Find(searchSettings);
 
             Assert.AreEqual(2, limitedCollection.Entities.Count);
             Assert.AreEqual(42, limitedCollection.TotalResources);
-            //Limit not supported
+            */
         }
     }
 }

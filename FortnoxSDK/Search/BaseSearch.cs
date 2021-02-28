@@ -79,7 +79,7 @@ namespace Fortnox.SDK.Search
                 if (!isSearchParameter) continue;
 
                 var value = property.GetValue(this);
-                var strValue = Utils.Utils.GetStringValue(value, property.PropertyType);
+                var strValue = Utils.GetStringValue(value, property.PropertyType);
                 if (string.IsNullOrWhiteSpace(strValue)) continue;
 
                 var searchAttribute = property.GetAttribute<SearchParameter>();

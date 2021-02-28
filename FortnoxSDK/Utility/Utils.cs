@@ -1,7 +1,6 @@
 ﻿using System;
-using Fortnox.SDK.Utility;
 
-namespace Fortnox.SDK.Utils
+namespace Fortnox.SDK.Utility
 {
     public static class Utils
     {

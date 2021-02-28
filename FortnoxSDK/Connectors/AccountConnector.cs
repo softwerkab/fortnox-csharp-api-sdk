@@ -56,11 +56,12 @@ namespace Fortnox.SDK.Connectors
 			return CreateAsync(account, finYearID).GetResult();
 		}
 
-		/// <summary>
-		/// Deletes a account
-		/// </summary>
-		/// <param name="id">Identifier of the account to delete</param>
-		public void Delete(long? id, long? finYearID = null)
+        /// <summary>
+        /// Deletes a account
+        /// </summary>
+        /// <param name="id">Identifier of the account to delete</param>
+        /// <param name="finYearID"></param>
+        public void Delete(long? id, long? finYearID = null)
 		{
 			DeleteAsync(id, finYearID).GetResult();
 		}
