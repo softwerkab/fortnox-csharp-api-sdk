@@ -56,5 +56,11 @@ namespace Fortnox.SDK.Search
 
         [SearchParameter]
 		public string YourReference { get; set; }
-    }
+
+		[SearchParameter]
+		public string AccountNumberFrom { get; set; }
+
+        [SearchParameter]
+        public string AccountNumberTo { get; set; }
+	}
 }

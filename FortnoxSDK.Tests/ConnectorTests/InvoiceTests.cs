@@ -288,5 +288,96 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Assert.IsTrue(invoice.InvoiceDate <= searchSettings.ToDate);
             }
         }
+
+        [TestMethod]
+        public void Test_Filter_By_AccountRange()
+        {
+            #region Arrange
+            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            #endregion Arrange
+
+            IInvoiceConnector connector = new InvoiceConnector();
+
+            var invoice1 = new Invoice()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
+                InvoiceType = InvoiceType.CashInvoice,
+                PaymentWay = PaymentWay.Cash,
+                Comments = "TestInvoice",
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow(){ AccountNumber = 1010, ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, Price = 100},
+                    new InvoiceRow(){ AccountNumber = 4000, ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, Price = 100}
+                }
+            };
+
+            var invoice2 = new Invoice()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
+                InvoiceType = InvoiceType.CashInvoice,
+                PaymentWay = PaymentWay.Cash,
+                Comments = "TestInvoice",
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow(){ AccountNumber = 2010, ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, Price = 100},
+                    new InvoiceRow(){ AccountNumber = 4000, ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, Price = 100}
+                }
+            };
+
+            var invoice3 = new Invoice()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
+                InvoiceType = InvoiceType.CashInvoice,
+                PaymentWay = PaymentWay.Cash,
+                Comments = "TestInvoice",
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow(){ AccountNumber = 3000, ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, Price = 100},
+                    new InvoiceRow(){ AccountNumber = 3000, ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, Price = 100}
+                }
+            };
+
+            invoice1 = connector.Create(invoice1);
+            invoice2 = connector.Create(invoice2);
+            invoice3 = connector.Create(invoice3);
+
+            var filter = new InvoiceSearch()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+            };
+
+            var invoices = connector.Find(filter);
+            Assert.AreEqual(3, invoices.Entities.Count);
+
+            filter.AccountNumberFrom = "1000";
+            filter.AccountNumberTo = "1999";
+            invoices = connector.Find(filter);
+            Assert.AreEqual(1, invoices.Entities.Count);
+            Assert.AreEqual(invoice1.DocumentNumber, invoices.Entities.First().DocumentNumber);
+
+            filter.AccountNumberFrom = "2000";
+            filter.AccountNumberTo = "2999";
+            invoices = connector.Find(filter);
+            Assert.AreEqual(1, invoices.Entities.Count);
+            Assert.AreEqual(invoice2.DocumentNumber, invoices.Entities.First().DocumentNumber);
+
+            filter.AccountNumberFrom = "3000";
+            filter.AccountNumberTo = "3999";
+            invoices = connector.Find(filter);
+            Assert.AreEqual(1, invoices.Entities.Count);
+            Assert.AreEqual(invoice3.DocumentNumber, invoices.Entities.First().DocumentNumber);
+
+            filter.AccountNumberFrom = "4000";
+            filter.AccountNumberTo = "4999";
+            invoices = connector.Find(filter);
+            Assert.AreEqual(2, invoices.Entities.Count);
+        }
     }
 }
