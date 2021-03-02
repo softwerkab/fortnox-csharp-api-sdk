@@ -124,7 +124,17 @@ namespace FortnoxAPILibrary.Connectors
             BankFiles,
             /// <remarks/>
             [RealValue("inbox_kf")]
-            CustomerInvoices
+            CustomerInvoices,
+            /// <remarks/>
+            [RealValue("inbox_l")]
+            PayrollFiles,
+            /// <remarks/>
+            [RealValue("inbox_o")]
+            Orders,
+            /// <remarks/>
+            [RealValue("inbox_of")]
+            Offers
+
         }
 
         /// <summary>
