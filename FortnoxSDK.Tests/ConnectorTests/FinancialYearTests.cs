@@ -80,7 +80,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             
             var finYears = connector.Find(null);
             Assert.AreEqual(5, finYears.Entities.Count);
-            Assert.IsNotNull(finYears.Entities.First().AccountChartType);
+            Assert.IsNotNull(finYears.Entities.First().FromDate);
         }
     }
 }

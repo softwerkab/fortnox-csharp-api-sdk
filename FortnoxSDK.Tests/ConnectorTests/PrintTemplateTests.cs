@@ -47,7 +47,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             searchSettings.FilterBy = Filter.PrintTemplate.Order;
             var orderTemplates = connector.Find(searchSettings);
 
-            Assert.AreEqual(4, orderTemplates.Entities.Count);
+            Assert.AreEqual(3, orderTemplates.Entities.Count);
 
             searchSettings.FilterBy = Filter.PrintTemplate.Offer;
             var offerTemplates = connector.Find(searchSettings);
