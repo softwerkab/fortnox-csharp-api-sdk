@@ -86,6 +86,6 @@ namespace Fortnox.SDK.Entities
 
         ///<summary> VAT percentage of the row. The percentage needs to be of an existing VAT percentage. </summary>
         [JsonProperty]
-        public long? VAT { get; set; }
+        public decimal? VAT { get; set; }
     }
 }

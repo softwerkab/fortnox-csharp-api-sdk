@@ -507,5 +507,45 @@ namespace FortnoxSDK.Tests.ConnectorTests
             labelConnector.Delete(label1.Id);
             labelConnector.Delete(label2.Id);
         }
+
+        /// <summary>
+        /// Prerequisites: A custom VAT 1.23% was added in the fortnox settings
+        /// </summary>
+        [TestMethod]
+        public void Test_Invoice_CustomVAT()
+        {
+            #region Arrange
+            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            #endregion Arrange
+
+            IInvoiceConnector connector = new InvoiceConnector();
+
+            var newInvoice = new Invoice()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
+                InvoiceType = InvoiceType.CashInvoice,
+                PaymentWay = PaymentWay.Cash,
+                Comments = "TestInvoice",
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, Price = 100, VAT = 1.23m},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, Price = 100, VAT = 1.23m},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, Price = 100, VAT = 1.23m}
+                }
+            };
+
+            var createdInvoice = connector.Create(newInvoice);
+            Assert.AreEqual(3, createdInvoice.InvoiceRows.Count);
+            Assert.AreEqual(1.23m, createdInvoice.InvoiceRows.First().VAT);
+
+            #region Delete arranged resources
+            new InvoiceConnector().Cancel(createdInvoice.DocumentNumber);
+            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            #endregion Delete arranged resources
+        }
     }
 }
