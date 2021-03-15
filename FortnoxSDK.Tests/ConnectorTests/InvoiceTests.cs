@@ -379,5 +379,133 @@ namespace FortnoxSDK.Tests.ConnectorTests
             invoices = connector.Find(filter);
             Assert.AreEqual(2, invoices.Entities.Count);
         }
+
+        [TestMethod]
+        public void Test_InvoiceWithLabels()
+        {
+            #region Arrange
+            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            #endregion Arrange
+
+            ILabelConnector labelConnector = new LabelConnector();
+            var label1 = labelConnector.Create(new Label() { Description = TestUtils.RandomString() });
+            var label2 = labelConnector.Create(new Label() { Description = TestUtils.RandomString() });
+
+            IInvoiceConnector connector = new InvoiceConnector();
+
+            var invoice = new Invoice()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
+                InvoiceType = InvoiceType.CashInvoice,
+                PaymentWay = PaymentWay.Cash,
+                Comments = "TestInvoice",
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, Price = 100},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, Price = 100}
+                },
+                Labels = new List<LabelReference>()
+                {
+                    new LabelReference(label1.Id),
+                    new LabelReference(label2.Id)
+                }
+            };
+
+            var createdInvoice = connector.Create(invoice);
+            Assert.AreEqual(2, createdInvoice.Labels.Count);
+
+            //Clean
+            connector.Cancel(createdInvoice.DocumentNumber);
+            labelConnector.Delete(label1.Id);
+            labelConnector.Delete(label2.Id);
+        }
+
+        [TestMethod]
+        public void Test_Invoice_FilterByLabel()
+        {
+            #region Arrange
+            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            #endregion Arrange
+
+            ILabelConnector labelConnector = new LabelConnector();
+            var label1 = labelConnector.Create(new Label() { Description = TestUtils.RandomString() });
+            var label2 = labelConnector.Create(new Label() { Description = TestUtils.RandomString() });
+            var label3 = labelConnector.Create(new Label() { Description = TestUtils.RandomString() });
+
+            IInvoiceConnector connector = new InvoiceConnector();
+
+            var invoice1 = new Invoice()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
+                InvoiceType = InvoiceType.CashInvoice,
+                PaymentWay = PaymentWay.Cash,
+                Comments = "TestInvoice",
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, Price = 100},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, Price = 100}
+                },
+                Labels = new List<LabelReference>()
+                {
+                    new LabelReference(label1.Id),
+                    new LabelReference(label2.Id),
+                }
+            };
+
+            var invoice2 = new Invoice()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
+                DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
+                InvoiceType = InvoiceType.CashInvoice,
+                PaymentWay = PaymentWay.Cash,
+                Comments = "TestInvoice",
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, Price = 100},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, Price = 100}
+                },
+                Labels = new List<LabelReference>()
+                {
+                    new LabelReference(label2.Id),
+                    new LabelReference(label3.Id),
+                }
+            };
+
+            invoice1 = connector.Create(invoice1);
+            invoice2 = connector.Create(invoice2);
+
+            var filter = new InvoiceSearch()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber
+            };
+
+            var invoices = connector.Find(filter);
+            Assert.AreEqual(2, invoices.Entities.Count);
+
+            filter.LabelReference = label1.Id;
+            invoices = connector.Find(filter);
+            Assert.AreEqual(1, invoices.Entities.Count);
+
+            filter.LabelReference = label2.Id;
+            invoices = connector.Find(filter);
+            Assert.AreEqual(2, invoices.Entities.Count);
+
+            filter.LabelReference = label3.Id;
+            invoices = connector.Find(filter);
+            Assert.AreEqual(1, invoices.Entities.Count);
+
+            //Clean
+            connector.Cancel(invoice1.DocumentNumber);
+            connector.Cancel(invoice2.DocumentNumber);
+            labelConnector.Delete(label1.Id);
+            labelConnector.Delete(label2.Id);
+        }
     }
 }

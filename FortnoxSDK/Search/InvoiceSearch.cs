@@ -62,5 +62,11 @@ namespace Fortnox.SDK.Search
 
         [SearchParameter]
         public string AccountNumberTo { get; set; }
+
+		/// <summary>
+		/// ID of a label
+		/// </summary>
+		[SearchParameter("Label")]
+		public long? LabelReference { get; set; }
 	}
 }
