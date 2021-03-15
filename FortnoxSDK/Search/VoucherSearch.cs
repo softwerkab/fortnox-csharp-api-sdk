@@ -11,5 +11,8 @@ namespace Fortnox.SDK.Search
 
 		[SearchParameter]
 		public string CostCenter { get; set; }
+
+		[SearchParameter]
+		public string VoucherSeries { get; set; }
     }
 }

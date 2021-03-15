@@ -12,9 +12,11 @@ namespace Fortnox.SDK.Interfaces
         Voucher Create(Voucher voucher);
 		Voucher Get(long? id, string seriesId, long? financialYearId);
         EntityCollection<VoucherSubset> Find(VoucherSearch searchSettings);
+        void Delete(long? id, string seriesId, long? financialYearId);
 
         Task<Voucher> CreateAsync(Voucher voucher);
 		Task<Voucher> GetAsync(long? id, string seriesId, long? financialYearId);
         Task<EntityCollection<VoucherSubset>> FindAsync(VoucherSearch searchSettings);
-	}
+        Task DeleteAsync(long? id, string seriesId, long? financialYearId);
+    }
 }

@@ -53,11 +53,32 @@ namespace Fortnox.SDK.Connectors
 			return FindAsync(searchSettings).GetResult();
 		}
 
-		public async Task<EntityCollection<VoucherSubset>> FindAsync(VoucherSearch searchSettings)
+        public void Delete(long? id, string seriesId, long? financialYearId)
+        {
+            DeleteAsync(id, seriesId, financialYearId).GetResult();
+        }
+
+        public async Task<EntityCollection<VoucherSubset>> FindAsync(VoucherSearch searchSettings)
 		{
 			return await BaseFind(searchSettings).ConfigureAwait(false);
 		}
-		public async Task<Voucher> CreateAsync(Voucher voucher)
+
+        public async Task DeleteAsync(long? id, string seriesId, long? financialYearId)
+        {
+			var request = new BaseRequest()
+            {
+                Resource = Resource,
+                Indices = new List<string> { seriesId, id.ToString() },
+                Method = HttpMethod.Delete
+            };
+
+            if (financialYearId != null)
+                request.Parameters.Add("financialyear", financialYearId.ToString());
+
+            await SendAsync(request).ConfigureAwait(false);
+		}
+
+        public async Task<Voucher> CreateAsync(Voucher voucher)
 		{
 			return await BaseCreate(voucher).ConfigureAwait(false);
 		}
