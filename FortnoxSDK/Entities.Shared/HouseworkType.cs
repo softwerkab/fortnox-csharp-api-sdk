@@ -39,8 +39,6 @@ namespace Fortnox.SDK.Entities
         OtherCare,
         [EnumMember(Value = "OTHERCOSTS")]
         OtherCosts,
-        [EnumMember(Value = "API_BLANK")]
-        Empty,
 
         [Obsolete]
         [EnumMember(Value = "COOKING")]
@@ -62,6 +60,18 @@ namespace Fortnox.SDK.Entities
         [EnumMember(Value = "TRANSPORTATIONSERVICES")]
         TransportationServices,
         [EnumMember(Value = "WASHINGANDCAREOFCLOTHING")]
-        WashingAndCareOfClothing
+        WashingAndCareOfClothing,
+
+        /// <summary>
+        /// More info about usage at https://developer.fortnox.se/blog/best-practise-new-housework-invoice/
+        /// </summary>
+        [EnumMember(Value = "EMPTYHOUSEWORK")]
+        EmptyHousework,
+
+        /// <summary>
+        /// Use with Update request to clear existing value
+        /// </summary>
+        [EnumMember(Value = APIConstants.BlankValue)]
+        Blank
     }
 }
