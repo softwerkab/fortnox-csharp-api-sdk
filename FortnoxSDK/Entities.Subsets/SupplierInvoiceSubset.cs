@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Fortnox.SDK.Serialization;
 using Newtonsoft.Json;
 
@@ -96,10 +97,8 @@ namespace Fortnox.SDK.Entities
         [JsonProperty]
         public decimal? Total { get; set; }
 
-        //NEW
-
-        //[JsonProperty]
-        //public List<Voucher> Vouchers { get; set; }
+        [JsonProperty]
+        public List<VoucherReference> Vouchers { get; set; }
 
         [JsonProperty]
         public DateTime? FinalPayDate { get; set; }

@@ -162,5 +162,27 @@ namespace Fortnox.SDK.Entities
         ///<summary> Customer reference </summary>
         [JsonProperty]
         public string YourReference { get; set; }
+
+        [ReadOnly]
+        [JsonProperty]
+        public List<VoucherReference> Vouchers { get; private set; }
+
+        ///<summary> Voucher number for the invoice. This is created when the invoice is bookkept.</summary>
+        [Obsolete("Seems like this is only populated in bookkeep action response. Use Vouchers property instead for other use cases")]
+        [ReadOnly]
+        [JsonProperty]
+        public long? VoucherNumber { get; private set; }
+
+        ///<summary> Voucher series for the invoice. This is created when the invoice is bookkept.</summary>
+        [Obsolete("Seems like this is only populated in bookkeep action response. Use Vouchers property instead for other use cases")]
+        [ReadOnly]
+        [JsonProperty]
+        public string VoucherSeries { get; private set; }
+
+        ///<summary> Voucher year for the invoice. This is created when the invoice is bookkept.</summary>
+        [Obsolete("Seems like this is only populated in bookkeep action response. Use Vouchers property instead for other use cases")]
+        [ReadOnly]
+        [JsonProperty]
+        public long? VoucherYear { get; private set; }
     }
 }

@@ -147,5 +147,51 @@ namespace FortnoxSDK.Tests.ConnectorTests
             new ArticleConnector().Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
+
+        [TestMethod]
+        public void Test_Book()
+        {
+            #region Arrange
+            var tmpSupplier = new SupplierConnector().Create(new Supplier() { Name = "TmpSupplier" });
+            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
+            #endregion Arrange
+
+            ISupplierInvoiceConnector connector = new SupplierInvoiceConnector();
+
+            var newSupplierInvoice = new SupplierInvoice()
+            {
+                SupplierNumber = tmpSupplier.SupplierNumber,
+                Comments = "InvoiceComments",
+                InvoiceDate = new DateTime(2020, 1, 1),
+                DueDate = new DateTime(2020, 2, 1),
+                SalesType = SalesType.Stock,
+                OCR = "123456789",
+                Total = 5000,
+                SupplierInvoiceRows = new List<SupplierInvoiceRow>()
+                {
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 10, Price = 100},
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100},
+                    new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100}
+                }
+            };
+
+            var createdSupplierInvoice = connector.Create(newSupplierInvoice);
+
+            //Act
+            connector.Bookkeep(createdSupplierInvoice.GivenNumber);
+            var bookedInvoice = connector.Get(createdSupplierInvoice.GivenNumber);
+
+            //Assert
+            Assert.AreEqual(true, bookedInvoice.Booked);
+            Assert.AreEqual(1, bookedInvoice.Vouchers.Count);
+            Assert.AreEqual(ReferenceType.SupplierInvoice, bookedInvoice.Vouchers.First().ReferenceType);
+
+            #region Delete arranged resources
+            //Can not cancel booked invoice
+/*            connector.Cancel(createdSupplierInvoice.GivenNumber);
+            new SupplierConnector().Delete(tmpSupplier.SupplierNumber);
+            new ArticleConnector().Delete(tmpArticle.ArticleNumber);*/
+            #endregion Delete arranged resources
+        }
     }
 }
