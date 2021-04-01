@@ -35,7 +35,7 @@ namespace Fortnox.SDK.Entities
         ///<summary> Organisation number </summary>
         [ReadOnly]
         [JsonProperty]
-        public string OrganisationNumber { get; private set; }
+        public string OrganizationNumber { get; private set; }
 
         ///<summary> Visit address </summary>
         [ReadOnly]
