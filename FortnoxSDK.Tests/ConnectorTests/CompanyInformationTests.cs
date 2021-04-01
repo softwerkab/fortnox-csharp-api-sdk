@@ -39,6 +39,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             var retrievedCompanyInformation = connector.Get();
             Assert.IsNotNull(retrievedCompanyInformation?.CompanyName);
+            Assert.IsNotNull(retrievedCompanyInformation?.OrganizationNumber);
 
             #endregion READ / GET
 
