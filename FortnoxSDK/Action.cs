@@ -62,6 +62,7 @@ namespace Fortnox.SDK
                 case Action.ExternalPrint:
                     return HttpMethod.Put;
                 case Action.Email:
+                case Action.EInvoice:
                     return HttpMethod.Get;
                 default:
                     return HttpMethod.Put;
