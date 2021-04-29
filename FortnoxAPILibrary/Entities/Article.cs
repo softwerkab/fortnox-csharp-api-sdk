@@ -276,7 +276,7 @@ namespace FortnoxAPILibrary
 		}
 
         /// <remarks/>
-        public string HouseWorkType { get; set; }
+        public string HouseworkType { get; set; }
 
 
 		/// <remarks/>
