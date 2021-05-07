@@ -47,7 +47,7 @@ namespace Fortnox.SDK.Connectors.Base
                 }
 
                 if (UseRateLimiter)
-                    await Throttle();
+                    await Throttle().ConfigureAwait(false);
 
                 using var response = await HttpClient.SendAsync(request).ConfigureAwait(false);
 

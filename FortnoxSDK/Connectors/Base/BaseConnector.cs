@@ -59,7 +59,7 @@ namespace Fortnox.SDK.Connectors.Base
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, fortnoxRequest.AbsoluteUrl);
             httpRequest.Content = content;
 
-            return await SendAsync(httpRequest);
+            return await SendAsync(httpRequest).ConfigureAwait(false);
         }
     }
 }
