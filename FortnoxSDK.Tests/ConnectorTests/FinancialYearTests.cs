@@ -4,6 +4,7 @@ using Fortnox.SDK;
 using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Interfaces;
+using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -81,6 +82,38 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var finYears = connector.Find(null);
             Assert.AreEqual(5, finYears.Entities.Count);
             Assert.IsNotNull(finYears.Entities.First().FromDate);
+        }
+
+        [TestMethod]
+        public void Test_FinancialYear_Find_By_Date()
+        {
+            IFinancialYearConnector connector = new FinancialYearConnector();
+
+            var search = new FinancialYearSearch()
+            {
+                Date = new DateTime(2022, 05, 24)
+            };
+
+            var finYears = connector.Find(search);
+            Assert.AreEqual(1, finYears.Entities.Count);
+            Assert.AreEqual(new DateTime(2022,1,1), finYears.Entities.Single().FromDate);
+            Assert.AreEqual(new DateTime(2022, 12, 31), finYears.Entities.Single().ToDate);
+        }
+
+        [TestMethod]
+        public void Test_FinancialYear_Find_By_FinYearDate()
+        {
+            IFinancialYearConnector connector = new FinancialYearConnector();
+
+            var search = new FinancialYearSearch()
+            {
+                FinancialYearDate = new DateTime(2022, 05, 24)
+            };
+
+            var finYears = connector.Find(search);
+            Assert.AreEqual(1, finYears.Entities.Count);
+            Assert.AreEqual(new DateTime(2022, 1, 1), finYears.Entities.Single().FromDate);
+            Assert.AreEqual(new DateTime(2022, 12, 31), finYears.Entities.Single().ToDate);
         }
     }
 }

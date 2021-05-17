@@ -27,7 +27,7 @@ namespace Fortnox.SDK.Search
         /// Note, financial years don't overlap, therefore a date defines one (or none) financial year 
         /// </summary>
         [SearchParameter]
-        public DateTime? FinancialYearDate { get; set; }
+        public virtual DateTime? FinancialYearDate { get; set; }
 
         /// <summary>
         /// Limits search result to entities with date (e.g. InvoiceDate) after specified date
