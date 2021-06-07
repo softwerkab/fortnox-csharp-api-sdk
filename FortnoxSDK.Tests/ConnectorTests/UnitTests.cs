@@ -22,7 +22,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            IUnitConnector connector = new UnitConnector();
+            IUnitConnector connector = FortnoxClient.UnitConnector;
 
             #region CREATE
             var newUnit = new Unit()
@@ -70,7 +70,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            IUnitConnector connector = new UnitConnector();
+            IUnitConnector connector = FortnoxClient.UnitConnector;
 
             var existingCount = connector.Find(null).TotalResources;
 

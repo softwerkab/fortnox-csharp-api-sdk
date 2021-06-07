@@ -17,7 +17,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ICompanySettingsConnector connector = new CompanySettingsConnector();
+            ICompanySettingsConnector connector = FortnoxClient.CompanySettingsConnector;
 
             #region CREATE
             //Not Allowed

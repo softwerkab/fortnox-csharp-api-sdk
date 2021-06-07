@@ -22,7 +22,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #region Arrange
             #endregion Arrange
 
-            IVoucherConnector connector = new VoucherConnector();
+            IVoucherConnector connector = FortnoxClient.VoucherConnector;
 
             #region CREATE
             var newVoucher = new Voucher()
@@ -108,7 +108,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 }
             };
 
-            IVoucherConnector connector = new VoucherConnector();
+            IVoucherConnector connector = FortnoxClient.VoucherConnector;
             voucher1 = connector.Create(voucher1);
             voucher2 = connector.Create(voucher2);
             voucher3 = connector.Create(voucher3);

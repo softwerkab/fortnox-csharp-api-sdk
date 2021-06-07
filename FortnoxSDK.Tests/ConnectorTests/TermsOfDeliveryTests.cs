@@ -21,7 +21,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ITermsOfDeliveryConnector connector = new TermsOfDeliveryConnector();
+            ITermsOfDeliveryConnector connector = FortnoxClient.TermsOfDeliveryConnector;
 
             #region CREATE
             var newTermsOfDelivery = new TermsOfDelivery()
@@ -69,7 +69,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            ITermsOfDeliveryConnector connector = new TermsOfDeliveryConnector();
+            ITermsOfDeliveryConnector connector = FortnoxClient.TermsOfDeliveryConnector;
 
             var newTermsOfDelivery = new TermsOfDelivery()
             {

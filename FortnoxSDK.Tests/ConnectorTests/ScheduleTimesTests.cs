@@ -16,10 +16,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_ScheduleTimes_CRUD()
         {
             #region Arrange
-            var tmpEmployee = new EmployeeConnector().Get("TEST_EMP") ?? new EmployeeConnector().Create(new Employee() { EmployeeId = "TEST_EMP" });
+            var tmpEmployee = FortnoxClient.EmployeeConnector.Get("TEST_EMP") ?? FortnoxClient.EmployeeConnector.Create(new Employee() { EmployeeId = "TEST_EMP" });
             #endregion Arrange
 
-            IScheduleTimesConnector connector = new ScheduleTimesConnector();
+            IScheduleTimesConnector connector = FortnoxClient.ScheduleTimesConnector;
 
             #region CREATE
 

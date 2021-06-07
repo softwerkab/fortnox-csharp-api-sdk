@@ -19,11 +19,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Offer_CRUD()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IOfferConnector connector = new OfferConnector();
+            IOfferConnector connector = FortnoxClient.OfferConnector;
 
             #region CREATE
             var newOffer = new Offer()
@@ -71,8 +71,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -80,11 +80,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Find()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IOfferConnector connector = new OfferConnector();
+            IOfferConnector connector = FortnoxClient.OfferConnector;
             var newOffer = new Offer()
             {
                 Comments = "TestOrder",
@@ -128,8 +128,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 connector.Cancel(offer.DocumentNumber);
 
             #region Delete arranged resources
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -137,11 +137,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Print()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IOfferConnector connector = new OfferConnector();
+            IOfferConnector connector = FortnoxClient.OfferConnector;
             var newOffer = new Offer()
             {
                 Comments = "TestOrder",
@@ -163,8 +163,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
             connector.Cancel(createdOffer.DocumentNumber);
 
             #region Delete arranged resources
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -172,11 +172,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Email()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "richard.randak@softwerk.se"});
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "richard.randak@softwerk.se"});
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IOfferConnector connector = new OfferConnector();
+            IOfferConnector connector = FortnoxClient.OfferConnector;
             var newOffer = new Offer()
             {
                 Comments = "TestOrder",
@@ -198,8 +198,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
             connector.Cancel(createdOffer.DocumentNumber);
 
             #region Delete arranged resources
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

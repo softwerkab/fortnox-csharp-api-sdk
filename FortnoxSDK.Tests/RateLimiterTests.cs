@@ -17,7 +17,7 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_RateLimiter_NoError()
         {
-            var connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
 
             var watch = new Stopwatch();
             watch.Start();
@@ -35,7 +35,7 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_NoRateLimiter_TooManyRequest_Error()
         {
-            var connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
             connector.UseRateLimiter = false;
 
             FortnoxApiException error = null;

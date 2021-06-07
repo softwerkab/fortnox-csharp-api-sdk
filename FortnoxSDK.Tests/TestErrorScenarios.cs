@@ -15,7 +15,7 @@ namespace FortnoxSDK.Tests
         [ExpectedException(typeof(FortnoxApiException))]
         public void Test_FailedCreate_NoEntity()
         {
-            var connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
 
             var createdCustomer = connector.Create(new Customer() {Name = "TestCustomer", CountryCode = "InvalidCountryCode"});
             Assert.IsNull(createdCustomer);
@@ -25,7 +25,7 @@ namespace FortnoxSDK.Tests
         [ExpectedException(typeof(FortnoxApiException))]
         public void Test_FailedUpdate_NoEntity()
         {
-            var connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
 
             var createdCustomer = connector.Update(new Customer() { Name = "TestCustomer", CustomerNumber = "NotExistingCustomerNumber"});
             Assert.IsNull(createdCustomer);

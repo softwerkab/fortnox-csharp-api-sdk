@@ -22,7 +22,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ISupplierConnector connector = new SupplierConnector();
+            ISupplierConnector connector = FortnoxClient.SupplierConnector;
 
             #region CREATE
             var newSupplier = new Supplier()
@@ -87,7 +87,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             var testKeyMark = TestUtils.RandomString();
 
-            ISupplierConnector connector = new SupplierConnector();
+            ISupplierConnector connector = FortnoxClient.SupplierConnector;
             var newSupplier = new Supplier()
             {
                 Name = "TestSupplier",
@@ -143,7 +143,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             var vatTypes = Enum.GetValues(typeof(SupplierVATType)).Cast<SupplierVATType>().ToList();
 
-            ISupplierConnector connector = new SupplierConnector();
+            ISupplierConnector connector = FortnoxClient.SupplierConnector;
 
             var newSupplier = new Supplier()
             {

@@ -18,12 +18,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             #region Arrange
 
-            var tmpArticle = new ArticleConnector().Create(new Article() {Description = "TmpArticle"});
-            var tmpFile = new ArchiveConnector().UploadFile("tmpImage.png", Resource.fortnox_image);
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() {Description = "TmpArticle"});
+            var tmpFile = FortnoxClient.ArchiveConnector.UploadFile("tmpImage.png", Resource.fortnox_image);
 
             #endregion Arrange
 
-            IArticleFileConnectionConnector connector = new ArticleFileConnectionConnector();
+            IArticleFileConnectionConnector connector = FortnoxClient.ArticleFileConnectionConnector;
 
             #region CREATE
 
@@ -63,8 +63,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region Delete arranged resources
 
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
-            new ArchiveConnector().DeleteFile(tmpFile.Id);
+            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.ArchiveConnector.DeleteFile(tmpFile.Id);
 
             #endregion Delete arranged resources
         }
@@ -74,10 +74,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             #region Arrange
 
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle" });
             #endregion Arrange
 
-            IArticleFileConnectionConnector connector = new ArticleFileConnectionConnector();
+            IArticleFileConnectionConnector connector = FortnoxClient.ArticleFileConnectionConnector;
 
             var newArticleFileConnection = new ArticleFileConnection()
             {
@@ -86,7 +86,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             for (var i = 0; i < 5; i++)
             {
-                var tmpFile = new ArchiveConnector().UploadFile($"tmpImage{i}.png", Resource.fortnox_image);
+                var tmpFile = FortnoxClient.ArchiveConnector.UploadFile($"tmpImage{i}.png", Resource.fortnox_image);
                 newArticleFileConnection.FileId = tmpFile.Id;
 
                 connector.Create(newArticleFileConnection);
@@ -101,12 +101,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
             {
                 connector.Delete(entity.FileId);
 
-                new ArchiveConnector().DeleteFile(entity.FileId);
+                FortnoxClient.ArchiveConnector.DeleteFile(entity.FileId);
             }
 
             #region Delete arranged resources
 
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
 
             #endregion Delete arranged resources
         }

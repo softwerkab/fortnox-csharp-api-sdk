@@ -19,11 +19,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Invoice_CRUD()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IInvoiceConnector connector = new InvoiceConnector();
+            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
 
             #region CREATE
             var newInvoice = new Invoice()
@@ -74,8 +74,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -83,11 +83,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Find()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IInvoiceConnector connector = new InvoiceConnector();
+            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
             var newInvoice = new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
@@ -134,8 +134,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 connector.Cancel(invoice.DocumentNumber);
 
             #region Delete arranged resources
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -143,11 +143,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_DueDate()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IInvoiceConnector connector = new InvoiceConnector();
+            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
             var newInvoice = new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
@@ -179,8 +179,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
             connector.Cancel(createdInvoice.DocumentNumber);
 
             #region Delete arranged resources
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -188,13 +188,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Print()
         {
             #region Arrange
-            var cc = new CustomerConnector();
-            var ac = new ArticleConnector();
+            var cc = FortnoxClient.CustomerConnector;
+            var ac = FortnoxClient.ArticleConnector;
             var tmpCustomer = cc.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
             var tmpArticle = ac.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IInvoiceConnector connector = new InvoiceConnector();
+            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
 
             var newInvoice = new Invoice()
             {
@@ -220,8 +220,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
             connector.Cancel(createdInvoice.DocumentNumber);
 
             #region Delete arranged resources
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -229,11 +229,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Email()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "richard.randak@softwerk.se" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "richard.randak@softwerk.se" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IInvoiceConnector connector = new InvoiceConnector();
+            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
 
             var newInvoice = new Invoice()
             {
@@ -259,15 +259,15 @@ namespace FortnoxSDK.Tests.ConnectorTests
             connector.Cancel(createdInvoice.DocumentNumber);
 
             #region Delete arranged resources
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
         [TestMethod]
         public void Test_Search()
         {
-            var connector = new InvoiceConnector();
+            var connector = FortnoxClient.InvoiceConnector;
             var searchSettings = new InvoiceSearch();
             searchSettings.FromDate = new DateTime(2020,10, 10);
             searchSettings.ToDate = new DateTime(2020, 10, 15);
@@ -286,11 +286,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Filter_By_AccountRange()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IInvoiceConnector connector = new InvoiceConnector();
+            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
 
             var invoice1 = new Invoice()
             {
@@ -377,15 +377,15 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_InvoiceWithLabels()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            ILabelConnector labelConnector = new LabelConnector();
+            ILabelConnector labelConnector = FortnoxClient.LabelConnector;
             var label1 = labelConnector.Create(new Label() { Description = TestUtils.RandomString() });
             var label2 = labelConnector.Create(new Label() { Description = TestUtils.RandomString() });
 
-            IInvoiceConnector connector = new InvoiceConnector();
+            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
 
             var invoice = new Invoice()
             {
@@ -420,16 +420,16 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Invoice_FilterByLabel()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            ILabelConnector labelConnector = new LabelConnector();
+            ILabelConnector labelConnector = FortnoxClient.LabelConnector;
             var label1 = labelConnector.Create(new Label() { Description = TestUtils.RandomString() });
             var label2 = labelConnector.Create(new Label() { Description = TestUtils.RandomString() });
             var label3 = labelConnector.Create(new Label() { Description = TestUtils.RandomString() });
 
-            IInvoiceConnector connector = new InvoiceConnector();
+            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
 
             var invoice1 = new Invoice()
             {
@@ -508,11 +508,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Invoice_CustomVAT()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IInvoiceConnector connector = new InvoiceConnector();
+            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
 
             var newInvoice = new Invoice()
             {
@@ -535,9 +535,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
             Assert.AreEqual(1.23m, createdInvoice.InvoiceRows.First().VAT);
 
             #region Delete arranged resources
-            new InvoiceConnector().Cancel(createdInvoice.DocumentNumber);
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.InvoiceConnector.Cancel(createdInvoice.DocumentNumber);
+            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

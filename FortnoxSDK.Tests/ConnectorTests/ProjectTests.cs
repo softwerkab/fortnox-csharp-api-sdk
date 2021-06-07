@@ -22,7 +22,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            IProjectConnector connector = new ProjectConnector();
+            IProjectConnector connector = FortnoxClient.ProjectConnector;
 
             #region CREATE
             var newProject = new Project()
@@ -79,7 +79,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            IProjectConnector connector = new ProjectConnector();
+            IProjectConnector connector = FortnoxClient.ProjectConnector;
             var existingEntries = connector.Find(null).Entities.Count;
             var testKeyMark = TestUtils.RandomString();
 
@@ -132,7 +132,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            IProjectConnector connector = new ProjectConnector();
+            IProjectConnector connector = FortnoxClient.ProjectConnector;
             var existingEntries = connector.Find(null).Entities.Count;
             var description = TestUtils.RandomString();
 

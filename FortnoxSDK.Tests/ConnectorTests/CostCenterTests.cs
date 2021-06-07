@@ -21,7 +21,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ICostCenterConnector connector = new CostCenterConnector();
+            ICostCenterConnector connector = FortnoxClient.CostCenterConnector;
 
             #region CREATE
             var newCostCenter = new CostCenter()
@@ -75,7 +75,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ICostCenterConnector connector = new CostCenterConnector();
+            ICostCenterConnector connector = FortnoxClient.CostCenterConnector;
             var newCostCenter = new CostCenter()
             {
                 Code = TestUtils.RandomString(),

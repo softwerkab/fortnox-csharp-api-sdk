@@ -19,11 +19,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Contract_CRUD()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IContractConnector connector = new ContractConnector();
+            IContractConnector connector = FortnoxClient.ContractConnector;
 
             #region CREATE
             var newContract = new Contract()
@@ -73,8 +73,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            //new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -82,11 +82,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Contract_Find()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IContractConnector connector = new ContractConnector();
+            IContractConnector connector = FortnoxClient.ContractConnector;
 
             var newContract = new Contract()
             {

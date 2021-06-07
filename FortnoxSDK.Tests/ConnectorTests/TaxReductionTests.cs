@@ -19,9 +19,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_TaxReduction_CRUD()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Service, PurchasePrice = 1000 });
-            var tmpInvoice = new InvoiceConnector().Create(new Invoice()
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Service, PurchasePrice = 1000 });
+            var tmpInvoice = FortnoxClient.InvoiceConnector.Create(new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
@@ -37,7 +37,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             });
             #endregion Arrange
 
-            ITaxReductionConnector connector = new TaxReductionConnector();
+            ITaxReductionConnector connector = FortnoxClient.TaxReductionConnector;
 
             #region CREATE
 
@@ -93,9 +93,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new InvoiceConnector().Cancel(tmpInvoice.DocumentNumber);
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.InvoiceConnector.Cancel(tmpInvoice.DocumentNumber);
+            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -103,9 +103,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Find()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Service, PurchasePrice = 1000 });
-            var tmpInvoice = new InvoiceConnector().Create(new Invoice()
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Service, PurchasePrice = 1000 });
+            var tmpInvoice = FortnoxClient.InvoiceConnector.Create(new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
@@ -123,7 +123,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //var testKeyMark = TestUtils.RandomString();
 
-            ITaxReductionConnector connector = new TaxReductionConnector();
+            ITaxReductionConnector connector = FortnoxClient.TaxReductionConnector;
             var newTaxReduction = new TaxReduction()
             {
                 CustomerName = "TmpCustomer",
@@ -158,21 +158,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
 
             #region Delete arranged resources
-            new InvoiceConnector().Cancel(tmpInvoice.DocumentNumber);
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.InvoiceConnector.Cancel(tmpInvoice.DocumentNumber);
+            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
         [TestMethod]
         public void Test_TaxReductionChanges_2021()
         {
-            var tmpCustomer = new CustomerConnector().Create(new Customer()
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer()
             {
                 Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"
             });
 
-            var houseworkArticle = new ArticleConnector().Create(new Article()
+            var houseworkArticle = FortnoxClient.ArticleConnector.Create(new Article()
             {
                 Description = "TmpArticle", 
                 Type = ArticleType.Service, 
@@ -180,7 +180,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Housework = true
             });
 
-            var houseworkInvoice = new InvoiceConnector().Create(new Invoice()
+            var houseworkInvoice = FortnoxClient.InvoiceConnector.Create(new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 InvoiceDate = new DateTime(2021, 1, 20), //"2019-01-20",
@@ -198,7 +198,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             Assert.AreEqual(true, houseworkInvoice.HouseWork);
             Assert.AreEqual(TaxReductionType.Green, houseworkInvoice.TaxReductionType);
 
-            var createdTaxReduction = new TaxReductionConnector().Create(new TaxReduction()
+            var createdTaxReduction = FortnoxClient.TaxReductionConnector.Create(new TaxReduction()
             {
                 CustomerName = "TmpCustomer",
                 AskedAmount = 100,
@@ -210,7 +210,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             Assert.AreEqual(100, createdTaxReduction.AskedAmount);
 
             //Check if invoice is still the same
-            var retrievedInvoice = new InvoiceConnector().Get(houseworkInvoice.DocumentNumber);
+            var retrievedInvoice = FortnoxClient.InvoiceConnector.Get(houseworkInvoice.DocumentNumber);
             Assert.AreEqual(true, retrievedInvoice.HouseWork);
             Assert.AreEqual(TaxReductionType.Green, retrievedInvoice.TaxReductionType);
         }

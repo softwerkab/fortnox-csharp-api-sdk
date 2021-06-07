@@ -14,7 +14,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_PredefinedVoucherSeries_CRUD()
         {
-            IPredefinedVoucherSeriesConnector connector = new PredefinedVoucherSeriesConnector();
+            IPredefinedVoucherSeriesConnector connector = FortnoxClient.PredefinedVoucherSeriesConnector;
 
             //Get
             var predefinedVoucherSeries = connector.Get("INVOICE");
@@ -34,7 +34,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            IPredefinedVoucherSeriesConnector connector = new PredefinedVoucherSeriesConnector();
+            IPredefinedVoucherSeriesConnector connector = FortnoxClient.PredefinedVoucherSeriesConnector;
 
             var fullCollection = connector.Find(null);
 

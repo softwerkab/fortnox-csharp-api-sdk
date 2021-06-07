@@ -18,7 +18,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #region Arrange
             #endregion Arrange
 
-            ITrustedEmailSendersConnector connector = new TrustedEmailSendersConnector();
+            ITrustedEmailSendersConnector connector = FortnoxClient.TrustedEmailSendersConnector;
 
             var randomAddress = $"{TestUtils.RandomString()}@test.tst";
             #region CREATE

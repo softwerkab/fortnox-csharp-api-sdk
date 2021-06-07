@@ -21,7 +21,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ITermsOfPaymentConnector connector = new TermsOfPaymentConnector();
+            ITermsOfPaymentConnector connector = FortnoxClient.TermsOfPaymentConnector;
 
             #region CREATE
             var newTermsOfPayment = new TermsOfPayment()
@@ -69,7 +69,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            ITermsOfPaymentConnector connector = new TermsOfPaymentConnector();
+            ITermsOfPaymentConnector connector = FortnoxClient.TermsOfPaymentConnector;
 
             var newTermsOfPayment = new TermsOfPayment()
             {

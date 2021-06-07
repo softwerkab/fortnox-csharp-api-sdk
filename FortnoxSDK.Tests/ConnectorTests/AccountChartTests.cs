@@ -20,7 +20,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            IAccountChartConnector connector = new AccountChartConnector();
+            IAccountChartConnector connector = FortnoxClient.AccountChartConnector;
 
             var fullCollection = connector.Find(null);
 

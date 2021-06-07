@@ -18,12 +18,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Employee_CRUD()
         {
             #region Arrange
-            var c = new EmployeeConnector();
+            var c = FortnoxClient.EmployeeConnector;
             var alreadyExists = c.Get("TEST_EMP") != null;
 
             #endregion Arrange
 
-            IEmployeeConnector connector = new EmployeeConnector();
+            IEmployeeConnector connector = FortnoxClient.EmployeeConnector;
 
             #region CREATE
 
@@ -79,7 +79,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var timestamp = DateTime.Now;
             var marks = TestUtils.RandomString();
 
-            IEmployeeConnector connector = new EmployeeConnector();
+            IEmployeeConnector connector = FortnoxClient.EmployeeConnector;
 
             for (var i = 0; i < 5; i++)
                 connector.Create(new Employee() {EmployeeId = TestUtils.RandomString(), City = marks});

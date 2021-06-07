@@ -19,7 +19,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             #region Arrange
 
-            var tmpVoucher = new VoucherConnector().Create(new Voucher()
+            var tmpVoucher = FortnoxClient.VoucherConnector.Create(new Voucher()
             {
                 Description = "TestVoucher",
                 Comments = "Some comments",
@@ -31,10 +31,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
                     new VoucherRow() {Account = 1910, Debit = 0, Credit = 1500}
                 }
             });
-            var tmpFile = new ArchiveConnector().UploadFile("tmpImage.png", Resource.fortnox_image);
+            var tmpFile = FortnoxClient.ArchiveConnector.UploadFile("tmpImage.png", Resource.fortnox_image);
             #endregion Arrange
 
-            IVoucherFileConnectionConnector connector = new VoucherFileConnectionConnector();
+            IVoucherFileConnectionConnector connector = FortnoxClient.VoucherFileConnectionConnector;
 
             #region CREATE
             var newVoucherFileConnection = new VoucherFileConnection()
@@ -71,7 +71,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new ArchiveConnector().DeleteFile(tmpFile.Id);
+            FortnoxClient.ArchiveConnector.DeleteFile(tmpFile.Id);
             #endregion Delete arranged resources
         }
     }

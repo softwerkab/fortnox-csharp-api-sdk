@@ -19,12 +19,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_AttendanceTransactions_CRUD()
         {
             #region Arrange
-            var tmpEmployee = new EmployeeConnector().Create(new Employee() { EmployeeId = TestUtils.RandomString() });
-            var tmpProject = new ProjectConnector().Create(new Project() {Description = "TmpProject"});
-            var tmpCostCenter = new CostCenterConnector().Create(new CostCenter() {Code = "TMP", Description = "TmpCostCenter"});
+            var tmpEmployee = FortnoxClient.EmployeeConnector.Create(new Employee() { EmployeeId = TestUtils.RandomString() });
+            var tmpProject = FortnoxClient.ProjectConnector.Create(new Project() {Description = "TmpProject"});
+            var tmpCostCenter = FortnoxClient.CostCenterConnector.Create(new CostCenter() {Code = "TMP", Description = "TmpCostCenter"});
             #endregion Arrange
 
-            IAttendanceTransactionsConnector connector = new AttendanceTransactionsConnector();
+            IAttendanceTransactionsConnector connector = FortnoxClient.AttendanceTransactionsConnector;
 
             #region CREATE
             var newAttendanceTransaction = new AttendanceTransaction()
@@ -69,8 +69,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new CostCenterConnector().Delete(tmpCostCenter.Code);
-            new ProjectConnector().Delete(tmpProject.ProjectNumber);
+            FortnoxClient.CostCenterConnector.Delete(tmpCostCenter.Code);
+            FortnoxClient.ProjectConnector.Delete(tmpProject.ProjectNumber);
             #endregion Delete arranged resources
         }
 
@@ -78,12 +78,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Find()
         {
             #region Arrange
-            var tmpEmployee = new EmployeeConnector().Create(new Employee() { EmployeeId = TestUtils.RandomString() });
-            var tmpProject = new ProjectConnector().Create(new Project() { Description = "TmpProject" });
-            var tmpCostCenter = new CostCenterConnector().Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
+            var tmpEmployee = FortnoxClient.EmployeeConnector.Create(new Employee() { EmployeeId = TestUtils.RandomString() });
+            var tmpProject = FortnoxClient.ProjectConnector.Create(new Project() { Description = "TmpProject" });
+            var tmpCostCenter = FortnoxClient.CostCenterConnector.Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
             #endregion Arrange
 
-            IAttendanceTransactionsConnector connector = new AttendanceTransactionsConnector();
+            IAttendanceTransactionsConnector connector = FortnoxClient.AttendanceTransactionsConnector;
 
             var newAttendenceTransaction = new AttendanceTransaction()
             {
@@ -125,8 +125,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 connector.Delete(entry.EmployeeId, entry.Date, entry.CauseCode);
 
             #region Delete arranged resources
-            new CostCenterConnector().Delete(tmpCostCenter.Code);
-            new ProjectConnector().Delete(tmpProject.ProjectNumber);
+            FortnoxClient.CostCenterConnector.Delete(tmpCostCenter.Code);
+            FortnoxClient.ProjectConnector.Delete(tmpProject.ProjectNumber);
             #endregion Delete arranged resources
         }
     }

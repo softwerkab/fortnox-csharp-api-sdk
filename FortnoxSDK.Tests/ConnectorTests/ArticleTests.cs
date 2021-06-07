@@ -22,7 +22,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            IArticleConnector connector = new ArticleConnector();
+            IArticleConnector connector = FortnoxClient.ArticleConnector;
 
             #region CREATE
             var newArticle = new Article()
@@ -81,7 +81,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             var testKeyMark = TestUtils.RandomString();
 
-            IArticleConnector connector = new ArticleConnector();
+            IArticleConnector connector = FortnoxClient.ArticleConnector;
 
             var newArticle = new Article
             {
@@ -137,7 +137,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var values = Enum.GetValues(typeof(HouseworkType)).Cast<HouseworkType>().ToList();
             Assert.AreEqual(28,values.Count);
 
-            var connector = new ArticleConnector();
+            var connector = FortnoxClient.ArticleConnector;
             var article = connector.Create(new Article(){ Description = "HouseworkArticleTest", Housework = true });
 
             foreach (var houseworkType in values)
@@ -164,7 +164,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void HouseWorkArticle_Blank()
         {
-            var connector = new ArticleConnector();
+            var connector = FortnoxClient.ArticleConnector;
             var article = connector.Create(new Article()
             {
                 Description = "HouseworkArticleTest", 

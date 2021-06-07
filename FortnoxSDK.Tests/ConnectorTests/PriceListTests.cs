@@ -21,7 +21,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #region Arrange
             #endregion Arrange
 
-            IPriceListConnector connector = new PriceListConnector();
+            IPriceListConnector connector = FortnoxClient.PriceListConnector;
 
             #region CREATE
             var newPriceList = new PriceList()
@@ -68,7 +68,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var timeStamp = DateTime.Now;
             Thread.Sleep(1000);
 
-            IPriceListConnector connector = new PriceListConnector();
+            IPriceListConnector connector = FortnoxClient.PriceListConnector;
 
             var newPriceList = new PriceList()
             {

@@ -21,7 +21,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            IPrintTemplateConnector connector = new PrintTemplateConnector();
+            IPrintTemplateConnector connector = FortnoxClient.PrintTemplateConnector;
             
             var fullCollection = connector.Find(null);
 
@@ -34,7 +34,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find_Filter()
         {
-            IPrintTemplateConnector connector = new PrintTemplateConnector();
+            IPrintTemplateConnector connector = FortnoxClient.PrintTemplateConnector;
             var searchSettings = new PrintTemplateSearch();
 
             searchSettings.FilterBy = Filter.PrintTemplate.Order;

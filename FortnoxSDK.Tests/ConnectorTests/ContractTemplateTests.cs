@@ -19,10 +19,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_ContractTemplate_CRUD()
         {
             #region Arrange
-            var tmpArticle = new ArticleConnector().Create(new Article(){ Description = "TmpArticle" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article(){ Description = "TmpArticle" });
             #endregion Arrange
 
-            IContractTemplateConnector connector = new ContractTemplateConnector();
+            IContractTemplateConnector connector = FortnoxClient.ContractTemplateConnector;
 
             #region CREATE
             var newContractTemplate = new ContractTemplate()
@@ -63,7 +63,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -72,10 +72,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_ContractTemplate_Find()
         {
             #region Arrange
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle" });
             #endregion Arrange
 
-            IContractTemplateConnector connector = new ContractTemplateConnector();
+            IContractTemplateConnector connector = FortnoxClient.ContractTemplateConnector;
 
             var marks = TestUtils.RandomString();
 

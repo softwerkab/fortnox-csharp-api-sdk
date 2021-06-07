@@ -21,11 +21,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             #region Arrange
 
-            var tmpCustomer = new CustomerConnector().Create(new Customer()
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer()
                 {Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"});
-            var tmpArticle = new ArticleConnector().Create(new Article()
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article()
                 {Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 10});
-            var invoiceConnector = new InvoiceConnector();
+            var invoiceConnector = FortnoxClient.InvoiceConnector;
             var tmpInvoice = invoiceConnector.Create(new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
@@ -39,7 +39,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             invoiceConnector.Bookkeep(tmpInvoice.DocumentNumber);
             #endregion Arrange
 
-            IInvoicePaymentConnector connector = new InvoicePaymentConnector();
+            IInvoicePaymentConnector connector = FortnoxClient.InvoicePaymentConnector;
 
             #region CREATE
 
@@ -84,9 +84,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region Delete arranged resources
             //Can't cancel invoice after it is booked
-            //new InvoiceConnector().Cancel(tmpInvoice.DocumentNumber);
-            //new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //FortnoxClient.InvoiceConnector.Cancel(tmpInvoice.DocumentNumber);
+            //FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
 
             #endregion Delete arranged resources
         }
@@ -95,9 +95,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_InvoicePayment_Find()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 10 });
-            var invoiceConnector = new InvoiceConnector();
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 10 });
+            var invoiceConnector = FortnoxClient.InvoiceConnector;
             var tmpInvoice = invoiceConnector.Create(new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
@@ -111,7 +111,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             invoiceConnector.Bookkeep(tmpInvoice.DocumentNumber);
             #endregion Arrange
 
-            IInvoicePaymentConnector connector = new InvoicePaymentConnector();
+            IInvoicePaymentConnector connector = FortnoxClient.InvoicePaymentConnector;
 
             var newInvoicePayment = new InvoicePayment()
             {

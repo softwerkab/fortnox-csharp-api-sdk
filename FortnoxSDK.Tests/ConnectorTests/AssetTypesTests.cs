@@ -22,7 +22,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #endregion Arrange
 
-            IAssetTypesConnector connector = new AssetTypesConnector();
+            IAssetTypesConnector connector = FortnoxClient.AssetTypesConnector;
             var entry = connector.Find(null).Entities.FirstOrDefault(at => at.Number == "TST");
             if (entry != null)
                 connector.Delete(entry.Id);
@@ -82,7 +82,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_AssetTypes_Find()
         {
-            IAssetTypesConnector connector = new AssetTypesConnector();
+            IAssetTypesConnector connector = FortnoxClient.AssetTypesConnector;
 
             var newAssetType = new AssetType()
             {

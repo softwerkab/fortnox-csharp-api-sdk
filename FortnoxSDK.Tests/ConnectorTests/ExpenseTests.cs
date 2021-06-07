@@ -18,10 +18,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Expense_CRUD()
         {
             #region Arrange
-            var tmpAccount = new AccountConnector().Create(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
+            var tmpAccount = FortnoxClient.AccountConnector.Create(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
             #endregion Arrange
 
-            IExpenseConnector connector = new ExpenseConnector();
+            IExpenseConnector connector = FortnoxClient.ExpenseConnector;
 
             #region CREATE
 
@@ -57,7 +57,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new AccountConnector().Delete(tmpAccount.Number);
+            FortnoxClient.AccountConnector.Delete(tmpAccount.Number);
             #endregion Delete arranged resources
         }
 
@@ -65,7 +65,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Expense_Find()
         {
             #region Arrange
-            var tmpAccount = new AccountConnector().Create(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
+            var tmpAccount = FortnoxClient.AccountConnector.Create(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
             #endregion Arrange
 
             var timeStamp = DateTime.Now;
@@ -77,7 +77,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Account = tmpAccount.Number
             };
 
-            IExpenseConnector connector = new ExpenseConnector();
+            IExpenseConnector connector = FortnoxClient.ExpenseConnector;
             for (var i = 0; i < 2; i++)
             {
                 newExpense.Code = TestUtils.RandomString(6);
@@ -94,7 +94,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             Assert.IsNotNull(newExpenses.First().Url);
 
             #region Delete arranged resources
-            new AccountConnector().Delete(tmpAccount.Number);
+            FortnoxClient.AccountConnector.Delete(tmpAccount.Number);
             #endregion Delete arranged resources
         }
     }

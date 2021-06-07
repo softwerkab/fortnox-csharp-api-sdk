@@ -15,7 +15,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_PredefinedAccounts_CRUD()
         {
-            IPredefinedAccountsConnector connector = new PredefinedAccountsConnector();
+            IPredefinedAccountsConnector connector = FortnoxClient.PredefinedAccountsConnector;
 
             //Get
             var bygAccount = connector.Get("CONSTRUCTION_DEB");
@@ -38,7 +38,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            IPredefinedAccountsConnector connector = new PredefinedAccountsConnector();
+            IPredefinedAccountsConnector connector = FortnoxClient.PredefinedAccountsConnector;
 
             var fullCollection = connector.Find(null);
 

@@ -22,7 +22,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            IWayOfDeliveryConnector connector = new WayOfDeliveryConnector();
+            IWayOfDeliveryConnector connector = FortnoxClient.WayOfDeliveryConnector;
 
             #region CREATE
             var newWayOfDelivery = new WayOfDelivery()
@@ -70,7 +70,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            IWayOfDeliveryConnector connector = new WayOfDeliveryConnector();
+            IWayOfDeliveryConnector connector = FortnoxClient.WayOfDeliveryConnector;
 
             var existingCount = connector.Find(null).Entities.Count;
             var testKeyMark = TestUtils.RandomString();

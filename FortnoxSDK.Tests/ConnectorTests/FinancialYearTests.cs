@@ -20,11 +20,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             #region Arrange
 
-            var existingAccountChartType = new AccountChartConnector().Find(null).Entities.First();
+            var existingAccountChartType = FortnoxClient.AccountChartConnector.Find(null).Entities.First();
 
             #endregion Arrange
 
-            IFinancialYearConnector connector = new FinancialYearConnector();
+            IFinancialYearConnector connector = FortnoxClient.FinancialYearConnector;
 
             #region CREATE
 
@@ -70,7 +70,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_FinancialYear_Find()
         {
-            IFinancialYearConnector connector = new FinancialYearConnector();
+            IFinancialYearConnector connector = FortnoxClient.FinancialYearConnector;
             
             var finYears = connector.Find(null);
             Assert.AreEqual(5, finYears.Entities.Count);
@@ -80,7 +80,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_FinancialYear_Find_By_Date()
         {
-            IFinancialYearConnector connector = new FinancialYearConnector();
+            IFinancialYearConnector connector = FortnoxClient.FinancialYearConnector;
 
             var search = new FinancialYearSearch()
             {
@@ -96,7 +96,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_FinancialYear_Find_By_FinYearDate()
         {
-            IFinancialYearConnector connector = new FinancialYearConnector();
+            IFinancialYearConnector connector = FortnoxClient.FinancialYearConnector;
 
             var search = new FinancialYearSearch()
             {

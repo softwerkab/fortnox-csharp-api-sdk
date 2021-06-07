@@ -108,7 +108,7 @@ namespace FortnoxSDK.Tests
         {
             try
             {
-                new AccountConnector().Get(number);
+                DefaultFortnoxClient.AccountConnector.Get(number);
                 return true;
             }
             catch (FortnoxApiException)

@@ -56,7 +56,7 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_Find_ParamsNotAdded()
         {
-            var connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
             searchSettings.Name = "TestName";
 
             connector.Find();
@@ -74,7 +74,7 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_Find_ParamsNullable()
         {
-            var connector = new CustomerConnector()
+            var connector = FortnoxClient.CustomerConnector
             {
                 Search = new CustomerSearch()
                 {
@@ -105,7 +105,7 @@ namespace FortnoxSDK.Tests
         /*[TestMethod]
         public void Test_ReadOnlyProperty_NotSerialized()
         {
-            var connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
 
             var createdCustomer = connector.Create(new Customer() {Name = "TestCustomer", CountryCode = "SE"});
             MyAssert.HasNoError(connector);
@@ -123,7 +123,7 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_ReadOnlyProperty_Deserialized()
         {
-            ICustomerConnector connector = new CustomerConnector();
+            ICustomerConnector connector = FortnoxClient.CustomerConnector;
 
             var createdCustomer = connector.Create(new Customer() {Name = "TestUser", CountryCode = "SE"});
             Assert.AreEqual("Sverige", createdCustomer.Country);
@@ -134,7 +134,7 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_EmptyNestedObject()
         {
-            ICustomerConnector connector = new CustomerConnector();
+            ICustomerConnector connector = FortnoxClient.CustomerConnector;
 
             var createdCustomer = connector.Create(new Customer()
             {
@@ -151,7 +151,7 @@ namespace FortnoxSDK.Tests
             const int large = 20;
             const int small = 5;
 
-            var connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
             var searchSettings = new CustomerSearch();
             searchSettings.Limit = large;
             searchSettings.SortBy = Sort.By.Customer.CustomerNumber;
@@ -180,7 +180,7 @@ namespace FortnoxSDK.Tests
         {
             //To make this test make sense, over 100 customers must exist, ideally over 500
 
-            ICustomerConnector connector = new CustomerConnector();
+            ICustomerConnector connector = FortnoxClient.CustomerConnector;
             var result = connector.Find(null);
             Assert.IsTrue(result.TotalPages > 1);
 
@@ -202,7 +202,7 @@ namespace FortnoxSDK.Tests
         public void TestAuth()
         {
             var authorizationCode = "Placeholder";
-            var authConnector = new AuthorizationConnector();
+            var authConnector = FortnoxClient.AuthorizationConnector;
 
             var token = authConnector.GetAccessToken(authorizationCode, TestCredentials.Client_Secret);
             Assert.IsNotNull(token);

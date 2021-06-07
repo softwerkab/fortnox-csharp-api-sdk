@@ -19,7 +19,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #region Arrange
 
             //Random currency code is not accepted by the server, therefore "SKK" is used.
-            var currencyConnector = new CurrencyConnector();
+            var currencyConnector = FortnoxClient.CurrencyConnector;
             try
             {
                 //Delete currency if already exists
@@ -32,7 +32,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #endregion Arrange
 
-            ICurrencyConnector connector = new CurrencyConnector();
+            ICurrencyConnector connector = FortnoxClient.CurrencyConnector;
 
             #region CREATE
 
@@ -87,7 +87,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             //Prerequisites: SEK, EUR and USD currencies are already present in the system
 
-            ICurrencyConnector connector = new CurrencyConnector();
+            ICurrencyConnector connector = FortnoxClient.CurrencyConnector;
 
             var currencies = connector.Find(null);
 

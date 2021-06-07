@@ -18,9 +18,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_SupplierInvoiceFileConnection_CRUD()
         {
             #region Arrange
-            var tmpSupplier = new SupplierConnector().Create(new Supplier() { Name = "TmpSupplier" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
-            var tmpSpplierInvoice = new SupplierInvoiceConnector().Create(new SupplierInvoice()
+            var tmpSupplier = FortnoxClient.SupplierConnector.Create(new Supplier() { Name = "TmpSupplier" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
+            var tmpSpplierInvoice = FortnoxClient.SupplierInvoiceConnector.Create(new SupplierInvoice()
             {
                 SupplierNumber = tmpSupplier.SupplierNumber,
                 Comments = "InvoiceComments",
@@ -36,10 +36,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
                     new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100}
                 }
             });
-            var tmpFile = new InboxConnector().UploadFile("tmpImage.png", Resource.fortnox_image, StaticFolders.SupplierInvoices);
+            var tmpFile = FortnoxClient.InboxConnector.UploadFile("tmpImage.png", Resource.fortnox_image, StaticFolders.SupplierInvoices);
             #endregion Arrange
 
-            ISupplierInvoiceFileConnectionConnector connector = new SupplierInvoiceFileConnectionConnector();
+            ISupplierInvoiceFileConnectionConnector connector = FortnoxClient.SupplierInvoiceFileConnectionConnector;
 
             #region CREATE
             var newSupplierInvoiceFileConnection = new SupplierInvoiceFileConnection()
@@ -75,9 +75,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new SupplierInvoiceConnector().Cancel(tmpSpplierInvoice.GivenNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
-            new SupplierConnector().Delete(tmpSupplier.SupplierNumber);
+            FortnoxClient.SupplierInvoiceConnector.Cancel(tmpSpplierInvoice.GivenNumber);
+            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.SupplierConnector.Delete(tmpSupplier.SupplierNumber);
             #endregion Delete arranged resources
         }
     }

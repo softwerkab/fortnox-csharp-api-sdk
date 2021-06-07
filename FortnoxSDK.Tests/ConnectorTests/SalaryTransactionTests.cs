@@ -17,10 +17,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_SalaryTransaction_CRUD()
         {
             #region Arrange
-            var tmpEmployee = new EmployeeConnector().Create(new Employee() { EmployeeId = TestUtils.RandomString() });
+            var tmpEmployee = FortnoxClient.EmployeeConnector.Create(new Employee() { EmployeeId = TestUtils.RandomString() });
             #endregion Arrange
 
-            ISalaryTransactionConnector connector = new SalaryTransactionConnector();
+            ISalaryTransactionConnector connector = FortnoxClient.SalaryTransactionConnector;
 
             #region CREATE
             var newSalaryTransaction = new SalaryTransaction()

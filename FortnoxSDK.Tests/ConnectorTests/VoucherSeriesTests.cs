@@ -18,7 +18,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            IVoucherSeriesConnector connector = new VoucherSeriesConnector();
+            IVoucherSeriesConnector connector = FortnoxClient.VoucherSeriesConnector;
 
             #region CREATE
             //var digits = new char[]{ '0', '1', '2', '3', '4', '5'}

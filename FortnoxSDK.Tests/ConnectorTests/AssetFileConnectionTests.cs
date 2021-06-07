@@ -16,8 +16,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_AssetFileConnection_CRUD()
         {
             #region Arrange
-            var tmpAssetType = new AssetTypesConnector().Create(new AssetType() { Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
-            var tmpAsset = new AssetConnector().Create(new Asset()
+            var tmpAssetType = FortnoxClient.AssetTypesConnector.Create(new AssetType() { Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
+            var tmpAsset = FortnoxClient.AssetConnector.Create(new Asset()
             {
                 Description = "TestAsset",
                 Number = TestUtils.RandomString(),
@@ -32,10 +32,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Placement = "Right here",
                 TypeId = tmpAssetType.Id.ToString()
             });
-            var tmpFile = new ArchiveConnector().UploadFile("tmpImage.png", Resource.fortnox_image);
+            var tmpFile = FortnoxClient.ArchiveConnector.UploadFile("tmpImage.png", Resource.fortnox_image);
             #endregion Arrange
 
-            IAssetFileConnectionConnector connector = new AssetFileConnectionConnector();
+            IAssetFileConnectionConnector connector = FortnoxClient.AssetFileConnectionConnector;
 
             #region CREATE
             var newAssetFileConnection = new AssetFileConnection()
@@ -75,9 +75,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new AssetConnector().Delete(tmpAsset.Id);
-            new AssetTypesConnector().Delete(tmpAssetType.Id);
-            new ArchiveConnector().DeleteFile(tmpFile.Id);
+            FortnoxClient.AssetConnector.Delete(tmpAsset.Id);
+            FortnoxClient.AssetTypesConnector.Delete(tmpAssetType.Id);
+            FortnoxClient.ArchiveConnector.DeleteFile(tmpFile.Id);
             #endregion Delete arranged resources
         }
     }

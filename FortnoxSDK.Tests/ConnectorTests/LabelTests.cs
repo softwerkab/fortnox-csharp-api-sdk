@@ -19,7 +19,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ILabelConnector connector = new LabelConnector();
+            ILabelConnector connector = FortnoxClient.LabelConnector;
 
             var randomLabel = TestUtils.RandomString();
 
@@ -62,7 +62,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            ILabelConnector connector = new LabelConnector();
+            ILabelConnector connector = FortnoxClient.LabelConnector;
 
             var existingCount = connector.Find(null).Entities.Count;
 

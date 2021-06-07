@@ -19,9 +19,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_SupplierInvoiceAccrual_CRUD()
         {
             #region Arrange
-            var tmpSupplier = new SupplierConnector().Create(new Supplier() { Name = "TmpSupplier" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle" });
-            var conn = new SupplierInvoiceConnector();
+            var tmpSupplier = FortnoxClient.SupplierConnector.Create(new Supplier() { Name = "TmpSupplier" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle" });
+            var conn = FortnoxClient.SupplierInvoiceConnector;
             var tmpSupplierInvoice = conn.Create(new SupplierInvoice()
             {
                 SupplierNumber = tmpSupplier.SupplierNumber,
@@ -38,7 +38,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             });
             #endregion Arrange
 
-            ISupplierInvoiceAccrualConnector connector = new SupplierInvoiceAccrualConnector();
+            ISupplierInvoiceAccrualConnector connector = FortnoxClient.SupplierInvoiceAccrualConnector;
 
             #region CREATE
             var newSupplierInvoiceAccrual = new SupplierInvoiceAccrual()
@@ -90,8 +90,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new SupplierConnector().Delete(tmpSupplier.SupplierNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.SupplierConnector.Delete(tmpSupplier.SupplierNumber);
+            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

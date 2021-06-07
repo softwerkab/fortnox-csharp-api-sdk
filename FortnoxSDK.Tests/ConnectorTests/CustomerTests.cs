@@ -20,7 +20,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ICustomerConnector connector = new CustomerConnector();
+            ICustomerConnector connector = FortnoxClient.CustomerConnector;
 
             #region CREATE
             var newCustomer = new Customer()
@@ -81,7 +81,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             var testKeyMark = TestUtils.RandomString();
 
-            ICustomerConnector connector = new CustomerConnector();
+            ICustomerConnector connector = FortnoxClient.CustomerConnector;
             var newCustomer = new Customer()
             {
                 Name = "TestCustomer",

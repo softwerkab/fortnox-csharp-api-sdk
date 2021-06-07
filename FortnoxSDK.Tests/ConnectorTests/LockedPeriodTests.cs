@@ -17,7 +17,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ILockedPeriodConnector connector = new LockedPeriodConnector();
+            ILockedPeriodConnector connector = FortnoxClient.LockedPeriodConnector;
 
             #region CREATE
             //Not Allowed

@@ -18,9 +18,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_SupplierInvoiceExternalURLConnection_CRUD()
         {
             #region Arrange
-            var tmpSupplier = new SupplierConnector().Create(new Supplier() { Name = "TmpSupplier" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
-            var tmpSpplierInvoice = new SupplierInvoiceConnector().Create(new SupplierInvoice()
+            var tmpSupplier = FortnoxClient.SupplierConnector.Create(new Supplier() { Name = "TmpSupplier" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
+            var tmpSpplierInvoice = FortnoxClient.SupplierInvoiceConnector.Create(new SupplierInvoice()
             {
                 SupplierNumber = tmpSupplier.SupplierNumber,
                 Comments = "InvoiceComments",
@@ -38,7 +38,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             });
             #endregion Arrange
 
-            ISupplierInvoiceExternalURLConnectionConnector connector = new SupplierInvoiceExternalURLConnectionConnector();
+            ISupplierInvoiceExternalURLConnectionConnector connector = FortnoxClient.SupplierInvoiceExternalURLConnectionConnector;
 
             #region CREATE
             var newSupplierInvoiceExternalURLConnection = new SupplierInvoiceExternalURLConnection()
@@ -79,9 +79,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new SupplierInvoiceConnector().Cancel(tmpSpplierInvoice.GivenNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
-            new SupplierConnector().Delete(tmpSupplier.SupplierNumber);
+            FortnoxClient.SupplierInvoiceConnector.Cancel(tmpSpplierInvoice.GivenNumber);
+            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.SupplierConnector.Delete(tmpSupplier.SupplierNumber);
             #endregion Delete arranged resources
         }
     }

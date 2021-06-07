@@ -19,7 +19,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ITrustedEmailDomainsConnector connector = new TrustedEmailDomainsConnector();
+            ITrustedEmailDomainsConnector connector = FortnoxClient.TrustedEmailDomainsConnector;
 
             #region CREATE
             var newTrustedEmailDomains = new TrustedEmailDomain()

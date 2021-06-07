@@ -18,9 +18,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_InvoiceFileConnection_CRUD()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 10 });
-            var invoiceConnector = new InvoiceConnector();
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 10 });
+            var invoiceConnector = FortnoxClient.InvoiceConnector;
             var tmpInvoice = invoiceConnector.Create(new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
@@ -31,11 +31,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
                     new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 2, Price = 10},
                 }
             });
-            var inboxConnector = new InboxConnector();
+            var inboxConnector = FortnoxClient.InboxConnector;
             var tmpFile = inboxConnector.UploadFile("tmpInvoiceFile.pdf", Resource.invoice_example, StaticFolders.CustomerInvoices);
             #endregion Arrange
 
-            IInvoiceFileConnectionConnector connector = new InvoiceFileConnectionConnector();
+            IInvoiceFileConnectionConnector connector = FortnoxClient.InvoiceFileConnectionConnector;
 
             #region CREATE
             var newInvoiceFileConnection = new InvoiceFileConnection()
@@ -77,10 +77,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new InvoiceConnector().Cancel(tmpInvoice.DocumentNumber);
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
-            new InboxConnector().DeleteFile(tmpFile.Id);
+            FortnoxClient.InvoiceConnector.Cancel(tmpInvoice.DocumentNumber);
+            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.InboxConnector.DeleteFile(tmpFile.Id);
             #endregion Delete arranged resources
         }
     }
