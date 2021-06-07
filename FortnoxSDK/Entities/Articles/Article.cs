@@ -103,9 +103,8 @@ namespace Fortnox.SDK.Entities
         public long? SalesAccount { get; set; }
 
         ///<summary> Price of article for its default price list. </summary>
-        [ReadOnly]
         [JsonProperty]
-        public decimal? SalesPrice { get; private set; }
+        public decimal? SalesPrice { get; set; }
 
         ///<summary> If the article is stock goods. </summary>
         [JsonProperty]
