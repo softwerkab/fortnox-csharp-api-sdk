@@ -21,13 +21,6 @@ namespace Fortnox.SDK.Connectors
             UseAuthHeaders = false;
         }
 
-        /// <summary>
-        /// <para>Use this function to create and get your Access-Token.</para>
-        /// <para>Note that an authorization-code can be used only once.</para> 
-        /// </summary>
-        /// <param name="authorizationCode">The authorisation-code given to you by Fortnox</param>
-        /// <param name="clientSecret">The Client-Secret code given to you by Fortnox</param>
-        /// <returns>The Access-Token to use with Fortnox</returns>
         public string GetAccessToken(string authorizationCode, string clientSecret)
         {
             return GetAccessTokenAsync(authorizationCode, clientSecret).GetResult();

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
@@ -201,10 +200,12 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void TestAuth()
         {
+            var clientSecret = TestCredentials.Client_Secret;
             var authorizationCode = "Placeholder";
-            var authConnector = FortnoxClient.AuthorizationConnector;
 
-            var token = authConnector.GetAccessToken(authorizationCode, TestCredentials.Client_Secret);
+            var fortnoxAuthClient = new FortnoxAuthClient();
+
+            var token = fortnoxAuthClient.Activate(authorizationCode, clientSecret);
             Assert.IsNotNull(token);
         }
     }

@@ -7,7 +7,7 @@ using Fortnox.SDK.Interfaces;
 namespace Fortnox.SDK
 {
     /// <summary>
-    /// Factory for creating connectors. All connectors will be created using configured set-up.
+    /// Entry point for Fortnox API usage.
     /// </summary>
     public class FortnoxClient
     {
@@ -64,7 +64,6 @@ namespace Fortnox.SDK
         public IAssetFileConnectionConnector AssetFileConnectionConnector => Get<AssetFileConnectionConnector>();
         public IAssetTypesConnector AssetTypesConnector => Get<AssetTypesConnector>();
         public IAttendanceTransactionsConnector AttendanceTransactionsConnector => Get<AttendanceTransactionsConnector>();
-        public IAuthorizationConnector AuthorizationConnector => Get<AuthorizationConnector>();
         public ICompanyInformationConnector CompanyInformationConnector => Get<CompanyInformationConnector>();
         public ICompanySettingsConnector CompanySettingsConnector => Get<CompanySettingsConnector>();
         public IContractAccrualConnector ContractAccrualConnector => Get<ContractAccrualConnector>();
