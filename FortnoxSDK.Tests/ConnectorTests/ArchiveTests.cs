@@ -10,16 +10,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class ArchiveTests
     {
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
         private ArchiveFolder testRootFolder;
 
         [TestInitialize]
         public void Init()
         {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-
             IArchiveConnector connector = new ArchiveConnector();
             testRootFolder = connector.GetFolder("TestArchive");
         }

@@ -12,13 +12,11 @@ namespace FortnoxSDK.Tests
     [TestClass]
     public class BaseConnectorTests
     {
+        public FortnoxClient FortnoxClient => TestUtils.DefaultFortnoxClient;
+
         [TestInitialize]
         public void Init()
         {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
         }
 
         /*[TestMethod]

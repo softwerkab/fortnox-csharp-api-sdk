@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Net.Http;
+using Fortnox.SDK;
 using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Exceptions;
 
@@ -7,6 +9,14 @@ namespace FortnoxSDK.Tests
 {
     public class TestUtils
     {
+        public static FortnoxClient DefaultFortnoxClient = new FortnoxClient()
+        {
+            AccessToken = TestCredentials.Access_Token,
+            ClientSecret = TestCredentials.Client_Secret,
+            HttpClient = new HttpClient(),
+            UseRateLimiter = true
+        };
+
         public static string GenerateTmpFilePath()
         {
             var path = Path.GetTempFileName(); //Creates empty file in temp dir
