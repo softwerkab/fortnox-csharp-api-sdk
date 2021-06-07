@@ -10,7 +10,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
 	/// <remarks/>
-	public class SupplierInvoiceAccrualConnector : SearchableEntityConnector<SupplierInvoiceAccrual, SupplierInvoiceAccrualSubset, SupplierInvoiceAccrualSearch>, ISupplierInvoiceAccrualConnector
+	internal class SupplierInvoiceAccrualConnector : SearchableEntityConnector<SupplierInvoiceAccrual, SupplierInvoiceAccrualSubset, SupplierInvoiceAccrualSearch>, ISupplierInvoiceAccrualConnector
 	{
 
 

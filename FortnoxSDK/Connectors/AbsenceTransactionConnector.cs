@@ -11,7 +11,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class AbsenceTransactionConnector : SearchableEntityConnector<AbsenceTransaction, AbsenceTransaction, AbsenceTransactionSearch>, IAbsenceTransactionConnector
+    internal class AbsenceTransactionConnector : SearchableEntityConnector<AbsenceTransaction, AbsenceTransaction, AbsenceTransactionSearch>, IAbsenceTransactionConnector
 	{
 
 

@@ -16,7 +16,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class ArchiveConnector : EntityConnector<ArchiveFolder>, IArchiveConnector
+    internal class ArchiveConnector : EntityConnector<ArchiveFolder>, IArchiveConnector
 	{
 
 		/// <remarks/>
@@ -294,7 +294,7 @@ namespace Fortnox.SDK.Connectors
         }
     }
 
-    public class StaticFolders
+    internal class StaticFolders
     {
         public const string Root = "root";
         public const string AssetRegister = "inbox_a";

@@ -10,7 +10,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class SupplierInvoiceExternalURLConnectionConnector : SearchableEntityConnector<SupplierInvoiceExternalURLConnection, SupplierInvoiceExternalURLConnection, SupplierInvoiceExternalURLConnectionSearch>, ISupplierInvoiceExternalURLConnectionConnector
+    internal class SupplierInvoiceExternalURLConnectionConnector : SearchableEntityConnector<SupplierInvoiceExternalURLConnection, SupplierInvoiceExternalURLConnection, SupplierInvoiceExternalURLConnectionSearch>, ISupplierInvoiceExternalURLConnectionConnector
 	{
 
 

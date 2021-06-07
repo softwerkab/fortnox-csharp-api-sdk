@@ -10,7 +10,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class OrderConnector : SearchableEntityConnector<Order, OrderSubset, OrderSearch>, IOrderConnector
+    internal class OrderConnector : SearchableEntityConnector<Order, OrderSubset, OrderSearch>, IOrderConnector
 	{
 
 

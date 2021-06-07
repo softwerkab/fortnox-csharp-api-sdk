@@ -10,7 +10,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
 	/// <remarks/>
-	public class VoucherFileConnectionConnector : SearchableEntityConnector<VoucherFileConnection, VoucherFileConnection, VoucherFileConnectionSearch>, IVoucherFileConnectionConnector
+	internal class VoucherFileConnectionConnector : SearchableEntityConnector<VoucherFileConnection, VoucherFileConnection, VoucherFileConnectionSearch>, IVoucherFileConnectionConnector
 	{
 
 

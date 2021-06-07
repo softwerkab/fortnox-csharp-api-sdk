@@ -10,7 +10,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class TaxReductionConnector : SearchableEntityConnector<TaxReduction, TaxReductionSubset, TaxReductionSearch>, ITaxReductionConnector
+    internal class TaxReductionConnector : SearchableEntityConnector<TaxReduction, TaxReductionSubset, TaxReductionSearch>, ITaxReductionConnector
 	{
 
 

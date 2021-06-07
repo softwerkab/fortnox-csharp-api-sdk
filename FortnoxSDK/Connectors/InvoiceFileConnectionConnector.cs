@@ -13,7 +13,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
 	/// <remarks/>
-    public class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConnection>, IInvoiceFileConnectionConnector
+    internal class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConnection>, IInvoiceFileConnectionConnector
     {
 
         /// <remarks/>

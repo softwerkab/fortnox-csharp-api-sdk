@@ -10,7 +10,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
 	/// <remarks/>
-	public class PredefinedAccountsConnector : SearchableEntityConnector<PredefinedAccount, PredefinedAccount, PredefinedAccountsSearch>, IPredefinedAccountsConnector
+	internal class PredefinedAccountsConnector : SearchableEntityConnector<PredefinedAccount, PredefinedAccount, PredefinedAccountsSearch>, IPredefinedAccountsConnector
 	{
 
 

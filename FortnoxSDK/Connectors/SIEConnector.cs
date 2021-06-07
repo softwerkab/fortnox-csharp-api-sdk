@@ -8,7 +8,7 @@ using Fortnox.SDK.Utility;
 
 namespace Fortnox.SDK.Connectors
 {
-    public class SIEConnector : BaseConnector, ISIEConnector
+    internal class SIEConnector : BaseConnector, ISIEConnector
     {
 
         public SIEConnector()

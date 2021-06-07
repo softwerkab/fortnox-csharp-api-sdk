@@ -10,7 +10,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class TermsOfPaymentConnector : SearchableEntityConnector<TermsOfPayment, TermsOfPayment, TermsOfPaymentSearch>, ITermsOfPaymentConnector
+    internal class TermsOfPaymentConnector : SearchableEntityConnector<TermsOfPayment, TermsOfPayment, TermsOfPaymentSearch>, ITermsOfPaymentConnector
 	{
 
 

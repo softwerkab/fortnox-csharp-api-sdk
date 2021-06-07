@@ -12,7 +12,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class AssetConnector : SearchableEntityConnector<Asset, AssetSubset, AssetSearch>, IAssetConnector
+    internal class AssetConnector : SearchableEntityConnector<Asset, AssetSubset, AssetSearch>, IAssetConnector
 	{
         /// <remarks/>
 		public AssetConnector()
@@ -92,7 +92,7 @@ namespace Fortnox.SDK.Connectors
         }
     }
 
-    public class AssetSerializer : ISerializer
+    internal class AssetSerializer : ISerializer
     {
 		private readonly ISerializer serializer = new JsonEntitySerializer();
 

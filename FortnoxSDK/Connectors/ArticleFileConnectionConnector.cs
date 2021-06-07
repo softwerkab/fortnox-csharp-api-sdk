@@ -10,7 +10,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class ArticleFileConnectionConnector : SearchableEntityConnector<ArticleFileConnection, ArticleFileConnection, ArticleFileConnectionSearch>, IArticleFileConnectionConnector
+    internal class ArticleFileConnectionConnector : SearchableEntityConnector<ArticleFileConnection, ArticleFileConnection, ArticleFileConnectionSearch>, IArticleFileConnectionConnector
 	{
 
 

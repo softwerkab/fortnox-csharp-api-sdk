@@ -10,7 +10,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class ExpenseConnector : SearchableEntityConnector<Expense, ExpenseSubset, ExpenseSearch>, IExpenseConnector
+    internal class ExpenseConnector : SearchableEntityConnector<Expense, ExpenseSubset, ExpenseSearch>, IExpenseConnector
 	{
 
 

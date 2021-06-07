@@ -10,7 +10,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class UnitConnector : SearchableEntityConnector<Unit, Unit, UnitSearch>, IUnitConnector
+    internal class UnitConnector : SearchableEntityConnector<Unit, Unit, UnitSearch>, IUnitConnector
 	{
 
 

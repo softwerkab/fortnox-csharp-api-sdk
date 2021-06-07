@@ -9,7 +9,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class LockedPeriodConnector : EntityConnector<LockedPeriod>, ILockedPeriodConnector
+    internal class LockedPeriodConnector : EntityConnector<LockedPeriod>, ILockedPeriodConnector
 	{
 
 

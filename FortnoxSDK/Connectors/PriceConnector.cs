@@ -12,7 +12,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class PriceConnector : SearchableEntityConnector<Price, PriceSubset, PriceSearch>, IPriceConnector
+    internal class PriceConnector : SearchableEntityConnector<Price, PriceSubset, PriceSearch>, IPriceConnector
 	{
 
 

@@ -13,7 +13,7 @@ using Newtonsoft.Json.Linq;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class AssetTypesConnector : SearchableEntityConnector<AssetType, AssetTypesSubset, AssetTypesSearch>, IAssetTypesConnector
+    internal class AssetTypesConnector : SearchableEntityConnector<AssetType, AssetTypesSubset, AssetTypesSearch>, IAssetTypesConnector
 	{
         /// <remarks/>
 		public AssetTypesConnector()
@@ -91,7 +91,7 @@ namespace Fortnox.SDK.Connectors
         }
     }
 
-    public class AssetTypeSerializer : ISerializer
+    internal class AssetTypeSerializer : ISerializer
     {
         private readonly ISerializer serializer = new JsonEntitySerializer();
 

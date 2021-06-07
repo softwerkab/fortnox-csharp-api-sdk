@@ -13,7 +13,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class AuthorizationConnector : BaseConnector, IAuthorizationConnector
+    internal class AuthorizationConnector : BaseConnector, IAuthorizationConnector
     {
         public AuthorizationConnector()
         {
