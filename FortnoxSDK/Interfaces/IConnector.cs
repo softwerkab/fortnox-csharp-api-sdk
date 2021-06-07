@@ -6,12 +6,12 @@ namespace Fortnox.SDK.Interfaces
     public interface IConnector
     {
         // Credentials
-        string AccessToken { get; set; }
-        string ClientSecret { get; set; }
+        string AccessToken { get; }
+        string ClientSecret { get; }
 
         // Config
-        HttpClient HttpClient { get; set; }
-        bool UseRateLimiter { get; set; }
+        HttpClient HttpClient { get; }
+        bool UseRateLimiter { get; }
     }
 
     public interface IEntityConnector : IConnector

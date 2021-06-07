@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Http;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,14 +15,14 @@ namespace FortnoxSDK.Tests
         public void TestConnection_NoCredenials_Error()
         {
             //Arrange
-            var FortnoxClient = new FortnoxClient()
+            var fortnoxClient = new FortnoxClient()
             {
                 AccessToken = null,
                 ClientSecret = null
             };
 
             //Act
-            ICustomerConnector cc = FortnoxClient.CustomerConnector;
+            ICustomerConnector cc = fortnoxClient.CustomerConnector;
             cc.Find(null);
         }
 
@@ -32,14 +31,14 @@ namespace FortnoxSDK.Tests
         public void TestConnection_EmptyCredenials_Error()
         {
             //Arrange
-            var FortnoxClient = new FortnoxClient()
+            var fortnoxClient = new FortnoxClient()
             {
                 AccessToken = "",
                 ClientSecret = ""
             };
 
             //Act
-            ICustomerConnector cc = FortnoxClient.CustomerConnector;
+            ICustomerConnector cc = fortnoxClient.CustomerConnector;
             cc.Find(null);
         }
 
@@ -48,77 +47,61 @@ namespace FortnoxSDK.Tests
         public void TestConnection_WrongCredenials_Error()
         {
             //Arrange
-            var FortnoxClient = new FortnoxClient()
+            var fortnoxClient = new FortnoxClient()
             {
                 AccessToken = "ABC",
                 ClientSecret = "DEF"
             };
 
             //Act
-            ICustomerConnector cc = FortnoxClient.CustomerConnector;
+            ICustomerConnector cc = fortnoxClient.CustomerConnector;
             cc.Find(null);
         }
 
         [TestMethod]
-        public void TestConnection_Credentials_Set()
+        public void TestConnection_Credentials_Correct()
         {
             //Arrange
-            var FortnoxClient = new FortnoxClient()
-            {
-                AccessToken = "",
-                ClientSecret = ""
-            };
-
-            //Act
-            ICustomerConnector connector = FortnoxClient.CustomerConnector;
-            connector.AccessToken = TestCredentials.Access_Token;
-            connector.ClientSecret = TestCredentials.Client_Secret;
-
-            var customers = connector.Find(null);
-            Assert.IsNotNull(customers);
-        }
-
-        [TestMethod]
-        public void TestConnection_GlobalCredentials_Set()
-        {
-            //Arrange
-            var FortnoxClient = new FortnoxClient()
+            var fortnoxClient = new FortnoxClient()
             {
                 AccessToken = TestCredentials.Access_Token,
                 ClientSecret = TestCredentials.Client_Secret
             };
 
             //Act
-            ICustomerConnector connector = FortnoxClient.CustomerConnector;
-
+            ICustomerConnector connector = fortnoxClient.CustomerConnector;
             var customers = connector.Find(null);
+
+            //Assert
             Assert.IsNotNull(customers);
         }
 
         [TestMethod]
         public void TestConnection_MultipleCredentials_Set()
         {
-            var FortnoxClient = new FortnoxClient()
+            var fortnoxClient1 = new FortnoxClient()
             {
-                AccessToken = "123",
-                ClientSecret = "456"
+                AccessToken = "AT1",
+                ClientSecret = "CS1"
             };
 
-            ICustomerConnector connector1 = FortnoxClient.CustomerConnector;
-            connector1.AccessToken = "A";
-            connector1.ClientSecret = "B";
+            var fortnoxClient2 = new FortnoxClient()
+            {
+                AccessToken = "AT2",
+                ClientSecret = "CS2"
+            };
 
-            ICustomerConnector connector2 = FortnoxClient.CustomerConnector;
-            connector2.AccessToken = "AA";
-            connector2.ClientSecret = "BB";
+            ICustomerConnector connector1 = fortnoxClient1.CustomerConnector;
+            ICustomerConnector connector2 = fortnoxClient2.CustomerConnector;
 
-            Assert.IsTrue(connector1.AccessToken == "A" && connector2.AccessToken == "AA");
+            Assert.IsTrue(connector1.AccessToken == "AT1" && connector2.AccessToken == "AT2");
+            Assert.IsTrue(connector1.ClientSecret == "CS1" && connector2.ClientSecret == "CS2");
         }
 
         [TestMethod]
-        public void TestConnection_Using_FortnoxClient()
+        public void TestConnection_Config_Set()
         {
-            var FortnoxClient = new FortnoxClient()
+            var fortnoxClient = new FortnoxClient()
             {
                 AccessToken = "AccToken",
                 ClientSecret = "Secret",
@@ -126,7 +109,7 @@ namespace FortnoxSDK.Tests
                 HttpClient = new HttpClient() {Timeout = TimeSpan.FromSeconds(10)}
             };
 
-            var connector = FortnoxClient.CustomerConnector;
+            var connector = fortnoxClient.CustomerConnector;
 
             Assert.AreEqual("AccToken", connector.AccessToken);
             Assert.AreEqual("Secret", connector.ClientSecret);

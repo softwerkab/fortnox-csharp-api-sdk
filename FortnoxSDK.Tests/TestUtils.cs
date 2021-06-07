@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Net.Http;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Exceptions;
 
 namespace FortnoxSDK.Tests
@@ -13,8 +11,6 @@ namespace FortnoxSDK.Tests
         {
             AccessToken = TestCredentials.Access_Token,
             ClientSecret = TestCredentials.Client_Secret,
-            HttpClient = new HttpClient(),
-            UseRateLimiter = true
         };
 
         public static string GenerateTmpFilePath()

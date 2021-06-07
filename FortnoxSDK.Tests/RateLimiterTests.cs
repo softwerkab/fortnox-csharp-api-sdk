@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Threading;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -35,8 +34,14 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_NoRateLimiter_TooManyRequest_Error()
         {
-            var connector = FortnoxClient.CustomerConnector;
-            connector.UseRateLimiter = false;
+            var fortnoxClient = new FortnoxClient()
+            {
+                AccessToken = TestCredentials.Access_Token,
+                ClientSecret = TestCredentials.Client_Secret,
+                UseRateLimiter = false
+            };
+
+            var connector = fortnoxClient.CustomerConnector;
 
             FortnoxApiException error = null;
             int i;
