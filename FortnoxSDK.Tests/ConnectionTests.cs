@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Net.Http;
-using System.Reflection;
 using Fortnox.SDK;
 using Fortnox.SDK.Connectors;
-using Fortnox.SDK.Connectors.Base;
 using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -18,8 +16,11 @@ namespace FortnoxSDK.Tests
         public void TestConnection_NoCredenials_Error()
         {
             //Arrange
-            ConnectionCredentials.AccessToken = null;
-            ConnectionCredentials.ClientSecret = null;
+            var FortnoxClient = new FortnoxClient()
+            {
+                AccessToken = null,
+                ClientSecret = null
+            };
 
             //Act
             ICustomerConnector cc = new CustomerConnector();
@@ -31,8 +32,11 @@ namespace FortnoxSDK.Tests
         public void TestConnection_EmptyCredenials_Error()
         {
             //Arrange
-            ConnectionCredentials.AccessToken = "";
-            ConnectionCredentials.ClientSecret = "";
+            var FortnoxClient = new FortnoxClient()
+            {
+                AccessToken = "",
+                ClientSecret = ""
+            };
 
             //Act
             ICustomerConnector cc = new CustomerConnector();
@@ -44,8 +48,11 @@ namespace FortnoxSDK.Tests
         public void TestConnection_WrongCredenials_Error()
         {
             //Arrange
-            ConnectionCredentials.AccessToken = "ABC";
-            ConnectionCredentials.ClientSecret = "DEF";
+            var FortnoxClient = new FortnoxClient()
+            {
+                AccessToken = "ABC",
+                ClientSecret = "DEF"
+            };
 
             //Act
             ICustomerConnector cc = new CustomerConnector();
@@ -53,11 +60,14 @@ namespace FortnoxSDK.Tests
         }
 
         [TestMethod]
-        public void TestConnection_LocalCredentials_Set()
+        public void TestConnection_Credentials_Set()
         {
             //Arrange
-            ConnectionCredentials.AccessToken = "";
-            ConnectionCredentials.ClientSecret = "";
+            var FortnoxClient = new FortnoxClient()
+            {
+                AccessToken = "",
+                ClientSecret = ""
+            };
 
             //Act
             ICustomerConnector connector = new CustomerConnector();
@@ -72,8 +82,11 @@ namespace FortnoxSDK.Tests
         public void TestConnection_GlobalCredentials_Set()
         {
             //Arrange
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
+            var FortnoxClient = new FortnoxClient()
+            {
+                AccessToken = TestCredentials.Access_Token,
+                ClientSecret = TestCredentials.Client_Secret
+            };
 
             //Act
             ICustomerConnector connector = new CustomerConnector();
@@ -85,8 +98,11 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void TestConnection_MultipleCredentials_Set()
         {
-            ConnectionCredentials.AccessToken = "123";
-            ConnectionCredentials.ClientSecret = "456";
+            var FortnoxClient = new FortnoxClient()
+            {
+                AccessToken = "123",
+                ClientSecret = "456"
+            };
 
             ICustomerConnector connector1 = new CustomerConnector();
             connector1.AccessToken = "A";
