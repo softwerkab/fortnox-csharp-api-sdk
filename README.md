@@ -15,9 +15,9 @@ For more information about the API, please visit the official documentation at <
 * Start coding
 
 ```CSharp
-var connector = new CustomerConnector()
+var fortnoxClient = new FortnoxClient()
 {
-	AccessToken = "MyAccessToken",
+    AccessToken = "MyAccessToken",
 	ClientSecret = "MyClientSecret"
 }
 
@@ -27,7 +27,7 @@ var customer = new Customer()
 	Name = "Stefan Andersson"
 }
 
-connector.Create(customer);
+client.CustomerConnector.Create(customer);
 ```
 
 
@@ -45,7 +45,7 @@ connector.Create(customer);
 
 ```
 The MIT License (MIT)
-Copyright (c) 2020 Softwerk AB
+Copyright (c) 2021 Softwerk AB
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
