@@ -17,15 +17,15 @@ For more information about the API, please visit the official documentation at <
 ```CSharp
 var connector = new CustomerConnector()
 {
-	AccessToken = "MyAccessToken",
-	ClientSecret = "MyClientSecret"
-}
+    AccessToken = "MyAccessToken",
+    ClientSecret = "MyClientSecret"
+};
 
 var customer = new Customer()
 {
-	CustomerNumber = "1",
-	Name = "Stefan Andersson"
-}
+    CustomerNumber = "1",
+    Name = "Stefan Andersson"
+};
 
 connector.Create(customer);
 ```
@@ -45,7 +45,7 @@ connector.Create(customer);
 
 ```
 The MIT License (MIT)
-Copyright (c) 2020 Softwerk AB
+Copyright (c) 2020–2021 Softwerk AB
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
