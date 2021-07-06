@@ -10,7 +10,7 @@ namespace FortnoxAPILibrary.Tests.Connectors
     public class EmployeeConnectorTests : ConnectorTestsBase
     {
         readonly IEmployeeConnector _connector;
-        
+
         static string NewEmployeeId => Guid.NewGuid().ToString().Replace("-", "").Substring(0, 6);
 
         public EmployeeConnectorTests()
@@ -33,16 +33,20 @@ namespace FortnoxAPILibrary.Tests.Connectors
         [TestMethod]
         public void CreateShouldCreateAnEmployee()
         {
+            var employedTo = DateTime.UtcNow.AddYears(1).ToString("yyyy-MM-dd");
             var employee = new Employee
             {
-                EmployeeId = NewEmployeeId
+                EmployeeId = NewEmployeeId,
+                EmployedTo = employedTo,
             };
 
             var result = _connector.Create(employee);
-            
+
             CheckForError(_connector);
 
             Assert.IsNotNull(result.EmployeeId);
+            Assert.IsNotNull(result.EmployedTo);
+            Assert.AreEqual(employedTo, result.EmployedTo);
 
             //Cleanup
             _connector.Update(new Employee { EmployeeId = result.EmployeeId, Inactive = true });
