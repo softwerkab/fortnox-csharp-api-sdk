@@ -50,7 +50,7 @@ namespace Fortnox.SDK.Connectors
             if (exportOptions.ToDate != null)
                 parameters.Add("todate", exportOptions.ToDate?.ToString(APIConstants.DateFormat));
             if (exportOptions.ExportAll != null)
-                parameters.Add("exportall", exportOptions.ExportAll.ToString());
+                parameters.Add("exportall", exportOptions.ExportAll.ToString().ToLower());
             if (exportOptions.Selection != null)
             {
                 var selectionValues = exportOptions.Selection.Where(s => s.VoucherSeries != null).Select(s =>
