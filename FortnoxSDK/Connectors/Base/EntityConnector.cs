@@ -11,7 +11,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors.Base
 {
     /// <remarks/>
-    public abstract class EntityConnector<TEntity> : BaseConnector where TEntity : class
+    internal abstract class EntityConnector<TEntity> : BaseConnector where TEntity : class
     {
         protected async Task<T> SendAsync<T>(EntityRequest<T> request)
         {

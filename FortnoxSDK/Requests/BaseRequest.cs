@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Fortnox.SDK.Requests
 {
-    public class BaseRequest
+    internal class BaseRequest
     {
         public HttpMethod Method { get; set; }
         public Dictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
