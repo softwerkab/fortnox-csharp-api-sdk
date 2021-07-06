@@ -56,13 +56,7 @@ namespace Fortnox.SDK
             UseRateLimiter = useRateLimiter;
         }
 
-        /// <summary>
-        /// Creates a configured instance of a connector.
-        /// </summary>
-        /// <typeparam name="TConnector">Connector type to be created. In future, interface type may be used instead</typeparam>
-        /// <returns></returns>
-        [Obsolete("You can now get the connector through a predefined property. Example: 'FortnoxClient.CustomerConnector' instead of 'FortnoxClient.Get<CustomerConnector>()'")]
-        public TConnector Get<TConnector>() where TConnector : BaseConnector, new()
+        private TConnector Get<TConnector>() where TConnector : BaseConnector, new()
         {
             return new TConnector()
             {
