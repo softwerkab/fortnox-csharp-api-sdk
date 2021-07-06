@@ -1,9 +1,7 @@
 using System;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -24,7 +22,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #endregion Arrange
 
-            IFinancialYearConnector connector = FortnoxClient.FinancialYearConnector;
+            var connector = FortnoxClient.FinancialYearConnector;
 
             #region CREATE
 
@@ -70,7 +68,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_FinancialYear_Find()
         {
-            IFinancialYearConnector connector = FortnoxClient.FinancialYearConnector;
+            var connector = FortnoxClient.FinancialYearConnector;
             
             var finYears = connector.Find(null);
             Assert.AreEqual(5, finYears.Entities.Count);
@@ -80,7 +78,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_FinancialYear_Find_By_Date()
         {
-            IFinancialYearConnector connector = FortnoxClient.FinancialYearConnector;
+            var connector = FortnoxClient.FinancialYearConnector;
 
             var search = new FinancialYearSearch()
             {
@@ -96,7 +94,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_FinancialYear_Find_By_FinYearDate()
         {
-            IFinancialYearConnector connector = FortnoxClient.FinancialYearConnector;
+            var connector = FortnoxClient.FinancialYearConnector;
 
             var search = new FinancialYearSearch()
             {

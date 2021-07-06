@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -34,7 +32,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpFile = FortnoxClient.ArchiveConnector.UploadFile("tmpImage.png", Resource.fortnox_image);
             #endregion Arrange
 
-            IVoucherFileConnectionConnector connector = FortnoxClient.VoucherFileConnectionConnector;
+            var connector = FortnoxClient.VoucherFileConnectionConnector;
 
             #region CREATE
             var newVoucherFileConnection = new VoucherFileConnection()

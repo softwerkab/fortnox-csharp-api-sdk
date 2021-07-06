@@ -1,9 +1,7 @@
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -22,7 +20,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #endregion Arrange
 
-            IAssetTypesConnector connector = FortnoxClient.AssetTypesConnector;
+            var connector = FortnoxClient.AssetTypesConnector;
             var entry = connector.Find(null).Entities.FirstOrDefault(at => at.Number == "TST");
             if (entry != null)
                 connector.Delete(entry.Id);
@@ -82,7 +80,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_AssetTypes_Find()
         {
-            IAssetTypesConnector connector = FortnoxClient.AssetTypesConnector;
+            var connector = FortnoxClient.AssetTypesConnector;
 
             var newAssetType = new AssetType()
             {

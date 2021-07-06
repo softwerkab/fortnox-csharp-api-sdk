@@ -1,8 +1,6 @@
 using System;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -19,7 +17,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpEmployee = FortnoxClient.EmployeeConnector.Get("TEST_EMP") ?? FortnoxClient.EmployeeConnector.Create(new Employee() { EmployeeId = "TEST_EMP" });
             #endregion Arrange
 
-            IScheduleTimesConnector connector = FortnoxClient.ScheduleTimesConnector;
+            var connector = FortnoxClient.ScheduleTimesConnector;
 
             #region CREATE
 

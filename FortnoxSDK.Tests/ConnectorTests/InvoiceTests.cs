@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -23,7 +21,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
+            var connector = FortnoxClient.InvoiceConnector;
 
             #region CREATE
             var newInvoice = new Invoice()
@@ -87,7 +85,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
+            var connector = FortnoxClient.InvoiceConnector;
             var newInvoice = new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
@@ -147,7 +145,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
+            var connector = FortnoxClient.InvoiceConnector;
             var newInvoice = new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
@@ -194,7 +192,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = ac.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
+            var connector = FortnoxClient.InvoiceConnector;
 
             var newInvoice = new Invoice()
             {
@@ -233,7 +231,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
+            var connector = FortnoxClient.InvoiceConnector;
 
             var newInvoice = new Invoice()
             {
@@ -290,7 +288,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
+            var connector = FortnoxClient.InvoiceConnector;
 
             var invoice1 = new Invoice()
             {
@@ -381,11 +379,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            ILabelConnector labelConnector = FortnoxClient.LabelConnector;
+            var labelConnector = FortnoxClient.LabelConnector;
             var label1 = labelConnector.Create(new Label() { Description = TestUtils.RandomString() });
             var label2 = labelConnector.Create(new Label() { Description = TestUtils.RandomString() });
 
-            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
+            var connector = FortnoxClient.InvoiceConnector;
 
             var invoice = new Invoice()
             {
@@ -424,12 +422,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            ILabelConnector labelConnector = FortnoxClient.LabelConnector;
+            var labelConnector = FortnoxClient.LabelConnector;
             var label1 = labelConnector.Create(new Label() { Description = TestUtils.RandomString() });
             var label2 = labelConnector.Create(new Label() { Description = TestUtils.RandomString() });
             var label3 = labelConnector.Create(new Label() { Description = TestUtils.RandomString() });
 
-            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
+            var connector = FortnoxClient.InvoiceConnector;
 
             var invoice1 = new Invoice()
             {
@@ -512,7 +510,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
+            var connector = FortnoxClient.InvoiceConnector;
 
             var newInvoice = new Invoice()
             {

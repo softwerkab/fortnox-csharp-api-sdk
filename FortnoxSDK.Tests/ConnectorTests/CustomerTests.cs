@@ -1,8 +1,6 @@
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,7 +18,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ICustomerConnector connector = FortnoxClient.CustomerConnector;
+            var connector = FortnoxClient.CustomerConnector;
 
             #region CREATE
             var newCustomer = new Customer()
@@ -81,7 +79,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             var testKeyMark = TestUtils.RandomString();
 
-            ICustomerConnector connector = FortnoxClient.CustomerConnector;
+            var connector = FortnoxClient.CustomerConnector;
             var newCustomer = new Customer()
             {
                 Name = "TestCustomer",

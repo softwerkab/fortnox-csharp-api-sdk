@@ -1,10 +1,8 @@
 using System;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -23,7 +21,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpPriceList = FortnoxClient.PriceListConnector.Get("TST_PR");
             #endregion Arrange
 
-            IPriceConnector connector = FortnoxClient.PriceConnector;
+            var connector = FortnoxClient.PriceConnector;
 
             #region CREATE
             var newPrice = new Price()
@@ -80,7 +78,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpPriceList = FortnoxClient.PriceListConnector.Get("TST_PR");
             #endregion Arrange
             
-            IPriceConnector connector = FortnoxClient.PriceConnector;
+            var connector = FortnoxClient.PriceConnector;
 
             var newPrice = new Price()
             {

@@ -1,8 +1,5 @@
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
-using Fortnox.SDK.Interfaces;
-using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -15,7 +12,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_PredefinedAccounts_CRUD()
         {
-            IPredefinedAccountsConnector connector = FortnoxClient.PredefinedAccountsConnector;
+            var connector = FortnoxClient.PredefinedAccountsConnector;
 
             //Get
             var bygAccount = connector.Get("CONSTRUCTION_DEB");
@@ -38,7 +35,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            IPredefinedAccountsConnector connector = FortnoxClient.PredefinedAccountsConnector;
+            var connector = FortnoxClient.PredefinedAccountsConnector;
 
             var fullCollection = connector.Find(null);
 

@@ -1,10 +1,8 @@
 using System;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,7 +20,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ISupplierConnector connector = FortnoxClient.SupplierConnector;
+            var connector = FortnoxClient.SupplierConnector;
 
             #region CREATE
             var newSupplier = new Supplier()
@@ -87,7 +85,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             var testKeyMark = TestUtils.RandomString();
 
-            ISupplierConnector connector = FortnoxClient.SupplierConnector;
+            var connector = FortnoxClient.SupplierConnector;
             var newSupplier = new Supplier()
             {
                 Name = "TestSupplier",
@@ -143,7 +141,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             var vatTypes = Enum.GetValues(typeof(SupplierVATType)).Cast<SupplierVATType>().ToList();
 
-            ISupplierConnector connector = FortnoxClient.SupplierConnector;
+            var connector = FortnoxClient.SupplierConnector;
 
             var newSupplier = new Supplier()
             {

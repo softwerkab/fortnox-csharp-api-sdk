@@ -1,9 +1,7 @@
 using System;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,7 +20,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpAssetType = FortnoxClient.AssetTypesConnector.Create(new AssetType() {Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
             #endregion Arrange
 
-            IAssetConnector connector = FortnoxClient.AssetConnector;
+            var connector = FortnoxClient.AssetConnector;
 
             #region CREATE
             var newAsset = new Asset()
@@ -89,7 +87,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             var testKeyMark = TestUtils.RandomString();
 
-            IAssetConnector connector = FortnoxClient.AssetConnector;
+            var connector = FortnoxClient.AssetConnector;
             var newAsset = new Asset()
             {
                 Description = testKeyMark,

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Interfaces;
@@ -39,7 +38,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpFile = FortnoxClient.InboxConnector.UploadFile("tmpImage.png", Resource.fortnox_image, StaticFolders.SupplierInvoices);
             #endregion Arrange
 
-            ISupplierInvoiceFileConnectionConnector connector = FortnoxClient.SupplierInvoiceFileConnectionConnector;
+            var connector = FortnoxClient.SupplierInvoiceFileConnectionConnector;
 
             #region CREATE
             var newSupplierInvoiceFileConnection = new SupplierInvoiceFileConnection()

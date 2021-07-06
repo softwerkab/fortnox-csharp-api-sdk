@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -122,7 +121,7 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_ReadOnlyProperty_Deserialized()
         {
-            ICustomerConnector connector = FortnoxClient.CustomerConnector;
+            var connector = FortnoxClient.CustomerConnector;
 
             var createdCustomer = connector.Create(new Customer() {Name = "TestUser", CountryCode = "SE"});
             Assert.AreEqual("Sverige", createdCustomer.Country);
@@ -133,7 +132,7 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_EmptyNestedObject()
         {
-            ICustomerConnector connector = FortnoxClient.CustomerConnector;
+            var connector = FortnoxClient.CustomerConnector;
 
             var createdCustomer = connector.Create(new Customer()
             {
@@ -162,7 +161,7 @@ namespace FortnoxSDK.Tests
             var neededPages = GetNeededPages(Math.Min(totalCustomers, large), small);
             var mergedCollection = new List<CustomerSubset>();
 
-            for (int i = 0; i < neededPages; i++)
+            for (var i = 0; i < neededPages; i++)
             {
                 searchSettings.Limit = small;
                 searchSettings.Page = i + 1;
@@ -170,7 +169,7 @@ namespace FortnoxSDK.Tests
                 mergedCollection.AddRange(smallCustomerCollection.Entities);
             }
 
-            for (int i = 0; i < largeCustomerCollection.Entities.Count; i++)
+            for (var i = 0; i < largeCustomerCollection.Entities.Count; i++)
                 Assert.AreEqual(largeCustomerCollection.Entities[i].CustomerNumber, mergedCollection[i].CustomerNumber);
         }
 
@@ -179,7 +178,7 @@ namespace FortnoxSDK.Tests
         {
             //To make this test make sense, over 100 customers must exist, ideally over 500
 
-            ICustomerConnector connector = FortnoxClient.CustomerConnector;
+            var connector = FortnoxClient.CustomerConnector;
             var result = connector.Find(null);
             Assert.IsTrue(result.TotalPages > 1);
 

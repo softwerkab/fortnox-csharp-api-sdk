@@ -1,7 +1,5 @@
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -20,7 +18,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            IAccountChartConnector connector = FortnoxClient.AccountChartConnector;
+            var connector = FortnoxClient.AccountChartConnector;
 
             var fullCollection = connector.Find(null);
 

@@ -2,10 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -46,7 +44,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #endregion Arrange
 
-            IContractAccrualConnector connector = FortnoxClient.ContractAccrualConnector;
+            var connector = FortnoxClient.ContractAccrualConnector;
 
             #region CREATE
 
@@ -115,7 +113,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #endregion Arrange
 
-            IContractAccrualConnector connector = FortnoxClient.ContractAccrualConnector;
+            var connector = FortnoxClient.ContractAccrualConnector;
 
             var contract = new Contract()
             {

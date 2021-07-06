@@ -1,6 +1,4 @@
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -17,7 +15,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ICompanyInformationConnector connector = FortnoxClient.CompanyInformationConnector;
+            var connector = FortnoxClient.CompanyInformationConnector;
 
             #region CREATE
             //Not Allowed

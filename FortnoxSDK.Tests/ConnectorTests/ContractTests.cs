@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -23,7 +21,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IContractConnector connector = FortnoxClient.ContractConnector;
+            var connector = FortnoxClient.ContractConnector;
 
             #region CREATE
             var newContract = new Contract()
@@ -86,7 +84,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IContractConnector connector = FortnoxClient.ContractConnector;
+            var connector = FortnoxClient.ContractConnector;
 
             var newContract = new Contract()
             {

@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,7 +20,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            IUnitConnector connector = FortnoxClient.UnitConnector;
+            var connector = FortnoxClient.UnitConnector;
 
             #region CREATE
             var newUnit = new Unit()
@@ -70,7 +68,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            IUnitConnector connector = FortnoxClient.UnitConnector;
+            var connector = FortnoxClient.UnitConnector;
 
             var existingCount = connector.Find(null).TotalResources;
 

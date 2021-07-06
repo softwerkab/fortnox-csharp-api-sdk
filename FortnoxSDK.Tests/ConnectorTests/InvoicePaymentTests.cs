@@ -2,10 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -39,7 +37,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             invoiceConnector.Bookkeep(tmpInvoice.DocumentNumber);
             #endregion Arrange
 
-            IInvoicePaymentConnector connector = FortnoxClient.InvoicePaymentConnector;
+            var connector = FortnoxClient.InvoicePaymentConnector;
 
             #region CREATE
 
@@ -111,7 +109,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             invoiceConnector.Bookkeep(tmpInvoice.DocumentNumber);
             #endregion Arrange
 
-            IInvoicePaymentConnector connector = FortnoxClient.InvoicePaymentConnector;
+            var connector = FortnoxClient.InvoicePaymentConnector;
 
             var newInvoicePayment = new InvoicePayment()
             {

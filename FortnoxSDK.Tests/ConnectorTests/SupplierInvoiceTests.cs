@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -23,7 +21,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article(){Description = "TmpArticle", PurchasePrice = 100});
             #endregion Arrange
 
-            ISupplierInvoiceConnector connector = FortnoxClient.SupplierInvoiceConnector;
+            var connector = FortnoxClient.SupplierInvoiceConnector;
 
             #region CREATE
             var newSupplierInvoice = new SupplierInvoice()
@@ -88,7 +86,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
             #endregion Arrange
 
-            ISupplierInvoiceConnector connector = FortnoxClient.SupplierInvoiceConnector;
+            var connector = FortnoxClient.SupplierInvoiceConnector;
             var newSupplierInvoice = new SupplierInvoice()
             {
                 SupplierNumber = tmpSupplier.SupplierNumber,
@@ -149,7 +147,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
             #endregion Arrange
 
-            ISupplierInvoiceConnector connector = FortnoxClient.SupplierInvoiceConnector;
+            var connector = FortnoxClient.SupplierInvoiceConnector;
 
             var newSupplierInvoice = new SupplierInvoice()
             {

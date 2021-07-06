@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -37,7 +35,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             });
             #endregion Arrange
 
-            ITaxReductionConnector connector = FortnoxClient.TaxReductionConnector;
+            var connector = FortnoxClient.TaxReductionConnector;
 
             #region CREATE
 
@@ -123,7 +121,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //var testKeyMark = TestUtils.RandomString();
 
-            ITaxReductionConnector connector = FortnoxClient.TaxReductionConnector;
+            var connector = FortnoxClient.TaxReductionConnector;
             var newTaxReduction = new TaxReduction()
             {
                 CustomerName = "TmpCustomer",

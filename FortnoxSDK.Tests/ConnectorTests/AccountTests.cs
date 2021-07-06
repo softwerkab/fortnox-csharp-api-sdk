@@ -1,9 +1,7 @@
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -17,7 +15,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Account_CRUD()
         {
-            IAccountConnector connector = FortnoxClient.AccountConnector;
+            var connector = FortnoxClient.AccountConnector;
 
             #region CREATE
             var newAccount = new Account()
@@ -71,7 +69,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             var specificFinYear = FortnoxClient.FinancialYearConnector.Find(null).Entities.First(y => y.FromDate?.Year == 2018); //get fin year 2018
 
-            IAccountConnector connector = FortnoxClient.AccountConnector;
+            var connector = FortnoxClient.AccountConnector;
 
             #region CREATE
             var newAccount = new Account()
@@ -132,7 +130,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             var testKeyMark = TestUtils.RandomInt();
 
-            IAccountConnector connector = FortnoxClient.AccountConnector;
+            var connector = FortnoxClient.AccountConnector;
             var newAccount = new Account()
             {
                 Description = "Test Account",

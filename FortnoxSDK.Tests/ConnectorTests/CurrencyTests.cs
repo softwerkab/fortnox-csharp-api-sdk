@@ -1,9 +1,7 @@
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -32,7 +30,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #endregion Arrange
 
-            ICurrencyConnector connector = FortnoxClient.CurrencyConnector;
+            var connector = FortnoxClient.CurrencyConnector;
 
             #region CREATE
 
@@ -87,7 +85,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             //Prerequisites: SEK, EUR and USD currencies are already present in the system
 
-            ICurrencyConnector connector = FortnoxClient.CurrencyConnector;
+            var connector = FortnoxClient.CurrencyConnector;
 
             var currencies = connector.Find(null);
 

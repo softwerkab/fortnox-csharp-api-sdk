@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,7 +20,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article(){ Description = "TmpArticle" });
             #endregion Arrange
 
-            IContractTemplateConnector connector = FortnoxClient.ContractTemplateConnector;
+            var connector = FortnoxClient.ContractTemplateConnector;
 
             #region CREATE
             var newContractTemplate = new ContractTemplate()
@@ -75,7 +73,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle" });
             #endregion Arrange
 
-            IContractTemplateConnector connector = FortnoxClient.ContractTemplateConnector;
+            var connector = FortnoxClient.ContractTemplateConnector;
 
             var marks = TestUtils.RandomString();
 
@@ -90,7 +88,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 },
             };
 
-            for (int i = 0; i < 5; i++)
+            for (var i = 0; i < 5; i++)
             {
                 newContractTemplate.TemplateName = marks + i;
                 connector.Create(newContractTemplate);

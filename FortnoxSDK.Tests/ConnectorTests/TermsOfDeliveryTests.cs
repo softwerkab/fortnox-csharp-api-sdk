@@ -1,9 +1,7 @@
 using System;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -21,7 +19,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ITermsOfDeliveryConnector connector = FortnoxClient.TermsOfDeliveryConnector;
+            var connector = FortnoxClient.TermsOfDeliveryConnector;
 
             #region CREATE
             var newTermsOfDelivery = new TermsOfDelivery()
@@ -69,7 +67,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            ITermsOfDeliveryConnector connector = FortnoxClient.TermsOfDeliveryConnector;
+            var connector = FortnoxClient.TermsOfDeliveryConnector;
 
             var newTermsOfDelivery = new TermsOfDelivery()
             {

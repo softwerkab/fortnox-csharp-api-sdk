@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Interfaces;
@@ -25,7 +24,7 @@ namespace FortnoxSDK.Tests
             var customerConnector = FortnoxClient.CustomerConnector;
             var tmpCustomer = customerConnector.Create(new Customer() { Name = "TmpTestCustomer" });
 
-            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
+            var connector = FortnoxClient.InvoiceConnector;
 
             var newInvoce = connector.Create(new Invoice()
             {
@@ -113,7 +112,7 @@ namespace FortnoxSDK.Tests
             watch.Start();
 
             var runningTasks = new List<Task<EntityCollection<CustomerSubset>>>();
-            for (int i = 0;i<40;i++) 
+            for (var i = 0;i<40;i++) 
                 runningTasks.Add(connector.FindAsync(searchSettings));
 
             Console.WriteLine(@"Thread free after: "+watch.ElapsedMilliseconds);
@@ -133,11 +132,11 @@ namespace FortnoxSDK.Tests
         public void Test_issue84_fixed() //Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/84
         {
             //Arrange
-            IArchiveConnector conn = FortnoxClient.ArchiveConnector;
+            var conn = FortnoxClient.ArchiveConnector;
             var testRootFolder = conn.GetFolder("TestArchive") ?? conn.CreateFolder("TestArchive");
 
             //Act
-            IArchiveConnector connector = FortnoxClient.ArchiveConnector;
+            var connector = FortnoxClient.ArchiveConnector;
 
             var data = Resource.fortnox_image;
             var randomFileName = TestUtils.RandomString() + "åöä.txt";
@@ -232,7 +231,7 @@ namespace FortnoxSDK.Tests
 
             #endregion Arrange
 
-            IInvoiceConnector connector = FortnoxClient.InvoiceConnector;
+            var connector = FortnoxClient.InvoiceConnector;
 
             var largeId = (long) 2 * int.MaxValue + TestUtils.RandomInt();
 
@@ -269,7 +268,7 @@ namespace FortnoxSDK.Tests
         public void Test_Issue99_v1_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/99
         {
             #region Arrange
-            IArchiveConnector ac = FortnoxClient.ArchiveConnector;
+            var ac = FortnoxClient.ArchiveConnector;
 
             var data = Resource.fortnox_image;
             var randomFileName = TestUtils.RandomString() + ".txt";
@@ -309,7 +308,7 @@ namespace FortnoxSDK.Tests
         public void Test_Issue99_v2_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/99
         {
             #region Arrange
-            IArchiveConnector ac = FortnoxClient.InboxConnector;
+            var ac = FortnoxClient.InboxConnector;
 
             var data = Resource.fortnox_image;
             var randomFileName = TestUtils.RandomString() + ".txt";

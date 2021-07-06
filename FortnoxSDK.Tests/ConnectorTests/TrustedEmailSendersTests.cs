@@ -1,8 +1,6 @@
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -18,7 +16,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #region Arrange
             #endregion Arrange
 
-            ITrustedEmailSendersConnector connector = FortnoxClient.TrustedEmailSendersConnector;
+            var connector = FortnoxClient.TrustedEmailSendersConnector;
 
             var randomAddress = $"{TestUtils.RandomString()}@test.tst";
             #region CREATE

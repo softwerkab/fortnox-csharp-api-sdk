@@ -2,7 +2,6 @@
 using System.Net.Http;
 using Fortnox.SDK;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests
@@ -22,7 +21,7 @@ namespace FortnoxSDK.Tests
             };
 
             //Act
-            ICustomerConnector cc = fortnoxClient.CustomerConnector;
+            var cc = fortnoxClient.CustomerConnector;
             cc.Find(null);
         }
 
@@ -38,7 +37,7 @@ namespace FortnoxSDK.Tests
             };
 
             //Act
-            ICustomerConnector cc = fortnoxClient.CustomerConnector;
+            var cc = fortnoxClient.CustomerConnector;
             cc.Find(null);
         }
 
@@ -54,7 +53,7 @@ namespace FortnoxSDK.Tests
             };
 
             //Act
-            ICustomerConnector cc = fortnoxClient.CustomerConnector;
+            var cc = fortnoxClient.CustomerConnector;
             cc.Find(null);
         }
 
@@ -69,7 +68,7 @@ namespace FortnoxSDK.Tests
             };
 
             //Act
-            ICustomerConnector connector = fortnoxClient.CustomerConnector;
+            var connector = fortnoxClient.CustomerConnector;
             var customers = connector.Find(null);
 
             //Assert
@@ -91,8 +90,8 @@ namespace FortnoxSDK.Tests
                 ClientSecret = "CS2"
             };
 
-            ICustomerConnector connector1 = fortnoxClient1.CustomerConnector;
-            ICustomerConnector connector2 = fortnoxClient2.CustomerConnector;
+            var connector1 = fortnoxClient1.CustomerConnector;
+            var connector2 = fortnoxClient2.CustomerConnector;
 
             Assert.IsTrue(connector1.AccessToken == "AT1" && connector2.AccessToken == "AT2");
             Assert.IsTrue(connector1.ClientSecret == "CS1" && connector2.ClientSecret == "CS2");

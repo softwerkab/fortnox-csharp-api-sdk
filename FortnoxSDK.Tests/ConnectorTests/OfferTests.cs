@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -23,7 +21,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IOfferConnector connector = FortnoxClient.OfferConnector;
+            var connector = FortnoxClient.OfferConnector;
 
             #region CREATE
             var newOffer = new Offer()
@@ -84,7 +82,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IOfferConnector connector = FortnoxClient.OfferConnector;
+            var connector = FortnoxClient.OfferConnector;
             var newOffer = new Offer()
             {
                 Comments = "TestOrder",
@@ -141,7 +139,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IOfferConnector connector = FortnoxClient.OfferConnector;
+            var connector = FortnoxClient.OfferConnector;
             var newOffer = new Offer()
             {
                 Comments = "TestOrder",
@@ -176,7 +174,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IOfferConnector connector = FortnoxClient.OfferConnector;
+            var connector = FortnoxClient.OfferConnector;
             var newOffer = new Offer()
             {
                 Comments = "TestOrder",

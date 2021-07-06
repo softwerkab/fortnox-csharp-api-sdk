@@ -1,9 +1,7 @@
 using System;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -21,7 +19,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpAccount = FortnoxClient.AccountConnector.Create(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
             #endregion Arrange
 
-            IExpenseConnector connector = FortnoxClient.ExpenseConnector;
+            var connector = FortnoxClient.ExpenseConnector;
 
             #region CREATE
 
@@ -77,7 +75,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Account = tmpAccount.Number
             };
 
-            IExpenseConnector connector = FortnoxClient.ExpenseConnector;
+            var connector = FortnoxClient.ExpenseConnector;
             for (var i = 0; i < 2; i++)
             {
                 newExpense.Code = TestUtils.RandomString(6);

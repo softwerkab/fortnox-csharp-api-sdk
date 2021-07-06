@@ -1,10 +1,8 @@
 using System;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,7 +20,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            IArticleConnector connector = FortnoxClient.ArticleConnector;
+            var connector = FortnoxClient.ArticleConnector;
 
             #region CREATE
             var newArticle = new Article()
@@ -81,7 +79,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             var testKeyMark = TestUtils.RandomString();
 
-            IArticleConnector connector = FortnoxClient.ArticleConnector;
+            var connector = FortnoxClient.ArticleConnector;
 
             var newArticle = new Article
             {

@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -23,7 +21,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IOrderConnector connector = FortnoxClient.OrderConnector;
+            var connector = FortnoxClient.OrderConnector;
 
             #region CREATE
             var newOrder = new Order()
@@ -81,7 +79,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IOrderConnector connector = FortnoxClient.OrderConnector;
+            var connector = FortnoxClient.OrderConnector;
             var newOrder = new Order()
             {
                 Comments = "TestOrder",
@@ -138,7 +136,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IOrderConnector connector = FortnoxClient.OrderConnector;
+            var connector = FortnoxClient.OrderConnector;
             var newOrder = new Order()
             {
                 Comments = "TestOrder",
@@ -173,7 +171,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
-            IOrderConnector connector = FortnoxClient.OrderConnector;
+            var connector = FortnoxClient.OrderConnector;
             var newOrder = new Order()
             {
                 Comments = "TestOrder",

@@ -1,10 +1,8 @@
 using System;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -24,7 +22,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpCostCenter = FortnoxClient.CostCenterConnector.Create(new CostCenter() {Code = "TMP", Description = "TmpCostCenter"});
             #endregion Arrange
 
-            IAttendanceTransactionsConnector connector = FortnoxClient.AttendanceTransactionsConnector;
+            var connector = FortnoxClient.AttendanceTransactionsConnector;
 
             #region CREATE
             var newAttendanceTransaction = new AttendanceTransaction()
@@ -83,7 +81,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpCostCenter = FortnoxClient.CostCenterConnector.Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
             #endregion Arrange
 
-            IAttendanceTransactionsConnector connector = FortnoxClient.AttendanceTransactionsConnector;
+            var connector = FortnoxClient.AttendanceTransactionsConnector;
 
             var newAttendenceTransaction = new AttendanceTransaction()
             {

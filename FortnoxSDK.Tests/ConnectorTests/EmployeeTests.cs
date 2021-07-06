@@ -1,9 +1,7 @@
 using System;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -23,7 +21,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #endregion Arrange
 
-            IEmployeeConnector connector = FortnoxClient.EmployeeConnector;
+            var connector = FortnoxClient.EmployeeConnector;
 
             #region CREATE
 
@@ -79,7 +77,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var timestamp = DateTime.Now;
             var marks = TestUtils.RandomString();
 
-            IEmployeeConnector connector = FortnoxClient.EmployeeConnector;
+            var connector = FortnoxClient.EmployeeConnector;
 
             for (var i = 0; i < 5; i++)
                 connector.Create(new Employee() {EmployeeId = TestUtils.RandomString(), City = marks});

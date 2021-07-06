@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -19,7 +17,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ILabelConnector connector = FortnoxClient.LabelConnector;
+            var connector = FortnoxClient.LabelConnector;
 
             var randomLabel = TestUtils.RandomString();
 
@@ -62,7 +60,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            ILabelConnector connector = FortnoxClient.LabelConnector;
+            var connector = FortnoxClient.LabelConnector;
 
             var existingCount = connector.Find(null).Entities.Count;
 

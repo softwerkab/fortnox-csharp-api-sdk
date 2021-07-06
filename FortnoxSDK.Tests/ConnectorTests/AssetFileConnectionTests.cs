@@ -1,8 +1,6 @@
 using System;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -35,7 +33,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpFile = FortnoxClient.ArchiveConnector.UploadFile("tmpImage.png", Resource.fortnox_image);
             #endregion Arrange
 
-            IAssetFileConnectionConnector connector = FortnoxClient.AssetFileConnectionConnector;
+            var connector = FortnoxClient.AssetFileConnectionConnector;
 
             #region CREATE
             var newAssetFileConnection = new AssetFileConnection()

@@ -1,7 +1,5 @@
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -18,7 +16,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            IVoucherSeriesConnector connector = FortnoxClient.VoucherSeriesConnector;
+            var connector = FortnoxClient.VoucherSeriesConnector;
 
             #region CREATE
             //var digits = new char[]{ '0', '1', '2', '3', '4', '5'}

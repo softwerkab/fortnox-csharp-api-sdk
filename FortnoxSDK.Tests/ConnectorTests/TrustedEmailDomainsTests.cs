@@ -1,8 +1,6 @@
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -19,7 +17,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ITrustedEmailDomainsConnector connector = FortnoxClient.TrustedEmailDomainsConnector;
+            var connector = FortnoxClient.TrustedEmailDomainsConnector;
 
             #region CREATE
             var newTrustedEmailDomains = new TrustedEmailDomain()

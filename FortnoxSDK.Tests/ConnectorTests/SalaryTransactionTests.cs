@@ -1,9 +1,7 @@
 using System;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -20,7 +18,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpEmployee = FortnoxClient.EmployeeConnector.Create(new Employee() { EmployeeId = TestUtils.RandomString() });
             #endregion Arrange
 
-            ISalaryTransactionConnector connector = FortnoxClient.SalaryTransactionConnector;
+            var connector = FortnoxClient.SalaryTransactionConnector;
 
             #region CREATE
             var newSalaryTransaction = new SalaryTransaction()

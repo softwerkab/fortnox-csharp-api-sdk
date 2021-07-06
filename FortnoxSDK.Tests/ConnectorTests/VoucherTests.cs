@@ -2,10 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,7 +20,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #region Arrange
             #endregion Arrange
 
-            IVoucherConnector connector = FortnoxClient.VoucherConnector;
+            var connector = FortnoxClient.VoucherConnector;
 
             #region CREATE
             var newVoucher = new Voucher()
@@ -108,7 +106,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 }
             };
 
-            IVoucherConnector connector = FortnoxClient.VoucherConnector;
+            var connector = FortnoxClient.VoucherConnector;
             voucher1 = connector.Create(voucher1);
             voucher2 = connector.Create(voucher2);
             voucher3 = connector.Create(voucher3);

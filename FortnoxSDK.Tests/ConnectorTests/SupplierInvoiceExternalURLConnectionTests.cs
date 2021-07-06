@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -38,7 +36,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             });
             #endregion Arrange
 
-            ISupplierInvoiceExternalURLConnectionConnector connector = FortnoxClient.SupplierInvoiceExternalURLConnectionConnector;
+            var connector = FortnoxClient.SupplierInvoiceExternalURLConnectionConnector;
 
             #region CREATE
             var newSupplierInvoiceExternalURLConnection = new SupplierInvoiceExternalURLConnection()

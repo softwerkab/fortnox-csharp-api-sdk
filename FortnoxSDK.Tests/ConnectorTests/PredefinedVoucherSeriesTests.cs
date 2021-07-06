@@ -1,7 +1,5 @@
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -14,7 +12,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_PredefinedVoucherSeries_CRUD()
         {
-            IPredefinedVoucherSeriesConnector connector = FortnoxClient.PredefinedVoucherSeriesConnector;
+            var connector = FortnoxClient.PredefinedVoucherSeriesConnector;
 
             //Get
             var predefinedVoucherSeries = connector.Get("INVOICE");
@@ -34,7 +32,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            IPredefinedVoucherSeriesConnector connector = FortnoxClient.PredefinedVoucherSeriesConnector;
+            var connector = FortnoxClient.PredefinedVoucherSeriesConnector;
 
             var fullCollection = connector.Find(null);
 

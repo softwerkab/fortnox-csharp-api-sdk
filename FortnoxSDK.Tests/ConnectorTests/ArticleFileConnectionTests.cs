@@ -1,8 +1,6 @@
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -23,7 +21,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #endregion Arrange
 
-            IArticleFileConnectionConnector connector = FortnoxClient.ArticleFileConnectionConnector;
+            var connector = FortnoxClient.ArticleFileConnectionConnector;
 
             #region CREATE
 
@@ -77,7 +75,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle" });
             #endregion Arrange
 
-            IArticleFileConnectionConnector connector = FortnoxClient.ArticleFileConnectionConnector;
+            var connector = FortnoxClient.ArticleFileConnectionConnector;
 
             var newArticleFileConnection = new ArticleFileConnection()
             {

@@ -1,5 +1,4 @@
 ﻿using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -35,7 +34,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpFile = inboxConnector.UploadFile("tmpInvoiceFile.pdf", Resource.invoice_example, StaticFolders.CustomerInvoices);
             #endregion Arrange
 
-            IInvoiceFileConnectionConnector connector = FortnoxClient.InvoiceFileConnectionConnector;
+            var connector = FortnoxClient.InvoiceFileConnectionConnector;
 
             #region CREATE
             var newInvoiceFileConnection = new InvoiceFileConnection()

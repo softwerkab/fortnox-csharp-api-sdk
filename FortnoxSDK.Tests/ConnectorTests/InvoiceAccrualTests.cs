@@ -2,10 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -35,7 +33,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             });
             #endregion Arrange
 
-            IInvoiceAccrualConnector connector = FortnoxClient.InvoiceAccrualConnector;
+            var connector = FortnoxClient.InvoiceAccrualConnector;
 
             #region CREATE
             var newInvoiceAccrual = new InvoiceAccrual()
@@ -103,7 +101,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #endregion Arrange
 
-            IInvoiceAccrualConnector connector = FortnoxClient.InvoiceAccrualConnector;
+            var connector = FortnoxClient.InvoiceAccrualConnector;
 
             var invoice = new Invoice()
             {
