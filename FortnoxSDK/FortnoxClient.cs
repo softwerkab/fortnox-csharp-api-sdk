@@ -37,6 +37,25 @@ namespace Fortnox.SDK
         /// </summary>
         public bool UseRateLimiter { get; set; } = true;
 
+        public FortnoxClient()
+        {
+        }
+
+        public FortnoxClient(string accessToken, string clientSecret, bool useRateLimiter = true)
+        {
+            AccessToken = accessToken;
+            ClientSecret = clientSecret;
+            UseRateLimiter = useRateLimiter;
+        }
+
+        public FortnoxClient(string accessToken, string clientSecret, HttpClient httpClient, bool useRateLimiter = true)
+        {
+            AccessToken = accessToken;
+            ClientSecret = clientSecret;
+            HttpClient = httpClient;
+            UseRateLimiter = useRateLimiter;
+        }
+
         /// <summary>
         /// Creates a configured instance of a connector.
         /// </summary>
