@@ -3,7 +3,7 @@
 namespace FortnoxAPILibrary.Entities
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [XmlRoot(ElementName = "Employee")]
     public class Employee
@@ -166,7 +166,7 @@ namespace FortnoxAPILibrary.Entities
         public double? NonRecurringTax { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [XmlElement(ElementName = "Inactive")]
         public bool Inactive { get; set; }
@@ -182,10 +182,16 @@ namespace FortnoxAPILibrary.Entities
         /// </summary>
         [XmlElement(ElementName = "BankAccountNo")]
         public virtual string BankAccountNo { get; set; }
+
+        /// <summary>
+        /// End date of employment
+        /// </summary>
+        [XmlElement(ElementName = "EmployedTo")]
+        public string EmployedTo { get; set; }
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum EmployeeEmploymentForm
     {
@@ -237,7 +243,7 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum EmployeeSalaryForm
     {
@@ -254,7 +260,7 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum EmployeePersonelType
     {
@@ -271,7 +277,7 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum EmployeeForaType
     {
@@ -453,7 +459,7 @@ namespace FortnoxAPILibrary.Entities
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum EmployeeTaxAllowance
     {
@@ -486,6 +492,6 @@ namespace FortnoxAPILibrary.Entities
         /// Unknown tax circumstances
         /// </summary>
         [XmlEnum("???")]
-        UnknownTaxCircumstances
+        UnknownTaxCircumstances,
     }
 }
