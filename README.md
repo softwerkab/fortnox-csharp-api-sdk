@@ -15,17 +15,13 @@ For more information about the API, please visit the official documentation at <
 * Start coding
 
 ```CSharp
-var fortnoxClient = new FortnoxClient()
-{
-    AccessToken = "MyAccessToken",
-	ClientSecret = "MyClientSecret"
-}
+var fortnoxClient = new FortnoxClient("MyAccessToken", "MyClientSecret");
 
 var customer = new Customer()
 {
-	CustomerNumber = "1",
-	Name = "Stefan Andersson"
-}
+    CustomerNumber = "1",
+    Name = "Stefan Andersson"
+};
 
 client.CustomerConnector.Create(customer);
 ```
