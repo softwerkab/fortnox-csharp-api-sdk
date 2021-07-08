@@ -8,7 +8,7 @@ namespace Fortnox.SDK.Entities
     {
         [GenericPropertyName]
         [JsonProperty]
-        public List<T> Entities { get; set; }
+        public IList<T> Entities { get; set; }
 
         [JsonProperty]
         internal MetaInformation MetaInformation { get; set; }

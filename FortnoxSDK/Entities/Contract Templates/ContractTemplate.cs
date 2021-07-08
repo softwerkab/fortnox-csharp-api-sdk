@@ -31,7 +31,7 @@ namespace Fortnox.SDK.Entities
 
         ///<summary> – </summary>
         [JsonProperty]
-        public List<ContractTemplateInvoiceRow> InvoiceRows { get; set; }
+        public IList<ContractTemplateInvoiceRow> InvoiceRows { get; set; }
 
         ///<summary> If the contract is continuous </summary>
         [JsonProperty]

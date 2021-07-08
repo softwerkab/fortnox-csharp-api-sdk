@@ -28,7 +28,7 @@ namespace Fortnox.SDK.Entities
 
         ///<summary> – </summary>
         [JsonProperty]
-        public List<InvoiceAccrualRow> InvoiceAccrualRows { get; set; }
+        public IList<InvoiceAccrualRow> InvoiceAccrualRows { get; set; }
 
         ///<summary> Invoice number </summary>
         [JsonProperty]

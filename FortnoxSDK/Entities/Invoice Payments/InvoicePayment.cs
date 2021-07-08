@@ -119,6 +119,6 @@ namespace Fortnox.SDK.Entities
 
         ///<summary>  </summary>
         [JsonProperty]
-        public List<WriteOff> WriteOffs { get; set; }
+        public IList<WriteOff> WriteOffs { get; set; }
     }
 }

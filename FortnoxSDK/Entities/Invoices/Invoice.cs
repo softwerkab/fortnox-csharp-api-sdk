@@ -221,7 +221,7 @@ namespace Fortnox.SDK.Entities
 
         ///<summary> The properties for the object in this array is listed in the table “Invoice Rows”. </summary>
         [JsonProperty]
-        public List<InvoiceRow> InvoiceRows { get; set; }
+        public IList<InvoiceRow> InvoiceRows { get; set; }
 
         ///<summary> The type of invoice.</summary>
         [JsonProperty]
@@ -229,7 +229,7 @@ namespace Fortnox.SDK.Entities
 
         ///<summary> The properties for the object in this array is listed in the table “Labels” </summary>
         [JsonProperty]
-        public List<LabelReference> Labels { get; set; }
+        public IList<LabelReference> Labels { get; set; }
 
         ///<summary> Language code. Can be SV or EN. </summary>
         [JsonProperty]

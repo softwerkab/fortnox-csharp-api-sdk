@@ -27,7 +27,7 @@ namespace Fortnox.SDK.Entities
 
         ///<summary> – </summary>
         [JsonProperty]
-        public List<ContractAccrualRow> AccrualRows { get; set; }
+        public IList<ContractAccrualRow> AccrualRows { get; set; }
 
         ///<summary> Document number </summary>
         [JsonProperty]

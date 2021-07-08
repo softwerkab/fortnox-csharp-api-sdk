@@ -51,7 +51,7 @@ namespace Fortnox.SDK.Entities
 
         ///<summary> The properties for the object in this array is listed in the table for “Voucher Rows”. </summary>
         [JsonProperty]
-        public List<VoucherRow> VoucherRows { get; set; }
+        public IList<VoucherRow> VoucherRows { get; set; }
 
         ///<summary> Code of the voucher series. The code must be of an existing voucher series. </summary>
         [JsonProperty]
