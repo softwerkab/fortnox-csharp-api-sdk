@@ -21,12 +21,12 @@ namespace Fortnox.SDK.Entities
         ///<summary> List of files </summary>
         [ReadOnly]
         [JsonProperty]
-        public List<ArchiveFile> Files { get; private set; }
+        public IList<ArchiveFile> Files { get; private set; }
 
         ///<summary> List of folders </summary>
         [ReadOnly]
         [JsonProperty]
-        public List<ArchiveFolder> Folders { get; private set; }
+        public IList<ArchiveFolder> Folders { get; private set; }
 
         ///<summary> Id of the folder </summary>
         [ReadOnly]

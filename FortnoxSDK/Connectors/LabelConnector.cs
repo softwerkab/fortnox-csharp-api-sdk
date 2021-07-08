@@ -10,7 +10,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class LabelConnector : SearchableEntityConnector<Label, Label, LabelSearch>, ILabelConnector
+    internal class LabelConnector : SearchableEntityConnector<Label, Label, LabelSearch>, ILabelConnector
 	{
 
 

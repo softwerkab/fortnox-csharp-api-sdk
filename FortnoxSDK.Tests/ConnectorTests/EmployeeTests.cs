@@ -1,9 +1,7 @@
 using System;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,25 +10,18 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class EmployeeTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_Employee_CRUD()
         {
             #region Arrange
-            var c = new EmployeeConnector();
+            var c = FortnoxClient.EmployeeConnector;
             var alreadyExists = c.Get("TEST_EMP") != null;
 
             #endregion Arrange
 
-            IEmployeeConnector connector = new EmployeeConnector();
+            var connector = FortnoxClient.EmployeeConnector;
 
             #region CREATE
 
@@ -86,7 +77,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var timestamp = DateTime.Now;
             var marks = TestUtils.RandomString();
 
-            IEmployeeConnector connector = new EmployeeConnector();
+            var connector = FortnoxClient.EmployeeConnector;
 
             for (var i = 0; i < 5; i++)
                 connector.Create(new Employee() {EmployeeId = TestUtils.RandomString(), City = marks});

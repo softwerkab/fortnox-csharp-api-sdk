@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Interfaces;
@@ -16,23 +15,16 @@ namespace FortnoxSDK.Tests
     [TestClass]
     public class ReportedIssuesTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
-
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        
         [TestMethod]
         public void Test_Issue_44() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/44
         {
             //Arrange
-            var customerConnector = new CustomerConnector();
+            var customerConnector = FortnoxClient.CustomerConnector;
             var tmpCustomer = customerConnector.Create(new Customer() { Name = "TmpTestCustomer" });
 
-            IInvoiceConnector connector = new InvoiceConnector();
+            var connector = FortnoxClient.InvoiceConnector;
 
             var newInvoce = connector.Create(new Invoice()
             {
@@ -57,7 +49,7 @@ namespace FortnoxSDK.Tests
             /* Assuming several (at least 5) vouchers exists */
 
             //Act & Assert
-            var connector = new VoucherConnector();
+            var connector = FortnoxClient.VoucherConnector;
             var searchSettings = new VoucherSearch();
             searchSettings.FinancialYearID = 1;
 
@@ -74,7 +66,7 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_issue57_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/57
         {
-            var connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
             var specificCustomer = connector.Create(new Customer() { Name = "TestCustomer", OrganisationNumber = "123456789" });
 
             var searchSettings = new CustomerSearch();
@@ -89,7 +81,7 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_issue50_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/50
         {
-            var connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
             var newCustomer = connector.Create(new Customer() { Name = "TestCustomer", City = "Växjö", Type = CustomerType.Company });
 
             var updatedCustomer = connector.Update(new Customer() { CustomerNumber = newCustomer.CustomerNumber, City = "Stockholm" });
@@ -101,7 +93,7 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_issue61_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/61
         {
-            var connector = new ArticleConnector();
+            var connector = FortnoxClient.ArticleConnector;
             var newArticle = connector.Create(new Article() { Description = "TestArticle", FreightCost = 10, OtherCost = 10, CostCalculationMethod = "MANUAL" });
 
             //NOTE: Server does not create the properties FreightCost, OtherCost and CostCalculationMethod
@@ -112,7 +104,7 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_issue73_async_non_blockable()
         {
-            var connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
             var searchSettings = new CustomerSearch();
             searchSettings.Limit = 2;
 
@@ -120,7 +112,7 @@ namespace FortnoxSDK.Tests
             watch.Start();
 
             var runningTasks = new List<Task<EntityCollection<CustomerSubset>>>();
-            for (int i = 0;i<40;i++) 
+            for (var i = 0;i<40;i++) 
                 runningTasks.Add(connector.FindAsync(searchSettings));
 
             Console.WriteLine(@"Thread free after: "+watch.ElapsedMilliseconds);
@@ -140,11 +132,11 @@ namespace FortnoxSDK.Tests
         public void Test_issue84_fixed() //Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/84
         {
             //Arrange
-            IArchiveConnector conn = new ArchiveConnector();
+            var conn = FortnoxClient.ArchiveConnector;
             var testRootFolder = conn.GetFolder("TestArchive") ?? conn.CreateFolder("TestArchive");
 
             //Act
-            IArchiveConnector connector = new ArchiveConnector();
+            var connector = FortnoxClient.ArchiveConnector;
 
             var data = Resource.fortnox_image;
             var randomFileName = TestUtils.RandomString() + "åöä.txt";
@@ -163,7 +155,7 @@ namespace FortnoxSDK.Tests
         {
             //Arrange
             //Creates a customer with ElectronicInvoice option for deliviery type
-            var connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
             var tmpCustomer = connector.Create(new Customer()
             {
                 Name = "TestCustomer",
@@ -185,11 +177,11 @@ namespace FortnoxSDK.Tests
         public void Test_Issue96_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/96
         {
             #region Arrange
-            var tmpSupplier = new SupplierConnector().Create(new Supplier() { Name = "TmpSupplier" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
+            var tmpSupplier = FortnoxClient.SupplierConnector.Create(new Supplier() { Name = "TmpSupplier" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
             #endregion Arrange
 
-            var connector = new SupplierInvoiceConnector();
+            var connector = FortnoxClient.SupplierInvoiceConnector;
 
             var createdInvoice = connector.Create(new SupplierInvoice()
             {
@@ -220,9 +212,9 @@ namespace FortnoxSDK.Tests
 
             #region Delete arranged resources
 
-            new SupplierInvoiceConnector().Cancel(createdInvoice.GivenNumber);
-            new SupplierConnector().Delete(tmpSupplier.SupplierNumber);
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.SupplierInvoiceConnector.Cancel(createdInvoice.GivenNumber);
+            FortnoxClient.SupplierConnector.Delete(tmpSupplier.SupplierNumber);
+            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
 
             #endregion Delete arranged resources
         }
@@ -232,14 +224,14 @@ namespace FortnoxSDK.Tests
         {
             #region Arrange
 
-            var tmpCustomer = new CustomerConnector().Create(new Customer()
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer()
                 {Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"});
-            var tmpArticle = new ArticleConnector().Create(new Article()
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article()
                 {Description = "TmpArticle", PurchasePrice = 100});
 
             #endregion Arrange
 
-            IInvoiceConnector connector = new InvoiceConnector();
+            var connector = FortnoxClient.InvoiceConnector;
 
             var largeId = (long) 2 * int.MaxValue + TestUtils.RandomInt();
 
@@ -265,9 +257,9 @@ namespace FortnoxSDK.Tests
 
             #region Delete arranged resources
 
-            new InvoiceConnector().Cancel(createdInvoice.DocumentNumber);
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.InvoiceConnector.Cancel(createdInvoice.DocumentNumber);
+            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
 
             #endregion Delete arranged resources
         }
@@ -276,7 +268,7 @@ namespace FortnoxSDK.Tests
         public void Test_Issue99_v1_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/99
         {
             #region Arrange
-            IArchiveConnector ac = new ArchiveConnector();
+            var ac = FortnoxClient.ArchiveConnector;
 
             var data = Resource.fortnox_image;
             var randomFileName = TestUtils.RandomString() + ".txt";
@@ -285,7 +277,7 @@ namespace FortnoxSDK.Tests
 
             #endregion Arrange
 
-            var archiveConnector = new ArchiveConnector();
+            var archiveConnector = FortnoxClient.ArchiveConnector;
             var case1 = archiveConnector.DownloadFile(fortnoxFile.Id, IdType.Id); //no error
             Assert.ThrowsException<FortnoxApiException>(
                 () => archiveConnector.DownloadFile(fortnoxFile.Id, IdType.FileId)); //has error
@@ -296,7 +288,7 @@ namespace FortnoxSDK.Tests
             Assert.IsNotNull(case1);
             Assert.IsNotNull(case4);
 
-            var inboxConnector = new InboxConnector();
+            var inboxConnector = FortnoxClient.InboxConnector;
             var case5 = inboxConnector.DownloadFile(fortnoxFile.Id, IdType.Id); //no error
             var case6 = inboxConnector.DownloadFile(fortnoxFile.Id, IdType.FileId); //no error, why?
 
@@ -316,7 +308,7 @@ namespace FortnoxSDK.Tests
         public void Test_Issue99_v2_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/99
         {
             #region Arrange
-            IArchiveConnector ac = new InboxConnector();
+            var ac = FortnoxClient.InboxConnector;
 
             var data = Resource.fortnox_image;
             var randomFileName = TestUtils.RandomString() + ".txt";
@@ -325,7 +317,7 @@ namespace FortnoxSDK.Tests
 
             #endregion Arrange
 
-            var archiveConnector = new ArchiveConnector();
+            var archiveConnector = FortnoxClient.ArchiveConnector;
             var case1 = archiveConnector.DownloadFile(fortnoxFile.Id, IdType.Id); //no error
             Assert.ThrowsException<FortnoxApiException>(
                 () => archiveConnector.DownloadFile(fortnoxFile.Id, IdType.FileId)); //has error
@@ -336,7 +328,7 @@ namespace FortnoxSDK.Tests
             Assert.IsNotNull(case1);
             Assert.IsNotNull(case4);
 
-            var inboxConnector = new InboxConnector();
+            var inboxConnector = FortnoxClient.InboxConnector;
             var case5 = inboxConnector.DownloadFile(fortnoxFile.Id, IdType.Id); //no error
             var case6 = inboxConnector.DownloadFile(fortnoxFile.Id, IdType.FileId); //no error, why?
             Assert.ThrowsException<FortnoxApiException>(

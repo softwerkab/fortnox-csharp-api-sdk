@@ -179,7 +179,7 @@ namespace Fortnox.SDK.Entities
 
         ///<summary>  </summary>
         [JsonProperty]
-        public List<OrderRow> OrderRows { get; set; }
+        public IList<OrderRow> OrderRows { get; set; }
 
         ///<summary> Type of the Order. Can be Order or Backorder. </summary>
         [ReadOnly]

@@ -1,6 +1,4 @@
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -8,14 +6,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class LockedPeriodTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_LockedPeriod_CRUD()
@@ -24,7 +15,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ILockedPeriodConnector connector = new LockedPeriodConnector();
+            var connector = FortnoxClient.LockedPeriodConnector;
 
             #region CREATE
             //Not Allowed

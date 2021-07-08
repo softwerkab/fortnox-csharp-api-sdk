@@ -1,10 +1,8 @@
 using System;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -13,24 +11,17 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class PriceTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_Price_CRUD()
         {
             #region Arrange
-            var tmpArticle = new ArticleConnector().Create(new Article() {Description = "TmpArticle"});
-            var tmpPriceList = new PriceListConnector().Get("TST_PR");
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() {Description = "TmpArticle"});
+            var tmpPriceList = FortnoxClient.PriceListConnector.Get("TST_PR");
             #endregion Arrange
 
-            IPriceConnector connector = new PriceConnector();
+            var connector = FortnoxClient.PriceConnector;
 
             #region CREATE
             var newPrice = new Price()
@@ -73,7 +64,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -83,11 +74,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var dateStamp = DateTime.Now;
 
             #region Arrange
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", PurchasePrice = 10});
-            var tmpPriceList = new PriceListConnector().Get("TST_PR");
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", PurchasePrice = 10});
+            var tmpPriceList = FortnoxClient.PriceListConnector.Get("TST_PR");
             #endregion Arrange
             
-            IPriceConnector connector = new PriceConnector();
+            var connector = FortnoxClient.PriceConnector;
 
             var newPrice = new Price()
             {
@@ -132,7 +123,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             }
 
             #region Delete arranged resources
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

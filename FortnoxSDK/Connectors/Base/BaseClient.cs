@@ -30,8 +30,8 @@ namespace Fortnox.SDK.Connectors.Base
             HttpClient = FortnoxClient.HttpClientSharedInstance;
             ErrorHandler = new ErrorHandler();
 
-            AccessToken = ConnectionCredentials.AccessToken;
-            ClientSecret = ConnectionCredentials.ClientSecret;
+            AccessToken = null;
+            ClientSecret = null;
             UseRateLimiter = true;
             UseAuthHeaders = true;
         }

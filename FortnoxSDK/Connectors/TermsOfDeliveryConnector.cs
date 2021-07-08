@@ -10,7 +10,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class TermsOfDeliveryConnector : SearchableEntityConnector<TermsOfDelivery, TermsOfDelivery, TermsOfDeliverySearch>, ITermsOfDeliveryConnector
+    internal class TermsOfDeliveryConnector : SearchableEntityConnector<TermsOfDelivery, TermsOfDelivery, TermsOfDeliverySearch>, ITermsOfDeliveryConnector
 	{
 
 

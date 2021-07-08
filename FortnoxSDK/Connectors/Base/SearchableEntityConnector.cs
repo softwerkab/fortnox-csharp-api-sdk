@@ -9,7 +9,7 @@ using Fortnox.SDK.Search;
 
 namespace Fortnox.SDK.Connectors.Base
 {
-    public class SearchableEntityConnector<TEntity, TEntitySubset, TSearchSettings> : EntityConnector<TEntity> 
+    internal abstract class SearchableEntityConnector<TEntity, TEntitySubset, TSearchSettings> : EntityConnector<TEntity> 
         where TEntity : class 
         where TSearchSettings : BaseSearch, new()
     {

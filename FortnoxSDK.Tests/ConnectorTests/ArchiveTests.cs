@@ -1,6 +1,5 @@
 using System.IO;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,24 +9,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class ArchiveTests
     {
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
         private ArchiveFolder testRootFolder;
 
         [TestInitialize]
         public void Init()
         {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-
-            IArchiveConnector connector = new ArchiveConnector();
+            var connector = FortnoxClient.ArchiveConnector;
             testRootFolder = connector.GetFolder("TestArchive");
         }
 
         [TestMethod]
         public void Test_File_Upload_Download_Delete()
         {
-            IArchiveConnector connector = new ArchiveConnector();
+            var connector = FortnoxClient.ArchiveConnector;
 
             var data = Resource.fortnox_image;
             var randomFileName = TestUtils.RandomString()+".txt";
@@ -43,7 +39,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Folder_Create_Get_Delete()
         {
-            IArchiveConnector connector = new ArchiveConnector();
+            var connector = FortnoxClient.ArchiveConnector;
             var randomFolderName = TestUtils.RandomString();
 
             var createdFolder = connector.CreateFolder(randomFolderName, testRootFolder.Name);
@@ -57,7 +53,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Folder_Delete_ByPath()
         {
-            IArchiveConnector connector = new ArchiveConnector();
+            var connector = FortnoxClient.ArchiveConnector;
             var randomFolderName = TestUtils.RandomString();
 
             var createdFolder = connector.CreateFolder(randomFolderName, testRootFolder.Name);
@@ -71,11 +67,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_GetSupplierFolder()
         {
-            IArchiveConnector connector1 = new InboxConnector();
+            var connector1 = FortnoxClient.InboxConnector;
             var folder1 = connector1.GetFolder(StaticFolders.SupplierInvoices);
             Assert.AreEqual("inbox_s", folder1.Id);
 
-            IArchiveConnector connector2 = new ArchiveConnector();
+            var connector2 = FortnoxClient.ArchiveConnector;
             var folder2 = connector2.GetFolder(StaticFolders.SupplierInvoices);
             Assert.AreEqual("inbox_s", folder2.Id);
         }
@@ -83,7 +79,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Upload_Download_Delete_From_Static_Folder()
         {
-            IArchiveConnector connector = new ArchiveConnector();
+            var connector = FortnoxClient.ArchiveConnector;
 
             var data = Resource.fortnox_image;
             var randomFileName = TestUtils.RandomString() + ".txt";
@@ -99,9 +95,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_ManyRequests()
         {
-            IArchiveConnector connector = new ArchiveConnector();
+            var connector = FortnoxClient.ArchiveConnector;
 
-            for (int i = 0; i < 20; i++)
+            for (var i = 0; i < 20; i++)
             {
                 var data = Resource.fortnox_image;
                 var randomFileName = TestUtils.RandomString() + ".txt";
@@ -118,7 +114,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Get_Root()
         {
-            IArchiveConnector connector = new ArchiveConnector();
+            var connector = FortnoxClient.ArchiveConnector;
             var rootFolder = connector.GetRoot();
             Assert.AreEqual("root", rootFolder.Id);
         }
@@ -126,7 +122,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Download_To_Local_System()
         {
-            IArchiveConnector connector = new ArchiveConnector();
+            var connector = FortnoxClient.ArchiveConnector;
             
             //Arrange
             var data = Resource.fortnox_image;
@@ -148,7 +144,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Upload_From_Local_System()
         {
-            IArchiveConnector connector = new ArchiveConnector();
+            var connector = FortnoxClient.ArchiveConnector;
 
             //Arrange
             var data = Resource.fortnox_image;

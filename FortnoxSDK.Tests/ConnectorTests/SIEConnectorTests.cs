@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Utility;
@@ -16,20 +15,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class SIEConnectorTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void SIE_Get()
         {
             var types = Enum.GetValues(typeof(SIEType)).Cast<SIEType>().ToList();
-            ISIEConnector connector = new SIEConnector();
+            var connector = FortnoxClient.SIEConnector;
             
             foreach (var sieType in types)
             {
@@ -48,9 +40,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void SIE_Get_SpecificYear()
         {
-            var finYears = new FinancialYearConnector().Find(null).Entities;
+            var finYears = FortnoxClient.FinancialYearConnector.Find(null).Entities;
 
-            ISIEConnector connector = new SIEConnector();
+            var connector = FortnoxClient.SIEConnector;
 
             foreach (var finYear in finYears)
             {
@@ -72,7 +64,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void SIE_Get_ExportOptions_Period()
         {
-            ISIEConnector connector = new SIEConnector();
+            var connector = FortnoxClient.SIEConnector;
             var exportOptions = new SIEExportOptions()
             {
                 FromDate = new DateTime(2020, 4, 1),
@@ -92,7 +84,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void SIE_Get_ExportOptions_VoucherSelection()
         {
-            ISIEConnector connector = new SIEConnector();
+            var connector = FortnoxClient.SIEConnector;
             var exportOptions = new SIEExportOptions()
             {
                 Selection = new List<VoucherSelection>()
@@ -130,7 +122,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void SIE_Get_ExportOptions_VoucherSelection_IncompleteInterval()
         {
-            ISIEConnector connector = new SIEConnector();
+            var connector = FortnoxClient.SIEConnector;
             var exportOptions = new SIEExportOptions()
             {
                 Selection = new List<VoucherSelection>()
@@ -156,7 +148,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void SIE_Get_ExportOptions_ExcludeUnused()
         {
-            ISIEConnector connector = new SIEConnector();
+            var connector = FortnoxClient.SIEConnector;
             var exportOptionsAll = new SIEExportOptions()
             {
                 ExportAll = true

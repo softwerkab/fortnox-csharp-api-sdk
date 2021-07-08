@@ -8,7 +8,7 @@ using Fortnox.SDK.Utility;
 
 namespace Fortnox.SDK.Connectors
 {
-    public class SIEConnector : BaseConnector, ISIEConnector
+    internal class SIEConnector : BaseConnector, ISIEConnector
     {
 
         public SIEConnector()
@@ -46,11 +46,11 @@ namespace Fortnox.SDK.Connectors
             var parameters = new Dictionary<string, string>();
 
             if (exportOptions.FromDate != null)
-                parameters.Add("fromdate", exportOptions.FromDate?.ToString("yyyy-MM-dd"));
+                parameters.Add("fromdate", exportOptions.FromDate?.ToString(APIConstants.DateFormat));
             if (exportOptions.ToDate != null)
-                parameters.Add("todate", exportOptions.ToDate?.ToString("yyyy-MM-dd"));
+                parameters.Add("todate", exportOptions.ToDate?.ToString(APIConstants.DateFormat));
             if (exportOptions.ExportAll != null)
-                parameters.Add("exportall", exportOptions.ExportAll.ToString());
+                parameters.Add("exportall", exportOptions.ExportAll.ToString().ToLower());
             if (exportOptions.Selection != null)
             {
                 var selectionValues = exportOptions.Selection.Where(s => s.VoucherSeries != null).Select(s =>

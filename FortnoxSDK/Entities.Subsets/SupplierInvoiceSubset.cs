@@ -98,7 +98,7 @@ namespace Fortnox.SDK.Entities
         public decimal? Total { get; set; }
 
         [JsonProperty]
-        public List<VoucherReference> Vouchers { get; set; }
+        public IList<VoucherReference> Vouchers { get; set; }
 
         [JsonProperty]
         public DateTime? FinalPayDate { get; set; }

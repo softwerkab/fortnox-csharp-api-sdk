@@ -2,7 +2,7 @@
 
 namespace Fortnox.SDK.Requests
 {
-    public class FileDownloadRequest : BaseRequest
+    internal class FileDownloadRequest : BaseRequest
     {
         public FileDownloadRequest()
         {

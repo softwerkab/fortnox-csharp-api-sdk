@@ -2,10 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -13,25 +11,18 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class ContractAccrualTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_ContractAccrual_CRUD()
         {
             #region Arrange
 
-            var tmpCustomer = new CustomerConnector().Create(new Customer()
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer()
                 {Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"});
-            var tmpArticle = new ArticleConnector().Create(new Article()
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article()
                 {Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100});
-            var tmpContract = new ContractConnector().Create(new Contract()
+            var tmpContract = FortnoxClient.ContractConnector.Create(new Contract()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 ContractDate = new DateTime(2020, 1, 1),
@@ -53,7 +44,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #endregion Arrange
 
-            IContractAccrualConnector connector = new ContractAccrualConnector();
+            var connector = FortnoxClient.ContractAccrualConnector;
 
             #region CREATE
 
@@ -105,9 +96,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region Delete arranged resources
 
-            new ContractConnector().Finish(tmpContract.DocumentNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber); //Can't delete since it is used in contract
-            //new CustomerConnector().Delete(tmpCustomer.CustomerNumber); //Can't delete since it is used in contract
+            FortnoxClient.ContractConnector.Finish(tmpContract.DocumentNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber); //Can't delete since it is used in contract
+            //FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber); //Can't delete since it is used in contract
 
             #endregion Delete arranged resources
         }
@@ -117,12 +108,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             #region Arrange
 
-            var tmpCustomer = new CustomerConnector().Create(new Customer() {Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"});
-            var tmpArticle = new ArticleConnector().Create(new Article() {Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100});
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() {Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"});
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() {Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100});
 
             #endregion Arrange
 
-            IContractAccrualConnector connector = new ContractAccrualConnector();
+            var connector = FortnoxClient.ContractAccrualConnector;
 
             var contract = new Contract()
             {
@@ -161,7 +152,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             for (var i = 0; i < 5; i++)
             {
-                var createdContract = new ContractConnector().Create(contract);
+                var createdContract = FortnoxClient.ContractConnector.Create(contract);
                 newContractAccrual.DocumentNumber = createdContract.DocumentNumber;
                 connector.Create(newContractAccrual);
             }
@@ -172,12 +163,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
             foreach (var entry in contractAccruals.Entities.Where(x => x.Description.StartsWith(marks)))
             {
                 connector.Delete(entry.DocumentNumber);
-                new ContractConnector().Finish(entry.DocumentNumber);
+                FortnoxClient.ContractConnector.Finish(entry.DocumentNumber);
             }
             #region Delete arranged resources
 
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
-            //new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+            //FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
 
             #endregion Delete arranged resources
         }

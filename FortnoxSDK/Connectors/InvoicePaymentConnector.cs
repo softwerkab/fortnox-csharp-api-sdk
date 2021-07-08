@@ -10,7 +10,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class InvoicePaymentConnector : SearchableEntityConnector<InvoicePayment, InvoicePaymentSubset, InvoicePaymentSearch>, IInvoicePaymentConnector
+    internal class InvoicePaymentConnector : SearchableEntityConnector<InvoicePayment, InvoicePaymentSubset, InvoicePaymentSearch>, IInvoicePaymentConnector
 	{
 
 

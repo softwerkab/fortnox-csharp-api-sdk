@@ -13,7 +13,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
 	/// <remarks/>
-    public class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConnection>, IInvoiceFileConnectionConnector
+    internal class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConnection>, IInvoiceFileConnectionConnector
     {
 
         /// <remarks/>
@@ -22,7 +22,7 @@ namespace Fortnox.SDK.Connectors
 			Resource = "fileattachments/attachments-v1";
         }
 
-        public List<InvoiceFileConnection> GetConnections(long? entityId, EntityType? entityType)
+        public IList<InvoiceFileConnection> GetConnections(long? entityId, EntityType? entityType)
         {
             return GetConnectionsAsync(entityId, entityType).GetResult();
         }
@@ -102,7 +102,7 @@ namespace Fortnox.SDK.Connectors
             return result;
         }
 
-        public async Task<List<InvoiceFileConnection>> GetConnectionsAsync(long? entityId, EntityType? entityType)
+        public async Task<IList<InvoiceFileConnection>> GetConnectionsAsync(long? entityId, EntityType? entityType)
         {
             var request = new EntityRequest<List<InvoiceFileConnection>>()
             {

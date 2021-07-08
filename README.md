@@ -14,12 +14,8 @@ For more information about the API, please visit the official documentation at <
 * Install nuget package Fortnox.NET.SDK
 * Start coding
 
-```CSharp
-var connector = new CustomerConnector()
-{
-    AccessToken = "MyAccessToken",
-    ClientSecret = "MyClientSecret"
-};
+```csharp
+var fortnoxClient = new FortnoxClient("MyAccessToken", "MyClientSecret");
 
 var customer = new Customer()
 {
@@ -27,7 +23,7 @@ var customer = new Customer()
     Name = "Stefan Andersson"
 };
 
-connector.Create(customer);
+client.CustomerConnector.Create(customer);
 ```
 
 

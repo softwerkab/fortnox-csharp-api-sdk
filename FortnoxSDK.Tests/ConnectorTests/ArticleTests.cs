@@ -1,10 +1,8 @@
 using System;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -13,14 +11,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class ArticleTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_Article_CRUD()
@@ -29,7 +20,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            IArticleConnector connector = new ArticleConnector();
+            var connector = FortnoxClient.ArticleConnector;
 
             #region CREATE
             var newArticle = new Article()
@@ -88,7 +79,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             var testKeyMark = TestUtils.RandomString();
 
-            IArticleConnector connector = new ArticleConnector();
+            var connector = FortnoxClient.ArticleConnector;
 
             var newArticle = new Article
             {
@@ -144,7 +135,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var values = Enum.GetValues(typeof(HouseworkType)).Cast<HouseworkType>().ToList();
             Assert.AreEqual(28,values.Count);
 
-            var connector = new ArticleConnector();
+            var connector = FortnoxClient.ArticleConnector;
             var article = connector.Create(new Article(){ Description = "HouseworkArticleTest", Housework = true });
 
             foreach (var houseworkType in values)
@@ -171,7 +162,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void HouseWorkArticle_Blank()
         {
-            var connector = new ArticleConnector();
+            var connector = FortnoxClient.ArticleConnector;
             var article = connector.Create(new Article()
             {
                 Description = "HouseworkArticleTest", 

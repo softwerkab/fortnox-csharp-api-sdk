@@ -1,9 +1,7 @@
 using System;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,14 +10,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class TermsOfPaymentTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_TermsOfPayment_CRUD()
@@ -28,7 +19,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ITermsOfPaymentConnector connector = new TermsOfPaymentConnector();
+            var connector = FortnoxClient.TermsOfPaymentConnector;
 
             #region CREATE
             var newTermsOfPayment = new TermsOfPayment()
@@ -76,7 +67,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            ITermsOfPaymentConnector connector = new TermsOfPaymentConnector();
+            var connector = FortnoxClient.TermsOfPaymentConnector;
 
             var newTermsOfPayment = new TermsOfPayment()
             {

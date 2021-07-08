@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -12,21 +10,14 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class VoucherFileConnectionTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_VoucherFileConnection_CRUD()
         {
             #region Arrange
 
-            var tmpVoucher = new VoucherConnector().Create(new Voucher()
+            var tmpVoucher = FortnoxClient.VoucherConnector.Create(new Voucher()
             {
                 Description = "TestVoucher",
                 Comments = "Some comments",
@@ -38,10 +29,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
                     new VoucherRow() {Account = 1910, Debit = 0, Credit = 1500}
                 }
             });
-            var tmpFile = new ArchiveConnector().UploadFile("tmpImage.png", Resource.fortnox_image);
+            var tmpFile = FortnoxClient.ArchiveConnector.UploadFile("tmpImage.png", Resource.fortnox_image);
             #endregion Arrange
 
-            IVoucherFileConnectionConnector connector = new VoucherFileConnectionConnector();
+            var connector = FortnoxClient.VoucherFileConnectionConnector;
 
             #region CREATE
             var newVoucherFileConnection = new VoucherFileConnection()
@@ -78,7 +69,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new ArchiveConnector().DeleteFile(tmpFile.Id);
+            FortnoxClient.ArchiveConnector.DeleteFile(tmpFile.Id);
             #endregion Delete arranged resources
         }
     }

@@ -10,7 +10,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class SalaryTransactionConnector : SearchableEntityConnector<SalaryTransaction, SalaryTransactionSubset, SalaryTransactionSearch>, ISalaryTransactionConnector
+    internal class SalaryTransactionConnector : SearchableEntityConnector<SalaryTransaction, SalaryTransactionSubset, SalaryTransactionSearch>, ISalaryTransactionConnector
 	{
 
 		/// <remarks/>

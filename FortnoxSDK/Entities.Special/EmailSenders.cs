@@ -8,8 +8,8 @@ namespace Fortnox.SDK.Entities
     public class EmailSenders
     {
         [JsonProperty]
-        public List<TrustedEmailSender> TrustedSenders { get; set; }
+        public IList<TrustedEmailSender> TrustedSenders { get; set; }
         [JsonProperty]
-        public List<TrustedEmailSender> RejectedSenders { get; set; }
+        public IList<TrustedEmailSender> RejectedSenders { get; set; }
     }
 }

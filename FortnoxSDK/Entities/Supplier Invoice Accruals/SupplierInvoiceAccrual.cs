@@ -40,7 +40,7 @@ namespace Fortnox.SDK.Entities
 
         ///<summary> – </summary>
         [JsonProperty]
-        public List<SupplierInvoiceAccrualRow> SupplierInvoiceAccrualRows { get; set; }
+        public IList<SupplierInvoiceAccrualRow> SupplierInvoiceAccrualRows { get; set; }
 
         ///<summary> Start date </summary>
         [JsonProperty]

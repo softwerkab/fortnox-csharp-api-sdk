@@ -1,9 +1,7 @@
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -11,14 +9,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class CurrencyTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_Currency_CRUD()
@@ -26,7 +17,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #region Arrange
 
             //Random currency code is not accepted by the server, therefore "SKK" is used.
-            var currencyConnector = new CurrencyConnector();
+            var currencyConnector = FortnoxClient.CurrencyConnector;
             try
             {
                 //Delete currency if already exists
@@ -39,7 +30,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #endregion Arrange
 
-            ICurrencyConnector connector = new CurrencyConnector();
+            var connector = FortnoxClient.CurrencyConnector;
 
             #region CREATE
 
@@ -94,7 +85,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             //Prerequisites: SEK, EUR and USD currencies are already present in the system
 
-            ICurrencyConnector connector = new CurrencyConnector();
+            var connector = FortnoxClient.CurrencyConnector;
 
             var currencies = connector.Find(null);
 

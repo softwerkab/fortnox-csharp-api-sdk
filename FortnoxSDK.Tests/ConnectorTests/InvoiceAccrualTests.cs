@@ -2,10 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -13,23 +11,16 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class InvoiceAccrualTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_InvoiceAccrual_CRUD()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
 
-            var tmpInvoice = new InvoiceConnector().Create(new Invoice()
+            var tmpInvoice = FortnoxClient.InvoiceConnector.Create(new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
@@ -42,7 +33,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             });
             #endregion Arrange
 
-            IInvoiceAccrualConnector connector = new InvoiceAccrualConnector();
+            var connector = FortnoxClient.InvoiceAccrualConnector;
 
             #region CREATE
             var newInvoiceAccrual = new InvoiceAccrual()
@@ -95,9 +86,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region Delete arranged resources
 
-            new InvoiceConnector().Cancel(tmpInvoice.DocumentNumber);
-            //new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.InvoiceConnector.Cancel(tmpInvoice.DocumentNumber);
+            //FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -105,12 +96,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_InvoiceAccrual_Find()
         {
             #region Arrange
-            var tmpCustomer = new CustomerConnector().Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
 
             #endregion Arrange
 
-            IInvoiceAccrualConnector connector = new InvoiceAccrualConnector();
+            var connector = FortnoxClient.InvoiceAccrualConnector;
 
             var invoice = new Invoice()
             {
@@ -143,7 +134,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             for (var i = 0; i < 5; i++)
             {
-                var createdInvoice = new InvoiceConnector().Create(invoice);
+                var createdInvoice = FortnoxClient.InvoiceConnector.Create(invoice);
 
                 newInvoiceAccrual.InvoiceNumber = createdInvoice.DocumentNumber;
                 connector.Create(newInvoiceAccrual);
@@ -155,12 +146,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
             foreach (var entry in contractAccruals.Entities.Where(x => x.Description.StartsWith(marks)))
             {
                 connector.Delete(entry.InvoiceNumber);
-                new InvoiceConnector().Cancel(entry.InvoiceNumber);
+                FortnoxClient.InvoiceConnector.Cancel(entry.InvoiceNumber);
             }
 
             #region Delete arranged resources
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
-            new CustomerConnector().Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
             #endregion Delete arranged resources
         }
     }

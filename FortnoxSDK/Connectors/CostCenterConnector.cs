@@ -10,7 +10,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class CostCenterConnector : SearchableEntityConnector<CostCenter, CostCenter, CostCenterSearch>, ICostCenterConnector
+    internal class CostCenterConnector : SearchableEntityConnector<CostCenter, CostCenter, CostCenterSearch>, ICostCenterConnector
 	{
 
 

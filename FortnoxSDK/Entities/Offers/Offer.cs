@@ -207,7 +207,7 @@ namespace Fortnox.SDK.Entities
 
         ///<summary> – </summary>
         [JsonProperty]
-        public List<OfferRow> OfferRows { get; set; }
+        public IList<OfferRow> OfferRows { get; set; }
 
         ///<summary> If document is printed or e-mailed to customer </summary>
         [ReadOnly]

@@ -115,7 +115,7 @@ namespace Fortnox.SDK.Entities
 
         ///<summary> – </summary>
         [JsonProperty]
-        public List<ContractInvoiceRow> InvoiceRows { get; set; }
+        public IList<ContractInvoiceRow> InvoiceRows { get; set; }
 
         ///<summary> Invoices remaining </summary>
         [ReadOnly]

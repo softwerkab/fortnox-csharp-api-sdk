@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Threading;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,19 +11,12 @@ namespace FortnoxSDK.Tests
     [TestClass]
     public class RateLimiterTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_RateLimiter_NoError()
         {
-            var connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
 
             var watch = new Stopwatch();
             watch.Start();
@@ -42,8 +34,14 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_NoRateLimiter_TooManyRequest_Error()
         {
-            var connector = new CustomerConnector();
-            connector.UseRateLimiter = false;
+            var fortnoxClient = new FortnoxClient()
+            {
+                AccessToken = TestCredentials.Access_Token,
+                ClientSecret = TestCredentials.Client_Secret,
+                UseRateLimiter = false
+            };
+
+            var connector = fortnoxClient.CustomerConnector;
 
             FortnoxApiException error = null;
             int i;

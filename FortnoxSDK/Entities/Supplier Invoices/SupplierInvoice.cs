@@ -136,7 +136,7 @@ namespace Fortnox.SDK.Entities
 
         ///<summary> – </summary>
         [JsonProperty]
-        public List<SupplierInvoiceRow> SupplierInvoiceRows { get; set; }
+        public IList<SupplierInvoiceRow> SupplierInvoiceRows { get; set; }
 
         ///<summary> Supplier number </summary>
         [JsonProperty]
@@ -165,7 +165,7 @@ namespace Fortnox.SDK.Entities
 
         [ReadOnly]
         [JsonProperty]
-        public List<VoucherReference> Vouchers { get; private set; }
+        public IList<VoucherReference> Vouchers { get; private set; }
 
         ///<summary> Voucher number for the invoice. This is created when the invoice is bookkept.</summary>
         [Obsolete("Seems like this is only populated in bookkeep action response. Use Vouchers property instead for other use cases")]

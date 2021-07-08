@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -13,14 +11,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class UnitTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_Unit_CRUD()
@@ -29,7 +20,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            IUnitConnector connector = new UnitConnector();
+            var connector = FortnoxClient.UnitConnector;
 
             #region CREATE
             var newUnit = new Unit()
@@ -77,7 +68,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            IUnitConnector connector = new UnitConnector();
+            var connector = FortnoxClient.UnitConnector;
 
             var existingCount = connector.Find(null).TotalResources;
 

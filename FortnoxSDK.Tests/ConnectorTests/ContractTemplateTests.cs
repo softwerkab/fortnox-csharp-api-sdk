@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -13,23 +11,16 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class ContractTemplateTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_ContractTemplate_CRUD()
         {
             #region Arrange
-            var tmpArticle = new ArticleConnector().Create(new Article(){ Description = "TmpArticle" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article(){ Description = "TmpArticle" });
             #endregion Arrange
 
-            IContractTemplateConnector connector = new ContractTemplateConnector();
+            var connector = FortnoxClient.ContractTemplateConnector;
 
             #region CREATE
             var newContractTemplate = new ContractTemplate()
@@ -70,7 +61,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            //new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
@@ -79,10 +70,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_ContractTemplate_Find()
         {
             #region Arrange
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle" });
             #endregion Arrange
 
-            IContractTemplateConnector connector = new ContractTemplateConnector();
+            var connector = FortnoxClient.ContractTemplateConnector;
 
             var marks = TestUtils.RandomString();
 
@@ -97,7 +88,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 },
             };
 
-            for (int i = 0; i < 5; i++)
+            for (var i = 0; i < 5; i++)
             {
                 newContractTemplate.TemplateName = marks + i;
                 connector.Create(newContractTemplate);

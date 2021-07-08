@@ -10,7 +10,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class EmployeeConnector : SearchableEntityConnector<Employee, EmployeeSubset, EmployeeSearch>, IEmployeeConnector
+    internal class EmployeeConnector : SearchableEntityConnector<Employee, EmployeeSubset, EmployeeSearch>, IEmployeeConnector
 	{
 
         /// <remarks/>

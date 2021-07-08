@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
 	<LangVersion>8</LangVersion>
 	<PackageId>Fortnox.NET.SDK</PackageId>
-	<Version>4.0.8</Version>
+	<Version>4.1.0</Version>
 	<Authors>Softwerk AB</Authors>
 	<Company>Softwerk AB</Company>
 	<Description>SDK package for Fortnox API. This package is developed and maintained by Softwerk AB. For more information please visit the repository on Github.</Description>

@@ -5,17 +5,17 @@ using System.Web;
 
 namespace Fortnox.SDK.Requests
 {
-    public class BaseRequest
+    internal class BaseRequest
     {
         public HttpMethod Method { get; set; }
-        public Dictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
+        public IDictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
         public byte[] Content { get; set; }
 
         public string BaseUrl { get; set; } = APIConstants.FortnoxApi;
         public string Version { get; set; } = "3";
         public string Resource { get; set; }
-        public List<string> Indices { get; set; } = new List<string>();
-        public Dictionary<string, string> Parameters { get; set; } = new Dictionary<string, string>();
+        public IList<string> Indices { get; set; } = new List<string>();
+        public IDictionary<string, string> Parameters { get; set; } = new Dictionary<string, string>();
 
         public string AbsoluteUrl => BuildUrl();
 

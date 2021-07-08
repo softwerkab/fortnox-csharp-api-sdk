@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -13,23 +11,16 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class ModeOfPaymentTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_ModeOfPayment_CRUD()
         {
             #region Arrange
-            var tmpAccount = new AccountConnector().Create(new Account(){Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber()});
+            var tmpAccount = FortnoxClient.AccountConnector.Create(new Account(){Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber()});
             #endregion Arrange
 
-            IModeOfPaymentConnector connector = new ModeOfPaymentConnector();
+            var connector = FortnoxClient.ModeOfPaymentConnector;
 
             #region CREATE
             var newModeOfPayment = new ModeOfPayment()
@@ -71,7 +62,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new AccountConnector().Delete(tmpAccount.Number);
+            FortnoxClient.AccountConnector.Delete(tmpAccount.Number);
             #endregion Delete arranged resources
         }
 
@@ -79,10 +70,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Find()
         {
             #region Arrange
-            var tmpAccount = new AccountConnector().Create(new Account() { Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber() });
+            var tmpAccount = FortnoxClient.AccountConnector.Create(new Account() { Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber() });
             #endregion Arrange
 
-            IModeOfPaymentConnector connector = new ModeOfPaymentConnector();
+            var connector = FortnoxClient.ModeOfPaymentConnector;
 
             var existingCount = connector.Find(null).Entities.Count;
             var testKeyMark = TestUtils.RandomString();
@@ -116,7 +107,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             }
 
             #region Delete arranged resources
-            new AccountConnector().Delete(tmpAccount.Number);
+            FortnoxClient.AccountConnector.Delete(tmpAccount.Number);
             #endregion Delete arranged resources
         }
     }

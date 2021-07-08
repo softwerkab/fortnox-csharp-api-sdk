@@ -1,9 +1,7 @@
 using System;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,24 +10,17 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class AssetTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_Asset_CRUD()
         {
             #region Arrange
-            var tmpCostCenter = new CostCenterConnector().Create(new CostCenter(){ Code = "TMP", Description = "TmpCostCenter"});
-            var tmpAssetType = new AssetTypesConnector().Create(new AssetType() {Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
+            var tmpCostCenter = FortnoxClient.CostCenterConnector.Create(new CostCenter(){ Code = "TMP", Description = "TmpCostCenter"});
+            var tmpAssetType = FortnoxClient.AssetTypesConnector.Create(new AssetType() {Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
             #endregion Arrange
 
-            IAssetConnector connector = new AssetConnector();
+            var connector = FortnoxClient.AssetConnector;
 
             #region CREATE
             var newAsset = new Asset()
@@ -81,8 +72,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new CostCenterConnector().Delete(tmpCostCenter.Code);
-            new AssetTypesConnector().Delete(tmpAssetType.Id);
+            FortnoxClient.CostCenterConnector.Delete(tmpCostCenter.Code);
+            FortnoxClient.AssetTypesConnector.Delete(tmpAssetType.Id);
             #endregion Delete arranged resources
         }
 
@@ -90,13 +81,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Find()
         {
             #region Arrange
-            var tmpCostCenter = new CostCenterConnector().Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
-            var tmpAssetType = new AssetTypesConnector().Create(new AssetType() { Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
+            var tmpCostCenter = FortnoxClient.CostCenterConnector.Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
+            var tmpAssetType = FortnoxClient.AssetTypesConnector.Create(new AssetType() { Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
             #endregion Arrange
 
             var testKeyMark = TestUtils.RandomString();
 
-            IAssetConnector connector = new AssetConnector();
+            var connector = FortnoxClient.AssetConnector;
             var newAsset = new Asset()
             {
                 Description = testKeyMark,
@@ -142,8 +133,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 connector.Delete(entry.Id);
 
             #region Delete arranged resources
-            new CostCenterConnector().Delete(tmpCostCenter.Code);
-            new AssetTypesConnector().Delete(tmpAssetType.Id);
+            FortnoxClient.CostCenterConnector.Delete(tmpCostCenter.Code);
+            FortnoxClient.AssetTypesConnector.Delete(tmpAssetType.Id);
             #endregion Delete arranged resources
         }
     }

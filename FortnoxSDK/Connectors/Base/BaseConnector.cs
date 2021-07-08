@@ -8,7 +8,7 @@ using Fortnox.SDK.Serialization;
 
 namespace Fortnox.SDK.Connectors.Base
 {
-    public abstract class BaseConnector : BaseClient
+    internal abstract class BaseConnector : BaseClient
     {
         protected ISerializer Serializer { get; set; }
         protected string Resource { get; set; }

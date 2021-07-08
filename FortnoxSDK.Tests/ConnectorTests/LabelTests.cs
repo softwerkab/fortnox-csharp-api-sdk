@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -10,14 +8,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class LabelTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_Label_CRUD()
@@ -26,7 +17,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ILabelConnector connector = new LabelConnector();
+            var connector = FortnoxClient.LabelConnector;
 
             var randomLabel = TestUtils.RandomString();
 
@@ -69,7 +60,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            ILabelConnector connector = new LabelConnector();
+            var connector = FortnoxClient.LabelConnector;
 
             var existingCount = connector.Find(null).Entities.Count;
 

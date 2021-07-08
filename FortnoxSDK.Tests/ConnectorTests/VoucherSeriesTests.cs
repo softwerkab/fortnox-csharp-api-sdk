@@ -1,7 +1,5 @@
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -9,14 +7,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class VoucherSeriesTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_VoucherSeries_CRUD()
@@ -25,7 +16,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            IVoucherSeriesConnector connector = new VoucherSeriesConnector();
+            var connector = FortnoxClient.VoucherSeriesConnector;
 
             #region CREATE
             //var digits = new char[]{ '0', '1', '2', '3', '4', '5'}

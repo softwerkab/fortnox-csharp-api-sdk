@@ -1,7 +1,5 @@
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,14 +8,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class PrintTemplateTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_PrintTemplate_CRUD()
@@ -28,7 +19,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            IPrintTemplateConnector connector = new PrintTemplateConnector();
+            var connector = FortnoxClient.PrintTemplateConnector;
             
             var fullCollection = connector.Find(null);
 
@@ -41,7 +32,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find_Filter()
         {
-            IPrintTemplateConnector connector = new PrintTemplateConnector();
+            var connector = FortnoxClient.PrintTemplateConnector;
             var searchSettings = new PrintTemplateSearch();
 
             searchSettings.FilterBy = Filter.PrintTemplate.Order;

@@ -3,7 +3,7 @@ using Fortnox.SDK.Search;
 
 namespace Fortnox.SDK.Requests
 {
-    public class SearchRequest<TEntity> : BaseRequest
+    internal class SearchRequest<TEntity> : BaseRequest
     {
         public SearchRequest()
         {

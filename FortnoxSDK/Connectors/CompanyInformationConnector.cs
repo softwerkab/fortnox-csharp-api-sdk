@@ -9,7 +9,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class CompanyInformationConnector : EntityConnector<CompanyInformation>, ICompanyInformationConnector
+    internal class CompanyInformationConnector : EntityConnector<CompanyInformation>, ICompanyInformationConnector
 	{
 
 		/// <remarks/>

@@ -10,7 +10,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class OfferConnector : SearchableEntityConnector<Offer, OfferSubset, OfferSearch>, IOfferConnector
+    internal class OfferConnector : SearchableEntityConnector<Offer, OfferSubset, OfferSearch>, IOfferConnector
 	{
 
 

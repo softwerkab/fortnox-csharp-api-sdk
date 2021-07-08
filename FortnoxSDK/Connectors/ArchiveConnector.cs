@@ -16,7 +16,7 @@ using Fortnox.SDK.Utility;
 namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
-    public class ArchiveConnector : EntityConnector<ArchiveFolder>, IArchiveConnector
+    internal class ArchiveConnector : EntityConnector<ArchiveFolder>, IArchiveConnector
 	{
 
 		/// <remarks/>
@@ -292,19 +292,5 @@ namespace Fortnox.SDK.Connectors
                     return false;
             }
         }
-    }
-
-    public class StaticFolders
-    {
-        public const string Root = "root";
-        public const string AssetRegister = "inbox_a";
-        public const string DailyTakings = "inbox_d";
-        public const string SupplierInvoices = "inbox_s";
-        public const string Vouchers = "inbox_v";
-        public const string BankFiles = "inbox_b";
-        public const string Salary = "inbox_l";
-        public const string CustomerInvoices = "inbox_kf";
-        public const string Orders = "inbox_o";
-        public const string Offers = "inbox_of"; //"quotes"
     }
 }

@@ -1,10 +1,8 @@
 using System;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -13,25 +11,18 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class AbsenceTransactionTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_AbsenceTransaction_CRUD()
         {
             #region Arrange
-            var tmpEmployee = new EmployeeConnector().Create(new Employee() { EmployeeId = TestUtils.RandomString() });
-            var tmpProject = new ProjectConnector().Create(new Project() { Description = "TmpProject" });
-            var tmpCostCenter = new CostCenterConnector().Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
+            var tmpEmployee = FortnoxClient.EmployeeConnector.Create(new Employee() { EmployeeId = TestUtils.RandomString() });
+            var tmpProject = FortnoxClient.ProjectConnector.Create(new Project() { Description = "TmpProject" });
+            var tmpCostCenter = FortnoxClient.CostCenterConnector.Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
             #endregion Arrange
 
-            IAbsenceTransactionConnector connector = new AbsenceTransactionConnector();
+            var connector = FortnoxClient.AbsenceTransactionConnector;
 
             #region CREATE
             var newAbsenceTransaction = new AbsenceTransaction()
@@ -76,8 +67,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new CostCenterConnector().Delete(tmpCostCenter.Code);
-            new ProjectConnector().Delete(tmpProject.ProjectNumber);
+            FortnoxClient.CostCenterConnector.Delete(tmpCostCenter.Code);
+            FortnoxClient.ProjectConnector.Delete(tmpProject.ProjectNumber);
             #endregion Delete arranged resources
         }
 
@@ -86,12 +77,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             #region Arrange
 
-            var tmpEmployee = new EmployeeConnector().Create(new Employee() { EmployeeId = TestUtils.RandomString() });
-            var tmpProject = new ProjectConnector().Create(new Project() { Description = "TmpProject" });
-            var tmpCostCenter = new CostCenterConnector().Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
+            var tmpEmployee = FortnoxClient.EmployeeConnector.Create(new Employee() { EmployeeId = TestUtils.RandomString() });
+            var tmpProject = FortnoxClient.ProjectConnector.Create(new Project() { Description = "TmpProject" });
+            var tmpCostCenter = FortnoxClient.CostCenterConnector.Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
             #endregion Arrange
 
-            IAbsenceTransactionConnector connector = new AbsenceTransactionConnector();
+            var connector = FortnoxClient.AbsenceTransactionConnector;
 
             var newAbsenceTransaction = new AbsenceTransaction()
             {
@@ -133,8 +124,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 connector.Delete(entry.EmployeeId, entry.Date, entry.CauseCode);
 
             #region Delete arranged resources
-            new CostCenterConnector().Delete(tmpCostCenter.Code);
-            new ProjectConnector().Delete(tmpProject.ProjectNumber);
+            FortnoxClient.CostCenterConnector.Delete(tmpCostCenter.Code);
+            FortnoxClient.ProjectConnector.Delete(tmpProject.ProjectNumber);
             #endregion Delete arranged resources
         }
     }

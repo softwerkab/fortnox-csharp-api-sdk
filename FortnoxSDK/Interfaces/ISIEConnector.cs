@@ -39,7 +39,7 @@ namespace Fortnox.SDK.Interfaces
         /// </summary>
         public bool? ExportAll;
 
-        public List<VoucherSelection> Selection;
+        public IList<VoucherSelection> Selection;
 
         public DateTime? FromDate;
 

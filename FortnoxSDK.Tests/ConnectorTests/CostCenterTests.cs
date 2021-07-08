@@ -1,9 +1,7 @@
 using System;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,14 +10,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class CostCenterTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_CostCenter_CRUD()
@@ -28,7 +19,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ICostCenterConnector connector = new CostCenterConnector();
+            var connector = FortnoxClient.CostCenterConnector;
 
             #region CREATE
             var newCostCenter = new CostCenter()
@@ -82,7 +73,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add code to create required resources
             #endregion Arrange
 
-            ICostCenterConnector connector = new CostCenterConnector();
+            var connector = FortnoxClient.CostCenterConnector;
             var newCostCenter = new CostCenter()
             {
                 Code = TestUtils.RandomString(),

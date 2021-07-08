@@ -1,8 +1,6 @@
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -11,26 +9,19 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class ArticleFileConnectionTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_ArticleFileConnection_CRUD()
         {
             #region Arrange
 
-            var tmpArticle = new ArticleConnector().Create(new Article() {Description = "TmpArticle"});
-            var tmpFile = new ArchiveConnector().UploadFile("tmpImage.png", Resource.fortnox_image);
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() {Description = "TmpArticle"});
+            var tmpFile = FortnoxClient.ArchiveConnector.UploadFile("tmpImage.png", Resource.fortnox_image);
 
             #endregion Arrange
 
-            IArticleFileConnectionConnector connector = new ArticleFileConnectionConnector();
+            var connector = FortnoxClient.ArticleFileConnectionConnector;
 
             #region CREATE
 
@@ -70,8 +61,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region Delete arranged resources
 
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
-            new ArchiveConnector().DeleteFile(tmpFile.Id);
+            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.ArchiveConnector.DeleteFile(tmpFile.Id);
 
             #endregion Delete arranged resources
         }
@@ -81,10 +72,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             #region Arrange
 
-            var tmpArticle = new ArticleConnector().Create(new Article() { Description = "TmpArticle" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle" });
             #endregion Arrange
 
-            IArticleFileConnectionConnector connector = new ArticleFileConnectionConnector();
+            var connector = FortnoxClient.ArticleFileConnectionConnector;
 
             var newArticleFileConnection = new ArticleFileConnection()
             {
@@ -93,7 +84,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             for (var i = 0; i < 5; i++)
             {
-                var tmpFile = new ArchiveConnector().UploadFile($"tmpImage{i}.png", Resource.fortnox_image);
+                var tmpFile = FortnoxClient.ArchiveConnector.UploadFile($"tmpImage{i}.png", Resource.fortnox_image);
                 newArticleFileConnection.FileId = tmpFile.Id;
 
                 connector.Create(newArticleFileConnection);
@@ -108,12 +99,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
             {
                 connector.Delete(entity.FileId);
 
-                new ArchiveConnector().DeleteFile(entity.FileId);
+                FortnoxClient.ArchiveConnector.DeleteFile(entity.FileId);
             }
 
             #region Delete arranged resources
 
-            new ArticleConnector().Delete(tmpArticle.ArticleNumber);
+            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
 
             #endregion Delete arranged resources
         }

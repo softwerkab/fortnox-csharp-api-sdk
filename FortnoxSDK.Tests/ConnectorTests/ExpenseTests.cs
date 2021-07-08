@@ -1,9 +1,7 @@
 using System;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,23 +10,16 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class ExpenseTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_Expense_CRUD()
         {
             #region Arrange
-            var tmpAccount = new AccountConnector().Create(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
+            var tmpAccount = FortnoxClient.AccountConnector.Create(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
             #endregion Arrange
 
-            IExpenseConnector connector = new ExpenseConnector();
+            var connector = FortnoxClient.ExpenseConnector;
 
             #region CREATE
 
@@ -64,7 +55,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            new AccountConnector().Delete(tmpAccount.Number);
+            FortnoxClient.AccountConnector.Delete(tmpAccount.Number);
             #endregion Delete arranged resources
         }
 
@@ -72,7 +63,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void Test_Expense_Find()
         {
             #region Arrange
-            var tmpAccount = new AccountConnector().Create(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
+            var tmpAccount = FortnoxClient.AccountConnector.Create(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
             #endregion Arrange
 
             var timeStamp = DateTime.Now;
@@ -84,7 +75,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Account = tmpAccount.Number
             };
 
-            IExpenseConnector connector = new ExpenseConnector();
+            var connector = FortnoxClient.ExpenseConnector;
             for (var i = 0; i < 2; i++)
             {
                 newExpense.Code = TestUtils.RandomString(6);
@@ -101,7 +92,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             Assert.IsNotNull(newExpenses.First().Url);
 
             #region Delete arranged resources
-            new AccountConnector().Delete(tmpAccount.Number);
+            FortnoxClient.AccountConnector.Delete(tmpAccount.Number);
             #endregion Delete arranged resources
         }
     }

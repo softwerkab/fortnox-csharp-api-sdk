@@ -1,8 +1,6 @@
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
@@ -10,14 +8,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class TrustedEmailSendersTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
         public void Test_TrustedEmailSenders_CRUD()
@@ -25,7 +16,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #region Arrange
             #endregion Arrange
 
-            ITrustedEmailSendersConnector connector = new TrustedEmailSendersConnector();
+            var connector = FortnoxClient.TrustedEmailSendersConnector;
 
             var randomAddress = $"{TestUtils.RandomString()}@test.tst";
             #region CREATE

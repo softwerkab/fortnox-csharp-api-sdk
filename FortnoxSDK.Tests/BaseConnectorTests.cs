@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,13 +10,11 @@ namespace FortnoxSDK.Tests
     [TestClass]
     public class BaseConnectorTests
     {
+        public FortnoxClient FortnoxClient => TestUtils.DefaultFortnoxClient;
+
         [TestInitialize]
         public void Init()
         {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
         }
 
         /*[TestMethod]
@@ -58,7 +54,7 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_Find_ParamsNotAdded()
         {
-            var connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
             searchSettings.Name = "TestName";
 
             connector.Find();
@@ -76,7 +72,7 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_Find_ParamsNullable()
         {
-            var connector = new CustomerConnector()
+            var connector = FortnoxClient.CustomerConnector
             {
                 Search = new CustomerSearch()
                 {
@@ -107,7 +103,7 @@ namespace FortnoxSDK.Tests
         /*[TestMethod]
         public void Test_ReadOnlyProperty_NotSerialized()
         {
-            var connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
 
             var createdCustomer = connector.Create(new Customer() {Name = "TestCustomer", CountryCode = "SE"});
             MyAssert.HasNoError(connector);
@@ -125,7 +121,7 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_ReadOnlyProperty_Deserialized()
         {
-            ICustomerConnector connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
 
             var createdCustomer = connector.Create(new Customer() {Name = "TestUser", CountryCode = "SE"});
             Assert.AreEqual("Sverige", createdCustomer.Country);
@@ -136,7 +132,7 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void Test_EmptyNestedObject()
         {
-            ICustomerConnector connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
 
             var createdCustomer = connector.Create(new Customer()
             {
@@ -153,7 +149,7 @@ namespace FortnoxSDK.Tests
             const int large = 20;
             const int small = 5;
 
-            var connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
             var searchSettings = new CustomerSearch();
             searchSettings.Limit = large;
             searchSettings.SortBy = Sort.By.Customer.CustomerNumber;
@@ -165,7 +161,7 @@ namespace FortnoxSDK.Tests
             var neededPages = GetNeededPages(Math.Min(totalCustomers, large), small);
             var mergedCollection = new List<CustomerSubset>();
 
-            for (int i = 0; i < neededPages; i++)
+            for (var i = 0; i < neededPages; i++)
             {
                 searchSettings.Limit = small;
                 searchSettings.Page = i + 1;
@@ -173,7 +169,7 @@ namespace FortnoxSDK.Tests
                 mergedCollection.AddRange(smallCustomerCollection.Entities);
             }
 
-            for (int i = 0; i < largeCustomerCollection.Entities.Count; i++)
+            for (var i = 0; i < largeCustomerCollection.Entities.Count; i++)
                 Assert.AreEqual(largeCustomerCollection.Entities[i].CustomerNumber, mergedCollection[i].CustomerNumber);
         }
 
@@ -182,7 +178,7 @@ namespace FortnoxSDK.Tests
         {
             //To make this test make sense, over 100 customers must exist, ideally over 500
 
-            ICustomerConnector connector = new CustomerConnector();
+            var connector = FortnoxClient.CustomerConnector;
             var result = connector.Find(null);
             Assert.IsTrue(result.TotalPages > 1);
 
@@ -203,10 +199,12 @@ namespace FortnoxSDK.Tests
         [TestMethod]
         public void TestAuth()
         {
+            var clientSecret = TestCredentials.Client_Secret;
             var authorizationCode = "Placeholder";
-            var authConnector = new AuthorizationConnector();
 
-            var token = authConnector.GetAccessToken(authorizationCode, TestCredentials.Client_Secret);
+            var fortnoxAuthClient = new FortnoxAuthClient();
+
+            var token = fortnoxAuthClient.Activate(authorizationCode, clientSecret);
             Assert.IsNotNull(token);
         }
     }

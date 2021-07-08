@@ -1,9 +1,7 @@
 using System;
 using System.Linq;
 using Fortnox.SDK;
-using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Entities;
-using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,14 +10,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
     [TestClass]
     public class FinancialYearTests
     {
-        [TestInitialize]
-        public void Init()
-        {
-            //Set global credentials for SDK
-            //--- Open 'TestCredentials.resx' to edit the values ---\\
-            ConnectionCredentials.AccessToken = TestCredentials.Access_Token;
-            ConnectionCredentials.ClientSecret = TestCredentials.Client_Secret;
-        }
+        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [Ignore("Does not provide update nor delete")]
         [TestMethod]
@@ -27,11 +18,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             #region Arrange
 
-            var existingAccountChartType = new AccountChartConnector().Find(null).Entities.First();
+            var existingAccountChartType = FortnoxClient.AccountChartConnector.Find(null).Entities.First();
 
             #endregion Arrange
 
-            IFinancialYearConnector connector = new FinancialYearConnector();
+            var connector = FortnoxClient.FinancialYearConnector;
 
             #region CREATE
 
@@ -77,7 +68,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_FinancialYear_Find()
         {
-            IFinancialYearConnector connector = new FinancialYearConnector();
+            var connector = FortnoxClient.FinancialYearConnector;
             
             var finYears = connector.Find(null);
             Assert.AreEqual(5, finYears.Entities.Count);
@@ -87,7 +78,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_FinancialYear_Find_By_Date()
         {
-            IFinancialYearConnector connector = new FinancialYearConnector();
+            var connector = FortnoxClient.FinancialYearConnector;
 
             var search = new FinancialYearSearch()
             {
@@ -103,7 +94,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_FinancialYear_Find_By_FinYearDate()
         {
-            IFinancialYearConnector connector = new FinancialYearConnector();
+            var connector = FortnoxClient.FinancialYearConnector;
 
             var search = new FinancialYearSearch()
             {
