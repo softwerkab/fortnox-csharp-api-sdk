@@ -194,18 +194,5 @@ namespace FortnoxSDK.Tests
         {
             return (int) Math.Ceiling(totalSize / (float) pageSize);
         }
-
-        [Ignore("Requires new authorization code.")]
-        [TestMethod]
-        public void TestAuth()
-        {
-            var clientSecret = TestCredentials.Client_Secret;
-            var authorizationCode = "Placeholder";
-
-            var fortnoxAuthClient = new FortnoxAuthClient();
-
-            var token = fortnoxAuthClient.Activate(authorizationCode, clientSecret);
-            Assert.IsNotNull(token);
-        }
     }
 }

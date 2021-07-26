@@ -43,7 +43,21 @@ namespace Fortnox.SDK.Connectors.Base
         {
             try
             {
-                return Serializer.Deserialize<EntityWrapper<ErrorInformation>>(errorJson).Entity;
+                var wrapper = Serializer.Deserialize<EntityWrapper<ErrorInformation>>(errorJson);
+                var error = wrapper.Entity;
+
+                if (wrapper.Entity == null) // Failed to parse
+                {
+                    // Temp workaround for alternative error occured in new auth workflow
+                    var authError = Serializer.Deserialize<AuthError>(errorJson);
+                    error = new ErrorInformation()
+                    {
+                        Error = authError.Error,
+                        Message = authError.ErrorDescription
+                    };
+                }
+
+                return error;
             }
             catch (Exception)
             {
