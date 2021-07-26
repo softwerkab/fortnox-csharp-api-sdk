@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using ComposableAsync;
+using Fortnox.SDK.Authorization;
 using RateLimiter;
 
 namespace Fortnox.SDK.Connectors.Base
 {
     public abstract class BaseClient
     {
-        private const string AccessTokenHeader = "Access-Token";
-        private const string ClientSecretHeader = "Client-Secret";
-
         private const int LimitPerSecond = 4;
         private static readonly Dictionary<string, TimeLimiter> RateLimiters = new Dictionary<string, TimeLimiter>();
         
@@ -23,29 +21,19 @@ namespace Fortnox.SDK.Connectors.Base
         public string ClientSecret { get; set; }
 
         public bool UseRateLimiter { get; set; }
-        protected bool UseAuthHeaders { get; set; }
+        public FortnoxAuthorization Authorization { get; set; }
 
         protected BaseClient()
         {
-            HttpClient = FortnoxClient.HttpClientSharedInstance;
             ErrorHandler = new ErrorHandler();
-
-            AccessToken = null;
-            ClientSecret = null;
-            UseRateLimiter = true;
-            UseAuthHeaders = true;
         }
 
         public async Task<byte[]> SendAsync(HttpRequestMessage request)
         {
             try
             {
-                if (UseAuthHeaders)
-                {
-                    request.Headers.Add(AccessTokenHeader, AccessToken);
-                    request.Headers.Add(ClientSecretHeader, ClientSecret);
-                }
-
+                Authorization?.ApplyTo(request);
+                
                 if (UseRateLimiter)
                     await Throttle().ConfigureAwait(false);
 
@@ -84,5 +72,15 @@ namespace Fortnox.SDK.Connectors.Base
                 return RateLimiters[accessToken];
             }
         }
+    }
+
+    public enum AuthType
+    {
+        /// <summary> No Auth </summary>
+        None,
+        /// <summary> Auth by non-expirable AccessToken and ClientSecret (old auth workflow)</summary>
+        Static,
+        /// <summary> Auth by expirable AccessToken (new auth workflow) </summary>
+        Standard
     }
 }

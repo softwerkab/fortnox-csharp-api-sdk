@@ -18,7 +18,6 @@ namespace Fortnox.SDK.Connectors
         public AuthorizationConnector()
         {
             Resource = "";
-            UseAuthHeaders = false;
         }
 
         public string GetAccessToken(string authorizationCode, string clientSecret)

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 using Fortnox.SDK;
+using Fortnox.SDK.Authorization;
 using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,6 +14,7 @@ namespace FortnoxSDK.Tests
     {
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
+        [Ignore("Takes too long")]
         [TestMethod]
         public void Test_RateLimiter_NoError()
         {
@@ -31,13 +33,13 @@ namespace FortnoxSDK.Tests
             Console.WriteLine(@"Total time: " + watch.ElapsedMilliseconds);
         }
 
+        [Ignore("Can make other test fail due to exhausting rate limiter")]
         [TestMethod]
         public void Test_NoRateLimiter_TooManyRequest_Error()
         {
             var fortnoxClient = new FortnoxClient()
             {
-                AccessToken = TestCredentials.Access_Token,
-                ClientSecret = TestCredentials.Client_Secret,
+                Authorization = new StaticTokenAuth(TestCredentials.Access_Token, TestCredentials.Client_Secret),
                 UseRateLimiter = false
             };
 

@@ -1,17 +1,15 @@
 ﻿using System;
 using System.IO;
 using Fortnox.SDK;
+using Fortnox.SDK.Authorization;
 using Fortnox.SDK.Exceptions;
 
 namespace FortnoxSDK.Tests
 {
     public class TestUtils
     {
-        public static FortnoxClient DefaultFortnoxClient = new FortnoxClient()
-        {
-            AccessToken = TestCredentials.Access_Token,
-            ClientSecret = TestCredentials.Client_Secret,
-        };
+        public static FortnoxAuthorization TestAuth = new StaticTokenAuth(TestCredentials.Access_Token, TestCredentials.Client_Secret);
+        public static FortnoxClient DefaultFortnoxClient = new FortnoxClient(TestAuth);
 
         public static string GenerateTmpFilePath()
         {

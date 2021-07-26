@@ -1,6 +1,7 @@
-﻿using System;
+﻿using System.Net;
 using Fortnox.SDK.Connectors.Base;
 using System.Net.Http;
+using Fortnox.SDK.Authorization;
 using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Interfaces;
 
@@ -22,14 +23,9 @@ namespace Fortnox.SDK
         public HttpClient HttpClient { get; set; } = HttpClientSharedInstance;
 
         /// <summary>
-        /// AccessToken needed for authentication with server
+        /// Authorization (credentials) for accessing Fortnox API
         /// </summary>
-        public string AccessToken { get; set; }
-
-        /// <summary>
-        /// ClientSecret needed for authentication with server
-        /// </summary>
-        public string ClientSecret { get; set; }
+        public FortnoxAuthorization Authorization { get; set; }
 
         /// <summary>
         /// RateLimiter throttles thread for each request, which prevents connection failure due to server side rate limit
@@ -41,17 +37,15 @@ namespace Fortnox.SDK
         {
         }
 
-        public FortnoxClient(string accessToken, string clientSecret, bool useRateLimiter = true)
+        public FortnoxClient(FortnoxAuthorization authorization, bool useRateLimiter = true)
         {
-            AccessToken = accessToken;
-            ClientSecret = clientSecret;
+            Authorization = authorization;
             UseRateLimiter = useRateLimiter;
         }
 
-        public FortnoxClient(string accessToken, string clientSecret, HttpClient httpClient, bool useRateLimiter = true)
+        public FortnoxClient(FortnoxAuthorization authorization, HttpClient httpClient, bool useRateLimiter = true)
         {
-            AccessToken = accessToken;
-            ClientSecret = clientSecret;
+            Authorization = authorization;
             HttpClient = httpClient;
             UseRateLimiter = useRateLimiter;
         }
@@ -60,10 +54,9 @@ namespace Fortnox.SDK
         {
             return new TConnector()
             {
-                AccessToken = AccessToken,
-                ClientSecret = ClientSecret,
+                Authorization = Authorization,
+                HttpClient = HttpClient,
                 UseRateLimiter = UseRateLimiter,
-                HttpClient = HttpClient
             };
         }
 
