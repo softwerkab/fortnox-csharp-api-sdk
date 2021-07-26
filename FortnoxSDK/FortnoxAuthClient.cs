@@ -14,6 +14,15 @@ namespace Fortnox.SDK
         /// Default HttpClient instance
         /// </summary>
         internal static readonly HttpClient HttpClientSharedInstance = new HttpClient();
+        
+        public FortnoxAuthClient()
+        {
+        }
+
+        public FortnoxAuthClient(HttpClient httpClient)
+        {
+            HttpClient = httpClient;
+        }
 
         /// <summary>
         /// Http client used under-the-hood for all request
