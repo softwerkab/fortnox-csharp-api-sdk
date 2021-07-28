@@ -91,7 +91,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //Apply base test filter
             var searchSettings = new CostCenterSearch();
-            searchSettings.LastModified = DateTime.Now.AddMinutes(-5);
+            searchSettings.LastModified = TestUtils.Recently;
             var fullCollection = connector.Find(searchSettings);
 
             Assert.AreEqual(5, fullCollection.TotalResources);

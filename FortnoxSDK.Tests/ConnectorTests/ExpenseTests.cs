@@ -66,7 +66,6 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var tmpAccount = FortnoxClient.AccountConnector.Create(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
             #endregion Arrange
 
-            var timeStamp = DateTime.Now;
             var remark = TestUtils.RandomString();
 
             var newExpense = new Expense()
@@ -83,7 +82,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             }
 
             var searchSettings = new ExpenseSearch();
-            searchSettings.LastModified = timeStamp; //does not seem to work
+            searchSettings.LastModified = TestUtils.Recently; //does not seem to work
             searchSettings.Limit = APIConstants.Unlimited;
             var expensesCollection = connector.Find(searchSettings);
 

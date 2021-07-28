@@ -71,8 +71,6 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            var dateStamp = DateTime.Now;
-
             #region Arrange
             var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", PurchasePrice = 10});
             var tmpPriceList = FortnoxClient.PriceListConnector.Get("TST_PR");
@@ -97,7 +95,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             }
 
             var searchSettings = new PriceSearch();
-            searchSettings.LastModified = dateStamp.AddSeconds(-1);
+            searchSettings.LastModified = TestUtils.Recently;
             var fullCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber, searchSettings);
 
             Assert.AreEqual(5+1, fullCollection.TotalResources);

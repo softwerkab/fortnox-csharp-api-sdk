@@ -95,7 +95,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             }
 
             var searchSettings = new ContractTemplateSearch();
-            searchSettings.LastModified = DateTime.Now.AddMinutes(-5);
+            searchSettings.LastModified = TestUtils.Recently;
             var templates = connector.Find(searchSettings);
 
             Assert.AreEqual(5, templates.Entities.Count(c => c.TemplateName.StartsWith(marks)));

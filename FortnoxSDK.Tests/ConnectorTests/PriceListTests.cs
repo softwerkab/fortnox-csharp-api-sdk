@@ -62,10 +62,6 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Find()
         {
-            Thread.Sleep(1000);
-            var timeStamp = DateTime.Now;
-            Thread.Sleep(1000);
-
             var connector = FortnoxClient.PriceListConnector;
 
             var newPriceList = new PriceList()
@@ -81,7 +77,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             }
 
             var searchSettings = new PriceListSearch();
-            searchSettings.LastModified = timeStamp;
+            searchSettings.LastModified = TestUtils.Recently;
             var fullCollection = connector.Find(searchSettings);
 
             Assert.AreEqual(5, fullCollection.TotalResources);

@@ -74,7 +74,6 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public void Test_Employee_Find()
         {
-            var timestamp = DateTime.Now;
             var marks = TestUtils.RandomString();
 
             var connector = FortnoxClient.EmployeeConnector;
@@ -83,7 +82,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 connector.Create(new Employee() {EmployeeId = TestUtils.RandomString(), City = marks});
 
             var searchSettings = new EmployeeSearch();
-            //searchSettings.LastModified = timestamp; //parameter is not accepted by server
+            //searchSettings.LastModified = TestUtils.Recently; //parameter is not accepted by server
             searchSettings.Limit = APIConstants.Unlimited;
             var employees = connector.Find(searchSettings);
 

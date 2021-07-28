@@ -83,7 +83,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //Filter not supported
             var searchSettings = new TermsOfDeliverySearch();
-            searchSettings.LastModified = DateTime.Now.AddMinutes(-5);
+            searchSettings.LastModified = TestUtils.Recently;
             var fullCollection = connector.Find(searchSettings);
 
             Assert.AreEqual(5, fullCollection.Entities.Count);

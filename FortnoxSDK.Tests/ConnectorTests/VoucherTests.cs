@@ -114,7 +114,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Act
             var settings = new VoucherSearch()
             {
-                LastModified = DateTime.Now.AddSeconds(-2),
+                LastModified = TestUtils.Recently,
                 VoucherSeries = "TST"
             };
 
