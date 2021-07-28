@@ -76,8 +76,8 @@ namespace FortnoxSDK.Tests
             var connector1 = fortnoxClient1.CustomerConnector;
             var connector2 = fortnoxClient2.CustomerConnector;
 
-            Assert.IsTrue(connector1.AccessToken == "AT1" && connector2.AccessToken == "AT2");
-            Assert.IsTrue(connector1.ClientSecret == "CS1" && connector2.ClientSecret == "CS2");
+            Assert.AreEqual(auth1, connector1.Authorization);
+            Assert.AreEqual(auth2, connector2.Authorization);
         }
 
         [TestMethod]
@@ -89,8 +89,7 @@ namespace FortnoxSDK.Tests
 
             var connector = fortnoxClient.CustomerConnector;
 
-            Assert.AreEqual("AccToken", connector.AccessToken);
-            Assert.AreEqual("Secret", connector.ClientSecret);
+            Assert.AreEqual(auth, connector.Authorization);
             Assert.AreEqual(false, connector.UseRateLimiter);
             Assert.AreEqual(10, connector.HttpClient.Timeout.Seconds);
         }

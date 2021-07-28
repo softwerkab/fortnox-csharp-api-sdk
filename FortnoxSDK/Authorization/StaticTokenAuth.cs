@@ -9,7 +9,6 @@ namespace Fortnox.SDK.Authorization
     public class StaticTokenAuth : FortnoxAuthorization
 
     {
-        public string AccessToken { get; set; }
         public string ClientSecret { get; set; }
 
         public StaticTokenAuth(string accessToken, string clientSecret)

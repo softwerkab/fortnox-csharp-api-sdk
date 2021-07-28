@@ -9,8 +9,6 @@ namespace Fortnox.SDK.Authorization
     public class StandardAuth : FortnoxAuthorization
 
     {
-        public string AccessToken { get; set; }
-
         public StandardAuth(string accessToken)
         {
             AccessToken = accessToken;

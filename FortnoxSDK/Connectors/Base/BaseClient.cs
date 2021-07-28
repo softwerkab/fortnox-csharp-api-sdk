@@ -17,10 +17,7 @@ namespace Fortnox.SDK.Connectors.Base
 
         public HttpClient HttpClient { get; set; }
 
-        public string AccessToken { get; set; }
-        public string ClientSecret { get; set; }
-
-        public bool UseRateLimiter { get; set; }
+        public bool UseRateLimiter { get; set; } = true;
         public FortnoxAuthorization Authorization { get; set; }
 
         protected BaseClient()
@@ -54,10 +51,10 @@ namespace Fortnox.SDK.Connectors.Base
 
         private async Task Throttle()
         {
-            if (string.IsNullOrEmpty(AccessToken))
+            if (string.IsNullOrEmpty(Authorization?.AccessToken))
                 return;
 
-            var limiter = SelectRateLimiter(AccessToken);
+            var limiter = SelectRateLimiter(Authorization.AccessToken);
             await limiter;
         }
 

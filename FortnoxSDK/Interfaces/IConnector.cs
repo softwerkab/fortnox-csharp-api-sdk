@@ -1,4 +1,5 @@
 using System.Net.Http;
+using Fortnox.SDK.Authorization;
 using Fortnox.SDK.Search;
 
 namespace Fortnox.SDK.Interfaces
@@ -6,8 +7,7 @@ namespace Fortnox.SDK.Interfaces
     public interface IConnector
     {
         // Credentials
-        string AccessToken { get; }
-        string ClientSecret { get; }
+        FortnoxAuthorization Authorization { get; }
 
         // Config
         HttpClient HttpClient { get; }

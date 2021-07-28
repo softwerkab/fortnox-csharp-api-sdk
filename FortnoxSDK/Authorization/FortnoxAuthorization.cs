@@ -7,6 +7,7 @@ namespace Fortnox.SDK.Authorization
     /// </summary>
     public abstract class FortnoxAuthorization
     {
+        public string AccessToken { get; set; }
         internal abstract void ApplyTo(HttpRequestMessage request);
     }
 }
