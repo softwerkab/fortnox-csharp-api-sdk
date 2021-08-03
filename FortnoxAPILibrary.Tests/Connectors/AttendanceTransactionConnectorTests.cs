@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
@@ -109,8 +108,7 @@ namespace FortnoxAPILibrary.Tests.Connectors
         public void GetShouldReturnResult()
         {
             var attendanceTransaction = GetNewOrExistingAttendanceTransaction();
-            DateTime.TryParseExact(attendanceTransaction.Date, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var date);
-            var result = _connector.Get(attendanceTransaction.EmployeeId, date, attendanceTransaction.CauseCode);
+            var result = _connector.Get(attendanceTransaction.EmployeeId, attendanceTransaction.Date, attendanceTransaction.CauseCode);
 
             CheckForError(_connector);
 

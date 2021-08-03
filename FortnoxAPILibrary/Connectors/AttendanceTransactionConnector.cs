@@ -16,7 +16,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Find an attendanceTransaction based on attendanceTransactionId
         /// </summary>
         /// <returns>The found attendanceTransaction</returns>
-        AttendanceTransaction Get(string employeeId, DateTime? date, AttendanceCauseCode? code);
+        AttendanceTransaction Get(string employeeId, string date, AttendanceCauseCode code);
 
         /// <summary>
         /// Updates an attendanceTransaction
@@ -36,7 +36,7 @@ namespace FortnoxAPILibrary.Connectors
         /// Gets a list of attendanceTransactions
         /// </summary>
         /// <returns>A list of attendanceTransactions</returns>
-        AttendanceTransactions Find(string employeeId = null, DateTime? date = null);
+        AttendanceTransactions Find(string employeeId = null, string date = null);
     }
 
     /// <summary>
@@ -56,9 +56,9 @@ namespace FortnoxAPILibrary.Connectors
         public Filter.AttendanceTransaction FilterBy { get; set; }
 
         /// <inheritdoc />
-        public AttendanceTransaction Get(string employeeId, DateTime? date, AttendanceCauseCode? code)
+        public AttendanceTransaction Get(string employeeId, string date, AttendanceCauseCode code)
         {
-            return BaseGet(employeeId, date?.ToString(APIConstants.DateFormat), code?.GetStringValue());
+            return BaseGet(employeeId, date, code.GetStringValue());
         }
 
         /// <inheritdoc />
@@ -68,10 +68,8 @@ namespace FortnoxAPILibrary.Connectors
                 throw new ArgumentException("AttendanceTransaction must have an EmployeeId to be able to update", nameof(attendanceTransaction.EmployeeId));
             if (string.IsNullOrEmpty(attendanceTransaction.Date))
                 throw new ArgumentException("AttendanceTransaction must have an Date to be able to update", nameof(attendanceTransaction.Date));
-            if (!attendanceTransaction.CauseCode.HasValue)
-                throw new ArgumentException("AttendanceTransaction must have an CauseCode to be able to update", nameof(attendanceTransaction.CauseCode));
 
-            var code = attendanceTransaction.CauseCode?.GetStringValue();
+            var code = attendanceTransaction.CauseCode.GetStringValue();
             return BaseUpdate(attendanceTransaction, attendanceTransaction.EmployeeId, attendanceTransaction.Date, code);
         }
 
@@ -82,7 +80,7 @@ namespace FortnoxAPILibrary.Connectors
         }
 
         /// <inheritdoc />
-        public AttendanceTransactions Find(string employeeId = null, DateTime? date = null)
+        public AttendanceTransactions Find(string employeeId = null, string date = null)
         {
             Parameters = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(employeeId))
@@ -90,9 +88,9 @@ namespace FortnoxAPILibrary.Connectors
                 Parameters.Add("employeeid", employeeId);
             }
 
-            if (date.HasValue)
+            if (!string.IsNullOrEmpty(date))
             {
-                Parameters.Add("date", date.Value.ToString(APIConstants.DateFormat));
+                Parameters.Add("date", date);
             }
 
             return BaseFind();
