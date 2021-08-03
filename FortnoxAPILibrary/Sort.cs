@@ -43,7 +43,11 @@ namespace FortnoxAPILibrary
 			{
 
 			}
-			
+
+            public enum AttendanceTransaction
+            {
+            }
+
 			public enum CompanyInformation
 			{
 			}
@@ -311,7 +315,7 @@ namespace FortnoxAPILibrary
 			public enum SalaryTransaction
 			{
 			}
-			
+
 			/// <remarks/>
 			public enum Sie
 			{
