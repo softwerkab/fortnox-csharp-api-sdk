@@ -7,7 +7,7 @@ namespace FortnoxAPILibrary.Tests.Connectors
         //Enter these values to run tests. DO NOT CHECK THESE CREDENTIALS IN. Also make sure this is not production account, these tests will make changes to the data.
         protected static string AccessToken = "";
         protected static string ClientSecret = "";
-        
+
         protected ConnectorTestsBase()
         {
             AccessToken = string.IsNullOrEmpty(AccessToken) ? Environment.GetEnvironmentVariable("Fortnox_AccessToken") : AccessToken;

@@ -3,6 +3,10 @@
 	/// <remarks/>
 	public class Filter
     {
+        public enum AttendanceTransaction
+        {
+        }
+
         /// <remarks/>
         public enum Contract
         {
