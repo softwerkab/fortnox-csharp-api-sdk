@@ -14,7 +14,7 @@ namespace FortnoxAPILibrary.Entities
 
         ///<summary> Cause code </summary>
         [XmlElement(ElementName = "CauseCode")]
-        public AttendanceCauseCode? CauseCode { get; set; }
+        public AttendanceCauseCode CauseCode { get; set; }
 
         ///<summary> Date </summary>
         [XmlElement(ElementName = "Date")]
