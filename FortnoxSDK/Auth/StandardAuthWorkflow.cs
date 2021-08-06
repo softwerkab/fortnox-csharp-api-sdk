@@ -49,14 +49,17 @@ namespace Fortnox.SDK.Auth
             return tokenInfo;
         }
 
-        public TokenInfo RefreshToken(string refreshToken)
+        public TokenInfo RefreshToken(string refreshToken, string clientId, string clientSecret)
         {
-            return RefreshTokenAsync(refreshToken).GetResult();
+            return RefreshTokenAsync(refreshToken, clientId, clientSecret).GetResult();
         }
 
-        public async Task<TokenInfo> RefreshTokenAsync(string refreshToken)
+        public async Task<TokenInfo> RefreshTokenAsync(string refreshToken, string clientId, string clientSecret)
         {
+            var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}"));
+
             var request = new HttpRequestMessage(HttpMethod.Post, AuthTokenUri);
+            request.Headers.Add("Authorization", $"Basic {credentials}");
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("grant_type", "refresh_token");
