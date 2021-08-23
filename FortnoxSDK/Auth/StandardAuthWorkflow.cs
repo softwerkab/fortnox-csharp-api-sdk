@@ -42,7 +42,7 @@ namespace Fortnox.SDK.Auth
 
             request.Content = new FormUrlEncodedContent(parameters);
 
-            var responseData = await SendAsync(request);
+            var responseData = await SendAsync(request).ConfigureAwait(false); ;
             var responseJson = Encoding.UTF8.GetString(responseData);
             var tokenInfo = Serializer.Deserialize<TokenInfo>(responseJson);
 
@@ -67,11 +67,11 @@ namespace Fortnox.SDK.Auth
 
             request.Content = new FormUrlEncodedContent(parameters);
 
-            var response = await HttpClient.SendAsync(request);
-            var json = await response.Content.ReadAsStringAsync();
-            var token = Serializer.Deserialize<TokenInfo>(json);
+            var responseData = await SendAsync(request).ConfigureAwait(false);
+            var responseJson = Encoding.UTF8.GetString(responseData);
+            var tokenInfo = Serializer.Deserialize<TokenInfo>(responseJson);
 
-            return token;
+            return tokenInfo;
         }
 
         public string BuildAuthUri(string clientId, IEnumerable<Scope> scopes, string state, string redirectUri = null)
