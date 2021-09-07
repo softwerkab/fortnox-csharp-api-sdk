@@ -13,6 +13,7 @@ namespace Fortnox.SDK.Entities
         public string Url { get; private set; }
 
         ///<summary> Code of pricelist </summary>
+        ///<remarks> It is recommended to use upper-case value. Other values can cause some undesired effects on server side.</remarks>
         [JsonProperty]
         public string Code { get; set; }
 
