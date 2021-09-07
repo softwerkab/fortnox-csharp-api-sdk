@@ -342,5 +342,27 @@ namespace FortnoxSDK.Tests
             //Clean
             inboxConnector.DeleteFile(fortnoxFile.Id);
         }
+
+        /// <summary>
+        /// Requires at least one fully paid invoice
+        /// </summary>
+        [TestMethod]
+        public void Test_Issue164_InvoiceSubset_HasFinalPayDate() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/164
+        {
+            var connector = FortnoxClient.InvoiceConnector;
+
+            var query = new InvoiceSearch()
+            {
+                FilterBy = Filter.Invoice.FullyPaid
+            };
+
+            var invoices = connector.Find(query).Entities;
+            Assert.AreNotEqual(0, invoices.Count);
+
+            foreach (var invoice in invoices)
+            {
+                Assert.IsNotNull(invoice.FinalPayDate);
+            }
+        }
     }
 }

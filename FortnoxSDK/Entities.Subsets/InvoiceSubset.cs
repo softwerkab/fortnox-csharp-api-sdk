@@ -70,6 +70,10 @@ namespace Fortnox.SDK.Entities
         [JsonProperty]
         public string ExternalInvoiceReference2 { get; set; }
 
+        ///<summary> The date when the invoice became fully paid. Only available if the invoice is fully paid. </summary>
+        [JsonProperty]
+        public DateTime? FinalPayDate { get; set; }
+
         ///<summary> Invoice date. Must be a valid date according to our date format. </summary>
         [JsonProperty]
         public DateTime? InvoiceDate { get; set; }
