@@ -4,7 +4,7 @@
 
 ## Fortnox .NET SDK
 
-.NET SDK package for developing integrations towards Fortnox REST API.  Package is developed and maintained by Softwerk AB.
+.NET SDK package for developing integrations towards Fortnox REST API. Package is developed and maintained by Softwerk AB.
 
 For more information about the API, please visit the official documentation at <a href="https://developer.fortnox.se/documentation/">https://developer.fortnox.se/</a>.
 
@@ -15,7 +15,8 @@ For more information about the API, please visit the official documentation at <
 * Start coding
 
 ```CSharp
-var fortnoxClient = new FortnoxClient("MyAccessToken", "MyClientSecret");
+var authorization = new StaticTokenAuth("MyAccessToken", "MyClientSecret");
+var fortnoxClient = new FortnoxClient(authorization);
 
 var customer = new Customer()
 {
