@@ -20,7 +20,7 @@ var customer = new Customer()
     Name = "Stefan Andersson"
 };
 
-client.CustomerConnector.Create(customer);
+customer = fortnoxClient.CustomerConnector.Create(customer);
 ```
 
 ## Get help
