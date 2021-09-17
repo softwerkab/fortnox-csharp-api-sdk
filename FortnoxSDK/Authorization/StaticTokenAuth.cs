@@ -6,8 +6,8 @@ namespace Fortnox.SDK.Authorization
     /// Handles authorization by non-expirable AccessToken and ClientSecret.
     /// Can only be used for unpublished Fortnox apps/integrations.
     /// </summary>
+    [Obsolete("2021-12-09: End-of-life for the static authorization. Use StandardAuth.")]
     public class StaticTokenAuth : FortnoxAuthorization
-
     {
         public string ClientSecret { get; set; }
 
