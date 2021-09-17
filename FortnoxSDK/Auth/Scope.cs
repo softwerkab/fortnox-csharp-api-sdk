@@ -3,6 +3,17 @@ using System.Runtime.Serialization;
 
 namespace Fortnox.SDK.Auth
 {
+    /// <summary>
+    /// Fortnox OAuth scopes.
+    ///
+    /// Scopes is the access an app has to the Fortnox API.
+    ///
+    /// An app can request one or more scopes, this information is then presented
+    /// to the user in the consent screen, and the access token issued to the
+    /// connection will be limited to the scopes granted.
+    ///
+    /// See https://developer.fortnox.se/general/scopes/
+    /// <summary>
     public enum Scope
     {
         [EnumMember(Value = "archive")]
