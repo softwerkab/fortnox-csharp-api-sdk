@@ -62,6 +62,7 @@ namespace Fortnox.SDK.Auth
     /// <summary>
     /// Represents methods of a Fortnox legacy auth workflow
     /// </summary>
+    [Obsolete("2021-12-09: End-of-life for the static authorization. Use StandardAuth.")]
     public interface IStaticTokenAuthWorkflow
     {
         /// <summary>
