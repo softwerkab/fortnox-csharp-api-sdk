@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 
 namespace Fortnox.SDK.Authorization
 {
@@ -10,9 +11,7 @@ namespace Fortnox.SDK.Authorization
         public StandardAuth(string accessToken)
         {
             if (string.IsNullOrEmpty(accessToken))
-            {
                 throw new ArgumentException("The access token is null or empty.", nameof(accessToken));
-            }
 
             AccessToken = accessToken;
         }
