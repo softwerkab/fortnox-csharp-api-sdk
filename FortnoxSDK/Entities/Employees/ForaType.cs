@@ -13,6 +13,9 @@ namespace Fortnox.SDK.Entities
         ///<summary> Workers, Painters </summary>
         [EnumMember(Value = "A3")]
         A3,
+        ///<summary> Worker, Construction contract </summary>
+        [EnumMember(Value = "A12")]
+        A12,
         ///<summary> Worker, Electrician – Installation plant contract </summary>
         [EnumMember(Value = "A91")]
         A91,
