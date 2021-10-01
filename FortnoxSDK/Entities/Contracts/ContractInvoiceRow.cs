@@ -69,5 +69,10 @@ namespace Fortnox.SDK.Entities
         ///<summary> Vat percent code </summary>
         [JsonProperty]
         public decimal VAT { get; set; }
+
+        /// <summary> Used for updating specific row. If not specified, the row will be handled as a new one. </summary>
+        /// <remarks> See https://developer.fortnox.se/blog/updating-document-rows-using-rowid/ </remarks>
+        [JsonProperty]
+        public long? RowId { get; set; }
     }
 }

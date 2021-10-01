@@ -53,6 +53,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             var updatedInvoice = connector.Update(createdInvoice); 
             Assert.AreEqual("UpdatedInvoice", updatedInvoice.Comments);
+            Assert.AreEqual(3, updatedInvoice.InvoiceRows.Count);
 
             #endregion UPDATE
 
@@ -60,6 +61,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             var retrievedInvoice = connector.Get(createdInvoice.DocumentNumber);
             Assert.AreEqual("UpdatedInvoice", retrievedInvoice.Comments);
+            Assert.AreEqual(3, retrievedInvoice.InvoiceRows.Count);
 
             #endregion READ / GET
 
@@ -537,6 +539,60 @@ namespace FortnoxSDK.Tests.ConnectorTests
             FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
             //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Test_Invoice_Rows_Update()
+        {
+            #region Arrange
+            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer" });
+            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle" });
+            #endregion Arrange
+
+            var connector = FortnoxClient.InvoiceConnector;
+
+            var newInvoice = new Invoice()
+            {
+                CustomerNumber = tmpCustomer.CustomerNumber,
+                InvoiceDate = new DateTime(2019, 1, 20),
+                Comments = "TestInvoice",
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Description = "Row1"},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Description = "Row2"},
+                    new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Description = "Row3"}
+                }
+            };
+
+            var createdInvoice = connector.Create(newInvoice);
+            Assert.AreEqual(3, createdInvoice.InvoiceRows.Count);
+
+            var updatedInvoiceData = new Invoice()
+            {
+                DocumentNumber = createdInvoice.DocumentNumber,
+                InvoiceRows = new List<InvoiceRow>()
+                {
+                    new InvoiceRow() { RowId = createdInvoice.InvoiceRows[0].RowId, Description = "Updated"}, // Update existing row
+                    new InvoiceRow() { ArticleNumber = tmpArticle.ArticleNumber, Description = "New1" }, // create new row
+                    new InvoiceRow() { RowId = createdInvoice.InvoiceRows[1].RowId}, // Keep unchanged
+                    new InvoiceRow() { RowId = createdInvoice.InvoiceRows[2].RowId}, // Keep unchanged
+                    new InvoiceRow() { ArticleNumber = tmpArticle.ArticleNumber, Description = "New2" } // create new row
+                }
+            };
+
+            var updatedInvoice = connector.Update(updatedInvoiceData);
+            Assert.AreEqual(3+2, updatedInvoice.InvoiceRows.Count);
+            Assert.AreEqual("Updated", updatedInvoice.InvoiceRows[0].Description);
+            Assert.AreEqual("New1", updatedInvoice.InvoiceRows[1].Description);
+            Assert.AreEqual("Row2", updatedInvoice.InvoiceRows[2].Description);
+            Assert.AreEqual("Row3", updatedInvoice.InvoiceRows[3].Description);
+            Assert.AreEqual("New2", updatedInvoice.InvoiceRows[4].Description);
+
+            #region Clean up
+            connector.Cancel(createdInvoice.DocumentNumber);
+            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+            #endregion Clean up
         }
     }
 }
