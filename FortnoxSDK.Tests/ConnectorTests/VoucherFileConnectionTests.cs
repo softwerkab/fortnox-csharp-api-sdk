@@ -38,12 +38,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var newVoucherFileConnection = new VoucherFileConnection()
             {
                 FileId = tmpFile.Id,
-                VoucherNumber = tmpVoucher.VoucherNumber.ToString(),
+                VoucherNumber = tmpVoucher.VoucherNumber,
                 VoucherSeries = tmpVoucher.VoucherSeries
             };
 
             var createdVoucherFileConnection = connector.Create(newVoucherFileConnection);
             Assert.AreEqual(tmpVoucher.Description, createdVoucherFileConnection.VoucherDescription);
+            Assert.AreEqual(tmpVoucher.Year, createdVoucherFileConnection.VoucherYear);
 
             #endregion CREATE
 
@@ -69,8 +70,50 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
+            FortnoxClient.VoucherConnector.Delete(tmpVoucher.VoucherNumber, tmpVoucher.VoucherSeries, tmpVoucher.Year);
             FortnoxClient.ArchiveConnector.DeleteFile(tmpFile.Id);
             #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public void Create_NonDefaultYear()
+        {
+            #region Arrange
+
+            var tmpVoucher = FortnoxClient.VoucherConnector.Create(new Voucher()
+            {
+                Description = "TestVoucher",
+                Comments = "Some comments",
+                VoucherSeries = "A", //predefined series
+                TransactionDate = new DateTime(2018, 1, 1),
+                VoucherRows = new List<VoucherRow>()
+                {
+                    new VoucherRow() {Account = 1930, Debit = 1500, Credit = 0},
+                    new VoucherRow() {Account = 1910, Debit = 0, Credit = 1500}
+                }
+            });
+            var tmpFile = FortnoxClient.ArchiveConnector.UploadFile("tmpImage.png", Resource.fortnox_image);
+            #endregion Arrange
+
+            var connector = FortnoxClient.VoucherFileConnectionConnector;
+
+            var newVoucherFileConnection = new VoucherFileConnection()
+            {
+                FileId = tmpFile.Id,
+                VoucherNumber = tmpVoucher.VoucherNumber,
+                VoucherSeries = tmpVoucher.VoucherSeries
+            };
+
+            var createdVoucherFileConnection = connector.Create(newVoucherFileConnection, tmpVoucher.Year);
+
+            Assert.AreEqual(tmpVoucher.Description, createdVoucherFileConnection.VoucherDescription);
+            Assert.AreEqual(tmpVoucher.Year, createdVoucherFileConnection.VoucherYear);
+
+            #region Clean up
+            connector.Delete(createdVoucherFileConnection.FileId);
+            FortnoxClient.VoucherConnector.Delete(tmpVoucher.VoucherNumber, tmpVoucher.VoucherSeries, tmpVoucher.Year);
+            FortnoxClient.ArchiveConnector.DeleteFile(tmpFile.Id);
+            #endregion Clean up
         }
     }
 }

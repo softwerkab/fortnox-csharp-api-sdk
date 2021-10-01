@@ -1,7 +1,9 @@
+using System.Net.Http;
 using System.Threading.Tasks;
 using Fortnox.SDK.Connectors.Base;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Interfaces;
+using Fortnox.SDK.Requests;
 using Fortnox.SDK.Search;
 using Fortnox.SDK.Utility;
 
@@ -12,9 +14,7 @@ namespace Fortnox.SDK.Connectors
 	/// <remarks/>
 	internal class VoucherFileConnectionConnector : SearchableEntityConnector<VoucherFileConnection, VoucherFileConnection, VoucherFileConnectionSearch>, IVoucherFileConnectionConnector
 	{
-
-
-		/// <remarks/>
+        /// <remarks/>
 		public VoucherFileConnectionConnector()
 		{
 			Resource = "voucherfileconnections";
@@ -29,15 +29,16 @@ namespace Fortnox.SDK.Connectors
 		{
 			return GetAsync(id).GetResult();
 		}
-		
-		/// <summary>
-		/// Creates a new voucherFileConnection
-		/// </summary>
-		/// <param name="voucherFileConnection">The voucherFileConnection to create</param>
-		/// <returns>The created voucherFileConnection</returns>
-		public VoucherFileConnection Create(VoucherFileConnection voucherFileConnection)
+
+        /// <summary>
+        /// Creates a new voucherFileConnection
+        /// </summary>
+        /// <param name="voucherFileConnection">The voucherFileConnection to create</param>
+        /// <param name="financialYearId">Financial year of the voucher</param>
+        /// <returns>The created voucherFileConnection</returns>
+        public VoucherFileConnection Create(VoucherFileConnection voucherFileConnection, long? financialYearId = null)
 		{
-			return CreateAsync(voucherFileConnection).GetResult();
+			return CreateAsync(voucherFileConnection, financialYearId).GetResult();
 		}
 
 		/// <summary>
@@ -66,9 +67,19 @@ namespace Fortnox.SDK.Connectors
 		{
 			await BaseDelete(id).ConfigureAwait(false);
 		}
-		public async Task<VoucherFileConnection> CreateAsync(VoucherFileConnection voucherFileConnection)
+		public async Task<VoucherFileConnection> CreateAsync(VoucherFileConnection voucherFileConnection, long? financialYearId = null)
 		{
-			return await BaseCreate(voucherFileConnection).ConfigureAwait(false);
+            var request = new EntityRequest<VoucherFileConnection>()
+            {
+                Resource = Resource,
+                Method = HttpMethod.Post,
+                Entity = voucherFileConnection
+			};
+
+            if (financialYearId != null)
+                request.Parameters.Add("financialyear", financialYearId.ToString());
+
+			return await SendAsync(request).ConfigureAwait(false);
 		}
 		public async Task<VoucherFileConnection> GetAsync(string id)
 		{

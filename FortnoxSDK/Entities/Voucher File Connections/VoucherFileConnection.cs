@@ -23,7 +23,7 @@ namespace Fortnox.SDK.Entities
 
         ///<summary> Voucher number </summary>
         [JsonProperty]
-        public string VoucherNumber { get; set; }
+        public long? VoucherNumber { get; set; }
 
         ///<summary> Voucher series </summary>
         [JsonProperty]
@@ -32,6 +32,6 @@ namespace Fortnox.SDK.Entities
         ///<summary> Voucher year </summary>
         [ReadOnly]
         [JsonProperty]
-        public string VoucherYear { get; private set; }
+        public long? VoucherYear { get; private set; }
     }
 }
