@@ -1,3 +1,4 @@
+using System;
 using Fortnox.SDK.Serialization;
 using Newtonsoft.Json;
 
@@ -10,7 +11,7 @@ namespace Fortnox.SDK.Entities
         ///<summary> Direct url to the record. </summary>
         [ReadOnly]
         [JsonProperty("@url")]
-        public string Url { get; private set; }
+        public Uri Url { get; private set; }
 
         ///<summary> Name of voucher type </summary>
         [ReadOnly]

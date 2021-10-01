@@ -1,3 +1,4 @@
+using System;
 using Fortnox.SDK.Serialization;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Fortnox.SDK.Entities
         ///<summary> Direct URL to the record </summary>
         [ReadOnly]
         [JsonProperty("@url")]
-        public string Url { get; private set; }
+        public Uri Url { get; private set; }
 
         ///<summary> Account for the accrual </summary>
         [JsonProperty]

@@ -1,3 +1,4 @@
+using System;
 using Fortnox.SDK.Serialization;
 using Newtonsoft.Json;
 
@@ -11,7 +12,7 @@ namespace Fortnox.SDK.Entities
     {
         ///<summary> Direct URL to the record </summary>
         [JsonProperty("@url")]
-        public string Url { get; set; }
+        public Uri Url { get; set; }
 
         ///<summary> Number of an asset type </summary>
         [JsonProperty]

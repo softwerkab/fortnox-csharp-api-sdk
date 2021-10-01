@@ -12,7 +12,7 @@ namespace Fortnox.SDK.Entities
         ///<summary> Direct URL to the record. </summary>
         [ReadOnly]
         [JsonProperty("@url")]
-        public string Url { get; private set; }
+        public Uri Url { get; private set; }
 
         ///<summary> Comments of the voucher. </summary>
         [JsonProperty]

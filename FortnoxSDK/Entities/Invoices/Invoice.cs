@@ -11,7 +11,7 @@ namespace Fortnox.SDK.Entities
         ///<summary> Direct url to the record. </summary>
         [ReadOnly]
         [JsonProperty("@url")]
-        public string Url { get; private set; }
+        public Uri Url { get; private set; }
 
         ///<summary> Direct url to the tax reduction for the invoice. This is visible even if no tax reduction exists. </summary>
         [ReadOnly]

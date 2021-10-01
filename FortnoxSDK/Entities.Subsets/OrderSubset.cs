@@ -13,7 +13,7 @@ namespace Fortnox.SDK.Entities
         ///<summary> Direct url to the record and URL to Taxreduction for the order (URL to Taxreduction shows even if � Taxreduction are connected to order) </summary>
         [ReadOnly]
         [JsonProperty("@url")]
-        public string Url { get; private set; }
+        public Uri Url { get; private set; }
 
         ///<summary> If Order is cancelled </summary>
         [ReadOnly]

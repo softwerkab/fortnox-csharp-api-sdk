@@ -1,3 +1,4 @@
+using System;
 using Fortnox.SDK.Serialization;
 using Newtonsoft.Json;
 
@@ -47,6 +48,6 @@ namespace Fortnox.SDK.Entities
 
         /// <remarks/>
         [JsonProperty(PropertyName = "@url")]
-        public string Url { get; set; }
+        public Uri Url { get; set; }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using Fortnox.SDK.Serialization;
 using Newtonsoft.Json;
 
@@ -12,7 +13,7 @@ namespace Fortnox.SDK.Entities
         ///<summary> Direct url to the record. </summary>
         [ReadOnly]
         [JsonProperty("@url")]
-        public string Url { get; private set; }
+        public Uri Url { get; private set; }
 
         ///<summary> Article number. If no article number is provided, the next number in the series will be used. Only alpha numeric characters, with the addition of � + /  . and _, are allowed. </summary>
         [JsonProperty]

@@ -12,7 +12,7 @@ namespace Fortnox.SDK.Entities
     {
         ///<summary> Direct URL to the record </summary>
         [JsonProperty("@url")]
-        public string Url { get; set; }
+        public Uri Url { get; set; }
 
         ///<summary> Unique employee-id </summary>
         [JsonProperty]
