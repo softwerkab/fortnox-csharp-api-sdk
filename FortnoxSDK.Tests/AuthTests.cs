@@ -22,6 +22,7 @@ namespace FortnoxSDK.Tests
             Assert.IsNotNull(token);
         }
 
+        [Ignore("Requires valid authorization code")]
         [TestMethod]
         public void Test_StandardAuth_GetToken()
         {

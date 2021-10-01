@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests
 {
+    [Ignore("Test environment exceeded limit of 250 price lists.")]
     [TestClass]
     public class PriceListTests
     {
