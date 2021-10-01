@@ -73,7 +73,7 @@ namespace Fortnox.SDK.Auth
             return tokenInfo;
         }
 
-        public string BuildAuthUri(string clientId, IEnumerable<Scope> scopes, string state, string redirectUri = null)
+        public Uri BuildAuthUri(string clientId, IEnumerable<Scope> scopes, string state, string redirectUri = null)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("client_id", clientId);
@@ -84,10 +84,10 @@ namespace Fortnox.SDK.Auth
             parameters.Add("access_type", "offline");
             parameters.Add("response_type", "code");
 
-            var query = string.Join("&",parameters.Select(p => $"{p.Key}={Uri.EscapeDataString(p.Value)}"));
+            var query = string.Join("&", parameters.Select(p => $"{p.Key}={Uri.EscapeDataString(p.Value)}"));
             var uri = string.Join("?", AuthInitUri, query);
 
-            return new Uri(uri).AbsoluteUri;
+            return new Uri(uri);
         }
     }
 }

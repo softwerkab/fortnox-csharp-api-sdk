@@ -54,7 +54,7 @@ namespace FortnoxSDK.Tests
             var authWorkflow = fortnoxAuthClient.StandardAuthWorkflow;
 
             var uri = authWorkflow.BuildAuthUri(clientId, scopes, state, redirectUri);
-            Assert.AreEqual(@"https://apps.fortnox.se/oauth-v1/auth?client_id=8VurtMGDTeAI&redirect_uri=https%3a%2f%2fmysite.org%2factivation&scope=companyinformation&state=somestate123&access_type=offline&response_type=code", uri);
+            Assert.AreEqual(@"https://apps.fortnox.se/oauth-v1/auth?client_id=8VurtMGDTeAI&redirect_uri=https%3a%2f%2fmysite.org%2factivation&scope=companyinformation&state=somestate123&access_type=offline&response_type=code", uri.AbsoluteUri);
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace FortnoxSDK.Tests
             var authWorkflow = fortnoxAuthClient.StandardAuthWorkflow;
 
             var uri = authWorkflow.BuildAuthUri(clientId, scopes, state, redirectUri);
-            Assert.AreEqual(@"https://apps.fortnox.se/oauth-v1/auth?client_id=8VurtMGDTeAI&redirect_uri=https%3a%2f%2fmysite.org%2factivation&scope=article+bookkeeping+customer&state=somestate123&access_type=offline&response_type=code", uri);
+            Assert.AreEqual(@"https://apps.fortnox.se/oauth-v1/auth?client_id=8VurtMGDTeAI&redirect_uri=https%3a%2f%2fmysite.org%2factivation&scope=article+bookkeeping+customer&state=somestate123&access_type=offline&response_type=code", uri.AbsoluteUri);
         }
     }
 }

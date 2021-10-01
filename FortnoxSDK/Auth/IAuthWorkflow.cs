@@ -61,7 +61,7 @@ namespace Fortnox.SDK.Auth
         Task<TokenInfo> RefreshTokenAsync(string refreshToken, string clientId, string clientSecret);
 
         /// <summary>
-        /// Use this function to build the full URI for auth workflow initialization.
+        /// Use this function to build the full URI for OAuth 2.0 workflow initialization.
         /// </summary>
         /// <param name="clientId">Client id given to you by Fortnox.</param>
         /// <param name="redirectUri">URI to redirect to.</param>
@@ -69,7 +69,7 @@ namespace Fortnox.SDK.Auth
         /// <param name="state">The state parameter is used by the application to store request-specific data and/or
         /// prevent CSRF attacks. The authorization server will return the unmodified state value back to the application.</param>
         /// <returns>A URI.</returns>
-        string BuildAuthUri(string clientId, IEnumerable<Scope> scopes, string state, string redirectUri = null);
+        Uri BuildAuthUri(string clientId, IEnumerable<Scope> scopes, string state, string redirectUri = null);
     }
 
     /// <summary>
