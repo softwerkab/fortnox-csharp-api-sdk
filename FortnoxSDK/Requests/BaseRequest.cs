@@ -23,28 +23,23 @@ namespace Fortnox.SDK.Requests
         {
             var index = string.Join("/", Indices.Select(Uri.EscapeDataString));
 
-            string[] str = {
+            var pathSegments = new []
+            {
                 BaseUrl,
                 Version,
                 Resource,
                 index
             };
 
-            str = str.Where(s => s != "").ToArray();
+            var uri = string.Join("/", pathSegments.Where(s => s != ""));
 
-            var requestUriString = string.Join("/", str);
-
-            var allParams = new Dictionary<string, string>();
-            if (Parameters != null)
-                foreach (var keyValuePair in Parameters)
-                    allParams.Add(keyValuePair.Key, keyValuePair.Value);
-
-            if (allParams.Count > 0)
+            if (Parameters != null && Parameters.Any())
             {
-                requestUriString += "/?" + string.Join("&", allParams.Select(p => p.Key + "=" + Uri.EscapeDataString(p.Value)));
+                var query = string.Join("&", Parameters.Select(p => $"{p.Key}={Uri.EscapeDataString(p.Value)}"));
+                uri += $"/?{query}";
             }
-
-            return requestUriString;
+            
+            return uri;
         }
     }
 }

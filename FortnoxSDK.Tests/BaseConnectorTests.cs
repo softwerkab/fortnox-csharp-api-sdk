@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -188,6 +189,30 @@ namespace FortnoxSDK.Tests
 
             Assert.AreEqual(1, allInOneResult.TotalPages);
             Assert.AreEqual(result.TotalResources, allInOneResult.Entities.Count);
+        }
+
+        [TestMethod]
+        public void Test_Uri_Escaping_Special_Characters()
+        {
+            var article = FortnoxClient.ArticleConnector.Create(new Article()
+            {
+                ArticleNumber = "TestArticle_+-",
+                Description = "X + Y != Z && X - Y == Z"
+            });
+
+            var retrievedArticle = FortnoxClient.ArticleConnector.Get(article.ArticleNumber);
+            Assert.AreEqual("TestArticle_+-", retrievedArticle.ArticleNumber);
+
+
+            var query = new ArticleSearch()
+            {
+                Description = "X + Y != Z && X - Y == Z" // some characters like '<' or '>' in query are not accepted by the server even if escaped
+            };
+            var matches = FortnoxClient.ArticleConnector.Find(query);
+            Assert.AreEqual(1, matches.Entities.Count);
+            Assert.AreEqual(article.ArticleNumber, matches.Entities.First().ArticleNumber);
+
+            FortnoxClient.ArticleConnector.Delete(article.ArticleNumber);
         }
 
         private static int GetNeededPages(int totalSize, int pageSize)
