@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using Fortnox.SDK.Connectors.Base;
 using Fortnox.SDK.Serialization;
 using Fortnox.SDK.Utility;
@@ -85,7 +84,7 @@ namespace Fortnox.SDK.Auth
             parameters.Add("access_type", "offline");
             parameters.Add("response_type", "code");
 
-            var query = string.Join("&",parameters.Select(p => $"{p.Key}={HttpUtility.UrlEncode(p.Value)}"));
+            var query = string.Join("&",parameters.Select(p => $"{p.Key}={Uri.EscapeDataString(p.Value)}"));
             var uri = string.Join("?", AuthInitUri, query);
 
             return new Uri(uri).AbsoluteUri;

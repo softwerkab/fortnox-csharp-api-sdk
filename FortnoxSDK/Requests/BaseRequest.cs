@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Web;
 
 namespace Fortnox.SDK.Requests
 {
@@ -21,7 +21,7 @@ namespace Fortnox.SDK.Requests
 
         private string BuildUrl()
         {
-            var index = string.Join("/", Indices.Select(HttpUtility.UrlEncode));
+            var index = string.Join("/", Indices.Select(Uri.EscapeDataString));
 
             string[] str = {
                 BaseUrl,
@@ -41,7 +41,7 @@ namespace Fortnox.SDK.Requests
 
             if (allParams.Count > 0)
             {
-                requestUriString += "/?" + string.Join("&", allParams.Select(p => p.Key + "=" + HttpUtility.UrlEncode(p.Value)));
+                requestUriString += "/?" + string.Join("&", allParams.Select(p => p.Key + "=" + Uri.EscapeDataString(p.Value)));
             }
 
             return requestUriString;
