@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace Fortnox.SDK.Auth
 {
     /// <summary>
-    /// Represents methods of OAuth 2 workflow.
+    /// Represents methods of OAuth 2.0 workflow.
     /// </summary>
     /// <remarks>https://oauth.net/</remarks>
     public interface IStandardAuthWorkflow
@@ -61,7 +61,7 @@ namespace Fortnox.SDK.Auth
         Task<TokenInfo> RefreshTokenAsync(string refreshToken, string clientId, string clientSecret);
 
         /// <summary>
-        /// Use this function build the auth URI for workflow initialization.
+        /// Use this function to build the full URI for auth workflow initialization.
         /// </summary>
         /// <param name="clientId">Client id given to you by Fortnox.</param>
         /// <param name="redirectUri">URI to redirect to.</param>

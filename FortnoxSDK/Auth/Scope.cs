@@ -13,7 +13,7 @@ namespace Fortnox.SDK.Auth
     /// connection will be limited to the scopes granted.
     ///
     /// See https://developer.fortnox.se/general/scopes/
-    /// <summary>
+    /// </summary>
     public enum Scope
     {
         [EnumMember(Value = "archive")]
