@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -8,11 +9,15 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface ICustomerConnector : IEntityConnector
 	{
-
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		Customer Update(Customer customer);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		Customer Create(Customer customer);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		Customer Get(string id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		void Delete(string id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<CustomerSubset> Find(CustomerSearch searchSettings);
 
 		Task<Customer> UpdateAsync(Customer customer);

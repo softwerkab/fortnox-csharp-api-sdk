@@ -9,11 +9,15 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IAttendanceTransactionsConnector : IEntityConnector
 	{
-
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		AttendanceTransaction Update(AttendanceTransaction attendanceTransaction);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		AttendanceTransaction Create(AttendanceTransaction attendanceTransaction);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		AttendanceTransaction Get(string employeeId, DateTime? date, AttendanceCauseCode? code);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		void Delete(string employeeId, DateTime? date, AttendanceCauseCode? code);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<AttendanceTransactionSubset> Find(AttendanceTransactionsSearch searchSettings);
 
 		Task<AttendanceTransaction> UpdateAsync(AttendanceTransaction attendanceTransaction);

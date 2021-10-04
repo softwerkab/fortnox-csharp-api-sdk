@@ -22,6 +22,7 @@ namespace Fortnox.SDK.Auth
         /// <para>The authorization code is valid for 10 minutes. It can only be used once.</para>
         /// <para>The token is valid for 10 minutes. It can be re-used several times.</para>
         /// </remarks>
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         TokenInfo GetToken(string authCode, string clientId, string clientSecret, string redirectUri = null);
 
         /// <summary>
@@ -33,8 +34,8 @@ namespace Fortnox.SDK.Auth
         /// <param name="redirectUri">Redirect URI configured at Fortnox.</param>
         /// <returns>OAuth 2 token information.</returns>
         /// <remarks>
-        /// <para>The authorization code is valid for 10 minutes. It can only be used once.<para>
-        /// <para>The token is valid for 10 minutes. It can be re-used several times.<para>
+        /// <para>The authorization code is valid for 10 minutes. It can only be used once.</para>
+        /// <para>The token is valid for 10 minutes. It can be re-used several times.</para>
         /// </remarks>
         Task<TokenInfo> GetTokenAsync(string authCode, string clientId, string clientSecret, string redirectUri = null);
 
@@ -47,6 +48,7 @@ namespace Fortnox.SDK.Auth
         /// <param name="clientSecret">Client secret given to you by Fortnox.</param>
         /// <returns>OAuth 2 token information.</returns>
         /// <remarks>The refresh token is valid for 30 days. It can only be used once.</remarks>
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         TokenInfo RefreshToken(string refreshToken, string clientId, string clientSecret);
 
         /// <summary>
@@ -92,6 +94,7 @@ namespace Fortnox.SDK.Auth
         /// <param name="clientSecret">The Client-Secret code given to you by Fortnox.</param>
         /// <returns>The Access-Token to use with Fortnox.</returns>
         /// <remarks>Note that an authorization-code can be used only once. Save the retrieved Access-Token in order to use it for FortnoxClient.</remarks>
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         string GetToken(string authCode, string clientSecret);
 
         /// <summary>

@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
@@ -7,11 +8,17 @@ namespace Fortnox.SDK.Interfaces
 {
     public interface IArchiveConnector : IEntityConnector
 	{
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         byte[] DownloadFile(string id, IdType idType = IdType.Id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         FileInfo DownloadFile(string id, string localPath, IdType idType = IdType.Id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         ArchiveFile UploadFile(string name, byte[] data, string folderPathOrId = null);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         ArchiveFile UploadFile(string name, Stream stream, string folderPathOrId = null);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         ArchiveFile UploadFile(string localPath, string folderPathOrId = null);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         void DeleteFile(string id);
 
         ArchiveFolder GetFolder(string pathOrId = null);

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -8,12 +9,15 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface ISupplierInvoiceExternalURLConnectionConnector : IEntityConnector
 	{
-
-
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		SupplierInvoiceExternalURLConnection Update(SupplierInvoiceExternalURLConnection supplierInvoiceExternalURLConnection);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		SupplierInvoiceExternalURLConnection Create(SupplierInvoiceExternalURLConnection supplierInvoiceExternalURLConnection);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		SupplierInvoiceExternalURLConnection Get(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		void Delete(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<SupplierInvoiceExternalURLConnection> Find(SupplierInvoiceExternalURLConnectionSearch searchSettings);
 
 		Task<SupplierInvoiceExternalURLConnection> UpdateAsync(SupplierInvoiceExternalURLConnection supplierInvoiceExternalURLConnection);

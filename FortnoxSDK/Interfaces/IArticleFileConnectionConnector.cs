@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -8,10 +9,13 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IArticleFileConnectionConnector : IEntityConnector
 	{
-
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		ArticleFileConnection Create(ArticleFileConnection articleFileConnection);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		ArticleFileConnection Get(string id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		void Delete(string id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<ArticleFileConnection> Find(ArticleFileConnectionSearch searchSettings);
 
 		Task<ArticleFileConnection> CreateAsync(ArticleFileConnection articleFileConnection);

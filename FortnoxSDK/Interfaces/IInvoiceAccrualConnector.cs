@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -8,12 +9,15 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IInvoiceAccrualConnector : IEntityConnector
 	{
-
-
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		InvoiceAccrual Update(InvoiceAccrual invoiceAccrual);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		InvoiceAccrual Create(InvoiceAccrual invoiceAccrual);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		InvoiceAccrual Get(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		void Delete(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<InvoiceAccrualSubset> Find(InvoiceAccrualSearch searchSettings);
 
 		Task<InvoiceAccrual> UpdateAsync(InvoiceAccrual invoiceAccrual);

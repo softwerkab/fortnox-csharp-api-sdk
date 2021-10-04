@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -8,14 +9,20 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IContractConnector : IEntityConnector
 	{
-
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		Contract Update(Contract contract);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		Contract Create(Contract contract);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		Contract Get(long? id);
-        EntityCollection<ContractSubset> Find(ContractSearch searchSettings);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+		EntityCollection<ContractSubset> Find(ContractSearch searchSettings);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		Contract Finish(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		Contract CreateInvoice(long? id);
-		Contract IncreaseInvoiceCount(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        Contract IncreaseInvoiceCount(long? id);
 
 		Task<Contract> UpdateAsync(Contract contract);
 		Task<Contract> CreateAsync(Contract contract);

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -8,17 +9,26 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IOfferConnector : IEntityConnector
 	{
-
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		Offer Update(Offer offer);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		Offer Create(Offer offer);
-		Offer Get(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        Offer Get(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         EntityCollection<OfferSubset> Find(OfferSearch searchSettings);
-		Offer CreateOrder(long? id);
-		Offer Cancel(long? id);
-		Offer Email(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        Offer CreateOrder(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        Offer Cancel(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        Offer Email(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         byte[] Print(long? id);
-		Offer ExternalPrint(long? id);
-		byte[] Preview(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        Offer ExternalPrint(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        byte[] Preview(long? id);
 
 		Task<Offer> UpdateAsync(Offer offer);
 		Task<Offer> CreateAsync(Offer offer);

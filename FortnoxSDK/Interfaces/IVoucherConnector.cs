@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -8,10 +9,13 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IVoucherConnector : IEntityConnector
 	{
-
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         Voucher Create(Voucher voucher);
-		Voucher Get(long? id, string seriesId, long? financialYearId);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        Voucher Get(long? id, string seriesId, long? financialYearId);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         EntityCollection<VoucherSubset> Find(VoucherSearch searchSettings);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         void Delete(long? id, string seriesId, long? financialYearId);
 
         Task<Voucher> CreateAsync(Voucher voucher);

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -8,9 +9,11 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IPredefinedAccountsConnector : IEntityConnector
 	{
-
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		PredefinedAccount Update(PredefinedAccount predefinedAccounts);
-        PredefinedAccount Get(string id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+		PredefinedAccount Get(string id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<PredefinedAccount> Find(PredefinedAccountsSearch searchSettings);
 
 		Task<PredefinedAccount> UpdateAsync(PredefinedAccount predefinedAccounts);

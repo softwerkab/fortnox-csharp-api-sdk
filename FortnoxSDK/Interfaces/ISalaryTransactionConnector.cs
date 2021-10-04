@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -8,12 +9,15 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface ISalaryTransactionConnector : IEntityConnector
 	{
-
-
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		SalaryTransaction Update(SalaryTransaction salaryTransaction);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		SalaryTransaction Create(SalaryTransaction salaryTransaction);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		SalaryTransaction Get(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		void Delete(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<SalaryTransactionSubset> Find(SalaryTransactionSearch searchSettings);
 
 		Task<SalaryTransaction> UpdateAsync(SalaryTransaction salaryTransaction);

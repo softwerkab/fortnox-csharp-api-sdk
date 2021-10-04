@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -8,20 +9,32 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IInvoiceConnector : IEntityConnector
 	{
-
-		Invoice Update(Invoice invoice);
-		Invoice Create(Invoice invoice);
-		Invoice Get(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        Invoice Update(Invoice invoice);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        Invoice Create(Invoice invoice);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        Invoice Get(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         EntityCollection<InvoiceSubset> Find(InvoiceSearch searchSettings);
-		Invoice Bookkeep(long? id);
-		Invoice Cancel(long? id);
-		Invoice CreditInvoice(long? id);
-		Invoice Email(long? id);
-		Invoice EInvoice(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        Invoice Bookkeep(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        Invoice Cancel(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        Invoice CreditInvoice(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        Invoice Email(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        Invoice EInvoice(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         byte[] Print(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         byte[] PrintReminder(long? id);
-		Invoice ExternalPrint(long? id);
-		byte[] Preview(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        Invoice ExternalPrint(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        byte[] Preview(long? id);
 
 		Task<Invoice> UpdateAsync(Invoice invoice);
 		Task<Invoice> CreateAsync(Invoice invoice);

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -8,12 +9,15 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IWayOfDeliveryConnector : IEntityConnector
 	{
-
-
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		WayOfDelivery Update(WayOfDelivery wayOfDelivery);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		WayOfDelivery Create(WayOfDelivery wayOfDelivery);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		WayOfDelivery Get(string id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		void Delete(string id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<WayOfDelivery> Find(WayOfDeliverySearch searchSettings);
 
 		Task<WayOfDelivery> UpdateAsync(WayOfDelivery wayOfDelivery);

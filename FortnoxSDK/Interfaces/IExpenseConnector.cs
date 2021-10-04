@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -8,10 +9,11 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IExpenseConnector : IEntityConnector
 	{
-
-
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         Expense Create(Expense expense);
-		Expense Get(string id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        Expense Get(string id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         EntityCollection<ExpenseSubset> Find(ExpenseSearch searchSettings);
 
         Task<Expense> CreateAsync(Expense expense);

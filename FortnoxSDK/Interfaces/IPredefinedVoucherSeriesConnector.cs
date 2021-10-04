@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -8,10 +9,11 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IPredefinedVoucherSeriesConnector : IEntityConnector
 	{
-
-
-		PredefinedVoucherSeries Update(PredefinedVoucherSeries predefinedVoucherSeries);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        PredefinedVoucherSeries Update(PredefinedVoucherSeries predefinedVoucherSeries);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         PredefinedVoucherSeries Get(string id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         EntityCollection<PredefinedVoucherSeries> Find(PredefinedVoucherSeriesSearch searchSettings);
 
 		Task<PredefinedVoucherSeries> UpdateAsync(PredefinedVoucherSeries predefinedVoucherSeries);

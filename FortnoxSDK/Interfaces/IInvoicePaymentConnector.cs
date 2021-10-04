@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -8,12 +9,17 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IInvoicePaymentConnector : IEntityConnector
 	{
-
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		InvoicePayment Update(InvoicePayment invoicePayment);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		InvoicePayment Create(InvoicePayment invoicePayment);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		InvoicePayment Get(long? id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		void Delete(long? id);
-		EntityCollection<InvoicePaymentSubset> Find(InvoicePaymentSearch searchSettings);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        EntityCollection<InvoicePaymentSubset> Find(InvoicePaymentSearch searchSettings);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         void Bookkeep(long? id);
 
 		Task<InvoicePayment> UpdateAsync(InvoicePayment invoicePayment);

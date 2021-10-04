@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 
@@ -7,7 +8,8 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface ICompanyInformationConnector : IEntityConnector
 	{
-		CompanyInformation Get();
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        CompanyInformation Get();
 
 		Task<CompanyInformation> GetAsync();
     }

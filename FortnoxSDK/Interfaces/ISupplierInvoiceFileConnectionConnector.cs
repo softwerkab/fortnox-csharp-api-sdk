@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -8,10 +9,13 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface ISupplierInvoiceFileConnectionConnector : IEntityConnector
 	{
-
-        SupplierInvoiceFileConnection Create(SupplierInvoiceFileConnection supplierInvoiceFileConnection);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+		SupplierInvoiceFileConnection Create(SupplierInvoiceFileConnection supplierInvoiceFileConnection);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		SupplierInvoiceFileConnection Get(string id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		void Delete(string id);
+        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<SupplierInvoiceFileConnection> Find(SupplierInvoiceFileConnectionSearch searchSettings);
 
         Task<SupplierInvoiceFileConnection> CreateAsync(SupplierInvoiceFileConnection supplierInvoiceFileConnection);
