@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Fortnox.SDK.Connectors.Base;
@@ -71,6 +72,20 @@ namespace Fortnox.SDK.Auth
             var tokenInfo = Serializer.Deserialize<TokenInfo>(responseJson);
 
             return tokenInfo;
+        }
+
+        public string GenerateState()
+        {
+            var data = new byte[32];
+
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                rng.GetBytes(data);
+            }
+
+            var state = Convert.ToBase64String(data).Replace('+', '-').Replace('/', '-').Replace('=', '-');
+
+            return state;
         }
 
         public Uri BuildAuthUri(string clientId, IEnumerable<Scope> scopes, string state, string redirectUri = null)
