@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -13,7 +14,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_CostCenter_CRUD()
+        public async Task Test_CostCenter_CRUD()
         {
             #region Arrange
             //Add code to create required resources
@@ -30,7 +31,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Note = "Some notes"
             };
 
-            var createdCostCenter = connector.Create(newCostCenter);
+            var createdCostCenter = await connector.CreateAsync(newCostCenter);
             Assert.AreEqual("TestCostCenter", createdCostCenter.Description);
 
             #endregion CREATE
@@ -39,21 +40,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdCostCenter.Description = "UpdatedTestCostCenter";
 
-            var updatedCostCenter = connector.Update(createdCostCenter); 
+            var updatedCostCenter = await connector.UpdateAsync(createdCostCenter); 
             Assert.AreEqual("UpdatedTestCostCenter", updatedCostCenter.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedCostCenter = connector.Get(createdCostCenter.Code);
+            var retrievedCostCenter = await connector.GetAsync(createdCostCenter.Code);
             Assert.AreEqual("UpdatedTestCostCenter", retrievedCostCenter.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdCostCenter.Code);
+            await connector.DeleteAsync(createdCostCenter.Code);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdCostCenter.Code),
@@ -67,7 +68,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             #region Arrange
             //Add code to create required resources
@@ -86,13 +87,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
             for (var i = 0; i < 5; i++)
             {
                 newCostCenter.Code = TestUtils.RandomString(5);
-                connector.Create(newCostCenter);
+                await connector.CreateAsync(newCostCenter);
             }
 
             //Apply base test filter
             var searchSettings = new CostCenterSearch();
             searchSettings.LastModified = TestUtils.Recently;
-            var fullCollection = connector.Find(searchSettings);
+            var fullCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -102,7 +103,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //Apply Limit
             searchSettings.Limit = 2;
-            var limitedCollection = connector.Find(searchSettings);
+            var limitedCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -111,7 +112,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Delete entries
             foreach (var entry in fullCollection.Entities)
             {
-                connector.Delete(entry.Code);
+                await connector.DeleteAsync(entry.Code);
             }
             #region Delete arranged resources
 

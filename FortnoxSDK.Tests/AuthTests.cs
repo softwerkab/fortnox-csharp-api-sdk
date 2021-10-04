@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Auth;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,7 +11,7 @@ namespace FortnoxSDK.Tests
     {
         [Ignore("Requires new authorization code.")]
         [TestMethod]
-        public void Test_StaticTokenAuth_GetToken()
+        public async Task Test_StaticTokenAuth_GetToken()
         {
             var clientSecret = TestCredentials.Client_Secret;
             var authorizationCode = "ca7f0830-ccf1-63f8-f750-1f78f50c0d58";
@@ -18,13 +19,13 @@ namespace FortnoxSDK.Tests
             var fortnoxAuthClient = new FortnoxAuthClient();
             var authWorkflow = fortnoxAuthClient.StaticTokenAuthWorkflow;
 
-            var token = authWorkflow.GetToken(authorizationCode, clientSecret);
+            var token = await authWorkflow.GetTokenAsync(authorizationCode, clientSecret);
             Assert.IsNotNull(token);
         }
 
         [Ignore("Requires valid authorization code")]
         [TestMethod]
-        public void Test_StandardAuth_GetToken()
+        public async Task Test_StandardAuth_GetToken()
         {
             var clientId = "8VurtMGDTeAI"; //"bhgmY4FYebfj";
             var clientSecret = "yFKwme8LEQ"; //"TestCredentials.Client_Secret;
@@ -34,12 +35,12 @@ namespace FortnoxSDK.Tests
             var fortnoxAuthClient = new FortnoxAuthClient();
             var authWorkflow = fortnoxAuthClient.StandardAuthWorkflow;
 
-            var token = authWorkflow.GetToken(authorizationCode, clientId, clientSecret, redirectUri);
+            var token = await authWorkflow.GetTokenAsync(authorizationCode, clientId, clientSecret, redirectUri);
             Assert.IsNotNull(token);
         }
 
         [TestMethod]
-        public void Test_BuildUri_Example()
+        public async Task Test_BuildUri_Example()
         {
             var clientId = "8VurtMGDTeAI";
             var clientSecret = "yFKwme8LEQ";
@@ -58,7 +59,7 @@ namespace FortnoxSDK.Tests
         }
 
         [TestMethod]
-        public void Test_BuildUri_MultipleScopes()
+        public async Task Test_BuildUri_MultipleScopes()
         {
             var clientId = "8VurtMGDTeAI";
             var clientSecret = "yFKwme8LEQ";

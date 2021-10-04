@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -14,7 +15,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_Project_CRUD()
+        public async Task Test_Project_CRUD()
         {
             #region Arrange
             //Add code to create required resources
@@ -34,7 +35,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Comments = "TestComments"
             };
 
-            var createdProject = connector.Create(newProject);
+            var createdProject = await connector.CreateAsync(newProject);
             Assert.AreEqual("TestProject", createdProject.Description);
 
             #endregion CREATE
@@ -43,21 +44,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdProject.Description = "UpdatedProject";
 
-            var updatedProject = connector.Update(createdProject); 
+            var updatedProject = await connector.UpdateAsync(createdProject); 
             Assert.AreEqual("UpdatedProject", updatedProject.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedProject = connector.Get(createdProject.ProjectNumber);
+            var retrievedProject = await connector.GetAsync(createdProject.ProjectNumber);
             Assert.AreEqual("UpdatedProject", retrievedProject.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdProject.ProjectNumber);
+            await connector.DeleteAsync(createdProject.ProjectNumber);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdProject.ProjectNumber),
@@ -71,14 +72,14 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             #region Arrange
             //Add code to create required resources
             #endregion Arrange
 
             var connector = FortnoxClient.ProjectConnector;
-            var existingEntries = connector.Find(null).Entities.Count;
+            var existingEntries = (await connector.FindAsync(null)).Entities.Count;
             var testKeyMark = TestUtils.RandomString();
 
             var newProject = new Project()
@@ -95,11 +96,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add entries
             for (var i = 0; i < 5; i++)
             {
-                connector.Create(newProject);
+                await connector.CreateAsync(newProject);
             }
 
             //No filter supported
-            var fullCollection = connector.Find(null);
+            var fullCollection = await connector.FindAsync(null);
 
             Assert.AreEqual(existingEntries + 5, fullCollection.Entities.Count);
             Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == testKeyMark));
@@ -107,7 +108,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Apply Limit
             var searchSettings = new ProjectSearch();
             searchSettings.Limit = 2;
-            var limitedCollection = connector.Find(searchSettings);
+            var limitedCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(existingEntries + 5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -115,7 +116,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Delete entries
             foreach (var entry in fullCollection.Entities)
             {
-                connector.Delete(entry.ProjectNumber);
+                await connector.DeleteAsync(entry.ProjectNumber);
             }
 
             #region Delete arranged resources
@@ -124,14 +125,14 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_Find_By_Description()
+        public async Task Test_Find_By_Description()
         {
             #region Arrange
             //Add code to create required resources
             #endregion Arrange
 
             var connector = FortnoxClient.ProjectConnector;
-            var existingEntries = connector.Find(null).Entities.Count;
+            var existingEntries = (await connector.FindAsync(null)).Entities.Count;
             var description = TestUtils.RandomString();
 
             var newProject = new Project()
@@ -147,13 +148,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //Add entries
             for (var i = 0; i < 5; i++)
-                connector.Create(newProject);
+                await connector.CreateAsync(newProject);
             var otherDescription = TestUtils.RandomString();
             newProject.Description = otherDescription;
             for (var i = 0; i < 5; i++)
-                connector.Create(newProject);
+                await connector.CreateAsync(newProject);
 
-            var fullCollection = connector.Find(null);
+            var fullCollection = await connector.FindAsync(null);
 
             Assert.AreEqual(existingEntries + 5 + 5, fullCollection.Entities.Count);
             Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == description));
@@ -162,7 +163,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Apply filter
             var searchSettings = new ProjectSearch();
             searchSettings.Description = otherDescription;
-            var filteredCollection = connector.Find(searchSettings);
+            var filteredCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, filteredCollection.TotalResources);
             Assert.AreEqual(5, filteredCollection.Entities.Count);
@@ -170,7 +171,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Delete entries
             foreach (var entry in fullCollection.Entities)
             {
-                connector.Delete(entry.ProjectNumber);
+                await connector.DeleteAsync(entry.ProjectNumber);
             }
 
             #region Delete arranged resources

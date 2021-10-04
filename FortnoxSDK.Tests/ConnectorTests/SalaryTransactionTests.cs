@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -12,10 +13,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_SalaryTransaction_CRUD()
+        public async Task Test_SalaryTransaction_CRUD()
         {
             #region Arrange
-            var tmpEmployee = FortnoxClient.EmployeeConnector.Create(new Employee() { EmployeeId = TestUtils.RandomString() });
+            var tmpEmployee = await FortnoxClient.EmployeeConnector.CreateAsync(new Employee() { EmployeeId = TestUtils.RandomString() });
             #endregion Arrange
 
             var connector = FortnoxClient.SalaryTransactionConnector;
@@ -30,7 +31,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 TextRow = "TestSalaryRow"
             };
 
-            var createdSalaryTransaction = connector.Create(newSalaryTransaction);
+            var createdSalaryTransaction = await connector.CreateAsync(newSalaryTransaction);
             Assert.AreEqual("TestSalaryRow", createdSalaryTransaction.TextRow);
 
             #endregion CREATE
@@ -39,21 +40,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdSalaryTransaction.TextRow = "UpdatedTestSalaryRow";
 
-            var updatedSalaryTransaction = connector.Update(createdSalaryTransaction); 
+            var updatedSalaryTransaction = await connector.UpdateAsync(createdSalaryTransaction); 
             Assert.AreEqual("UpdatedTestSalaryRow", updatedSalaryTransaction.TextRow);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedSalaryTransaction = connector.Get(createdSalaryTransaction.SalaryRow);
+            var retrievedSalaryTransaction = await connector.GetAsync(createdSalaryTransaction.SalaryRow);
             Assert.AreEqual("UpdatedTestSalaryRow", retrievedSalaryTransaction.TextRow);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdSalaryTransaction.SalaryRow);
+            await connector.DeleteAsync(createdSalaryTransaction.SalaryRow);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdSalaryTransaction.SalaryRow),

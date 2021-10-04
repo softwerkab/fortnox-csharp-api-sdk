@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -14,11 +15,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_Contract_CRUD()
+        public async Task Test_Contract_CRUD()
         {
             #region Arrange
-            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
             var connector = FortnoxClient.ContractConnector;
@@ -45,7 +46,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 PeriodEnd = new DateTime(2020, 08, 01)
             };
 
-            var createdContract = connector.Create(newContract);
+            var createdContract = await connector.CreateAsync(newContract);
             Assert.AreEqual("TestContract", createdContract.Comments);
 
             #endregion CREATE
@@ -54,14 +55,14 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdContract.Comments = "UpdatedTestContract";
 
-            var updatedContract = connector.Update(createdContract); 
+            var updatedContract = await connector.UpdateAsync(createdContract); 
             Assert.AreEqual("UpdatedTestContract", updatedContract.Comments);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedContract = connector.Get(createdContract.DocumentNumber);
+            var retrievedContract = await connector.GetAsync(createdContract.DocumentNumber);
             Assert.AreEqual("UpdatedTestContract", retrievedContract.Comments);
 
             #endregion READ / GET
@@ -77,11 +78,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_Contract_Find()
+        public async Task Test_Contract_Find()
         {
             #region Arrange
-            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
             var connector = FortnoxClient.ContractConnector;
@@ -108,12 +109,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             for (var i = 0; i < 5; i++)
             {
-                connector.Create(newContract);
+                await connector.CreateAsync(newContract);
             }
 
             var searchSettings = new ContractSearch();
             searchSettings.CustomerNumber = tmpCustomer.CustomerNumber;
-            var contracts = connector.Find(searchSettings);
+            var contracts = await connector.FindAsync(searchSettings);
             Assert.AreEqual(5, contracts.Entities.Count);
             Assert.AreEqual("INACTIVE", contracts.Entities.First().Status);
         }

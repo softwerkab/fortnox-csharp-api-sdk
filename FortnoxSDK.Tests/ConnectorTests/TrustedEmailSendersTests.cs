@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,7 +12,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_TrustedEmailSenders_CRUD()
+        public async Task Test_TrustedEmailSenders_CRUD()
         {
             #region Arrange
             #endregion Arrange
@@ -25,7 +26,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Email = randomAddress
             };
 
-            var createdTrustedEmailSender = connector.Create(newTrustedEmailSender);
+            var createdTrustedEmailSender = await connector.CreateAsync(newTrustedEmailSender);
             Assert.AreEqual(randomAddress, createdTrustedEmailSender.Email);
 
             #endregion CREATE
@@ -36,15 +37,15 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region READ / GET
             //Single get is not supported, full list is used instead
-            var retrievedTrustedEmailSender = connector.GetAll().TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
+            var retrievedTrustedEmailSender = (await connector.GetAllAsync()).TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
             Assert.AreEqual(randomAddress, retrievedTrustedEmailSender?.Email);
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdTrustedEmailSender.Id);
+            await connector.DeleteAsync(createdTrustedEmailSender.Id);
 
-            retrievedTrustedEmailSender = connector.GetAll().TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
+            retrievedTrustedEmailSender = (await connector.GetAllAsync()).TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
             Assert.AreEqual(null, retrievedTrustedEmailSender);
 
             #endregion DELETE

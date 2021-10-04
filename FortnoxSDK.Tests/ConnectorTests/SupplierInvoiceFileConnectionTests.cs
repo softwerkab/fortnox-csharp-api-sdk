@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -14,12 +15,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_SupplierInvoiceFileConnection_CRUD()
+        public async Task Test_SupplierInvoiceFileConnection_CRUD()
         {
             #region Arrange
-            var tmpSupplier = FortnoxClient.SupplierConnector.Create(new Supplier() { Name = "TmpSupplier" });
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
-            var tmpSpplierInvoice = FortnoxClient.SupplierInvoiceConnector.Create(new SupplierInvoice()
+            var tmpSupplier = await FortnoxClient.SupplierConnector.CreateAsync(new Supplier() { Name = "TmpSupplier" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
+            var tmpSpplierInvoice = await FortnoxClient.SupplierInvoiceConnector.CreateAsync(new SupplierInvoice()
             {
                 SupplierNumber = tmpSupplier.SupplierNumber,
                 Comments = "InvoiceComments",
@@ -35,7 +36,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                     new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100}
                 }
             });
-            var tmpFile = FortnoxClient.InboxConnector.UploadFile("tmpImage.png", Resource.fortnox_image, StaticFolders.SupplierInvoices);
+            var tmpFile = await FortnoxClient.InboxConnector.UploadFileAsync("tmpImage.png", Resource.fortnox_image, StaticFolders.SupplierInvoices);
             #endregion Arrange
 
             var connector = FortnoxClient.SupplierInvoiceFileConnectionConnector;
@@ -47,7 +48,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 FileId = tmpFile.Id
             };
 
-            var createdSupplierInvoiceFileConnection = connector.Create(newSupplierInvoiceFileConnection);
+            var createdSupplierInvoiceFileConnection = await connector.CreateAsync(newSupplierInvoiceFileConnection);
             Assert.AreEqual(tmpSupplier.Name, createdSupplierInvoiceFileConnection.SupplierName);
 
             #endregion CREATE
@@ -58,14 +59,14 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region READ / GET
 
-            var retrievedSupplierInvoiceFileConnection = connector.Get(createdSupplierInvoiceFileConnection.FileId);
+            var retrievedSupplierInvoiceFileConnection = await connector.GetAsync(createdSupplierInvoiceFileConnection.FileId);
             Assert.AreEqual(tmpSupplier.Name, retrievedSupplierInvoiceFileConnection.SupplierName);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdSupplierInvoiceFileConnection.FileId);
+            await connector.DeleteAsync(createdSupplierInvoiceFileConnection.FileId);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdSupplierInvoiceFileConnection.FileId),
@@ -74,9 +75,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            FortnoxClient.SupplierInvoiceConnector.Cancel(tmpSpplierInvoice.GivenNumber);
-            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
-            FortnoxClient.SupplierConnector.Delete(tmpSupplier.SupplierNumber);
+            await FortnoxClient.SupplierInvoiceConnector.CancelAsync(tmpSpplierInvoice.GivenNumber);
+            await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
+            await FortnoxClient.SupplierConnector.DeleteAsync(tmpSupplier.SupplierNumber);
             #endregion Delete arranged resources
         }
     }

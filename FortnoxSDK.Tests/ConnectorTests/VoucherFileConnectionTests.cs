@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -13,11 +14,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_VoucherFileConnection_CRUD()
+        public async Task Test_VoucherFileConnection_CRUD()
         {
             #region Arrange
 
-            var tmpVoucher = FortnoxClient.VoucherConnector.Create(new Voucher()
+            var tmpVoucher = await FortnoxClient.VoucherConnector.CreateAsync(new Voucher()
             {
                 Description = "TestVoucher",
                 Comments = "Some comments",
@@ -29,7 +30,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                     new VoucherRow() {Account = 1910, Debit = 0, Credit = 1500}
                 }
             });
-            var tmpFile = FortnoxClient.ArchiveConnector.UploadFile("tmpImage.png", Resource.fortnox_image);
+            var tmpFile = await FortnoxClient.ArchiveConnector.UploadFileAsync("tmpImage.png", Resource.fortnox_image);
             #endregion Arrange
 
             var connector = FortnoxClient.VoucherFileConnectionConnector;
@@ -42,7 +43,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 VoucherSeries = tmpVoucher.VoucherSeries
             };
 
-            var createdVoucherFileConnection = connector.Create(newVoucherFileConnection);
+            var createdVoucherFileConnection = await connector.CreateAsync(newVoucherFileConnection);
             Assert.AreEqual(tmpVoucher.Description, createdVoucherFileConnection.VoucherDescription);
             Assert.AreEqual(tmpVoucher.Year, createdVoucherFileConnection.VoucherYear);
 
@@ -54,14 +55,14 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region READ / GET
 
-            var retrievedVoucherFileConnection = connector.Get(createdVoucherFileConnection.FileId);
+            var retrievedVoucherFileConnection = await connector.GetAsync(createdVoucherFileConnection.FileId);
             Assert.AreEqual(tmpVoucher.Description, retrievedVoucherFileConnection.VoucherDescription);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdVoucherFileConnection.FileId);
+            await connector.DeleteAsync(createdVoucherFileConnection.FileId);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdVoucherFileConnection.FileId),
@@ -70,8 +71,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            FortnoxClient.VoucherConnector.Delete(tmpVoucher.VoucherNumber, tmpVoucher.VoucherSeries, tmpVoucher.Year);
-            FortnoxClient.ArchiveConnector.DeleteFile(tmpFile.Id);
+            await FortnoxClient.VoucherConnector.DeleteAsync(tmpVoucher.VoucherNumber, tmpVoucher.VoucherSeries, tmpVoucher.Year);
+            await FortnoxClient.ArchiveConnector.DeleteFileAsync(tmpFile.Id);
             #endregion Delete arranged resources
         }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -14,10 +15,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_ContractTemplate_CRUD()
+        public async Task Test_ContractTemplate_CRUD()
         {
             #region Arrange
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article(){ Description = "TmpArticle" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article(){ Description = "TmpArticle" });
             #endregion Arrange
 
             var connector = FortnoxClient.ContractTemplateConnector;
@@ -35,7 +36,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 TemplateName = "TestTemplate",
             };
 
-            var createdContractTemplate = connector.Create(newContractTemplate);
+            var createdContractTemplate = await connector.CreateAsync(newContractTemplate);
             Assert.AreEqual("TestTemplate", createdContractTemplate.TemplateName);
 
             #endregion CREATE
@@ -44,14 +45,14 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdContractTemplate.TemplateName = "UpdatedTestTemplate";
 
-            var updatedContractTemplate = connector.Update(createdContractTemplate); 
+            var updatedContractTemplate = await connector.UpdateAsync(createdContractTemplate); 
             Assert.AreEqual("UpdatedTestTemplate", updatedContractTemplate.TemplateName);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedContractTemplate = connector.Get(createdContractTemplate.TemplateNumber);
+            var retrievedContractTemplate = await connector.GetAsync(createdContractTemplate.TemplateNumber);
             Assert.AreEqual("UpdatedTestTemplate", retrievedContractTemplate.TemplateName);
 
             #endregion READ / GET
@@ -67,10 +68,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
         [Ignore("LastModified parameter is not accepted")]
         [TestMethod]
-        public void Test_ContractTemplate_Find()
+        public async Task Test_ContractTemplate_Find()
         {
             #region Arrange
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle" });
             #endregion Arrange
 
             var connector = FortnoxClient.ContractTemplateConnector;
@@ -91,12 +92,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
             for (var i = 0; i < 5; i++)
             {
                 newContractTemplate.TemplateName = marks + i;
-                connector.Create(newContractTemplate);
+                await connector.CreateAsync(newContractTemplate);
             }
 
             var searchSettings = new ContractTemplateSearch();
             searchSettings.LastModified = TestUtils.Recently;
-            var templates = connector.Find(searchSettings);
+            var templates = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, templates.Entities.Count(c => c.TemplateName.StartsWith(marks)));
 

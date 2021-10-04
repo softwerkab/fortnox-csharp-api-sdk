@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -9,7 +10,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_LockedPeriod_CRUD()
+        public async Task Test_LockedPeriod_CRUD()
         {
             #region Arrange
             //Add code to create required resources
@@ -27,7 +28,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region READ / GET
 
-            var retrievedLockedPeriod = connector.Get();
+            var retrievedLockedPeriod = await connector.GetAsync();
             Assert.IsNotNull(retrievedLockedPeriod);
 
             Assert.IsNull(retrievedLockedPeriod.EndDate); //No period is locked

@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -12,7 +13,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_AssetTypes_CRUD()
+        public async Task Test_AssetTypes_CRUD()
         {
             #region Arrange
 
@@ -21,9 +22,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion Arrange
 
             var connector = FortnoxClient.AssetTypesConnector;
-            var entry = connector.Find(null).Entities.FirstOrDefault(at => at.Number == "TST");
+            var entry = (await connector.FindAsync(null)).Entities.FirstOrDefault(at => at.Number == "TST");
             if (entry != null)
-                connector.Delete(entry.Id);
+                await connector.DeleteAsync(entry.Id);
 
             #region CREATE
 
@@ -38,7 +39,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 AccountValueLossId = 1159,
             };
 
-            var createdAssetTypes = connector.Create(newAssetTypes);
+            var createdAssetTypes = await connector.CreateAsync(newAssetTypes);
             Assert.AreEqual("TestAssetType",
                 createdAssetTypes.Description); //Fails due to response entity is named "Type", not "AssetType"
 
@@ -48,21 +49,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdAssetTypes.Description = "UpdatedTestAssetType";
 
-            var updatedAssetTypes = connector.Update(createdAssetTypes);
+            var updatedAssetTypes = await connector.UpdateAsync(createdAssetTypes);
             Assert.AreEqual("UpdatedTestAssetType", updatedAssetTypes.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedAssetTypes = connector.Get(createdAssetTypes.Id);
+            var retrievedAssetTypes = await connector.GetAsync(createdAssetTypes.Id);
             Assert.AreEqual("UpdatedTestAssetType", retrievedAssetTypes.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdAssetTypes.Id);
+            await connector.DeleteAsync(createdAssetTypes.Id);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdAssetTypes.Id),
@@ -78,7 +79,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_AssetTypes_Find()
+        public async Task Test_AssetTypes_Find()
         {
             var connector = FortnoxClient.AssetTypesConnector;
 
@@ -96,16 +97,16 @@ namespace FortnoxSDK.Tests.ConnectorTests
             for (var i = 0; i < 5; i++)
             {
                 newAssetType.Number = marks + i;
-                connector.Create(newAssetType);
+                await connector.CreateAsync(newAssetType);
             }
 
-            var assetTypes = connector.Find(null);
+            var assetTypes = await connector.FindAsync(null);
             Assert.AreEqual(5, assetTypes.Entities.Count(x => x.Number.StartsWith(marks)));
 
             //restore
             foreach (var entity in assetTypes.Entities.Where(x => x.Number.StartsWith(marks)))
             {
-                connector.Delete(entity.Id);
+                await connector.DeleteAsync(entity.Id);
             }
         }
     }

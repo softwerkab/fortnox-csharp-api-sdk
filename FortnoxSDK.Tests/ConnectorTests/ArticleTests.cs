@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -14,7 +15,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_Article_CRUD()
+        public async Task Test_Article_CRUD()
         {
             #region Arrange
             //Add code to create required resources
@@ -35,7 +36,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Note = "Definitely not worth the price."
             };
 
-            var createdArticle = connector.Create(newArticle);
+            var createdArticle = await connector.CreateAsync(newArticle);
             Assert.AreEqual("Test Article", createdArticle.Description);
             #endregion CREATE
 
@@ -43,21 +44,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdArticle.Description = "Updated Test Article";
 
-            var updatedArticle = connector.Update(createdArticle); 
+            var updatedArticle = await connector.UpdateAsync(createdArticle); 
             Assert.AreEqual("Updated Test Article", updatedArticle.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedArticle = connector.Get(createdArticle.ArticleNumber);
+            var retrievedArticle = await connector.GetAsync(createdArticle.ArticleNumber);
             Assert.AreEqual("Updated Test Article", retrievedArticle.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdArticle.ArticleNumber);
+            await connector.DeleteAsync(createdArticle.ArticleNumber);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdArticle.ArticleNumber),
@@ -71,7 +72,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             #region Arrange
             //Add code to create required resources
@@ -96,13 +97,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add entries
             for (var i = 0; i < 5; i++)
             {
-                connector.Create(newArticle);
+                await connector.CreateAsync(newArticle);
             }
 
             //Apply base test filter
             var searchSettings = new ArticleSearch();
             searchSettings.Description = testKeyMark;
-            var fullCollection = connector.Find(searchSettings);
+            var fullCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -110,7 +111,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //Apply Limit
             searchSettings.Limit = 2;
-            var limitedCollection = connector.Find(searchSettings);
+            var limitedCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -119,7 +120,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Delete entries
             foreach (var entry in fullCollection.Entities)
             {
-                connector.Delete(entry.ArticleNumber);
+                await connector.DeleteAsync(entry.ArticleNumber);
             }
 
             #region Delete arranged resources

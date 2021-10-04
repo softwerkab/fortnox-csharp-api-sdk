@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Authorization;
 using Fortnox.SDK.Exceptions;
@@ -16,7 +17,7 @@ namespace FortnoxSDK.Tests
 
         [Ignore("Takes too long")]
         [TestMethod]
-        public void Test_RateLimiter_NoError()
+        public async Task Test_RateLimiter_NoError()
         {
             var connector = FortnoxClient.CustomerConnector;
 
@@ -26,7 +27,7 @@ namespace FortnoxSDK.Tests
             {
                 var searchSettings = new CustomerSearch();
                 searchSettings.City = TestUtils.RandomString(); //Needs to be random to make unique GET request
-                connector.Find(searchSettings);
+                await connector.FindAsync(searchSettings);
             }
 
             watch.Stop();
@@ -35,7 +36,7 @@ namespace FortnoxSDK.Tests
 
         [Ignore("Can make other test fail due to exhausting rate limiter")]
         [TestMethod]
-        public void Test_NoRateLimiter_TooManyRequest_Error()
+        public async Task Test_NoRateLimiter_TooManyRequest_Error()
         {
             var fortnoxClient = new FortnoxClient()
             {
@@ -53,7 +54,7 @@ namespace FortnoxSDK.Tests
                 searchSettings.City = TestUtils.RandomString();
                 try
                 {
-                    connector.Find(searchSettings);
+                    await connector.FindAsync(searchSettings);
                 }
                 catch (FortnoxApiException ex)
                 {

@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,34 +11,34 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_PredefinedAccounts_CRUD()
+        public async Task Test_PredefinedAccounts_CRUD()
         {
             var connector = FortnoxClient.PredefinedAccountsConnector;
 
             //Get
-            var bygAccount = connector.Get("CONSTRUCTION_DEB");
+            var bygAccount = await connector.GetAsync("CONSTRUCTION_DEB");
             Assert.AreEqual(2647, bygAccount.Account);
 
-            var patentAccount = connector.Get("PRODUCT_DEB");
+            var patentAccount = await connector.GetAsync("PRODUCT_DEB");
             Assert.AreEqual(2645, patentAccount.Account);
 
             //Update
             patentAccount.Account = bygAccount.Account;
-            connector.Update(patentAccount);
+            await connector.UpdateAsync(patentAccount);
             Assert.AreEqual(2647, patentAccount.Account);
 
             //Revert
             patentAccount.Account = 2645;
-            connector.Update(patentAccount);
+            await connector.UpdateAsync(patentAccount);
             Assert.AreEqual(2645, patentAccount.Account);
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             var connector = FortnoxClient.PredefinedAccountsConnector;
 
-            var fullCollection = connector.Find(null);
+            var fullCollection = await connector.FindAsync(null);
 
             Assert.AreEqual(42, fullCollection.Entities.Count);
             Assert.IsNotNull(fullCollection.Entities.First().Name);

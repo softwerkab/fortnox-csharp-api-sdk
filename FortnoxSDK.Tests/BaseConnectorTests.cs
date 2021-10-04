@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -19,7 +20,7 @@ namespace FortnoxSDK.Tests
         }
 
         /*[TestMethod]
-        public void Test_Find_ParamsAdded()
+        public async Task Test_Find_ParamsAdded()
         {
             var connector = new CustomerConnector
             {
@@ -53,7 +54,7 @@ namespace FortnoxSDK.Tests
         }
 
         [TestMethod]
-        public void Test_Find_ParamsNotAdded()
+        public async Task Test_Find_ParamsNotAdded()
         {
             var connector = FortnoxClient.CustomerConnector;
             searchSettings.Name = "TestName";
@@ -71,7 +72,7 @@ namespace FortnoxSDK.Tests
         }
 
         [TestMethod]
-        public void Test_Find_ParamsNullable()
+        public async Task Test_Find_ParamsNullable()
         {
             var connector = FortnoxClient.CustomerConnector
             {
@@ -102,7 +103,7 @@ namespace FortnoxSDK.Tests
         }*/
 
         /*[TestMethod]
-        public void Test_ReadOnlyProperty_NotSerialized()
+        public async Task Test_ReadOnlyProperty_NotSerialized()
         {
             var connector = FortnoxClient.CustomerConnector;
 
@@ -120,32 +121,32 @@ namespace FortnoxSDK.Tests
         }*/
 
         [TestMethod]
-        public void Test_ReadOnlyProperty_Deserialized()
+        public async Task Test_ReadOnlyProperty_Deserialized()
         {
             var connector = FortnoxClient.CustomerConnector;
 
-            var createdCustomer = connector.Create(new Customer() {Name = "TestUser", CountryCode = "SE"});
+            var createdCustomer = await connector.CreateAsync(new Customer() {Name = "TestUser", CountryCode = "SE"});
             Assert.AreEqual("Sverige", createdCustomer.Country);
 
-            connector.Delete(createdCustomer.CustomerNumber);
+            await connector.DeleteAsync(createdCustomer.CustomerNumber);
         }
 
         [TestMethod]
-        public void Test_EmptyNestedObject()
+        public async Task Test_EmptyNestedObject()
         {
             var connector = FortnoxClient.CustomerConnector;
 
-            var createdCustomer = connector.Create(new Customer()
+            var createdCustomer = await connector.CreateAsync(new Customer()
             {
                 Name = "TestUser",
                 DefaultDeliveryTypes = new DefaultDeliveryTypes() //Empty Object
             });
 
-            connector.Delete(createdCustomer.CustomerNumber);
+            await connector.DeleteAsync(createdCustomer.CustomerNumber);
         }
 
         [TestMethod]
-        public void Test_Paging()
+        public async Task Test_Paging()
         {
             const int large = 20;
             const int small = 5;
@@ -156,7 +157,7 @@ namespace FortnoxSDK.Tests
             searchSettings.SortBy = Sort.By.Customer.CustomerNumber;
             searchSettings.SortOrder = Sort.Order.Ascending;
 
-            var largeCustomerCollection = connector.Find(searchSettings); //get up to 'large' number of entities
+            var largeCustomerCollection = await connector.FindAsync(searchSettings); //get up to 'large' number of entities
             var totalCustomers = largeCustomerCollection.TotalResources;
 
             var neededPages = GetNeededPages(Math.Min(totalCustomers, large), small);
@@ -166,7 +167,7 @@ namespace FortnoxSDK.Tests
             {
                 searchSettings.Limit = small;
                 searchSettings.Page = i + 1;
-                var smallCustomerCollection = connector.Find(searchSettings);
+                var smallCustomerCollection = await connector.FindAsync(searchSettings);
                 mergedCollection.AddRange(smallCustomerCollection.Entities);
             }
 
@@ -175,32 +176,32 @@ namespace FortnoxSDK.Tests
         }
 
         [TestMethod]
-        public void Test_AllInOnePage()
+        public async Task Test_AllInOnePage()
         {
             //To make this test make sense, over 100 customers must exist, ideally over 500
 
             var connector = FortnoxClient.CustomerConnector;
-            var result = connector.Find(null);
+            var result = await connector.FindAsync(null);
             Assert.IsTrue(result.TotalPages > 1);
 
             var searchSettings = new CustomerSearch();
             searchSettings.Limit = APIConstants.Unlimited;
-            var allInOneResult = connector.Find(searchSettings);
+            var allInOneResult = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(1, allInOneResult.TotalPages);
             Assert.AreEqual(result.TotalResources, allInOneResult.Entities.Count);
         }
 
         [TestMethod]
-        public void Test_Uri_Escaping_Special_Characters()
+        public async Task Test_Uri_Escaping_Special_Characters()
         {
-            var article = FortnoxClient.ArticleConnector.Create(new Article()
+            var article = await FortnoxClient.ArticleConnector.CreateAsync(new Article()
             {
                 ArticleNumber = "TestArticle_+-",
                 Description = "X + Y != Z && X - Y == Z"
             });
 
-            var retrievedArticle = FortnoxClient.ArticleConnector.Get(article.ArticleNumber);
+            var retrievedArticle = await FortnoxClient.ArticleConnector.GetAsync(article.ArticleNumber);
             Assert.AreEqual("TestArticle_+-", retrievedArticle.ArticleNumber);
 
 
@@ -208,11 +209,11 @@ namespace FortnoxSDK.Tests
             {
                 Description = "X + Y != Z && X - Y == Z" // some characters like '<' or '>' in query are not accepted by the server even if escaped
             };
-            var matches = FortnoxClient.ArticleConnector.Find(query);
+            var matches = await FortnoxClient.ArticleConnector.FindAsync(query);
             Assert.AreEqual(1, matches.Entities.Count);
             Assert.AreEqual(article.ArticleNumber, matches.Entities.First().ArticleNumber);
 
-            FortnoxClient.ArticleConnector.Delete(article.ArticleNumber);
+            await FortnoxClient.ArticleConnector.DeleteAsync(article.ArticleNumber);
         }
 
         private static int GetNeededPages(int totalSize, int pageSize)

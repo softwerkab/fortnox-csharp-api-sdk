@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -15,7 +16,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_Voucher_CRUD()
+        public async Task Test_Voucher_CRUD()
         {
             #region Arrange
             #endregion Arrange
@@ -36,7 +37,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 }
             };
 
-            var createdVoucher = connector.Create(newVoucher);
+            var createdVoucher = await connector.CreateAsync(newVoucher);
             Assert.AreEqual("TestVoucher", createdVoucher.Description);
 
             #endregion CREATE
@@ -46,13 +47,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion UPDATE
 
             #region READ / GET
-            var retrievedVoucher = connector.Get(createdVoucher.VoucherNumber, createdVoucher.VoucherSeries, createdVoucher.Year);
+            var retrievedVoucher = await connector.GetAsync(createdVoucher.VoucherNumber, createdVoucher.VoucherSeries, createdVoucher.Year);
             Assert.AreEqual("TestVoucher", retrievedVoucher.Description);
 
             #endregion READ / GET
 
             #region DELETE
-            connector.Delete(createdVoucher.VoucherNumber, createdVoucher.VoucherSeries, createdVoucher.Year);
+            await connector.DeleteAsync(createdVoucher.VoucherNumber, createdVoucher.VoucherSeries, createdVoucher.Year);
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdVoucher.VoucherNumber, createdVoucher.VoucherSeries, createdVoucher.Year),
                 "Entity still exists after Delete!");
@@ -64,7 +65,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_Vouchers_Find_By_Series()
+        public async Task Test_Vouchers_Find_By_Series()
         {
             //Arrange
             Thread.Sleep(2);
@@ -107,9 +108,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
             };
 
             var connector = FortnoxClient.VoucherConnector;
-            voucher1 = connector.Create(voucher1);
-            voucher2 = connector.Create(voucher2);
-            voucher3 = connector.Create(voucher3);
+            voucher1 = await connector.CreateAsync(voucher1);
+            voucher2 = await connector.CreateAsync(voucher2);
+            voucher3 = await connector.CreateAsync(voucher3);
 
             //Act
             var settings = new VoucherSearch()
@@ -119,13 +120,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
             };
 
             //Assert
-            var vouchers = connector.Find(settings);
+            var vouchers = await connector.FindAsync(settings);
             Assert.AreEqual(2, vouchers.TotalResources);
 
             //Clean
-            connector.Delete(voucher3.VoucherNumber, voucher3.VoucherSeries, voucher3.Year); 
-            connector.Delete(voucher2.VoucherNumber, voucher2.VoucherSeries, voucher2.Year);
-            connector.Delete(voucher1.VoucherNumber, voucher1.VoucherSeries, voucher1.Year);
+            await connector.DeleteAsync(voucher3.VoucherNumber, voucher3.VoucherSeries, voucher3.Year); 
+            await connector.DeleteAsync(voucher2.VoucherNumber, voucher2.VoucherSeries, voucher2.Year);
+            await connector.DeleteAsync(voucher1.VoucherNumber, voucher1.VoucherSeries, voucher1.Year);
         }
     }
 }

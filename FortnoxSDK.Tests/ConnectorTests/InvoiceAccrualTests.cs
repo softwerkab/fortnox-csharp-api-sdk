@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -14,13 +15,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_InvoiceAccrual_CRUD()
+        public async Task Test_InvoiceAccrual_CRUD()
         {
             #region Arrange
-            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
 
-            var tmpInvoice = FortnoxClient.InvoiceConnector.Create(new Invoice()
+            var tmpInvoice = await FortnoxClient.InvoiceConnector.CreateAsync(new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
@@ -53,7 +54,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 }
             };
 
-            var createdInvoiceAccrual = connector.Create(newInvoiceAccrual);
+            var createdInvoiceAccrual = await connector.CreateAsync(newInvoiceAccrual);
             Assert.AreEqual("TestInvoiceAccrual", createdInvoiceAccrual.Description);
 
             #endregion CREATE
@@ -62,21 +63,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdInvoiceAccrual.Description = "UpdatedTestInvoiceAccrual";
 
-            var updatedInvoiceAccrual = connector.Update(createdInvoiceAccrual); 
+            var updatedInvoiceAccrual = await connector.UpdateAsync(createdInvoiceAccrual); 
             Assert.AreEqual("UpdatedTestInvoiceAccrual", updatedInvoiceAccrual.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedInvoiceAccrual = connector.Get(createdInvoiceAccrual.InvoiceNumber);
+            var retrievedInvoiceAccrual = await connector.GetAsync(createdInvoiceAccrual.InvoiceNumber);
             Assert.AreEqual("UpdatedTestInvoiceAccrual", retrievedInvoiceAccrual.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdInvoiceAccrual.InvoiceNumber);
+            await connector.DeleteAsync(createdInvoiceAccrual.InvoiceNumber);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdInvoiceAccrual.InvoiceNumber),
@@ -86,18 +87,18 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region Delete arranged resources
 
-            FortnoxClient.InvoiceConnector.Cancel(tmpInvoice.DocumentNumber);
+            await FortnoxClient.InvoiceConnector.CancelAsync(tmpInvoice.DocumentNumber);
             //FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
             //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
         [TestMethod]
-        public void Test_InvoiceAccrual_Find()
+        public async Task Test_InvoiceAccrual_Find()
         {
             #region Arrange
-            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
 
             #endregion Arrange
 
@@ -134,24 +135,24 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             for (var i = 0; i < 5; i++)
             {
-                var createdInvoice = FortnoxClient.InvoiceConnector.Create(invoice);
+                var createdInvoice = await FortnoxClient.InvoiceConnector.CreateAsync(invoice);
 
                 newInvoiceAccrual.InvoiceNumber = createdInvoice.DocumentNumber;
-                connector.Create(newInvoiceAccrual);
+                await connector.CreateAsync(newInvoiceAccrual);
             }
 
-            var contractAccruals = connector.Find(null);
+            var contractAccruals = await connector.FindAsync(null);
             Assert.AreEqual(5, contractAccruals.Entities.Count(x => x.Description.StartsWith(marks)));
 
             foreach (var entry in contractAccruals.Entities.Where(x => x.Description.StartsWith(marks)))
             {
-                connector.Delete(entry.InvoiceNumber);
-                FortnoxClient.InvoiceConnector.Cancel(entry.InvoiceNumber);
+                await connector.DeleteAsync(entry.InvoiceNumber);
+                await FortnoxClient.InvoiceConnector.CancelAsync(entry.InvoiceNumber);
             }
 
             #region Delete arranged resources
             //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
-            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
             #endregion Delete arranged resources
         }
     }

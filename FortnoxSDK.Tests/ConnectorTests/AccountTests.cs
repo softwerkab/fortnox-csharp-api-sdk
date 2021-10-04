@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -13,7 +14,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_Account_CRUD()
+        public async Task Test_Account_CRUD()
         {
             var connector = FortnoxClient.AccountConnector;
 
@@ -28,7 +29,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 SRU = 123
             };
 
-            var createdAccount = connector.Create(newAccount);
+            var createdAccount = await connector.CreateAsync(newAccount);
             Assert.AreEqual("Test Account", createdAccount.Description);
 
             #endregion CREATE
@@ -37,21 +38,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdAccount.Description = "Updated Test Account";
 
-            var updatedAccount = connector.Update(createdAccount); 
+            var updatedAccount = await connector.UpdateAsync(createdAccount); 
             Assert.AreEqual("Updated Test Account", updatedAccount.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedAccount = connector.Get(createdAccount.Number);
+            var retrievedAccount = await connector.GetAsync(createdAccount.Number);
             Assert.AreEqual("Updated Test Account", retrievedAccount.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdAccount.Number);
+            await connector.DeleteAsync(createdAccount.Number);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdAccount.Number),
@@ -65,9 +66,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_Account_CRUD_SpecificFinYear()
+        public async Task Test_Account_CRUD_SpecificFinYear()
         {
-            var specificFinYear = FortnoxClient.FinancialYearConnector.Find(null).Entities.First(y => y.FromDate?.Year == 2018); //get fin year 2018
+            var specificFinYear = (await FortnoxClient.FinancialYearConnector.FindAsync(null)).Entities.First(y => y.FromDate?.Year == 2018); //get fin year 2018
 
             var connector = FortnoxClient.AccountConnector;
 
@@ -82,7 +83,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 SRU = 123
             };
 
-            var createdAccount = connector.Create(newAccount, specificFinYear.Id);
+            var createdAccount = await connector.CreateAsync(newAccount, specificFinYear.Id);
             Assert.AreEqual(specificFinYear.Id, createdAccount.Year);
             Assert.AreEqual("Test Account", createdAccount.Description);
 
@@ -92,7 +93,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdAccount.Description = "Updated Test Account";
 
-            var updatedAccount = connector.Update(createdAccount, specificFinYear.Id);
+            var updatedAccount = await connector.UpdateAsync(createdAccount, specificFinYear.Id);
             Assert.AreEqual("Updated Test Account", updatedAccount.Description);
             Assert.AreEqual(specificFinYear.Id, updatedAccount.Year);
 
@@ -100,7 +101,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region READ / GET
 
-            var retrievedAccount = connector.Get(createdAccount.Number, specificFinYear.Id);
+            var retrievedAccount = await connector.GetAsync(createdAccount.Number, specificFinYear.Id);
             Assert.AreEqual("Updated Test Account", retrievedAccount.Description);
             Assert.AreEqual(specificFinYear.Id, retrievedAccount.Year);
 
@@ -108,7 +109,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region DELETE
 
-            connector.Delete(createdAccount.Number, specificFinYear.Id);
+            await connector.DeleteAsync(createdAccount.Number, specificFinYear.Id);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdAccount.Number, specificFinYear.Id),
@@ -122,7 +123,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             #region Arrange
             //Add code to create required resources
@@ -144,14 +145,14 @@ namespace FortnoxSDK.Tests.ConnectorTests
             for (var i = 0; i < 5; i++)
             {
                 newAccount.Number = TestUtils.GetUnusedAccountNumber();
-                connector.Create(newAccount);
+                await connector.CreateAsync(newAccount);
             }
 
             //Apply base test filter
             var searchSettings = new AccountSearch();
             searchSettings.SRU = testKeyMark.ToString();
 
-            var fullCollection = connector.Find(searchSettings);
+            var fullCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -159,7 +160,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //Apply Limit
             searchSettings.Limit = 2;
-            var limitedCollection = connector.Find(searchSettings);
+            var limitedCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -168,7 +169,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Delete entries
             foreach (var entry in fullCollection.Entities)
             {
-                connector.Delete(entry.Number);
+                await connector.DeleteAsync(entry.Number);
             }
             #region Delete arranged resources
 

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -14,7 +15,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_Supplier_CRUD()
+        public async Task Test_Supplier_CRUD()
         {
             #region Arrange
             //Add code to create required resources
@@ -40,7 +41,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 PG = "1111111"
             };
 
-            var createdSupplier = connector.Create(newSupplier);
+            var createdSupplier = await connector.CreateAsync(newSupplier);
             Assert.AreEqual("TestSupplier", createdSupplier.Name);
 
             #endregion CREATE
@@ -49,21 +50,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdSupplier.Name = "UpdatedSupplier";
 
-            var updatedSupplier = connector.Update(createdSupplier); 
+            var updatedSupplier = await connector.UpdateAsync(createdSupplier); 
             Assert.AreEqual("UpdatedSupplier", updatedSupplier.Name);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedSupplier = connector.Get(createdSupplier.SupplierNumber);
+            var retrievedSupplier = await connector.GetAsync(createdSupplier.SupplierNumber);
             Assert.AreEqual("UpdatedSupplier", retrievedSupplier.Name);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdSupplier.SupplierNumber);
+            await connector.DeleteAsync(createdSupplier.SupplierNumber);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdSupplier.SupplierNumber),
@@ -77,7 +78,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             #region Arrange
             //Add code to create required resources
@@ -104,13 +105,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add entries
             for (var i = 0; i < 5; i++)
             {
-                connector.Create(newSupplier);
+                await connector.CreateAsync(newSupplier);
             }
 
             //Apply base test filter
             var searchSettings = new SupplierSearch();
             searchSettings.City = testKeyMark;
-            var fullCollection = connector.Find(searchSettings);
+            var fullCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -119,7 +120,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //Apply Limit
             searchSettings.Limit = 2;
-            var limitedCollection = connector.Find(searchSettings);
+            var limitedCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -128,7 +129,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Delete entries
             foreach (var entry in fullCollection.Entities)
             {
-                connector.Delete(entry.SupplierNumber);
+                await connector.DeleteAsync(entry.SupplierNumber);
             }
 
             #region Delete arranged resources

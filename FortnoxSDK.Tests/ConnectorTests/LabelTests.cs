@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,7 +12,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_Label_CRUD()
+        public async Task Test_Label_CRUD()
         {
             #region Arrange
             //Add code to create required resources
@@ -27,7 +28,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Description = randomLabel
             };
 
-            var createdLabel = connector.Create(newLabel);
+            var createdLabel = await connector.CreateAsync(newLabel);
             Assert.AreEqual(randomLabel, createdLabel.Description);
 
             #endregion CREATE
@@ -37,7 +38,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var updatedRandomLabel = TestUtils.RandomString();
             createdLabel.Description = updatedRandomLabel;
 
-            var updatedLabel = connector.Update(createdLabel); 
+            var updatedLabel = await connector.UpdateAsync(createdLabel); 
             Assert.AreEqual(updatedRandomLabel, updatedLabel.Description);
 
             #endregion UPDATE
@@ -48,7 +49,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region DELETE
 
-            connector.Delete(createdLabel.Id);
+            await connector.DeleteAsync(createdLabel.Id);
 
             #endregion DELETE
 
@@ -58,22 +59,22 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             var connector = FortnoxClient.LabelConnector;
 
-            var existingCount = connector.Find(null).Entities.Count;
+            var existingCount = (await connector.FindAsync(null)).Entities.Count;
 
             var createdEntries = new List<Label>();
             //Add entries
             for (var i = 0; i < 5; i++)
             {
-                var createdEntry = connector.Create(new Label() {Description = TestUtils.RandomString()});
+                var createdEntry = await connector.CreateAsync(new Label() {Description = TestUtils.RandomString()});
                 createdEntries.Add(createdEntry);
             }
 
             //Filter not supported
-            var fullCollection = connector.Find(null);
+            var fullCollection = await connector.FindAsync(null);
 
             Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);
 
@@ -82,7 +83,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Delete entries
             foreach (var entry in createdEntries)
             {
-                connector.Delete(entry.Id);
+                await connector.DeleteAsync(entry.Id);
             }
         }
     }

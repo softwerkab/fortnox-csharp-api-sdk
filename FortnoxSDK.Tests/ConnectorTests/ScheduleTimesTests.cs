@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,10 +12,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_ScheduleTimes_CRUD()
+        public async Task Test_ScheduleTimes_CRUD()
         {
             #region Arrange
-            var tmpEmployee = FortnoxClient.EmployeeConnector.Get("TEST_EMP") ?? FortnoxClient.EmployeeConnector.Create(new Employee() { EmployeeId = "TEST_EMP" });
+            var tmpEmployee = await FortnoxClient.EmployeeConnector.GetAsync("TEST_EMP") ?? await FortnoxClient.EmployeeConnector.CreateAsync(new Employee() { EmployeeId = "TEST_EMP" });
             #endregion Arrange
 
             var connector = FortnoxClient.ScheduleTimesConnector;
@@ -29,7 +30,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Date = new DateTime(2050,10,10)
             };
 
-            var createdScheduleTimes = connector.Update(newScheduleTimes);
+            var createdScheduleTimes = await connector.UpdateAsync(newScheduleTimes);
             Assert.AreEqual(6.5m, createdScheduleTimes.Hours);
 
             #endregion CREATE
@@ -38,14 +39,14 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdScheduleTimes.Hours = 7;
 
-            var updatedScheduleTimes = connector.Update(createdScheduleTimes); 
+            var updatedScheduleTimes = await connector.UpdateAsync(createdScheduleTimes); 
             Assert.AreEqual(7, updatedScheduleTimes.Hours);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedScheduleTimes = connector.Get(createdScheduleTimes.EmployeeId, createdScheduleTimes.Date);
+            var retrievedScheduleTimes = await connector.GetAsync(createdScheduleTimes.EmployeeId, createdScheduleTimes.Date);
             Assert.AreEqual(7, retrievedScheduleTimes.Hours);
 
             #endregion READ / GET

@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -15,7 +16,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_PriceList_CRUD()
+        public async Task Test_PriceList_CRUD()
         {
             #region Arrange
             #endregion Arrange
@@ -30,7 +31,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Comments = "Some comments"
             };
 
-            var createdPriceList = connector.Create(newPriceList);
+            var createdPriceList = await connector.CreateAsync(newPriceList);
             Assert.AreEqual("TestPriceList", createdPriceList.Description);
 
             #endregion CREATE
@@ -39,14 +40,14 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdPriceList.Description = "UpdatedTestPriceList";
 
-            var updatedPriceList = connector.Update(createdPriceList); 
+            var updatedPriceList = await connector.UpdateAsync(createdPriceList); 
             Assert.AreEqual("UpdatedTestPriceList", updatedPriceList.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedPriceList = connector.Get(createdPriceList.Code);
+            var retrievedPriceList = await connector.GetAsync(createdPriceList.Code);
             Assert.AreEqual("UpdatedTestPriceList", retrievedPriceList.Description);
 
             #endregion READ / GET
@@ -61,7 +62,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             var connector = FortnoxClient.PriceListConnector;
 
@@ -74,12 +75,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
             for (var i = 0; i < 5; i++)
             {
                 newPriceList.Code = TestUtils.RandomString().ToUpperInvariant();
-                connector.Create(newPriceList);
+                await connector.CreateAsync(newPriceList);
             }
 
             var searchSettings = new PriceListSearch();
             searchSettings.LastModified = TestUtils.Recently;
-            var fullCollection = connector.Find(searchSettings);
+            var fullCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -87,7 +88,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //Apply Limit
             searchSettings.Limit = 2;
-            var limitedCollection = connector.Find(searchSettings);
+            var limitedCollection = await connector.FindAsync(searchSettings);
 
             //Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);

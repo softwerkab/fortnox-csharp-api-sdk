@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -13,12 +14,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_SupplierInvoicePayment_CRUD()
+        public async Task Test_SupplierInvoicePayment_CRUD()
         {
             #region Arrange
-            var tmpSupplier = FortnoxClient.SupplierConnector.Create(new Supplier() { Name = "TmpSupplier" });
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
-            var tmpSpplierInvoice = FortnoxClient.SupplierInvoiceConnector.Create(new SupplierInvoice()
+            var tmpSupplier = await FortnoxClient.SupplierConnector.CreateAsync(new Supplier() { Name = "TmpSupplier" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
+            var tmpSpplierInvoice = await FortnoxClient.SupplierInvoiceConnector.CreateAsync(new SupplierInvoice()
             {
                 SupplierNumber = tmpSupplier.SupplierNumber,
                 Comments = "InvoiceComments",
@@ -34,7 +35,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                     new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100}
                 }
             });
-            var bookedInvoice = FortnoxClient.SupplierInvoiceConnector.Bookkeep(tmpSpplierInvoice.GivenNumber);
+            var bookedInvoice = await FortnoxClient.SupplierInvoiceConnector.BookkeepAsync(tmpSpplierInvoice.GivenNumber);
             #endregion Arrange
 
             var connector = FortnoxClient.SupplierInvoicePaymentConnector;
@@ -48,7 +49,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 PaymentDate = new DateTime(2020, 1, 20)
             };
 
-            var createdSupplierInvoicePayment = connector.Create(newSupplierInvoicePayment);
+            var createdSupplierInvoicePayment = await connector.CreateAsync(newSupplierInvoicePayment);
             Assert.AreEqual(1000, createdSupplierInvoicePayment.Amount);
 
             #endregion CREATE
@@ -57,21 +58,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdSupplierInvoicePayment.Amount = 2000; 
 
-            var updatedSupplierInvoicePayment = connector.Update(createdSupplierInvoicePayment); 
+            var updatedSupplierInvoicePayment = await connector.UpdateAsync(createdSupplierInvoicePayment); 
             Assert.AreEqual(2000, updatedSupplierInvoicePayment.Amount);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedSupplierInvoicePayment = connector.Get(createdSupplierInvoicePayment.Number);
+            var retrievedSupplierInvoicePayment = await connector.GetAsync(createdSupplierInvoicePayment.Number);
             Assert.AreEqual(2000, retrievedSupplierInvoicePayment.Amount);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdSupplierInvoicePayment.Number);
+            await connector.DeleteAsync(createdSupplierInvoicePayment.Number);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdSupplierInvoicePayment.Number),

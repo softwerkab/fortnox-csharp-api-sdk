@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Interfaces;
@@ -14,13 +15,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_InvoiceFileConnection_CRUD()
+        public async Task Test_InvoiceFileConnection_CRUD()
         {
             #region Arrange
-            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 10 });
+            var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 10 });
             var invoiceConnector = FortnoxClient.InvoiceConnector;
-            var tmpInvoice = invoiceConnector.Create(new Invoice()
+            var tmpInvoice = await invoiceConnector.CreateAsync(new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 InvoiceDate = new DateTime(2020, 1, 20),
@@ -31,7 +32,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 }
             });
             var inboxConnector = FortnoxClient.InboxConnector;
-            var tmpFile = inboxConnector.UploadFile("tmpInvoiceFile.pdf", Resource.invoice_example, StaticFolders.CustomerInvoices);
+            var tmpFile = await inboxConnector.UploadFileAsync("tmpInvoiceFile.pdf", Resource.invoice_example, StaticFolders.CustomerInvoices);
             #endregion Arrange
 
             var connector = FortnoxClient.InvoiceFileConnectionConnector;
@@ -45,7 +46,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 EntityType = EntityType.Invoice
             };
 
-            var createdInvoiceFileConnection = connector.Create(newInvoiceFileConnection);
+            var createdInvoiceFileConnection = await connector.CreateAsync(newInvoiceFileConnection);
             Assert.AreEqual(false, createdInvoiceFileConnection.IncludeOnSend);
 
             #endregion CREATE
@@ -54,32 +55,32 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdInvoiceFileConnection.IncludeOnSend = true;
 
-            var updatedInvoiceFileConnection = connector.Update(createdInvoiceFileConnection); 
+            var updatedInvoiceFileConnection = await connector.UpdateAsync(createdInvoiceFileConnection); 
             Assert.AreEqual(true, updatedInvoiceFileConnection.IncludeOnSend);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedInvoiceFileConnection = connector.GetConnections(createdInvoiceFileConnection.EntityId, createdInvoiceFileConnection.EntityType)?.FirstOrDefault();
+            var retrievedInvoiceFileConnection = (await connector.GetConnectionsAsync(createdInvoiceFileConnection.EntityId, createdInvoiceFileConnection.EntityType))?.FirstOrDefault();
             Assert.AreEqual(true, retrievedInvoiceFileConnection?.IncludeOnSend);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdInvoiceFileConnection.Id);
+            await connector.DeleteAsync(createdInvoiceFileConnection.Id);
 
-            retrievedInvoiceFileConnection = connector.GetConnections(createdInvoiceFileConnection.EntityId, createdInvoiceFileConnection.EntityType)?.FirstOrDefault();
+            retrievedInvoiceFileConnection = (await connector.GetConnectionsAsync(createdInvoiceFileConnection.EntityId, createdInvoiceFileConnection.EntityType))?.FirstOrDefault();
             Assert.AreEqual(null, retrievedInvoiceFileConnection, "Entity still exists after Delete!");
 
             #endregion DELETE
 
             #region Delete arranged resources
-            FortnoxClient.InvoiceConnector.Cancel(tmpInvoice.DocumentNumber);
-            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            await FortnoxClient.InvoiceConnector.CancelAsync(tmpInvoice.DocumentNumber);
+            await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
             //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
-            FortnoxClient.InboxConnector.DeleteFile(tmpFile.Id);
+            await FortnoxClient.InboxConnector.DeleteFileAsync(tmpFile.Id);
             #endregion Delete arranged resources
         }
     }

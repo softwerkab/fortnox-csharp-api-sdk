@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -14,11 +15,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_Order_CRUD()
+        public async Task Test_Order_CRUD()
         {
             #region Arrange
-            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
             var connector = FortnoxClient.OrderConnector;
@@ -37,7 +38,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 }
             };
 
-            var createdOrder = connector.Create(newOrder);
+            var createdOrder = await connector.CreateAsync(newOrder);
             Assert.AreEqual("TestOrder", createdOrder.Comments);
             Assert.AreEqual("TmpCustomer", createdOrder.CustomerName);
             Assert.AreEqual(3, createdOrder.OrderRows.Count);
@@ -48,35 +49,35 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdOrder.Comments = "UpdatedTestOrder";
 
-            var updatedOrder = connector.Update(createdOrder); 
+            var updatedOrder = await connector.UpdateAsync(createdOrder); 
             Assert.AreEqual("UpdatedTestOrder", updatedOrder.Comments);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedOrder = connector.Get(createdOrder.DocumentNumber);
+            var retrievedOrder = await connector.GetAsync(createdOrder.DocumentNumber);
             Assert.AreEqual("UpdatedTestOrder", retrievedOrder.Comments);
 
             #endregion READ / GET
 
             #region DELETE
             //Not allowed
-            connector.Cancel(createdOrder.DocumentNumber);
+            await connector.CancelAsync(createdOrder.DocumentNumber);
             #endregion DELETE
 
             #region Delete arranged resources
-            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
             //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             #region Arrange
-            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
             var connector = FortnoxClient.OrderConnector;
@@ -96,13 +97,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add entries
             for (var i = 0; i < 5; i++)
             {
-                connector.Create(newOrder);
+                await connector.CreateAsync(newOrder);
             }
 
             //Apply base test filter
             var searchSettings = new OrderSearch();
             searchSettings.CustomerNumber = tmpCustomer.CustomerNumber;
-            var fullCollection = connector.Find(searchSettings);
+            var fullCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -112,7 +113,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //Apply Limit
             searchSettings.Limit = 2;
-            var limitedCollection = connector.Find(searchSettings);
+            var limitedCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -120,20 +121,20 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //Delete entries (DELETE not supported)
             foreach (var order in fullCollection.Entities)
-                connector.Cancel(order.DocumentNumber);
+                await connector.CancelAsync(order.DocumentNumber);
 
             #region Delete arranged resources
-            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
             //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
         [TestMethod]
-        public void Test_Print()
+        public async Task Test_Print()
         {
             #region Arrange
-            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
             var connector = FortnoxClient.OrderConnector;
@@ -150,25 +151,25 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 }
             };
 
-            var createdOrder = connector.Create(newOrder);
+            var createdOrder = await connector.CreateAsync(newOrder);
 
-            var fileData = connector.Print(createdOrder.DocumentNumber);
+            var fileData = await connector.PrintAsync(createdOrder.DocumentNumber);
             MyAssert.IsPDF(fileData);
 
-            connector.Cancel(createdOrder.DocumentNumber);
+            await connector.CancelAsync(createdOrder.DocumentNumber);
 
             #region Delete arranged resources
-            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
             //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
         [TestMethod]
-        public void Test_Email()
+        public async Task Test_Email()
         {
             #region Arrange
-            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "richard.randak@softwerk.se" });
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+            var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "richard.randak@softwerk.se" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 
             var connector = FortnoxClient.OrderConnector;
@@ -185,15 +186,15 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 }
             };
 
-            var createdOrder = connector.Create(newOrder);
+            var createdOrder = await connector.CreateAsync(newOrder);
 
-            var emailedInvoice = connector.Email(createdOrder.DocumentNumber);
+            var emailedInvoice = await connector.EmailAsync(createdOrder.DocumentNumber);
             Assert.AreEqual(emailedInvoice.DocumentNumber, createdOrder.DocumentNumber);
 
-            connector.Cancel(createdOrder.DocumentNumber);
+            await connector.CancelAsync(createdOrder.DocumentNumber);
 
             #region Delete arranged resources
-            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
             //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }

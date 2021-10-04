@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -14,7 +15,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_WayOfDelivery_CRUD()
+        public async Task Test_WayOfDelivery_CRUD()
         {
             #region Arrange
             //Add code to create required resources
@@ -29,7 +30,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Description = "TestDeliveryMethod"
             };
 
-            var createdWayOfDelivery = connector.Create(newWayOfDelivery);
+            var createdWayOfDelivery = await connector.CreateAsync(newWayOfDelivery);
             Assert.AreEqual("TestDeliveryMethod", createdWayOfDelivery.Description);
 
             #endregion CREATE
@@ -38,21 +39,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdWayOfDelivery.Description = "UpdatedTestDeliveryMethod";
 
-            var updatedWayOfDelivery = connector.Update(createdWayOfDelivery); 
+            var updatedWayOfDelivery = await connector.UpdateAsync(createdWayOfDelivery); 
             Assert.AreEqual("UpdatedTestDeliveryMethod", updatedWayOfDelivery.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedWayOfDelivery = connector.Get(createdWayOfDelivery.Code);
+            var retrievedWayOfDelivery = await connector.GetAsync(createdWayOfDelivery.Code);
             Assert.AreEqual("UpdatedTestDeliveryMethod", retrievedWayOfDelivery.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdWayOfDelivery.Code);
+            await connector.DeleteAsync(createdWayOfDelivery.Code);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdWayOfDelivery.Code),
@@ -66,23 +67,23 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             var connector = FortnoxClient.WayOfDeliveryConnector;
 
-            var existingCount = connector.Find(null).Entities.Count;
+            var existingCount = (await connector.FindAsync(null)).Entities.Count;
             var testKeyMark = TestUtils.RandomString();
 
             var createdEntries = new List<WayOfDelivery>();
             //Add entries
             for (var i = 0; i < 5; i++)
             {
-                var createdEntry = connector.Create(new WayOfDelivery() { Code = TestUtils.RandomString(), Description = testKeyMark });
+                var createdEntry = await connector.CreateAsync(new WayOfDelivery() { Code = TestUtils.RandomString(), Description = testKeyMark });
                 createdEntries.Add(createdEntry);
             }
 
             //Filter not supported
-            var fullCollection = connector.Find(null);
+            var fullCollection = await connector.FindAsync(null);
 
             Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);
             Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == testKeyMark));
@@ -90,7 +91,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Apply Limit
             var searchSettings = new WayOfDeliverySearch();
             searchSettings.Limit = 2;
-            var limitedCollection = connector.Find(searchSettings);
+            var limitedCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(existingCount + 5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -98,7 +99,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Delete entries
             foreach (var entry in createdEntries)
             {
-                connector.Delete(entry.Code);
+                await connector.DeleteAsync(entry.Code);
             }
         }
     }

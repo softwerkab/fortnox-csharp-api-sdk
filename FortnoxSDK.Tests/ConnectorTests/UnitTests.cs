@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -14,7 +15,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_Unit_CRUD()
+        public async Task Test_Unit_CRUD()
         {
             #region Arrange
             //Add code to create required resources
@@ -29,7 +30,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Description = "TestUnit"
             };
 
-            var createdUnit = connector.Create(newUnit);
+            var createdUnit = await connector.CreateAsync(newUnit);
             Assert.AreEqual("TestUnit", createdUnit.Description);
 
             #endregion CREATE
@@ -38,21 +39,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdUnit.Description = "UpdatedTestUnit";
 
-            var updatedUnit = connector.Update(createdUnit); 
+            var updatedUnit = await connector.UpdateAsync(createdUnit); 
             Assert.AreEqual("UpdatedTestUnit", updatedUnit.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedUnit = connector.Get(createdUnit.Code);
+            var retrievedUnit = await connector.GetAsync(createdUnit.Code);
             Assert.AreEqual("UpdatedTestUnit", retrievedUnit.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdUnit.Code);
+            await connector.DeleteAsync(createdUnit.Code);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdUnit.Code),
@@ -66,23 +67,23 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             var connector = FortnoxClient.UnitConnector;
 
-            var existingCount = connector.Find(null).TotalResources;
+            var existingCount = (await connector.FindAsync(null)).TotalResources;
 
             var marks = TestUtils.RandomString();
             var createdEntries = new List<Unit>();
             //Add entries
             for (var i = 0; i < 5; i++)
             {
-                var createdEntry = connector.Create(new Unit() { Code = marks + i, Description = TestUtils.RandomString() });
+                var createdEntry = await connector.CreateAsync(new Unit() { Code = marks + i, Description = TestUtils.RandomString() });
                 createdEntries.Add(createdEntry);
             }
 
             //Filter not supported
-            var fullCollection = connector.Find(null);
+            var fullCollection = await connector.FindAsync(null);
 
             Assert.AreEqual(existingCount + 5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count(x => x.Code.StartsWith(marks)));
@@ -90,13 +91,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Limit not supported
             var searchSettings = new UnitSearch();
             searchSettings.Limit = 2;
-            var limitedCollection = connector.Find(searchSettings);
+            var limitedCollection = await connector.FindAsync(searchSettings);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
 
             //Delete entries
             foreach (var entry in createdEntries)
             {
-                connector.Delete(entry.Code);
+                await connector.DeleteAsync(entry.Code);
             }
         }
     }

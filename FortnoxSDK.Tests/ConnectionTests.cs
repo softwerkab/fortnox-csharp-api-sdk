@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Authorization;
 using Fortnox.SDK.Exceptions;
@@ -12,7 +13,7 @@ namespace FortnoxSDK.Tests
     {
         [TestMethod]
         [ExpectedException(typeof(FortnoxApiException))]
-        public void TestConnection_NoCredenials_Error()
+        public async Task TestConnection_NoCredenials_Error()
         {
             //Arrange
             var auth = new StaticTokenAuth(null, null);
@@ -20,12 +21,12 @@ namespace FortnoxSDK.Tests
 
             //Act
             var cc = fortnoxClient.CustomerConnector;
-            cc.Find(null);
+            await cc.FindAsync(null);
         }
 
         [TestMethod]
         [ExpectedException(typeof(FortnoxApiException))]
-        public void TestConnection_EmptyCredenials_Error()
+        public async Task TestConnection_EmptyCredenials_Error()
         {
             //Arrange
             var auth = new StaticTokenAuth("", "");
@@ -33,12 +34,12 @@ namespace FortnoxSDK.Tests
 
             //Act
             var cc = fortnoxClient.CustomerConnector;
-            cc.Find(null);
+            await cc.FindAsync(null);
         }
 
         [TestMethod]
         [ExpectedException(typeof(FortnoxApiException))]
-        public void TestConnection_WrongCredenials_Error()
+        public async Task TestConnection_WrongCredenials_Error()
         {
             //Arrange
             var auth = new StaticTokenAuth("ABC", "DEF");
@@ -46,11 +47,11 @@ namespace FortnoxSDK.Tests
 
             //Act
             var cc = fortnoxClient.CustomerConnector;
-            cc.Find(null);
+            await cc.FindAsync(null);
         }
 
         [TestMethod]
-        public void TestConnection_Credentials_Correct()
+        public async Task TestConnection_Credentials_Correct()
         {
             //Arrange
             var auth = new StaticTokenAuth(TestCredentials.Access_Token, TestCredentials.Client_Secret);
@@ -58,14 +59,14 @@ namespace FortnoxSDK.Tests
 
             //Act
             var connector = fortnoxClient.CustomerConnector;
-            var customers = connector.Find(null);
+            var customers = await connector.FindAsync(null);
 
             //Assert
             Assert.IsNotNull(customers);
         }
 
         [TestMethod]
-        public void TestConnection_MultipleCredentials_Set()
+        public async Task TestConnection_MultipleCredentials_Set()
         {
             var auth1 = new StaticTokenAuth("AT1", "CS1");
             var fortnoxClient1 = new FortnoxClient(auth1);
@@ -81,7 +82,7 @@ namespace FortnoxSDK.Tests
         }
 
         [TestMethod]
-        public void TestConnection_Config_Set()
+        public async Task TestConnection_Config_Set()
         {
             var auth = new StaticTokenAuth("AccToken", "Secret");
             var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(10) };

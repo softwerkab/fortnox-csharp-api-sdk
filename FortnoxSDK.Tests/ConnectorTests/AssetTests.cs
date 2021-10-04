@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -13,11 +14,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_Asset_CRUD()
+        public async Task Test_Asset_CRUD()
         {
             #region Arrange
-            var tmpCostCenter = FortnoxClient.CostCenterConnector.Create(new CostCenter(){ Code = "TMP", Description = "TmpCostCenter"});
-            var tmpAssetType = FortnoxClient.AssetTypesConnector.Create(new AssetType() {Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
+            var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter(){ Code = "TMP", Description = "TmpCostCenter"});
+            var tmpAssetType = await FortnoxClient.AssetTypesConnector.CreateAsync(new AssetType() {Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
             #endregion Arrange
 
             var connector = FortnoxClient.AssetConnector;
@@ -40,7 +41,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 TypeId = tmpAssetType.Id.ToString()
             };
 
-            var createdAsset = connector.Create(newAsset);
+            var createdAsset = await connector.CreateAsync(newAsset);
             Assert.AreEqual("TestAsset", createdAsset.Description); //returns entity named "Assets" instead of "asset"
 
             #endregion CREATE
@@ -49,21 +50,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdAsset.Description = "UpdatedTestAsset";
 
-            var updatedAsset = connector.Update(createdAsset); 
+            var updatedAsset = await connector.UpdateAsync(createdAsset); 
             Assert.AreEqual("UpdatedTestAsset", updatedAsset.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedAsset = connector.Get(createdAsset.Id);
+            var retrievedAsset = await connector.GetAsync(createdAsset.Id);
             Assert.AreEqual("UpdatedTestAsset", retrievedAsset.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdAsset.Id);
+            await connector.DeleteAsync(createdAsset.Id);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdAsset.Id),
@@ -72,17 +73,17 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            FortnoxClient.CostCenterConnector.Delete(tmpCostCenter.Code);
-            FortnoxClient.AssetTypesConnector.Delete(tmpAssetType.Id);
+            await FortnoxClient.CostCenterConnector.DeleteAsync(tmpCostCenter.Code);
+            await FortnoxClient.AssetTypesConnector.DeleteAsync(tmpAssetType.Id);
             #endregion Delete arranged resources
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             #region Arrange
-            var tmpCostCenter = FortnoxClient.CostCenterConnector.Create(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
-            var tmpAssetType = FortnoxClient.AssetTypesConnector.Create(new AssetType() { Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
+            var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
+            var tmpAssetType = await FortnoxClient.AssetTypesConnector.CreateAsync(new AssetType() { Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
             #endregion Arrange
 
             var testKeyMark = TestUtils.RandomString();
@@ -108,13 +109,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
             for (var i = 0; i < 5; i++)
             {
                 newAsset.Number = TestUtils.RandomString();
-                connector.Create(newAsset);
+                await connector.CreateAsync(newAsset);
             }
 
             //Apply base test filter
             var searchSettings = new AssetSearch();
             searchSettings.Description = testKeyMark;
-            var fullCollection = connector.Find(searchSettings);
+            var fullCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -122,7 +123,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //Apply Limit
             searchSettings.Limit = 2;
-            var limitedCollection = connector.Find(searchSettings);
+            var limitedCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -130,11 +131,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //Delete entries
             foreach (var entry in fullCollection.Entities)
-                connector.Delete(entry.Id);
+                await connector.DeleteAsync(entry.Id);
 
             #region Delete arranged resources
-            FortnoxClient.CostCenterConnector.Delete(tmpCostCenter.Code);
-            FortnoxClient.AssetTypesConnector.Delete(tmpAssetType.Id);
+            await FortnoxClient.CostCenterConnector.DeleteAsync(tmpCostCenter.Code);
+            await FortnoxClient.AssetTypesConnector.DeleteAsync(tmpAssetType.Id);
             #endregion Delete arranged resources
         }
     }

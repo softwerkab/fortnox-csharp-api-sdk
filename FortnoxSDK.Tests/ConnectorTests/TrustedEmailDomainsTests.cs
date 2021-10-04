@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -11,7 +12,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_TrustedEmailDomains_CRUD()
+        public async Task Test_TrustedEmailDomains_CRUD()
         {
             #region Arrange
             //Add code to create required resources
@@ -25,7 +26,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Domain = "testdomain.tst",
             };
 
-            var createdTrustedEmailDomains = connector.Create(newTrustedEmailDomains);
+            var createdTrustedEmailDomains = await connector.CreateAsync(newTrustedEmailDomains);
             Assert.AreEqual("testdomain.tst", createdTrustedEmailDomains.Domain);
 
             #endregion CREATE
@@ -36,14 +37,14 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region READ / GET
 
-            var retrievedTrustedEmailDomains = connector.Get(createdTrustedEmailDomains.Id);
+            var retrievedTrustedEmailDomains = await connector.GetAsync(createdTrustedEmailDomains.Id);
             Assert.AreEqual("testdomain.tst", retrievedTrustedEmailDomains.Domain);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdTrustedEmailDomains.Id);
+            await connector.DeleteAsync(createdTrustedEmailDomains.Id);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdTrustedEmailDomains.Id),

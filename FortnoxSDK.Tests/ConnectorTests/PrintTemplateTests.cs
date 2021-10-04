@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,17 +12,17 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_PrintTemplate_CRUD()
+        public async Task Test_PrintTemplate_CRUD()
         {
             //Not supported
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             var connector = FortnoxClient.PrintTemplateConnector;
             
-            var fullCollection = connector.Find(null);
+            var fullCollection = await connector.FindAsync(null);
 
             Assert.AreEqual(9, fullCollection.Entities.Count);
             Assert.IsNotNull(fullCollection.Entities.First().Name);
@@ -30,23 +31,23 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_Find_Filter()
+        public async Task Test_Find_Filter()
         {
             var connector = FortnoxClient.PrintTemplateConnector;
             var searchSettings = new PrintTemplateSearch();
 
             searchSettings.FilterBy = Filter.PrintTemplate.Order;
-            var orderTemplates = connector.Find(searchSettings);
+            var orderTemplates = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(3, orderTemplates.Entities.Count);
 
             searchSettings.FilterBy = Filter.PrintTemplate.Offer;
-            var offerTemplates = connector.Find(searchSettings);
+            var offerTemplates = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(1, offerTemplates.Entities.Count);
 
             searchSettings.FilterBy = Filter.PrintTemplate.Invoice;
-            var invoiceTemplates = connector.Find(searchSettings);
+            var invoiceTemplates = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(9, invoiceTemplates.Entities.Count);
         }

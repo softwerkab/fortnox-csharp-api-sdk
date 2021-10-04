@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -12,12 +13,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_ArticleFileConnection_CRUD()
+        public async Task Test_ArticleFileConnection_CRUD()
         {
             #region Arrange
 
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() {Description = "TmpArticle"});
-            var tmpFile = FortnoxClient.ArchiveConnector.UploadFile("tmpImage.png", Resource.fortnox_image);
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() {Description = "TmpArticle"});
+            var tmpFile = await FortnoxClient.ArchiveConnector.UploadFileAsync("tmpImage.png", Resource.fortnox_image);
 
             #endregion Arrange
 
@@ -31,7 +32,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 ArticleNumber = tmpArticle.ArticleNumber
             };
 
-            var createdArticleFileConnection = connector.Create(newArticleFileConnection);
+            var createdArticleFileConnection = await connector.CreateAsync(newArticleFileConnection);
             Assert.AreEqual(tmpArticle.ArticleNumber, createdArticleFileConnection.ArticleNumber);
 
             #endregion CREATE
@@ -44,14 +45,14 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region READ / GET
 
-            var retrievedArticleFileConnection = connector.Get(createdArticleFileConnection.FileId);
+            var retrievedArticleFileConnection = await connector.GetAsync(createdArticleFileConnection.FileId);
             Assert.AreEqual(tmpArticle.ArticleNumber, retrievedArticleFileConnection.ArticleNumber);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdArticleFileConnection.FileId);
+            await connector.DeleteAsync(createdArticleFileConnection.FileId);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdArticleFileConnection.FileId),
@@ -61,18 +62,18 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region Delete arranged resources
 
-            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
-            FortnoxClient.ArchiveConnector.DeleteFile(tmpFile.Id);
+            await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
+            await FortnoxClient.ArchiveConnector.DeleteFileAsync(tmpFile.Id);
 
             #endregion Delete arranged resources
         }
 
         [TestMethod]
-        public void Test_ArticleFileConnection_Find()
+        public async Task Test_ArticleFileConnection_Find()
         {
             #region Arrange
 
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle" });
             #endregion Arrange
 
             var connector = FortnoxClient.ArticleFileConnectionConnector;
@@ -84,27 +85,27 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             for (var i = 0; i < 5; i++)
             {
-                var tmpFile = FortnoxClient.ArchiveConnector.UploadFile($"tmpImage{i}.png", Resource.fortnox_image);
+                var tmpFile = await FortnoxClient.ArchiveConnector.UploadFileAsync($"tmpImage{i}.png", Resource.fortnox_image);
                 newArticleFileConnection.FileId = tmpFile.Id;
 
-                connector.Create(newArticleFileConnection);
+                await connector.CreateAsync(newArticleFileConnection);
             }
 
             var searchSettings = new ArticleFileConnectionSearch();
             searchSettings.ArticleNumber = tmpArticle.ArticleNumber;
-            var connections = connector.Find(searchSettings);
+            var connections = await connector.FindAsync(searchSettings);
             Assert.AreEqual(5, connections.Entities.Count);
 
             foreach (var entity in connections.Entities)
             {
-                connector.Delete(entity.FileId);
+                await connector.DeleteAsync(entity.FileId);
 
-                FortnoxClient.ArchiveConnector.DeleteFile(entity.FileId);
+                await FortnoxClient.ArchiveConnector.DeleteFileAsync(entity.FileId);
             }
 
             #region Delete arranged resources
 
-            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+            await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
 
             #endregion Delete arranged resources
         }

@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -12,7 +13,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_Currency_CRUD()
+        public async Task Test_Currency_CRUD()
         {
             #region Arrange
 
@@ -21,7 +22,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             try
             {
                 //Delete currency if already exists
-                currencyConnector.Delete("SKK");
+                await currencyConnector.DeleteAsync("SKK");
             }
             catch
             {
@@ -42,7 +43,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 SellRate = 1.21m
             };
 
-            var createdCurrency = connector.Create(newCurrency);
+            var createdCurrency = await connector.CreateAsync(newCurrency);
             Assert.AreEqual("TestCurrency", createdCurrency.Description);
 
             #endregion CREATE
@@ -51,21 +52,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdCurrency.Description = "UpdatedCurrency";
 
-            var updatedCurrency = connector.Update(createdCurrency);
+            var updatedCurrency = await connector.UpdateAsync(createdCurrency);
             Assert.AreEqual("UpdatedCurrency", updatedCurrency.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedCurrency = connector.Get(createdCurrency.Code);
+            var retrievedCurrency = await connector.GetAsync(createdCurrency.Code);
             Assert.AreEqual("UpdatedCurrency", retrievedCurrency.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdCurrency.Code);
+            await connector.DeleteAsync(createdCurrency.Code);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdCurrency.Code),
@@ -81,13 +82,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_Currency_Find()
+        public async Task Test_Currency_Find()
         {
             //Prerequisites: SEK, EUR and USD currencies are already present in the system
 
             var connector = FortnoxClient.CurrencyConnector;
 
-            var currencies = connector.Find(null);
+            var currencies = await connector.FindAsync(null);
 
             Assert.AreEqual(3, currencies.Entities.Count); //SEK, EUR, USD
             Assert.AreEqual(true, currencies.Entities.Any(c => c.Code == "SEK"));

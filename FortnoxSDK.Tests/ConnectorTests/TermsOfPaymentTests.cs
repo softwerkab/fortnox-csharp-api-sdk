@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -13,7 +14,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_TermsOfPayment_CRUD()
+        public async Task Test_TermsOfPayment_CRUD()
         {
             #region Arrange
             //Add code to create required resources
@@ -28,7 +29,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Description = "TestPaymentTerms"
             };
 
-            var createdTermsOfPayment = connector.Create(newTermsOfPayment);
+            var createdTermsOfPayment = await connector.CreateAsync(newTermsOfPayment);
             Assert.AreEqual("TestPaymentTerms", createdTermsOfPayment.Description);
 
             #endregion CREATE
@@ -37,21 +38,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdTermsOfPayment.Description = "UpdatedTestPaymentTerms";
 
-            var updatedTermsOfPayment = connector.Update(createdTermsOfPayment); 
+            var updatedTermsOfPayment = await connector.UpdateAsync(createdTermsOfPayment); 
             Assert.AreEqual("UpdatedTestPaymentTerms", updatedTermsOfPayment.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedTermsOfPayment = connector.Get(createdTermsOfPayment.Code);
+            var retrievedTermsOfPayment = await connector.GetAsync(createdTermsOfPayment.Code);
             Assert.AreEqual("UpdatedTestPaymentTerms", retrievedTermsOfPayment.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdTermsOfPayment.Code);
+            await connector.DeleteAsync(createdTermsOfPayment.Code);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdTermsOfPayment.Code),
@@ -65,7 +66,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             var connector = FortnoxClient.TermsOfPaymentConnector;
 
@@ -78,27 +79,27 @@ namespace FortnoxSDK.Tests.ConnectorTests
             for (var i = 0; i < 5; i++)
             {
                 newTermsOfPayment.Code = TestUtils.RandomString();
-                connector.Create(newTermsOfPayment);
+                await connector.CreateAsync(newTermsOfPayment);
             }
 
             //Filter not supported
             var searchSettings = new TermsOfPaymentSearch();
             searchSettings.LastModified = TestUtils.Recently;
-            var fullCollection = connector.Find(searchSettings);
+            var fullCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, fullCollection.Entities.Count);
             Assert.AreEqual("TestPaymentTerms", fullCollection.Entities[0].Description);
 
             //Apply Limit
             searchSettings.Limit = 2;
-            var limitedCollection = connector.Find(searchSettings);
+            var limitedCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(2, limitedCollection.Entities.Count);
 
             //Delete entries
             foreach (var entry in fullCollection.Entities)
             {
-                connector.Delete(entry.Code);
+                await connector.DeleteAsync(entry.Code);
             }
         }
     }

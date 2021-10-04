@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -14,11 +15,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
         [Ignore("Does not provide update nor delete")]
         [TestMethod]
-        public void Test_FinancialYear_CRUD()
+        public async Task Test_FinancialYear_CRUD()
         {
             #region Arrange
 
-            var existingAccountChartType = FortnoxClient.AccountChartConnector.Find(null).Entities.First();
+            var existingAccountChartType = (await FortnoxClient.AccountChartConnector.FindAsync(null)).Entities.First();
 
             #endregion Arrange
 
@@ -34,7 +35,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 AccountingMethod = AccountingMethod.Cash
             };
 
-            var createdFinancialYear = connector.Create(newFinancialYear);
+            var createdFinancialYear = await connector.CreateAsync(newFinancialYear);
             Assert.AreEqual(new DateTime(2010, 1, 1), createdFinancialYear.FromDate);
 
             #endregion CREATE
@@ -47,7 +48,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region READ / GET
 
-            var retrievedFinancialYear = connector.Get(createdFinancialYear.Id);
+            var retrievedFinancialYear = await connector.GetAsync(createdFinancialYear.Id);
             Assert.AreEqual(new DateTime(2010, 1, 1), retrievedFinancialYear.FromDate);
 
             #endregion READ / GET
@@ -66,17 +67,17 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_FinancialYear_Find()
+        public async Task Test_FinancialYear_Find()
         {
             var connector = FortnoxClient.FinancialYearConnector;
             
-            var finYears = connector.Find(null);
+            var finYears = await connector.FindAsync(null);
             Assert.AreEqual(5, finYears.Entities.Count);
             Assert.IsNotNull(finYears.Entities.First().FromDate);
         }
 
         [TestMethod]
-        public void Test_FinancialYear_Find_By_Date()
+        public async Task Test_FinancialYear_Find_By_Date()
         {
             var connector = FortnoxClient.FinancialYearConnector;
 
@@ -85,14 +86,14 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Date = new DateTime(2022, 05, 24)
             };
 
-            var finYears = connector.Find(search);
+            var finYears = await connector.FindAsync(search);
             Assert.AreEqual(1, finYears.Entities.Count);
             Assert.AreEqual(new DateTime(2022,1,1), finYears.Entities.Single().FromDate);
             Assert.AreEqual(new DateTime(2022, 12, 31), finYears.Entities.Single().ToDate);
         }
 
         [TestMethod]
-        public void Test_FinancialYear_Find_By_FinYearDate()
+        public async Task Test_FinancialYear_Find_By_FinYearDate()
         {
             var connector = FortnoxClient.FinancialYearConnector;
 
@@ -101,7 +102,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 FinancialYearDate = new DateTime(2022, 05, 24)
             };
 
-            var finYears = connector.Find(search);
+            var finYears = await connector.FindAsync(search);
             Assert.AreEqual(1, finYears.Entities.Count);
             Assert.AreEqual(new DateTime(2022, 1, 1), finYears.Entities.Single().FromDate);
             Assert.AreEqual(new DateTime(2022, 12, 31), finYears.Entities.Single().ToDate);

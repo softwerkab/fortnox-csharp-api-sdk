@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -13,12 +14,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_SupplierInvoiceExternalURLConnection_CRUD()
+        public async Task Test_SupplierInvoiceExternalURLConnection_CRUD()
         {
             #region Arrange
-            var tmpSupplier = FortnoxClient.SupplierConnector.Create(new Supplier() { Name = "TmpSupplier" });
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
-            var tmpSpplierInvoice = FortnoxClient.SupplierInvoiceConnector.Create(new SupplierInvoice()
+            var tmpSupplier = await FortnoxClient.SupplierConnector.CreateAsync(new Supplier() { Name = "TmpSupplier" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
+            var tmpSpplierInvoice = await FortnoxClient.SupplierInvoiceConnector.CreateAsync(new SupplierInvoice()
             {
                 SupplierNumber = tmpSupplier.SupplierNumber,
                 Comments = "InvoiceComments",
@@ -45,7 +46,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 ExternalURLConnection = @"http://example.com/image.jpg"
             };
 
-            var createdSupplierInvoiceExternalURLConnection = connector.Create(newSupplierInvoiceExternalURLConnection);
+            var createdSupplierInvoiceExternalURLConnection = await connector.CreateAsync(newSupplierInvoiceExternalURLConnection);
             Assert.AreEqual("http://example.com/image.jpg", createdSupplierInvoiceExternalURLConnection.ExternalURLConnection);
 
             #endregion CREATE
@@ -54,21 +55,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdSupplierInvoiceExternalURLConnection.ExternalURLConnection = "http://example.com/image.png";
 
-            var updatedSupplierInvoiceExternalURLConnection = connector.Update(createdSupplierInvoiceExternalURLConnection); 
+            var updatedSupplierInvoiceExternalURLConnection = await connector.UpdateAsync(createdSupplierInvoiceExternalURLConnection); 
             Assert.AreEqual("http://example.com/image.png", updatedSupplierInvoiceExternalURLConnection.ExternalURLConnection);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedSupplierInvoiceExternalURLConnection = connector.Get(createdSupplierInvoiceExternalURLConnection.Id);
+            var retrievedSupplierInvoiceExternalURLConnection = await connector.GetAsync(createdSupplierInvoiceExternalURLConnection.Id);
             Assert.AreEqual("http://example.com/image.png", retrievedSupplierInvoiceExternalURLConnection.ExternalURLConnection);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdSupplierInvoiceExternalURLConnection.Id);
+            await connector.DeleteAsync(createdSupplierInvoiceExternalURLConnection.Id);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdSupplierInvoiceExternalURLConnection.Id),
@@ -77,9 +78,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            FortnoxClient.SupplierInvoiceConnector.Cancel(tmpSpplierInvoice.GivenNumber);
-            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
-            FortnoxClient.SupplierConnector.Delete(tmpSupplier.SupplierNumber);
+            await FortnoxClient.SupplierInvoiceConnector.CancelAsync(tmpSpplierInvoice.GivenNumber);
+            await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
+            await FortnoxClient.SupplierConnector.DeleteAsync(tmpSupplier.SupplierNumber);
             #endregion Delete arranged resources
         }
     }

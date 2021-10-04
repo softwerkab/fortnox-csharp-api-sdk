@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
@@ -14,11 +15,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_SupplierInvoice_CRUD()
+        public async Task Test_SupplierInvoice_CRUD()
         {
             #region Arrange
-            var tmpSupplier = FortnoxClient.SupplierConnector.Create(new Supplier() {Name = "TmpSupplier"});
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article(){Description = "TmpArticle", PurchasePrice = 100});
+            var tmpSupplier = await FortnoxClient.SupplierConnector.CreateAsync(new Supplier() {Name = "TmpSupplier"});
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article(){Description = "TmpArticle", PurchasePrice = 100});
             #endregion Arrange
 
             var connector = FortnoxClient.SupplierInvoiceConnector;
@@ -41,7 +42,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 }
             };
 
-            var createdSupplierInvoice = connector.Create(newSupplierInvoice);
+            var createdSupplierInvoice = await connector.CreateAsync(newSupplierInvoice);
             Assert.AreEqual("InvoiceComments", createdSupplierInvoice.Comments);
             Assert.AreEqual("TmpSupplier", createdSupplierInvoice.SupplierName);
             Assert.AreEqual(3 + 1, createdSupplierInvoice.SupplierInvoiceRows.Count);
@@ -53,37 +54,37 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdSupplierInvoice.Comments = "UpdatedInvoiceComments";
 
-            var updatedSupplierInvoice = connector.Update(createdSupplierInvoice); 
+            var updatedSupplierInvoice = await connector.UpdateAsync(createdSupplierInvoice); 
             Assert.AreEqual("UpdatedInvoiceComments", updatedSupplierInvoice.Comments);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedSupplierInvoice = connector.Get(createdSupplierInvoice.GivenNumber);
+            var retrievedSupplierInvoice = await connector.GetAsync(createdSupplierInvoice.GivenNumber);
             Assert.AreEqual("UpdatedInvoiceComments", retrievedSupplierInvoice.Comments);
 
             #endregion READ / GET
 
             #region DELETE
             //Not supported
-            connector.Cancel(createdSupplierInvoice.GivenNumber);
-            var cancelledInvoice = connector.Get(createdSupplierInvoice.GivenNumber);
+            await connector.CancelAsync(createdSupplierInvoice.GivenNumber);
+            var cancelledInvoice = await connector.GetAsync(createdSupplierInvoice.GivenNumber);
             Assert.AreEqual(true, cancelledInvoice.Cancelled);
             #endregion DELETE
 
             #region Delete arranged resources
-            FortnoxClient.SupplierConnector.Delete(tmpSupplier.SupplierNumber);
-            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+            await FortnoxClient.SupplierConnector.DeleteAsync(tmpSupplier.SupplierNumber);
+            await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             #region Arrange
-            var tmpSupplier = FortnoxClient.SupplierConnector.Create(new Supplier() { Name = "TmpSupplier" });
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
+            var tmpSupplier = await FortnoxClient.SupplierConnector.CreateAsync(new Supplier() { Name = "TmpSupplier" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
             #endregion Arrange
 
             var connector = FortnoxClient.SupplierInvoiceConnector;
@@ -107,13 +108,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add entries
             for (var i = 0; i < 5; i++)
             {
-                connector.Create(newSupplierInvoice);
+                await connector.CreateAsync(newSupplierInvoice);
             }
 
             //Apply base test filter
             var searchSettings = new SupplierInvoiceSearch();
             searchSettings.SupplierNumber = tmpSupplier.SupplierNumber;
-            var fullCollection = connector.Find(searchSettings);
+            var fullCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -123,7 +124,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //Apply Limit
             searchSettings.Limit = 2;
-            var limitedCollection = connector.Find(searchSettings);
+            var limitedCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -131,20 +132,20 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //Delete entries (DELETE not supported)
             foreach (var invoice in fullCollection.Entities)
-                connector.Cancel(invoice.GivenNumber);
+                await connector.CancelAsync(invoice.GivenNumber);
 
             #region Delete arranged resources
-            FortnoxClient.SupplierConnector.Delete(tmpSupplier.SupplierNumber);
-            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+            await FortnoxClient.SupplierConnector.DeleteAsync(tmpSupplier.SupplierNumber);
+            await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
         [TestMethod]
-        public void Test_Book()
+        public async Task Test_Book()
         {
             #region Arrange
-            var tmpSupplier = FortnoxClient.SupplierConnector.Create(new Supplier() { Name = "TmpSupplier" });
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
+            var tmpSupplier = await FortnoxClient.SupplierConnector.CreateAsync(new Supplier() { Name = "TmpSupplier" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
             #endregion Arrange
 
             var connector = FortnoxClient.SupplierInvoiceConnector;
@@ -166,11 +167,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 }
             };
 
-            var createdSupplierInvoice = connector.Create(newSupplierInvoice);
+            var createdSupplierInvoice = await connector.CreateAsync(newSupplierInvoice);
 
             //Act
-            connector.Bookkeep(createdSupplierInvoice.GivenNumber);
-            var bookedInvoice = connector.Get(createdSupplierInvoice.GivenNumber);
+            await connector.BookkeepAsync(createdSupplierInvoice.GivenNumber);
+            var bookedInvoice = await connector.GetAsync(createdSupplierInvoice.GivenNumber);
 
             //Assert
             Assert.AreEqual(true, bookedInvoice.Booked);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -14,13 +15,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
         [Ignore("Fails due to invoice not being balanced. Investigation needed")]
         [TestMethod]
-        public void Test_SupplierInvoiceAccrual_CRUD()
+        public async Task Test_SupplierInvoiceAccrual_CRUD()
         {
             #region Arrange
-            var tmpSupplier = FortnoxClient.SupplierConnector.Create(new Supplier() { Name = "TmpSupplier" });
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle" });
+            var tmpSupplier = await FortnoxClient.SupplierConnector.CreateAsync(new Supplier() { Name = "TmpSupplier" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle" });
             var conn = FortnoxClient.SupplierInvoiceConnector;
-            var tmpSupplierInvoice = conn.Create(new SupplierInvoice()
+            var tmpSupplierInvoice = await conn.CreateAsync(new SupplierInvoice()
             {
                 SupplierNumber = tmpSupplier.SupplierNumber,
                 Comments = "InvoiceComments",
@@ -57,7 +58,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 }
             };
 
-            var createdSupplierInvoiceAccrual = connector.Create(newSupplierInvoiceAccrual);
+            var createdSupplierInvoiceAccrual = await connector.CreateAsync(newSupplierInvoiceAccrual);
             Assert.AreEqual("TestSupplierInvoiceAccrual", createdSupplierInvoiceAccrual.Description);
 
             #endregion CREATE
@@ -66,21 +67,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdSupplierInvoiceAccrual.Description = "UpdatedTestSupplierInvoiceAccrual";
 
-            var updatedSupplierInvoiceAccrual = connector.Update(createdSupplierInvoiceAccrual); 
+            var updatedSupplierInvoiceAccrual = await connector.UpdateAsync(createdSupplierInvoiceAccrual); 
             Assert.AreEqual("UpdatedTestSupplierInvoiceAccrual", updatedSupplierInvoiceAccrual.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedSupplierInvoiceAccrual = connector.Get(createdSupplierInvoiceAccrual.SupplierInvoiceNumber);
+            var retrievedSupplierInvoiceAccrual = await connector.GetAsync(createdSupplierInvoiceAccrual.SupplierInvoiceNumber);
             Assert.AreEqual("UpdatedTestSupplierInvoiceAccrual", retrievedSupplierInvoiceAccrual.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdSupplierInvoiceAccrual.SupplierInvoiceNumber);
+            await connector.DeleteAsync(createdSupplierInvoiceAccrual.SupplierInvoiceNumber);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdSupplierInvoiceAccrual.SupplierInvoiceNumber),
@@ -88,8 +89,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            FortnoxClient.SupplierConnector.Delete(tmpSupplier.SupplierNumber);
-            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+            await FortnoxClient.SupplierConnector.DeleteAsync(tmpSupplier.SupplierNumber);
+            await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

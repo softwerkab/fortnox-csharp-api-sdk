@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -12,7 +13,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_Customer_CRUD()
+        public async Task Test_Customer_CRUD()
         {
             #region Arrange
             //Add code to create required resources
@@ -34,7 +35,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Active = false
             };
 
-            var createdCustomer = connector.Create(newCustomer);
+            var createdCustomer = await connector.CreateAsync(newCustomer);
             Assert.AreEqual("TestCustomer", createdCustomer.Name);
 
             #endregion CREATE
@@ -43,21 +44,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdCustomer.Name = "UpdatedTestCustomer";
 
-            var updatedCustomer = connector.Update(createdCustomer); 
+            var updatedCustomer = await connector.UpdateAsync(createdCustomer); 
             Assert.AreEqual("UpdatedTestCustomer", updatedCustomer.Name);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedCustomer = connector.Get(createdCustomer.CustomerNumber);
+            var retrievedCustomer = await connector.GetAsync(createdCustomer.CustomerNumber);
             Assert.AreEqual("UpdatedTestCustomer", retrievedCustomer.Name);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdCustomer.CustomerNumber);
+            await connector.DeleteAsync(createdCustomer.CustomerNumber);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdCustomer.CustomerNumber),
@@ -71,7 +72,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             #region Arrange
             //Add code to create required resources
@@ -97,13 +98,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add entries
             for (var i = 0; i < 5; i++)
             {
-                connector.Create(newCustomer);
+                await connector.CreateAsync(newCustomer);
             }
 
             //Apply base test filter
             var searchSettings = new CustomerSearch();
             searchSettings.City = testKeyMark;
-            var fullCollection = connector.Find(searchSettings);
+            var fullCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -111,7 +112,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //Apply Limit
             searchSettings.Limit = 2;
-            var limitedCollection = connector.Find(searchSettings);
+            var limitedCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -120,7 +121,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Delete entries
             foreach (var entry in fullCollection.Entities)
             {
-                connector.Delete(entry.CustomerNumber);
+                await connector.DeleteAsync(entry.CustomerNumber);
             }
 
             #region Delete arranged resources

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,7 +11,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_VoucherSeries_CRUD()
+        public async Task Test_VoucherSeries_CRUD()
         {
             #region Arrange
             //Add code to create required resources
@@ -26,7 +27,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Description = "TestVoucherSeries",
             };
 
-            var createdVoucherSeries = connector.Create(newVoucherSeries) ?? connector.Update(newVoucherSeries); //if already exists, update it instead
+            var createdVoucherSeries = await connector.CreateAsync(newVoucherSeries) ?? await connector.UpdateAsync(newVoucherSeries); //if already exists, update it instead
             Assert.AreEqual("TestVoucherSeries", createdVoucherSeries.Description);
 
             #endregion CREATE
@@ -35,14 +36,14 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdVoucherSeries.Description = "UpdatedTestVoucherSeries";
 
-            var updatedVoucherSeries = connector.Update(createdVoucherSeries); 
+            var updatedVoucherSeries = await connector.UpdateAsync(createdVoucherSeries); 
             Assert.AreEqual("UpdatedTestVoucherSeries", updatedVoucherSeries.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedVoucherSeries = connector.Get(createdVoucherSeries.Code);
+            var retrievedVoucherSeries = await connector.GetAsync(createdVoucherSeries.Code);
             Assert.AreEqual("UpdatedTestVoucherSeries", retrievedVoucherSeries.Description);
 
             #endregion READ / GET

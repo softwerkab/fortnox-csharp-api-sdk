@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -9,7 +10,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_CompanyInformation_CRUD()
+        public async Task Test_CompanyInformation_CRUD()
         {
             #region Arrange
             //Add code to create required resources
@@ -28,7 +29,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region READ / GET
 
-            var retrievedCompanyInformation = connector.Get();
+            var retrievedCompanyInformation = await connector.GetAsync();
             Assert.IsNotNull(retrievedCompanyInformation?.CompanyName);
             Assert.IsNotNull(retrievedCompanyInformation?.OrganizationNumber);
 

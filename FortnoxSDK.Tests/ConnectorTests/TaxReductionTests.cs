@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -14,12 +15,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_TaxReduction_CRUD()
+        public async Task Test_TaxReduction_CRUD()
         {
             #region Arrange
-            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Service, PurchasePrice = 1000 });
-            var tmpInvoice = FortnoxClient.InvoiceConnector.Create(new Invoice()
+            var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", Type = ArticleType.Service, PurchasePrice = 1000 });
+            var tmpInvoice = await FortnoxClient.InvoiceConnector.CreateAsync(new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
@@ -49,7 +50,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 ReferenceDocumentType = ReferenceDocumentType.Invoice
             };
 
-            var createdTaxReduction = connector.Create(newTaxReduction);
+            var createdTaxReduction = await connector.CreateAsync(newTaxReduction);
             Assert.AreEqual(100, createdTaxReduction.AskedAmount);
 
             #endregion CREATE
@@ -58,21 +59,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdTaxReduction.AskedAmount = 200;
 
-            var updatedTaxReduction = connector.Update(createdTaxReduction); 
+            var updatedTaxReduction = await connector.UpdateAsync(createdTaxReduction); 
             Assert.AreEqual(200, updatedTaxReduction.AskedAmount);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedTaxReduction = connector.Get(createdTaxReduction.Id);
+            var retrievedTaxReduction = await connector.GetAsync(createdTaxReduction.Id);
             Assert.AreEqual(200, retrievedTaxReduction.AskedAmount);
 
             #endregion READ / GET
 
             #region DELETE
             //Can not delete tax redution if there is only one, therefore one more is created
-            connector.Create(new TaxReduction()
+            await connector.CreateAsync(new TaxReduction()
             {
                 //TypeOfReduction = TypeOfReduction.RUT,
                 CustomerName = "TmpCustomer",
@@ -82,7 +83,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 ReferenceDocumentType = ReferenceDocumentType.Invoice
             });
 
-            connector.Delete(createdTaxReduction.Id);
+            await connector.DeleteAsync(createdTaxReduction.Id);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdTaxReduction.Id),
@@ -91,19 +92,19 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            FortnoxClient.InvoiceConnector.Cancel(tmpInvoice.DocumentNumber);
-            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            await FortnoxClient.InvoiceConnector.CancelAsync(tmpInvoice.DocumentNumber);
+            await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
             //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             #region Arrange
-            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", Type = ArticleType.Service, PurchasePrice = 1000 });
-            var tmpInvoice = FortnoxClient.InvoiceConnector.Create(new Invoice()
+            var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", Type = ArticleType.Service, PurchasePrice = 1000 });
+            var tmpInvoice = await FortnoxClient.InvoiceConnector.CreateAsync(new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
@@ -134,13 +135,13 @@ namespace FortnoxSDK.Tests.ConnectorTests
             for (var i = 0; i < 5; i++)
             {
                 newTaxReduction.SocialSecurityNumber = TestUtils.RandomPersonalNumber();
-                connector.Create(newTaxReduction);
+                await connector.CreateAsync(newTaxReduction);
             }
 
             //Apply base test filter
             var searchSettings = new TaxReductionSearch();
             searchSettings.ReferenceNumber = tmpInvoice.DocumentNumber.ToString();
-            var fullCollection = connector.Find(searchSettings);
+            var fullCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
@@ -148,7 +149,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //Apply Limit
             searchSettings.Limit = 2;
-            var limitedCollection = connector.Find(searchSettings);
+            var limitedCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -156,21 +157,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
 
             #region Delete arranged resources
-            FortnoxClient.InvoiceConnector.Cancel(tmpInvoice.DocumentNumber);
-            FortnoxClient.CustomerConnector.Delete(tmpCustomer.CustomerNumber);
+            await FortnoxClient.InvoiceConnector.CancelAsync(tmpInvoice.DocumentNumber);
+            await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
             //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
         [TestMethod]
-        public void Test_TaxReductionChanges_2021()
+        public async Task Test_TaxReductionChanges_2021()
         {
-            var tmpCustomer = FortnoxClient.CustomerConnector.Create(new Customer()
+            var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer()
             {
                 Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"
             });
 
-            var houseworkArticle = FortnoxClient.ArticleConnector.Create(new Article()
+            var houseworkArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article()
             {
                 Description = "TmpArticle", 
                 Type = ArticleType.Service, 
@@ -178,7 +179,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Housework = true
             });
 
-            var houseworkInvoice = FortnoxClient.InvoiceConnector.Create(new Invoice()
+            var houseworkInvoice = await FortnoxClient.InvoiceConnector.CreateAsync(new Invoice()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 InvoiceDate = new DateTime(2021, 1, 20), //"2019-01-20",
@@ -196,7 +197,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             Assert.AreEqual(true, houseworkInvoice.HouseWork);
             Assert.AreEqual(TaxReductionType.Green, houseworkInvoice.TaxReductionType);
 
-            var createdTaxReduction = FortnoxClient.TaxReductionConnector.Create(new TaxReduction()
+            var createdTaxReduction = await FortnoxClient.TaxReductionConnector.CreateAsync(new TaxReduction()
             {
                 CustomerName = "TmpCustomer",
                 AskedAmount = 100,
@@ -208,7 +209,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             Assert.AreEqual(100, createdTaxReduction.AskedAmount);
 
             //Check if invoice is still the same
-            var retrievedInvoice = FortnoxClient.InvoiceConnector.Get(houseworkInvoice.DocumentNumber);
+            var retrievedInvoice = await FortnoxClient.InvoiceConnector.GetAsync(houseworkInvoice.DocumentNumber);
             Assert.AreEqual(true, retrievedInvoice.HouseWork);
             Assert.AreEqual(TaxReductionType.Green, retrievedInvoice.TaxReductionType);
         }

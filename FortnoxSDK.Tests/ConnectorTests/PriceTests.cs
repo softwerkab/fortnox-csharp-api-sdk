@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -14,11 +15,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_Price_CRUD()
+        public async Task Test_Price_CRUD()
         {
             #region Arrange
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() {Description = "TmpArticle"});
-            var tmpPriceList = FortnoxClient.PriceListConnector.Get("TST_PR");
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() {Description = "TmpArticle"});
+            var tmpPriceList = await FortnoxClient.PriceListConnector.GetAsync("TST_PR");
             #endregion Arrange
 
             var connector = FortnoxClient.PriceConnector;
@@ -32,7 +33,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 PriceValue = 12.5m
             };
 
-            var createdPrice = connector.Create(newPrice);
+            var createdPrice = await connector.CreateAsync(newPrice);
             Assert.AreEqual(12.5m, createdPrice.PriceValue);
 
             #endregion CREATE
@@ -41,21 +42,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdPrice.PriceValue = 15;
 
-            var updatedPrice = connector.Update(createdPrice); 
+            var updatedPrice = await connector.UpdateAsync(createdPrice); 
             Assert.AreEqual(15, updatedPrice.PriceValue);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedPrice = connector.Get(createdPrice.PriceList, createdPrice.ArticleNumber, createdPrice.FromQuantity);
+            var retrievedPrice = await connector.GetAsync(createdPrice.PriceList, createdPrice.ArticleNumber, createdPrice.FromQuantity);
             Assert.AreEqual(15, retrievedPrice.PriceValue);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdPrice.PriceList, createdPrice.ArticleNumber, createdPrice.FromQuantity);
+            await connector.DeleteAsync(createdPrice.PriceList, createdPrice.ArticleNumber, createdPrice.FromQuantity);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdPrice.PriceList, createdPrice.ArticleNumber, createdPrice.FromQuantity),
@@ -64,16 +65,16 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+            await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             #region Arrange
-            var tmpArticle = FortnoxClient.ArticleConnector.Create(new Article() { Description = "TmpArticle", PurchasePrice = 10});
-            var tmpPriceList = FortnoxClient.PriceListConnector.Get("TST_PR");
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", PurchasePrice = 10});
+            var tmpPriceList = await FortnoxClient.PriceListConnector.GetAsync("TST_PR");
             #endregion Arrange
             
             var connector = FortnoxClient.PriceConnector;
@@ -91,12 +92,12 @@ namespace FortnoxSDK.Tests.ConnectorTests
             {
                 newPrice.PriceValue -= 10;
                 newPrice.FromQuantity += 10;
-                connector.Create(newPrice);
+                await connector.CreateAsync(newPrice);
             }
 
             var searchSettings = new PriceSearch();
             searchSettings.LastModified = TestUtils.Recently;
-            var fullCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber, searchSettings);
+            var fullCollection = await connector.FindAsync(tmpPriceList.Code, tmpArticle.ArticleNumber, searchSettings);
 
             Assert.AreEqual(5+1, fullCollection.TotalResources);
             Assert.AreEqual(5+1, fullCollection.Entities.Count);
@@ -106,7 +107,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             //Apply Limit
             searchSettings.Limit = 2;
-            var limitedCollection = connector.Find(tmpPriceList.Code, tmpArticle.ArticleNumber, searchSettings);
+            var limitedCollection = await connector.FindAsync(tmpPriceList.Code, tmpArticle.ArticleNumber, searchSettings);
 
             Assert.AreEqual(5+1, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -117,11 +118,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
             {
                 if (entry.FromQuantity == 0)
                     continue; //base price
-                connector.Delete(entry.PriceList, entry.ArticleNumber, entry.FromQuantity);
+                await connector.DeleteAsync(entry.PriceList, entry.ArticleNumber, entry.FromQuantity);
             }
 
             #region Delete arranged resources
-            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+            await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
             #endregion Delete arranged resources
         }
     }

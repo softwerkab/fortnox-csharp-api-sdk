@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
@@ -14,10 +15,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_ModeOfPayment_CRUD()
+        public async Task Test_ModeOfPayment_CRUD()
         {
             #region Arrange
-            var tmpAccount = FortnoxClient.AccountConnector.Create(new Account(){Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber()});
+            var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account(){Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber()});
             #endregion Arrange
 
             var connector = FortnoxClient.ModeOfPaymentConnector;
@@ -30,7 +31,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Code = "TEST_MODE",
             };
 
-            var createdModeOfPayment = connector.Create(newModeOfPayment);
+            var createdModeOfPayment = await connector.CreateAsync(newModeOfPayment);
             Assert.AreEqual("TestMode", createdModeOfPayment.Description);
 
             #endregion CREATE
@@ -39,21 +40,21 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdModeOfPayment.Description = "UpdatedMode";
 
-            var updatedModeOfPayment = connector.Update(createdModeOfPayment); 
+            var updatedModeOfPayment = await connector.UpdateAsync(createdModeOfPayment); 
             Assert.AreEqual("UpdatedMode", updatedModeOfPayment.Description);
 
             #endregion UPDATE
 
             #region READ / GET
 
-            var retrievedModeOfPayment = connector.Get(createdModeOfPayment.Code);
+            var retrievedModeOfPayment = await connector.GetAsync(createdModeOfPayment.Code);
             Assert.AreEqual("UpdatedMode", retrievedModeOfPayment.Description);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdModeOfPayment.Code);
+            await connector.DeleteAsync(createdModeOfPayment.Code);
 
             Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdModeOfPayment.Code),
@@ -62,32 +63,32 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #endregion DELETE
 
             #region Delete arranged resources
-            FortnoxClient.AccountConnector.Delete(tmpAccount.Number);
+            await FortnoxClient.AccountConnector.DeleteAsync(tmpAccount.Number);
             #endregion Delete arranged resources
         }
 
         [TestMethod]
-        public void Test_Find()
+        public async Task Test_Find()
         {
             #region Arrange
-            var tmpAccount = FortnoxClient.AccountConnector.Create(new Account() { Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber() });
+            var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber() });
             #endregion Arrange
 
             var connector = FortnoxClient.ModeOfPaymentConnector;
 
-            var existingCount = connector.Find(null).Entities.Count;
+            var existingCount = (await connector.FindAsync(null)).Entities.Count;
             var testKeyMark = TestUtils.RandomString();
 
             var createdEntries = new List<ModeOfPayment>();
             //Add entries
             for (var i = 0; i < 5; i++)
             {
-                var createdEntry = connector.Create(new ModeOfPayment() { Code = TestUtils.RandomString(), Description = testKeyMark, AccountNumber = tmpAccount.Number });
+                var createdEntry = await connector.CreateAsync(new ModeOfPayment() { Code = TestUtils.RandomString(), Description = testKeyMark, AccountNumber = tmpAccount.Number });
                 createdEntries.Add(createdEntry);
             }
 
             //Filter not supported
-            var fullCollection = connector.Find(null);
+            var fullCollection = await connector.FindAsync(null);
 
             Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);
             Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == testKeyMark));
@@ -95,7 +96,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Apply Limit
             var searchSettings = new ModeOfPaymentSearch();
             searchSettings.Limit = 2;
-            var limitedCollection = connector.Find(searchSettings);
+            var limitedCollection = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(existingCount + 5, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
@@ -103,11 +104,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Delete entries
             foreach (var entry in createdEntries)
             {
-                connector.Delete(entry.Code);
+                await connector.DeleteAsync(entry.Code);
             }
 
             #region Delete arranged resources
-            FortnoxClient.AccountConnector.Delete(tmpAccount.Number);
+            await FortnoxClient.AccountConnector.DeleteAsync(tmpAccount.Number);
             #endregion Delete arranged resources
         }
     }

@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,11 +12,11 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
         [TestMethod]
-        public void Test_AssetFileConnection_CRUD()
+        public async Task Test_AssetFileConnection_CRUD()
         {
             #region Arrange
-            var tmpAssetType = FortnoxClient.AssetTypesConnector.Create(new AssetType() { Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
-            var tmpAsset = FortnoxClient.AssetConnector.Create(new Asset()
+            var tmpAssetType = await FortnoxClient.AssetTypesConnector.CreateAsync(new AssetType() { Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
+            var tmpAsset = await FortnoxClient.AssetConnector.CreateAsync(new Asset()
             {
                 Description = "TestAsset",
                 Number = TestUtils.RandomString(),
@@ -30,7 +31,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Placement = "Right here",
                 TypeId = tmpAssetType.Id.ToString()
             });
-            var tmpFile = FortnoxClient.ArchiveConnector.UploadFile("tmpImage.png", Resource.fortnox_image);
+            var tmpFile = await FortnoxClient.ArchiveConnector.UploadFileAsync("tmpImage.png", Resource.fortnox_image);
             #endregion Arrange
 
             var connector = FortnoxClient.AssetFileConnectionConnector;
@@ -42,7 +43,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 AssetId = tmpAsset.Id
             };
 
-            var createdAssetFileConnection = connector.Create(newAssetFileConnection);
+            var createdAssetFileConnection = await connector.CreateAsync(newAssetFileConnection);
             Assert.AreEqual(tmpAsset.Id, createdAssetFileConnection.AssetId);
 
             #endregion CREATE
@@ -53,29 +54,29 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region READ / GET
 
-            var retrievedAssetFileConnection = connector.Get(createdAssetFileConnection.FileId);
+            var retrievedAssetFileConnection = await connector.GetAsync(createdAssetFileConnection.FileId);
             Assert.AreEqual(tmpAsset.Id, retrievedAssetFileConnection.AssetId);
 
             #endregion READ / GET
 
             #region DELETE
 
-            connector.Delete(createdAssetFileConnection.FileId);
+            await connector.DeleteAsync(createdAssetFileConnection.FileId);
 
             /*Assert.ThrowsException<FortnoxApiException>(
                 () => connector.Get(createdAssetFileConnection.FileId),
                 "Entity still exists after Delete!");*/
 
             //For some reason, connection exists after delete, but with asset id set to null
-            retrievedAssetFileConnection = connector.Get(createdAssetFileConnection.FileId);
+            retrievedAssetFileConnection = await connector.GetAsync(createdAssetFileConnection.FileId);
             Assert.AreEqual(null, retrievedAssetFileConnection.AssetId, "Entity still exists after Delete!");
 
             #endregion DELETE
 
             #region Delete arranged resources
-            FortnoxClient.AssetConnector.Delete(tmpAsset.Id);
-            FortnoxClient.AssetTypesConnector.Delete(tmpAssetType.Id);
-            FortnoxClient.ArchiveConnector.DeleteFile(tmpFile.Id);
+            await FortnoxClient.AssetConnector.DeleteAsync(tmpAsset.Id);
+            await FortnoxClient.AssetTypesConnector.DeleteAsync(tmpAssetType.Id);
+            await FortnoxClient.ArchiveConnector.DeleteFileAsync(tmpFile.Id);
             #endregion Delete arranged resources
         }
     }
