@@ -61,6 +61,12 @@ namespace Fortnox.SDK.Auth
         Task<TokenInfo> RefreshTokenAsync(string refreshToken, string clientId, string clientSecret);
 
         /// <summary>
+        /// Generates a state nonce for use with the <see cref="BuildAuthUri"/> method.
+        /// </summary>
+        /// <returns>A randomly-generated string.</returns>
+        string GenerateState();
+
+        /// <summary>
         /// Use this function to build the full URI for OAuth 2.0 workflow initialization.
         /// </summary>
         /// <param name="clientId">Client id given to you by Fortnox.</param>
