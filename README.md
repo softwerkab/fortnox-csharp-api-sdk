@@ -1,4 +1,4 @@
-[![GitHub release](https://img.shields.io/github/release/FortnoxAB/csharp-api-sdk.svg)]() [![nuget](https://img.shields.io/nuget/v/Fortnox.NET.SDK.svg)](https://www.nuget.org/packages/Fortnox.NET.SDK/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
+[![GitHub release](https://img.shields.io/github/release/FortnoxAB/csharp-api-sdk.svg)]() [![nuget](https://img.shields.io/nuget/v/Fortnox.NET.SDK.svg)](https://www.nuget.org/packages/Fortnox.NET.SDK/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Fortnox .NET SDK
 .NET SDK package for developing integrations towards Fortnox REST API. The package is developed and maintained by Softwerk AB.
