@@ -78,10 +78,8 @@ namespace Fortnox.SDK.Auth
         {
             var data = new byte[32];
 
-            using (var rng = new RNGCryptoServiceProvider())
-            {
-                rng.GetBytes(data);
-            }
+            using var rng = new RNGCryptoServiceProvider()
+            rng.GetBytes(data);
 
             var state = Convert.ToBase64String(data).Replace('+', '-').Replace('/', '-').Replace('=', '-');
 
