@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using FortnoxAPILibrary.SDK.Auth;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FortnoxAPILibrary.Connectors;
 
@@ -16,10 +17,8 @@ namespace FortnoxAPILibrary.Tests
         public void TestConnection1()
         {
             var cc = new CustomerConnector();
-            ConnectionCredentials.AccessToken = "";
-            ConnectionCredentials.ClientSecret = "";
-            cc.AccessToken = "";
-            cc.ClientSecret = "";
+            cc.Authorization = new StandardAuth("");
+            
             cc.Find();
         }
 
@@ -27,16 +26,14 @@ namespace FortnoxAPILibrary.Tests
         public void TestConnection2()
         {
             var connector = new CustomerConnector();
-            connector.AccessToken = at;
-            connector.ClientSecret = cs;
+            connector.Authorization = new StandardAuth(at);
             var customer = connector.Get("0022");
             Assert.IsFalse(connector.HasError);
             Assert.IsTrue(customer.CustomerNumber == "0022");
 
             ConnectionCredentials.AccessToken = at;
             ConnectionCredentials.ClientSecret = cs;
-            connector.AccessToken = "";
-            connector.ClientSecret = "";
+            connector.Authorization = new StandardAuth("");
 
             customer = connector.Get("0022");
             Assert.IsFalse(connector.HasError);
@@ -50,22 +47,19 @@ namespace FortnoxAPILibrary.Tests
             ConnectionCredentials.ClientSecret = "456";
 
             var connector1 = new CustomerConnector();
-            connector1.AccessToken = "A";
-            connector1.ClientSecret = "B";
+            connector1.Authorization = new StandardAuth("A");
 
             var connector2 = new CustomerConnector();
-            connector2.AccessToken = "AA";
-            connector2.ClientSecret = "BB";
+            connector2.Authorization = new StandardAuth("AA");
 
-            Assert.IsTrue(connector1.AccessToken == "A" && connector2.AccessToken == "AA");
+            Assert.IsTrue(connector1.Authorization.AccessToken == "A" && connector2.Authorization.AccessToken == "AA");
         }
 
         [TestMethod]
         public void TestCustomer()
         {
             var connector = new CustomerConnector();
-            connector.AccessToken = at;
-            connector.ClientSecret = cs;
+            connector.Authorization.AccessToken = at;
 
             var customer = connector.Get("0022");
             customer.GLN = "123";
@@ -95,8 +89,7 @@ namespace FortnoxAPILibrary.Tests
         public void TestArticle()
         {
             var connector = new ArticleConnector();
-            connector.AccessToken = at;
-            connector.ClientSecret = cs;
+            connector.Authorization.AccessToken = at;
 
             var article = connector.Get("1");
             article.Active = "false";
@@ -122,8 +115,7 @@ namespace FortnoxAPILibrary.Tests
         public void TestFinicialYear()
         {
             var connector = new FinancialYearConnector();
-            connector.AccessToken = at;
-            connector.ClientSecret = cs;
+            connector.Authorization.AccessToken = at;
 
             var finicialYear = connector.Get(1);
             Assert.IsFalse(connector.HasError);
@@ -134,9 +126,8 @@ namespace FortnoxAPILibrary.Tests
         public void TestOffer()
         {
             var connector = new OfferConnector();
-            connector.AccessToken = at;
-            connector.ClientSecret = cs;
-
+            connector.Authorization.AccessToken = at;
+            
             connector.FromDate = "2017-01-01";
             connector.ToDate = "2017-01-30";
             var offers = connector.Find();
@@ -154,8 +145,7 @@ namespace FortnoxAPILibrary.Tests
         public void TestOrder()
         {
             var connector = new OrderConnector();
-            connector.AccessToken = at;
-            connector.ClientSecret = cs;
+            connector.Authorization.AccessToken = at;
 
             connector.FromDate = "2017-01-01";
             connector.ToDate = "2017-04-03";
@@ -174,8 +164,7 @@ namespace FortnoxAPILibrary.Tests
         public void TestContractAccrural()
         {
             var connector = new ContractAccrualConnector();
-            connector.AccessToken = at;
-            connector.ClientSecret = cs;
+            connector.Authorization.AccessToken = at;
 
             // test cost account
             var contract = connector.Get("3");
@@ -219,8 +208,7 @@ namespace FortnoxAPILibrary.Tests
         public void TestInvoice()
         {
             var connector = new InvoiceConnector();
-            connector.AccessToken = at;
-            connector.ClientSecret = cs;
+            connector.Authorization.AccessToken = at;
 
             var invoice = connector.Get("988");
             invoice.PaymentWay = "CASH";
@@ -238,8 +226,7 @@ namespace FortnoxAPILibrary.Tests
         public void TestSupplierInvoice()
         {
             var connector = new SupplierInvoiceConnector();
-            connector.AccessToken = at;
-            connector.ClientSecret = cs;
+            connector.Authorization.AccessToken = at;
 
             var invoice = connector.Get("5");
             Assert.IsFalse(connector.HasError);
@@ -281,8 +268,7 @@ namespace FortnoxAPILibrary.Tests
         public void TestFolder()
         {
             var connector = new ArchiveConnector();
-            connector.AccessToken = at;
-            connector.ClientSecret = cs;
+            connector.Authorization.AccessToken = at;
 
             var folder = new Folder();
             folder.Name = $"f1-{Guid.NewGuid().ToString().Substring(0, 8)}";
@@ -298,8 +284,7 @@ namespace FortnoxAPILibrary.Tests
         public void TestFiles()
         {
             var connector = new ArchiveConnector();
-            connector.AccessToken = at;
-            connector.ClientSecret = cs;
+            connector.Authorization.AccessToken = at;
 
             connector.DownloadFile("537be280-fc52-4b91-9dab-427be15db4c5", @"C:\temp\abc.txt");
             Assert.IsFalse(connector.HasError);
@@ -327,8 +312,7 @@ namespace FortnoxAPILibrary.Tests
             var connector = new InvoiceConnector
             {
                 //use credentials:
-                AccessToken = at, //16a366e1-7389-4e94-9032-31546d644e9a
-                ClientSecret = cs, // PNWPB5EGzJ
+                Authorization = new StandardAuth(at), //16a366e1-7389-4e94-9032-31546d644e9a
                 YourOrderNumber = "20190809"
             };
             var invoice = connector.Find();
