@@ -55,5 +55,9 @@ namespace Fortnox.SDK.Entities
         [ReadOnly]
         [JsonProperty]
         public long? Year { get; private set; }
+
+        /// <summary> VAT code </summary>
+        [JsonProperty]
+        public string VATCode { get; set; }
     }
 }
