@@ -4,15 +4,13 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using ComposableAsync;
+using FortnoxAPILibrary.SDK.Auth;
 using RateLimiter;
 
 namespace FortnoxAPILibrary
 {
     public class BaseClient
     {
-        private const string AccessTokenHeader = "Access-Token";
-        private const string ClientSecretHeader = "Client-Secret";
-
         private const int LimitPerSecond = 4;
         private static readonly Dictionary<string, TimeLimiter> RateLimiters = new Dictionary<string, TimeLimiter>();
 
@@ -20,9 +18,8 @@ namespace FortnoxAPILibrary
         /// Http client used under-the-hood for all request (except file upload due to a server-side limitation)
         /// </summary>
         private HttpClient HttpClient { get; }
-
-        public string AccessToken { get; set; }
-        public string ClientSecret { get; set; }
+        
+        public FortnoxAuthorization Authorization { get; set; }
 
         public int Timeout
         {
@@ -40,9 +37,7 @@ namespace FortnoxAPILibrary
         public BaseClient()
         {
             HttpClient = new HttpClient();
-
-            AccessToken = ConnectionCredentials.AccessToken;
-            ClientSecret = ConnectionCredentials.ClientSecret;
+            
             BaseUrl = ConnectionSettings.FortnoxAPIServer;
             Timeout = ConnectionSettings.Timeout;
             UseRateLimiter = ConnectionSettings.UseRateLimiter;
@@ -50,8 +45,7 @@ namespace FortnoxAPILibrary
 
         public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
         {
-            request.Headers.Add(AccessTokenHeader, AccessToken);
-            request.Headers.Add(ClientSecretHeader, ClientSecret);
+            Authorization?.ApplyTo(request);
 
             if (UseRateLimiter)
                 await Throttle();
@@ -61,8 +55,8 @@ namespace FortnoxAPILibrary
 
         public async Task<HttpWebResponse> SendAsync(HttpWebRequest request)
         {
-            request.Headers.Add(AccessTokenHeader, AccessToken);
-            request.Headers.Add(ClientSecretHeader, ClientSecret);
+            Authorization?.ApplyTo(request);
+            
             request.Timeout = Timeout;
 
             if (UseRateLimiter)
@@ -73,14 +67,23 @@ namespace FortnoxAPILibrary
 
         private async Task Throttle()
         {
-            if (string.IsNullOrEmpty(AccessToken))
+            if (string.IsNullOrEmpty(Authorization?.AccessToken))
                 return;
 
-            //Add ratelimiter for access token if does not exist
-            if (!RateLimiters.ContainsKey(AccessToken))
-                RateLimiters.Add(AccessToken, TimeLimiter.GetFromMaxCountByInterval(LimitPerSecond, TimeSpan.FromSeconds(1)));
+            var limiter = SelectRateLimiter(Authorization.AccessToken);
+            await limiter;
+        }
 
-            await RateLimiters[AccessToken];
+        private static TimeLimiter SelectRateLimiter(string accessToken)
+        {
+            lock (RateLimiters)
+            {
+                //Add ratelimiter for access token if does not exist
+                if (!RateLimiters.ContainsKey(accessToken))
+                    RateLimiters.Add(accessToken, TimeLimiter.GetFromMaxCountByInterval(LimitPerSecond, TimeSpan.FromSeconds(1)));
+
+                return RateLimiters[accessToken];
+            }
         }
     }
 }

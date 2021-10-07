@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Web;
+using FortnoxAPILibrary.SDK.Auth;
 
 namespace FortnoxAPILibrary
 {
@@ -43,17 +44,7 @@ namespace FortnoxAPILibrary
         /// </summary>
         int Offset { get; set; }
 
-        /// <summary>
-        /// Optional Fortnox Client Secret, if used it will override the static version.
-        /// </summary>
-        /// <exception cref="Exception">Exception will be thrown if client secret is not set.</exception>
-        string ClientSecret { get; set; }
-
-        /// <summary>
-        /// Optional Fortnox Access Token, if used it will override the static version.
-        /// </summary>
-        /// /// <exception cref="Exception">Exception will be thrown if access token is not set.</exception>
-        string AccessToken { get; set; }
+        FortnoxAuthorization Authorization { get; set; }
 
         /// <summary>
         /// Timeout of requests sent to the Fortnox API in miliseconds

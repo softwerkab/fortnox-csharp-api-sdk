@@ -7,17 +7,13 @@ using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
 using FortnoxAPILibrary.Exceptions;
-using FortnoxError;
+using FortnoxAPILibrary.SDK.Auth;
 
 namespace FortnoxAPILibrary
 {
     /// <remarks/>
     public class UrlRequestBase
     {
-		string clientSecret;
-
-		string accessToken;
-
         /// <summary>
         /// link to restriction info:
         /// https://developer.fortnox.se/documentation/general/regarding-fortnox-api-rate-limits/
@@ -26,57 +22,7 @@ namespace FortnoxAPILibrary
         private DateTime firstRequest = DateTime.Now;
         private int currentRequestsPerSecond = 0;
 
-        /// <summary>
-        /// Optional Fortnox Client Secret, if used it will override the static version.
-        /// </summary>
-        /// <exception cref="Exception">Exception will be thrown if client secret is not set.</exception>
-        public string ClientSecret
-		{
-			get
-			{
-				if (!string.IsNullOrEmpty(this.clientSecret))
-				{
-					return this.clientSecret;
-				}
-
-				if (!string.IsNullOrEmpty(ConnectionCredentials.ClientSecret))
-				{
-					return ConnectionCredentials.ClientSecret;
-				}
-
-				throw new Exception("Fortnox Client Secret must be set.");
-			}
-			set
-			{
-				this.clientSecret = value;
-			}
-		}
-
-		/// <summary>
-		/// Optional Fortnox Access Token, if used it will override the static version.
-		/// </summary>
-		/// /// <exception cref="Exception">Exception will be thrown if access token is not set.</exception>
-		public string AccessToken
-		{
-			get
-			{
-				if (!string.IsNullOrEmpty(this.accessToken))
-				{
-					return this.accessToken;
-				}
-
-				if (!string.IsNullOrEmpty(ConnectionCredentials.AccessToken))
-				{
-					return ConnectionCredentials.AccessToken;
-				}
-
-				throw new Exception("Fortnox Access Token must be set.");
-			}
-			set
-			{
-				this.accessToken = value;
-			}
-		}
+        public FortnoxAuthorization Authorization { get; set; }
 
 		/// <summary>
 		/// Timeout of requests sent to the Fortnox API in miliseconds
@@ -184,8 +130,9 @@ namespace FortnoxAPILibrary
             Error = null;
 
             HttpWebRequest wr = (HttpWebRequest)HttpWebRequest.Create(requestUriString);
-            wr.Headers.Add("access-token", this.AccessToken);
-            wr.Headers.Add("client-secret", this.ClientSecret);
+            
+            Authorization.ApplyTo(wr);
+            
             wr.ContentType = "application/xml";
             wr.Accept = "application/xml";
             wr.Method = method;
@@ -507,6 +454,8 @@ namespace FortnoxAPILibrary
                         throw we;
                     case HttpStatusCode.TooManyRequests:
                         throw new FortnoxTooManyRequestsException(we.Message, we);
+                    case HttpStatusCode.Unauthorized:
+                        throw new FortnoxUnauthorizedRequestException(we.Message, we);
                 }
 
                 using (var errorStream = response.GetResponseStream())

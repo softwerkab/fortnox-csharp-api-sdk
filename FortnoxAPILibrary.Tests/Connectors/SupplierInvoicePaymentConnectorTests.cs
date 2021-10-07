@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using FortnoxAPILibrary.Connectors;
+using FortnoxAPILibrary.SDK.Auth;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests.Connectors
@@ -14,8 +15,7 @@ namespace FortnoxAPILibrary.Tests.Connectors
         {
             _connector = new SupplierInvoicePaymentConnector
             {
-                AccessToken = AccessToken,
-                ClientSecret = ClientSecret
+                Authorization = new StandardAuth(AccessToken)
             };
         }
 
