@@ -11,6 +11,9 @@ namespace FortnoxSDK.Tests
         public static FortnoxAuthorization TestAuth = new StaticTokenAuth(TestCredentials.Access_Token, TestCredentials.Client_Secret);
         public static FortnoxClient DefaultFortnoxClient = new FortnoxClient(TestAuth);
 
+        public static long DefaultFinancialYear = 1;
+        public static long NonDefaultFinancialYear = 2;
+
         public static DateTime Recently => DateTime.Now.AddSeconds(-5);
 
         public static string GenerateTmpFilePath()

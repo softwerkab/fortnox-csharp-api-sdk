@@ -10,17 +10,17 @@ namespace Fortnox.SDK.Interfaces
     public interface IVoucherSeriesConnector : IEntityConnector
 	{
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		VoucherSeries Update(VoucherSeries voucherSeries);
+		VoucherSeries Update(VoucherSeries voucherSeries, long? financialYearId = null);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		VoucherSeries Create(VoucherSeries voucherSeries);
+		VoucherSeries Create(VoucherSeries voucherSeries, long? financialYearId = null);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		VoucherSeries Get(string id);
+		VoucherSeries Get(string id, long? financialYearId = null);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<VoucherSeriesSubset> Find(VoucherSeriesSearch searchSettings);
 
-		Task<VoucherSeries> UpdateAsync(VoucherSeries voucherSeries);
-		Task<VoucherSeries> CreateAsync(VoucherSeries voucherSeries);
-		Task<VoucherSeries> GetAsync(string id);
+		Task<VoucherSeries> UpdateAsync(VoucherSeries voucherSeries, long? financialYearId = null);
+		Task<VoucherSeries> CreateAsync(VoucherSeries voucherSeries, long? financialYearId = null);
+		Task<VoucherSeries> GetAsync(string id, long? financialYearId = null);
         Task<EntityCollection<VoucherSeriesSubset>> FindAsync(VoucherSeriesSearch searchSettings);
 	}
 }

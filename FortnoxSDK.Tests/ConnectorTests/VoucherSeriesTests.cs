@@ -27,7 +27,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Description = "TestVoucherSeries",
             };
 
-            var createdVoucherSeries = await connector.CreateAsync(newVoucherSeries) ?? await connector.UpdateAsync(newVoucherSeries); //if already exists, update it instead
+            var createdVoucherSeries = await connector.CreateAsync(newVoucherSeries);
             Assert.AreEqual("TestVoucherSeries", createdVoucherSeries.Description);
 
             #endregion CREATE
@@ -45,6 +45,52 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             var retrievedVoucherSeries = await connector.GetAsync(createdVoucherSeries.Code);
             Assert.AreEqual("UpdatedTestVoucherSeries", retrievedVoucherSeries.Description);
+
+            #endregion READ / GET
+
+            #region DELETE
+            //Not supported
+            #endregion DELETE
+
+            #region Delete arranged resources
+            //Add code to delete temporary resources
+            #endregion Delete arranged resources
+        }
+
+        [TestMethod]
+        public async Task Test_VoucherSeries_SpecifiedFinYear_CRUD()
+        {
+            var connector = FortnoxClient.VoucherSeriesConnector;
+
+            #region CREATE
+            //var digits = new char[]{ '0', '1', '2', '3', '4', '5'}
+            var newVoucherSeries = new VoucherSeries()
+            {
+                Code = TestUtils.RandomInt().ToString(),
+                Description = "TestVoucherSeries"
+            };
+
+            var createdVoucherSeries = await connector.CreateAsync(newVoucherSeries, TestUtils.NonDefaultFinancialYear);
+            Assert.AreEqual("TestVoucherSeries", createdVoucherSeries.Description);
+            Assert.AreEqual(TestUtils.NonDefaultFinancialYear, createdVoucherSeries.Year);
+
+            #endregion CREATE
+
+            #region UPDATE
+
+            createdVoucherSeries.Description = "UpdatedTestVoucherSeries";
+
+            var updatedVoucherSeries = await connector.UpdateAsync(createdVoucherSeries, TestUtils.NonDefaultFinancialYear);
+            Assert.AreEqual("UpdatedTestVoucherSeries", updatedVoucherSeries.Description);
+            Assert.AreEqual(TestUtils.NonDefaultFinancialYear, updatedVoucherSeries.Year);
+
+            #endregion UPDATE
+
+            #region READ / GET
+
+            var retrievedVoucherSeries = await connector.GetAsync(createdVoucherSeries.Code, TestUtils.NonDefaultFinancialYear);
+            Assert.AreEqual("UpdatedTestVoucherSeries", retrievedVoucherSeries.Description);
+            Assert.AreEqual(TestUtils.NonDefaultFinancialYear, retrievedVoucherSeries.Year);
 
             #endregion READ / GET
 
