@@ -15,6 +15,7 @@ namespace FortnoxSDK.Tests
         public static long NonDefaultFinancialYear = 2;
 
         public static DateTime Recently => DateTime.Now.AddSeconds(-5);
+        public static TimeSpan TestSleepTime = TimeSpan.FromSeconds(5);
 
         public static string GenerateTmpFilePath()
         {
