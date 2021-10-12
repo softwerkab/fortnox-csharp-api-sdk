@@ -14,8 +14,7 @@ namespace FortnoxSDK.Tests
         public static long DefaultFinancialYear = 1;
         public static long NonDefaultFinancialYear = 2;
 
-        public static DateTime Recently => DateTime.UtcNow.AddHours(FortnoxServerHourOffset).AddSeconds(-5); 
-        public static TimeSpan TestSleepTime = TimeSpan.FromSeconds(5);
+        public static DateTime Recently => DateTime.UtcNow.AddHours(FortnoxServerHourOffset).AddSeconds(-5);
 
         public static int FortnoxServerHourOffset = IsDST ? 2 : 1; // Fortnox Server is UTC+1 or UTC+2 (in case of DST)
         public static bool IsDST => true; //TODO: Handle Daylight saving time (DST) properly.

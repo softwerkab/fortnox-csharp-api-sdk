@@ -71,7 +71,6 @@ namespace FortnoxSDK.Tests.ConnectorTests
         [TestMethod]
         public async Task Test_Find()
         {
-            Thread.Sleep(TestUtils.TestSleepTime);
             #region Arrange
             //Add code to create required resources
             #endregion Arrange
