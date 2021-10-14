@@ -9,15 +9,15 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface ITaxReductionConnector : IEntityConnector
 	{
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		TaxReduction Update(TaxReduction taxReduction);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		TaxReduction Create(TaxReduction taxReduction);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		TaxReduction Get(string id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		void Delete(string id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<TaxReductionSubset> Find(TaxReductionSearch searchSettings);
 
 		Task<TaxReduction> UpdateAsync(TaxReduction taxReduction);

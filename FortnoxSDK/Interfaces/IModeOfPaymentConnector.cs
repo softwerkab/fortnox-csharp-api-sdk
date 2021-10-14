@@ -9,15 +9,15 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IModeOfPaymentConnector : IEntityConnector
 	{
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		ModeOfPayment Update(ModeOfPayment modeOfPayment);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		ModeOfPayment Create(ModeOfPayment modeOfPayment);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		ModeOfPayment Get(string id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		void Delete(string id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<ModeOfPayment> Find(ModeOfPaymentSearch searchSettings);
 
 		Task<ModeOfPayment> UpdateAsync(ModeOfPayment modeOfPayment);

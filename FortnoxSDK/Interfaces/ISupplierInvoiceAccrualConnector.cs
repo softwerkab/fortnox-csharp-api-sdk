@@ -9,15 +9,15 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface ISupplierInvoiceAccrualConnector : IEntityConnector
 	{
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		SupplierInvoiceAccrual Update(SupplierInvoiceAccrual supplierInvoiceAccrual);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		SupplierInvoiceAccrual Create(SupplierInvoiceAccrual supplierInvoiceAccrual);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		SupplierInvoiceAccrual Get(long? id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		void Delete(long? id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<SupplierInvoiceAccrualSubset> Find(SupplierInvoiceAccrualSearch searchSettings);
 
 		Task<SupplierInvoiceAccrual> UpdateAsync(SupplierInvoiceAccrual supplierInvoiceAccrual);

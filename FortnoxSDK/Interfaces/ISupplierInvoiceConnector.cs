@@ -9,23 +9,23 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface ISupplierInvoiceConnector : IEntityConnector
 	{
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		SupplierInvoice Update(SupplierInvoice supplierInvoice);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		SupplierInvoice Create(SupplierInvoice supplierInvoice);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		SupplierInvoice Get(long? id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<SupplierInvoiceSubset> Find(SupplierInvoiceSearch searchSettings);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		SupplierInvoice Bookkeep(long? id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		SupplierInvoice Cancel(long? id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         SupplierInvoice Credit(long? id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         SupplierInvoice ApprovalPayment(long? id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         SupplierInvoice ApprovalBookkeep(long? id);
 
 		Task<SupplierInvoice> UpdateAsync(SupplierInvoice supplierInvoice);

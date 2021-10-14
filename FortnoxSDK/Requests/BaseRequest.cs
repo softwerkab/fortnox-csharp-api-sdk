@@ -11,7 +11,7 @@ namespace Fortnox.SDK.Requests
         public IDictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
         public byte[] Content { get; set; }
 
-        public string BaseUrl { get; set; } = APIConstants.FortnoxApi;
+        public string BaseUrl { get; set; } = ApiConstants.FortnoxApi;
         public string Version { get; set; } = "3";
         public string Resource { get; set; }
         public IList<string> Indices { get; set; } = new List<string>();

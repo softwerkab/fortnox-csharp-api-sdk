@@ -46,9 +46,9 @@ namespace Fortnox.SDK.Connectors
             var parameters = new Dictionary<string, string>();
 
             if (exportOptions.FromDate != null)
-                parameters.Add("fromdate", exportOptions.FromDate?.ToString(APIConstants.DateFormat));
+                parameters.Add("fromdate", exportOptions.FromDate?.ToString(ApiConstants.DateFormat));
             if (exportOptions.ToDate != null)
-                parameters.Add("todate", exportOptions.ToDate?.ToString(APIConstants.DateFormat));
+                parameters.Add("todate", exportOptions.ToDate?.ToString(ApiConstants.DateFormat));
             if (exportOptions.ExportAll != null)
                 parameters.Add("exportall", exportOptions.ExportAll.ToString().ToLower());
             if (exportOptions.Selection != null)

@@ -7,7 +7,7 @@ namespace Fortnox.SDK.Interfaces
 {
     public interface ISIEConnector : IConnector
     {
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         byte[] Get(SIEType type, long? finYearID = null, SIEExportOptions exportOptions = null);
 
         Task<byte[]> GetAsync(SIEType type, long? finYearID = null, SIEExportOptions exportOptions = null);

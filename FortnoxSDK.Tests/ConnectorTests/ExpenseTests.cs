@@ -84,7 +84,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             var searchSettings = new ExpenseSearch();
             searchSettings.LastModified = TestUtils.Recently; //does not seem to work
-            searchSettings.Limit = APIConstants.Unlimited;
+            searchSettings.Limit = ApiConstants.Unlimited;
             var expensesCollection = await connector.FindAsync(searchSettings);
 
             var newExpenses = expensesCollection.Entities.Where(x => x.Text == remark).ToList();

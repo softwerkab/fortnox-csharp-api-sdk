@@ -9,13 +9,13 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface ITrustedEmailDomainsConnector : IEntityConnector
 	{
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		TrustedEmailDomain Create(TrustedEmailDomain trustedEmailDomain);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		TrustedEmailDomain Get(long? id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		void Delete(long? id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<TrustedEmailDomain> Find(TrustedEmailDomainsSearch searchSettings);
 
         Task<TrustedEmailDomain> CreateAsync(TrustedEmailDomain trustedEmailDomain);

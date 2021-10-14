@@ -9,13 +9,13 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IInvoiceFileConnectionConnector : IEntityConnector
 	{
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         InvoiceFileConnection Update(InvoiceFileConnection invoiceFileConnection);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         InvoiceFileConnection Create(InvoiceFileConnection invoiceFileConnection);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         void Delete(string id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         IList<InvoiceFileConnection> GetConnections(long? entityId, EntityType? entityType);
 
 		Task<InvoiceFileConnection> UpdateAsync(InvoiceFileConnection invoiceFileConnection);

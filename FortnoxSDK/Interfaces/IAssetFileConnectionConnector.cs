@@ -9,13 +9,13 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IAssetFileConnectionConnector : IEntityConnector
 	{
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		AssetFileConnection Create(AssetFileConnection assetFileConnection);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		AssetFileConnection Get(string id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		void Delete(string id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<AssetFileConnection> Find(AssetFileConnectionSearch searchSettings);
 
         Task<AssetFileConnection> CreateAsync(AssetFileConnection assetFileConnection);

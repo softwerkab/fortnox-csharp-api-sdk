@@ -8,7 +8,7 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface ICompanyInformationConnector : IEntityConnector
 	{
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         CompanyInformation Get();
 
 		Task<CompanyInformation> GetAsync();

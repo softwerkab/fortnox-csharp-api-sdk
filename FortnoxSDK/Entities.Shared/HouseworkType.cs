@@ -71,7 +71,7 @@ namespace Fortnox.SDK.Entities
         /// <summary>
         /// Use with Update request to clear existing value
         /// </summary>
-        [EnumMember(Value = APIConstants.BlankValue)]
+        [EnumMember(Value = ApiConstants.BlankValue)]
         Blank
     }
 }

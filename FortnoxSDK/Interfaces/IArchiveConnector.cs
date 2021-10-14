@@ -8,17 +8,17 @@ namespace Fortnox.SDK.Interfaces
 {
     public interface IArchiveConnector : IEntityConnector
 	{
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         byte[] DownloadFile(string id, IdType idType = IdType.Id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         FileInfo DownloadFile(string id, string localPath, IdType idType = IdType.Id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         ArchiveFile UploadFile(string name, byte[] data, string folderPathOrId = null);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         ArchiveFile UploadFile(string name, Stream stream, string folderPathOrId = null);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         ArchiveFile UploadFile(string localPath, string folderPathOrId = null);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         void DeleteFile(string id);
 
         ArchiveFolder GetFolder(string pathOrId = null);

@@ -9,17 +9,17 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IInvoicePaymentConnector : IEntityConnector
 	{
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		InvoicePayment Update(InvoicePayment invoicePayment);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		InvoicePayment Create(InvoicePayment invoicePayment);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		InvoicePayment Get(long? id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		void Delete(long? id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         EntityCollection<InvoicePaymentSubset> Find(InvoicePaymentSearch searchSettings);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         void Bookkeep(long? id);
 
 		Task<InvoicePayment> UpdateAsync(InvoicePayment invoicePayment);

@@ -84,7 +84,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             var searchSettings = new EmployeeSearch();
             //searchSettings.LastModified = TestUtils.Recently; //parameter is not accepted by server
-            searchSettings.Limit = APIConstants.Unlimited;
+            searchSettings.Limit = ApiConstants.Unlimited;
             var employees = await connector.FindAsync(searchSettings);
 
             var newEmployees = employees.Entities.Where(e => e.City == marks).ToList();
