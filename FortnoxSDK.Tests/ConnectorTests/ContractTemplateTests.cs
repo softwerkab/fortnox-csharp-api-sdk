@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +17,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public async Task Test_ContractTemplate_CRUD()
         {
             #region Arrange
-            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article(){ Description = "TmpArticle" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle" });
             #endregion Arrange
 
             var connector = FortnoxClient.ContractTemplateConnector;
@@ -45,7 +44,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdContractTemplate.TemplateName = "UpdatedTestTemplate";
 
-            var updatedContractTemplate = await connector.UpdateAsync(createdContractTemplate); 
+            var updatedContractTemplate = await connector.UpdateAsync(createdContractTemplate);
             Assert.AreEqual("UpdatedTestTemplate", updatedContractTemplate.TemplateName);
 
             #endregion UPDATE

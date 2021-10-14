@@ -8,7 +8,7 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface IVoucherConnector : IEntityConnector
-	{
+    {
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         Voucher Create(Voucher voucher);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
@@ -19,7 +19,7 @@ namespace Fortnox.SDK.Interfaces
         void Delete(long? id, string seriesId, long? financialYearId);
 
         Task<Voucher> CreateAsync(Voucher voucher);
-		Task<Voucher> GetAsync(long? id, string seriesId, long? financialYearId);
+        Task<Voucher> GetAsync(long? id, string seriesId, long? financialYearId);
         Task<EntityCollection<VoucherSubset>> FindAsync(VoucherSearch searchSettings);
         Task DeleteAsync(long? id, string seriesId, long? financialYearId);
     }

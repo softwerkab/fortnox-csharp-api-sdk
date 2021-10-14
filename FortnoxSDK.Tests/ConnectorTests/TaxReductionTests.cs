@@ -59,7 +59,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdTaxReduction.AskedAmount = 200;
 
-            var updatedTaxReduction = await connector.UpdateAsync(createdTaxReduction); 
+            var updatedTaxReduction = await connector.UpdateAsync(createdTaxReduction);
             Assert.AreEqual(200, updatedTaxReduction.AskedAmount);
 
             #endregion UPDATE
@@ -168,14 +168,16 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer()
             {
-                Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"
+                Name = "TmpCustomer",
+                CountryCode = "SE",
+                City = "Testopolis"
             });
 
             var houseworkArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article()
             {
-                Description = "TmpArticle", 
-                Type = ArticleType.Service, 
-                HouseworkType = HouseworkType.SolarCells, 
+                Description = "TmpArticle",
+                Type = ArticleType.Service,
+                HouseworkType = HouseworkType.SolarCells,
                 Housework = true
             });
 

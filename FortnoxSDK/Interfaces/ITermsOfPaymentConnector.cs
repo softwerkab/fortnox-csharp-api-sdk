@@ -8,22 +8,22 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface ITermsOfPaymentConnector : IEntityConnector
-	{
+    {
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		TermsOfPayment Update(TermsOfPayment termsOfPayment);
+        TermsOfPayment Update(TermsOfPayment termsOfPayment);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		TermsOfPayment Create(TermsOfPayment termsOfPayment);
+        TermsOfPayment Create(TermsOfPayment termsOfPayment);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		TermsOfPayment Get(string id);
+        TermsOfPayment Get(string id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		void Delete(string id);
+        void Delete(string id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		EntityCollection<TermsOfPayment> Find(TermsOfPaymentSearch searchSettings);
+        EntityCollection<TermsOfPayment> Find(TermsOfPaymentSearch searchSettings);
 
-		Task<TermsOfPayment> UpdateAsync(TermsOfPayment termsOfPayment);
-		Task<TermsOfPayment> CreateAsync(TermsOfPayment termsOfPayment);
-		Task<TermsOfPayment> GetAsync(string id);
-		Task DeleteAsync(string id);
-		Task<EntityCollection<TermsOfPayment>> FindAsync(TermsOfPaymentSearch searchSettings);
-	}
+        Task<TermsOfPayment> UpdateAsync(TermsOfPayment termsOfPayment);
+        Task<TermsOfPayment> CreateAsync(TermsOfPayment termsOfPayment);
+        Task<TermsOfPayment> GetAsync(string id);
+        Task DeleteAsync(string id);
+        Task<EntityCollection<TermsOfPayment>> FindAsync(TermsOfPaymentSearch searchSettings);
+    }
 }

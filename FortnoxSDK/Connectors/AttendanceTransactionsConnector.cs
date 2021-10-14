@@ -12,13 +12,13 @@ namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
     internal class AttendanceTransactionsConnector : SearchableEntityConnector<AttendanceTransaction, AttendanceTransactionSubset, AttendanceTransactionsSearch>, IAttendanceTransactionsConnector
-	{
+    {
 
         /// <remarks/>
         public AttendanceTransactionsConnector()
-		{
-			Resource = "attendancetransactions";
-		}
+        {
+            Resource = "attendancetransactions";
+        }
 
         /// <summary>
         /// Gets a attendenceTransaction
@@ -29,7 +29,7 @@ namespace Fortnox.SDK.Connectors
         /// <returns>The found attendanceTransaction</returns>
         public AttendanceTransaction Get(string employeeId, DateTime? date, AttendanceCauseCode? code)
         {
-			return GetAsync(employeeId, date, code).GetResult();
+            return GetAsync(employeeId, date, code).GetResult();
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Fortnox.SDK.Connectors
         /// <returns>The updated attendanceTransaction</returns>
         public AttendanceTransaction Update(AttendanceTransaction attendanceTransaction)
         {
-			return UpdateAsync(attendanceTransaction).GetResult();
+            return UpdateAsync(attendanceTransaction).GetResult();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Fortnox.SDK.Connectors
         /// <returns>The created attendanceTransaction</returns>
         public AttendanceTransaction Create(AttendanceTransaction attendanceTransaction)
         {
-			return CreateAsync(attendanceTransaction).GetResult();
+            return CreateAsync(attendanceTransaction).GetResult();
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Fortnox.SDK.Connectors
         /// <param name="code"></param>
         public void Delete(string employeeId, DateTime? date, AttendanceCauseCode? code)
         {
-			DeleteAsync(employeeId, date, code).GetResult();
+            DeleteAsync(employeeId, date, code).GetResult();
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Fortnox.SDK.Connectors
         /// <returns>A list of attendanceTransactions</returns>
         public EntityCollection<AttendanceTransactionSubset> Find(AttendanceTransactionsSearch searchSettings)
         {
-			return FindAsync(searchSettings).GetResult();
+            return FindAsync(searchSettings).GetResult();
         }
 
         public async Task<EntityCollection<AttendanceTransactionSubset>> FindAsync(AttendanceTransactionsSearch searchSettings)
@@ -92,5 +92,5 @@ namespace Fortnox.SDK.Connectors
         {
             return await BaseGet(employeeId, date?.ToString(APIConstants.DateFormat), code?.GetStringValue()).ConfigureAwait(false);
         }
-	}
+    }
 }

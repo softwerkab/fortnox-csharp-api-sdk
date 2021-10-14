@@ -10,18 +10,18 @@ namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
     internal class LockedPeriodConnector : EntityConnector<LockedPeriod>, ILockedPeriodConnector
-	{
+    {
 
 
-		/// <remarks/>
-		public LockedPeriodConnector()
-		{
-			Resource = "settings/lockedperiod";
-		}
+        /// <remarks/>
+        public LockedPeriodConnector()
+        {
+            Resource = "settings/lockedperiod";
+        }
 
         public LockedPeriod Get()
         {
-			return GetAsync().GetResult();
+            return GetAsync().GetResult();
         }
 
         public async Task<LockedPeriod> GetAsync()

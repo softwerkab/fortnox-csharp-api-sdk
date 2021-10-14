@@ -8,7 +8,7 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface IPredefinedVoucherSeriesConnector : IEntityConnector
-	{
+    {
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         PredefinedVoucherSeries Update(PredefinedVoucherSeries predefinedVoucherSeries);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
@@ -16,8 +16,8 @@ namespace Fortnox.SDK.Interfaces
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         EntityCollection<PredefinedVoucherSeries> Find(PredefinedVoucherSeriesSearch searchSettings);
 
-		Task<PredefinedVoucherSeries> UpdateAsync(PredefinedVoucherSeries predefinedVoucherSeries);
+        Task<PredefinedVoucherSeries> UpdateAsync(PredefinedVoucherSeries predefinedVoucherSeries);
         Task<PredefinedVoucherSeries> GetAsync(string id);
         Task<EntityCollection<PredefinedVoucherSeries>> FindAsync(PredefinedVoucherSeriesSearch searchSettings);
-	}
+    }
 }

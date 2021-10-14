@@ -10,26 +10,26 @@ namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
     internal class CompanyInformationConnector : EntityConnector<CompanyInformation>, ICompanyInformationConnector
-	{
+    {
 
-		/// <remarks/>
-		public CompanyInformationConnector()
-		{
-			Resource = "companyinformation";
-		}
-
-		/// <summary>
-		/// Retrieves the Company Information.
-		/// </summary>
-		/// <returns></returns>
-		public CompanyInformation Get()
+        /// <remarks/>
+        public CompanyInformationConnector()
         {
-			return GetAsync().GetResult();
+            Resource = "companyinformation";
         }
 
-		public async Task<CompanyInformation> GetAsync()
+        /// <summary>
+        /// Retrieves the Company Information.
+        /// </summary>
+        /// <returns></returns>
+        public CompanyInformation Get()
+        {
+            return GetAsync().GetResult();
+        }
+
+        public async Task<CompanyInformation> GetAsync()
         {
             return await BaseGet().ConfigureAwait(false);
         }
-	}
+    }
 }

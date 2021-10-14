@@ -7,7 +7,7 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface ITrustedEmailSendersConnector : IEntityConnector
-	{
+    {
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         TrustedEmailSender Create(TrustedEmailSender trustedEmailSenders);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
@@ -18,5 +18,5 @@ namespace Fortnox.SDK.Interfaces
         Task<TrustedEmailSender> CreateAsync(TrustedEmailSender trustedEmailSenders);
         Task DeleteAsync(long? id);
         Task<EmailSenders> GetAllAsync();
-	}
+    }
 }

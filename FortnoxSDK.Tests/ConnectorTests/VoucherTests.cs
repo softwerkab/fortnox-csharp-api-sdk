@@ -29,7 +29,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Description = "TestVoucher",
                 Comments = "Some comments",
                 VoucherSeries = "A", //predefined series
-                TransactionDate = new DateTime(2020, 1,1),
+                TransactionDate = new DateTime(2020, 1, 1),
                 VoucherRows = new List<VoucherRow>()
                 {
                     new VoucherRow(){ Account = 1930, Debit = 1500, Credit = 0 },
@@ -124,7 +124,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             Assert.AreEqual(2, vouchers.TotalResources);
 
             //Clean
-            await connector.DeleteAsync(voucher3.VoucherNumber, voucher3.VoucherSeries, voucher3.Year); 
+            await connector.DeleteAsync(voucher3.VoucherNumber, voucher3.VoucherSeries, voucher3.Year);
             await connector.DeleteAsync(voucher2.VoucherNumber, voucher2.VoucherSeries, voucher2.Year);
             await connector.DeleteAsync(voucher1.VoucherNumber, voucher1.VoucherSeries, voucher1.Year);
         }

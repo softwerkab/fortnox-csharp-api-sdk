@@ -8,19 +8,19 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface ILabelConnector : IEntityConnector
-	{
+    {
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		Label Update(Label label);
+        Label Update(Label label);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		Label Create(Label label);
+        Label Create(Label label);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		void Delete(long? id);
+        void Delete(long? id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		EntityCollection<Label> Find(LabelSearch searchSettings);
+        EntityCollection<Label> Find(LabelSearch searchSettings);
 
-		Task<Label> UpdateAsync(Label label);
-		Task<Label> CreateAsync(Label label);
-		Task DeleteAsync(long? id);
-		Task<EntityCollection<Label>> FindAsync(LabelSearch searchSettings);
-	}
+        Task<Label> UpdateAsync(Label label);
+        Task<Label> CreateAsync(Label label);
+        Task DeleteAsync(long? id);
+        Task<EntityCollection<Label>> FindAsync(LabelSearch searchSettings);
+    }
 }

@@ -8,22 +8,22 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface IAssetTypesConnector : IEntityConnector
-	{
+    {
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		AssetType Update(AssetType assetType);
+        AssetType Update(AssetType assetType);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		AssetType Create(AssetType assetType);
+        AssetType Create(AssetType assetType);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		AssetType Get(long? id);
+        AssetType Get(long? id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		void Delete(long? id);
+        void Delete(long? id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		EntityCollection<AssetTypesSubset> Find(AssetTypesSearch searchSettings);
+        EntityCollection<AssetTypesSubset> Find(AssetTypesSearch searchSettings);
 
-		Task<AssetType> UpdateAsync(AssetType assetType);
-		Task<AssetType> CreateAsync(AssetType assetType);
-		Task<AssetType> GetAsync(long? id);
-		Task DeleteAsync(long? id);
-		Task<EntityCollection<AssetTypesSubset>> FindAsync(AssetTypesSearch searchSettings);
-	}
+        Task<AssetType> UpdateAsync(AssetType assetType);
+        Task<AssetType> CreateAsync(AssetType assetType);
+        Task<AssetType> GetAsync(long? id);
+        Task DeleteAsync(long? id);
+        Task<EntityCollection<AssetTypesSubset>> FindAsync(AssetTypesSearch searchSettings);
+    }
 }

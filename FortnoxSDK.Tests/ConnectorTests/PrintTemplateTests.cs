@@ -21,7 +21,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public async Task Test_Find()
         {
             var connector = FortnoxClient.PrintTemplateConnector;
-            
+
             var fullCollection = await connector.FindAsync(null);
 
             Assert.AreEqual(9, fullCollection.Entities.Count);

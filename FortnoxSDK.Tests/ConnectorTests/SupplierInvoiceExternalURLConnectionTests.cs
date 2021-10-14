@@ -42,7 +42,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #region CREATE
             var newSupplierInvoiceExternalURLConnection = new SupplierInvoiceExternalURLConnection()
             {
-                SupplierInvoiceNumber = (int?) tmpSpplierInvoice.GivenNumber,
+                SupplierInvoiceNumber = (int?)tmpSpplierInvoice.GivenNumber,
                 ExternalURLConnection = @"http://example.com/image.jpg"
             };
 
@@ -55,7 +55,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdSupplierInvoiceExternalURLConnection.ExternalURLConnection = "http://example.com/image.png";
 
-            var updatedSupplierInvoiceExternalURLConnection = await connector.UpdateAsync(createdSupplierInvoiceExternalURLConnection); 
+            var updatedSupplierInvoiceExternalURLConnection = await connector.UpdateAsync(createdSupplierInvoiceExternalURLConnection);
             Assert.AreEqual("http://example.com/image.png", updatedSupplierInvoiceExternalURLConnection.ExternalURLConnection);
 
             #endregion UPDATE

@@ -7,7 +7,7 @@ using Fortnox.SDK.Entities;
 namespace Fortnox.SDK.Interfaces
 {
     public interface IArchiveConnector : IEntityConnector
-	{
+    {
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         byte[] DownloadFile(string id, IdType idType = IdType.Id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]

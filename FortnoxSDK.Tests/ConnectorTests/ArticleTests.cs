@@ -44,7 +44,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdArticle.Description = "Updated Test Article";
 
-            var updatedArticle = await connector.UpdateAsync(createdArticle); 
+            var updatedArticle = await connector.UpdateAsync(createdArticle);
             Assert.AreEqual("Updated Test Article", updatedArticle.Description);
 
             #endregion UPDATE
@@ -134,10 +134,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public void HouseWorkArticle_AllTypes()
         {
             var values = Enum.GetValues(typeof(HouseworkType)).Cast<HouseworkType>().ToList();
-            Assert.AreEqual(28,values.Count);
+            Assert.AreEqual(28, values.Count);
 
             var connector = FortnoxClient.ArticleConnector;
-            var article = connector.Create(new Article(){ Description = "HouseworkArticleTest", Housework = true });
+            var article = connector.Create(new Article() { Description = "HouseworkArticleTest", Housework = true });
 
             foreach (var houseworkType in values)
             {
@@ -166,7 +166,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var connector = FortnoxClient.ArticleConnector;
             var article = connector.Create(new Article()
             {
-                Description = "HouseworkArticleTest", 
+                Description = "HouseworkArticleTest",
                 Housework = true,
                 HouseworkType = HouseworkType.Cleaning
             });

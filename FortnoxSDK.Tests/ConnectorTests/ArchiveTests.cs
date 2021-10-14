@@ -27,7 +27,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var connector = FortnoxClient.ArchiveConnector;
 
             var data = Resource.fortnox_image;
-            var randomFileName = TestUtils.RandomString()+".txt";
+            var randomFileName = TestUtils.RandomString() + ".txt";
 
             var fortnoxFile = await connector.UploadFileAsync(randomFileName, data, testRootFolder.Name);
 
@@ -124,7 +124,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public async Task Test_Download_To_Local_System()
         {
             var connector = FortnoxClient.ArchiveConnector;
-            
+
             //Arrange
             var data = Resource.fortnox_image;
             var randomFileName = TestUtils.RandomString() + ".txt";

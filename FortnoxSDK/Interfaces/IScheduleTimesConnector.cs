@@ -7,7 +7,7 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface IScheduleTimesConnector : IEntityConnector
-	{
+    {
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         ScheduleTimes Update(ScheduleTimes scheduleTimes);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
@@ -15,7 +15,7 @@ namespace Fortnox.SDK.Interfaces
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         ScheduleTimes Reset(string employeeId, DateTime? date);
 
-		Task<ScheduleTimes> UpdateAsync(ScheduleTimes scheduleTimes);
+        Task<ScheduleTimes> UpdateAsync(ScheduleTimes scheduleTimes);
         Task<ScheduleTimes> GetAsync(string employeeId, DateTime? date);
         Task<ScheduleTimes> ResetAsync(string employeeId, DateTime? date);
     }

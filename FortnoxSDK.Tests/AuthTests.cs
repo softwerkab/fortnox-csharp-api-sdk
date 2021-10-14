@@ -31,7 +31,7 @@ namespace FortnoxSDK.Tests
             var clientSecret = "yFKwme8LEQ"; //"TestCredentials.Client_Secret;
             var redirectUri = "https://mysite.org/activation";
             var authorizationCode = "Placeholder";
-            
+
             var fortnoxAuthClient = new FortnoxAuthClient();
             var authWorkflow = fortnoxAuthClient.StandardAuthWorkflow;
 

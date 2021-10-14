@@ -50,7 +50,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdSupplier.Name = "UpdatedSupplier";
 
-            var updatedSupplier = await connector.UpdateAsync(createdSupplier); 
+            var updatedSupplier = await connector.UpdateAsync(createdSupplier);
             Assert.AreEqual("UpdatedSupplier", updatedSupplier.Name);
 
             #endregion UPDATE

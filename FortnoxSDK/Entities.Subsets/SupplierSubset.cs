@@ -32,7 +32,7 @@ namespace Fortnox.SDK.Entities
         ///<summary> City of the supplier address </summary>
         [JsonProperty]
         public string City { get; set; }
-        
+
         ///<summary> Cost center code </summary>
         [JsonProperty]
         public string CostCenter { get; set; }
@@ -73,7 +73,7 @@ namespace Fortnox.SDK.Entities
         ///<summary> Phone number for the supplier </summary>
         [JsonProperty]
         public string Phone { get; set; }
-        
+
         ///<summary> Pre defined account of the supplier </summary>
         [JsonProperty]
         public string PreDefinedAccount { get; set; }

@@ -41,7 +41,7 @@ namespace Fortnox.SDK.Entities
         ///<summary> Id of asset type used for asset </summary>
         [JsonProperty]
         public string TypeId { get; set; }
-        
+
         ///<summary> Acquisition value </summary>
         [JsonProperty]
         public decimal? AcquisitionValue { get; set; }

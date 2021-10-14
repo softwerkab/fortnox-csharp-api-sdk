@@ -14,13 +14,13 @@ namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
     internal class VoucherConnector : SearchableEntityConnector<Voucher, VoucherSubset, VoucherSearch>, IVoucherConnector
-	{
+    {
 
-		/// <remarks/>
-		public VoucherConnector()
-		{
-			Resource = "vouchers";
-		}
+        /// <remarks/>
+        public VoucherConnector()
+        {
+            Resource = "vouchers";
+        }
 
         /// <summary>
         /// Find a voucher based on id
@@ -30,28 +30,28 @@ namespace Fortnox.SDK.Connectors
         /// <param name="financialYearId">Identifier of the financial year</param>
         /// <returns>The found voucher</returns>
         public Voucher Get(long? id, string seriesId, long? financialYearId)
-		{
-			return GetAsync(id, seriesId, financialYearId).GetResult();
+        {
+            return GetAsync(id, seriesId, financialYearId).GetResult();
         }
 
-		/// <summary>
-		/// Creates a new voucher
-		/// </summary>
-		/// <param name="voucher">The voucher to create</param>
-		/// <returns>The created voucher</returns>
-		public Voucher Create(Voucher voucher)
-		{
-			return CreateAsync(voucher).GetResult();
-		}
+        /// <summary>
+        /// Creates a new voucher
+        /// </summary>
+        /// <param name="voucher">The voucher to create</param>
+        /// <returns>The created voucher</returns>
+        public Voucher Create(Voucher voucher)
+        {
+            return CreateAsync(voucher).GetResult();
+        }
 
-		/// <summary>
-		/// Gets a list of vouchers
-		/// </summary>
-		/// <returns>A list of vouchers</returns>
-		public EntityCollection<VoucherSubset> Find(VoucherSearch searchSettings)
-		{
-			return FindAsync(searchSettings).GetResult();
-		}
+        /// <summary>
+        /// Gets a list of vouchers
+        /// </summary>
+        /// <returns>A list of vouchers</returns>
+        public EntityCollection<VoucherSubset> Find(VoucherSearch searchSettings)
+        {
+            return FindAsync(searchSettings).GetResult();
+        }
 
         public void Delete(long? id, string seriesId, long? financialYearId)
         {
@@ -59,13 +59,13 @@ namespace Fortnox.SDK.Connectors
         }
 
         public async Task<EntityCollection<VoucherSubset>> FindAsync(VoucherSearch searchSettings)
-		{
-			return await BaseFind(searchSettings).ConfigureAwait(false);
-		}
+        {
+            return await BaseFind(searchSettings).ConfigureAwait(false);
+        }
 
         public async Task DeleteAsync(long? id, string seriesId, long? financialYearId)
         {
-			var request = new BaseRequest()
+            var request = new BaseRequest()
             {
                 Resource = Resource,
                 Indices = new List<string> { seriesId, id.ToString() },
@@ -76,25 +76,25 @@ namespace Fortnox.SDK.Connectors
                 request.Parameters.Add("financialyear", financialYearId.ToString());
 
             await SendAsync(request).ConfigureAwait(false);
-		}
+        }
 
         public async Task<Voucher> CreateAsync(Voucher voucher)
-		{
-			return await BaseCreate(voucher).ConfigureAwait(false);
-		}
+        {
+            return await BaseCreate(voucher).ConfigureAwait(false);
+        }
         public async Task<Voucher> GetAsync(long? id, string seriesId, long? financialYearId)
-		{
+        {
             var request = new EntityRequest<Voucher>()
             {
                 Resource = Resource,
-                Indices = new List<string>{ seriesId, id.ToString() },
+                Indices = new List<string> { seriesId, id.ToString() },
                 Method = HttpMethod.Get
             };
 
-			if (financialYearId != null)
-				request.Parameters.Add("financialyear", financialYearId.ToString());
+            if (financialYearId != null)
+                request.Parameters.Add("financialyear", financialYearId.ToString());
 
-			return await SendAsync(request).ConfigureAwait(false);
+            return await SendAsync(request).ConfigureAwait(false);
         }
     }
 }

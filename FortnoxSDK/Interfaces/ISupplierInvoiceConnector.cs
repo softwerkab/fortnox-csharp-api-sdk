@@ -8,19 +8,19 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface ISupplierInvoiceConnector : IEntityConnector
-	{
+    {
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		SupplierInvoice Update(SupplierInvoice supplierInvoice);
+        SupplierInvoice Update(SupplierInvoice supplierInvoice);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		SupplierInvoice Create(SupplierInvoice supplierInvoice);
+        SupplierInvoice Create(SupplierInvoice supplierInvoice);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		SupplierInvoice Get(long? id);
+        SupplierInvoice Get(long? id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		EntityCollection<SupplierInvoiceSubset> Find(SupplierInvoiceSearch searchSettings);
+        EntityCollection<SupplierInvoiceSubset> Find(SupplierInvoiceSearch searchSettings);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		SupplierInvoice Bookkeep(long? id);
+        SupplierInvoice Bookkeep(long? id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		SupplierInvoice Cancel(long? id);
+        SupplierInvoice Cancel(long? id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         SupplierInvoice Credit(long? id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
@@ -28,14 +28,14 @@ namespace Fortnox.SDK.Interfaces
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         SupplierInvoice ApprovalBookkeep(long? id);
 
-		Task<SupplierInvoice> UpdateAsync(SupplierInvoice supplierInvoice);
-		Task<SupplierInvoice> CreateAsync(SupplierInvoice supplierInvoice);
-		Task<SupplierInvoice> GetAsync(long? id);
+        Task<SupplierInvoice> UpdateAsync(SupplierInvoice supplierInvoice);
+        Task<SupplierInvoice> CreateAsync(SupplierInvoice supplierInvoice);
+        Task<SupplierInvoice> GetAsync(long? id);
         Task<EntityCollection<SupplierInvoiceSubset>> FindAsync(SupplierInvoiceSearch searchSettings);
         Task<SupplierInvoice> BookkeepAsync(long? id);
         Task<SupplierInvoice> CancelAsync(long? id);
         Task<SupplierInvoice> CreditAsync(long? id);
         Task<SupplierInvoice> ApprovalPaymentAsync(long? id);
         Task<SupplierInvoice> ApprovalBookkeepAsync(long? id);
-	}
+    }
 }

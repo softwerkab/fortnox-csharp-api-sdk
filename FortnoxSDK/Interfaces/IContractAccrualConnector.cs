@@ -8,22 +8,22 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface IContractAccrualConnector : IEntityConnector
-	{
+    {
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		ContractAccrual Update(ContractAccrual contractAccrual);
+        ContractAccrual Update(ContractAccrual contractAccrual);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		ContractAccrual Create(ContractAccrual contractAccrual);
+        ContractAccrual Create(ContractAccrual contractAccrual);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		ContractAccrual Get(long? id);
+        ContractAccrual Get(long? id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		void Delete(long? id);
+        void Delete(long? id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		EntityCollection<ContractAccrualSubset> Find(ContractAccrualSearch searchSettings);
+        EntityCollection<ContractAccrualSubset> Find(ContractAccrualSearch searchSettings);
 
-		Task<ContractAccrual> UpdateAsync(ContractAccrual contractAccrual);
-		Task<ContractAccrual> CreateAsync(ContractAccrual contractAccrual);
-		Task<ContractAccrual> GetAsync(long? id);
-		Task DeleteAsync(long? id);
-		Task<EntityCollection<ContractAccrualSubset>> FindAsync(ContractAccrualSearch searchSettings);
-	}
+        Task<ContractAccrual> UpdateAsync(ContractAccrual contractAccrual);
+        Task<ContractAccrual> CreateAsync(ContractAccrual contractAccrual);
+        Task<ContractAccrual> GetAsync(long? id);
+        Task DeleteAsync(long? id);
+        Task<EntityCollection<ContractAccrualSubset>> FindAsync(ContractAccrualSearch searchSettings);
+    }
 }

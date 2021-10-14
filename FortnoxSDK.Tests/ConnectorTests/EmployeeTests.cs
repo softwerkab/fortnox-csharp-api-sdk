@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Fortnox.SDK;
@@ -80,7 +79,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var connector = FortnoxClient.EmployeeConnector;
 
             for (var i = 0; i < 5; i++)
-                await connector.CreateAsync(new Employee() {EmployeeId = TestUtils.RandomString(), City = marks});
+                await connector.CreateAsync(new Employee() { EmployeeId = TestUtils.RandomString(), City = marks });
 
             var searchSettings = new EmployeeSearch();
             //searchSettings.LastModified = TestUtils.Recently; //parameter is not accepted by server

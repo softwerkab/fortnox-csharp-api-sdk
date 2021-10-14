@@ -70,7 +70,7 @@ namespace FortnoxSDK.Tests
             Console.WriteLine(error.Message);
             Assert.IsTrue(error.Message.Contains("Too Many Requests"));
 
-            Thread.Sleep(5*1000); //Sleep to cooldown/recover from "debt" (otherwise following tests will fail with TooManyRequests)
+            Thread.Sleep(5 * 1000); //Sleep to cooldown/recover from "debt" (otherwise following tests will fail with TooManyRequests)
         }
     }
 }

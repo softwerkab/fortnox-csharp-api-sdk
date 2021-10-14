@@ -14,7 +14,7 @@ namespace Fortnox.SDK.Entities
         [ReadOnly]
         [JsonProperty("@url")]
         public Uri Url { get; private set; }
-        
+
         ///<summary> Description of the project </summary>
         [JsonProperty]
         public string Description { get; set; }

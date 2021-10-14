@@ -18,7 +18,7 @@ namespace Fortnox.SDK.Entities
         ///<summary> Article number. If no article number is provided, the next number in the series will be used. Only alpha numeric characters, with the addition of � + /  . and _, are allowed. </summary>
         [JsonProperty]
         public string ArticleNumber { get; set; }
-        
+
         ///<summary> The description of the article. </summary>
         [JsonProperty]
         public string Description { get; set; }
@@ -35,7 +35,7 @@ namespace Fortnox.SDK.Entities
         ///<summary> If the article is housework. </summary>
         [JsonProperty]
         public bool? Housework { get; set; }
-        
+
         ///<summary> Purchase price of the article. </summary>
         [JsonProperty]
         public decimal? PurchasePrice { get; set; }

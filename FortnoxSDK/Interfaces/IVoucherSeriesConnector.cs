@@ -8,19 +8,19 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface IVoucherSeriesConnector : IEntityConnector
-	{
+    {
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		VoucherSeries Update(VoucherSeries voucherSeries, long? financialYearId = null);
+        VoucherSeries Update(VoucherSeries voucherSeries, long? financialYearId = null);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		VoucherSeries Create(VoucherSeries voucherSeries, long? financialYearId = null);
+        VoucherSeries Create(VoucherSeries voucherSeries, long? financialYearId = null);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		VoucherSeries Get(string id, long? financialYearId = null);
+        VoucherSeries Get(string id, long? financialYearId = null);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		EntityCollection<VoucherSeriesSubset> Find(VoucherSeriesSearch searchSettings);
+        EntityCollection<VoucherSeriesSubset> Find(VoucherSeriesSearch searchSettings);
 
-		Task<VoucherSeries> UpdateAsync(VoucherSeries voucherSeries, long? financialYearId = null);
-		Task<VoucherSeries> CreateAsync(VoucherSeries voucherSeries, long? financialYearId = null);
-		Task<VoucherSeries> GetAsync(string id, long? financialYearId = null);
+        Task<VoucherSeries> UpdateAsync(VoucherSeries voucherSeries, long? financialYearId = null);
+        Task<VoucherSeries> CreateAsync(VoucherSeries voucherSeries, long? financialYearId = null);
+        Task<VoucherSeries> GetAsync(string id, long? financialYearId = null);
         Task<EntityCollection<VoucherSeriesSubset>> FindAsync(VoucherSeriesSearch searchSettings);
-	}
+    }
 }

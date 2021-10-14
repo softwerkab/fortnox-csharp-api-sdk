@@ -8,7 +8,7 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface IExpenseConnector : IEntityConnector
-	{
+    {
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
         Expense Create(Expense expense);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
@@ -17,7 +17,7 @@ namespace Fortnox.SDK.Interfaces
         EntityCollection<ExpenseSubset> Find(ExpenseSearch searchSettings);
 
         Task<Expense> CreateAsync(Expense expense);
-		Task<Expense> GetAsync(string id);
+        Task<Expense> GetAsync(string id);
         Task<EntityCollection<ExpenseSubset>> FindAsync(ExpenseSearch searchSettings);
-	}
+    }
 }

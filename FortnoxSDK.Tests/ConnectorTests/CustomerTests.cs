@@ -44,7 +44,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdCustomer.Name = "UpdatedTestCustomer";
 
-            var updatedCustomer = await connector.UpdateAsync(createdCustomer); 
+            var updatedCustomer = await connector.UpdateAsync(createdCustomer);
             Assert.AreEqual("UpdatedTestCustomer", updatedCustomer.Name);
 
             #endregion UPDATE

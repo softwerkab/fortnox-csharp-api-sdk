@@ -8,19 +8,19 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface IPriceListConnector : IEntityConnector
-	{
+    {
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		PriceList Update(PriceList priceList);
+        PriceList Update(PriceList priceList);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		PriceList Create(PriceList priceList);
+        PriceList Create(PriceList priceList);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		PriceList Get(string id);
+        PriceList Get(string id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		EntityCollection<PriceList> Find(PriceListSearch searchSettings);
+        EntityCollection<PriceList> Find(PriceListSearch searchSettings);
 
-		Task<PriceList> UpdateAsync(PriceList priceList);
-		Task<PriceList> CreateAsync(PriceList priceList);
-		Task<PriceList> GetAsync(string id);
-		Task<EntityCollection<PriceList>> FindAsync(PriceListSearch searchSettings);
-	}
+        Task<PriceList> UpdateAsync(PriceList priceList);
+        Task<PriceList> CreateAsync(PriceList priceList);
+        Task<PriceList> GetAsync(string id);
+        Task<EntityCollection<PriceList>> FindAsync(PriceListSearch searchSettings);
+    }
 }

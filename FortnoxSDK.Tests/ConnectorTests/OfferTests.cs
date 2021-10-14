@@ -49,7 +49,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdOffer.Comments = "UpdatedTestOrder";
 
-            var updatedOffer = await connector.UpdateAsync(createdOffer); 
+            var updatedOffer = await connector.UpdateAsync(createdOffer);
             Assert.AreEqual("UpdatedTestOrder", updatedOffer.Comments);
 
             #endregion UPDATE
@@ -171,7 +171,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public async Task Test_Email()
         {
             #region Arrange
-            var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "richard.randak@softwerk.se"});
+            var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "richard.randak@softwerk.se" });
             var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             #endregion Arrange
 

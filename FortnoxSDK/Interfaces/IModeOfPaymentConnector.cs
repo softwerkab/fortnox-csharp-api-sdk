@@ -8,22 +8,22 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface IModeOfPaymentConnector : IEntityConnector
-	{
+    {
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		ModeOfPayment Update(ModeOfPayment modeOfPayment);
+        ModeOfPayment Update(ModeOfPayment modeOfPayment);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		ModeOfPayment Create(ModeOfPayment modeOfPayment);
+        ModeOfPayment Create(ModeOfPayment modeOfPayment);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		ModeOfPayment Get(string id);
+        ModeOfPayment Get(string id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		void Delete(string id);
+        void Delete(string id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		EntityCollection<ModeOfPayment> Find(ModeOfPaymentSearch searchSettings);
+        EntityCollection<ModeOfPayment> Find(ModeOfPaymentSearch searchSettings);
 
-		Task<ModeOfPayment> UpdateAsync(ModeOfPayment modeOfPayment);
-		Task<ModeOfPayment> CreateAsync(ModeOfPayment modeOfPayment);
-		Task<ModeOfPayment> GetAsync(string id);
-		Task DeleteAsync(string id);
-		Task<EntityCollection<ModeOfPayment>> FindAsync(ModeOfPaymentSearch searchSettings);
-	}
+        Task<ModeOfPayment> UpdateAsync(ModeOfPayment modeOfPayment);
+        Task<ModeOfPayment> CreateAsync(ModeOfPayment modeOfPayment);
+        Task<ModeOfPayment> GetAsync(string id);
+        Task DeleteAsync(string id);
+        Task<EntityCollection<ModeOfPayment>> FindAsync(ModeOfPaymentSearch searchSettings);
+    }
 }

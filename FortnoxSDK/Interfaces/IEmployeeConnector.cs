@@ -8,19 +8,19 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface IEmployeeConnector : IEntityConnector
-	{
+    {
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		Employee Update(Employee employee);
+        Employee Update(Employee employee);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		Employee Create(Employee employee);
+        Employee Create(Employee employee);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		Employee Get(string id);
+        Employee Get(string id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		EntityCollection<EmployeeSubset> Find(EmployeeSearch searchSettings);
+        EntityCollection<EmployeeSubset> Find(EmployeeSearch searchSettings);
 
-		Task<Employee> UpdateAsync(Employee employee);
-		Task<Employee> CreateAsync(Employee employee);
-		Task<Employee> GetAsync(string id);
+        Task<Employee> UpdateAsync(Employee employee);
+        Task<Employee> CreateAsync(Employee employee);
+        Task<Employee> GetAsync(string id);
         Task<EntityCollection<EmployeeSubset>> FindAsync(EmployeeSearch searchSettings);
-	}
+    }
 }

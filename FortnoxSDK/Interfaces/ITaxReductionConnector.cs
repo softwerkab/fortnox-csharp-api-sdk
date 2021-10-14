@@ -8,22 +8,22 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface ITaxReductionConnector : IEntityConnector
-	{
+    {
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		TaxReduction Update(TaxReduction taxReduction);
+        TaxReduction Update(TaxReduction taxReduction);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		TaxReduction Create(TaxReduction taxReduction);
+        TaxReduction Create(TaxReduction taxReduction);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		TaxReduction Get(string id);
+        TaxReduction Get(string id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		void Delete(string id);
+        void Delete(string id);
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		EntityCollection<TaxReductionSubset> Find(TaxReductionSearch searchSettings);
+        EntityCollection<TaxReductionSubset> Find(TaxReductionSearch searchSettings);
 
-		Task<TaxReduction> UpdateAsync(TaxReduction taxReduction);
-		Task<TaxReduction> CreateAsync(TaxReduction taxReduction);
-		Task<TaxReduction> GetAsync(string id);
-		Task DeleteAsync(string id);
-		Task<EntityCollection<TaxReductionSubset>> FindAsync(TaxReductionSearch searchSettings);
-	}
+        Task<TaxReduction> UpdateAsync(TaxReduction taxReduction);
+        Task<TaxReduction> CreateAsync(TaxReduction taxReduction);
+        Task<TaxReduction> GetAsync(string id);
+        Task DeleteAsync(string id);
+        Task<EntityCollection<TaxReductionSubset>> FindAsync(TaxReductionSearch searchSettings);
+    }
 }

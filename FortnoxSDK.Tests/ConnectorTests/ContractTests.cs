@@ -55,7 +55,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdContract.Comments = "UpdatedTestContract";
 
-            var updatedContract = await connector.UpdateAsync(createdContract); 
+            var updatedContract = await connector.UpdateAsync(createdContract);
             Assert.AreEqual("UpdatedTestContract", updatedContract.Comments);
 
             #endregion UPDATE

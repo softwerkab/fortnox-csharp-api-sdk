@@ -8,10 +8,10 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface IAccountChartConnector : IEntityConnector
-	{
+    {
         [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
-		EntityCollection<AccountChart> Find(AccountChartSearch searchSettings);
+        EntityCollection<AccountChart> Find(AccountChartSearch searchSettings);
 
-		Task<EntityCollection<AccountChart>> FindAsync(AccountChartSearch searchSettings);
-	}
+        Task<EntityCollection<AccountChart>> FindAsync(AccountChartSearch searchSettings);
+    }
 }

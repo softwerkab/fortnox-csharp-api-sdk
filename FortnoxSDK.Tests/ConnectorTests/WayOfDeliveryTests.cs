@@ -39,7 +39,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdWayOfDelivery.Description = "UpdatedTestDeliveryMethod";
 
-            var updatedWayOfDelivery = await connector.UpdateAsync(createdWayOfDelivery); 
+            var updatedWayOfDelivery = await connector.UpdateAsync(createdWayOfDelivery);
             Assert.AreEqual("UpdatedTestDeliveryMethod", updatedWayOfDelivery.Description);
 
             #endregion UPDATE

@@ -17,8 +17,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public async Task Test_Asset_CRUD()
         {
             #region Arrange
-            var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter(){ Code = "TMP", Description = "TmpCostCenter"});
-            var tmpAssetType = await FortnoxClient.AssetTypesConnector.CreateAsync(new AssetType() {Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
+            var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
+            var tmpAssetType = await FortnoxClient.AssetTypesConnector.CreateAsync(new AssetType() { Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
             #endregion Arrange
 
             var connector = FortnoxClient.AssetConnector;
@@ -29,9 +29,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Description = "TestAsset",
                 Number = TestUtils.RandomString(),
                 AcquisitionDate = new DateTime(2011, 1, 1),
-                AcquisitionStart = new DateTime(2011,2,1),
+                AcquisitionStart = new DateTime(2011, 2, 1),
                 AcquisitionValue = 500,
-                DepreciationFinal = new DateTime(2012,1,1),
+                DepreciationFinal = new DateTime(2012, 1, 1),
                 Department = "Some Department",
                 Notes = "Some notes",
                 Group = "Some Group",
@@ -50,7 +50,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdAsset.Description = "UpdatedTestAsset";
 
-            var updatedAsset = await connector.UpdateAsync(createdAsset); 
+            var updatedAsset = await connector.UpdateAsync(createdAsset);
             Assert.AreEqual("UpdatedTestAsset", updatedAsset.Description);
 
             #endregion UPDATE

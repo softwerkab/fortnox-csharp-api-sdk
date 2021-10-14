@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Fortnox.SDK.Utility
 {
-	/// <remarks/>
-	public static class Extensions
-	{
+    /// <remarks/>
+    public static class Extensions
+    {
         internal static bool HasAttribute<T>(this MemberInfo property) where T : Attribute
         {
             return property.GetCustomAttributes<T>().Any();
@@ -66,7 +66,7 @@ namespace Fortnox.SDK.Utility
 
         internal static async Task WriteBytes(this Stream stream, byte[] data)
         {
-            await stream.WriteAsync(data, 0,data.Length).ConfigureAwait(false);
+            await stream.WriteAsync(data, 0, data.Length).ConfigureAwait(false);
         }
 
         internal static async Task<byte[]> ToBytes(this FileInfo fileInfo)

@@ -30,7 +30,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             {
                 EmployeeId = tmpEmployee.EmployeeId,
                 CauseCode = AbsenceCauseCode.MIL,
-                Date = new DateTime(2018, 01,01),
+                Date = new DateTime(2018, 01, 01),
                 Hours = 5.5m,
                 CostCenter = tmpCostCenter.Code,
                 Project = tmpProject.ProjectNumber
@@ -45,7 +45,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdAbsenceTransaction.Hours = 8;
 
-            var updatedAbsenceTransaction = await connector.UpdateAsync(createdAbsenceTransaction); 
+            var updatedAbsenceTransaction = await connector.UpdateAsync(createdAbsenceTransaction);
             Assert.AreEqual(8, updatedAbsenceTransaction.Hours);
 
             #endregion UPDATE

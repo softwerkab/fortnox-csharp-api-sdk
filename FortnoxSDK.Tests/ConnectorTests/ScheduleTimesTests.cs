@@ -27,7 +27,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             {
                 Hours = 6.5m,
                 EmployeeId = tmpEmployee.EmployeeId,
-                Date = new DateTime(2050,10,10)
+                Date = new DateTime(2050, 10, 10)
             };
 
             var createdScheduleTimes = await connector.UpdateAsync(newScheduleTimes);
@@ -39,7 +39,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdScheduleTimes.Hours = 7;
 
-            var updatedScheduleTimes = await connector.UpdateAsync(createdScheduleTimes); 
+            var updatedScheduleTimes = await connector.UpdateAsync(createdScheduleTimes);
             Assert.AreEqual(7, updatedScheduleTimes.Hours);
 
             #endregion UPDATE

@@ -21,9 +21,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #region Arrange
 
             var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer()
-                {Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"});
+            { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
             var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article()
-                {Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 10});
+            { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 10 });
             var invoiceConnector = FortnoxClient.InvoiceConnector;
             var tmpInvoice = await invoiceConnector.CreateAsync(new Invoice()
             {

@@ -12,14 +12,14 @@ using Fortnox.SDK.Utility;
 
 namespace Fortnox.SDK.Connectors
 {
-	/// <remarks/>
+    /// <remarks/>
     internal class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConnection>, IInvoiceFileConnectionConnector
     {
 
         /// <remarks/>
 		public InvoiceFileConnectionConnector()
-		{
-			Resource = "fileattachments/attachments-v1";
+        {
+            Resource = "fileattachments/attachments-v1";
         }
 
         public IList<InvoiceFileConnection> GetConnections(long? entityId, EntityType? entityType)
@@ -33,31 +33,31 @@ namespace Fortnox.SDK.Connectors
 		/// <param name="invoiceFileConnection">The invoiceFileConnection to update</param>
 		/// <returns>The updated invoiceFileConnection</returns>
 		public InvoiceFileConnection Update(InvoiceFileConnection invoiceFileConnection)
-		{
-			return UpdateAsync(invoiceFileConnection).GetResult();
-		}
+        {
+            return UpdateAsync(invoiceFileConnection).GetResult();
+        }
 
-		/// <summary>
-		/// Creates a new invoiceFileConnection
-		/// </summary>
-		/// <param name="invoiceFileConnection">The invoiceFileConnection to create</param>
-		/// <returns>The created invoiceFileConnection</returns>
-		public InvoiceFileConnection Create(InvoiceFileConnection invoiceFileConnection)
-		{
-			return CreateAsync(invoiceFileConnection).GetResult();
-		}
+        /// <summary>
+        /// Creates a new invoiceFileConnection
+        /// </summary>
+        /// <param name="invoiceFileConnection">The invoiceFileConnection to create</param>
+        /// <returns>The created invoiceFileConnection</returns>
+        public InvoiceFileConnection Create(InvoiceFileConnection invoiceFileConnection)
+        {
+            return CreateAsync(invoiceFileConnection).GetResult();
+        }
 
-		/// <summary>
-		/// Deletes a invoiceFileConnection
-		/// </summary>
-		/// <param name="id">Identifier of the invoiceFileConnection to delete</param>
-		public void Delete(string id)
-		{
-			DeleteAsync(id).GetResult();
-		}
+        /// <summary>
+        /// Deletes a invoiceFileConnection
+        /// </summary>
+        /// <param name="id">Identifier of the invoiceFileConnection to delete</param>
+        public void Delete(string id)
+        {
+            DeleteAsync(id).GetResult();
+        }
 
-		public async Task DeleteAsync(string id)
-		{
+        public async Task DeleteAsync(string id)
+        {
             var request = new BaseRequest
             {
                 Version = "api",
@@ -68,7 +68,7 @@ namespace Fortnox.SDK.Connectors
 
             await SendAsync(request).ConfigureAwait(false);
         }
-		public async Task<InvoiceFileConnection> CreateAsync(InvoiceFileConnection invoiceFileConnection)
+        public async Task<InvoiceFileConnection> CreateAsync(InvoiceFileConnection invoiceFileConnection)
         {
             var request = new EntityRequest<List<InvoiceFileConnection>>()
             {

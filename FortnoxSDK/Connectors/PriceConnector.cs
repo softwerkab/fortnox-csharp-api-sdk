@@ -13,14 +13,14 @@ namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
     internal class PriceConnector : SearchableEntityConnector<Price, PriceSubset, PriceSearch>, IPriceConnector
-	{
+    {
 
 
-		/// <remarks/>
-		public PriceConnector()
-		{
-			Resource = "prices";
-		}
+        /// <remarks/>
+        public PriceConnector()
+        {
+            Resource = "prices";
+        }
 
         /// <summary>
         /// Find a price
@@ -31,7 +31,7 @@ namespace Fortnox.SDK.Connectors
         /// <returns>The found price</returns>
         public Price Get(string priceListCode, string articleNumber, decimal? fromQuantity = null)
         {
-			return GetAsync(priceListCode, articleNumber, fromQuantity).GetResult();
+            return GetAsync(priceListCode, articleNumber, fromQuantity).GetResult();
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Fortnox.SDK.Connectors
         /// <returns>The updated price</returns>
         public Price Update(Price price)
         {
-			return UpdateAsync(price).GetResult();
+            return UpdateAsync(price).GetResult();
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Fortnox.SDK.Connectors
         /// <returns>The created price</returns>
         public Price Create(Price price)
         {
-			return CreateAsync(price).GetResult();
+            return CreateAsync(price).GetResult();
         }
 
         /// <summary>
@@ -62,24 +62,24 @@ namespace Fortnox.SDK.Connectors
         /// <param name="fromQuantity"></param>
         public void Delete(string priceListCode, string articleNumber, decimal? fromQuantity = null)
         {
-			DeleteAsync(priceListCode, articleNumber, fromQuantity).GetResult();
+            DeleteAsync(priceListCode, articleNumber, fromQuantity).GetResult();
         }
 
-		/// <summary>
-		/// Gets a list of prices
-		/// </summary>
-		/// <returns>A list of prices</returns>
-		public EntityCollection<PriceSubset> Find(string priceListId, string articleId, PriceSearch searchSettings)
-		{
-			return FindAsync(priceListId, articleId, searchSettings).GetResult();
-		}
+        /// <summary>
+        /// Gets a list of prices
+        /// </summary>
+        /// <returns>A list of prices</returns>
+        public EntityCollection<PriceSubset> Find(string priceListId, string articleId, PriceSearch searchSettings)
+        {
+            return FindAsync(priceListId, articleId, searchSettings).GetResult();
+        }
 
-		public async Task<EntityCollection<PriceSubset>> FindAsync(string priceListId, string articleId, PriceSearch searchSettings)
-		{
+        public async Task<EntityCollection<PriceSubset>> FindAsync(string priceListId, string articleId, PriceSearch searchSettings)
+        {
             var request = new SearchRequest<PriceSubset>()
             {
                 Resource = $"{Resource}/sublist",
-                Indices = new List<string>(){ priceListId, articleId },
+                Indices = new List<string>() { priceListId, articleId },
                 SearchSettings = searchSettings
             };
 
@@ -101,5 +101,5 @@ namespace Fortnox.SDK.Connectors
         {
             return await BaseGet(priceListCode, articleNumber, fromQuantity?.ToString()).ConfigureAwait(false);
         }
-	}
+    }
 }

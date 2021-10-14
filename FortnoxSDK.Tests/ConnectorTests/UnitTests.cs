@@ -39,7 +39,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdUnit.Description = "UpdatedTestUnit";
 
-            var updatedUnit = await connector.UpdateAsync(createdUnit); 
+            var updatedUnit = await connector.UpdateAsync(createdUnit);
             Assert.AreEqual("UpdatedTestUnit", updatedUnit.Description);
 
             #endregion UPDATE

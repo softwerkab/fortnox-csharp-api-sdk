@@ -23,7 +23,7 @@ namespace Fortnox.SDK.Requests
         {
             var index = string.Join("/", Indices.Select(Uri.EscapeDataString));
 
-            var pathSegments = new []
+            var pathSegments = new[]
             {
                 BaseUrl,
                 Version,
@@ -38,7 +38,7 @@ namespace Fortnox.SDK.Requests
                 var query = string.Join("&", Parameters.Select(p => $"{p.Key}={Uri.EscapeDataString(p.Value)}"));
                 uri += $"/?{query}";
             }
-            
+
             return uri;
         }
     }

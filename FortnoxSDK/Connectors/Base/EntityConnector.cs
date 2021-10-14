@@ -18,8 +18,8 @@ namespace Fortnox.SDK.Connectors.Base
             if (request.Entity != null)
             {
 
-                var requestJson = request.UseEntityWrapper ? 
-                    Serializer.Serialize(new EntityWrapper<T>(request.Entity)): 
+                var requestJson = request.UseEntityWrapper ?
+                    Serializer.Serialize(new EntityWrapper<T>(request.Entity)) :
                     Serializer.Serialize(request.Entity);
                 request.Content = Encoding.UTF8.GetBytes(requestJson);
             }
@@ -80,7 +80,7 @@ namespace Fortnox.SDK.Connectors.Base
 
             return await SendAsync(request).ConfigureAwait(false);
         }
-        
+
         protected async Task<byte[]> DoDownloadActionAsync(string documentNumber, Action action)
         {
             if (!action.IsDownloadAction())
@@ -89,7 +89,7 @@ namespace Fortnox.SDK.Connectors.Base
             var request = new FileDownloadRequest()
             {
                 Resource = Resource,
-                Indices = new List<string>{ documentNumber, action.GetStringValue() },
+                Indices = new List<string> { documentNumber, action.GetStringValue() },
             };
 
             return await SendAsync(request).ConfigureAwait(false);
@@ -103,7 +103,7 @@ namespace Fortnox.SDK.Connectors.Base
             var request = new EntityRequest<TEntity>()
             {
                 Resource = Resource,
-                Indices = new List<string> {documentNumber, action.GetStringValue()},
+                Indices = new List<string> { documentNumber, action.GetStringValue() },
                 Method = action.GetMethod()
             };
 

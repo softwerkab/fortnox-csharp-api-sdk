@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
@@ -38,7 +37,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdTermsOfDelivery.Description = "UpdatedTestDeliveryTerms";
 
-            var updatedTermsOfDelivery = await connector.UpdateAsync(createdTermsOfDelivery); 
+            var updatedTermsOfDelivery = await connector.UpdateAsync(createdTermsOfDelivery);
             Assert.AreEqual("UpdatedTestDeliveryTerms", updatedTermsOfDelivery.Description);
 
             #endregion UPDATE
