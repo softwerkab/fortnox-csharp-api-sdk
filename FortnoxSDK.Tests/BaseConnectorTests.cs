@@ -185,7 +185,7 @@ namespace FortnoxSDK.Tests
             Assert.IsTrue(result.TotalPages > 1);
 
             var searchSettings = new CustomerSearch();
-            searchSettings.Limit = APIConstants.Unlimited;
+            searchSettings.Limit = ApiConstants.Unlimited;
             var allInOneResult = await connector.FindAsync(searchSettings);
 
             Assert.AreEqual(1, allInOneResult.TotalPages);

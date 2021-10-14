@@ -163,8 +163,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
             };
 
             var createdInvoice = await connector.CreateAsync(newInvoice);
-            Assert.AreEqual("2019-01-20", createdInvoice.InvoiceDate?.ToString(APIConstants.DateFormat));
-            Assert.AreEqual("2019-02-19", createdInvoice.DueDate?.ToString(APIConstants.DateFormat));
+            Assert.AreEqual("2019-01-20", createdInvoice.InvoiceDate?.ToString(ApiConstants.DateFormat));
+            Assert.AreEqual("2019-02-19", createdInvoice.DueDate?.ToString(ApiConstants.DateFormat));
 
             var newInvoiceDate = new DateTime(2019, 1, 1);
             var dateChange = newInvoiceDate - newInvoice.InvoiceDate.Value;
@@ -174,8 +174,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
             createdInvoice.DueDate = newDueDate;
 
             var updatedInvoice = await connector.UpdateAsync(createdInvoice);
-            Assert.AreEqual("2019-01-01", updatedInvoice.InvoiceDate?.ToString(APIConstants.DateFormat));
-            Assert.AreEqual("2019-01-31", updatedInvoice.DueDate?.ToString(APIConstants.DateFormat));
+            Assert.AreEqual("2019-01-01", updatedInvoice.InvoiceDate?.ToString(ApiConstants.DateFormat));
+            Assert.AreEqual("2019-01-31", updatedInvoice.DueDate?.ToString(ApiConstants.DateFormat));
 
             await connector.CancelAsync(createdInvoice.DocumentNumber);
 

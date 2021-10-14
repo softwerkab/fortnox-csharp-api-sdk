@@ -9,11 +9,11 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IFinancialYearConnector : IEntityConnector
 	{
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         FinancialYear Create(FinancialYear financialYear);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         FinancialYear Get(long? id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         EntityCollection<FinancialYearSubset> Find(FinancialYearSearch searchSettings);
 
         Task<FinancialYear> CreateAsync(FinancialYear financialYear);

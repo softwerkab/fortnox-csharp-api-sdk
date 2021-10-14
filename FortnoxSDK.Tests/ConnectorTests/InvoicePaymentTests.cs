@@ -51,7 +51,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             };
 
             var createdInvoicePayment = await connector.CreateAsync(newInvoicePayment);
-            Assert.AreEqual("2020-02-01", createdInvoicePayment.PaymentDate?.ToString(APIConstants.DateFormat));
+            Assert.AreEqual("2020-02-01", createdInvoicePayment.PaymentDate?.ToString(ApiConstants.DateFormat));
 
             #endregion CREATE
 
@@ -60,14 +60,14 @@ namespace FortnoxSDK.Tests.ConnectorTests
             createdInvoicePayment.PaymentDate = new DateTime(2020, 3, 1);
 
             var updatedInvoicePayment = await connector.UpdateAsync(createdInvoicePayment);
-            Assert.AreEqual("2020-03-01", updatedInvoicePayment.PaymentDate?.ToString(APIConstants.DateFormat));
+            Assert.AreEqual("2020-03-01", updatedInvoicePayment.PaymentDate?.ToString(ApiConstants.DateFormat));
 
             #endregion UPDATE
 
             #region READ / GET
 
             var retrievedInvoicePayment = await connector.GetAsync(createdInvoicePayment.Number);
-            Assert.AreEqual("2020-03-01", retrievedInvoicePayment.PaymentDate?.ToString(APIConstants.DateFormat));
+            Assert.AreEqual("2020-03-01", retrievedInvoicePayment.PaymentDate?.ToString(ApiConstants.DateFormat));
 
             #endregion READ / GET
 

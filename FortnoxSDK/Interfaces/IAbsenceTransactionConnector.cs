@@ -9,15 +9,15 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IAbsenceTransactionConnector : IEntityConnector
 	{
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		AbsenceTransaction Update(AbsenceTransaction absenceTransaction);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		AbsenceTransaction Create(AbsenceTransaction absenceTransaction);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		AbsenceTransaction Get(string employeeId, DateTime? date, AbsenceCauseCode? code);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		void Delete(string employeeId, DateTime? date, AbsenceCauseCode? code);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<AbsenceTransaction> Find(AbsenceTransactionSearch searchSettings);
 
 		Task<AbsenceTransaction> UpdateAsync(AbsenceTransaction absenceTransaction);

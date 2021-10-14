@@ -9,11 +9,11 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IExpenseConnector : IEntityConnector
 	{
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         Expense Create(Expense expense);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         Expense Get(string id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         EntityCollection<ExpenseSubset> Find(ExpenseSearch searchSettings);
 
         Task<Expense> CreateAsync(Expense expense);

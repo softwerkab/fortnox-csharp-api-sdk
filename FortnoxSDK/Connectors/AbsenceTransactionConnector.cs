@@ -79,7 +79,7 @@ namespace Fortnox.SDK.Connectors
 		}
 		public async Task DeleteAsync(string employeeId, DateTime? date, AbsenceCauseCode? code)
 		{
-			await BaseDelete(employeeId, date?.ToString(APIConstants.DateFormat), code?.GetStringValue()).ConfigureAwait(false);
+			await BaseDelete(employeeId, date?.ToString(ApiConstants.DateFormat), code?.GetStringValue()).ConfigureAwait(false);
 		}
 		public async Task<AbsenceTransaction> CreateAsync(AbsenceTransaction absenceTransaction)
 		{
@@ -87,11 +87,11 @@ namespace Fortnox.SDK.Connectors
 		}
 		public async Task<AbsenceTransaction> UpdateAsync(AbsenceTransaction absenceTransaction)
 		{
-			return await BaseUpdate(absenceTransaction, absenceTransaction.EmployeeId, absenceTransaction.Date?.ToString(APIConstants.DateFormat), absenceTransaction.CauseCode?.GetStringValue()).ConfigureAwait(false);
+			return await BaseUpdate(absenceTransaction, absenceTransaction.EmployeeId, absenceTransaction.Date?.ToString(ApiConstants.DateFormat), absenceTransaction.CauseCode?.GetStringValue()).ConfigureAwait(false);
 		}
         public async Task<AbsenceTransaction> GetAsync(string employeeId, DateTime? date, AbsenceCauseCode? code)
 		{
-			return await BaseGet(employeeId, date?.ToString(APIConstants.DateFormat), code?.GetStringValue()).ConfigureAwait(false);
+			return await BaseGet(employeeId, date?.ToString(ApiConstants.DateFormat), code?.GetStringValue()).ConfigureAwait(false);
 		}
 	}
 }

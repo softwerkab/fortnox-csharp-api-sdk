@@ -17,9 +17,9 @@ namespace Fortnox.SDK.Utility
             if (type == typeof(DateTime))
             {
                 if (((DateTime)value).Date == (DateTime)value) //Date without hours/minutes/seconds..
-                    return ((DateTime)value).ToString(APIConstants.DateFormat);
+                    return ((DateTime)value).ToString(ApiConstants.DateFormat);
 
-                return ((DateTime)value).ToString(APIConstants.DateAndTimeFormat);
+                return ((DateTime)value).ToString(ApiConstants.DateAndTimeFormat);
             }
 
             return value.ToString().ToLower();

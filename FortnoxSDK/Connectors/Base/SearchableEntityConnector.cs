@@ -26,7 +26,7 @@ namespace Fortnox.SDK.Connectors.Base
         
         protected async Task<EntityCollection<T>> SendAsync<T>(SearchRequest<T> request)
         {
-            if (request.SearchSettings != null && request.SearchSettings.Limit == APIConstants.Unlimited)
+            if (request.SearchSettings != null && request.SearchSettings.Limit == ApiConstants.Unlimited)
                 return await GetAllInOnePage(request).ConfigureAwait(false);
             else
                 return await GetSinglePage(request).ConfigureAwait(false);
@@ -40,7 +40,7 @@ namespace Fortnox.SDK.Connectors.Base
             {
                 var singlePageRequest = Clone(request);
                 singlePageRequest.SearchSettings.Page = page;
-                singlePageRequest.SearchSettings.Limit = APIConstants.MaxLimit;
+                singlePageRequest.SearchSettings.Limit = ApiConstants.MaxLimit;
 
                 var result = await GetSinglePage(singlePageRequest).ConfigureAwait(false);
                 allEntities.AddRange(result.Entities);

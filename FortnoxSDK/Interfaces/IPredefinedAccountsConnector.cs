@@ -9,11 +9,11 @@ namespace Fortnox.SDK.Interfaces
     /// <remarks/>
     public interface IPredefinedAccountsConnector : IEntityConnector
 	{
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		PredefinedAccount Update(PredefinedAccount predefinedAccounts);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		PredefinedAccount Get(string id);
-        [Obsolete(APIConstants.ObsoleteSyncMethodWarning)]
+        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
 		EntityCollection<PredefinedAccount> Find(PredefinedAccountsSearch searchSettings);
 
 		Task<PredefinedAccount> UpdateAsync(PredefinedAccount predefinedAccounts);
