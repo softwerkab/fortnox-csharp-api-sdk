@@ -15,7 +15,7 @@ namespace Fortnox.SDK.Entities
         ///<summary> Id of the asset </summary>
         [ReadOnly]
         [JsonProperty]
-        public string Id { get; set; }
+        public long? Id { get; private set; }
 
         ///<summary> Description of asset </summary>
         [JsonProperty]
@@ -38,7 +38,7 @@ namespace Fortnox.SDK.Entities
 
         ///<summary> Id of asset type used for asset </summary>
         [JsonProperty]
-        public string TypeId { get; set; }
+        public long? TypeId { get; set; }
 
         ///<summary> Cost center Id used for asset </summary>
         [JsonProperty]

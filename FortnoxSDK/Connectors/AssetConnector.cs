@@ -26,7 +26,7 @@ namespace Fortnox.SDK.Connectors
         /// </summary>
         /// <param name="id">Identifier of the asset to find</param>
         /// <returns>The found asset</returns>
-        public Asset Get(string id)
+        public Asset Get(long? id)
         {
             return GetAsync(id).GetResult();
         }
@@ -55,7 +55,7 @@ namespace Fortnox.SDK.Connectors
         /// Deletes a asset
         /// </summary>
         /// <param name="id">Identifier of the asset to delete</param>
-        public void Delete(string id)
+        public void Delete(long? id)
         {
             DeleteAsync(id).GetResult();
         }
@@ -73,9 +73,9 @@ namespace Fortnox.SDK.Connectors
         {
             return await BaseFind(searchSettings).ConfigureAwait(false);
         }
-        public async Task DeleteAsync(string id)
+        public async Task DeleteAsync(long? id)
         {
-            await BaseDelete(id).ConfigureAwait(false);
+            await BaseDelete(id.ToString()).ConfigureAwait(false);
         }
         public async Task<Asset> CreateAsync(Asset asset)
         {
@@ -83,12 +83,12 @@ namespace Fortnox.SDK.Connectors
         }
         public async Task<Asset> UpdateAsync(Asset asset)
         {
-            return await BaseUpdate(asset, asset.Id).ConfigureAwait(false);
+            return await BaseUpdate(asset, asset.Id.ToString()).ConfigureAwait(false);
         }
 
-        public async Task<Asset> GetAsync(string id)
+        public async Task<Asset> GetAsync(long? id)
         {
-            return await BaseGet(id).ConfigureAwait(false);
+            return await BaseGet(id.ToString()).ConfigureAwait(false);
         }
     }
 

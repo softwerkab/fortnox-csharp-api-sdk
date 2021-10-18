@@ -14,16 +14,16 @@ namespace Fortnox.SDK.Interfaces
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         Asset Create(Asset asset);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-        Asset Get(string id);
+        Asset Get(long? id);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-        void Delete(string id);
+        void Delete(long? id);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         EntityCollection<AssetSubset> Find(AssetSearch searchSettings);
 
         Task<Asset> UpdateAsync(Asset asset);
         Task<Asset> CreateAsync(Asset asset);
-        Task<Asset> GetAsync(string id);
-        Task DeleteAsync(string id);
+        Task<Asset> GetAsync(long? id);
+        Task DeleteAsync(long? id);
         Task<EntityCollection<AssetSubset>> FindAsync(AssetSearch searchSettings);
     }
 }

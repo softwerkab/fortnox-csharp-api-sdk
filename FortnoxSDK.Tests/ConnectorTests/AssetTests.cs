@@ -38,7 +38,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Room = "Some room",
                 Placement = "Right here",
                 CostCenter = tmpCostCenter.Code,
-                TypeId = tmpAssetType.Id.ToString()
+                TypeId = tmpAssetType.Id
             };
 
             var createdAsset = await connector.CreateAsync(newAsset);
@@ -102,7 +102,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Room = "Some room",
                 Placement = "Right here",
                 CostCenter = tmpCostCenter.Code,
-                TypeId = tmpAssetType.Id.ToString()
+                TypeId = tmpAssetType.Id
             };
 
             //Add entries

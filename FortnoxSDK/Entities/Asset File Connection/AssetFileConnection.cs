@@ -24,6 +24,6 @@ namespace Fortnox.SDK.Entities
 
         ///<summary> Asset number </summary>
         [JsonProperty]
-        public string AssetId { get; set; }
+        public long? AssetId { get; set; }
     }
 }

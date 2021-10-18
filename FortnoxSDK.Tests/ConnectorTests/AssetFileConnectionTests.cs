@@ -29,7 +29,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Group = "Some Group",
                 Room = "Some room",
                 Placement = "Right here",
-                TypeId = tmpAssetType.Id.ToString()
+                TypeId = tmpAssetType.Id
             });
             var tmpFile = await FortnoxClient.ArchiveConnector.UploadFileAsync("tmpImage.png", Resource.fortnox_image);
             #endregion Arrange
