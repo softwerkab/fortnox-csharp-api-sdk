@@ -44,7 +44,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdProject.Description = "UpdatedProject";
 
-            var updatedProject = await connector.UpdateAsync(createdProject); 
+            var updatedProject = await connector.UpdateAsync(createdProject);
             Assert.AreEqual("UpdatedProject", updatedProject.Description);
 
             #endregion UPDATE

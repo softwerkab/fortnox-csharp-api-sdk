@@ -7,10 +7,10 @@ namespace Fortnox.SDK.Entities
     public enum PaymentWay
     {
         ///<summary> Cash payment </summary>
-        [EnumMember(Value="CASH")]
+        [EnumMember(Value = "CASH")]
         Cash,
         ///<summary> Card. </summary>
-        [EnumMember(Value="CARD")]
+        [EnumMember(Value = "CARD")]
         Card,
         ///<summary> Direct debit </summary>
         [EnumMember(Value = "AG")]

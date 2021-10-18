@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
@@ -38,7 +37,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdTermsOfPayment.Description = "UpdatedTestPaymentTerms";
 
-            var updatedTermsOfPayment = await connector.UpdateAsync(createdTermsOfPayment); 
+            var updatedTermsOfPayment = await connector.UpdateAsync(createdTermsOfPayment);
             Assert.AreEqual("UpdatedTestPaymentTerms", updatedTermsOfPayment.Description);
 
             #endregion UPDATE

@@ -14,51 +14,51 @@ namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
     internal class AssetTypesConnector : SearchableEntityConnector<AssetType, AssetTypesSubset, AssetTypesSearch>, IAssetTypesConnector
-	{
+    {
         /// <remarks/>
 		public AssetTypesConnector()
-		{
-			Resource = "assets/types";
+        {
+            Resource = "assets/types";
             Serializer = new AssetTypeSerializer();
-		}
-		/// <summary>
-		/// Find a assetType based on id
-		/// </summary>
-		/// <param name="id">Identifier of the assetType to find</param>
-		/// <returns>The found assetType</returns>
-		public AssetType Get(long? id)
-		{
+        }
+        /// <summary>
+        /// Find a assetType based on id
+        /// </summary>
+        /// <param name="id">Identifier of the assetType to find</param>
+        /// <returns>The found assetType</returns>
+        public AssetType Get(long? id)
+        {
             return GetAsync(id).GetResult();
         }
 
-		/// <summary>
-		/// Updates a assetType
-		/// </summary>
-		/// <param name="assetTypes">The assetType to update</param>
-		/// <returns>The updated assetType</returns>
-		public AssetType Update(AssetType assetTypes)
-		{
+        /// <summary>
+        /// Updates a assetType
+        /// </summary>
+        /// <param name="assetTypes">The assetType to update</param>
+        /// <returns>The updated assetType</returns>
+        public AssetType Update(AssetType assetTypes)
+        {
             return UpdateAsync(assetTypes).GetResult();
         }
 
-		/// <summary>
-		/// Creates a new assetType
-		/// </summary>
-		/// <param name="assetType">The assetType to create</param>
-		/// <returns>The created assetType</returns>
-		public AssetType Create(AssetType assetType)
-		{
+        /// <summary>
+        /// Creates a new assetType
+        /// </summary>
+        /// <param name="assetType">The assetType to create</param>
+        /// <returns>The created assetType</returns>
+        public AssetType Create(AssetType assetType)
+        {
             return CreateAsync(assetType).GetResult();
         }
 
-		/// <summary>
-		/// Deletes a assetTypes
-		/// </summary>
-		/// <param name="id">Identifier of the assetTypes to delete</param>
-		public void Delete(long? id)
-		{
-			DeleteAsync(id).GetResult();
-		}
+        /// <summary>
+        /// Deletes a assetTypes
+        /// </summary>
+        /// <param name="id">Identifier of the assetTypes to delete</param>
+        public void Delete(long? id)
+        {
+            DeleteAsync(id).GetResult();
+        }
 
         /// <summary>
         /// Gets a list of assetTypess
@@ -73,20 +73,20 @@ namespace Fortnox.SDK.Connectors
         {
             return await BaseFind(searchSettings).ConfigureAwait(false);
         }
-		public async Task DeleteAsync(long? id)
-		{
-			await BaseDelete(id.ToString()).ConfigureAwait(false);
-		}
-		public async Task<AssetType> CreateAsync(AssetType assetType)
-		{
+        public async Task DeleteAsync(long? id)
+        {
+            await BaseDelete(id.ToString()).ConfigureAwait(false);
+        }
+        public async Task<AssetType> CreateAsync(AssetType assetType)
+        {
             return await BaseCreate(assetType).ConfigureAwait(false);
         }
-		public async Task<AssetType> UpdateAsync(AssetType assetTypes)
+        public async Task<AssetType> UpdateAsync(AssetType assetTypes)
         {
             return await BaseUpdate(assetTypes, assetTypes.Id.ToString()).ConfigureAwait(false);
         }
-		public async Task<AssetType> GetAsync(long? id)
-		{
+        public async Task<AssetType> GetAsync(long? id)
+        {
             return await BaseGet(id.ToString()).ConfigureAwait(false);
         }
     }
@@ -113,7 +113,7 @@ namespace Fortnox.SDK.Connectors
                 structure["Types"][0].Remove(); //remove the array element with meta-info node
                 content = structure.ToString();
             }
-            
+
             return serializer.Deserialize<T>(content);
         }
     }

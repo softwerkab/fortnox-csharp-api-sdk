@@ -9,8 +9,8 @@ using Fortnox.SDK.Search;
 
 namespace Fortnox.SDK.Connectors.Base
 {
-    internal abstract class SearchableEntityConnector<TEntity, TEntitySubset, TSearchSettings> : EntityConnector<TEntity> 
-        where TEntity : class 
+    internal abstract class SearchableEntityConnector<TEntity, TEntitySubset, TSearchSettings> : EntityConnector<TEntity>
+        where TEntity : class
         where TSearchSettings : BaseSearch, new()
     {
         protected async Task<EntityCollection<TEntitySubset>> BaseFind(BaseSearch searchSettings)
@@ -23,7 +23,7 @@ namespace Fortnox.SDK.Connectors.Base
 
             return await SendAsync(request).ConfigureAwait(false);
         }
-        
+
         protected async Task<EntityCollection<T>> SendAsync<T>(SearchRequest<T> request)
         {
             if (request.SearchSettings != null && request.SearchSettings.Limit == ApiConstants.Unlimited)
@@ -62,7 +62,7 @@ namespace Fortnox.SDK.Connectors.Base
             };
             return collection;
         }
-        
+
         private async Task<EntityCollection<T>> GetSinglePage<T>(SearchRequest<T> request)
         {
             if (request.SearchSettings != null)
@@ -96,7 +96,7 @@ namespace Fortnox.SDK.Connectors.Base
         private static T Clone<T>(T obj) where T : BaseSearch
         {
             var memberwiseClone = obj?.GetType().GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic);
-            return (T) memberwiseClone?.Invoke(obj, null);
+            return (T)memberwiseClone?.Invoke(obj, null);
         }
     }
 }

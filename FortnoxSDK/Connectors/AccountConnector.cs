@@ -14,14 +14,14 @@ namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
     internal class AccountConnector : SearchableEntityConnector<Account, AccountSubset, AccountSearch>, IAccountConnector
-	{
+    {
 
 
-		/// <remarks/>
-		public AccountConnector()
-		{
-			Resource = "accounts";
-		}
+        /// <remarks/>
+        public AccountConnector()
+        {
+            Resource = "accounts";
+        }
 
         /// <summary>
         /// Find a account based on id
@@ -30,9 +30,9 @@ namespace Fortnox.SDK.Connectors
         /// <param name="finYearID"></param>
         /// <returns>The found account</returns>
         public Account Get(long? id, long? finYearID = null)
-		{
-			return GetAsync(id, finYearID).GetResult();
-		}
+        {
+            return GetAsync(id, finYearID).GetResult();
+        }
 
         /// <summary>
         /// Updates a account
@@ -41,9 +41,9 @@ namespace Fortnox.SDK.Connectors
         /// <param name="finYearID"></param>
         /// <returns>The updated account</returns>
         public Account Update(Account account, long? finYearID = null)
-		{
-			return UpdateAsync(account, finYearID).GetResult();
-		}
+        {
+            return UpdateAsync(account, finYearID).GetResult();
+        }
 
         /// <summary>
         /// Creates a new account
@@ -52,9 +52,9 @@ namespace Fortnox.SDK.Connectors
         /// <param name="finYearID"></param>
         /// <returns>The created account</returns>
         public Account Create(Account account, long? finYearID = null)
-		{
-			return CreateAsync(account, finYearID).GetResult();
-		}
+        {
+            return CreateAsync(account, finYearID).GetResult();
+        }
 
         /// <summary>
         /// Deletes a account
@@ -62,26 +62,26 @@ namespace Fortnox.SDK.Connectors
         /// <param name="id">Identifier of the account to delete</param>
         /// <param name="finYearID"></param>
         public void Delete(long? id, long? finYearID = null)
-		{
-			DeleteAsync(id, finYearID).GetResult();
-		}
+        {
+            DeleteAsync(id, finYearID).GetResult();
+        }
 
-		/// <summary>
-		/// Gets a list of accounts
-		/// </summary>
-		/// <returns>A list of accounts</returns>
-		public EntityCollection<AccountSubset> Find(AccountSearch searchSettings)
-		{
-			return FindAsync(searchSettings).GetResult();
-		}
+        /// <summary>
+        /// Gets a list of accounts
+        /// </summary>
+        /// <returns>A list of accounts</returns>
+        public EntityCollection<AccountSubset> Find(AccountSearch searchSettings)
+        {
+            return FindAsync(searchSettings).GetResult();
+        }
 
-		public async Task<EntityCollection<AccountSubset>> FindAsync(AccountSearch searchSettings)
-		{
-			return await BaseFind(searchSettings).ConfigureAwait(false);
-		}
+        public async Task<EntityCollection<AccountSubset>> FindAsync(AccountSearch searchSettings)
+        {
+            return await BaseFind(searchSettings).ConfigureAwait(false);
+        }
 
-		public async Task DeleteAsync(long? id, long? finYearID = null)
-		{
+        public async Task DeleteAsync(long? id, long? finYearID = null)
+        {
             var request = new BaseRequest()
             {
                 Resource = Resource,
@@ -92,11 +92,11 @@ namespace Fortnox.SDK.Connectors
             if (finYearID != null)
                 request.Parameters.Add("financialyear", finYearID.ToString());
 
-			await SendAsync(request).ConfigureAwait(false);
-		}
+            await SendAsync(request).ConfigureAwait(false);
+        }
 
-		public async Task<Account> CreateAsync(Account account, long? finYearID = null)
-		{
+        public async Task<Account> CreateAsync(Account account, long? finYearID = null)
+        {
             var request = new EntityRequest<Account>()
             {
                 Resource = Resource,
@@ -107,11 +107,11 @@ namespace Fortnox.SDK.Connectors
             if (finYearID != null)
                 request.Parameters.Add("financialyear", finYearID.ToString());
 
-			return await SendAsync(request).ConfigureAwait(false);
-		}
+            return await SendAsync(request).ConfigureAwait(false);
+        }
 
-		public async Task<Account> UpdateAsync(Account account, long? finYearID = null)
-		{
+        public async Task<Account> UpdateAsync(Account account, long? finYearID = null)
+        {
             var request = new EntityRequest<Account>()
             {
                 Resource = Resource,
@@ -124,10 +124,10 @@ namespace Fortnox.SDK.Connectors
                 request.Parameters.Add("financialyear", finYearID.ToString());
 
             return await SendAsync(request).ConfigureAwait(false);
-	    }
+        }
 
-		public async Task<Account> GetAsync(long? id, long? finYearID = null)
-		{ 
+        public async Task<Account> GetAsync(long? id, long? finYearID = null)
+        {
             //return await BaseGet(id.ToString()).ConfigureAwait(false);
             var request = new EntityRequest<Account>()
             {
@@ -135,10 +135,10 @@ namespace Fortnox.SDK.Connectors
                 Indices = new List<string>() { id.ToString() },
                 Method = HttpMethod.Get,
             };
-			if (finYearID != null)
-				request.Parameters.Add("financialyear", finYearID.ToString());
+            if (finYearID != null)
+                request.Parameters.Add("financialyear", finYearID.ToString());
 
             return await SendAsync(request).ConfigureAwait(false);
-		}
-	}
+        }
+    }
 }

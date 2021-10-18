@@ -11,14 +11,14 @@ namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
     internal class InvoiceAccrualConnector : SearchableEntityConnector<InvoiceAccrual, InvoiceAccrualSubset, InvoiceAccrualSearch>, IInvoiceAccrualConnector
-	{
+    {
 
 
-		/// <remarks/>
-		public InvoiceAccrualConnector()
-		{
-			Resource = "invoiceaccruals";
-		}
+        /// <remarks/>
+        public InvoiceAccrualConnector()
+        {
+            Resource = "invoiceaccruals";
+        }
 
         /// <summary>
         /// Find a invoiceAccrual based on id
@@ -27,7 +27,7 @@ namespace Fortnox.SDK.Connectors
         /// <returns>The found invoiceAccrual</returns>
         public InvoiceAccrual Get(long? id)
         {
-			return GetAsync(id).GetResult();
+            return GetAsync(id).GetResult();
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Fortnox.SDK.Connectors
         /// <returns>The updated invoiceAccrual</returns>
         public InvoiceAccrual Update(InvoiceAccrual invoiceAccrual)
         {
-			return UpdateAsync(invoiceAccrual).GetResult();
+            return UpdateAsync(invoiceAccrual).GetResult();
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Fortnox.SDK.Connectors
         /// <returns>The created invoiceAccrual</returns>
         public InvoiceAccrual Create(InvoiceAccrual invoiceAccrual)
         {
-			return CreateAsync(invoiceAccrual).GetResult();
+            return CreateAsync(invoiceAccrual).GetResult();
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Fortnox.SDK.Connectors
         /// <param name="id">Identifier of the invoiceAccrual to delete</param>
         public void Delete(long? id)
         {
-			DeleteAsync(id).GetResult();
+            DeleteAsync(id).GetResult();
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Fortnox.SDK.Connectors
         /// <returns>A list of invoiceAccruals</returns>
         public EntityCollection<InvoiceAccrualSubset> Find(InvoiceAccrualSearch searchSettings)
         {
-			return FindAsync(searchSettings).GetResult();
+            return FindAsync(searchSettings).GetResult();
         }
 
         public async Task<EntityCollection<InvoiceAccrualSubset>> FindAsync(InvoiceAccrualSearch searchSettings)

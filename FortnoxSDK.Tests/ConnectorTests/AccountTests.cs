@@ -38,7 +38,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdAccount.Description = "Updated Test Account";
 
-            var updatedAccount = await connector.UpdateAsync(createdAccount); 
+            var updatedAccount = await connector.UpdateAsync(createdAccount);
             Assert.AreEqual("Updated Test Account", updatedAccount.Description);
 
             #endregion UPDATE

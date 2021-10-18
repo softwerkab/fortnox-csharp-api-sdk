@@ -20,9 +20,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #region Arrange
 
             var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer()
-                {Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"});
+            { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
             var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article()
-                {Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100});
+            { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
             var tmpContract = await FortnoxClient.ContractConnector.CreateAsync(new Contract()
             {
                 CustomerNumber = tmpCustomer.CustomerNumber,
@@ -109,8 +109,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             #region Arrange
 
-            var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() {Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"});
-            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() {Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100});
+            var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
 
             #endregion Arrange
 
@@ -159,7 +159,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             }
 
             var contractAccruals = await connector.FindAsync(null);
-            Assert.AreEqual(5,contractAccruals.Entities.Count(x => x.Description.StartsWith(marks)));
+            Assert.AreEqual(5, contractAccruals.Entities.Count(x => x.Description.StartsWith(marks)));
 
             foreach (var entry in contractAccruals.Entities.Where(x => x.Description.StartsWith(marks)))
             {

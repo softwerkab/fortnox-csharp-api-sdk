@@ -12,7 +12,7 @@ namespace Fortnox.SDK.Connectors.Base
     {
         private const int LimitPerSecond = 4;
         private static readonly Dictionary<string, TimeLimiter> RateLimiters = new Dictionary<string, TimeLimiter>();
-        
+
         private ErrorHandler ErrorHandler { get; }
 
         public HttpClient HttpClient { get; set; }
@@ -30,7 +30,7 @@ namespace Fortnox.SDK.Connectors.Base
             try
             {
                 Authorization?.ApplyTo(request);
-                
+
                 if (UseRateLimiter)
                     await Throttle().ConfigureAwait(false);
 
@@ -38,7 +38,7 @@ namespace Fortnox.SDK.Connectors.Base
 
                 if (response.IsSuccessStatusCode)
                     return await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
-                
+
                 ErrorHandler.HandleErrorResponse(response);
                 return default;
             }

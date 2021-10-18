@@ -1,5 +1,3 @@
-using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
@@ -41,7 +39,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdCostCenter.Description = "UpdatedTestCostCenter";
 
-            var updatedCostCenter = await connector.UpdateAsync(createdCostCenter); 
+            var updatedCostCenter = await connector.UpdateAsync(createdCostCenter);
             Assert.AreEqual("UpdatedTestCostCenter", updatedCostCenter.Description);
 
             #endregion UPDATE

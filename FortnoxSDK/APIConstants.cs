@@ -1,7 +1,7 @@
 ﻿// ReSharper disable UnusedMember.Global
 namespace Fortnox.SDK
 {
-	public class ApiConstants
+    public class ApiConstants
     {
         // TODO: Temporary constant - remove when not needed anymore
         internal const string ObsoleteSyncMethodWarning = @"Method will be removed. Use async variant. If it doesn't exist, report an issue. See https://github.com/FortnoxAB/csharp-api-sdk/issues/180";
@@ -11,10 +11,10 @@ namespace Fortnox.SDK
         /// </summary>
         public const string FortnoxApi = "https://api.fortnox.se";
 
-		/// <summary>
-		/// Use this to make a field blank in Fortnox.
-		/// </summary>
-		public const string BlankValue = "API_BLANK";
+        /// <summary>
+        /// Use this to make a field blank in Fortnox.
+        /// </summary>
+        public const string BlankValue = "API_BLANK";
 
         /// <summary>
         /// Use this to format date to a string.

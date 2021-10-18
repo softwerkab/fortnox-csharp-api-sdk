@@ -17,7 +17,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             #region Arrange
 
-            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() {Description = "TmpArticle"});
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle" });
             var tmpFile = await FortnoxClient.ArchiveConnector.UploadFileAsync("tmpImage.png", Resource.fortnox_image);
 
             #endregion Arrange

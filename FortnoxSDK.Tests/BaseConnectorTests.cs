@@ -125,7 +125,7 @@ namespace FortnoxSDK.Tests
         {
             var connector = FortnoxClient.CustomerConnector;
 
-            var createdCustomer = await connector.CreateAsync(new Customer() {Name = "TestUser", CountryCode = "SE"});
+            var createdCustomer = await connector.CreateAsync(new Customer() { Name = "TestUser", CountryCode = "SE" });
             Assert.AreEqual("Sverige", createdCustomer.Country);
 
             await connector.DeleteAsync(createdCustomer.CustomerNumber);
@@ -218,7 +218,7 @@ namespace FortnoxSDK.Tests
 
         private static int GetNeededPages(int totalSize, int pageSize)
         {
-            return (int) Math.Ceiling(totalSize / (float) pageSize);
+            return (int)Math.Ceiling(totalSize / (float)pageSize);
         }
     }
 }

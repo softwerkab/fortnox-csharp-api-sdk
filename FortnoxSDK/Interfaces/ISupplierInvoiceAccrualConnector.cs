@@ -8,22 +8,22 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface ISupplierInvoiceAccrualConnector : IEntityConnector
-	{
+    {
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		SupplierInvoiceAccrual Update(SupplierInvoiceAccrual supplierInvoiceAccrual);
+        SupplierInvoiceAccrual Update(SupplierInvoiceAccrual supplierInvoiceAccrual);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		SupplierInvoiceAccrual Create(SupplierInvoiceAccrual supplierInvoiceAccrual);
+        SupplierInvoiceAccrual Create(SupplierInvoiceAccrual supplierInvoiceAccrual);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		SupplierInvoiceAccrual Get(long? id);
+        SupplierInvoiceAccrual Get(long? id);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		void Delete(long? id);
+        void Delete(long? id);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		EntityCollection<SupplierInvoiceAccrualSubset> Find(SupplierInvoiceAccrualSearch searchSettings);
+        EntityCollection<SupplierInvoiceAccrualSubset> Find(SupplierInvoiceAccrualSearch searchSettings);
 
-		Task<SupplierInvoiceAccrual> UpdateAsync(SupplierInvoiceAccrual supplierInvoiceAccrual);
-		Task<SupplierInvoiceAccrual> CreateAsync(SupplierInvoiceAccrual supplierInvoiceAccrual);
-		Task<SupplierInvoiceAccrual> GetAsync(long? id);
-		Task DeleteAsync(long? id);
-		Task<EntityCollection<SupplierInvoiceAccrualSubset>> FindAsync(SupplierInvoiceAccrualSearch searchSettings);
-	}
+        Task<SupplierInvoiceAccrual> UpdateAsync(SupplierInvoiceAccrual supplierInvoiceAccrual);
+        Task<SupplierInvoiceAccrual> CreateAsync(SupplierInvoiceAccrual supplierInvoiceAccrual);
+        Task<SupplierInvoiceAccrual> GetAsync(long? id);
+        Task DeleteAsync(long? id);
+        Task<EntityCollection<SupplierInvoiceAccrualSubset>> FindAsync(SupplierInvoiceAccrualSearch searchSettings);
+    }
 }

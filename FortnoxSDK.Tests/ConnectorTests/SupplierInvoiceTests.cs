@@ -18,8 +18,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public async Task Test_SupplierInvoice_CRUD()
         {
             #region Arrange
-            var tmpSupplier = await FortnoxClient.SupplierConnector.CreateAsync(new Supplier() {Name = "TmpSupplier"});
-            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article(){Description = "TmpArticle", PurchasePrice = 100});
+            var tmpSupplier = await FortnoxClient.SupplierConnector.CreateAsync(new Supplier() { Name = "TmpSupplier" });
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", PurchasePrice = 100 });
             #endregion Arrange
 
             var connector = FortnoxClient.SupplierInvoiceConnector;
@@ -29,8 +29,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
             {
                 SupplierNumber = tmpSupplier.SupplierNumber,
                 Comments = "InvoiceComments",
-                InvoiceDate = new DateTime(2010,1,1),
-                DueDate = new DateTime(2010,2,1),
+                InvoiceDate = new DateTime(2010, 1, 1),
+                DueDate = new DateTime(2010, 2, 1),
                 SalesType = SalesType.Stock,
                 OCR = "123456789",
                 Total = 5000,
@@ -54,7 +54,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdSupplierInvoice.Comments = "UpdatedInvoiceComments";
 
-            var updatedSupplierInvoice = await connector.UpdateAsync(createdSupplierInvoice); 
+            var updatedSupplierInvoice = await connector.UpdateAsync(createdSupplierInvoice);
             Assert.AreEqual("UpdatedInvoiceComments", updatedSupplierInvoice.Comments);
 
             #endregion UPDATE
@@ -180,9 +180,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region Delete arranged resources
             //Can not cancel booked invoice
-/*            connector.Cancel(createdSupplierInvoice.GivenNumber);
-            FortnoxClient.SupplierConnector.Delete(tmpSupplier.SupplierNumber);
-            FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);*/
+            /*            connector.Cancel(createdSupplierInvoice.GivenNumber);
+                        FortnoxClient.SupplierConnector.Delete(tmpSupplier.SupplierNumber);
+                        FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);*/
             #endregion Delete arranged resources
         }
     }

@@ -36,7 +36,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdVoucherSeries.Description = "UpdatedTestVoucherSeries";
 
-            var updatedVoucherSeries = await connector.UpdateAsync(createdVoucherSeries); 
+            var updatedVoucherSeries = await connector.UpdateAsync(createdVoucherSeries);
             Assert.AreEqual("UpdatedTestVoucherSeries", updatedVoucherSeries.Description);
 
             #endregion UPDATE

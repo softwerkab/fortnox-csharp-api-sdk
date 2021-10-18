@@ -70,7 +70,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public async Task Test_FinancialYear_Find()
         {
             var connector = FortnoxClient.FinancialYearConnector;
-            
+
             var finYears = await connector.FindAsync(null);
             Assert.AreEqual(5, finYears.Entities.Count);
             Assert.IsNotNull(finYears.Entities.First().FromDate);
@@ -88,7 +88,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             var finYears = await connector.FindAsync(search);
             Assert.AreEqual(1, finYears.Entities.Count);
-            Assert.AreEqual(new DateTime(2022,1,1), finYears.Entities.Single().FromDate);
+            Assert.AreEqual(new DateTime(2022, 1, 1), finYears.Entities.Single().FromDate);
             Assert.AreEqual(new DateTime(2022, 12, 31), finYears.Entities.Single().ToDate);
         }
 

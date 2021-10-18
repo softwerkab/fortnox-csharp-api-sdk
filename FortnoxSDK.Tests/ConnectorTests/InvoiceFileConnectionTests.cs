@@ -55,7 +55,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdInvoiceFileConnection.IncludeOnSend = true;
 
-            var updatedInvoiceFileConnection = await connector.UpdateAsync(createdInvoiceFileConnection); 
+            var updatedInvoiceFileConnection = await connector.UpdateAsync(createdInvoiceFileConnection);
             Assert.AreEqual(true, updatedInvoiceFileConnection.IncludeOnSend);
 
             #endregion UPDATE

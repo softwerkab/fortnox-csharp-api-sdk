@@ -16,7 +16,7 @@ namespace FortnoxSDK.Tests
     public class ReportedIssuesTests
     {
         public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
-        
+
         [TestMethod]
         public async Task Test_Issue_44() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/44
         {
@@ -28,7 +28,7 @@ namespace FortnoxSDK.Tests
 
             var newInvoce = await connector.CreateAsync(new Invoice()
             {
-                InvoiceDate = new DateTime(2019,1,20), //"2019-01-20",
+                InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
                 DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
                 CustomerNumber = tmpCustomer.CustomerNumber,
                 InvoiceType = InvoiceType.Invoice,
@@ -112,10 +112,10 @@ namespace FortnoxSDK.Tests
             watch.Start();
 
             var runningTasks = new List<Task<EntityCollection<CustomerSubset>>>();
-            for (var i = 0;i<40;i++) 
+            for (var i = 0; i < 40; i++)
                 runningTasks.Add(connector.FindAsync(searchSettings));
 
-            Console.WriteLine(@"Thread free after: "+watch.ElapsedMilliseconds);
+            Console.WriteLine(@"Thread free after: " + watch.ElapsedMilliseconds);
             Assert.IsTrue(watch.ElapsedMilliseconds < 1000);
 
             watch.Start();
@@ -125,7 +125,7 @@ namespace FortnoxSDK.Tests
                 Assert.IsNotNull(result);
             }
             watch.Stop();
-            Console.WriteLine(@"Total time: "+watch.ElapsedMilliseconds);
+            Console.WriteLine(@"Total time: " + watch.ElapsedMilliseconds);
         }
 
         [TestMethod]
@@ -225,15 +225,15 @@ namespace FortnoxSDK.Tests
             #region Arrange
 
             var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer()
-                {Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis"});
+            { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
             var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article()
-                {Description = "TmpArticle", PurchasePrice = 100});
+            { Description = "TmpArticle", PurchasePrice = 100 });
 
             #endregion Arrange
 
             var connector = FortnoxClient.InvoiceConnector;
 
-            var largeId = (long) 2 * int.MaxValue + TestUtils.RandomInt();
+            var largeId = (long)2 * int.MaxValue + TestUtils.RandomInt();
 
             var newInvoice = new Invoice()
             {
@@ -299,7 +299,7 @@ namespace FortnoxSDK.Tests
             Assert.IsNotNull(case5);
             Assert.IsNotNull(case6);
             Assert.IsNotNull(case8);
-            
+
             //Clean
             await archiveConnector.DeleteFileAsync(fortnoxFile.Id);
         }

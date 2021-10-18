@@ -19,8 +19,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             #region Arrange
             var tmpEmployee = await FortnoxClient.EmployeeConnector.CreateAsync(new Employee() { EmployeeId = TestUtils.RandomString() });
-            var tmpProject = await FortnoxClient.ProjectConnector.CreateAsync(new Project() {Description = "TmpProject"});
-            var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() {Code = "TMP", Description = "TmpCostCenter"});
+            var tmpProject = await FortnoxClient.ProjectConnector.CreateAsync(new Project() { Description = "TmpProject" });
+            var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
             #endregion Arrange
 
             var connector = FortnoxClient.AttendanceTransactionsConnector;
@@ -45,7 +45,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdAttendanceTransaction.Hours = 8;
 
-            var updatedAttendanceTransaction = await connector.UpdateAsync(createdAttendanceTransaction); 
+            var updatedAttendanceTransaction = await connector.UpdateAsync(createdAttendanceTransaction);
             Assert.AreEqual(8, updatedAttendanceTransaction.Hours);
 
             #endregion UPDATE
@@ -100,7 +100,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 newAttendenceTransaction.Date = new DateTime(2018, 01, 01).AddDays(i);
                 await connector.CreateAsync(newAttendenceTransaction);
             }
-            
+
             var searchSettings = new AttendanceTransactionsSearch();
             searchSettings.EmployeeId = tmpEmployee.EmployeeId;
             var fullCollection = await connector.FindAsync(searchSettings);

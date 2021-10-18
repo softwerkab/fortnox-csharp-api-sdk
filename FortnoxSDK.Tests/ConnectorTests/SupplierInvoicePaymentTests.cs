@@ -43,7 +43,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             #region CREATE
             var newSupplierInvoicePayment = new SupplierInvoicePayment()
             {
-                InvoiceNumber = (int?) tmpSpplierInvoice.GivenNumber,
+                InvoiceNumber = (int?)tmpSpplierInvoice.GivenNumber,
                 Amount = 1000,
                 AmountCurrency = 1000,
                 PaymentDate = new DateTime(2020, 1, 20)
@@ -56,9 +56,9 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             #region UPDATE
 
-            createdSupplierInvoicePayment.Amount = 2000; 
+            createdSupplierInvoicePayment.Amount = 2000;
 
-            var updatedSupplierInvoicePayment = await connector.UpdateAsync(createdSupplierInvoicePayment); 
+            var updatedSupplierInvoicePayment = await connector.UpdateAsync(createdSupplierInvoicePayment);
             Assert.AreEqual(2000, updatedSupplierInvoicePayment.Amount);
 
             #endregion UPDATE

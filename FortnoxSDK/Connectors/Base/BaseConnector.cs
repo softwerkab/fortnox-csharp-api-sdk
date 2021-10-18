@@ -12,12 +12,12 @@ namespace Fortnox.SDK.Connectors.Base
     {
         protected ISerializer Serializer { get; set; }
         protected string Resource { get; set; }
-        
+
         protected BaseConnector()
         {
             Serializer = new JsonEntitySerializer();
         }
-        
+
         protected async Task<byte[]> SendAsync(BaseRequest fortnoxRequest)
         {
             var httpRequest = new HttpRequestMessage(fortnoxRequest.Method, fortnoxRequest.AbsoluteUrl);
@@ -34,7 +34,7 @@ namespace Fortnox.SDK.Connectors.Base
 
         protected async Task<byte[]> SendAsync(FileDownloadRequest fortnoxRequest)
         {
-            return await SendAsync((BaseRequest) fortnoxRequest).ConfigureAwait(false);
+            return await SendAsync((BaseRequest)fortnoxRequest).ConfigureAwait(false);
         }
 
         protected async Task<byte[]> SendAsync(FileUploadRequest fortnoxRequest)

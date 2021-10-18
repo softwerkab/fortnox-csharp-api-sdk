@@ -22,7 +22,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             var types = Enum.GetValues(typeof(SIEType)).Cast<SIEType>().ToList();
             var connector = FortnoxClient.SIEConnector;
-            
+
             foreach (var sieType in types)
             {
                 var data = connector.Get(sieType);
@@ -97,7 +97,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                     },
                     new VoucherSelection()
                     {
-                        VoucherSeries = "B", 
+                        VoucherSeries = "B",
                         FromVoucherNumber = 5,
                         ToVoucherNumber = 9
                     }
@@ -107,7 +107,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var data = connector.Get(SIEType.Transactions, exportOptions: exportOptions);
             var sieDocument = Parse(data);
 
-            Assert.AreEqual(5+5, sieDocument.VER.Count);
+            Assert.AreEqual(5 + 5, sieDocument.VER.Count);
 
             Assert.AreEqual(5, sieDocument.VER.Count(v => v.Series == "A"));
             Assert.AreEqual(false, sieDocument.VER.Any(v => v.Series == "A" && int.Parse(v.Number) < 20));
@@ -118,7 +118,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             Assert.AreEqual(false, sieDocument.VER.Any(v => v.Series == "B" && int.Parse(v.Number) > 9));
         }
 
-        [ExpectedException(typeof(FortnoxApiException))] 
+        [ExpectedException(typeof(FortnoxApiException))]
         [TestMethod]
         public void SIE_Get_ExportOptions_VoucherSelection_IncompleteInterval()
         {
@@ -144,7 +144,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             connector.Get(SIEType.Transactions, exportOptions: exportOptions);
         }
-        
+
         [TestMethod]
         public void SIE_Get_ExportOptions_ExcludeUnused()
         {

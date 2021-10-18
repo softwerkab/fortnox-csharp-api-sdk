@@ -49,7 +49,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdOrder.Comments = "UpdatedTestOrder";
 
-            var updatedOrder = await connector.UpdateAsync(createdOrder); 
+            var updatedOrder = await connector.UpdateAsync(createdOrder);
             Assert.AreEqual("UpdatedTestOrder", updatedOrder.Comments);
 
             #endregion UPDATE

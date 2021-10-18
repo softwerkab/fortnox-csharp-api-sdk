@@ -8,19 +8,19 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface IOrderConnector : IEntityConnector
-	{
+    {
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		Order Update(Order order);
+        Order Update(Order order);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		Order Create(Order order);
+        Order Create(Order order);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		Order Get(long? id);
+        Order Get(long? id);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		EntityCollection<OrderSubset> Find(OrderSearch searchSettings);
+        EntityCollection<OrderSubset> Find(OrderSearch searchSettings);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		Order CreateInvoice(long? id);
+        Order CreateInvoice(long? id);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		Order Cancel(long? id);
+        Order Cancel(long? id);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         Order Email(long? id);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
@@ -31,8 +31,8 @@ namespace Fortnox.SDK.Interfaces
         byte[] Preview(long? id);
 
         Task<Order> UpdateAsync(Order order);
-		Task<Order> CreateAsync(Order order);
-		Task<Order> GetAsync(long? id);
+        Task<Order> CreateAsync(Order order);
+        Task<Order> GetAsync(long? id);
         Task<EntityCollection<OrderSubset>> FindAsync(OrderSearch searchSettings);
         Task<Order> CreateInvoiceAsync(long? id);
         Task<Order> CancelAsync(long? id);
@@ -40,5 +40,5 @@ namespace Fortnox.SDK.Interfaces
         Task<byte[]> PrintAsync(long? id);
         Task<Order> ExternalPrintAsync(long? id);
         Task<byte[]> PreviewAsync(long? id);
-	}
+    }
 }

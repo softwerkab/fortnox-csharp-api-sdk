@@ -10,13 +10,13 @@ namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
     internal class CompanySettingsConnector : EntityConnector<CompanySettings>, ICompanySettingsConnector
-	{
+    {
 
-		/// <remarks/>
-		public CompanySettingsConnector()
-		{
-			Resource = "settings/company";
-		}
+        /// <remarks/>
+        public CompanySettingsConnector()
+        {
+            Resource = "settings/company";
+        }
 
         /// <summary>
         /// Retrieves the company settings.
@@ -24,7 +24,7 @@ namespace Fortnox.SDK.Connectors
         /// <returns></returns>
         public CompanySettings Get()
         {
-			return GetAsync().GetResult();
+            return GetAsync().GetResult();
         }
 
         public async Task<CompanySettings> GetAsync()

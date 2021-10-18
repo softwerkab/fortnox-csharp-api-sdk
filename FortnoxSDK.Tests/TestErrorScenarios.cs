@@ -17,7 +17,7 @@ namespace FortnoxSDK.Tests
         {
             var connector = FortnoxClient.CustomerConnector;
 
-            var createdCustomer = await connector.CreateAsync(new Customer() {Name = "TestCustomer", CountryCode = "InvalidCountryCode"});
+            var createdCustomer = await connector.CreateAsync(new Customer() { Name = "TestCustomer", CountryCode = "InvalidCountryCode" });
             Assert.IsNull(createdCustomer);
         }
 
@@ -27,7 +27,7 @@ namespace FortnoxSDK.Tests
         {
             var connector = FortnoxClient.CustomerConnector;
 
-            var createdCustomer = await connector.UpdateAsync(new Customer() { Name = "TestCustomer", CustomerNumber = "NotExistingCustomerNumber"});
+            var createdCustomer = await connector.UpdateAsync(new Customer() { Name = "TestCustomer", CustomerNumber = "NotExistingCustomerNumber" });
             Assert.IsNull(createdCustomer);
         }
     }

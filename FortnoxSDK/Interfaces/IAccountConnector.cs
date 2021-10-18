@@ -8,22 +8,22 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface IAccountConnector : IEntityConnector
-	{
+    {
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		Account Update(Account account, long? finYearID = null);
+        Account Update(Account account, long? finYearID = null);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		Account Create(Account account, long? finYearID = null);
+        Account Create(Account account, long? finYearID = null);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		Account Get(long? id, long? finYearID = null);
+        Account Get(long? id, long? finYearID = null);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		void Delete(long? id, long? finYearID = null);
+        void Delete(long? id, long? finYearID = null);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		EntityCollection<AccountSubset> Find(AccountSearch searchSettings);
+        EntityCollection<AccountSubset> Find(AccountSearch searchSettings);
 
-		Task<Account> UpdateAsync(Account account, long? finYearID = null);
-		Task<Account> CreateAsync(Account account, long? finYearID = null);
-		Task<Account> GetAsync(long? id, long? finYearID = null);
-		Task DeleteAsync(long? id, long? finYearID = null);
-		Task<EntityCollection<AccountSubset>> FindAsync(AccountSearch searchSettings);
-	}
+        Task<Account> UpdateAsync(Account account, long? finYearID = null);
+        Task<Account> CreateAsync(Account account, long? finYearID = null);
+        Task<Account> GetAsync(long? id, long? finYearID = null);
+        Task DeleteAsync(long? id, long? finYearID = null);
+        Task<EntityCollection<AccountSubset>> FindAsync(AccountSearch searchSettings);
+    }
 }

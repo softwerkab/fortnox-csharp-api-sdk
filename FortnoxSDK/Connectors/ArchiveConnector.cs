@@ -17,13 +17,13 @@ namespace Fortnox.SDK.Connectors
 {
     /// <remarks/>
     internal class ArchiveConnector : EntityConnector<ArchiveFolder>, IArchiveConnector
-	{
+    {
 
-		/// <remarks/>
-		public ArchiveConnector()
-		{
-			Resource = "archive";
-		}
+        /// <remarks/>
+        public ArchiveConnector()
+        {
+            Resource = "archive";
+        }
 
         #region SYNC Interface Methods
 
@@ -78,7 +78,7 @@ namespace Fortnox.SDK.Connectors
 		/// </summary>
 		/// <param name="id">Id of the file delete</param>
         public void DeleteFile(string id)
-		{
+        {
             DeleteFileAsync(id).GetResult();
         }
 
@@ -131,7 +131,7 @@ namespace Fortnox.SDK.Connectors
                 return await BaseDownload(null, id).ConfigureAwait(false);
             else
             {
-                var parameters = new Dictionary<string, string>() { {"fileid", id} };
+                var parameters = new Dictionary<string, string>() { { "fileid", id } };
                 return await BaseDownload(parameters).ConfigureAwait(false);
             }
         }
@@ -186,7 +186,7 @@ namespace Fortnox.SDK.Connectors
         {
             if (string.IsNullOrEmpty(pathOrId))
                 pathOrId = "root";
-            
+
             var request = new EntityRequest<ArchiveFolder>()
             {
                 Resource = Resource,

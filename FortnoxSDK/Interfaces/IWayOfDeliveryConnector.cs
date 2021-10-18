@@ -8,22 +8,22 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface IWayOfDeliveryConnector : IEntityConnector
-	{
+    {
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		WayOfDelivery Update(WayOfDelivery wayOfDelivery);
+        WayOfDelivery Update(WayOfDelivery wayOfDelivery);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		WayOfDelivery Create(WayOfDelivery wayOfDelivery);
+        WayOfDelivery Create(WayOfDelivery wayOfDelivery);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		WayOfDelivery Get(string id);
+        WayOfDelivery Get(string id);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		void Delete(string id);
+        void Delete(string id);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		EntityCollection<WayOfDelivery> Find(WayOfDeliverySearch searchSettings);
+        EntityCollection<WayOfDelivery> Find(WayOfDeliverySearch searchSettings);
 
-		Task<WayOfDelivery> UpdateAsync(WayOfDelivery wayOfDelivery);
-		Task<WayOfDelivery> CreateAsync(WayOfDelivery wayOfDelivery);
-		Task<WayOfDelivery> GetAsync(string id);
-		Task DeleteAsync(string id);
-		Task<EntityCollection<WayOfDelivery>> FindAsync(WayOfDeliverySearch searchSettings);
-	}
+        Task<WayOfDelivery> UpdateAsync(WayOfDelivery wayOfDelivery);
+        Task<WayOfDelivery> CreateAsync(WayOfDelivery wayOfDelivery);
+        Task<WayOfDelivery> GetAsync(string id);
+        Task DeleteAsync(string id);
+        Task<EntityCollection<WayOfDelivery>> FindAsync(WayOfDeliverySearch searchSettings);
+    }
 }

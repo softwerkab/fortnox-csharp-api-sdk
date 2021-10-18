@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Fortnox.SDK;
@@ -18,7 +17,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public async Task Test_Price_CRUD()
         {
             #region Arrange
-            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() {Description = "TmpArticle"});
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle" });
             var tmpPriceList = await FortnoxClient.PriceListConnector.GetAsync("TST_PR");
             #endregion Arrange
 
@@ -42,7 +41,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdPrice.PriceValue = 15;
 
-            var updatedPrice = await connector.UpdateAsync(createdPrice); 
+            var updatedPrice = await connector.UpdateAsync(createdPrice);
             Assert.AreEqual(15, updatedPrice.PriceValue);
 
             #endregion UPDATE
@@ -73,10 +72,10 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public async Task Test_Find()
         {
             #region Arrange
-            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", PurchasePrice = 10});
+            var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", PurchasePrice = 10 });
             var tmpPriceList = await FortnoxClient.PriceListConnector.GetAsync("TST_PR");
             #endregion Arrange
-            
+
             var connector = FortnoxClient.PriceConnector;
 
             var newPrice = new Price()
@@ -99,8 +98,8 @@ namespace FortnoxSDK.Tests.ConnectorTests
             searchSettings.LastModified = TestUtils.Recently;
             var fullCollection = await connector.FindAsync(tmpPriceList.Code, tmpArticle.ArticleNumber, searchSettings);
 
-            Assert.AreEqual(5+1, fullCollection.TotalResources);
-            Assert.AreEqual(5+1, fullCollection.Entities.Count);
+            Assert.AreEqual(5 + 1, fullCollection.TotalResources);
+            Assert.AreEqual(5 + 1, fullCollection.Entities.Count);
             Assert.AreEqual(1, fullCollection.TotalPages);
 
             Assert.AreEqual("TST_PR", fullCollection.Entities.First().PriceList);
@@ -109,7 +108,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             searchSettings.Limit = 2;
             var limitedCollection = await connector.FindAsync(tmpPriceList.Code, tmpArticle.ArticleNumber, searchSettings);
 
-            Assert.AreEqual(5+1, limitedCollection.TotalResources);
+            Assert.AreEqual(5 + 1, limitedCollection.TotalResources);
             Assert.AreEqual(2, limitedCollection.Entities.Count);
             Assert.AreEqual(3, limitedCollection.TotalPages);
 

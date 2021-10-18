@@ -8,7 +8,7 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface IFinancialYearConnector : IEntityConnector
-	{
+    {
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         FinancialYear Create(FinancialYear financialYear);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
@@ -17,7 +17,7 @@ namespace Fortnox.SDK.Interfaces
         EntityCollection<FinancialYearSubset> Find(FinancialYearSearch searchSettings);
 
         Task<FinancialYear> CreateAsync(FinancialYear financialYear);
-		Task<FinancialYear> GetAsync(long? id);
+        Task<FinancialYear> GetAsync(long? id);
         Task<EntityCollection<FinancialYearSubset>> FindAsync(FinancialYearSearch searchSettings);
-	}
+    }
 }

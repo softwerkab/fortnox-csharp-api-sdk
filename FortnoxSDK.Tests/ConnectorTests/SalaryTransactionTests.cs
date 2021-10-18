@@ -26,7 +26,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             {
                 EmployeeId = tmpEmployee.EmployeeId,
                 SalaryCode = "11", //Arbetstid
-                Date = new DateTime(2020,1,1),
+                Date = new DateTime(2020, 1, 1),
                 Number = 10,
                 TextRow = "TestSalaryRow"
             };
@@ -40,7 +40,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdSalaryTransaction.TextRow = "UpdatedTestSalaryRow";
 
-            var updatedSalaryTransaction = await connector.UpdateAsync(createdSalaryTransaction); 
+            var updatedSalaryTransaction = await connector.UpdateAsync(createdSalaryTransaction);
             Assert.AreEqual("UpdatedTestSalaryRow", updatedSalaryTransaction.TextRow);
 
             #endregion UPDATE

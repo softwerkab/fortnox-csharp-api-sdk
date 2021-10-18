@@ -18,7 +18,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         public async Task Test_ModeOfPayment_CRUD()
         {
             #region Arrange
-            var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account(){Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber()});
+            var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber() });
             #endregion Arrange
 
             var connector = FortnoxClient.ModeOfPaymentConnector;
@@ -40,7 +40,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdModeOfPayment.Description = "UpdatedMode";
 
-            var updatedModeOfPayment = await connector.UpdateAsync(createdModeOfPayment); 
+            var updatedModeOfPayment = await connector.UpdateAsync(createdModeOfPayment);
             Assert.AreEqual("UpdatedMode", updatedModeOfPayment.Description);
 
             #endregion UPDATE

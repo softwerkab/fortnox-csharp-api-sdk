@@ -79,7 +79,7 @@ namespace Fortnox.SDK.Entities
         ///<summary> Invoice Number </summary>
         [JsonProperty]
         public string InvoiceNumber { get; set; }
-        
+
         ///<summary> Project code </summary>
         [JsonProperty]
         public string Project { get; set; }

@@ -108,7 +108,7 @@ namespace Fortnox.SDK.Entities
         [ReadOnly]
         [JsonProperty]
         public decimal? Total { get; private set; }
-        
+
         ///<summary> Code of the way of delivery. The code must be of an existing way of delivery. </summary>
         [JsonProperty]
         public string WayOfDelivery { get; set; }

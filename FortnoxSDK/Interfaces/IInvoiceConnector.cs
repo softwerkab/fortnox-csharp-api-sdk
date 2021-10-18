@@ -8,7 +8,7 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface IInvoiceConnector : IEntityConnector
-	{
+    {
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         Invoice Update(Invoice invoice);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
@@ -36,9 +36,9 @@ namespace Fortnox.SDK.Interfaces
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
         byte[] Preview(long? id);
 
-		Task<Invoice> UpdateAsync(Invoice invoice);
-		Task<Invoice> CreateAsync(Invoice invoice);
-		Task<Invoice> GetAsync(long? id);
+        Task<Invoice> UpdateAsync(Invoice invoice);
+        Task<Invoice> CreateAsync(Invoice invoice);
+        Task<Invoice> GetAsync(long? id);
         Task<EntityCollection<InvoiceSubset>> FindAsync(InvoiceSearch searchSettings);
 
         Task<Invoice> BookkeepAsync(long? id);
@@ -50,5 +50,5 @@ namespace Fortnox.SDK.Interfaces
         Task<byte[]> PrintReminderAsync(long? id);
         Task<Invoice> ExternalPrintAsync(long? id);
         Task<byte[]> PreviewAsync(long? id);
-	}
+    }
 }

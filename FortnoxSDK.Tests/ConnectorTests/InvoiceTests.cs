@@ -52,7 +52,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdInvoice.Comments = "UpdatedInvoice";
 
-            var updatedInvoice = await connector.UpdateAsync(createdInvoice); 
+            var updatedInvoice = await connector.UpdateAsync(createdInvoice);
             Assert.AreEqual("UpdatedInvoice", updatedInvoice.Comments);
             Assert.AreEqual(3, updatedInvoice.InvoiceRows.Count);
 
@@ -119,7 +119,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             Assert.AreEqual(5, fullCollection.TotalResources);
             Assert.AreEqual(5, fullCollection.Entities.Count);
             Assert.AreEqual(1, fullCollection.TotalPages);
-            
+
             Assert.AreEqual(tmpCustomer.CustomerNumber, fullCollection.Entities.First().CustomerNumber);
 
             //Apply Limit
@@ -270,7 +270,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
         {
             var connector = FortnoxClient.InvoiceConnector;
             var searchSettings = new InvoiceSearch();
-            searchSettings.FromDate = new DateTime(2020,10, 10);
+            searchSettings.FromDate = new DateTime(2020, 10, 10);
             searchSettings.ToDate = new DateTime(2020, 10, 15);
 
             var result = await connector.FindAsync(searchSettings);
@@ -582,7 +582,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             };
 
             var updatedInvoice = await connector.UpdateAsync(updatedInvoiceData);
-            Assert.AreEqual(3+2, updatedInvoice.InvoiceRows.Count);
+            Assert.AreEqual(3 + 2, updatedInvoice.InvoiceRows.Count);
             Assert.AreEqual("Updated", updatedInvoice.InvoiceRows[0].Description);
             Assert.AreEqual("New1", updatedInvoice.InvoiceRows[1].Description);
             Assert.AreEqual("Row2", updatedInvoice.InvoiceRows[2].Description);

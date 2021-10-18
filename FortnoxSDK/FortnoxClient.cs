@@ -1,5 +1,4 @@
-﻿using System.Net;
-using Fortnox.SDK.Connectors.Base;
+﻿using Fortnox.SDK.Connectors.Base;
 using System.Net.Http;
 using Fortnox.SDK.Authorization;
 using Fortnox.SDK.Connectors;

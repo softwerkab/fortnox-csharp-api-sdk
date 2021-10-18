@@ -44,7 +44,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
                 Period = "MONTHLY",
                 AccrualAccount = 2990,
                 RevenueAccount = 3990,
-                StartDate = new DateTime(2020,3,25),
+                StartDate = new DateTime(2020, 3, 25),
                 EndDate = new DateTime(2020, 6, 25),
                 Total = 6000,
                 InvoiceAccrualRows = new List<InvoiceAccrualRow>()
@@ -63,7 +63,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
 
             createdInvoiceAccrual.Description = "UpdatedTestInvoiceAccrual";
 
-            var updatedInvoiceAccrual = await connector.UpdateAsync(createdInvoiceAccrual); 
+            var updatedInvoiceAccrual = await connector.UpdateAsync(createdInvoiceAccrual);
             Assert.AreEqual("UpdatedTestInvoiceAccrual", updatedInvoiceAccrual.Description);
 
             #endregion UPDATE

@@ -38,7 +38,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             var updatedRandomLabel = TestUtils.RandomString();
             createdLabel.Description = updatedRandomLabel;
 
-            var updatedLabel = await connector.UpdateAsync(createdLabel); 
+            var updatedLabel = await connector.UpdateAsync(createdLabel);
             Assert.AreEqual(updatedRandomLabel, updatedLabel.Description);
 
             #endregion UPDATE
@@ -69,7 +69,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             //Add entries
             for (var i = 0; i < 5; i++)
             {
-                var createdEntry = await connector.CreateAsync(new Label() {Description = TestUtils.RandomString()});
+                var createdEntry = await connector.CreateAsync(new Label() { Description = TestUtils.RandomString() });
                 createdEntries.Add(createdEntry);
             }
 
@@ -79,7 +79,7 @@ namespace FortnoxSDK.Tests.ConnectorTests
             Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);
 
             //Limit not supported
-            
+
             //Delete entries
             foreach (var entry in createdEntries)
             {

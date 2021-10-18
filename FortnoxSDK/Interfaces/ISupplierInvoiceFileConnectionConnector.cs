@@ -8,19 +8,19 @@ namespace Fortnox.SDK.Interfaces
 {
     /// <remarks/>
     public interface ISupplierInvoiceFileConnectionConnector : IEntityConnector
-	{
+    {
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		SupplierInvoiceFileConnection Create(SupplierInvoiceFileConnection supplierInvoiceFileConnection);
+        SupplierInvoiceFileConnection Create(SupplierInvoiceFileConnection supplierInvoiceFileConnection);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		SupplierInvoiceFileConnection Get(string id);
+        SupplierInvoiceFileConnection Get(string id);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		void Delete(string id);
+        void Delete(string id);
         [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-		EntityCollection<SupplierInvoiceFileConnection> Find(SupplierInvoiceFileConnectionSearch searchSettings);
+        EntityCollection<SupplierInvoiceFileConnection> Find(SupplierInvoiceFileConnectionSearch searchSettings);
 
         Task<SupplierInvoiceFileConnection> CreateAsync(SupplierInvoiceFileConnection supplierInvoiceFileConnection);
-		Task<SupplierInvoiceFileConnection> GetAsync(string id);
-		Task DeleteAsync(string id);
-		Task<EntityCollection<SupplierInvoiceFileConnection>> FindAsync(SupplierInvoiceFileConnectionSearch searchSettings);
-	}
+        Task<SupplierInvoiceFileConnection> GetAsync(string id);
+        Task DeleteAsync(string id);
+        Task<EntityCollection<SupplierInvoiceFileConnection>> FindAsync(SupplierInvoiceFileConnectionSearch searchSettings);
+    }
 }
