@@ -17,7 +17,7 @@ namespace FortnoxSDK.Tests
 
         public static DateTime Recently => FortnoxServerTime.AddSeconds(-5);
 
-        public static DateTime FortnoxServerTime = DateTime.UtcNow.Add(FortnoxServerTimeZone.BaseUtcOffset);
+        public static DateTime FortnoxServerTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, FortnoxServerTimeZone);
         public static TimeZoneInfo FortnoxServerTimeZone => TZConvert.GetTimeZoneInfo("Europe/Stockholm"); // Swedish timezone
 
         public static string GenerateTmpFilePath()
