@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using System.Reflection;
 using Fortnox.SDK.Utility;
@@ -28,6 +29,9 @@ namespace Fortnox.SDK.Serialization
 
         public T Deserialize<T>(string json)
         {
+            if (string.IsNullOrWhiteSpace(json))
+                throw new Exception("Can not deserialize empty JSON.");
+
             return JsonConvert.DeserializeObject<T>(json, settings);
         }
 
