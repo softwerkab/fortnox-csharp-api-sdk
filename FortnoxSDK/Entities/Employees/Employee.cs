@@ -1,6 +1,7 @@
 using Fortnox.SDK.Serialization;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace Fortnox.SDK.Entities
 {
@@ -131,5 +132,19 @@ namespace Fortnox.SDK.Entities
         ///<summary> Average hourly wage </summary>
         [JsonProperty]
         public decimal? AverageHourlyWage { get; set; }
+
+        [JsonProperty]
+        public DateTime? EmployedTo { get; set; }
+
+        [JsonProperty]
+        public bool? AutoNonRecurringTax { get; set; }
+
+        [ReadOnly]
+        [JsonProperty]
+        public IList<DatedWage> DatedWages { get; private set; }
+
+        [ReadOnly]
+        [JsonProperty]
+        public IList<DatedSchedule> DatedSchedules { get; private set; }
     }
 }
