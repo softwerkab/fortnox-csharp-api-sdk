@@ -15,10 +15,7 @@ namespace FortnoxSDK.Tests
         public static long DefaultFinancialYear = 1;
         public static long NonDefaultFinancialYear = 2;
 
-        public static DateTime Recently => FortnoxServerTime.AddSeconds(-5);
-
-        public static DateTime FortnoxServerTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, FortnoxServerTimeZone);
-        public static TimeZoneInfo FortnoxServerTimeZone => TZConvert.GetTimeZoneInfo("Europe/Stockholm"); // Swedish timezone
+        public static DateTime Recently => FortnoxServerInfo.ServerTime.AddSeconds(-5);
 
         public static string GenerateTmpFilePath()
         {
