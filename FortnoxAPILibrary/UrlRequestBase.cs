@@ -41,12 +41,13 @@ namespace FortnoxAPILibrary
 				this.clientSecret = value;
 			}
 		}
+        public bool UseOAuth2 { get; set; }
 
-		/// <summary>
-		/// Optional Fortnox Access Token, if used it will override the static version.
-		/// </summary>
-		/// /// <exception cref="Exception">Exception will be thrown if access token is not set.</exception>
-		public string AccessToken
+        /// <summary>
+        /// Optional Fortnox Access Token, if used it will override the static version.
+        /// </summary>
+        /// /// <exception cref="Exception">Exception will be thrown if access token is not set.</exception>
+        public string AccessToken
 		{
 			get
 			{
@@ -86,7 +87,7 @@ namespace FortnoxAPILibrary
         /// </summary>
         public string RequestXml { get; set; }
         /// <summary>
-        /// The data returned from Fortnox in Xml-format. 
+        /// The data returned from Fortnox in Xml-format.
         /// </summary>
         public string ResponseXml { get; set; }
 
@@ -134,7 +135,7 @@ namespace FortnoxAPILibrary
         }
 
         /// <summary>
-        /// This method is used to setup the WebRequest used in every call to Fortnox. 
+        /// This method is used to setup the WebRequest used in every call to Fortnox.
         /// </summary>
         /// <param name="requestUriString">The url to the resource</param>
         /// <param name="method">
@@ -150,8 +151,17 @@ namespace FortnoxAPILibrary
             Error = null;
 
             HttpWebRequest wr = (HttpWebRequest)HttpWebRequest.Create(requestUriString);
-            wr.Headers.Add("access-token", this.AccessToken);
-            wr.Headers.Add("client-secret", this.ClientSecret);
+
+            if (UseOAuth2)
+            {
+                wr.Headers["Authorization"] = $"Bearer {AccessToken}";
+            }
+            else
+            {
+                wr.Headers.Add("access-token", this.AccessToken);
+                wr.Headers.Add("client-secret", this.ClientSecret);
+            }
+
             wr.ContentType = "application/xml";
             wr.Accept = "application/xml";
             wr.Method = method;
@@ -366,12 +376,12 @@ namespace FortnoxAPILibrary
 						}
 						else
 						{
-							// memory                          
+							// memory
 							using (var ms = new System.IO.MemoryStream())
 							{
 								file.ContentType = response.Headers["Content-Type"];
 								responseStream.CopyTo(ms);
-								file.Data = ms.ToArray();								
+								file.Data = ms.ToArray();
 							}
 						}
 					}
