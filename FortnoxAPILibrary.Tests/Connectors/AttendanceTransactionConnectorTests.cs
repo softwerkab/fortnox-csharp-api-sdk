@@ -2,7 +2,6 @@
 using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
-using FortnoxAPILibrary.SDK.Auth;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests.Connectors
@@ -22,21 +21,22 @@ namespace FortnoxAPILibrary.Tests.Connectors
 
         public AttendanceTransactionConnectorTests()
         {
-            var authorization = new StandardAuth(AccessToken);
-            
             _connector = new AttendanceTransactionConnector
             {
-                Authorization = authorization
+                AccessToken = AccessToken,
+                ClientSecret = ClientSecret
             };
 
             _employeeConnector = new EmployeeConnector
             {
-                Authorization = authorization
+                AccessToken = AccessToken,
+                ClientSecret = ClientSecret
             };
 
             _costCenterConnector = new CostCenterConnector
             {
-                Authorization = authorization
+                AccessToken = AccessToken,
+                ClientSecret = ClientSecret
             };
         }
 
