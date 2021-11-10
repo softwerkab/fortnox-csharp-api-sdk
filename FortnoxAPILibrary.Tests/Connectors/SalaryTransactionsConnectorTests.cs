@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using FortnoxAPILibrary.Connectors;
 using FortnoxAPILibrary.Entities;
-using FortnoxAPILibrary.SDK.Auth;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxAPILibrary.Tests.Connectors
@@ -15,7 +14,8 @@ namespace FortnoxAPILibrary.Tests.Connectors
         {
             _connector = new SalaryTransactionsConnector
             {
-                Authorization = new StandardAuth(AccessToken)
+                AccessToken = AccessToken,
+                ClientSecret = ClientSecret
             };
         }
 
@@ -138,7 +138,8 @@ namespace FortnoxAPILibrary.Tests.Connectors
         {
             var employeeConnector = new EmployeeConnector
             {
-                Authorization = new StandardAuth(AccessToken)
+                AccessToken = AccessToken,
+                ClientSecret = ClientSecret
             };
 
             var result = employeeConnector.Find();
