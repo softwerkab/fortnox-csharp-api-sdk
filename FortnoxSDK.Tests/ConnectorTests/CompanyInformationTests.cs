@@ -2,46 +2,45 @@ using System.Threading.Tasks;
 using Fortnox.SDK;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class CompanyInformationTests
 {
-    [TestClass]
-    public class CompanyInformationTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_CompanyInformation_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        //Add code to create required resources
+        #endregion Arrange
 
-        [TestMethod]
-        public async Task Test_CompanyInformation_CRUD()
-        {
-            #region Arrange
-            //Add code to create required resources
-            #endregion Arrange
+        var connector = FortnoxClient.CompanyInformationConnector;
 
-            var connector = FortnoxClient.CompanyInformationConnector;
+        #region CREATE
+        //Not Allowed
+        #endregion CREATE
 
-            #region CREATE
-            //Not Allowed
-            #endregion CREATE
+        #region UPDATE
+        //Not Allowed
 
-            #region UPDATE
-            //Not Allowed
+        #endregion UPDATE
 
-            #endregion UPDATE
+        #region READ / GET
 
-            #region READ / GET
+        var retrievedCompanyInformation = await connector.GetAsync();
+        Assert.IsNotNull(retrievedCompanyInformation?.CompanyName);
+        Assert.IsNotNull(retrievedCompanyInformation?.OrganizationNumber);
 
-            var retrievedCompanyInformation = await connector.GetAsync();
-            Assert.IsNotNull(retrievedCompanyInformation?.CompanyName);
-            Assert.IsNotNull(retrievedCompanyInformation?.OrganizationNumber);
+        #endregion READ / GET
 
-            #endregion READ / GET
+        #region DELETE
+        //Not Allowed
+        #endregion DELETE
 
-            #region DELETE
-            //Not Allowed
-            #endregion DELETE
-
-            #region Delete arranged resources
-            //Add code to delete temporary resources
-            #endregion Delete arranged resources
-        }
+        #region Delete arranged resources
+        //Add code to delete temporary resources
+        #endregion Delete arranged resources
     }
 }

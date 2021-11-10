@@ -1,12 +1,11 @@
-namespace Fortnox.SDK.Connectors
+namespace Fortnox.SDK.Connectors;
+
+internal class InboxConnector : ArchiveConnector
 {
-    internal class InboxConnector : ArchiveConnector
+
+    public InboxConnector()
     {
-
-        public InboxConnector()
-        {
-            Resource = "inbox";
-        }
-
+        Resource = "inbox";
     }
+
 }

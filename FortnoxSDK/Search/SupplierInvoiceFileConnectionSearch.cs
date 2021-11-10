@@ -1,15 +1,14 @@
-namespace Fortnox.SDK.Search
+namespace Fortnox.SDK.Search;
+
+public class SupplierInvoiceFileConnectionSearch : BaseSearch
 {
-    public class SupplierInvoiceFileConnectionSearch : BaseSearch
-    {
-        [SearchParameter("sortby")]
-        public Sort.By.SupplierInvoiceFileConnection? SortBy { get; set; }
+    [SearchParameter("sortby")]
+    public Sort.By.SupplierInvoiceFileConnection? SortBy { get; set; }
 
-        [SearchParameter("filter")]
-        public Filter.SupplierInvoiceFileConnection? FilterBy { get; set; }
+    [SearchParameter("filter")]
+    public Filter.SupplierInvoiceFileConnection? FilterBy { get; set; }
 
 
-        [SearchParameter]
-        public string SupplierInvoiceNumber { get; set; }
-    }
+    [SearchParameter]
+    public string SupplierInvoiceNumber { get; set; }
 }

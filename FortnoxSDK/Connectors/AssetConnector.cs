@@ -9,105 +9,104 @@ using Fortnox.SDK.Utility;
 
 // ReSharper disable UnusedMember.Global
 
-namespace Fortnox.SDK.Connectors
+namespace Fortnox.SDK.Connectors;
+
+/// <remarks/>
+internal class AssetConnector : SearchableEntityConnector<Asset, AssetSubset, AssetSearch>, IAssetConnector
 {
     /// <remarks/>
-    internal class AssetConnector : SearchableEntityConnector<Asset, AssetSubset, AssetSearch>, IAssetConnector
+    public AssetConnector()
     {
-        /// <remarks/>
-		public AssetConnector()
-        {
-            Resource = "assets";
-            Serializer = new AssetSerializer();
-        }
-
-        /// <summary>
-        /// Find a asset based on id
-        /// </summary>
-        /// <param name="id">Identifier of the asset to find</param>
-        /// <returns>The found asset</returns>
-        public Asset Get(long? id)
-        {
-            return GetAsync(id).GetResult();
-        }
-
-        /// <summary>
-        /// Updates a asset
-        /// </summary>
-        /// <param name="asset">The asset to update</param>
-        /// <returns>The updated asset</returns>
-        public Asset Update(Asset asset)
-        {
-            return UpdateAsync(asset).GetResult();
-        }
-
-        /// <summary>
-        /// Creates a new asset
-        /// </summary>
-        /// <param name="asset">The asset to create</param>
-        /// <returns>The created asset</returns>
-        public Asset Create(Asset asset)
-        {
-            return CreateAsync(asset).GetResult();
-        }
-
-        /// <summary>
-        /// Deletes a asset
-        /// </summary>
-        /// <param name="id">Identifier of the asset to delete</param>
-        public void Delete(long? id)
-        {
-            DeleteAsync(id).GetResult();
-        }
-
-        /// <summary>
-        /// Gets a list of assets
-        /// </summary>
-        /// <returns>A list of assets</returns>
-        public EntityCollection<AssetSubset> Find(AssetSearch searchSettings)
-        {
-            return FindAsync(searchSettings).GetResult();
-        }
-
-        public async Task<EntityCollection<AssetSubset>> FindAsync(AssetSearch searchSettings)
-        {
-            return await BaseFind(searchSettings).ConfigureAwait(false);
-        }
-        public async Task DeleteAsync(long? id)
-        {
-            await BaseDelete(id.ToString()).ConfigureAwait(false);
-        }
-        public async Task<Asset> CreateAsync(Asset asset)
-        {
-            return await BaseCreate(asset).ConfigureAwait(false);
-        }
-        public async Task<Asset> UpdateAsync(Asset asset)
-        {
-            return await BaseUpdate(asset, asset.Id.ToString()).ConfigureAwait(false);
-        }
-
-        public async Task<Asset> GetAsync(long? id)
-        {
-            return await BaseGet(id.ToString()).ConfigureAwait(false);
-        }
+        Resource = "assets";
+        Serializer = new AssetSerializer();
     }
 
-    internal class AssetSerializer : ISerializer
+    /// <summary>
+    /// Find a asset based on id
+    /// </summary>
+    /// <param name="id">Identifier of the asset to find</param>
+    /// <returns>The found asset</returns>
+    public Asset Get(long? id)
     {
-        private readonly ISerializer serializer = new JsonEntitySerializer();
+        return GetAsync(id).GetResult();
+    }
 
-        public string Serialize<T>(T entity)
-        {
-            return serializer.Serialize(entity);
-        }
+    /// <summary>
+    /// Updates a asset
+    /// </summary>
+    /// <param name="asset">The asset to update</param>
+    /// <returns>The updated asset</returns>
+    public Asset Update(Asset asset)
+    {
+        return UpdateAsync(asset).GetResult();
+    }
 
-        public T Deserialize<T>(string content)
-        {
-            //in case of single single entity response, fix json root from "Assets" to "Asset"
-            content = new Regex("\"Assets\":{").Replace(content, "\"Asset\":{", 1);
+    /// <summary>
+    /// Creates a new asset
+    /// </summary>
+    /// <param name="asset">The asset to create</param>
+    /// <returns>The created asset</returns>
+    public Asset Create(Asset asset)
+    {
+        return CreateAsync(asset).GetResult();
+    }
 
-            return serializer.Deserialize<T>(content);
+    /// <summary>
+    /// Deletes a asset
+    /// </summary>
+    /// <param name="id">Identifier of the asset to delete</param>
+    public void Delete(long? id)
+    {
+        DeleteAsync(id).GetResult();
+    }
 
-        }
+    /// <summary>
+    /// Gets a list of assets
+    /// </summary>
+    /// <returns>A list of assets</returns>
+    public EntityCollection<AssetSubset> Find(AssetSearch searchSettings)
+    {
+        return FindAsync(searchSettings).GetResult();
+    }
+
+    public async Task<EntityCollection<AssetSubset>> FindAsync(AssetSearch searchSettings)
+    {
+        return await BaseFind(searchSettings).ConfigureAwait(false);
+    }
+    public async Task DeleteAsync(long? id)
+    {
+        await BaseDelete(id.ToString()).ConfigureAwait(false);
+    }
+    public async Task<Asset> CreateAsync(Asset asset)
+    {
+        return await BaseCreate(asset).ConfigureAwait(false);
+    }
+    public async Task<Asset> UpdateAsync(Asset asset)
+    {
+        return await BaseUpdate(asset, asset.Id.ToString()).ConfigureAwait(false);
+    }
+
+    public async Task<Asset> GetAsync(long? id)
+    {
+        return await BaseGet(id.ToString()).ConfigureAwait(false);
+    }
+}
+
+internal class AssetSerializer : ISerializer
+{
+    private readonly ISerializer serializer = new JsonEntitySerializer();
+
+    public string Serialize<T>(T entity)
+    {
+        return serializer.Serialize(entity);
+    }
+
+    public T Deserialize<T>(string content)
+    {
+        //in case of single single entity response, fix json root from "Assets" to "Asset"
+        content = new Regex("\"Assets\":{").Replace(content, "\"Asset\":{", 1);
+
+        return serializer.Deserialize<T>(content);
+
     }
 }

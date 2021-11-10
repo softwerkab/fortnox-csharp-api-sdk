@@ -3,354 +3,353 @@
 
 using System.Runtime.Serialization;
 
-namespace Fortnox.SDK.Search
+namespace Fortnox.SDK.Search;
+
+/// <remarks/>
+public class Filter
 {
     /// <remarks/>
-    public class Filter
+    public enum Contract
     {
         /// <remarks/>
-        public enum Contract
-        {
-            /// <remarks/>
-            [EnumMember(Value = "active")]
-            Active,
-            /// <remarks/>
-            [EnumMember(Value = "inactive")]
-            Inactive,
-            /// <remarks/>
-            [EnumMember(Value = "finished")]
-            Finished
-        }
-
+        [EnumMember(Value = "active")]
+        Active,
         /// <remarks/>
-        public enum Invoice
-        {
-            /// <remarks/>
-            [EnumMember(Value = "fullypaid")]
-            FullyPaid,
-            /// <remarks/>
-            [EnumMember(Value = "cancelled")]
-            Cancelled,
-            /// <remarks/>
-            [EnumMember(Value = "unpaid")]
-            Unpaid,
-            /// <remarks/>
-            [EnumMember(Value = "unpaidoverdue")]
-            UnpaidOverdue,
-            /// <remarks/>
-            [EnumMember(Value = "unbooked")]
-            Unbooked
-        }
-
+        [EnumMember(Value = "inactive")]
+        Inactive,
         /// <remarks/>
-        public enum SupplierInvoice
-        {
-            /// <remarks/>
-            [EnumMember(Value = "fullypaid")]
-            FullyPaid,
-            /// <remarks/>
-            [EnumMember(Value = "cancelled")]
-            Cancelled,
-            /// <remarks/>
-            [EnumMember(Value = "unpaid")]
-            Unpaid,
-            /// <remarks/>
-            [EnumMember(Value = "unpaidoverdue")]
-            UnpaidOverdue,
-            /// <remarks/>
-            [EnumMember(Value = "unbooked")]
-            Unbooked,
-            /// <remarks/>
-            [EnumMember(Value = "pendingpayment")]
-            PendingPayment,
-            /// <remarks/>
-            [EnumMember(Value = "authorizepending")]
-            AuthorizePending
-        }
+        [EnumMember(Value = "finished")]
+        Finished
+    }
 
+    /// <remarks/>
+    public enum Invoice
+    {
         /// <remarks/>
-        public enum Offer
-        {
-            /// <remarks/>
-            [EnumMember(Value = "cancelled")]
-            Cancelled,
-            /// <remarks/>
-            [EnumMember(Value = "expired")]
-            Expired,
-            /// <remarks/>
-            [EnumMember(Value = "ordercreated")]
-            OrderCreated,
-            /// <remarks/>
-            [EnumMember(Value = "ordernotcreated")]
-            OrderNotCreated
-        }
-
+        [EnumMember(Value = "fullypaid")]
+        FullyPaid,
         /// <remarks/>
-        public enum Order
-        {
-            /// <remarks/>
-            [EnumMember(Value = "cancelled")]
-            Cancelled,
-            /// <remarks/>
-            [EnumMember(Value = "expired")]
-            Expired,
-            /// <remarks/>
-            [EnumMember(Value = "invoicecreated")]
-            InvoiceCreated,
-            /// <remarks/>
-            [EnumMember(Value = "invoicenotcreated")]
-            InvoiceNotCreated
-        }
-
+        [EnumMember(Value = "cancelled")]
+        Cancelled,
         /// <remarks/>
-        public enum TaxReduction
-        {
-            /// <remarks/>
-            [EnumMember(Value = "invoices")]
-            Invoices,
-            /// <remarks/>
-            [EnumMember(Value = "offers")]
-            Offers,
-            /// <remarks/>
-            [EnumMember(Value = "orders")]
-            Orders
-        }
-
+        [EnumMember(Value = "unpaid")]
+        Unpaid,
         /// <remarks/>
-        public enum Customer
-        {
-            /// <remarks/>
-            [EnumMember(Value = "active")]
-            Active,
-            /// <remarks/>
-            [EnumMember(Value = "inactive")]
-            Inactive
-        }
-
+        [EnumMember(Value = "unpaidoverdue")]
+        UnpaidOverdue,
         /// <remarks/>
-        public enum Article
-        {
-            /// <remarks/>
-            [EnumMember(Value = "active")]
-            Active,
-            /// <remarks/>
-            [EnumMember(Value = "inactive")]
-            Inactive
-        }
+        [EnumMember(Value = "unbooked")]
+        Unbooked
+    }
 
-        public enum AbsenceTransaction
-        {
+    /// <remarks/>
+    public enum SupplierInvoice
+    {
+        /// <remarks/>
+        [EnumMember(Value = "fullypaid")]
+        FullyPaid,
+        /// <remarks/>
+        [EnumMember(Value = "cancelled")]
+        Cancelled,
+        /// <remarks/>
+        [EnumMember(Value = "unpaid")]
+        Unpaid,
+        /// <remarks/>
+        [EnumMember(Value = "unpaidoverdue")]
+        UnpaidOverdue,
+        /// <remarks/>
+        [EnumMember(Value = "unbooked")]
+        Unbooked,
+        /// <remarks/>
+        [EnumMember(Value = "pendingpayment")]
+        PendingPayment,
+        /// <remarks/>
+        [EnumMember(Value = "authorizepending")]
+        AuthorizePending
+    }
 
-        }
-        public enum AccountChart
-        {
+    /// <remarks/>
+    public enum Offer
+    {
+        /// <remarks/>
+        [EnumMember(Value = "cancelled")]
+        Cancelled,
+        /// <remarks/>
+        [EnumMember(Value = "expired")]
+        Expired,
+        /// <remarks/>
+        [EnumMember(Value = "ordercreated")]
+        OrderCreated,
+        /// <remarks/>
+        [EnumMember(Value = "ordernotcreated")]
+        OrderNotCreated
+    }
 
-        }
-        public enum Account
-        {
+    /// <remarks/>
+    public enum Order
+    {
+        /// <remarks/>
+        [EnumMember(Value = "cancelled")]
+        Cancelled,
+        /// <remarks/>
+        [EnumMember(Value = "expired")]
+        Expired,
+        /// <remarks/>
+        [EnumMember(Value = "invoicecreated")]
+        InvoiceCreated,
+        /// <remarks/>
+        [EnumMember(Value = "invoicenotcreated")]
+        InvoiceNotCreated
+    }
 
-        }
-        public enum Archive
-        {
+    /// <remarks/>
+    public enum TaxReduction
+    {
+        /// <remarks/>
+        [EnumMember(Value = "invoices")]
+        Invoices,
+        /// <remarks/>
+        [EnumMember(Value = "offers")]
+        Offers,
+        /// <remarks/>
+        [EnumMember(Value = "orders")]
+        Orders
+    }
 
-        }
-        public enum ArticleFileConnection
-        {
+    /// <remarks/>
+    public enum Customer
+    {
+        /// <remarks/>
+        [EnumMember(Value = "active")]
+        Active,
+        /// <remarks/>
+        [EnumMember(Value = "inactive")]
+        Inactive
+    }
 
-        }
+    /// <remarks/>
+    public enum Article
+    {
+        /// <remarks/>
+        [EnumMember(Value = "active")]
+        Active,
+        /// <remarks/>
+        [EnumMember(Value = "inactive")]
+        Inactive
+    }
 
-        public enum AssetFileConnection
-        {
+    public enum AbsenceTransaction
+    {
 
-        }
-        public enum AssetTypes
-        {
+    }
+    public enum AccountChart
+    {
 
-        }
-        public enum Asset
-        {
-            /// <summary> Retrieves all active assets </summary>
-            [EnumMember(Value = "active")]
-            Active,
-            /// <summary>Retrieves all inactive assets </summary>
-            [EnumMember(Value = "inactive")]
-            Inactive,
-            /// <summary> Retrieves all fully depreciated assets </summary>
-            [EnumMember(Value = "fully_depreciated")]
-            FullyDepreciated,
-            /// <summary> Retrieves all sold assets </summary>
-            [EnumMember(Value = "sold")]
-            Sold,
-            /// <summary> Retrieves all scrapped assets </summary>
-            [EnumMember(Value = "scrapped")]
-            Scrapped,
-            /// <summary> Retrieves all voided assets </summary>
-            [EnumMember(Value = "voided")]
-            Voided
-        }
-        public enum AttendanceTransactions
-        {
+    }
+    public enum Account
+    {
 
-        }
-        public enum CompanyInformation
-        {
+    }
+    public enum Archive
+    {
 
-        }
-        public enum CompanySettings
-        {
+    }
+    public enum ArticleFileConnection
+    {
 
-        }
-        public enum ContractAccrual
-        {
+    }
 
-        }
-        public enum ContractTemplate
-        {
+    public enum AssetFileConnection
+    {
 
-        }
-        public enum CostCenter
-        {
+    }
+    public enum AssetTypes
+    {
 
-        }
-        public enum Currency
-        {
+    }
+    public enum Asset
+    {
+        /// <summary> Retrieves all active assets </summary>
+        [EnumMember(Value = "active")]
+        Active,
+        /// <summary>Retrieves all inactive assets </summary>
+        [EnumMember(Value = "inactive")]
+        Inactive,
+        /// <summary> Retrieves all fully depreciated assets </summary>
+        [EnumMember(Value = "fully_depreciated")]
+        FullyDepreciated,
+        /// <summary> Retrieves all sold assets </summary>
+        [EnumMember(Value = "sold")]
+        Sold,
+        /// <summary> Retrieves all scrapped assets </summary>
+        [EnumMember(Value = "scrapped")]
+        Scrapped,
+        /// <summary> Retrieves all voided assets </summary>
+        [EnumMember(Value = "voided")]
+        Voided
+    }
+    public enum AttendanceTransactions
+    {
 
-        }
-        public enum Employee
-        {
-            [EnumMember(Value = "active")]
-            Active,
-            [EnumMember(Value = "inactive")]
-            Inactive
-        }
-        public enum Expense
-        {
+    }
+    public enum CompanyInformation
+    {
 
-        }
-        public enum FinancialYear
-        {
+    }
+    public enum CompanySettings
+    {
 
-        }
-        public enum InvoiceAccrual
-        {
+    }
+    public enum ContractAccrual
+    {
 
-        }
-        public enum InvoiceFileConnection
-        {
+    }
+    public enum ContractTemplate
+    {
 
-        }
-        public enum InvoicePayment
-        {
+    }
+    public enum CostCenter
+    {
 
-        }
-        public enum Label
-        {
+    }
+    public enum Currency
+    {
 
-        }
-        public enum LockedPeriod
-        {
+    }
+    public enum Employee
+    {
+        [EnumMember(Value = "active")]
+        Active,
+        [EnumMember(Value = "inactive")]
+        Inactive
+    }
+    public enum Expense
+    {
 
-        }
-        public enum ModeOfPayment
-        {
+    }
+    public enum FinancialYear
+    {
 
-        }
-        public enum NoxFinansInvoice
-        {
+    }
+    public enum InvoiceAccrual
+    {
 
-        }
-        public enum PredefinedAccounts
-        {
+    }
+    public enum InvoiceFileConnection
+    {
 
-        }
-        public enum PredefinedVoucherSeries
-        {
+    }
+    public enum InvoicePayment
+    {
 
-        }
-        public enum PriceList
-        {
+    }
+    public enum Label
+    {
 
-        }
-        public enum Price
-        {
+    }
+    public enum LockedPeriod
+    {
 
-        }
-        public enum PrintTemplate
-        {
-            [EnumMember(Value = "order")]
-            Order,
-            [EnumMember(Value = "offer")]
-            Offer,
-            [EnumMember(Value = "invoice")]
-            Invoice
-        }
-        public enum Project
-        {
+    }
+    public enum ModeOfPayment
+    {
 
-        }
-        public enum SalaryTransaction
-        {
+    }
+    public enum NoxFinansInvoice
+    {
 
-        }
-        public enum ScheduleTimes
-        {
+    }
+    public enum PredefinedAccounts
+    {
 
-        }
-        public enum SupplierInvoiceAccrual
-        {
+    }
+    public enum PredefinedVoucherSeries
+    {
 
-        }
-        public enum SupplierInvoiceExternalURLConnection
-        {
+    }
+    public enum PriceList
+    {
 
-        }
-        public enum SupplierInvoiceFileConnection
-        {
+    }
+    public enum Price
+    {
 
-        }
-        public enum SupplierInvoicePayment
-        {
+    }
+    public enum PrintTemplate
+    {
+        [EnumMember(Value = "order")]
+        Order,
+        [EnumMember(Value = "offer")]
+        Offer,
+        [EnumMember(Value = "invoice")]
+        Invoice
+    }
+    public enum Project
+    {
 
-        }
-        public enum Supplier
-        {
+    }
+    public enum SalaryTransaction
+    {
 
-        }
-        public enum TermsOfDelivery
-        {
+    }
+    public enum ScheduleTimes
+    {
 
-        }
-        public enum TermsOfPayment
-        {
+    }
+    public enum SupplierInvoiceAccrual
+    {
 
-        }
-        public enum TrustedEmailDomains
-        {
+    }
+    public enum SupplierInvoiceExternalURLConnection
+    {
 
-        }
-        public enum TrustedEmailSenders
-        {
+    }
+    public enum SupplierInvoiceFileConnection
+    {
 
-        }
-        public enum Unit
-        {
+    }
+    public enum SupplierInvoicePayment
+    {
 
-        }
-        public enum VoucherFileConnection
-        {
+    }
+    public enum Supplier
+    {
 
-        }
-        public enum VoucherSeries
-        {
+    }
+    public enum TermsOfDelivery
+    {
 
-        }
-        public enum Voucher
-        {
+    }
+    public enum TermsOfPayment
+    {
 
-        }
-        public enum WayOfDelivery
-        {
+    }
+    public enum TrustedEmailDomains
+    {
 
-        }
+    }
+    public enum TrustedEmailSenders
+    {
+
+    }
+    public enum Unit
+    {
+
+    }
+    public enum VoucherFileConnection
+    {
+
+    }
+    public enum VoucherSeries
+    {
+
+    }
+    public enum Voucher
+    {
+
+    }
+    public enum WayOfDelivery
+    {
+
     }
 }

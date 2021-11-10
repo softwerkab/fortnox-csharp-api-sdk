@@ -1,28 +1,27 @@
 ﻿using System;
 
-namespace Fortnox.SDK.Utility
+namespace Fortnox.SDK.Utility;
+
+public static class Utils
 {
-    public static class Utils
+    internal static string GetStringValue(object value, Type type)
     {
-        internal static string GetStringValue(object value, Type type)
+        if (value == null) return null;
+
+        type = Nullable.GetUnderlyingType(type) ?? type; //unwrap nullable type
+
+        if (type == typeof(string))
+            return value.ToString();
+        if (type.IsEnum)
+            return ((Enum)value).GetStringValue();
+        if (type == typeof(DateTime))
         {
-            if (value == null) return null;
+            if (((DateTime)value).Date == (DateTime)value) //Date without hours/minutes/seconds..
+                return ((DateTime)value).ToString(ApiConstants.DateFormat);
 
-            type = Nullable.GetUnderlyingType(type) ?? type; //unwrap nullable type
-
-            if (type == typeof(string))
-                return value.ToString();
-            if (type.IsEnum)
-                return ((Enum)value).GetStringValue();
-            if (type == typeof(DateTime))
-            {
-                if (((DateTime)value).Date == (DateTime)value) //Date without hours/minutes/seconds..
-                    return ((DateTime)value).ToString(ApiConstants.DateFormat);
-
-                return ((DateTime)value).ToString(ApiConstants.DateAndTimeFormat);
-            }
-
-            return value.ToString().ToLower();
+            return ((DateTime)value).ToString(ApiConstants.DateAndTimeFormat);
         }
+
+        return value.ToString().ToLower();
     }
 }

@@ -1,11 +1,10 @@
-namespace Fortnox.SDK.Search
-{
-    public class PrintTemplateSearch : BaseSearch
-    {
-        [SearchParameter("sortby")]
-        public Sort.By.PrintTemplate? SortBy { get; set; }
+namespace Fortnox.SDK.Search;
 
-        [SearchParameter("type")]
-        public Filter.PrintTemplate? FilterBy { get; set; }
-    }
+public class PrintTemplateSearch : BaseSearch
+{
+    [SearchParameter("sortby")]
+    public Sort.By.PrintTemplate? SortBy { get; set; }
+
+    [SearchParameter("type")]
+    public Filter.PrintTemplate? FilterBy { get; set; }
 }

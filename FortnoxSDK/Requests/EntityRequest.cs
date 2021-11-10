@@ -1,8 +1,7 @@
-﻿namespace Fortnox.SDK.Requests
+﻿namespace Fortnox.SDK.Requests;
+
+internal class EntityRequest<TEntity> : BaseRequest
 {
-    internal class EntityRequest<TEntity> : BaseRequest
-    {
-        public TEntity Entity { get; set; }
-        public bool UseEntityWrapper { get; set; } = true;
-    }
+    public TEntity Entity { get; set; }
+    public bool UseEntityWrapper { get; set; } = true;
 }

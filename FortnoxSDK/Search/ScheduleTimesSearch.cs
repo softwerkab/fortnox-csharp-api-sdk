@@ -1,13 +1,12 @@
-namespace Fortnox.SDK.Search
+namespace Fortnox.SDK.Search;
+
+public class ScheduleTimesSearch : BaseSearch
 {
-    public class ScheduleTimesSearch : BaseSearch
-    {
-        [SearchParameter("sortby")]
-        public Sort.By.ScheduleTimes? SortBy { get; set; }
+    [SearchParameter("sortby")]
+    public Sort.By.ScheduleTimes? SortBy { get; set; }
 
-        [SearchParameter("filter")]
-        public Filter.ScheduleTimes? FilterBy { get; set; }
+    [SearchParameter("filter")]
+    public Filter.ScheduleTimes? FilterBy { get; set; }
 
 
-    }
 }

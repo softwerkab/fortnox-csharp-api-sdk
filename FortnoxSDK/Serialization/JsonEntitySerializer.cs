@@ -7,81 +7,80 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
-namespace Fortnox.SDK.Serialization
+namespace Fortnox.SDK.Serialization;
+
+internal class JsonEntitySerializer : ISerializer
 {
-    internal class JsonEntitySerializer : ISerializer
+    private readonly JsonSerializerSettings settings;
+
+    public JsonEntitySerializer()
+    {
+        settings = new JsonSerializerSettings();
+        settings.DateFormatString = "yyyy-MM-dd";
+        settings.Converters.Add(new StringEnumConverter());
+        settings.NullValueHandling = NullValueHandling.Ignore;
+        settings.ContractResolver = new MyJsonContractResolver(settings);
+    }
+
+    public string Serialize<T>(T entity)
+    {
+        return JsonConvert.SerializeObject(entity, settings);
+    }
+
+    public T Deserialize<T>(string json)
+    {
+        if (string.IsNullOrWhiteSpace(json))
+            throw new Exception("Can not deserialize empty JSON.");
+
+        return JsonConvert.DeserializeObject<T>(json, settings);
+    }
+
+    private class MyJsonContractResolver : DefaultContractResolver
     {
         private readonly JsonSerializerSettings settings;
 
-        public JsonEntitySerializer()
+        public MyJsonContractResolver(JsonSerializerSettings settings)
         {
-            settings = new JsonSerializerSettings();
-            settings.DateFormatString = "yyyy-MM-dd";
-            settings.Converters.Add(new StringEnumConverter());
-            settings.NullValueHandling = NullValueHandling.Ignore;
-            settings.ContractResolver = new MyJsonContractResolver(settings);
+            this.settings = settings;
         }
 
-        public string Serialize<T>(T entity)
+        protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {
-            return JsonConvert.SerializeObject(entity, settings);
-        }
+            var property = base.CreateProperty(member, memberSerialization);
 
-        public T Deserialize<T>(string json)
-        {
-            if (string.IsNullOrWhiteSpace(json))
-                throw new Exception("Can not deserialize empty JSON.");
+            var isReadOnly = member.HasAttribute<ReadOnlyAttribute>();
+            property.ShouldSerialize = o => !isReadOnly && !HasEmptyObjectValue(o, (PropertyInfo)member);
 
-            return JsonConvert.DeserializeObject<T>(json, settings);
-        }
+            var hasGenericName = member.HasAttribute<GenericPropertyNameAttribute>();
 
-        private class MyJsonContractResolver : DefaultContractResolver
-        {
-            private readonly JsonSerializerSettings settings;
-
-            public MyJsonContractResolver(JsonSerializerSettings settings)
+            if (hasGenericName)
             {
-                this.settings = settings;
-            }
-
-            protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
-            {
-                var property = base.CreateProperty(member, memberSerialization);
-
-                var isReadOnly = member.HasAttribute<ReadOnlyAttribute>();
-                property.ShouldSerialize = o => !isReadOnly && !HasEmptyObjectValue(o, (PropertyInfo)member);
-
-                var hasGenericName = member.HasAttribute<GenericPropertyNameAttribute>();
-
-                if (hasGenericName)
+                var propertyType = ((PropertyInfo)member).PropertyType;
+                if (propertyType.GetInterfaces().Contains(typeof(IEnumerable))) //is collection
                 {
-                    var propertyType = ((PropertyInfo)member).PropertyType;
-                    if (propertyType.GetInterfaces().Contains(typeof(IEnumerable))) //is collection
-                    {
-                        var entityType = propertyType.GetGenericArguments()[0];
-                        var entityAtt = entityType.GetAttribute<EntityAttribute>();
-                        if (entityAtt?.SingularName != null)
-                            property.PropertyName = entityAtt.PluralName;
-                    }
-                    else //single 
-                    {
-                        var entityType = propertyType;
-
-                        var entityAtt = entityType.GetAttribute<EntityAttribute>();
-                        if (entityAtt?.SingularName != null)
-                            property.PropertyName = entityAtt.SingularName;
-                    }
+                    var entityType = propertyType.GetGenericArguments()[0];
+                    var entityAtt = entityType.GetAttribute<EntityAttribute>();
+                    if (entityAtt?.SingularName != null)
+                        property.PropertyName = entityAtt.PluralName;
                 }
+                else //single 
+                {
+                    var entityType = propertyType;
 
-                return property;
+                    var entityAtt = entityType.GetAttribute<EntityAttribute>();
+                    if (entityAtt?.SingularName != null)
+                        property.PropertyName = entityAtt.SingularName;
+                }
             }
 
-            private bool HasEmptyObjectValue(object obj, PropertyInfo member)
-            {
-                var value = member.GetValue(obj);
-                var json = JsonConvert.SerializeObject(value, settings);
-                return json.Equals("{}"); //empty object
-            }
+            return property;
+        }
+
+        private bool HasEmptyObjectValue(object obj, PropertyInfo member)
+        {
+            var value = member.GetValue(obj);
+            var json = JsonConvert.SerializeObject(value, settings);
+            return json.Equals("{}"); //empty object
         }
     }
 }

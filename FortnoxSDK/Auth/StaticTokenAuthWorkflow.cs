@@ -6,37 +6,36 @@ using Fortnox.SDK.Entities;
 using Fortnox.SDK.Serialization;
 using Fortnox.SDK.Utility;
 
-namespace Fortnox.SDK.Auth
+namespace Fortnox.SDK.Auth;
+
+internal class StaticTokenAuthWorkflow : BaseClient, IStaticTokenAuthWorkflow
 {
-    internal class StaticTokenAuthWorkflow : BaseClient, IStaticTokenAuthWorkflow
+    public const string ActivationUri = @"https://api.fortnox.se/3";
+
+    public ISerializer Serializer { get; internal set; }
+
+    public StaticTokenAuthWorkflow()
     {
-        public const string ActivationUri = @"https://api.fortnox.se/3";
+        Serializer = new JsonEntitySerializer();
+    }
 
-        public ISerializer Serializer { get; internal set; }
+    public string GetToken(string authCode, string clientSecret)
+    {
+        return GetTokenAsync(authCode, clientSecret).GetResult();
+    }
 
-        public StaticTokenAuthWorkflow()
-        {
-            Serializer = new JsonEntitySerializer();
-        }
+    public async Task<string> GetTokenAsync(string authCode, string clientSecret)
+    {
+        var httpRequest = new HttpRequestMessage(HttpMethod.Get, ActivationUri);
+        httpRequest.Headers.Add("Authorization-Code", authCode);
+        httpRequest.Headers.Add("Client-Secret", clientSecret);
+        httpRequest.Headers.Add("Accept", "application/json");
 
-        public string GetToken(string authCode, string clientSecret)
-        {
-            return GetTokenAsync(authCode, clientSecret).GetResult();
-        }
+        var responseData = await SendAsync(httpRequest).ConfigureAwait(false);
+        var responseJson = Encoding.UTF8.GetString(responseData);
+        var result = Serializer.Deserialize<EntityWrapper<AuthorizationData>>(responseJson);
 
-        public async Task<string> GetTokenAsync(string authCode, string clientSecret)
-        {
-            var httpRequest = new HttpRequestMessage(HttpMethod.Get, ActivationUri);
-            httpRequest.Headers.Add("Authorization-Code", authCode);
-            httpRequest.Headers.Add("Client-Secret", clientSecret);
-            httpRequest.Headers.Add("Accept", "application/json");
-
-            var responseData = await SendAsync(httpRequest).ConfigureAwait(false);
-            var responseJson = Encoding.UTF8.GetString(responseData);
-            var result = Serializer.Deserialize<EntityWrapper<AuthorizationData>>(responseJson);
-
-            var accessToken = result?.Entity.AccessToken;
-            return accessToken;
-        }
+        var accessToken = result?.Entity.AccessToken;
+        return accessToken;
     }
 }

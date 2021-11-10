@@ -1,12 +1,11 @@
 using System.Runtime.Serialization;
 
-namespace Fortnox.SDK.Entities
+namespace Fortnox.SDK.Entities;
+
+public enum DiscountType
 {
-    public enum DiscountType
-    {
-        [EnumMember(Value = "AMOUNT")]
-        Amount,
-        [EnumMember(Value = "PERCENT")]
-        Percent,
-    }
+    [EnumMember(Value = "AMOUNT")]
+    Amount,
+    [EnumMember(Value = "PERCENT")]
+    Percent,
 }

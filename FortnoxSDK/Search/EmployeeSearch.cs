@@ -1,13 +1,12 @@
-namespace Fortnox.SDK.Search
+namespace Fortnox.SDK.Search;
+
+public class EmployeeSearch : BaseSearch
 {
-    public class EmployeeSearch : BaseSearch
-    {
-        [SearchParameter("sortby")]
-        public Sort.By.Employee? SortBy { get; set; }
+    [SearchParameter("sortby")]
+    public Sort.By.Employee? SortBy { get; set; }
 
-        [SearchParameter("filter")]
-        public Filter.Employee? FilterBy { get; set; }
+    [SearchParameter("filter")]
+    public Filter.Employee? FilterBy { get; set; }
 
 
-    }
 }

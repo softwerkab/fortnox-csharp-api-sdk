@@ -1,14 +1,13 @@
 using System.Runtime.Serialization;
 
-namespace Fortnox.SDK.Entities
+namespace Fortnox.SDK.Entities;
+
+public enum ReferenceDocumentType
 {
-    public enum ReferenceDocumentType
-    {
-        [EnumMember(Value = "OFFER")]
-        Offer,
-        [EnumMember(Value = "ORDER")]
-        Order,
-        [EnumMember(Value = "INVOICE")]
-        Invoice,
-    }
+    [EnumMember(Value = "OFFER")]
+    Offer,
+    [EnumMember(Value = "ORDER")]
+    Order,
+    [EnumMember(Value = "INVOICE")]
+    Invoice,
 }

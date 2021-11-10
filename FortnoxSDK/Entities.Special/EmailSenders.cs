@@ -2,14 +2,13 @@
 using Fortnox.SDK.Serialization;
 using Newtonsoft.Json;
 
-namespace Fortnox.SDK.Entities
+namespace Fortnox.SDK.Entities;
+
+[Entity(SingularName = "EmailSenders")]
+public class EmailSenders
 {
-    [Entity(SingularName = "EmailSenders")]
-    public class EmailSenders
-    {
-        [JsonProperty]
-        public IList<TrustedEmailSender> TrustedSenders { get; set; }
-        [JsonProperty]
-        public IList<TrustedEmailSender> RejectedSenders { get; set; }
-    }
+    [JsonProperty]
+    public IList<TrustedEmailSender> TrustedSenders { get; set; }
+    [JsonProperty]
+    public IList<TrustedEmailSender> RejectedSenders { get; set; }
 }

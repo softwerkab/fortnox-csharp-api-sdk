@@ -4,87 +4,86 @@ using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class LabelTests
 {
-    [TestClass]
-    public class LabelTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_Label_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        //Add code to create required resources
+        #endregion Arrange
 
-        [TestMethod]
-        public async Task Test_Label_CRUD()
+        var connector = FortnoxClient.LabelConnector;
+
+        var randomLabel = TestUtils.RandomString();
+
+        #region CREATE
+        var newLabel = new Label()
         {
-            #region Arrange
-            //Add code to create required resources
-            #endregion Arrange
+            Description = randomLabel
+        };
 
-            var connector = FortnoxClient.LabelConnector;
+        var createdLabel = await connector.CreateAsync(newLabel);
+        Assert.AreEqual(randomLabel, createdLabel.Description);
 
-            var randomLabel = TestUtils.RandomString();
+        #endregion CREATE
 
-            #region CREATE
-            var newLabel = new Label()
-            {
-                Description = randomLabel
-            };
+        #region UPDATE
 
-            var createdLabel = await connector.CreateAsync(newLabel);
-            Assert.AreEqual(randomLabel, createdLabel.Description);
+        var updatedRandomLabel = TestUtils.RandomString();
+        createdLabel.Description = updatedRandomLabel;
 
-            #endregion CREATE
+        var updatedLabel = await connector.UpdateAsync(createdLabel);
+        Assert.AreEqual(updatedRandomLabel, updatedLabel.Description);
 
-            #region UPDATE
+        #endregion UPDATE
 
-            var updatedRandomLabel = TestUtils.RandomString();
-            createdLabel.Description = updatedRandomLabel;
+        #region READ / GET
+        //Not allowed to read single label
+        #endregion READ / GET
 
-            var updatedLabel = await connector.UpdateAsync(createdLabel);
-            Assert.AreEqual(updatedRandomLabel, updatedLabel.Description);
+        #region DELETE
 
-            #endregion UPDATE
+        await connector.DeleteAsync(createdLabel.Id);
 
-            #region READ / GET
-            //Not allowed to read single label
-            #endregion READ / GET
+        #endregion DELETE
 
-            #region DELETE
+        #region Delete arranged resources
+        //Add code to delete temporary resources
+        #endregion Delete arranged resources
+    }
 
-            await connector.DeleteAsync(createdLabel.Id);
+    [TestMethod]
+    public async Task Test_Find()
+    {
+        var connector = FortnoxClient.LabelConnector;
 
-            #endregion DELETE
+        var existingCount = (await connector.FindAsync(null)).Entities.Count;
 
-            #region Delete arranged resources
-            //Add code to delete temporary resources
-            #endregion Delete arranged resources
+        var createdEntries = new List<Label>();
+        //Add entries
+        for (var i = 0; i < 5; i++)
+        {
+            var createdEntry = await connector.CreateAsync(new Label() { Description = TestUtils.RandomString() });
+            createdEntries.Add(createdEntry);
         }
 
-        [TestMethod]
-        public async Task Test_Find()
+        //Filter not supported
+        var fullCollection = await connector.FindAsync(null);
+
+        Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);
+
+        //Limit not supported
+
+        //Delete entries
+        foreach (var entry in createdEntries)
         {
-            var connector = FortnoxClient.LabelConnector;
-
-            var existingCount = (await connector.FindAsync(null)).Entities.Count;
-
-            var createdEntries = new List<Label>();
-            //Add entries
-            for (var i = 0; i < 5; i++)
-            {
-                var createdEntry = await connector.CreateAsync(new Label() { Description = TestUtils.RandomString() });
-                createdEntries.Add(createdEntry);
-            }
-
-            //Filter not supported
-            var fullCollection = await connector.FindAsync(null);
-
-            Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);
-
-            //Limit not supported
-
-            //Delete entries
-            foreach (var entry in createdEntries)
-            {
-                await connector.DeleteAsync(entry.Id);
-            }
+            await connector.DeleteAsync(entry.Id);
         }
     }
 }

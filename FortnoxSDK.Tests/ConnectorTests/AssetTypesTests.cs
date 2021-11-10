@@ -5,109 +5,108 @@ using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class AssetTypesTests
 {
-    [TestClass]
-    public class AssetTypesTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_AssetTypes_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
 
-        [TestMethod]
-        public async Task Test_AssetTypes_CRUD()
+        //Add code to create required resources
+
+        #endregion Arrange
+
+        var connector = FortnoxClient.AssetTypesConnector;
+        var entry = (await connector.FindAsync(null)).Entities.FirstOrDefault(at => at.Number == "TST");
+        if (entry != null)
+            await connector.DeleteAsync(entry.Id);
+
+        #region CREATE
+
+        var newAssetTypes = new AssetType()
         {
-            #region Arrange
+            Description = "TestAssetType",
+            Notes = "Some notes",
+            Number = "TST",
+            Type = "1",
+            AccountAssetId = 1150,
+            AccountDepreciationId = 7824,
+            AccountValueLossId = 1159,
+        };
 
-            //Add code to create required resources
+        var createdAssetTypes = await connector.CreateAsync(newAssetTypes);
+        Assert.AreEqual("TestAssetType",
+            createdAssetTypes.Description); //Fails due to response entity is named "Type", not "AssetType"
 
-            #endregion Arrange
+        #endregion CREATE
 
-            var connector = FortnoxClient.AssetTypesConnector;
-            var entry = (await connector.FindAsync(null)).Entities.FirstOrDefault(at => at.Number == "TST");
-            if (entry != null)
-                await connector.DeleteAsync(entry.Id);
+        #region UPDATE
 
-            #region CREATE
+        createdAssetTypes.Description = "UpdatedTestAssetType";
 
-            var newAssetTypes = new AssetType()
-            {
-                Description = "TestAssetType",
-                Notes = "Some notes",
-                Number = "TST",
-                Type = "1",
-                AccountAssetId = 1150,
-                AccountDepreciationId = 7824,
-                AccountValueLossId = 1159,
-            };
+        var updatedAssetTypes = await connector.UpdateAsync(createdAssetTypes);
+        Assert.AreEqual("UpdatedTestAssetType", updatedAssetTypes.Description);
 
-            var createdAssetTypes = await connector.CreateAsync(newAssetTypes);
-            Assert.AreEqual("TestAssetType",
-                createdAssetTypes.Description); //Fails due to response entity is named "Type", not "AssetType"
+        #endregion UPDATE
 
-            #endregion CREATE
+        #region READ / GET
 
-            #region UPDATE
+        var retrievedAssetTypes = await connector.GetAsync(createdAssetTypes.Id);
+        Assert.AreEqual("UpdatedTestAssetType", retrievedAssetTypes.Description);
 
-            createdAssetTypes.Description = "UpdatedTestAssetType";
+        #endregion READ / GET
 
-            var updatedAssetTypes = await connector.UpdateAsync(createdAssetTypes);
-            Assert.AreEqual("UpdatedTestAssetType", updatedAssetTypes.Description);
+        #region DELETE
 
-            #endregion UPDATE
+        await connector.DeleteAsync(createdAssetTypes.Id);
 
-            #region READ / GET
+        Assert.ThrowsException<FortnoxApiException>(
+            () => connector.Get(createdAssetTypes.Id),
+            "Entity still exists after Delete!");
 
-            var retrievedAssetTypes = await connector.GetAsync(createdAssetTypes.Id);
-            Assert.AreEqual("UpdatedTestAssetType", retrievedAssetTypes.Description);
+        #endregion DELETE
 
-            #endregion READ / GET
+        #region Delete arranged resources
 
-            #region DELETE
+        //Add code to delete temporary resources
 
-            await connector.DeleteAsync(createdAssetTypes.Id);
+        #endregion Delete arranged resources
+    }
 
-            Assert.ThrowsException<FortnoxApiException>(
-                () => connector.Get(createdAssetTypes.Id),
-                "Entity still exists after Delete!");
+    [TestMethod]
+    public async Task Test_AssetTypes_Find()
+    {
+        var connector = FortnoxClient.AssetTypesConnector;
 
-            #endregion DELETE
+        var newAssetType = new AssetType()
+        {
+            Description = "TestAssetType",
+            Notes = "Some notes",
+            Type = "1",
+            AccountAssetId = 1150,
+            AccountDepreciationId = 7824,
+            AccountValueLossId = 1159,
+        };
 
-            #region Delete arranged resources
-
-            //Add code to delete temporary resources
-
-            #endregion Delete arranged resources
+        var marks = TestUtils.RandomString(3);
+        for (var i = 0; i < 5; i++)
+        {
+            newAssetType.Number = marks + i;
+            await connector.CreateAsync(newAssetType);
         }
 
-        [TestMethod]
-        public async Task Test_AssetTypes_Find()
+        var assetTypes = await connector.FindAsync(null);
+        Assert.AreEqual(5, assetTypes.Entities.Count(x => x.Number.StartsWith(marks)));
+
+        //restore
+        foreach (var entity in assetTypes.Entities.Where(x => x.Number.StartsWith(marks)))
         {
-            var connector = FortnoxClient.AssetTypesConnector;
-
-            var newAssetType = new AssetType()
-            {
-                Description = "TestAssetType",
-                Notes = "Some notes",
-                Type = "1",
-                AccountAssetId = 1150,
-                AccountDepreciationId = 7824,
-                AccountValueLossId = 1159,
-            };
-
-            var marks = TestUtils.RandomString(3);
-            for (var i = 0; i < 5; i++)
-            {
-                newAssetType.Number = marks + i;
-                await connector.CreateAsync(newAssetType);
-            }
-
-            var assetTypes = await connector.FindAsync(null);
-            Assert.AreEqual(5, assetTypes.Entities.Count(x => x.Number.StartsWith(marks)));
-
-            //restore
-            foreach (var entity in assetTypes.Entities.Where(x => x.Number.StartsWith(marks)))
-            {
-                await connector.DeleteAsync(entity.Id);
-            }
+            await connector.DeleteAsync(entity.Id);
         }
     }
 }

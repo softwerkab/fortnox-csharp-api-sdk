@@ -4,15 +4,14 @@ using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
 
-namespace Fortnox.SDK.Entities
+namespace Fortnox.SDK.Entities;
+
+/// <remarks/>
+[Entity(SingularName = "Employee", PluralName = "Employees")]
+public class EmployeeSubset : Employee
 {
-    /// <remarks/>
-    [Entity(SingularName = "Employee", PluralName = "Employees")]
-    public class EmployeeSubset : Employee
-    {
-        ///<summary> Direct URL to the record </summary>
-        [ReadOnly]
-        [JsonProperty("@url")]
-        public Uri Url { get; private set; }
-    }
+    ///<summary> Direct URL to the record </summary>
+    [ReadOnly]
+    [JsonProperty("@url")]
+    public Uri Url { get; private set; }
 }

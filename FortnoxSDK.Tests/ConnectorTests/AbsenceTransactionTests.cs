@@ -7,127 +7,126 @@ using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class AbsenceTransactionTests
 {
-    [TestClass]
-    public class AbsenceTransactionTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_AbsenceTransaction_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        var tmpEmployee = await FortnoxClient.EmployeeConnector.CreateAsync(new Employee() { EmployeeId = TestUtils.RandomString() });
+        var tmpProject = await FortnoxClient.ProjectConnector.CreateAsync(new Project() { Description = "TmpProject" });
+        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
+        #endregion Arrange
 
-        [TestMethod]
-        public async Task Test_AbsenceTransaction_CRUD()
+        var connector = FortnoxClient.AbsenceTransactionConnector;
+
+        #region CREATE
+        var newAbsenceTransaction = new AbsenceTransaction()
         {
-            #region Arrange
-            var tmpEmployee = await FortnoxClient.EmployeeConnector.CreateAsync(new Employee() { EmployeeId = TestUtils.RandomString() });
-            var tmpProject = await FortnoxClient.ProjectConnector.CreateAsync(new Project() { Description = "TmpProject" });
-            var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
-            #endregion Arrange
+            EmployeeId = tmpEmployee.EmployeeId,
+            CauseCode = AbsenceCauseCode.MIL,
+            Date = new DateTime(2018, 01, 01),
+            Hours = 5.5m,
+            CostCenter = tmpCostCenter.Code,
+            Project = tmpProject.ProjectNumber
+        };
 
-            var connector = FortnoxClient.AbsenceTransactionConnector;
+        var createdAbsenceTransaction = await connector.CreateAsync(newAbsenceTransaction);
+        Assert.AreEqual(5.5m, createdAbsenceTransaction.Hours);
 
-            #region CREATE
-            var newAbsenceTransaction = new AbsenceTransaction()
-            {
-                EmployeeId = tmpEmployee.EmployeeId,
-                CauseCode = AbsenceCauseCode.MIL,
-                Date = new DateTime(2018, 01, 01),
-                Hours = 5.5m,
-                CostCenter = tmpCostCenter.Code,
-                Project = tmpProject.ProjectNumber
-            };
+        #endregion CREATE
 
-            var createdAbsenceTransaction = await connector.CreateAsync(newAbsenceTransaction);
-            Assert.AreEqual(5.5m, createdAbsenceTransaction.Hours);
+        #region UPDATE
 
-            #endregion CREATE
+        createdAbsenceTransaction.Hours = 8;
 
-            #region UPDATE
+        var updatedAbsenceTransaction = await connector.UpdateAsync(createdAbsenceTransaction);
+        Assert.AreEqual(8, updatedAbsenceTransaction.Hours);
 
-            createdAbsenceTransaction.Hours = 8;
+        #endregion UPDATE
 
-            var updatedAbsenceTransaction = await connector.UpdateAsync(createdAbsenceTransaction);
-            Assert.AreEqual(8, updatedAbsenceTransaction.Hours);
+        #region READ / GET
 
-            #endregion UPDATE
+        var retrievedAbsenceTransaction = await connector.GetAsync(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode);
+        Assert.AreEqual(8, retrievedAbsenceTransaction.Hours);
 
-            #region READ / GET
+        #endregion READ / GET
 
-            var retrievedAbsenceTransaction = await connector.GetAsync(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode);
-            Assert.AreEqual(8, retrievedAbsenceTransaction.Hours);
+        #region DELETE
 
-            #endregion READ / GET
+        await connector.DeleteAsync(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode);
 
-            #region DELETE
+        Assert.ThrowsException<FortnoxApiException>(
+            () => connector.Get(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode),
+            "Entity still exists after Delete!");
 
-            await connector.DeleteAsync(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode);
+        #endregion DELETE
 
-            Assert.ThrowsException<FortnoxApiException>(
-                () => connector.Get(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode),
-                "Entity still exists after Delete!");
+        #region Delete arranged resources
+        await FortnoxClient.CostCenterConnector.DeleteAsync(tmpCostCenter.Code);
+        await FortnoxClient.ProjectConnector.DeleteAsync(tmpProject.ProjectNumber);
+        #endregion Delete arranged resources
+    }
 
-            #endregion DELETE
+    [TestMethod]
+    public async Task Test_Find()
+    {
+        #region Arrange
 
-            #region Delete arranged resources
-            await FortnoxClient.CostCenterConnector.DeleteAsync(tmpCostCenter.Code);
-            await FortnoxClient.ProjectConnector.DeleteAsync(tmpProject.ProjectNumber);
-            #endregion Delete arranged resources
+        var tmpEmployee = await FortnoxClient.EmployeeConnector.CreateAsync(new Employee() { EmployeeId = TestUtils.RandomString() });
+        var tmpProject = await FortnoxClient.ProjectConnector.CreateAsync(new Project() { Description = "TmpProject" });
+        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
+        #endregion Arrange
+
+        var connector = FortnoxClient.AbsenceTransactionConnector;
+
+        var newAbsenceTransaction = new AbsenceTransaction()
+        {
+            EmployeeId = tmpEmployee.EmployeeId,
+            CauseCode = AbsenceCauseCode.MIL,
+            Date = new DateTime(2018, 01, 01),
+            Hours = 1,
+            CostCenter = tmpCostCenter.Code,
+            Project = tmpProject.ProjectNumber
+        };
+
+        //Add entries
+        for (var i = 0; i < 5; i++)
+        {
+            newAbsenceTransaction.Date = new DateTime(2018, 01, 01).AddDays(i);
+            await connector.CreateAsync(newAbsenceTransaction);
         }
 
-        [TestMethod]
-        public async Task Test_Find()
-        {
-            #region Arrange
+        var searchSettings = new AbsenceTransactionSearch();
+        searchSettings.EmployeeId = tmpEmployee.EmployeeId;
+        var fullCollection = await connector.FindAsync(searchSettings);
 
-            var tmpEmployee = await FortnoxClient.EmployeeConnector.CreateAsync(new Employee() { EmployeeId = TestUtils.RandomString() });
-            var tmpProject = await FortnoxClient.ProjectConnector.CreateAsync(new Project() { Description = "TmpProject" });
-            var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
-            #endregion Arrange
+        Assert.AreEqual(5, fullCollection.TotalResources);
+        Assert.AreEqual(5, fullCollection.Entities.Count);
+        Assert.AreEqual(1, fullCollection.TotalPages);
 
-            var connector = FortnoxClient.AbsenceTransactionConnector;
+        Assert.AreEqual(tmpEmployee.EmployeeId, fullCollection.Entities.First().EmployeeId);
 
-            var newAbsenceTransaction = new AbsenceTransaction()
-            {
-                EmployeeId = tmpEmployee.EmployeeId,
-                CauseCode = AbsenceCauseCode.MIL,
-                Date = new DateTime(2018, 01, 01),
-                Hours = 1,
-                CostCenter = tmpCostCenter.Code,
-                Project = tmpProject.ProjectNumber
-            };
+        //Apply Limit
+        searchSettings.Limit = 2;
+        var limitedCollection = await connector.FindAsync(searchSettings);
 
-            //Add entries
-            for (var i = 0; i < 5; i++)
-            {
-                newAbsenceTransaction.Date = new DateTime(2018, 01, 01).AddDays(i);
-                await connector.CreateAsync(newAbsenceTransaction);
-            }
+        Assert.AreEqual(5, limitedCollection.TotalResources);
+        Assert.AreEqual(2, limitedCollection.Entities.Count);
+        Assert.AreEqual(3, limitedCollection.TotalPages);
 
-            var searchSettings = new AbsenceTransactionSearch();
-            searchSettings.EmployeeId = tmpEmployee.EmployeeId;
-            var fullCollection = await connector.FindAsync(searchSettings);
+        //Delete entries
+        foreach (var entry in fullCollection.Entities)
+            await connector.DeleteAsync(entry.EmployeeId, entry.Date, entry.CauseCode);
 
-            Assert.AreEqual(5, fullCollection.TotalResources);
-            Assert.AreEqual(5, fullCollection.Entities.Count);
-            Assert.AreEqual(1, fullCollection.TotalPages);
-
-            Assert.AreEqual(tmpEmployee.EmployeeId, fullCollection.Entities.First().EmployeeId);
-
-            //Apply Limit
-            searchSettings.Limit = 2;
-            var limitedCollection = await connector.FindAsync(searchSettings);
-
-            Assert.AreEqual(5, limitedCollection.TotalResources);
-            Assert.AreEqual(2, limitedCollection.Entities.Count);
-            Assert.AreEqual(3, limitedCollection.TotalPages);
-
-            //Delete entries
-            foreach (var entry in fullCollection.Entities)
-                await connector.DeleteAsync(entry.EmployeeId, entry.Date, entry.CauseCode);
-
-            #region Delete arranged resources
-            await FortnoxClient.CostCenterConnector.DeleteAsync(tmpCostCenter.Code);
-            await FortnoxClient.ProjectConnector.DeleteAsync(tmpProject.ProjectNumber);
-            #endregion Delete arranged resources
-        }
+        #region Delete arranged resources
+        await FortnoxClient.CostCenterConnector.DeleteAsync(tmpCostCenter.Code);
+        await FortnoxClient.ProjectConnector.DeleteAsync(tmpProject.ProjectNumber);
+        #endregion Delete arranged resources
     }
 }

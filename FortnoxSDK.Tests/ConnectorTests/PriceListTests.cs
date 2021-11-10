@@ -5,92 +5,91 @@ using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[Ignore("Test environment exceeded limit of 250 price lists.")]
+[TestClass]
+public class PriceListTests
 {
-    [Ignore("Test environment exceeded limit of 250 price lists.")]
-    [TestClass]
-    public class PriceListTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_PriceList_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        #endregion Arrange
 
-        [TestMethod]
-        public async Task Test_PriceList_CRUD()
+        var connector = FortnoxClient.PriceListConnector;
+
+        #region CREATE
+        var newPriceList = new PriceList()
         {
-            #region Arrange
-            #endregion Arrange
+            Code = TestUtils.RandomString().ToUpperInvariant(),
+            Description = "TestPriceList",
+            Comments = "Some comments"
+        };
 
-            var connector = FortnoxClient.PriceListConnector;
+        var createdPriceList = await connector.CreateAsync(newPriceList);
+        Assert.AreEqual("TestPriceList", createdPriceList.Description);
 
-            #region CREATE
-            var newPriceList = new PriceList()
-            {
-                Code = TestUtils.RandomString().ToUpperInvariant(),
-                Description = "TestPriceList",
-                Comments = "Some comments"
-            };
+        #endregion CREATE
 
-            var createdPriceList = await connector.CreateAsync(newPriceList);
-            Assert.AreEqual("TestPriceList", createdPriceList.Description);
+        #region UPDATE
 
-            #endregion CREATE
+        createdPriceList.Description = "UpdatedTestPriceList";
 
-            #region UPDATE
+        var updatedPriceList = await connector.UpdateAsync(createdPriceList);
+        Assert.AreEqual("UpdatedTestPriceList", updatedPriceList.Description);
 
-            createdPriceList.Description = "UpdatedTestPriceList";
+        #endregion UPDATE
 
-            var updatedPriceList = await connector.UpdateAsync(createdPriceList);
-            Assert.AreEqual("UpdatedTestPriceList", updatedPriceList.Description);
+        #region READ / GET
 
-            #endregion UPDATE
+        var retrievedPriceList = await connector.GetAsync(createdPriceList.Code);
+        Assert.AreEqual("UpdatedTestPriceList", retrievedPriceList.Description);
 
-            #region READ / GET
+        #endregion READ / GET
 
-            var retrievedPriceList = await connector.GetAsync(createdPriceList.Code);
-            Assert.AreEqual("UpdatedTestPriceList", retrievedPriceList.Description);
+        #region DELETE
+        //Not available
+        #endregion DELETE
 
-            #endregion READ / GET
+        #region Delete arranged resources
+        //Add code to delete temporary resources
+        #endregion Delete arranged resources
+    }
 
-            #region DELETE
-            //Not available
-            #endregion DELETE
+    [TestMethod]
+    public async Task Test_Find()
+    {
+        var connector = FortnoxClient.PriceListConnector;
 
-            #region Delete arranged resources
-            //Add code to delete temporary resources
-            #endregion Delete arranged resources
+        var newPriceList = new PriceList()
+        {
+            Description = "TestPriceList",
+            Comments = "EntryForFindRequest"
+        };
+
+        for (var i = 0; i < 5; i++)
+        {
+            newPriceList.Code = TestUtils.RandomString().ToUpperInvariant();
+            await connector.CreateAsync(newPriceList);
         }
 
-        [TestMethod]
-        public async Task Test_Find()
-        {
-            var connector = FortnoxClient.PriceListConnector;
+        var searchSettings = new PriceListSearch();
+        searchSettings.LastModified = TestUtils.Recently;
+        var fullCollection = await connector.FindAsync(searchSettings);
 
-            var newPriceList = new PriceList()
-            {
-                Description = "TestPriceList",
-                Comments = "EntryForFindRequest"
-            };
+        Assert.AreEqual(5, fullCollection.TotalResources);
+        Assert.AreEqual(5, fullCollection.Entities.Count);
+        Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Comments == "EntryForFindRequest"));
 
-            for (var i = 0; i < 5; i++)
-            {
-                newPriceList.Code = TestUtils.RandomString().ToUpperInvariant();
-                await connector.CreateAsync(newPriceList);
-            }
+        //Apply Limit
+        searchSettings.Limit = 2;
+        var limitedCollection = await connector.FindAsync(searchSettings);
 
-            var searchSettings = new PriceListSearch();
-            searchSettings.LastModified = TestUtils.Recently;
-            var fullCollection = await connector.FindAsync(searchSettings);
-
-            Assert.AreEqual(5, fullCollection.TotalResources);
-            Assert.AreEqual(5, fullCollection.Entities.Count);
-            Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Comments == "EntryForFindRequest"));
-
-            //Apply Limit
-            searchSettings.Limit = 2;
-            var limitedCollection = await connector.FindAsync(searchSettings);
-
-            //Assert.AreEqual(5, limitedCollection.TotalResources);
-            Assert.AreEqual(2, limitedCollection.Entities.Count);
-            //Assert.AreEqual(3, limitedCollection.TotalPages);
-        }
+        //Assert.AreEqual(5, limitedCollection.TotalResources);
+        Assert.AreEqual(2, limitedCollection.Entities.Count);
+        //Assert.AreEqual(3, limitedCollection.TotalPages);
     }
 }

@@ -4,57 +4,56 @@ using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class TrustedEmailSendersTests
 {
-    [TestClass]
-    public class TrustedEmailSendersTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_TrustedEmailSenders_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        #endregion Arrange
 
-        [TestMethod]
-        public async Task Test_TrustedEmailSenders_CRUD()
+        var connector = FortnoxClient.TrustedEmailSendersConnector;
+
+        var randomAddress = $"{TestUtils.RandomString()}@test.tst";
+        #region CREATE
+        var newTrustedEmailSender = new TrustedEmailSender()
         {
-            #region Arrange
-            #endregion Arrange
+            Email = randomAddress
+        };
 
-            var connector = FortnoxClient.TrustedEmailSendersConnector;
+        var createdTrustedEmailSender = await connector.CreateAsync(newTrustedEmailSender);
+        Assert.AreEqual(randomAddress, createdTrustedEmailSender.Email);
 
-            var randomAddress = $"{TestUtils.RandomString()}@test.tst";
-            #region CREATE
-            var newTrustedEmailSender = new TrustedEmailSender()
-            {
-                Email = randomAddress
-            };
+        #endregion CREATE
 
-            var createdTrustedEmailSender = await connector.CreateAsync(newTrustedEmailSender);
-            Assert.AreEqual(randomAddress, createdTrustedEmailSender.Email);
+        #region UPDATE
+        //Not supported
+        #endregion UPDATE
 
-            #endregion CREATE
+        #region READ / GET
+        //Single get is not supported, full list is used instead
+        var retrievedTrustedEmailSender = (await connector.GetAllAsync()).TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
+        Assert.AreEqual(randomAddress, retrievedTrustedEmailSender?.Email);
+        #endregion READ / GET
 
-            #region UPDATE
-            //Not supported
-            #endregion UPDATE
+        #region DELETE
 
-            #region READ / GET
-            //Single get is not supported, full list is used instead
-            var retrievedTrustedEmailSender = (await connector.GetAllAsync()).TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
-            Assert.AreEqual(randomAddress, retrievedTrustedEmailSender?.Email);
-            #endregion READ / GET
+        await connector.DeleteAsync(createdTrustedEmailSender.Id);
 
-            #region DELETE
+        retrievedTrustedEmailSender = (await connector.GetAllAsync()).TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
+        Assert.AreEqual(null, retrievedTrustedEmailSender);
 
-            await connector.DeleteAsync(createdTrustedEmailSender.Id);
+        #endregion DELETE
 
-            retrievedTrustedEmailSender = (await connector.GetAllAsync()).TrustedSenders.FirstOrDefault(t => t.Id == createdTrustedEmailSender.Id);
-            Assert.AreEqual(null, retrievedTrustedEmailSender);
+        #region Delete arranged resources
 
-            #endregion DELETE
+        //Add code to delete temporary resources
 
-            #region Delete arranged resources
-
-            //Add code to delete temporary resources
-
-            #endregion Delete arranged resources
-        }
+        #endregion Delete arranged resources
     }
 }

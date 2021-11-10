@@ -7,176 +7,175 @@ using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class ArticleTests
 {
-    [TestClass]
-    public class ArticleTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_Article_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        //Add code to create required resources
+        #endregion Arrange
 
-        [TestMethod]
-        public async Task Test_Article_CRUD()
+        var connector = FortnoxClient.ArticleConnector;
+
+        #region CREATE
+        var newArticle = new Article()
         {
-            #region Arrange
-            //Add code to create required resources
-            #endregion Arrange
+            Description = "Test Article",
+            Height = 60,
+            Width = 150,
+            Type = ArticleType.Stock,
+            PurchasePrice = 2499.50m,
+            FreightCost = 200,
+            OtherCost = 210,
+            Note = "Definitely not worth the price."
+        };
 
-            var connector = FortnoxClient.ArticleConnector;
+        var createdArticle = await connector.CreateAsync(newArticle);
+        Assert.AreEqual("Test Article", createdArticle.Description);
+        #endregion CREATE
 
-            #region CREATE
-            var newArticle = new Article()
-            {
-                Description = "Test Article",
-                Height = 60,
-                Width = 150,
-                Type = ArticleType.Stock,
-                PurchasePrice = 2499.50m,
-                FreightCost = 200,
-                OtherCost = 210,
-                Note = "Definitely not worth the price."
-            };
+        #region UPDATE
 
-            var createdArticle = await connector.CreateAsync(newArticle);
-            Assert.AreEqual("Test Article", createdArticle.Description);
-            #endregion CREATE
+        createdArticle.Description = "Updated Test Article";
 
-            #region UPDATE
+        var updatedArticle = await connector.UpdateAsync(createdArticle);
+        Assert.AreEqual("Updated Test Article", updatedArticle.Description);
 
-            createdArticle.Description = "Updated Test Article";
+        #endregion UPDATE
 
-            var updatedArticle = await connector.UpdateAsync(createdArticle);
-            Assert.AreEqual("Updated Test Article", updatedArticle.Description);
+        #region READ / GET
 
-            #endregion UPDATE
+        var retrievedArticle = await connector.GetAsync(createdArticle.ArticleNumber);
+        Assert.AreEqual("Updated Test Article", retrievedArticle.Description);
 
-            #region READ / GET
+        #endregion READ / GET
 
-            var retrievedArticle = await connector.GetAsync(createdArticle.ArticleNumber);
-            Assert.AreEqual("Updated Test Article", retrievedArticle.Description);
+        #region DELETE
 
-            #endregion READ / GET
+        await connector.DeleteAsync(createdArticle.ArticleNumber);
 
-            #region DELETE
+        Assert.ThrowsException<FortnoxApiException>(
+            () => connector.Get(createdArticle.ArticleNumber),
+            "Entity still exists after Delete!");
 
-            await connector.DeleteAsync(createdArticle.ArticleNumber);
+        #endregion DELETE
 
-            Assert.ThrowsException<FortnoxApiException>(
-                () => connector.Get(createdArticle.ArticleNumber),
-                "Entity still exists after Delete!");
+        #region Delete arranged resources
+        //Add code to delete temporary resources
+        #endregion Delete arranged resources
+    }
 
-            #endregion DELETE
+    [TestMethod]
+    public async Task Test_Find()
+    {
+        #region Arrange
+        //Add code to create required resources
+        #endregion Arrange
 
-            #region Delete arranged resources
-            //Add code to delete temporary resources
-            #endregion Delete arranged resources
+        var testKeyMark = TestUtils.RandomString();
+
+        var connector = FortnoxClient.ArticleConnector;
+
+        var newArticle = new Article
+        {
+            Description = testKeyMark,
+            Height = 60,
+            Width = 150,
+            Type = ArticleType.Stock,
+            PurchasePrice = 2499.50m,
+            FreightCost = 200,
+            OtherCost = 210,
+            Note = "Definitely not worth the price."
+        };
+
+        //Add entries
+        for (var i = 0; i < 5; i++)
+        {
+            await connector.CreateAsync(newArticle);
         }
 
-        [TestMethod]
-        public async Task Test_Find()
+        //Apply base test filter
+        var searchSettings = new ArticleSearch();
+        searchSettings.Description = testKeyMark;
+        var fullCollection = await connector.FindAsync(searchSettings);
+
+        Assert.AreEqual(5, fullCollection.TotalResources);
+        Assert.AreEqual(5, fullCollection.Entities.Count);
+        Assert.AreEqual(1, fullCollection.TotalPages);
+
+        //Apply Limit
+        searchSettings.Limit = 2;
+        var limitedCollection = await connector.FindAsync(searchSettings);
+
+        Assert.AreEqual(5, limitedCollection.TotalResources);
+        Assert.AreEqual(2, limitedCollection.Entities.Count);
+        Assert.AreEqual(3, limitedCollection.TotalPages);
+
+        //Delete entries
+        foreach (var entry in fullCollection.Entities)
         {
-            #region Arrange
-            //Add code to create required resources
-            #endregion Arrange
+            await connector.DeleteAsync(entry.ArticleNumber);
+        }
 
-            var testKeyMark = TestUtils.RandomString();
+        #region Delete arranged resources
 
-            var connector = FortnoxClient.ArticleConnector;
+        //Add code to delete temporary resources
 
-            var newArticle = new Article
+        #endregion Delete arranged resources
+    }
+
+    [TestMethod]
+    public void HouseWorkArticle_AllTypes()
+    {
+        var values = Enum.GetValues(typeof(HouseworkType)).Cast<HouseworkType>().ToList();
+        Assert.AreEqual(28, values.Count);
+
+        var connector = FortnoxClient.ArticleConnector;
+        var article = connector.Create(new Article() { Description = "HouseworkArticleTest", Housework = true });
+
+        foreach (var houseworkType in values)
+        {
+            switch (houseworkType)
             {
-                Description = testKeyMark,
-                Height = 60,
-                Width = 150,
-                Type = ArticleType.Stock,
-                PurchasePrice = 2499.50m,
-                FreightCost = 200,
-                OtherCost = 210,
-                Note = "Definitely not worth the price."
-            };
-
-            //Add entries
-            for (var i = 0; i < 5; i++)
-            {
-                await connector.CreateAsync(newArticle);
+                case HouseworkType.Blank:
+                    continue;
+                case HouseworkType.Cooking:
+                case HouseworkType.Tutoring:
+                    continue; // Obsolete, no longer supported
             }
 
-            //Apply base test filter
-            var searchSettings = new ArticleSearch();
-            searchSettings.Description = testKeyMark;
-            var fullCollection = await connector.FindAsync(searchSettings);
+            article.HouseworkType = houseworkType;
+            Console.Error.WriteLine(article.HouseworkType);
+            article = connector.Update(article);
 
-            Assert.AreEqual(5, fullCollection.TotalResources);
-            Assert.AreEqual(5, fullCollection.Entities.Count);
-            Assert.AreEqual(1, fullCollection.TotalPages);
-
-            //Apply Limit
-            searchSettings.Limit = 2;
-            var limitedCollection = await connector.FindAsync(searchSettings);
-
-            Assert.AreEqual(5, limitedCollection.TotalResources);
-            Assert.AreEqual(2, limitedCollection.Entities.Count);
-            Assert.AreEqual(3, limitedCollection.TotalPages);
-
-            //Delete entries
-            foreach (var entry in fullCollection.Entities)
-            {
-                await connector.DeleteAsync(entry.ArticleNumber);
-            }
-
-            #region Delete arranged resources
-
-            //Add code to delete temporary resources
-
-            #endregion Delete arranged resources
+            Assert.AreEqual(houseworkType, article.HouseworkType);
         }
 
-        [TestMethod]
-        public void HouseWorkArticle_AllTypes()
+        connector.Delete(article.ArticleNumber);
+    }
+
+    [TestMethod]
+    public void HouseWorkArticle_Blank()
+    {
+        var connector = FortnoxClient.ArticleConnector;
+        var article = connector.Create(new Article()
         {
-            var values = Enum.GetValues(typeof(HouseworkType)).Cast<HouseworkType>().ToList();
-            Assert.AreEqual(28, values.Count);
+            Description = "HouseworkArticleTest",
+            Housework = true,
+            HouseworkType = HouseworkType.Cleaning
+        });
+        Assert.AreEqual(HouseworkType.Cleaning, article.HouseworkType);
 
-            var connector = FortnoxClient.ArticleConnector;
-            var article = connector.Create(new Article() { Description = "HouseworkArticleTest", Housework = true });
+        article.HouseworkType = HouseworkType.Blank;
+        var updatedArticle = connector.Update(article);
+        Assert.AreEqual(null, updatedArticle.HouseworkType);
 
-            foreach (var houseworkType in values)
-            {
-                switch (houseworkType)
-                {
-                    case HouseworkType.Blank:
-                        continue;
-                    case HouseworkType.Cooking:
-                    case HouseworkType.Tutoring:
-                        continue; // Obsolete, no longer supported
-                }
-
-                article.HouseworkType = houseworkType;
-                Console.Error.WriteLine(article.HouseworkType);
-                article = connector.Update(article);
-
-                Assert.AreEqual(houseworkType, article.HouseworkType);
-            }
-
-            connector.Delete(article.ArticleNumber);
-        }
-
-        [TestMethod]
-        public void HouseWorkArticle_Blank()
-        {
-            var connector = FortnoxClient.ArticleConnector;
-            var article = connector.Create(new Article()
-            {
-                Description = "HouseworkArticleTest",
-                Housework = true,
-                HouseworkType = HouseworkType.Cleaning
-            });
-            Assert.AreEqual(HouseworkType.Cleaning, article.HouseworkType);
-
-            article.HouseworkType = HouseworkType.Blank;
-            var updatedArticle = connector.Update(article);
-            Assert.AreEqual(null, updatedArticle.HouseworkType);
-
-            connector.Delete(article.ArticleNumber);
-        }
+        connector.Delete(article.ArticleNumber);
     }
 }

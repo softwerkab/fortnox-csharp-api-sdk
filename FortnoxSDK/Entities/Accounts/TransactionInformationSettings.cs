@@ -1,14 +1,13 @@
 using System.Runtime.Serialization;
 
-namespace Fortnox.SDK.Entities
+namespace Fortnox.SDK.Entities;
+
+public enum TransactionInformationSettings
 {
-    public enum TransactionInformationSettings
-    {
-        [EnumMember(Value = "ALLOWED")]
-        Allowed,
-        [EnumMember(Value = "MANDATORY")]
-        Mandatory,
-        [EnumMember(Value = "NOTALLOWED")]
-        NotAllowed,
-    }
+    [EnumMember(Value = "ALLOWED")]
+    Allowed,
+    [EnumMember(Value = "MANDATORY")]
+    Mandatory,
+    [EnumMember(Value = "NOTALLOWED")]
+    NotAllowed,
 }

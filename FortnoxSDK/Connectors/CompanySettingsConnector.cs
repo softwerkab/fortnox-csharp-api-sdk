@@ -6,30 +6,29 @@ using Fortnox.SDK.Utility;
 
 // ReSharper disable UnusedMember.Global
 
-namespace Fortnox.SDK.Connectors
+namespace Fortnox.SDK.Connectors;
+
+/// <remarks/>
+internal class CompanySettingsConnector : EntityConnector<CompanySettings>, ICompanySettingsConnector
 {
+
     /// <remarks/>
-    internal class CompanySettingsConnector : EntityConnector<CompanySettings>, ICompanySettingsConnector
+    public CompanySettingsConnector()
     {
+        Resource = "settings/company";
+    }
 
-        /// <remarks/>
-        public CompanySettingsConnector()
-        {
-            Resource = "settings/company";
-        }
+    /// <summary>
+    /// Retrieves the company settings.
+    /// </summary>
+    /// <returns></returns>
+    public CompanySettings Get()
+    {
+        return GetAsync().GetResult();
+    }
 
-        /// <summary>
-        /// Retrieves the company settings.
-        /// </summary>
-        /// <returns></returns>
-        public CompanySettings Get()
-        {
-            return GetAsync().GetResult();
-        }
-
-        public async Task<CompanySettings> GetAsync()
-        {
-            return await BaseGet().ConfigureAwait(false);
-        }
+    public async Task<CompanySettings> GetAsync()
+    {
+        return await BaseGet().ConfigureAwait(false);
     }
 }

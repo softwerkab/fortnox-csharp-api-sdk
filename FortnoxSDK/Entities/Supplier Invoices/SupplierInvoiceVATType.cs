@@ -1,14 +1,13 @@
 using System.Runtime.Serialization;
 
-namespace Fortnox.SDK.Entities
+namespace Fortnox.SDK.Entities;
+
+public enum SupplierInvoiceVATType
 {
-    public enum SupplierInvoiceVATType
-    {
-        [EnumMember(Value = "NORMAL")]
-        Normal,
-        [EnumMember(Value = "EUINTERNAL")]
-        EUInternal,
-        [EnumMember(Value = "REVERSE")]
-        Reverse,
-    }
+    [EnumMember(Value = "NORMAL")]
+    Normal,
+    [EnumMember(Value = "EUINTERNAL")]
+    EUInternal,
+    [EnumMember(Value = "REVERSE")]
+    Reverse,
 }

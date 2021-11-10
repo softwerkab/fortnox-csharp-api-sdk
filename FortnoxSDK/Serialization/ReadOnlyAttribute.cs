@@ -1,8 +1,7 @@
 ﻿using System;
 
-namespace Fortnox.SDK.Serialization
+namespace Fortnox.SDK.Serialization;
+
+public class ReadOnlyAttribute : Attribute
 {
-    public class ReadOnlyAttribute : Attribute
-    {
-    }
 }

@@ -6,30 +6,29 @@ using Fortnox.SDK.Utility;
 
 // ReSharper disable UnusedMember.Global
 
-namespace Fortnox.SDK.Connectors
+namespace Fortnox.SDK.Connectors;
+
+/// <remarks/>
+internal class CompanyInformationConnector : EntityConnector<CompanyInformation>, ICompanyInformationConnector
 {
+
     /// <remarks/>
-    internal class CompanyInformationConnector : EntityConnector<CompanyInformation>, ICompanyInformationConnector
+    public CompanyInformationConnector()
     {
+        Resource = "companyinformation";
+    }
 
-        /// <remarks/>
-        public CompanyInformationConnector()
-        {
-            Resource = "companyinformation";
-        }
+    /// <summary>
+    /// Retrieves the Company Information.
+    /// </summary>
+    /// <returns></returns>
+    public CompanyInformation Get()
+    {
+        return GetAsync().GetResult();
+    }
 
-        /// <summary>
-        /// Retrieves the Company Information.
-        /// </summary>
-        /// <returns></returns>
-        public CompanyInformation Get()
-        {
-            return GetAsync().GetResult();
-        }
-
-        public async Task<CompanyInformation> GetAsync()
-        {
-            return await BaseGet().ConfigureAwait(false);
-        }
+    public async Task<CompanyInformation> GetAsync()
+    {
+        return await BaseGet().ConfigureAwait(false);
     }
 }

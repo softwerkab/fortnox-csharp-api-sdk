@@ -1,12 +1,11 @@
 using System.Runtime.Serialization;
 
-namespace Fortnox.SDK.Entities
+namespace Fortnox.SDK.Entities;
+
+public enum Language
 {
-    public enum Language
-    {
-        [EnumMember(Value = "SV")]
-        Swedish,
-        [EnumMember(Value = "EN")]
-        English,
-    }
+    [EnumMember(Value = "SV")]
+    Swedish,
+    [EnumMember(Value = "EN")]
+    English,
 }

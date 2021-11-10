@@ -1,11 +1,10 @@
 using System;
 
-namespace Fortnox.SDK.Entities
+namespace Fortnox.SDK.Entities;
+
+public class DatedSchedule
 {
-    public class DatedSchedule
-    {
-        public string EmployeeId { get; set; }
-        public DateTime? FirstDay { get; set; }
-        public string ScheduleId { get; set; }
-    }
+    public string EmployeeId { get; set; }
+    public DateTime? FirstDay { get; set; }
+    public string ScheduleId { get; set; }
 }

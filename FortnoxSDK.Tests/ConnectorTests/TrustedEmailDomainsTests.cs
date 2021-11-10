@@ -4,57 +4,56 @@ using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class TrustedEmailDomainsTests
 {
-    [TestClass]
-    public class TrustedEmailDomainsTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_TrustedEmailDomains_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        //Add code to create required resources
+        #endregion Arrange
 
-        [TestMethod]
-        public async Task Test_TrustedEmailDomains_CRUD()
+        var connector = FortnoxClient.TrustedEmailDomainsConnector;
+
+        #region CREATE
+        var newTrustedEmailDomains = new TrustedEmailDomain()
         {
-            #region Arrange
-            //Add code to create required resources
-            #endregion Arrange
+            Domain = "testdomain.tst",
+        };
 
-            var connector = FortnoxClient.TrustedEmailDomainsConnector;
+        var createdTrustedEmailDomains = await connector.CreateAsync(newTrustedEmailDomains);
+        Assert.AreEqual("testdomain.tst", createdTrustedEmailDomains.Domain);
 
-            #region CREATE
-            var newTrustedEmailDomains = new TrustedEmailDomain()
-            {
-                Domain = "testdomain.tst",
-            };
+        #endregion CREATE
 
-            var createdTrustedEmailDomains = await connector.CreateAsync(newTrustedEmailDomains);
-            Assert.AreEqual("testdomain.tst", createdTrustedEmailDomains.Domain);
+        #region UPDATE
+        //Not supported
+        #endregion UPDATE
 
-            #endregion CREATE
+        #region READ / GET
 
-            #region UPDATE
-            //Not supported
-            #endregion UPDATE
+        var retrievedTrustedEmailDomains = await connector.GetAsync(createdTrustedEmailDomains.Id);
+        Assert.AreEqual("testdomain.tst", retrievedTrustedEmailDomains.Domain);
 
-            #region READ / GET
+        #endregion READ / GET
 
-            var retrievedTrustedEmailDomains = await connector.GetAsync(createdTrustedEmailDomains.Id);
-            Assert.AreEqual("testdomain.tst", retrievedTrustedEmailDomains.Domain);
+        #region DELETE
 
-            #endregion READ / GET
+        await connector.DeleteAsync(createdTrustedEmailDomains.Id);
 
-            #region DELETE
+        Assert.ThrowsException<FortnoxApiException>(
+            () => connector.Get(createdTrustedEmailDomains.Id),
+            "Entity still exists after Delete!");
 
-            await connector.DeleteAsync(createdTrustedEmailDomains.Id);
+        #endregion DELETE
 
-            Assert.ThrowsException<FortnoxApiException>(
-                () => connector.Get(createdTrustedEmailDomains.Id),
-                "Entity still exists after Delete!");
-
-            #endregion DELETE
-
-            #region Delete arranged resources
-            //Add code to delete temporary resources
-            #endregion Delete arranged resources
-        }
+        #region Delete arranged resources
+        //Add code to delete temporary resources
+        #endregion Delete arranged resources
     }
 }

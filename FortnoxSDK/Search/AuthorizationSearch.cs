@@ -1,6 +1,5 @@
-namespace Fortnox.SDK.Search
+namespace Fortnox.SDK.Search;
+
+public class AuthorizationSearch : BaseSearch
 {
-    public class AuthorizationSearch : BaseSearch
-    {
-    }
 }

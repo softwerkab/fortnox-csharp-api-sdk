@@ -7,109 +7,108 @@ using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class ModeOfPaymentTests
 {
-    [TestClass]
-    public class ModeOfPaymentTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_ModeOfPayment_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber() });
+        #endregion Arrange
 
-        [TestMethod]
-        public async Task Test_ModeOfPayment_CRUD()
+        var connector = FortnoxClient.ModeOfPaymentConnector;
+
+        #region CREATE
+        var newModeOfPayment = new ModeOfPayment()
         {
-            #region Arrange
-            var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber() });
-            #endregion Arrange
+            Description = "TestMode",
+            AccountNumber = tmpAccount.Number,
+            Code = "TEST_MODE",
+        };
 
-            var connector = FortnoxClient.ModeOfPaymentConnector;
+        var createdModeOfPayment = await connector.CreateAsync(newModeOfPayment);
+        Assert.AreEqual("TestMode", createdModeOfPayment.Description);
 
-            #region CREATE
-            var newModeOfPayment = new ModeOfPayment()
-            {
-                Description = "TestMode",
-                AccountNumber = tmpAccount.Number,
-                Code = "TEST_MODE",
-            };
+        #endregion CREATE
 
-            var createdModeOfPayment = await connector.CreateAsync(newModeOfPayment);
-            Assert.AreEqual("TestMode", createdModeOfPayment.Description);
+        #region UPDATE
 
-            #endregion CREATE
+        createdModeOfPayment.Description = "UpdatedMode";
 
-            #region UPDATE
+        var updatedModeOfPayment = await connector.UpdateAsync(createdModeOfPayment);
+        Assert.AreEqual("UpdatedMode", updatedModeOfPayment.Description);
 
-            createdModeOfPayment.Description = "UpdatedMode";
+        #endregion UPDATE
 
-            var updatedModeOfPayment = await connector.UpdateAsync(createdModeOfPayment);
-            Assert.AreEqual("UpdatedMode", updatedModeOfPayment.Description);
+        #region READ / GET
 
-            #endregion UPDATE
+        var retrievedModeOfPayment = await connector.GetAsync(createdModeOfPayment.Code);
+        Assert.AreEqual("UpdatedMode", retrievedModeOfPayment.Description);
 
-            #region READ / GET
+        #endregion READ / GET
 
-            var retrievedModeOfPayment = await connector.GetAsync(createdModeOfPayment.Code);
-            Assert.AreEqual("UpdatedMode", retrievedModeOfPayment.Description);
+        #region DELETE
 
-            #endregion READ / GET
+        await connector.DeleteAsync(createdModeOfPayment.Code);
 
-            #region DELETE
+        Assert.ThrowsException<FortnoxApiException>(
+            () => connector.Get(createdModeOfPayment.Code),
+            "Entity still exists after Delete!");
 
-            await connector.DeleteAsync(createdModeOfPayment.Code);
+        #endregion DELETE
 
-            Assert.ThrowsException<FortnoxApiException>(
-                () => connector.Get(createdModeOfPayment.Code),
-                "Entity still exists after Delete!");
+        #region Delete arranged resources
+        await FortnoxClient.AccountConnector.DeleteAsync(tmpAccount.Number);
+        #endregion Delete arranged resources
+    }
 
-            #endregion DELETE
+    [TestMethod]
+    public async Task Test_Find()
+    {
+        #region Arrange
+        var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber() });
+        #endregion Arrange
 
-            #region Delete arranged resources
-            await FortnoxClient.AccountConnector.DeleteAsync(tmpAccount.Number);
-            #endregion Delete arranged resources
+        var connector = FortnoxClient.ModeOfPaymentConnector;
+
+        var existingCount = (await connector.FindAsync(null)).Entities.Count;
+        var testKeyMark = TestUtils.RandomString();
+
+        var createdEntries = new List<ModeOfPayment>();
+        //Add entries
+        for (var i = 0; i < 5; i++)
+        {
+            var createdEntry = await connector.CreateAsync(new ModeOfPayment() { Code = TestUtils.RandomString(), Description = testKeyMark, AccountNumber = tmpAccount.Number });
+            createdEntries.Add(createdEntry);
         }
 
-        [TestMethod]
-        public async Task Test_Find()
+        //Filter not supported
+        var fullCollection = await connector.FindAsync(null);
+
+        Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);
+        Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == testKeyMark));
+
+        //Apply Limit
+        var searchSettings = new ModeOfPaymentSearch();
+        searchSettings.Limit = 2;
+        var limitedCollection = await connector.FindAsync(searchSettings);
+
+        Assert.AreEqual(existingCount + 5, limitedCollection.TotalResources);
+        Assert.AreEqual(2, limitedCollection.Entities.Count);
+
+        //Delete entries
+        foreach (var entry in createdEntries)
         {
-            #region Arrange
-            var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber() });
-            #endregion Arrange
-
-            var connector = FortnoxClient.ModeOfPaymentConnector;
-
-            var existingCount = (await connector.FindAsync(null)).Entities.Count;
-            var testKeyMark = TestUtils.RandomString();
-
-            var createdEntries = new List<ModeOfPayment>();
-            //Add entries
-            for (var i = 0; i < 5; i++)
-            {
-                var createdEntry = await connector.CreateAsync(new ModeOfPayment() { Code = TestUtils.RandomString(), Description = testKeyMark, AccountNumber = tmpAccount.Number });
-                createdEntries.Add(createdEntry);
-            }
-
-            //Filter not supported
-            var fullCollection = await connector.FindAsync(null);
-
-            Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);
-            Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == testKeyMark));
-
-            //Apply Limit
-            var searchSettings = new ModeOfPaymentSearch();
-            searchSettings.Limit = 2;
-            var limitedCollection = await connector.FindAsync(searchSettings);
-
-            Assert.AreEqual(existingCount + 5, limitedCollection.TotalResources);
-            Assert.AreEqual(2, limitedCollection.Entities.Count);
-
-            //Delete entries
-            foreach (var entry in createdEntries)
-            {
-                await connector.DeleteAsync(entry.Code);
-            }
-
-            #region Delete arranged resources
-            await FortnoxClient.AccountConnector.DeleteAsync(tmpAccount.Number);
-            #endregion Delete arranged resources
+            await connector.DeleteAsync(entry.Code);
         }
+
+        #region Delete arranged resources
+        await FortnoxClient.AccountConnector.DeleteAsync(tmpAccount.Number);
+        #endregion Delete arranged resources
     }
 }

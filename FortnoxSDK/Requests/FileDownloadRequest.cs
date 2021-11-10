@@ -1,12 +1,11 @@
 ﻿using System.Net.Http;
 
-namespace Fortnox.SDK.Requests
+namespace Fortnox.SDK.Requests;
+
+internal class FileDownloadRequest : BaseRequest
 {
-    internal class FileDownloadRequest : BaseRequest
+    public FileDownloadRequest()
     {
-        public FileDownloadRequest()
-        {
-            Method = HttpMethod.Get;
-        }
+        Method = HttpMethod.Get;
     }
 }

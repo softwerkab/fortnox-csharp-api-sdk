@@ -1,17 +1,16 @@
 ﻿using System.Threading.Tasks;
 
-namespace Fortnox.SDK.Utility
-{
-    internal static class TaskExtensions
-    {
-        public static T GetResult<T>(this Task<T> task)
-        {
-            return task.ConfigureAwait(false).GetAwaiter().GetResult();
-        }
+namespace Fortnox.SDK.Utility;
 
-        public static void GetResult(this Task task)
-        {
-            task.ConfigureAwait(false).GetAwaiter().GetResult();
-        }
+internal static class TaskExtensions
+{
+    public static T GetResult<T>(this Task<T> task)
+    {
+        return task.ConfigureAwait(false).GetAwaiter().GetResult();
+    }
+
+    public static void GetResult(this Task task)
+    {
+        task.ConfigureAwait(false).GetAwaiter().GetResult();
     }
 }

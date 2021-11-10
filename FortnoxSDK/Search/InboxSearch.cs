@@ -1,6 +1,5 @@
-namespace Fortnox.SDK.Search
+namespace Fortnox.SDK.Search;
+
+public class InboxSearch : BaseSearch
 {
-    public class InboxSearch : BaseSearch
-    {
-    }
 }

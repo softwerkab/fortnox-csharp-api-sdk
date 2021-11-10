@@ -4,59 +4,58 @@ using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class ScheduleTimesTests
 {
-    [TestClass]
-    public class ScheduleTimesTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_ScheduleTimes_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        var tmpEmployee = await FortnoxClient.EmployeeConnector.GetAsync("TEST_EMP") ?? await FortnoxClient.EmployeeConnector.CreateAsync(new Employee() { EmployeeId = "TEST_EMP" });
+        #endregion Arrange
 
-        [TestMethod]
-        public async Task Test_ScheduleTimes_CRUD()
+        var connector = FortnoxClient.ScheduleTimesConnector;
+
+        #region CREATE
+
+        //Create method is not supported
+        var newScheduleTimes = new ScheduleTimes()
         {
-            #region Arrange
-            var tmpEmployee = await FortnoxClient.EmployeeConnector.GetAsync("TEST_EMP") ?? await FortnoxClient.EmployeeConnector.CreateAsync(new Employee() { EmployeeId = "TEST_EMP" });
-            #endregion Arrange
+            Hours = 6.5m,
+            EmployeeId = tmpEmployee.EmployeeId,
+            Date = new DateTime(2050, 10, 10)
+        };
 
-            var connector = FortnoxClient.ScheduleTimesConnector;
+        var createdScheduleTimes = await connector.UpdateAsync(newScheduleTimes);
+        Assert.AreEqual(6.5m, createdScheduleTimes.Hours);
 
-            #region CREATE
+        #endregion CREATE
 
-            //Create method is not supported
-            var newScheduleTimes = new ScheduleTimes()
-            {
-                Hours = 6.5m,
-                EmployeeId = tmpEmployee.EmployeeId,
-                Date = new DateTime(2050, 10, 10)
-            };
+        #region UPDATE
 
-            var createdScheduleTimes = await connector.UpdateAsync(newScheduleTimes);
-            Assert.AreEqual(6.5m, createdScheduleTimes.Hours);
+        createdScheduleTimes.Hours = 7;
 
-            #endregion CREATE
+        var updatedScheduleTimes = await connector.UpdateAsync(createdScheduleTimes);
+        Assert.AreEqual(7, updatedScheduleTimes.Hours);
 
-            #region UPDATE
+        #endregion UPDATE
 
-            createdScheduleTimes.Hours = 7;
+        #region READ / GET
 
-            var updatedScheduleTimes = await connector.UpdateAsync(createdScheduleTimes);
-            Assert.AreEqual(7, updatedScheduleTimes.Hours);
+        var retrievedScheduleTimes = await connector.GetAsync(createdScheduleTimes.EmployeeId, createdScheduleTimes.Date);
+        Assert.AreEqual(7, retrievedScheduleTimes.Hours);
 
-            #endregion UPDATE
+        #endregion READ / GET
 
-            #region READ / GET
+        #region DELETE
+        //Not available
+        #endregion DELETE
 
-            var retrievedScheduleTimes = await connector.GetAsync(createdScheduleTimes.EmployeeId, createdScheduleTimes.Date);
-            Assert.AreEqual(7, retrievedScheduleTimes.Hours);
-
-            #endregion READ / GET
-
-            #region DELETE
-            //Not available
-            #endregion DELETE
-
-            #region Delete arranged resources
-            #endregion Delete arranged resources
-        }
+        #region Delete arranged resources
+        #endregion Delete arranged resources
     }
 }

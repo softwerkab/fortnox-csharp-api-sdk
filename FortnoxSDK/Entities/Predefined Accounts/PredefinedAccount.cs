@@ -2,24 +2,23 @@ using System;
 using Fortnox.SDK.Serialization;
 using Newtonsoft.Json;
 
-namespace Fortnox.SDK.Entities
+namespace Fortnox.SDK.Entities;
+
+[Entity(SingularName = "PreDefinedAccount", PluralName = "PreDefinedAccounts")]
+public class PredefinedAccount
 {
-    [Entity(SingularName = "PreDefinedAccount", PluralName = "PreDefinedAccounts")]
-    public class PredefinedAccount
-    {
 
-        ///<summary> Direct url to the record. </summary>
-        [ReadOnly]
-        [JsonProperty("@url")]
-        public Uri Url { get; private set; }
+    ///<summary> Direct url to the record. </summary>
+    [ReadOnly]
+    [JsonProperty("@url")]
+    public Uri Url { get; private set; }
 
-        ///<summary> Name of account type </summary>
-        [ReadOnly]
-        [JsonProperty]
-        public string Name { get; private set; }
+    ///<summary> Name of account type </summary>
+    [ReadOnly]
+    [JsonProperty]
+    public string Name { get; private set; }
 
-        ///<summary> Predefined account </summary>
-        [JsonProperty]
-        public long? Account { get; set; }
-    }
+    ///<summary> Predefined account </summary>
+    [JsonProperty]
+    public long? Account { get; set; }
 }

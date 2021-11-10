@@ -7,100 +7,99 @@ using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class WayOfDeliveryTests
 {
-    [TestClass]
-    public class WayOfDeliveryTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_WayOfDelivery_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        //Add code to create required resources
+        #endregion Arrange
 
-        [TestMethod]
-        public async Task Test_WayOfDelivery_CRUD()
+        var connector = FortnoxClient.WayOfDeliveryConnector;
+
+        #region CREATE
+        var newWayOfDelivery = new WayOfDelivery()
         {
-            #region Arrange
-            //Add code to create required resources
-            #endregion Arrange
+            Code = "TST",
+            Description = "TestDeliveryMethod"
+        };
 
-            var connector = FortnoxClient.WayOfDeliveryConnector;
+        var createdWayOfDelivery = await connector.CreateAsync(newWayOfDelivery);
+        Assert.AreEqual("TestDeliveryMethod", createdWayOfDelivery.Description);
 
-            #region CREATE
-            var newWayOfDelivery = new WayOfDelivery()
-            {
-                Code = "TST",
-                Description = "TestDeliveryMethod"
-            };
+        #endregion CREATE
 
-            var createdWayOfDelivery = await connector.CreateAsync(newWayOfDelivery);
-            Assert.AreEqual("TestDeliveryMethod", createdWayOfDelivery.Description);
+        #region UPDATE
 
-            #endregion CREATE
+        createdWayOfDelivery.Description = "UpdatedTestDeliveryMethod";
 
-            #region UPDATE
+        var updatedWayOfDelivery = await connector.UpdateAsync(createdWayOfDelivery);
+        Assert.AreEqual("UpdatedTestDeliveryMethod", updatedWayOfDelivery.Description);
 
-            createdWayOfDelivery.Description = "UpdatedTestDeliveryMethod";
+        #endregion UPDATE
 
-            var updatedWayOfDelivery = await connector.UpdateAsync(createdWayOfDelivery);
-            Assert.AreEqual("UpdatedTestDeliveryMethod", updatedWayOfDelivery.Description);
+        #region READ / GET
 
-            #endregion UPDATE
+        var retrievedWayOfDelivery = await connector.GetAsync(createdWayOfDelivery.Code);
+        Assert.AreEqual("UpdatedTestDeliveryMethod", retrievedWayOfDelivery.Description);
 
-            #region READ / GET
+        #endregion READ / GET
 
-            var retrievedWayOfDelivery = await connector.GetAsync(createdWayOfDelivery.Code);
-            Assert.AreEqual("UpdatedTestDeliveryMethod", retrievedWayOfDelivery.Description);
+        #region DELETE
 
-            #endregion READ / GET
+        await connector.DeleteAsync(createdWayOfDelivery.Code);
 
-            #region DELETE
+        Assert.ThrowsException<FortnoxApiException>(
+            () => connector.Get(createdWayOfDelivery.Code),
+            "Entity still exists after Delete!");
 
-            await connector.DeleteAsync(createdWayOfDelivery.Code);
+        #endregion DELETE
 
-            Assert.ThrowsException<FortnoxApiException>(
-                () => connector.Get(createdWayOfDelivery.Code),
-                "Entity still exists after Delete!");
+        #region Delete arranged resources
+        //Add code to delete temporary resources
+        #endregion Delete arranged resources
+    }
 
-            #endregion DELETE
+    [TestMethod]
+    public async Task Test_Find()
+    {
+        var connector = FortnoxClient.WayOfDeliveryConnector;
 
-            #region Delete arranged resources
-            //Add code to delete temporary resources
-            #endregion Delete arranged resources
+        var existingCount = (await connector.FindAsync(null)).Entities.Count;
+        var testKeyMark = TestUtils.RandomString();
+
+        var createdEntries = new List<WayOfDelivery>();
+        //Add entries
+        for (var i = 0; i < 5; i++)
+        {
+            var createdEntry = await connector.CreateAsync(new WayOfDelivery() { Code = TestUtils.RandomString(), Description = testKeyMark });
+            createdEntries.Add(createdEntry);
         }
 
-        [TestMethod]
-        public async Task Test_Find()
+        //Filter not supported
+        var fullCollection = await connector.FindAsync(null);
+
+        Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);
+        Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == testKeyMark));
+
+        //Apply Limit
+        var searchSettings = new WayOfDeliverySearch();
+        searchSettings.Limit = 2;
+        var limitedCollection = await connector.FindAsync(searchSettings);
+
+        Assert.AreEqual(existingCount + 5, limitedCollection.TotalResources);
+        Assert.AreEqual(2, limitedCollection.Entities.Count);
+
+        //Delete entries
+        foreach (var entry in createdEntries)
         {
-            var connector = FortnoxClient.WayOfDeliveryConnector;
-
-            var existingCount = (await connector.FindAsync(null)).Entities.Count;
-            var testKeyMark = TestUtils.RandomString();
-
-            var createdEntries = new List<WayOfDelivery>();
-            //Add entries
-            for (var i = 0; i < 5; i++)
-            {
-                var createdEntry = await connector.CreateAsync(new WayOfDelivery() { Code = TestUtils.RandomString(), Description = testKeyMark });
-                createdEntries.Add(createdEntry);
-            }
-
-            //Filter not supported
-            var fullCollection = await connector.FindAsync(null);
-
-            Assert.AreEqual(existingCount + 5, fullCollection.Entities.Count);
-            Assert.AreEqual(5, fullCollection.Entities.Count(e => e.Description == testKeyMark));
-
-            //Apply Limit
-            var searchSettings = new WayOfDeliverySearch();
-            searchSettings.Limit = 2;
-            var limitedCollection = await connector.FindAsync(searchSettings);
-
-            Assert.AreEqual(existingCount + 5, limitedCollection.TotalResources);
-            Assert.AreEqual(2, limitedCollection.Entities.Count);
-
-            //Delete entries
-            foreach (var entry in createdEntries)
-            {
-                await connector.DeleteAsync(entry.Code);
-            }
+            await connector.DeleteAsync(entry.Code);
         }
     }
 }

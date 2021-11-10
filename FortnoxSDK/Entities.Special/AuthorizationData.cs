@@ -1,12 +1,11 @@
 ﻿using Fortnox.SDK.Serialization;
 using Newtonsoft.Json;
 
-namespace Fortnox.SDK.Entities
+namespace Fortnox.SDK.Entities;
+
+[Entity(SingularName = "Authorization")]
+public class AuthorizationData
 {
-    [Entity(SingularName = "Authorization")]
-    public class AuthorizationData
-    {
-        [JsonProperty]
-        public string AccessToken { get; set; }
-    }
+    [JsonProperty]
+    public string AccessToken { get; set; }
 }

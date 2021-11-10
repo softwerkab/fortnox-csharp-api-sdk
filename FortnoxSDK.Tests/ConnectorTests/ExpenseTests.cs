@@ -5,94 +5,93 @@ using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class ExpenseTests
 {
-    [TestClass]
-    public class ExpenseTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_Expense_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
+        #endregion Arrange
 
-        [TestMethod]
-        public async Task Test_Expense_CRUD()
+        var connector = FortnoxClient.ExpenseConnector;
+
+        #region CREATE
+
+        var newExpense = new Expense()
         {
-            #region Arrange
-            var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
-            #endregion Arrange
+            Text = "TestExpense",
+            Code = TestUtils.RandomString(6),
+            Account = tmpAccount.Number
+        };
 
-            var connector = FortnoxClient.ExpenseConnector;
+        var createdExpense = await connector.CreateAsync(newExpense);
+        Assert.AreEqual("TestExpense", createdExpense.Text);
 
-            #region CREATE
+        #endregion CREATE
 
-            var newExpense = new Expense()
-            {
-                Text = "TestExpense",
-                Code = TestUtils.RandomString(6),
-                Account = tmpAccount.Number
-            };
+        #region UPDATE
 
-            var createdExpense = await connector.CreateAsync(newExpense);
-            Assert.AreEqual("TestExpense", createdExpense.Text);
+        //Not supported
 
-            #endregion CREATE
+        #endregion UPDATE
 
-            #region UPDATE
+        #region READ / GET
 
-            //Not supported
+        var retrievedExpense = await connector.GetAsync(createdExpense.Code);
+        Assert.AreEqual("TestExpense", retrievedExpense.Text);
 
-            #endregion UPDATE
+        #endregion READ / GET
 
-            #region READ / GET
+        #region DELETE
 
-            var retrievedExpense = await connector.GetAsync(createdExpense.Code);
-            Assert.AreEqual("TestExpense", retrievedExpense.Text);
+        //Not supported
 
-            #endregion READ / GET
+        #endregion DELETE
 
-            #region DELETE
+        #region Delete arranged resources
+        await FortnoxClient.AccountConnector.DeleteAsync(tmpAccount.Number);
+        #endregion Delete arranged resources
+    }
 
-            //Not supported
+    [TestMethod]
+    public async Task Test_Expense_Find()
+    {
+        #region Arrange
+        var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
+        #endregion Arrange
 
-            #endregion DELETE
+        var remark = TestUtils.RandomString();
 
-            #region Delete arranged resources
-            await FortnoxClient.AccountConnector.DeleteAsync(tmpAccount.Number);
-            #endregion Delete arranged resources
+        var newExpense = new Expense()
+        {
+            Text = remark,
+            Account = tmpAccount.Number
+        };
+
+        var connector = FortnoxClient.ExpenseConnector;
+        for (var i = 0; i < 2; i++)
+        {
+            newExpense.Code = TestUtils.RandomString(6);
+            await connector.CreateAsync(newExpense);
         }
 
-        [TestMethod]
-        public async Task Test_Expense_Find()
-        {
-            #region Arrange
-            var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
-            #endregion Arrange
+        var searchSettings = new ExpenseSearch();
+        searchSettings.LastModified = TestUtils.Recently; //does not seem to work
+        searchSettings.Limit = ApiConstants.Unlimited;
+        var expensesCollection = await connector.FindAsync(searchSettings);
 
-            var remark = TestUtils.RandomString();
+        var newExpenses = expensesCollection.Entities.Where(x => x.Text == remark).ToList();
+        Assert.AreEqual(2, newExpenses.Count);
+        Assert.IsNotNull(newExpenses.First().Url);
 
-            var newExpense = new Expense()
-            {
-                Text = remark,
-                Account = tmpAccount.Number
-            };
-
-            var connector = FortnoxClient.ExpenseConnector;
-            for (var i = 0; i < 2; i++)
-            {
-                newExpense.Code = TestUtils.RandomString(6);
-                await connector.CreateAsync(newExpense);
-            }
-
-            var searchSettings = new ExpenseSearch();
-            searchSettings.LastModified = TestUtils.Recently; //does not seem to work
-            searchSettings.Limit = ApiConstants.Unlimited;
-            var expensesCollection = await connector.FindAsync(searchSettings);
-
-            var newExpenses = expensesCollection.Entities.Where(x => x.Text == remark).ToList();
-            Assert.AreEqual(2, newExpenses.Count);
-            Assert.IsNotNull(newExpenses.First().Url);
-
-            #region Delete arranged resources
-            await FortnoxClient.AccountConnector.DeleteAsync(tmpAccount.Number);
-            #endregion Delete arranged resources
-        }
+        #region Delete arranged resources
+        await FortnoxClient.AccountConnector.DeleteAsync(tmpAccount.Number);
+        #endregion Delete arranged resources
     }
 }

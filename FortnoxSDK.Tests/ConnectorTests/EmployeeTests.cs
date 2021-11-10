@@ -5,89 +5,88 @@ using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class EmployeeTests
 {
-    [TestClass]
-    public class EmployeeTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_Employee_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        var c = FortnoxClient.EmployeeConnector;
+        var alreadyExists = await c.GetAsync("TEST_EMP") != null;
 
-        [TestMethod]
-        public async Task Test_Employee_CRUD()
+        #endregion Arrange
+
+        var connector = FortnoxClient.EmployeeConnector;
+
+        #region CREATE
+
+        var newEmployee = new Employee()
         {
-            #region Arrange
-            var c = FortnoxClient.EmployeeConnector;
-            var alreadyExists = await c.GetAsync("TEST_EMP") != null;
+            EmployeeId = "TEST_EMP",
+            FirstName = "Test",
+            LastName = "Testasson",
+            City = "Växjö",
+            Country = "Sweden",
+            ForaType = ForaType.A74,
+            JobTitle = "Woodcutter",
+            MonthlySalary = 20000
+        };
 
-            #endregion Arrange
+        var createdEmployee = alreadyExists ? await connector.UpdateAsync(newEmployee) : await connector.CreateAsync(newEmployee);
+        Assert.AreEqual("Test", createdEmployee.FirstName);
 
-            var connector = FortnoxClient.EmployeeConnector;
+        #endregion CREATE
 
-            #region CREATE
+        #region UPDATE
 
-            var newEmployee = new Employee()
-            {
-                EmployeeId = "TEST_EMP",
-                FirstName = "Test",
-                LastName = "Testasson",
-                City = "Växjö",
-                Country = "Sweden",
-                ForaType = ForaType.A74,
-                JobTitle = "Woodcutter",
-                MonthlySalary = 20000
-            };
+        createdEmployee.FirstName = "UpdatedTest";
 
-            var createdEmployee = alreadyExists ? await connector.UpdateAsync(newEmployee) : await connector.CreateAsync(newEmployee);
-            Assert.AreEqual("Test", createdEmployee.FirstName);
+        var updatedEmployee = await connector.UpdateAsync(createdEmployee);
+        Assert.AreEqual("UpdatedTest", updatedEmployee.FirstName);
 
-            #endregion CREATE
+        #endregion UPDATE
 
-            #region UPDATE
+        #region READ / GET
 
-            createdEmployee.FirstName = "UpdatedTest";
+        var retrievedEmployee = await connector.GetAsync(createdEmployee.EmployeeId);
+        Assert.AreEqual("UpdatedTest", retrievedEmployee.FirstName);
 
-            var updatedEmployee = await connector.UpdateAsync(createdEmployee);
-            Assert.AreEqual("UpdatedTest", updatedEmployee.FirstName);
+        #endregion READ / GET
 
-            #endregion UPDATE
+        #region DELETE
 
-            #region READ / GET
+        //Not supported
 
-            var retrievedEmployee = await connector.GetAsync(createdEmployee.EmployeeId);
-            Assert.AreEqual("UpdatedTest", retrievedEmployee.FirstName);
+        #endregion DELETE
 
-            #endregion READ / GET
+        #region Delete arranged resources
 
-            #region DELETE
+        //Add code to delete temporary resources
 
-            //Not supported
+        #endregion Delete arranged resources
+    }
 
-            #endregion DELETE
+    [TestMethod]
+    public async Task Test_Employee_Find()
+    {
+        var marks = TestUtils.RandomString();
 
-            #region Delete arranged resources
+        var connector = FortnoxClient.EmployeeConnector;
 
-            //Add code to delete temporary resources
+        for (var i = 0; i < 5; i++)
+            await connector.CreateAsync(new Employee() { EmployeeId = TestUtils.RandomString(), City = marks });
 
-            #endregion Delete arranged resources
-        }
+        var searchSettings = new EmployeeSearch();
+        //searchSettings.LastModified = TestUtils.Recently; //parameter is not accepted by server
+        searchSettings.Limit = ApiConstants.Unlimited;
+        var employees = await connector.FindAsync(searchSettings);
 
-        [TestMethod]
-        public async Task Test_Employee_Find()
-        {
-            var marks = TestUtils.RandomString();
-
-            var connector = FortnoxClient.EmployeeConnector;
-
-            for (var i = 0; i < 5; i++)
-                await connector.CreateAsync(new Employee() { EmployeeId = TestUtils.RandomString(), City = marks });
-
-            var searchSettings = new EmployeeSearch();
-            //searchSettings.LastModified = TestUtils.Recently; //parameter is not accepted by server
-            searchSettings.Limit = ApiConstants.Unlimited;
-            var employees = await connector.FindAsync(searchSettings);
-
-            var newEmployees = employees.Entities.Where(e => e.City == marks).ToList();
-            Assert.AreEqual(5, newEmployees.Count);
-        }
+        var newEmployees = employees.Entities.Where(e => e.City == marks).ToList();
+        Assert.AreEqual(5, newEmployees.Count);
     }
 }

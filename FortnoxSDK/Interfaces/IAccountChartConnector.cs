@@ -4,14 +4,13 @@ using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
 
 // ReSharper disable UnusedMember.Global
-namespace Fortnox.SDK.Interfaces
-{
-    /// <remarks/>
-    public interface IAccountChartConnector : IEntityConnector
-    {
-        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-        EntityCollection<AccountChart> Find(AccountChartSearch searchSettings);
+namespace Fortnox.SDK.Interfaces;
 
-        Task<EntityCollection<AccountChart>> FindAsync(AccountChartSearch searchSettings);
-    }
+/// <remarks/>
+public interface IAccountChartConnector : IEntityConnector
+{
+    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
+    EntityCollection<AccountChart> Find(AccountChartSearch searchSettings);
+
+    Task<EntityCollection<AccountChart>> FindAsync(AccountChartSearch searchSettings);
 }

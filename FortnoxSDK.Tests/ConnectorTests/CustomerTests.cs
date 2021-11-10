@@ -5,128 +5,127 @@ using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class CustomerTests
 {
-    [TestClass]
-    public class CustomerTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_Customer_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        //Add code to create required resources
+        #endregion Arrange
 
-        [TestMethod]
-        public async Task Test_Customer_CRUD()
+        var connector = FortnoxClient.CustomerConnector;
+
+        #region CREATE
+        var newCustomer = new Customer()
         {
-            #region Arrange
-            //Add code to create required resources
-            #endregion Arrange
+            Name = "TestCustomer",
+            Address1 = "TestStreet 1",
+            Address2 = "TestStreet 2",
+            ZipCode = "01010",
+            City = "Testopolis",
+            CountryCode = "SE", //CountryCode needs to be valid
+            Email = "testCustomer@test.com",
+            Type = CustomerType.Private,
+            Active = false
+        };
 
-            var connector = FortnoxClient.CustomerConnector;
+        var createdCustomer = await connector.CreateAsync(newCustomer);
+        Assert.AreEqual("TestCustomer", createdCustomer.Name);
 
-            #region CREATE
-            var newCustomer = new Customer()
-            {
-                Name = "TestCustomer",
-                Address1 = "TestStreet 1",
-                Address2 = "TestStreet 2",
-                ZipCode = "01010",
-                City = "Testopolis",
-                CountryCode = "SE", //CountryCode needs to be valid
-                Email = "testCustomer@test.com",
-                Type = CustomerType.Private,
-                Active = false
-            };
+        #endregion CREATE
 
-            var createdCustomer = await connector.CreateAsync(newCustomer);
-            Assert.AreEqual("TestCustomer", createdCustomer.Name);
+        #region UPDATE
 
-            #endregion CREATE
+        createdCustomer.Name = "UpdatedTestCustomer";
 
-            #region UPDATE
+        var updatedCustomer = await connector.UpdateAsync(createdCustomer);
+        Assert.AreEqual("UpdatedTestCustomer", updatedCustomer.Name);
 
-            createdCustomer.Name = "UpdatedTestCustomer";
+        #endregion UPDATE
 
-            var updatedCustomer = await connector.UpdateAsync(createdCustomer);
-            Assert.AreEqual("UpdatedTestCustomer", updatedCustomer.Name);
+        #region READ / GET
 
-            #endregion UPDATE
+        var retrievedCustomer = await connector.GetAsync(createdCustomer.CustomerNumber);
+        Assert.AreEqual("UpdatedTestCustomer", retrievedCustomer.Name);
 
-            #region READ / GET
+        #endregion READ / GET
 
-            var retrievedCustomer = await connector.GetAsync(createdCustomer.CustomerNumber);
-            Assert.AreEqual("UpdatedTestCustomer", retrievedCustomer.Name);
+        #region DELETE
 
-            #endregion READ / GET
+        await connector.DeleteAsync(createdCustomer.CustomerNumber);
 
-            #region DELETE
+        Assert.ThrowsException<FortnoxApiException>(
+            () => connector.Get(createdCustomer.CustomerNumber),
+            "Entity still exists after Delete!");
 
-            await connector.DeleteAsync(createdCustomer.CustomerNumber);
+        #endregion DELETE
 
-            Assert.ThrowsException<FortnoxApiException>(
-                () => connector.Get(createdCustomer.CustomerNumber),
-                "Entity still exists after Delete!");
+        #region Delete arranged resources
+        //Add code to delete temporary resources
+        #endregion Delete arranged resources
+    }
 
-            #endregion DELETE
+    [TestMethod]
+    public async Task Test_Find()
+    {
+        #region Arrange
+        //Add code to create required resources
+        #endregion Arrange
 
-            #region Delete arranged resources
-            //Add code to delete temporary resources
-            #endregion Delete arranged resources
+        var testKeyMark = TestUtils.RandomString();
+
+        var connector = FortnoxClient.CustomerConnector;
+        var newCustomer = new Customer()
+        {
+            Name = "TestCustomer",
+            Address1 = "TestStreet 1",
+            Address2 = "TestStreet 2",
+            ZipCode = "01010",
+            City = testKeyMark,
+            CountryCode = "SE", //CountryCode needs to be valid
+            Email = "testCustomer@test.com",
+            Type = CustomerType.Private,
+            Active = false,
+            Comments = testKeyMark
+        };
+
+        //Add entries
+        for (var i = 0; i < 5; i++)
+        {
+            await connector.CreateAsync(newCustomer);
         }
 
-        [TestMethod]
-        public async Task Test_Find()
+        //Apply base test filter
+        var searchSettings = new CustomerSearch();
+        searchSettings.City = testKeyMark;
+        var fullCollection = await connector.FindAsync(searchSettings);
+
+        Assert.AreEqual(5, fullCollection.TotalResources);
+        Assert.AreEqual(5, fullCollection.Entities.Count);
+        Assert.AreEqual(1, fullCollection.TotalPages);
+
+        //Apply Limit
+        searchSettings.Limit = 2;
+        var limitedCollection = await connector.FindAsync(searchSettings);
+
+        Assert.AreEqual(5, limitedCollection.TotalResources);
+        Assert.AreEqual(2, limitedCollection.Entities.Count);
+        Assert.AreEqual(3, limitedCollection.TotalPages);
+
+        //Delete entries
+        foreach (var entry in fullCollection.Entities)
         {
-            #region Arrange
-            //Add code to create required resources
-            #endregion Arrange
-
-            var testKeyMark = TestUtils.RandomString();
-
-            var connector = FortnoxClient.CustomerConnector;
-            var newCustomer = new Customer()
-            {
-                Name = "TestCustomer",
-                Address1 = "TestStreet 1",
-                Address2 = "TestStreet 2",
-                ZipCode = "01010",
-                City = testKeyMark,
-                CountryCode = "SE", //CountryCode needs to be valid
-                Email = "testCustomer@test.com",
-                Type = CustomerType.Private,
-                Active = false,
-                Comments = testKeyMark
-            };
-
-            //Add entries
-            for (var i = 0; i < 5; i++)
-            {
-                await connector.CreateAsync(newCustomer);
-            }
-
-            //Apply base test filter
-            var searchSettings = new CustomerSearch();
-            searchSettings.City = testKeyMark;
-            var fullCollection = await connector.FindAsync(searchSettings);
-
-            Assert.AreEqual(5, fullCollection.TotalResources);
-            Assert.AreEqual(5, fullCollection.Entities.Count);
-            Assert.AreEqual(1, fullCollection.TotalPages);
-
-            //Apply Limit
-            searchSettings.Limit = 2;
-            var limitedCollection = await connector.FindAsync(searchSettings);
-
-            Assert.AreEqual(5, limitedCollection.TotalResources);
-            Assert.AreEqual(2, limitedCollection.Entities.Count);
-            Assert.AreEqual(3, limitedCollection.TotalPages);
-
-            //Delete entries
-            foreach (var entry in fullCollection.Entities)
-            {
-                await connector.DeleteAsync(entry.CustomerNumber);
-            }
-
-            #region Delete arranged resources
-            //Add code to delete temporary resources
-            #endregion Delete arranged resources
+            await connector.DeleteAsync(entry.CustomerNumber);
         }
+
+        #region Delete arranged resources
+        //Add code to delete temporary resources
+        #endregion Delete arranged resources
     }
 }

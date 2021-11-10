@@ -1,12 +1,11 @@
 using System.Runtime.Serialization;
 
-namespace Fortnox.SDK.Entities
+namespace Fortnox.SDK.Entities;
+
+public enum OrderType
 {
-    public enum OrderType
-    {
-        [EnumMember(Value = "Order")]
-        Order,
-        [EnumMember(Value = "Backorder")]
-        Backorder,
-    }
+    [EnumMember(Value = "Order")]
+    Order,
+    [EnumMember(Value = "Backorder")]
+    Backorder,
 }

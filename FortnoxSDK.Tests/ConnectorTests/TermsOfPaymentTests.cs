@@ -5,101 +5,100 @@ using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class TermsOfPaymentTests
 {
-    [TestClass]
-    public class TermsOfPaymentTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_TermsOfPayment_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        //Add code to create required resources
+        #endregion Arrange
 
-        [TestMethod]
-        public async Task Test_TermsOfPayment_CRUD()
+        var connector = FortnoxClient.TermsOfPaymentConnector;
+
+        #region CREATE
+        var newTermsOfPayment = new TermsOfPayment()
         {
-            #region Arrange
-            //Add code to create required resources
-            #endregion Arrange
+            Code = TestUtils.RandomString(5),
+            Description = "TestPaymentTerms"
+        };
 
-            var connector = FortnoxClient.TermsOfPaymentConnector;
+        var createdTermsOfPayment = await connector.CreateAsync(newTermsOfPayment);
+        Assert.AreEqual("TestPaymentTerms", createdTermsOfPayment.Description);
 
-            #region CREATE
-            var newTermsOfPayment = new TermsOfPayment()
-            {
-                Code = TestUtils.RandomString(5),
-                Description = "TestPaymentTerms"
-            };
+        #endregion CREATE
 
-            var createdTermsOfPayment = await connector.CreateAsync(newTermsOfPayment);
-            Assert.AreEqual("TestPaymentTerms", createdTermsOfPayment.Description);
+        #region UPDATE
 
-            #endregion CREATE
+        createdTermsOfPayment.Description = "UpdatedTestPaymentTerms";
 
-            #region UPDATE
+        var updatedTermsOfPayment = await connector.UpdateAsync(createdTermsOfPayment);
+        Assert.AreEqual("UpdatedTestPaymentTerms", updatedTermsOfPayment.Description);
 
-            createdTermsOfPayment.Description = "UpdatedTestPaymentTerms";
+        #endregion UPDATE
 
-            var updatedTermsOfPayment = await connector.UpdateAsync(createdTermsOfPayment);
-            Assert.AreEqual("UpdatedTestPaymentTerms", updatedTermsOfPayment.Description);
+        #region READ / GET
 
-            #endregion UPDATE
+        var retrievedTermsOfPayment = await connector.GetAsync(createdTermsOfPayment.Code);
+        Assert.AreEqual("UpdatedTestPaymentTerms", retrievedTermsOfPayment.Description);
 
-            #region READ / GET
+        #endregion READ / GET
 
-            var retrievedTermsOfPayment = await connector.GetAsync(createdTermsOfPayment.Code);
-            Assert.AreEqual("UpdatedTestPaymentTerms", retrievedTermsOfPayment.Description);
+        #region DELETE
 
-            #endregion READ / GET
+        await connector.DeleteAsync(createdTermsOfPayment.Code);
 
-            #region DELETE
+        Assert.ThrowsException<FortnoxApiException>(
+            () => connector.Get(createdTermsOfPayment.Code),
+            "Entity still exists after Delete!");
 
-            await connector.DeleteAsync(createdTermsOfPayment.Code);
+        #endregion DELETE
 
-            Assert.ThrowsException<FortnoxApiException>(
-                () => connector.Get(createdTermsOfPayment.Code),
-                "Entity still exists after Delete!");
+        #region Delete arranged resources
+        //Add code to delete temporary resources
+        #endregion Delete arranged resources
+    }
 
-            #endregion DELETE
+    [TestMethod]
+    public async Task Test_Find()
+    {
+        var connector = FortnoxClient.TermsOfPaymentConnector;
 
-            #region Delete arranged resources
-            //Add code to delete temporary resources
-            #endregion Delete arranged resources
+        var newTermsOfPayment = new TermsOfPayment()
+        {
+            Description = "TestPaymentTerms"
+        };
+
+        //Add entries
+        for (var i = 0; i < 5; i++)
+        {
+            newTermsOfPayment.Code = TestUtils.RandomString();
+            await connector.CreateAsync(newTermsOfPayment);
         }
 
-        [TestMethod]
-        public async Task Test_Find()
+        //Filter not supported
+        var searchSettings = new TermsOfPaymentSearch();
+        searchSettings.LastModified = TestUtils.Recently;
+        var fullCollection = await connector.FindAsync(searchSettings);
+
+        Assert.AreEqual(5, fullCollection.Entities.Count);
+        Assert.AreEqual("TestPaymentTerms", fullCollection.Entities[0].Description);
+
+        //Apply Limit
+        searchSettings.Limit = 2;
+        var limitedCollection = await connector.FindAsync(searchSettings);
+
+        Assert.AreEqual(2, limitedCollection.Entities.Count);
+
+        //Delete entries
+        foreach (var entry in fullCollection.Entities)
         {
-            var connector = FortnoxClient.TermsOfPaymentConnector;
-
-            var newTermsOfPayment = new TermsOfPayment()
-            {
-                Description = "TestPaymentTerms"
-            };
-
-            //Add entries
-            for (var i = 0; i < 5; i++)
-            {
-                newTermsOfPayment.Code = TestUtils.RandomString();
-                await connector.CreateAsync(newTermsOfPayment);
-            }
-
-            //Filter not supported
-            var searchSettings = new TermsOfPaymentSearch();
-            searchSettings.LastModified = TestUtils.Recently;
-            var fullCollection = await connector.FindAsync(searchSettings);
-
-            Assert.AreEqual(5, fullCollection.Entities.Count);
-            Assert.AreEqual("TestPaymentTerms", fullCollection.Entities[0].Description);
-
-            //Apply Limit
-            searchSettings.Limit = 2;
-            var limitedCollection = await connector.FindAsync(searchSettings);
-
-            Assert.AreEqual(2, limitedCollection.Entities.Count);
-
-            //Delete entries
-            foreach (var entry in fullCollection.Entities)
-            {
-                await connector.DeleteAsync(entry.Code);
-            }
+            await connector.DeleteAsync(entry.Code);
         }
     }
 }

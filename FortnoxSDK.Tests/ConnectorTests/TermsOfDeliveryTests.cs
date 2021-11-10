@@ -5,101 +5,100 @@ using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class TermsOfDeliveryTests
 {
-    [TestClass]
-    public class TermsOfDeliveryTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_TermsOfDelivery_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        //Add code to create required resources
+        #endregion Arrange
 
-        [TestMethod]
-        public async Task Test_TermsOfDelivery_CRUD()
+        var connector = FortnoxClient.TermsOfDeliveryConnector;
+
+        #region CREATE
+        var newTermsOfDelivery = new TermsOfDelivery()
         {
-            #region Arrange
-            //Add code to create required resources
-            #endregion Arrange
+            Code = TestUtils.RandomString(5),
+            Description = "TestDeliveryTerms"
+        };
 
-            var connector = FortnoxClient.TermsOfDeliveryConnector;
+        var createdTermsOfDelivery = await connector.CreateAsync(newTermsOfDelivery);
+        Assert.AreEqual("TestDeliveryTerms", createdTermsOfDelivery.Description);
 
-            #region CREATE
-            var newTermsOfDelivery = new TermsOfDelivery()
-            {
-                Code = TestUtils.RandomString(5),
-                Description = "TestDeliveryTerms"
-            };
+        #endregion CREATE
 
-            var createdTermsOfDelivery = await connector.CreateAsync(newTermsOfDelivery);
-            Assert.AreEqual("TestDeliveryTerms", createdTermsOfDelivery.Description);
+        #region UPDATE
 
-            #endregion CREATE
+        createdTermsOfDelivery.Description = "UpdatedTestDeliveryTerms";
 
-            #region UPDATE
+        var updatedTermsOfDelivery = await connector.UpdateAsync(createdTermsOfDelivery);
+        Assert.AreEqual("UpdatedTestDeliveryTerms", updatedTermsOfDelivery.Description);
 
-            createdTermsOfDelivery.Description = "UpdatedTestDeliveryTerms";
+        #endregion UPDATE
 
-            var updatedTermsOfDelivery = await connector.UpdateAsync(createdTermsOfDelivery);
-            Assert.AreEqual("UpdatedTestDeliveryTerms", updatedTermsOfDelivery.Description);
+        #region READ / GET
 
-            #endregion UPDATE
+        var retrievedTermsOfDelivery = await connector.GetAsync(createdTermsOfDelivery.Code);
+        Assert.AreEqual("UpdatedTestDeliveryTerms", retrievedTermsOfDelivery.Description);
 
-            #region READ / GET
+        #endregion READ / GET
 
-            var retrievedTermsOfDelivery = await connector.GetAsync(createdTermsOfDelivery.Code);
-            Assert.AreEqual("UpdatedTestDeliveryTerms", retrievedTermsOfDelivery.Description);
+        #region DELETE
 
-            #endregion READ / GET
+        await connector.DeleteAsync(createdTermsOfDelivery.Code);
 
-            #region DELETE
+        Assert.ThrowsException<FortnoxApiException>(
+            () => connector.Get(createdTermsOfDelivery.Code),
+            "Entity still exists after Delete!");
 
-            await connector.DeleteAsync(createdTermsOfDelivery.Code);
+        #endregion DELETE
 
-            Assert.ThrowsException<FortnoxApiException>(
-                () => connector.Get(createdTermsOfDelivery.Code),
-                "Entity still exists after Delete!");
+        #region Delete arranged resources
+        //Add code to delete temporary resources
+        #endregion Delete arranged resources
+    }
 
-            #endregion DELETE
+    [TestMethod]
+    public async Task Test_Find()
+    {
+        var connector = FortnoxClient.TermsOfDeliveryConnector;
 
-            #region Delete arranged resources
-            //Add code to delete temporary resources
-            #endregion Delete arranged resources
+        var newTermsOfDelivery = new TermsOfDelivery()
+        {
+            Description = "TestDeliveryTerms"
+        };
+
+        //Add entries
+        for (var i = 0; i < 5; i++)
+        {
+            newTermsOfDelivery.Code = TestUtils.RandomString();
+            await connector.CreateAsync(newTermsOfDelivery);
         }
 
-        [TestMethod]
-        public async Task Test_Find()
+        //Filter not supported
+        var searchSettings = new TermsOfDeliverySearch();
+        searchSettings.LastModified = TestUtils.Recently;
+        var fullCollection = await connector.FindAsync(searchSettings);
+
+        Assert.AreEqual(5, fullCollection.Entities.Count);
+        Assert.AreEqual("TestDeliveryTerms", fullCollection.Entities[0].Description);
+
+        //Apply Limit
+        searchSettings.Limit = 2;
+        var limitedCollection = await connector.FindAsync(searchSettings);
+
+        Assert.AreEqual(2, limitedCollection.Entities.Count);
+
+        //Delete entries
+        foreach (var entry in fullCollection.Entities)
         {
-            var connector = FortnoxClient.TermsOfDeliveryConnector;
-
-            var newTermsOfDelivery = new TermsOfDelivery()
-            {
-                Description = "TestDeliveryTerms"
-            };
-
-            //Add entries
-            for (var i = 0; i < 5; i++)
-            {
-                newTermsOfDelivery.Code = TestUtils.RandomString();
-                await connector.CreateAsync(newTermsOfDelivery);
-            }
-
-            //Filter not supported
-            var searchSettings = new TermsOfDeliverySearch();
-            searchSettings.LastModified = TestUtils.Recently;
-            var fullCollection = await connector.FindAsync(searchSettings);
-
-            Assert.AreEqual(5, fullCollection.Entities.Count);
-            Assert.AreEqual("TestDeliveryTerms", fullCollection.Entities[0].Description);
-
-            //Apply Limit
-            searchSettings.Limit = 2;
-            var limitedCollection = await connector.FindAsync(searchSettings);
-
-            Assert.AreEqual(2, limitedCollection.Entities.Count);
-
-            //Delete entries
-            foreach (var entry in fullCollection.Entities)
-            {
-                await connector.DeleteAsync(entry.Code);
-            }
+            await connector.DeleteAsync(entry.Code);
         }
     }
 }

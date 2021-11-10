@@ -8,106 +8,105 @@ using Fortnox.SDK.Entities;
 using Fortnox.SDK.Requests;
 using Fortnox.SDK.Utility;
 
-namespace Fortnox.SDK.Connectors.Base
+namespace Fortnox.SDK.Connectors.Base;
+
+/// <remarks/>
+internal abstract class EntityConnector<TEntity> : BaseConnector where TEntity : class
 {
-    /// <remarks/>
-    internal abstract class EntityConnector<TEntity> : BaseConnector where TEntity : class
+    protected async Task<T> SendAsync<T>(EntityRequest<T> request)
     {
-        protected async Task<T> SendAsync<T>(EntityRequest<T> request)
+        if (request.Entity != null)
         {
-            if (request.Entity != null)
-            {
 
-                var requestJson = request.UseEntityWrapper ?
-                    Serializer.Serialize(new EntityWrapper<T>(request.Entity)) :
-                    Serializer.Serialize(request.Entity);
-                request.Content = Encoding.UTF8.GetBytes(requestJson);
-            }
-
-            var responseData = await SendAsync((BaseRequest)request).ConfigureAwait(false);
-            var responseJson = Encoding.UTF8.GetString(responseData);
-
-            return request.UseEntityWrapper
-                ? Serializer.Deserialize<EntityWrapper<T>>(responseJson).Entity
-                : Serializer.Deserialize<T>(responseJson);
+            var requestJson = request.UseEntityWrapper ?
+                Serializer.Serialize(new EntityWrapper<T>(request.Entity)) :
+                Serializer.Serialize(request.Entity);
+            request.Content = Encoding.UTF8.GetBytes(requestJson);
         }
 
-        protected async Task<TEntity> BaseCreate(TEntity entity)
+        var responseData = await SendAsync((BaseRequest)request).ConfigureAwait(false);
+        var responseJson = Encoding.UTF8.GetString(responseData);
+
+        return request.UseEntityWrapper
+            ? Serializer.Deserialize<EntityWrapper<T>>(responseJson).Entity
+            : Serializer.Deserialize<T>(responseJson);
+    }
+
+    protected async Task<TEntity> BaseCreate(TEntity entity)
+    {
+        var request = new EntityRequest<TEntity>()
         {
-            var request = new EntityRequest<TEntity>()
-            {
-                Resource = Resource,
-                Method = HttpMethod.Post,
-                Entity = entity
-            };
+            Resource = Resource,
+            Method = HttpMethod.Post,
+            Entity = entity
+        };
 
-            return await SendAsync(request).ConfigureAwait(false);
-        }
+        return await SendAsync(request).ConfigureAwait(false);
+    }
 
-        protected async Task<TEntity> BaseUpdate(TEntity entity, params string[] indices)
+    protected async Task<TEntity> BaseUpdate(TEntity entity, params string[] indices)
+    {
+        var request = new EntityRequest<TEntity>()
         {
-            var request = new EntityRequest<TEntity>()
-            {
-                Resource = Resource,
-                Indices = indices.ToList(),
-                Method = HttpMethod.Put,
-                Entity = entity
-            };
+            Resource = Resource,
+            Indices = indices.ToList(),
+            Method = HttpMethod.Put,
+            Entity = entity
+        };
 
-            return await SendAsync(request).ConfigureAwait(false);
-        }
+        return await SendAsync(request).ConfigureAwait(false);
+    }
 
-        protected async Task BaseDelete(params string[] indices)
+    protected async Task BaseDelete(params string[] indices)
+    {
+        var request = new BaseRequest()
         {
-            var request = new BaseRequest()
-            {
-                Resource = Resource,
-                Indices = indices.ToList(),
-                Method = HttpMethod.Delete
-            };
+            Resource = Resource,
+            Indices = indices.ToList(),
+            Method = HttpMethod.Delete
+        };
 
-            await SendAsync(request).ConfigureAwait(false);
-        }
+        await SendAsync(request).ConfigureAwait(false);
+    }
 
-        protected async Task<TEntity> BaseGet(params string[] indices)
+    protected async Task<TEntity> BaseGet(params string[] indices)
+    {
+        var request = new EntityRequest<TEntity>()
         {
-            var request = new EntityRequest<TEntity>()
-            {
-                Resource = Resource,
-                Indices = indices.ToList(),
-                Method = HttpMethod.Get,
-            };
+            Resource = Resource,
+            Indices = indices.ToList(),
+            Method = HttpMethod.Get,
+        };
 
-            return await SendAsync(request).ConfigureAwait(false);
-        }
+        return await SendAsync(request).ConfigureAwait(false);
+    }
 
-        protected async Task<byte[]> DoDownloadActionAsync(string documentNumber, Action action)
+    protected async Task<byte[]> DoDownloadActionAsync(string documentNumber, Action action)
+    {
+        if (!action.IsDownloadAction())
+            throw new Exception("Invalid action type");
+
+        var request = new FileDownloadRequest()
         {
-            if (!action.IsDownloadAction())
-                throw new Exception("Invalid action type");
+            Resource = Resource,
+            Indices = new List<string> { documentNumber, action.GetStringValue() },
+        };
 
-            var request = new FileDownloadRequest()
-            {
-                Resource = Resource,
-                Indices = new List<string> { documentNumber, action.GetStringValue() },
-            };
+        return await SendAsync(request).ConfigureAwait(false);
+    }
 
-            return await SendAsync(request).ConfigureAwait(false);
-        }
+    protected async Task<TEntity> DoActionAsync(string documentNumber, Action action)
+    {
+        if (action.IsDownloadAction())
+            throw new Exception("Invalid action type");
 
-        protected async Task<TEntity> DoActionAsync(string documentNumber, Action action)
+        var request = new EntityRequest<TEntity>()
         {
-            if (action.IsDownloadAction())
-                throw new Exception("Invalid action type");
+            Resource = Resource,
+            Indices = new List<string> { documentNumber, action.GetStringValue() },
+            Method = action.GetMethod()
+        };
 
-            var request = new EntityRequest<TEntity>()
-            {
-                Resource = Resource,
-                Indices = new List<string> { documentNumber, action.GetStringValue() },
-                Method = action.GetMethod()
-            };
-
-            return await SendAsync(request).ConfigureAwait(false);
-        }
+        return await SendAsync(request).ConfigureAwait(false);
     }
 }

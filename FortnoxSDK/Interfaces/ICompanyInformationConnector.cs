@@ -3,14 +3,13 @@ using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 
 // ReSharper disable UnusedMember.Global
-namespace Fortnox.SDK.Interfaces
-{
-    /// <remarks/>
-    public interface ICompanyInformationConnector : IEntityConnector
-    {
-        [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-        CompanyInformation Get();
+namespace Fortnox.SDK.Interfaces;
 
-        Task<CompanyInformation> GetAsync();
-    }
+/// <remarks/>
+public interface ICompanyInformationConnector : IEntityConnector
+{
+    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
+    CompanyInformation Get();
+
+    Task<CompanyInformation> GetAsync();
 }

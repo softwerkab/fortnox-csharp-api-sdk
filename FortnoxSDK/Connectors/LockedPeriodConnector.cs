@@ -6,27 +6,26 @@ using Fortnox.SDK.Utility;
 
 // ReSharper disable UnusedMember.Global
 
-namespace Fortnox.SDK.Connectors
+namespace Fortnox.SDK.Connectors;
+
+/// <remarks/>
+internal class LockedPeriodConnector : EntityConnector<LockedPeriod>, ILockedPeriodConnector
 {
+
+
     /// <remarks/>
-    internal class LockedPeriodConnector : EntityConnector<LockedPeriod>, ILockedPeriodConnector
+    public LockedPeriodConnector()
     {
+        Resource = "settings/lockedperiod";
+    }
 
+    public LockedPeriod Get()
+    {
+        return GetAsync().GetResult();
+    }
 
-        /// <remarks/>
-        public LockedPeriodConnector()
-        {
-            Resource = "settings/lockedperiod";
-        }
-
-        public LockedPeriod Get()
-        {
-            return GetAsync().GetResult();
-        }
-
-        public async Task<LockedPeriod> GetAsync()
-        {
-            return await BaseGet().ConfigureAwait(false);
-        }
+    public async Task<LockedPeriod> GetAsync()
+    {
+        return await BaseGet().ConfigureAwait(false);
     }
 }

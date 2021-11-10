@@ -1,8 +1,7 @@
 ﻿using System;
 
-namespace Fortnox.SDK.Serialization
+namespace Fortnox.SDK.Serialization;
+
+internal class GenericPropertyNameAttribute : Attribute
 {
-    internal class GenericPropertyNameAttribute : Attribute
-    {
-    }
 }

@@ -5,65 +5,64 @@ using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class SalaryTransactionTests
 {
-    [TestClass]
-    public class SalaryTransactionTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_SalaryTransaction_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        var tmpEmployee = await FortnoxClient.EmployeeConnector.CreateAsync(new Employee() { EmployeeId = TestUtils.RandomString() });
+        #endregion Arrange
 
-        [TestMethod]
-        public async Task Test_SalaryTransaction_CRUD()
+        var connector = FortnoxClient.SalaryTransactionConnector;
+
+        #region CREATE
+        var newSalaryTransaction = new SalaryTransaction()
         {
-            #region Arrange
-            var tmpEmployee = await FortnoxClient.EmployeeConnector.CreateAsync(new Employee() { EmployeeId = TestUtils.RandomString() });
-            #endregion Arrange
+            EmployeeId = tmpEmployee.EmployeeId,
+            SalaryCode = "11", //Arbetstid
+            Date = new DateTime(2020, 1, 1),
+            Number = 10,
+            TextRow = "TestSalaryRow"
+        };
 
-            var connector = FortnoxClient.SalaryTransactionConnector;
+        var createdSalaryTransaction = await connector.CreateAsync(newSalaryTransaction);
+        Assert.AreEqual("TestSalaryRow", createdSalaryTransaction.TextRow);
 
-            #region CREATE
-            var newSalaryTransaction = new SalaryTransaction()
-            {
-                EmployeeId = tmpEmployee.EmployeeId,
-                SalaryCode = "11", //Arbetstid
-                Date = new DateTime(2020, 1, 1),
-                Number = 10,
-                TextRow = "TestSalaryRow"
-            };
+        #endregion CREATE
 
-            var createdSalaryTransaction = await connector.CreateAsync(newSalaryTransaction);
-            Assert.AreEqual("TestSalaryRow", createdSalaryTransaction.TextRow);
+        #region UPDATE
 
-            #endregion CREATE
+        createdSalaryTransaction.TextRow = "UpdatedTestSalaryRow";
 
-            #region UPDATE
+        var updatedSalaryTransaction = await connector.UpdateAsync(createdSalaryTransaction);
+        Assert.AreEqual("UpdatedTestSalaryRow", updatedSalaryTransaction.TextRow);
 
-            createdSalaryTransaction.TextRow = "UpdatedTestSalaryRow";
+        #endregion UPDATE
 
-            var updatedSalaryTransaction = await connector.UpdateAsync(createdSalaryTransaction);
-            Assert.AreEqual("UpdatedTestSalaryRow", updatedSalaryTransaction.TextRow);
+        #region READ / GET
 
-            #endregion UPDATE
+        var retrievedSalaryTransaction = await connector.GetAsync(createdSalaryTransaction.SalaryRow);
+        Assert.AreEqual("UpdatedTestSalaryRow", retrievedSalaryTransaction.TextRow);
 
-            #region READ / GET
+        #endregion READ / GET
 
-            var retrievedSalaryTransaction = await connector.GetAsync(createdSalaryTransaction.SalaryRow);
-            Assert.AreEqual("UpdatedTestSalaryRow", retrievedSalaryTransaction.TextRow);
+        #region DELETE
 
-            #endregion READ / GET
+        await connector.DeleteAsync(createdSalaryTransaction.SalaryRow);
 
-            #region DELETE
+        Assert.ThrowsException<FortnoxApiException>(
+            () => connector.Get(createdSalaryTransaction.SalaryRow),
+            "Entity still exists after Delete!");
 
-            await connector.DeleteAsync(createdSalaryTransaction.SalaryRow);
+        #endregion DELETE
 
-            Assert.ThrowsException<FortnoxApiException>(
-                () => connector.Get(createdSalaryTransaction.SalaryRow),
-                "Entity still exists after Delete!");
-
-            #endregion DELETE
-
-            #region Delete arranged resources
-            #endregion Delete arranged resources
-        }
+        #region Delete arranged resources
+        #endregion Delete arranged resources
     }
 }

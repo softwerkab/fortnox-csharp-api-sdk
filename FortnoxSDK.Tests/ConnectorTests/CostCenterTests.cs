@@ -5,119 +5,118 @@ using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class CostCenterTests
 {
-    [TestClass]
-    public class CostCenterTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_CostCenter_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        //Add code to create required resources
+        #endregion Arrange
 
-        [TestMethod]
-        public async Task Test_CostCenter_CRUD()
+        var connector = FortnoxClient.CostCenterConnector;
+
+        #region CREATE
+        var newCostCenter = new CostCenter()
         {
-            #region Arrange
-            //Add code to create required resources
-            #endregion Arrange
+            Code = TestUtils.RandomString(5),
+            Description = "TestCostCenter",
+            Active = true,
+            Note = "Some notes"
+        };
 
-            var connector = FortnoxClient.CostCenterConnector;
+        var createdCostCenter = await connector.CreateAsync(newCostCenter);
+        Assert.AreEqual("TestCostCenter", createdCostCenter.Description);
 
-            #region CREATE
-            var newCostCenter = new CostCenter()
-            {
-                Code = TestUtils.RandomString(5),
-                Description = "TestCostCenter",
-                Active = true,
-                Note = "Some notes"
-            };
+        #endregion CREATE
 
-            var createdCostCenter = await connector.CreateAsync(newCostCenter);
-            Assert.AreEqual("TestCostCenter", createdCostCenter.Description);
+        #region UPDATE
 
-            #endregion CREATE
+        createdCostCenter.Description = "UpdatedTestCostCenter";
 
-            #region UPDATE
+        var updatedCostCenter = await connector.UpdateAsync(createdCostCenter);
+        Assert.AreEqual("UpdatedTestCostCenter", updatedCostCenter.Description);
 
-            createdCostCenter.Description = "UpdatedTestCostCenter";
+        #endregion UPDATE
 
-            var updatedCostCenter = await connector.UpdateAsync(createdCostCenter);
-            Assert.AreEqual("UpdatedTestCostCenter", updatedCostCenter.Description);
+        #region READ / GET
 
-            #endregion UPDATE
+        var retrievedCostCenter = await connector.GetAsync(createdCostCenter.Code);
+        Assert.AreEqual("UpdatedTestCostCenter", retrievedCostCenter.Description);
 
-            #region READ / GET
+        #endregion READ / GET
 
-            var retrievedCostCenter = await connector.GetAsync(createdCostCenter.Code);
-            Assert.AreEqual("UpdatedTestCostCenter", retrievedCostCenter.Description);
+        #region DELETE
 
-            #endregion READ / GET
+        await connector.DeleteAsync(createdCostCenter.Code);
 
-            #region DELETE
+        Assert.ThrowsException<FortnoxApiException>(
+            () => connector.Get(createdCostCenter.Code),
+            "Entity still exists after Delete!");
 
-            await connector.DeleteAsync(createdCostCenter.Code);
+        #endregion DELETE
 
-            Assert.ThrowsException<FortnoxApiException>(
-                () => connector.Get(createdCostCenter.Code),
-                "Entity still exists after Delete!");
+        #region Delete arranged resources
+        //Add code to delete temporary resources
+        #endregion Delete arranged resources
+    }
 
-            #endregion DELETE
+    [TestMethod]
+    public async Task Test_Find()
+    {
+        #region Arrange
+        //Add code to create required resources
+        #endregion Arrange
 
-            #region Delete arranged resources
-            //Add code to delete temporary resources
-            #endregion Delete arranged resources
+        var connector = FortnoxClient.CostCenterConnector;
+        var newCostCenter = new CostCenter()
+        {
+            Code = TestUtils.RandomString(),
+            Description = "TestCostCenter",
+            Active = true,
+            Note = "Some notes"
+        };
+
+        //Add entries
+        for (var i = 0; i < 5; i++)
+        {
+            newCostCenter.Code = TestUtils.RandomString(5);
+            await connector.CreateAsync(newCostCenter);
         }
 
-        [TestMethod]
-        public async Task Test_Find()
+        //Apply base test filter
+        var searchSettings = new CostCenterSearch();
+        searchSettings.LastModified = TestUtils.Recently;
+        var fullCollection = await connector.FindAsync(searchSettings);
+
+        Assert.AreEqual(5, fullCollection.TotalResources);
+        Assert.AreEqual(5, fullCollection.Entities.Count);
+        Assert.AreEqual(1, fullCollection.TotalPages);
+
+        Assert.AreEqual("TestCostCenter", fullCollection.Entities[0].Description);
+
+        //Apply Limit
+        searchSettings.Limit = 2;
+        var limitedCollection = await connector.FindAsync(searchSettings);
+
+        Assert.AreEqual(5, limitedCollection.TotalResources);
+        Assert.AreEqual(2, limitedCollection.Entities.Count);
+        Assert.AreEqual(3, limitedCollection.TotalPages);
+
+        //Delete entries
+        foreach (var entry in fullCollection.Entities)
         {
-            #region Arrange
-            //Add code to create required resources
-            #endregion Arrange
-
-            var connector = FortnoxClient.CostCenterConnector;
-            var newCostCenter = new CostCenter()
-            {
-                Code = TestUtils.RandomString(),
-                Description = "TestCostCenter",
-                Active = true,
-                Note = "Some notes"
-            };
-
-            //Add entries
-            for (var i = 0; i < 5; i++)
-            {
-                newCostCenter.Code = TestUtils.RandomString(5);
-                await connector.CreateAsync(newCostCenter);
-            }
-
-            //Apply base test filter
-            var searchSettings = new CostCenterSearch();
-            searchSettings.LastModified = TestUtils.Recently;
-            var fullCollection = await connector.FindAsync(searchSettings);
-
-            Assert.AreEqual(5, fullCollection.TotalResources);
-            Assert.AreEqual(5, fullCollection.Entities.Count);
-            Assert.AreEqual(1, fullCollection.TotalPages);
-
-            Assert.AreEqual("TestCostCenter", fullCollection.Entities[0].Description);
-
-            //Apply Limit
-            searchSettings.Limit = 2;
-            var limitedCollection = await connector.FindAsync(searchSettings);
-
-            Assert.AreEqual(5, limitedCollection.TotalResources);
-            Assert.AreEqual(2, limitedCollection.Entities.Count);
-            Assert.AreEqual(3, limitedCollection.TotalPages);
-
-            //Delete entries
-            foreach (var entry in fullCollection.Entities)
-            {
-                await connector.DeleteAsync(entry.Code);
-            }
-            #region Delete arranged resources
-
-            //Add code to delete temporary resources
-
-            #endregion Delete arranged resources
+            await connector.DeleteAsync(entry.Code);
         }
+        #region Delete arranged resources
+
+        //Add code to delete temporary resources
+
+        #endregion Delete arranged resources
     }
 }

@@ -1,7 +1,6 @@
-namespace Fortnox.SDK.Search
-{
-    public class SIESearch : BaseSearch
-    {
+namespace Fortnox.SDK.Search;
 
-    }
+public class SIESearch : BaseSearch
+{
+
 }

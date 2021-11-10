@@ -2,44 +2,43 @@ using System.Threading.Tasks;
 using Fortnox.SDK;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FortnoxSDK.Tests.ConnectorTests
+namespace FortnoxSDK.Tests.ConnectorTests;
+
+[TestClass]
+public class CompanySettingsTests
 {
-    [TestClass]
-    public class CompanySettingsTests
+    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+
+    [TestMethod]
+    public async Task Test_CompanySettings_CRUD()
     {
-        public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+        #region Arrange
+        //Add code to create required resources
+        #endregion Arrange
 
-        [TestMethod]
-        public async Task Test_CompanySettings_CRUD()
-        {
-            #region Arrange
-            //Add code to create required resources
-            #endregion Arrange
+        var connector = FortnoxClient.CompanySettingsConnector;
 
-            var connector = FortnoxClient.CompanySettingsConnector;
+        #region CREATE
+        //Not Allowed
+        #endregion CREATE
 
-            #region CREATE
-            //Not Allowed
-            #endregion CREATE
+        #region UPDATE
+        //Not Allowed
+        #endregion UPDATE
 
-            #region UPDATE
-            //Not Allowed
-            #endregion UPDATE
+        #region READ / GET
 
-            #region READ / GET
+        var retrievedCompanySettings = await connector.GetAsync();
+        Assert.IsNotNull(retrievedCompanySettings?.Name);
 
-            var retrievedCompanySettings = await connector.GetAsync();
-            Assert.IsNotNull(retrievedCompanySettings?.Name);
+        #endregion READ / GET
 
-            #endregion READ / GET
+        #region DELETE
+        //Not Allowed
+        #endregion DELETE
 
-            #region DELETE
-            //Not Allowed
-            #endregion DELETE
-
-            #region Delete arranged resources
-            //Add code to delete temporary resources
-            #endregion Delete arranged resources
-        }
+        #region Delete arranged resources
+        //Add code to delete temporary resources
+        #endregion Delete arranged resources
     }
 }
