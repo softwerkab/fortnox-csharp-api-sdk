@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <LangVersion>8</LangVersion>
+    <LangVersion>10</LangVersion>
     <PackageId>Fortnox.NET.SDK</PackageId>
     <Version>4.2.3</Version>
     <Authors>Softwerk AB</Authors>
