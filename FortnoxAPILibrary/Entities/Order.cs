@@ -76,6 +76,8 @@ namespace FortnoxAPILibrary
 
 		private string deliveryNameField;
 
+		private string deliveryStateField;
+
 		private string deliveryZipCodeField;
 
 		private string documentNumberField;
@@ -481,6 +483,19 @@ namespace FortnoxAPILibrary
 			set
 			{
 				this.deliveryNameField = value;
+			}
+		}
+
+		/// <remarks/>
+		public string DeliveryState
+		{
+			get
+			{
+				return this.deliveryStateField;
+			}
+			set
+			{
+				this.deliveryStateField = value;
 			}
 		}
 
