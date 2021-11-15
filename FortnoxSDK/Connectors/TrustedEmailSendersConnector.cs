@@ -47,7 +47,7 @@ internal class TrustedEmailSendersConnector : EntityConnector<TrustedEmailSender
 
         var request = new EntityRequest<EmailSenders>()
         {
-            Endpoint = "/3/emailsenders",
+            Endpoint = Endpoints.EmailSenders,
             Method = HttpMethod.Get
         };
 

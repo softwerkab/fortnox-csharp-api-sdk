@@ -68,4 +68,6 @@ internal static class Endpoints
     public const string VoucherFileConnections = $"/{Version}/voucherfileconnections";
     public const string VoucherSeries = $"/{Version}/voucherseries";
     public const string WayOfDelivery = $"/{Version}/wayofdeliveries";
+
+    public const string EmailSenders = $"/{Version}/emailsenders";
 }
