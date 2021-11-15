@@ -11,7 +11,7 @@ internal class SalaryTransactionConnector : SearchableEntityConnector<SalaryTran
 {
     public SalaryTransactionConnector()
     {
-        Resource = Endpoints.SalaryTransactions;
+        Endpoint = Endpoints.SalaryTransactions;
     }
 
     public SalaryTransaction Get(long? id)

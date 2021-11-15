@@ -11,7 +11,7 @@ namespace Fortnox.SDK.Connectors.Base;
 internal abstract class BaseConnector : BaseClient
 {
     protected ISerializer Serializer { get; set; }
-    protected string Resource { get; set; }
+    protected string Endpoint { get; set; }
 
     protected BaseConnector()
     {

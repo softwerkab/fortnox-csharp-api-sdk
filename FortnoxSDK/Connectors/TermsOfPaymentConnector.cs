@@ -11,7 +11,7 @@ internal class TermsOfPaymentConnector : SearchableEntityConnector<TermsOfPaymen
 {
     public TermsOfPaymentConnector()
     {
-        Resource = Endpoints.TermsOfPayments;
+        Endpoint = Endpoints.TermsOfPayments;
     }
 
     public TermsOfPayment Get(string id)

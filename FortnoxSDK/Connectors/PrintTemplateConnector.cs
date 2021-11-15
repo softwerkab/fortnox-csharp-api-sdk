@@ -11,7 +11,7 @@ internal class PrintTemplateConnector : SearchableEntityConnector<PrintTemplate,
 {
     public PrintTemplateConnector()
     {
-        Resource = Endpoints.PrintTemplates;
+        Endpoint = Endpoints.PrintTemplates;
     }
 
     public EntityCollection<PrintTemplate> Find(PrintTemplateSearch searchSettings)

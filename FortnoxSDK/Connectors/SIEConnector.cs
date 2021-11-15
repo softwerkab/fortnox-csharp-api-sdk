@@ -12,7 +12,7 @@ internal class SIEConnector : BaseConnector, ISIEConnector
 {
     public SIEConnector()
     {
-        Resource = Endpoints.SIE;
+        Endpoint = Endpoints.SIE;
     }
 
     public byte[] Get(SIEType type, long? finYearID = null, SIEExportOptions exportOptions = null)
@@ -24,7 +24,7 @@ internal class SIEConnector : BaseConnector, ISIEConnector
     {
         var request = new FileDownloadRequest()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Indices = new List<string> { type.GetStringValue() }
         };
 

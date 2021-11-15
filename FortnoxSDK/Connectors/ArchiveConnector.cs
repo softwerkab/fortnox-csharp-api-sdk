@@ -17,7 +17,7 @@ internal class ArchiveConnector : EntityConnector<ArchiveFolder>, IArchiveConnec
 {
     public ArchiveConnector()
     {
-        Resource = Endpoints.Archive;
+        Endpoint = Endpoints.Archive;
     }
 
     #region SYNC Interface Methods
@@ -140,7 +140,7 @@ internal class ArchiveConnector : EntityConnector<ArchiveFolder>, IArchiveConnec
 
         var request = new EntityRequest<ArchiveFolder>()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Method = HttpMethod.Get,
         };
 
@@ -163,7 +163,7 @@ internal class ArchiveConnector : EntityConnector<ArchiveFolder>, IArchiveConnec
 
         var request = new EntityRequest<ArchiveFolder>()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Method = HttpMethod.Post,
             Entity = folder
         };
@@ -178,7 +178,7 @@ internal class ArchiveConnector : EntityConnector<ArchiveFolder>, IArchiveConnec
     {
         var request = new BaseRequest()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Method = HttpMethod.Delete
         };
 
@@ -195,7 +195,7 @@ internal class ArchiveConnector : EntityConnector<ArchiveFolder>, IArchiveConnec
         var request = new FileUploadRequest()
         {
             Parameters = parameters ?? new Dictionary<string, string>(),
-            Resource = Resource,
+            Endpoint = Endpoint,
             Indices = indices.ToList(),
             FileData = data,
             FileName = name
@@ -212,7 +212,7 @@ internal class ArchiveConnector : EntityConnector<ArchiveFolder>, IArchiveConnec
         var request = new FileDownloadRequest()
         {
             Parameters = parameters ?? new Dictionary<string, string>(),
-            Resource = Resource,
+            Endpoint = Endpoint,
             Indices = indices.ToList()
         };
 

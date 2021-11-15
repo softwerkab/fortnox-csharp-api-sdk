@@ -11,7 +11,7 @@ internal class UnitConnector : SearchableEntityConnector<Unit, Unit, UnitSearch>
 {
     public UnitConnector()
     {
-        Resource = Endpoints.Units;
+        Endpoint = Endpoints.Units;
     }
 
     public Unit Get(string id)

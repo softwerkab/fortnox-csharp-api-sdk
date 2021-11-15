@@ -11,7 +11,7 @@ internal class ContractConnector : SearchableEntityConnector<Contract, ContractS
 {
     public ContractConnector()
     {
-        Resource = Endpoints.Contracts;
+        Endpoint = Endpoints.Contracts;
     }
 
     /// <summary>

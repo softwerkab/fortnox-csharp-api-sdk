@@ -2,68 +2,70 @@
 
 internal static class Endpoints
 {
-    public const string AbsenceTransactions = "absencetransactions";
-    public const string AccountCharts = "accountcharts";
-    public const string Accounts = "accounts";
-    public const string Archive = "archive";
-    public const string Articles = "articles";
-    public const string ArticleFileConnections = "articlefileconnections";
-    public const string Assets = "assets";
-    public const string AssetTypes = "assets/types";
-    public const string AssetFileConnections = "assetfileconnections";
-    public const string AttendanceTransactions = "attendancetransactions";
+    public const string Version = "3";
 
-    public const string CompanyInformation = "companyinformation";
-    public const string CompanySettings = "settings/company";
-    public const string ContractAccruals = "contractaccruals";
-    public const string Contracts = "contracts";
-    public const string ContractTemplates = "contracttemplates";
-    public const string CostCenters = "costcenters";
-    public const string Currencies = "currencies";
-    public const string Customers = "customers";
+    public const string AbsenceTransactions = $"/{Version}/absencetransactions";
+    public const string AccountCharts = $"/{Version}/accountcharts";
+    public const string Accounts = $"/{Version}/accounts";
+    public const string Archive = $"/{Version}/archive";
+    public const string Articles = $"/{Version}/articles";
+    public const string ArticleFileConnections = $"/{Version}/articlefileconnections";
+    public const string Assets = $"/{Version}/assets";
+    public const string AssetTypes = $"/{Version}/assets/types";
+    public const string AssetFileConnections = $"/{Version}/assetfileconnections";
+    public const string AttendanceTransactions = $"/{Version}/attendancetransactions";
 
-    public const string Employees = "employees";
-    public const string Expenses = "expenses";
-    public const string FinancialYears = "financialyears";
+    public const string CompanyInformation = $"/{Version}/companyinformation";
+    public const string CompanySettings = $"/{Version}/settings/company";
+    public const string ContractAccruals = $"/{Version}/contractaccruals";
+    public const string Contracts = $"/{Version}/contracts";
+    public const string ContractTemplates = $"/{Version}/contracttemplates";
+    public const string CostCenters = $"/{Version}/costcenters";
+    public const string Currencies = $"/{Version}/currencies";
+    public const string Customers = $"/{Version}/customers";
 
-    public const string Inbox = "inbox";
-    public const string InvoiceAccruals = "invoiceaccruals";
-    public const string Invoices = "invoices";
-    public const string InvoiceFileConnections = "fileattachments/attachments-v1";
-    public const string InvoicePayments = "invoicepayments";
+    public const string Employees = $"/{Version}/employees";
+    public const string Expenses = $"/{Version}/expenses";
+    public const string FinancialYears = $"/{Version}/financialyears";
 
-    public const string Labels = "labels";
-    public const string LockedPeriods = "settings/lockedperiod";
-    public const string ModesOfPayments = "modesofpayments";
-    public const string Offers = "offers";
-    public const string Orders = "orders";
+    public const string Inbox = $"/{Version}/inbox";
+    public const string InvoiceAccruals = $"/{Version}/invoiceaccruals";
+    public const string Invoices = $"/{Version}/invoices";
+    public const string InvoiceFileConnections = "/api/fileattachments/attachments-v1";
+    public const string InvoicePayments = $"/{Version}/invoicepayments";
 
-    public const string PredefinedAccounts = "predefinedaccounts";
-    public const string PredefinedVoucherSeries = "predefinedvoucherseries";
-    public const string Prices = "prices";
-    public const string PriceLists = "pricelists";
-    public const string PrintTemplates = "printtemplates";
-    public const string Projects = "projects";
+    public const string Labels = $"/{Version}/labels";
+    public const string LockedPeriods = $"/{Version}/settings/lockedperiod";
+    public const string ModesOfPayments = $"/{Version}/modesofpayments";
+    public const string Offers = $"/{Version}/offers";
+    public const string Orders = $"/{Version}/orders";
 
-    public const string SalaryTransactions = "salarytransactions";
-    public const string ScheduleTimes = "scheduletimes";
-    public const string SIE = "sie";
-    public const string Suppliers = "suppliers";
-    public const string SupplierInvoiceAcrruals = "supplierinvoiceaccruals";
-    public const string SupplierInvoices = "supplierinvoices";
-    public const string SupplierInvoiceExternalUrlConnections = "supplierinvoiceexternalurlconnections";
-    public const string SupplierFileConnections = "supplierinvoicefileconnections";
-    public const string SupplierInvoicePayments = "supplierinvoicepayments";
+    public const string PredefinedAccounts = $"/{Version}/predefinedaccounts";
+    public const string PredefinedVoucherSeries = $"/{Version}/predefinedvoucherseries";
+    public const string Prices = $"/{Version}/prices";
+    public const string PriceLists = $"/{Version}/pricelists";
+    public const string PrintTemplates = $"/{Version}/printtemplates";
+    public const string Projects = $"/{Version}/projects";
 
-    public const string TaxReductions = "taxreductions";
-    public const string TermsOfDelivery = "termsofdeliveries";
-    public const string TermsOfPayments = "termsofpayments";
-    public const string TrustedEmailDomains = "emailtrusteddomains";
-    public const string TrustedEmailSenders = "emailsenders/trusted";
+    public const string SalaryTransactions = $"/{Version}/salarytransactions";
+    public const string ScheduleTimes = $"/{Version}/scheduletimes";
+    public const string SIE = $"/{Version}/sie";
+    public const string Suppliers = $"/{Version}/suppliers";
+    public const string SupplierInvoiceAcrruals = $"/{Version}/supplierinvoiceaccruals";
+    public const string SupplierInvoices = $"/{Version}/supplierinvoices";
+    public const string SupplierInvoiceExternalUrlConnections = $"/{Version}/supplierinvoiceexternalurlconnections";
+    public const string SupplierFileConnections = $"/{Version}/supplierinvoicefileconnections";
+    public const string SupplierInvoicePayments = $"/{Version}/supplierinvoicepayments";
 
-    public const string Units = "units";
-    public const string Vouchers = "vouchers";
-    public const string VoucherFileConnections = "voucherfileconnections";
-    public const string VoucherSeries = "voucherseries";
-    public const string WayOfDelivery = "wayofdeliveries";
+    public const string TaxReductions = $"/{Version}/taxreductions";
+    public const string TermsOfDelivery = $"/{Version}/termsofdeliveries";
+    public const string TermsOfPayments = $"/{Version}/termsofpayments";
+    public const string TrustedEmailDomains = $"/{Version}/emailtrusteddomains";
+    public const string TrustedEmailSenders = $"/{Version}/emailsenders/trusted";
+
+    public const string Units = $"/{Version}/units";
+    public const string Vouchers = $"/{Version}/vouchers";
+    public const string VoucherFileConnections = $"/{Version}/voucherfileconnections";
+    public const string VoucherSeries = $"/{Version}/voucherseries";
+    public const string WayOfDelivery = $"/{Version}/wayofdeliveries";
 }

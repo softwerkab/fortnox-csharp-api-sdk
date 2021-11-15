@@ -11,7 +11,7 @@ internal class ProjectConnector : SearchableEntityConnector<Project, ProjectSubs
 {
     public ProjectConnector()
     {
-        Resource = Endpoints.Projects;
+        Endpoint = Endpoints.Projects;
     }
 
     public Project Get(string id)

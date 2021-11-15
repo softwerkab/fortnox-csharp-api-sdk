@@ -13,7 +13,7 @@ internal class VoucherSeriesConnector : SearchableEntityConnector<VoucherSeries,
 {
     public VoucherSeriesConnector()
     {
-        Resource = Endpoints.VoucherSeries;
+        Endpoint = Endpoints.VoucherSeries;
     }
 
     public VoucherSeries Get(string id, long? financialYearId = null)
@@ -45,7 +45,7 @@ internal class VoucherSeriesConnector : SearchableEntityConnector<VoucherSeries,
     {
         var request = new EntityRequest<VoucherSeries>()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Method = HttpMethod.Post,
             Entity = voucherSeries,
         };
@@ -60,7 +60,7 @@ internal class VoucherSeriesConnector : SearchableEntityConnector<VoucherSeries,
     {
         var request = new EntityRequest<VoucherSeries>()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Method = HttpMethod.Put,
             Entity = voucherSeries
         };
@@ -77,7 +77,7 @@ internal class VoucherSeriesConnector : SearchableEntityConnector<VoucherSeries,
     {
         var request = new EntityRequest<VoucherSeries>()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Method = HttpMethod.Get,
         };
 

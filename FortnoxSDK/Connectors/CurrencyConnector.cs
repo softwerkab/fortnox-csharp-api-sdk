@@ -11,7 +11,7 @@ internal class CurrencyConnector : SearchableEntityConnector<Currency, Currency,
 {
     public CurrencyConnector()
     {
-        Resource = Endpoints.Currencies;
+        Endpoint = Endpoints.Currencies;
     }
 
     public Currency Get(string id)

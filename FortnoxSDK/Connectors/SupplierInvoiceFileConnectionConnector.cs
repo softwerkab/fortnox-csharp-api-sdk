@@ -11,7 +11,7 @@ internal class SupplierInvoiceFileConnectionConnector : SearchableEntityConnecto
 {
     public SupplierInvoiceFileConnectionConnector()
     {
-        Resource = Endpoints.SupplierFileConnections;
+        Endpoint = Endpoints.SupplierFileConnections;
     }
 
     public SupplierInvoiceFileConnection Get(string id)

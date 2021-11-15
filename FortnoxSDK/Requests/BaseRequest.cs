@@ -12,8 +12,7 @@ internal class BaseRequest
     public byte[] Content { get; set; }
 
     public string BaseUrl { get; set; } = ApiConstants.FortnoxApi;
-    public string Version { get; set; } = "3";
-    public string Resource { get; set; }
+    public string Endpoint { get; set; }
     public IList<string> Indices { get; set; } = new List<string>();
     public IDictionary<string, string> Parameters { get; set; } = new Dictionary<string, string>();
 
@@ -23,7 +22,7 @@ internal class BaseRequest
     {
         var index = string.Join("/", Indices.Select(Uri.EscapeDataString));
 
-        var uri = CombineUri(BaseUrl, Version, Resource, index);
+        var uri = CombineUri(BaseUrl, Endpoint, index);
         var query = BuildQuery(Parameters);
 
         return string.IsNullOrEmpty(query) ? uri : $"{uri}?{query}";

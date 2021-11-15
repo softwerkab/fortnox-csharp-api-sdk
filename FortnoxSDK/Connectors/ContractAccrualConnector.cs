@@ -11,7 +11,7 @@ internal class ContractAccrualConnector : SearchableEntityConnector<ContractAccr
 {
     public ContractAccrualConnector()
     {
-        Resource = Endpoints.ContractAccruals;
+        Endpoint = Endpoints.ContractAccruals;
     }
 
     public ContractAccrual Get(long? id)

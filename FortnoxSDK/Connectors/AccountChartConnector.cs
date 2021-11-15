@@ -12,7 +12,7 @@ internal class AccountChartConnector : SearchableEntityConnector<AccountChart, A
 {
     public AccountChartConnector()
     {
-        Resource = Endpoints.AccountCharts;
+        Endpoint = Endpoints.AccountCharts;
     }
 
     public EntityCollection<AccountChart> Find(AccountChartSearch searchSettings)

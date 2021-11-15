@@ -11,7 +11,7 @@ internal class OfferConnector : SearchableEntityConnector<Offer, OfferSubset, Of
 {
     public OfferConnector()
     {
-        Resource = Endpoints.Offers;
+        Endpoint = Endpoints.Offers;
     }
 
     public Offer Get(long? id)

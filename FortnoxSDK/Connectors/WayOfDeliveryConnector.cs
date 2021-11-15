@@ -11,7 +11,7 @@ internal class WayOfDeliveryConnector : SearchableEntityConnector<WayOfDelivery,
 {
     public WayOfDeliveryConnector()
     {
-        Resource = Endpoints.WayOfDelivery;
+        Endpoint = Endpoints.WayOfDelivery;
     }
 
     public WayOfDelivery Get(string id)

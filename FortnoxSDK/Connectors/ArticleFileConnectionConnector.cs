@@ -11,7 +11,7 @@ internal class ArticleFileConnectionConnector : SearchableEntityConnector<Articl
 {
     public ArticleFileConnectionConnector()
     {
-        Resource = Endpoints.ArticleFileConnections;
+        Endpoint = Endpoints.ArticleFileConnections;
     }
 
     public ArticleFileConnection Get(string id)

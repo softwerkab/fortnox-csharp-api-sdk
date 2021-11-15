@@ -11,7 +11,7 @@ internal class PredefinedVoucherSeriesConnector : SearchableEntityConnector<Pred
 {
     public PredefinedVoucherSeriesConnector()
     {
-        Resource = Endpoints.PredefinedVoucherSeries;
+        Endpoint = Endpoints.PredefinedVoucherSeries;
     }
 
     public PredefinedVoucherSeries Get(string id)

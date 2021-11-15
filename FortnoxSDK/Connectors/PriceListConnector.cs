@@ -11,7 +11,7 @@ internal class PriceListConnector : SearchableEntityConnector<PriceList, PriceLi
 {
     public PriceListConnector()
     {
-        Resource = Endpoints.PriceLists;
+        Endpoint = Endpoints.PriceLists;
     }
 
     public PriceList Get(string id)

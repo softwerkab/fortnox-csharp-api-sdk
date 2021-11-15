@@ -11,7 +11,7 @@ internal class ModeOfPaymentConnector : SearchableEntityConnector<ModeOfPayment,
 {
     public ModeOfPaymentConnector()
     {
-        Resource = Endpoints.ModesOfPayments;
+        Endpoint = Endpoints.ModesOfPayments;
     }
 
     public ModeOfPayment Get(string id)

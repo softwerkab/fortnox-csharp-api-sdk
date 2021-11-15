@@ -11,7 +11,7 @@ internal class ArticleConnector : SearchableEntityConnector<Article, ArticleSubs
 {
     public ArticleConnector()
     {
-        Resource = Endpoints.Articles;
+        Endpoint = Endpoints.Articles;
     }
 
     public Article Get(string id)

@@ -12,7 +12,7 @@ internal class AttendanceTransactionsConnector : SearchableEntityConnector<Atten
 {
     public AttendanceTransactionsConnector()
     {
-        Resource = Endpoints.AttendanceTransactions;
+        Endpoint = Endpoints.AttendanceTransactions;
     }
 
     public AttendanceTransaction Get(string employeeId, DateTime? date, AttendanceCauseCode? code)

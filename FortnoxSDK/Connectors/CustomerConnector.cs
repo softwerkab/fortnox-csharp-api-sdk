@@ -11,7 +11,7 @@ internal class CustomerConnector : SearchableEntityConnector<Customer, CustomerS
 {
     public CustomerConnector()
     {
-        Resource = Endpoints.Customers;
+        Endpoint = Endpoints.Customers;
     }
 
     public Customer Get(string id)

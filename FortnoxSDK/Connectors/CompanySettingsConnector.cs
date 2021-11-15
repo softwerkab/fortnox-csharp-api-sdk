@@ -10,7 +10,7 @@ internal class CompanySettingsConnector : EntityConnector<CompanySettings>, ICom
 {
     public CompanySettingsConnector()
     {
-        Resource = Endpoints.CompanySettings;
+        Endpoint = Endpoints.CompanySettings;
     }
 
     public CompanySettings Get()

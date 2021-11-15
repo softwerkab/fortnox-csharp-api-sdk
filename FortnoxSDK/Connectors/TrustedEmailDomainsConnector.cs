@@ -11,7 +11,7 @@ internal class TrustedEmailDomainsConnector : SearchableEntityConnector<TrustedE
 {
     public TrustedEmailDomainsConnector()
     {
-        Resource = Endpoints.TrustedEmailDomains;
+        Endpoint = Endpoints.TrustedEmailDomains;
     }
 
     public TrustedEmailDomain Get(long? id)

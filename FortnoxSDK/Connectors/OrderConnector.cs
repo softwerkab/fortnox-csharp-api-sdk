@@ -11,7 +11,7 @@ internal class OrderConnector : SearchableEntityConnector<Order, OrderSubset, Or
 {
     public OrderConnector()
     {
-        Resource = Endpoints.Orders;
+        Endpoint = Endpoints.Orders;
     }
 
     public Order Get(long? id)

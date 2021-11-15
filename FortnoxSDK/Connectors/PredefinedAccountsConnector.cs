@@ -11,7 +11,7 @@ internal class PredefinedAccountsConnector : SearchableEntityConnector<Predefine
 {
     public PredefinedAccountsConnector()
     {
-        Resource = Endpoints.PredefinedAccounts;
+        Endpoint = Endpoints.PredefinedAccounts;
     }
 
     public PredefinedAccount Get(string id)

@@ -11,7 +11,7 @@ internal class LabelConnector : SearchableEntityConnector<Label, Label, LabelSea
 {
     public LabelConnector()
     {
-        Resource = Endpoints.Labels;
+        Endpoint = Endpoints.Labels;
     }
 
     public Label Update(Label label)

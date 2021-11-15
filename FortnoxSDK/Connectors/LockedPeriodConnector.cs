@@ -10,7 +10,7 @@ internal class LockedPeriodConnector : EntityConnector<LockedPeriod>, ILockedPer
 {
     public LockedPeriodConnector()
     {
-        Resource = Endpoints.LockedPeriods;
+        Endpoint = Endpoints.LockedPeriods;
     }
 
     public LockedPeriod Get()

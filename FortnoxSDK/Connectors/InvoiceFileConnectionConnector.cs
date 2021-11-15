@@ -14,7 +14,7 @@ internal class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConne
 {
     public InvoiceFileConnectionConnector()
     {
-        Resource = Endpoints.InvoiceFileConnections;
+        Endpoint = Endpoints.InvoiceFileConnections;
     }
 
     public IList<InvoiceFileConnection> GetConnections(long? entityId, EntityType? entityType)
@@ -41,8 +41,7 @@ internal class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConne
     {
         var request = new BaseRequest
         {
-            Version = "api",
-            Resource = Resource,
+            Endpoint = Endpoint,
             Indices = new List<string>() { id },
             Method = HttpMethod.Delete,
         };
@@ -54,8 +53,7 @@ internal class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConne
     {
         var request = new EntityRequest<List<InvoiceFileConnection>>()
         {
-            Version = "api",
-            Resource = Resource,
+            Endpoint = Endpoint,
             Method = HttpMethod.Post,
             Entity = new List<InvoiceFileConnection>() { invoiceFileConnection },
             UseEntityWrapper = false
@@ -69,8 +67,7 @@ internal class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConne
     {
         var request = new EntityRequest<InvoiceFileConnection>()
         {
-            Version = "api",
-            Resource = Resource,
+            Endpoint = Endpoint,
             Indices = new List<string> { invoiceFileConnection.Id },
             Method = HttpMethod.Put,
             Entity = new InvoiceFileConnection()
@@ -88,8 +85,7 @@ internal class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConne
     {
         var request = new EntityRequest<List<InvoiceFileConnection>>()
         {
-            Version = "api",
-            Resource = Resource,
+            Endpoint = Endpoint,
             Parameters = new Dictionary<string, string>
             {
                 { "entityid", entityId?.ToString() },

@@ -11,7 +11,7 @@ internal class AssetFileConnectionConnector : SearchableEntityConnector<AssetFil
 {
     public AssetFileConnectionConnector()
     {
-        Resource = Endpoints.AssetFileConnections;
+        Endpoint = Endpoints.AssetFileConnections;
     }
 
     public AssetFileConnection Get(string id)

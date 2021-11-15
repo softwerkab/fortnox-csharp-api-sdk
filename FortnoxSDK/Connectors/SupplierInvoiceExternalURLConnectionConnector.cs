@@ -11,7 +11,7 @@ internal class SupplierInvoiceExternalURLConnectionConnector : SearchableEntityC
 {
     public SupplierInvoiceExternalURLConnectionConnector()
     {
-        Resource = Endpoints.SupplierInvoiceExternalUrlConnections;
+        Endpoint = Endpoints.SupplierInvoiceExternalUrlConnections;
     }
 
     public SupplierInvoiceExternalURLConnection Get(long? id)

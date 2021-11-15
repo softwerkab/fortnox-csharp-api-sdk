@@ -17,7 +17,7 @@ internal abstract class SearchableEntityConnector<TEntity, TEntitySubset, TSearc
     {
         var request = new SearchRequest<TEntitySubset>()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             SearchSettings = searchSettings
         };
 
@@ -83,7 +83,7 @@ internal abstract class SearchableEntityConnector<TEntity, TEntitySubset, TSearc
         return new SearchRequest<T>()
         {
             BaseUrl = request.BaseUrl,
-            Resource = request.Resource,
+            Endpoint = request.Endpoint,
             Headers = request.Headers,
             Indices = request.Indices,
             Method = request.Method,

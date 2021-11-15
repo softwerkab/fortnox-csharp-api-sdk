@@ -11,7 +11,7 @@ internal class CostCenterConnector : SearchableEntityConnector<CostCenter, CostC
 {
     public CostCenterConnector()
     {
-        Resource = Endpoints.CostCenters;
+        Endpoint = Endpoints.CostCenters;
     }
 
     public CostCenter Get(string id)

@@ -12,7 +12,7 @@ internal class AbsenceTransactionConnector : SearchableEntityConnector<AbsenceTr
 {
     public AbsenceTransactionConnector()
     {
-        Resource = Endpoints.AbsenceTransactions;
+        Endpoint = Endpoints.AbsenceTransactions;
     }
 
     public AbsenceTransaction Get(string employeeId, DateTime? date, AbsenceCauseCode? code)

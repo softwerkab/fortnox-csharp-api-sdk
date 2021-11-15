@@ -13,7 +13,7 @@ internal class VoucherFileConnectionConnector : SearchableEntityConnector<Vouche
 {
     public VoucherFileConnectionConnector()
     {
-        Resource = Endpoints.VoucherFileConnections;
+        Endpoint = Endpoints.VoucherFileConnections;
     }
 
     public VoucherFileConnection Get(string id)
@@ -50,7 +50,7 @@ internal class VoucherFileConnectionConnector : SearchableEntityConnector<Vouche
     {
         var request = new EntityRequest<VoucherFileConnection>()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Method = HttpMethod.Post,
             Entity = voucherFileConnection
         };

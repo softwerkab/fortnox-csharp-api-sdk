@@ -11,7 +11,7 @@ internal class FinancialYearConnector : SearchableEntityConnector<FinancialYear,
 {
     public FinancialYearConnector()
     {
-        Resource = Endpoints.FinancialYears;
+        Endpoint = Endpoints.FinancialYears;
     }
 
     public FinancialYear Get(long? id)

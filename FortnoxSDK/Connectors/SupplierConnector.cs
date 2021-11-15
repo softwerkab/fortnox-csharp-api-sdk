@@ -11,7 +11,7 @@ internal class SupplierConnector : SearchableEntityConnector<Supplier, SupplierS
 {
     public SupplierConnector()
     {
-        Resource = Endpoints.Suppliers;
+        Endpoint = Endpoints.Suppliers;
     }
 
     public Supplier Get(string id)

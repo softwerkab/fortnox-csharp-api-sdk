@@ -13,7 +13,7 @@ internal class PriceConnector : SearchableEntityConnector<Price, PriceSubset, Pr
 {
     public PriceConnector()
     {
-        Resource = Endpoints.Prices;
+        Endpoint = Endpoints.Prices;
     }
 
     public Price Get(string priceListCode, string articleNumber, decimal? fromQuantity = null)
@@ -45,7 +45,7 @@ internal class PriceConnector : SearchableEntityConnector<Price, PriceSubset, Pr
     {
         var request = new SearchRequest<PriceSubset>()
         {
-            Resource = $"{Resource}/sublist",
+            Endpoint = $"{Endpoint}/sublist",
             Indices = new List<string>() { priceListId, articleId },
             SearchSettings = searchSettings
         };

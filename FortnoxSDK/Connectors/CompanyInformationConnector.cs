@@ -10,7 +10,7 @@ internal class CompanyInformationConnector : EntityConnector<CompanyInformation>
 {
     public CompanyInformationConnector()
     {
-        Resource = Endpoints.CompanyInformation;
+        Endpoint = Endpoints.CompanyInformation;
     }
 
     public CompanyInformation Get()

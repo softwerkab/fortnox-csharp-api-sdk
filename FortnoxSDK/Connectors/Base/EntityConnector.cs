@@ -34,7 +34,7 @@ internal abstract class EntityConnector<TEntity> : BaseConnector where TEntity :
     {
         var request = new EntityRequest<TEntity>()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Method = HttpMethod.Post,
             Entity = entity
         };
@@ -46,7 +46,7 @@ internal abstract class EntityConnector<TEntity> : BaseConnector where TEntity :
     {
         var request = new EntityRequest<TEntity>()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Indices = indices.ToList(),
             Method = HttpMethod.Put,
             Entity = entity
@@ -59,7 +59,7 @@ internal abstract class EntityConnector<TEntity> : BaseConnector where TEntity :
     {
         var request = new BaseRequest()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Indices = indices.ToList(),
             Method = HttpMethod.Delete
         };
@@ -71,7 +71,7 @@ internal abstract class EntityConnector<TEntity> : BaseConnector where TEntity :
     {
         var request = new EntityRequest<TEntity>()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Indices = indices.ToList(),
             Method = HttpMethod.Get,
         };
@@ -86,7 +86,7 @@ internal abstract class EntityConnector<TEntity> : BaseConnector where TEntity :
 
         var request = new FileDownloadRequest()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Indices = new List<string> { documentNumber, action.GetStringValue() },
         };
 
@@ -100,7 +100,7 @@ internal abstract class EntityConnector<TEntity> : BaseConnector where TEntity :
 
         var request = new EntityRequest<TEntity>()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Indices = new List<string> { documentNumber, action.GetStringValue() },
             Method = action.GetMethod()
         };

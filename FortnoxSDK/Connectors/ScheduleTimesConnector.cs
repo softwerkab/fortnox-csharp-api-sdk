@@ -12,7 +12,7 @@ internal class ScheduleTimesConnector : SearchableEntityConnector<ScheduleTimes,
 {
     public ScheduleTimesConnector()
     {
-        Resource = Endpoints.ScheduleTimes;
+        Endpoint = Endpoints.ScheduleTimes;
     }
 
     public EntityCollection<ScheduleTimes> Find(ScheduleTimesSearch searchSettings)

@@ -11,7 +11,7 @@ internal class EmployeeConnector : SearchableEntityConnector<Employee, EmployeeS
 {
     public EmployeeConnector()
     {
-        Resource = Endpoints.Employees;
+        Endpoint = Endpoints.Employees;
     }
 
     public Employee Get(string id)

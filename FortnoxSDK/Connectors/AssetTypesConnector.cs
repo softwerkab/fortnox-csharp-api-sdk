@@ -14,7 +14,7 @@ internal class AssetTypesConnector : SearchableEntityConnector<AssetType, AssetT
 {
     public AssetTypesConnector()
     {
-        Resource = Endpoints.AssetTypes;
+        Endpoint = Endpoints.AssetTypes;
         Serializer = new AssetTypeSerializer();
     }
 

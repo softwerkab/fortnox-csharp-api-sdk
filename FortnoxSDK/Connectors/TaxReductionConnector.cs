@@ -11,7 +11,7 @@ internal class TaxReductionConnector : SearchableEntityConnector<TaxReduction, T
 {
     public TaxReductionConnector()
     {
-        Resource = Endpoints.TaxReductions;
+        Endpoint = Endpoints.TaxReductions;
     }
 
     public TaxReduction Get(string id)

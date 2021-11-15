@@ -11,7 +11,7 @@ internal class TermsOfDeliveryConnector : SearchableEntityConnector<TermsOfDeliv
 {
     public TermsOfDeliveryConnector()
     {
-        Resource = Endpoints.TermsOfDelivery;
+        Endpoint = Endpoints.TermsOfDelivery;
     }
 
     public TermsOfDelivery Get(string id)

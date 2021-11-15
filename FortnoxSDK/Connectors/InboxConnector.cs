@@ -4,6 +4,6 @@ internal class InboxConnector : ArchiveConnector
 {
     public InboxConnector()
     {
-        Resource = Endpoints.Inbox;
+        Endpoint = Endpoints.Inbox;
     }
 }

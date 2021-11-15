@@ -13,7 +13,7 @@ internal class AssetConnector : SearchableEntityConnector<Asset, AssetSubset, As
 {
     public AssetConnector()
     {
-        Resource = Endpoints.Assets;
+        Endpoint = Endpoints.Assets;
         Serializer = new AssetSerializer();
     }
 

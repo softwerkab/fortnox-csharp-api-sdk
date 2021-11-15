@@ -11,7 +11,7 @@ internal class ContractTemplateConnector : SearchableEntityConnector<ContractTem
 {
     public ContractTemplateConnector()
     {
-        Resource = Endpoints.ContractTemplates;
+        Endpoint = Endpoints.ContractTemplates;
     }
 
     public ContractTemplate Get(string id)

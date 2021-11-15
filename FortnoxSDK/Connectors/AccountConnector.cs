@@ -14,7 +14,7 @@ internal class AccountConnector : SearchableEntityConnector<Account, AccountSubs
 {
     public AccountConnector()
     {
-        Resource = Endpoints.Accounts;
+        Endpoint = Endpoints.Accounts;
     }
 
     /// <summary>
@@ -78,7 +78,7 @@ internal class AccountConnector : SearchableEntityConnector<Account, AccountSubs
     {
         var request = new BaseRequest()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Indices = new List<string>() { id.ToString() },
             Method = HttpMethod.Delete
         };
@@ -93,7 +93,7 @@ internal class AccountConnector : SearchableEntityConnector<Account, AccountSubs
     {
         var request = new EntityRequest<Account>()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Method = HttpMethod.Post,
             Entity = account
         };
@@ -108,7 +108,7 @@ internal class AccountConnector : SearchableEntityConnector<Account, AccountSubs
     {
         var request = new EntityRequest<Account>()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Indices = new List<string>() { account.Number.ToString() },
             Method = HttpMethod.Put,
             Entity = account
@@ -125,7 +125,7 @@ internal class AccountConnector : SearchableEntityConnector<Account, AccountSubs
         //return await BaseGet(id.ToString()).ConfigureAwait(false);
         var request = new EntityRequest<Account>()
         {
-            Resource = Resource,
+            Endpoint = Endpoint,
             Indices = new List<string>() { id.ToString() },
             Method = HttpMethod.Get,
         };

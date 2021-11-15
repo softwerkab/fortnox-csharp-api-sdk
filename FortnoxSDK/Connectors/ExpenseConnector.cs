@@ -11,7 +11,7 @@ internal class ExpenseConnector : SearchableEntityConnector<Expense, ExpenseSubs
 {
     public ExpenseConnector()
     {
-        Resource = Endpoints.Expenses;
+        Endpoint = Endpoints.Expenses;
     }
 
     public Expense Get(string id)

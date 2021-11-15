@@ -11,7 +11,7 @@ internal class InvoiceConnector : SearchableEntityConnector<Invoice, InvoiceSubs
 {
     public InvoiceConnector()
     {
-        Resource = Endpoints.Invoices;
+        Endpoint = Endpoints.Invoices;
     }
 
     public Invoice Get(long? id)
