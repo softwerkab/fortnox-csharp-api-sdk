@@ -37,7 +37,7 @@ public enum ForaType
     ///<summary> Worker, Tobacco Industry </summary>
     [EnumMember(Value = "A54")]
     A54,
-    ///<summary> Worker, Company Agreement for V&amp;S Vin & Sprit AB </summary>
+    ///<summary> Worker, Company Agreement for V&amp;S Vin &amp; Sprit AB </summary>
     [EnumMember(Value = "A55")]
     A55,
     ///<summary> Worker, Coffee Roasters and Spice Factories </summary>
@@ -55,7 +55,7 @@ public enum ForaType
     ///<summary> Worker, Industry Agreement </summary>
     [EnumMember(Value = "A60")]
     A60,
-    ///<summary> Worker, Leather & Sporting Goods </summary>
+    ///<summary> Worker, Leather &amp; Sporting Goods </summary>
     [EnumMember(Value = "A61")]
     A61,
     ///<summary> Worker, Chemical Factories </summary>
