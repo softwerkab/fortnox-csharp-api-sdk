@@ -8,13 +8,12 @@ using RateLimiter;
 
 namespace Fortnox.SDK.Connectors.Base;
 
-public abstract class BaseClient
+internal abstract class BaseClient
 {
     private const int LimitPerSecond = 4;
-    private static readonly Dictionary<string, TimeLimiter> RateLimiters = new Dictionary<string, TimeLimiter>();
+    private static readonly Dictionary<string, TimeLimiter> RateLimiters = new();
 
-    private ErrorHandler ErrorHandler { get; }
-
+    public ErrorHandler ErrorHandler { get; set; }
     public HttpClient HttpClient { get; set; }
 
     public bool UseRateLimiter { get; set; } = true;
@@ -69,14 +68,4 @@ public abstract class BaseClient
             return RateLimiters[accessToken];
         }
     }
-}
-
-public enum AuthType
-{
-    /// <summary> No Auth </summary>
-    None,
-    /// <summary> Auth by non-expirable AccessToken and ClientSecret (old auth workflow)</summary>
-    Static,
-    /// <summary> Auth by expirable AccessToken (new auth workflow) </summary>
-    Standard
 }

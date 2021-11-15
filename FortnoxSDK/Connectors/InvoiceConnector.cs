@@ -5,145 +5,75 @@ using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Fortnox.SDK.Utility;
 
-// ReSharper disable UnusedMember.Global
-
 namespace Fortnox.SDK.Connectors;
 
-/// <remarks/>
 internal class InvoiceConnector : SearchableEntityConnector<Invoice, InvoiceSubset, InvoiceSearch>, IInvoiceConnector
 {
-
-
-    /// <remarks/>
     public InvoiceConnector()
     {
-        Resource = "invoices";
+        Resource = Endpoints.Invoices;
     }
 
-    /// <summary>
-    /// Find a invoice based on id
-    /// </summary>
-    /// <param name="id">Identifier of the invoice to find</param>
-    /// <returns>The found invoice</returns>
     public Invoice Get(long? id)
     {
         return GetAsync(id).GetResult();
     }
 
-    /// <summary>
-    /// Updates a invoice
-    /// </summary>
-    /// <param name="invoice">The invoice to update</param>
-    /// <returns>The updated invoice</returns>
     public Invoice Update(Invoice invoice)
     {
         return UpdateAsync(invoice).GetResult();
     }
 
-    /// <summary>
-    /// Creates a new invoice
-    /// </summary>
-    /// <param name="invoice">The invoice to create</param>
-    /// <returns>The created invoice</returns>
     public Invoice Create(Invoice invoice)
     {
         return CreateAsync(invoice).GetResult();
     }
 
-    /// <summary>
-    /// Gets a list of invoices
-    /// </summary>
-    /// <returns>A list of invoices</returns>
     public EntityCollection<InvoiceSubset> Find(InvoiceSearch searchSettings)
     {
         return FindAsync(searchSettings).GetResult();
     }
 
-    /// <summary>
-    /// Bookkeeps an invoice
-    /// <param name="id"></param>
-    /// <returns></returns>
-    /// </summary>
     public Invoice Bookkeep(long? id)
     {
         return BookkeepAsync(id).GetResult();
     }
 
-    /// <summary>
-    /// Cancels an invoice
-    /// <param name="id"></param>
-    /// <returns></returns>
-    /// </summary>
     public Invoice Cancel(long? id)
     {
         return CancelAsync(id).GetResult();
     }
 
-    /// <summary>
-    /// Creates a credit invoice from the provided invoice. The created credit invoice will be referenced in the property CreditInvoiceReference.
-    /// <param name="id"></param>
-    /// <returns></returns>
-    /// </summary>
     public Invoice CreditInvoice(long? id)
     {
         return CreditInvoiceAsync(id).GetResult();
     }
 
-    /// <summary>
-    /// Sends an e-mail to the customer with an attached PDF document of the invoice. You can use the properties in the EmailInformation to customize the e-mail message on each invoice.
-    /// <param name="id"></param>
-    /// <returns></returns>
-    /// </summary>
     public Invoice Email(long? id)
     {
         return EmailAsync(id).GetResult();
     }
 
-    /// <summary>
-    /// Sends an e-invoice to the customer with an attached PDF document of the invoice. Note that this action also sets the property Sent as true.
-    /// <param name="id"></param>
-    /// <returns></returns>
-    /// </summary>
     public Invoice EInvoice(long? id)
     {
         return EInvoiceAsync(id).GetResult();
     }
 
-    /// <summary>
-    /// This action returns a PDF document with the current template that is used by the specific document. Note that this action also sets the property Sent as true.
-    /// <param name="id"></param>
-    /// <returns></returns>
-    /// </summary>
     public byte[] Print(long? id)
     {
         return PrintAsync(id).GetResult();
     }
 
-    /// <summary>
-    /// This action returns a PDF document with the current reminder template that is used by the specific document. Note that this action also sets the property Sent as true.
-    /// <param name="id"></param>
-    /// <returns></returns>
-    /// </summary>
     public byte[] PrintReminder(long? id)
     {
         return PrintReminderAsync(id).GetResult();
     }
 
-    /// <summary>
-    /// This action is used to set the field Sent as true from an external system without generating a PDF.
-    /// <param name="id"></param>
-    /// <returns></returns>
-    /// </summary>
     public Invoice ExternalPrint(long? id)
     {
         return ExternalPrintAsync(id).GetResult();
     }
 
-    /// <summary>
-    /// This action returns a PDF document with the current template that is used by the specific document. Unliike the action print, this action doesn’t set the property Sent as true.
-    /// <param name="id"></param>
-    /// <returns></returns>
-    /// </summary>
     public byte[] Preview(long? id)
     {
         return PreviewAsync(id).GetResult();
@@ -153,14 +83,17 @@ internal class InvoiceConnector : SearchableEntityConnector<Invoice, InvoiceSubs
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);
     }
+
     public async Task<Invoice> CreateAsync(Invoice invoice)
     {
         return await BaseCreate(invoice).ConfigureAwait(false);
     }
+
     public async Task<Invoice> UpdateAsync(Invoice invoice)
     {
         return await BaseUpdate(invoice, invoice.DocumentNumber.ToString()).ConfigureAwait(false);
     }
+
     public async Task<Invoice> GetAsync(long? id)
     {
         return await BaseGet(id.ToString()).ConfigureAwait(false);

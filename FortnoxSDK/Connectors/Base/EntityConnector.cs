@@ -10,17 +10,15 @@ using Fortnox.SDK.Utility;
 
 namespace Fortnox.SDK.Connectors.Base;
 
-/// <remarks/>
 internal abstract class EntityConnector<TEntity> : BaseConnector where TEntity : class
 {
     protected async Task<T> SendAsync<T>(EntityRequest<T> request)
     {
         if (request.Entity != null)
         {
-
-            var requestJson = request.UseEntityWrapper ?
-                Serializer.Serialize(new EntityWrapper<T>(request.Entity)) :
-                Serializer.Serialize(request.Entity);
+            var requestJson = request.UseEntityWrapper
+                ? Serializer.Serialize(new EntityWrapper<T>(request.Entity))
+                : Serializer.Serialize(request.Entity);
             request.Content = Encoding.UTF8.GetBytes(requestJson);
         }
 

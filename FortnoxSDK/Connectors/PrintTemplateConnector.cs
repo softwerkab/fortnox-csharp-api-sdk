@@ -5,24 +5,15 @@ using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Fortnox.SDK.Utility;
 
-// ReSharper disable UnusedMember.Global
-
 namespace Fortnox.SDK.Connectors;
 
-/// <remarks/>
 internal class PrintTemplateConnector : SearchableEntityConnector<PrintTemplate, PrintTemplate, PrintTemplateSearch>, IPrintTemplateConnector
 {
-
-    /// <remarks/>
     public PrintTemplateConnector()
     {
-        Resource = "printtemplates";
+        Resource = Endpoints.PrintTemplates;
     }
 
-    /// <summary>
-    /// Gets a list of printTemplates
-    /// </summary>
-    /// <returns>A list of printTemplates</returns>
     public EntityCollection<PrintTemplate> Find(PrintTemplateSearch searchSettings)
     {
         return FindAsync(searchSettings).GetResult();

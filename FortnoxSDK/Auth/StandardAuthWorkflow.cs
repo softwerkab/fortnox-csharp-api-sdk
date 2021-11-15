@@ -42,7 +42,7 @@ internal class StandardAuthWorkflow : BaseClient, IStandardAuthWorkflow
 
         request.Content = new FormUrlEncodedContent(parameters);
 
-        var responseData = await SendAsync(request).ConfigureAwait(false); ;
+        var responseData = await SendAsync(request).ConfigureAwait(false);
         var responseJson = Encoding.UTF8.GetString(responseData);
         var tokenInfo = Serializer.Deserialize<TokenInfo>(responseJson);
 

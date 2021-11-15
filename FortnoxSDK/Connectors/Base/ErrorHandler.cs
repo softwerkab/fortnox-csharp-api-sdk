@@ -23,9 +23,9 @@ internal class ErrorHandler
         var content = response.Content.ReadAsStringAsync().GetResult();
         var errorInformation = ParseError(content);
 
-        var exception = errorInformation != null ?
-            new FortnoxApiException($"Request failed: {errorInformation.Message}") :
-            new FortnoxApiException($"Request failed: {response.ReasonPhrase} ({(int)response.StatusCode})");
+        var exception = errorInformation != null
+            ? new FortnoxApiException($"Request failed: {errorInformation.Message}")
+            : new FortnoxApiException($"Request failed: {response.ReasonPhrase} ({(int)response.StatusCode})");
 
         exception.ResponseContent = content;
         exception.StatusCode = response.StatusCode;

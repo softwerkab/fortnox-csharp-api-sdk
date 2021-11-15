@@ -5,19 +5,13 @@ using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Fortnox.SDK.Utility;
 
-// ReSharper disable UnusedMember.Global
-
 namespace Fortnox.SDK.Connectors;
 
-/// <remarks/>
 internal class ContractConnector : SearchableEntityConnector<Contract, ContractSubset, ContractSearch>, IContractConnector
 {
-
-
-    /// <remarks/>
     public ContractConnector()
     {
-        Resource = "contracts";
+        Resource = Endpoints.Contracts;
     }
 
     /// <summary>
@@ -93,14 +87,17 @@ internal class ContractConnector : SearchableEntityConnector<Contract, ContractS
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);
     }
+
     public async Task<Contract> CreateAsync(Contract contract)
     {
         return await BaseCreate(contract).ConfigureAwait(false);
     }
+
     public async Task<Contract> UpdateAsync(Contract contract)
     {
         return await BaseUpdate(contract, contract.DocumentNumber.ToString()).ConfigureAwait(false);
     }
+
     public async Task<Contract> GetAsync(long? id)
     {
         return await BaseGet(id.ToString()).ConfigureAwait(false);

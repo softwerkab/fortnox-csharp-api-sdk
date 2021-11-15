@@ -8,19 +8,13 @@ using Fortnox.SDK.Requests;
 using Fortnox.SDK.Search;
 using Fortnox.SDK.Utility;
 
-// ReSharper disable UnusedMember.Global
-
 namespace Fortnox.SDK.Connectors;
 
-/// <remarks/>
 internal class AccountConnector : SearchableEntityConnector<Account, AccountSubset, AccountSearch>, IAccountConnector
 {
-
-
-    /// <remarks/>
     public AccountConnector()
     {
-        Resource = "accounts";
+        Resource = Endpoints.Accounts;
     }
 
     /// <summary>

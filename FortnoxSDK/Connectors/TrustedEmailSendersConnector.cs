@@ -6,43 +6,25 @@ using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Requests;
 using Fortnox.SDK.Utility;
 
-// ReSharper disable UnusedMember.Global
-
 namespace Fortnox.SDK.Connectors;
 
-/// <remarks/>
 internal class TrustedEmailSendersConnector : EntityConnector<TrustedEmailSender>, ITrustedEmailSendersConnector
 {
-
-    /// <remarks/>
     public TrustedEmailSendersConnector()
     {
-        Resource = "emailsenders/trusted";
+        Resource = Endpoints.TrustedEmailSenders;
     }
 
-    /// <summary>
-    /// Creates a new trustedEmailSenders
-    /// </summary>
-    /// <param name="trustedEmailSenders">The trustedEmailSenders to create</param>
-    /// <returns>The created trustedEmailSenders</returns>
     public TrustedEmailSender Create(TrustedEmailSender trustedEmailSenders)
     {
         return CreateAsync(trustedEmailSenders).GetResult();
     }
 
-    /// <summary>
-    /// Deletes a trustedEmailSenders
-    /// </summary>
-    /// <param name="id">Identifier of the trustedEmailSenders to delete</param>
     public void Delete(long? id)
     {
         DeleteAsync(id).GetResult();
     }
 
-    /// <summary>
-    /// Retrieves all trusted and rejected emails with id.
-    /// </summary>
-    /// <returns>Collection of emails with id </returns>
     public EmailSenders GetAll()
     {
         return GetAllAsync().GetResult();

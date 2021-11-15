@@ -11,52 +11,27 @@ using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Requests;
 using Fortnox.SDK.Utility;
 
-// ReSharper disable UnusedMember.Global
-
 namespace Fortnox.SDK.Connectors;
 
-/// <remarks/>
 internal class ArchiveConnector : EntityConnector<ArchiveFolder>, IArchiveConnector
 {
-
-    /// <remarks/>
     public ArchiveConnector()
     {
-        Resource = "archive";
+        Resource = Endpoints.Archive;
     }
 
     #region SYNC Interface Methods
 
-    /// <summary>
-    /// Downloads the specified file
-    /// </summary>
-    /// <param name="id">Identifier of the file to download</param>
-    /// <param name="idType">Specify type of the provided identifier. Temporary workaround. </param>
-    /// <returns>The found file</returns>
     public byte[] DownloadFile(string id, IdType idType = IdType.Id)
     {
         return DownloadFileAsync(id, idType).GetResult();
     }
 
-    /// <summary>
-    /// Downloads the specified file and saves it to a provided location
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="localPath"></param>
-    /// <param name="idType">Specify type of the provided identifier. Temporary workaround.</param>
-    /// <returns></returns>
     public FileInfo DownloadFile(string id, string localPath, IdType idType = IdType.Id)
     {
         return DownloadFileAsync(id, localPath, idType).GetResult();
     }
 
-    /// <summary>
-    /// Creates a new file
-    /// </summary>
-    /// <param name="name">File name</param>
-    /// <param name="data">File data</param>
-    /// <param name="folderPathOrId">Path or id of the folder where file should be located</param>
-    /// <returns>The created file</returns>
     public ArchiveFile UploadFile(string name, byte[] data, string folderPathOrId = null)
     {
         return UploadFileAsync(name, data, folderPathOrId).GetResult();
@@ -72,50 +47,26 @@ internal class ArchiveConnector : EntityConnector<ArchiveFolder>, IArchiveConnec
         return UploadFileAsync(localPath, folderPathOrId).GetResult();
     }
 
-    /// <summary>
-    /// Deletes a file
-    /// Note: If the specified id belongs to a folder, the folder will be deleted instead!
-    /// </summary>
-    /// <param name="id">Id of the file delete</param>
     public void DeleteFile(string id)
     {
         DeleteFileAsync(id).GetResult();
     }
 
-    /// <summary>
-    /// Retrieves a folder. If no path or id is specified, root folder will be retrieved
-    /// </summary>
-    /// <param name="pathOrId"></param>
-    /// <returns></returns>
     public ArchiveFolder GetFolder(string pathOrId = null)
     {
         return GetFolderAsync(pathOrId).GetResult();
     }
 
-    /// <summary>
-    /// Retrieves the root folder.
-    /// </summary>
-    /// <returns></returns>
     public ArchiveFolder GetRoot()
     {
         return GetRootAsync().GetResult();
     }
 
-    /// <summary>
-    /// Creates a folder
-    /// </summary>
-    /// <param name="folderName"></param>
-    /// <param name="path"></param>
-    /// <returns></returns>
     public ArchiveFolder CreateFolder(string folderName, string path = null)
     {
         return CreateFolderAsync(folderName, path).GetResult();
     }
 
-    /// <summary>
-    /// Deletes a folder
-    /// </summary>
-    /// <param name="pathOrId">Id or path of the folder to delete</param>
     public void DeleteFolder(string pathOrId)
     {
         DeleteFolderAsync(pathOrId).GetResult();

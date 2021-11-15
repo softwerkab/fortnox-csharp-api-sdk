@@ -10,10 +10,9 @@ namespace Fortnox.SDK.Connectors;
 
 internal class SIEConnector : BaseConnector, ISIEConnector
 {
-
     public SIEConnector()
     {
-        Resource = "sie";
+        Resource = Endpoints.SIE;
     }
 
     public byte[] Get(SIEType type, long? finYearID = null, SIEExportOptions exportOptions = null)

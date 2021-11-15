@@ -8,18 +8,13 @@ using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Requests;
 using Fortnox.SDK.Utility;
 
-// ReSharper disable UnusedMember.Global
-
 namespace Fortnox.SDK.Connectors;
 
-/// <remarks/>
 internal class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConnection>, IInvoiceFileConnectionConnector
 {
-
-    /// <remarks/>
     public InvoiceFileConnectionConnector()
     {
-        Resource = "fileattachments/attachments-v1";
+        Resource = Endpoints.InvoiceFileConnections;
     }
 
     public IList<InvoiceFileConnection> GetConnections(long? entityId, EntityType? entityType)
@@ -27,30 +22,16 @@ internal class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConne
         return GetConnectionsAsync(entityId, entityType).GetResult();
     }
 
-    /// <summary>
-    /// Updates a invoiceFileConnection
-    /// </summary>
-    /// <param name="invoiceFileConnection">The invoiceFileConnection to update</param>
-    /// <returns>The updated invoiceFileConnection</returns>
     public InvoiceFileConnection Update(InvoiceFileConnection invoiceFileConnection)
     {
         return UpdateAsync(invoiceFileConnection).GetResult();
     }
 
-    /// <summary>
-    /// Creates a new invoiceFileConnection
-    /// </summary>
-    /// <param name="invoiceFileConnection">The invoiceFileConnection to create</param>
-    /// <returns>The created invoiceFileConnection</returns>
     public InvoiceFileConnection Create(InvoiceFileConnection invoiceFileConnection)
     {
         return CreateAsync(invoiceFileConnection).GetResult();
     }
 
-    /// <summary>
-    /// Deletes a invoiceFileConnection
-    /// </summary>
-    /// <param name="id">Identifier of the invoiceFileConnection to delete</param>
     public void Delete(string id)
     {
         DeleteAsync(id).GetResult();
@@ -68,6 +49,7 @@ internal class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConne
 
         await SendAsync(request).ConfigureAwait(false);
     }
+
     public async Task<InvoiceFileConnection> CreateAsync(InvoiceFileConnection invoiceFileConnection)
     {
         var request = new EntityRequest<List<InvoiceFileConnection>>()
@@ -110,8 +92,8 @@ internal class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConne
             Resource = Resource,
             Parameters = new Dictionary<string, string>
             {
-                {"entityid", entityId?.ToString()},
-                {"entitytype", entityType?.GetStringValue()}
+                { "entityid", entityId?.ToString() },
+                { "entitytype", entityType?.GetStringValue() }
             },
             Method = HttpMethod.Get,
             UseEntityWrapper = false

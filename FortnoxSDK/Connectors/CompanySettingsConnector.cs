@@ -4,24 +4,15 @@ using Fortnox.SDK.Entities;
 using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Utility;
 
-// ReSharper disable UnusedMember.Global
-
 namespace Fortnox.SDK.Connectors;
 
-/// <remarks/>
 internal class CompanySettingsConnector : EntityConnector<CompanySettings>, ICompanySettingsConnector
 {
-
-    /// <remarks/>
     public CompanySettingsConnector()
     {
-        Resource = "settings/company";
+        Resource = Endpoints.CompanySettings;
     }
 
-    /// <summary>
-    /// Retrieves the company settings.
-    /// </summary>
-    /// <returns></returns>
     public CompanySettings Get()
     {
         return GetAsync().GetResult();

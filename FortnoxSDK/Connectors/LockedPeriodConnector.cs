@@ -4,19 +4,13 @@ using Fortnox.SDK.Entities;
 using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Utility;
 
-// ReSharper disable UnusedMember.Global
-
 namespace Fortnox.SDK.Connectors;
 
-/// <remarks/>
 internal class LockedPeriodConnector : EntityConnector<LockedPeriod>, ILockedPeriodConnector
 {
-
-
-    /// <remarks/>
     public LockedPeriodConnector()
     {
-        Resource = "settings/lockedperiod";
+        Resource = Endpoints.LockedPeriods;
     }
 
     public LockedPeriod Get()
