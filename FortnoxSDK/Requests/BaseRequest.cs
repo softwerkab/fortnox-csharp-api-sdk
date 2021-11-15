@@ -23,22 +23,27 @@ internal class BaseRequest
     {
         var index = string.Join("/", Indices.Select(Uri.EscapeDataString));
 
-        var pathSegments = new[]
-        {
-            BaseUrl,
-            Version,
-            Resource,
-            index
-        };
+        var uri = CombineUri(BaseUrl, Version, Resource, index);
+        var query = BuildQuery(Parameters);
 
-        var uri = string.Join("/", pathSegments.Where(s => s != ""));
+        return string.IsNullOrEmpty(query) ? uri : $"{uri}?{query}";
+    }
 
-        if (Parameters != null && Parameters.Any())
-        {
-            var query = string.Join("&", Parameters.Select(p => $"{p.Key}={Uri.EscapeDataString(p.Value)}"));
-            uri += $"/?{query}";
-        }
+    private static string CombineUri(params string[] segments)
+    {
+        segments = segments
+            .Where(s => !string.IsNullOrWhiteSpace(s))
+            .Select(s => s.TrimStart('/').TrimStart('\\'))
+            .Select(s => s.TrimEnd('/').TrimEnd('\\')).ToArray();
 
-        return uri;
+        return string.Join("/", segments);
+    }
+
+    private static string BuildQuery(IDictionary<string, string> parameters)
+    {
+        if (parameters == null || !parameters.Any())
+            return string.Empty;
+
+        return string.Join("&", parameters.Select(p => $"{p.Key}={Uri.EscapeDataString(p.Value)}"));
     }
 }
