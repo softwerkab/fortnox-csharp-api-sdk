@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
-using ComposableAsync;
 using Fortnox.SDK.Authorization;
-using RateLimiter;
 
 namespace Fortnox.SDK.Connectors.Base;
 
 internal abstract class BaseClient
 {
-    private const int LimitPerSecond = 4;
-    private static readonly Dictionary<string, TimeLimiter> RateLimiters = new();
-
     public ErrorHandler ErrorHandler { get; set; }
+    public RateLimiter RateLimier { get; set; }
     public HttpClient HttpClient { get; set; }
 
     public bool UseRateLimiter { get; set; } = true;
@@ -21,6 +15,7 @@ internal abstract class BaseClient
 
     protected BaseClient()
     {
+        RateLimier = new RateLimiter();
         ErrorHandler = new ErrorHandler();
     }
 
@@ -29,9 +24,9 @@ internal abstract class BaseClient
         try
         {
             Authorization?.ApplyTo(request);
-
+            
             if (UseRateLimiter)
-                await Throttle().ConfigureAwait(false);
+                await RateLimier.Trottle(Authorization?.AccessToken).ConfigureAwait(false);
 
             using var response = await HttpClient.SendAsync(request).ConfigureAwait(false);
 
@@ -45,27 +40,6 @@ internal abstract class BaseClient
         {
             ErrorHandler.HandleNoResponse(ex);
             return default;
-        }
-    }
-
-    private async Task Throttle()
-    {
-        if (string.IsNullOrEmpty(Authorization?.AccessToken))
-            return;
-
-        var limiter = SelectRateLimiter(Authorization.AccessToken);
-        await limiter;
-    }
-
-    private static TimeLimiter SelectRateLimiter(string accessToken)
-    {
-        lock (RateLimiters)
-        {
-            //Add ratelimiter for access token if does not exist
-            if (!RateLimiters.ContainsKey(accessToken))
-                RateLimiters.Add(accessToken, TimeLimiter.GetFromMaxCountByInterval(LimitPerSecond, TimeSpan.FromSeconds(1)));
-
-            return RateLimiters[accessToken];
         }
     }
 }
