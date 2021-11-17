@@ -7,7 +7,7 @@ namespace Fortnox.SDK.Entities;
 public class EntityCollection<T>
 {
     [GenericPropertyName]
-    [JsonProperty]
+    [JsonProperty(Required = Required.Always)]
     public IList<T> Entities { get; set; }
 
     [JsonProperty]

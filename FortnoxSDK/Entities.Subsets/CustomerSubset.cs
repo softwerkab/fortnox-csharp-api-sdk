@@ -47,6 +47,6 @@ public class CustomerSubset
     public string ZipCode { get; set; }
 
     /// <remarks/>
-    [JsonProperty(PropertyName = "@url")]
+    [JsonProperty("@url")]
     public Uri Url { get; set; }
 }

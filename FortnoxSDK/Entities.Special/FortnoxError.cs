@@ -10,14 +10,14 @@ namespace Fortnox.SDK.Entities;
 public class ErrorInformation
 {
     /// <remarks/>
-    [JsonProperty(PropertyName = "error")]
+    [JsonProperty("error")]
     public string Error { get; set; }
 
     /// <remarks/>
-    [JsonProperty(PropertyName = "message")]
+    [JsonProperty("message", Required = Required.Always)]
     public string Message { get; set; }
 
     /// <remarks/>
-    [JsonProperty(PropertyName = "code")]
+    [JsonProperty("code")]
     public string Code { get; set; }
 }

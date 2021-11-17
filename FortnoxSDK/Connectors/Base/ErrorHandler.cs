@@ -23,7 +23,7 @@ internal class ErrorHandler
         var content = response.Content.ReadAsStringAsync().GetResult();
         var errorInformation = ParseError(content);
 
-        var exception = errorInformation != null
+        var exception = errorInformation?.Message != null
             ? new FortnoxApiException($"Request failed: {errorInformation.Message}")
             : new FortnoxApiException($"Request failed: {response.ReasonPhrase} ({(int)response.StatusCode})");
 
@@ -44,24 +44,43 @@ internal class ErrorHandler
         try
         {
             var wrapper = Serializer.Deserialize<EntityWrapper<ErrorInformation>>(errorJson);
-            var error = wrapper.Entity;
-
-            if (wrapper.Entity == null) // Failed to parse
-            {
-                // Temp workaround for alternative error occured in new auth workflow
-                var authError = Serializer.Deserialize<AuthError>(errorJson);
-                error = new ErrorInformation()
-                {
-                    Error = authError.Error,
-                    Message = authError.ErrorDescription
-                };
-            }
-
-            return error;
+            return wrapper.Entity;
         }
         catch (Exception)
         {
-            return null;
+            // Continue
         }
+
+        try
+        {
+            // Temp workaround for alternative error occured in new auth workflow
+            var authError = Serializer.Deserialize<AuthError>(errorJson);
+            return new ErrorInformation()
+            {
+                Error = authError.Error,
+                Message = authError.ErrorDescription ?? authError.Error
+            };
+        }
+        catch (Exception)
+        {
+            // Continue
+        }
+
+        try
+        {
+            // Temp workaround for alternative error occured in new auth workflow
+            var simpleError = Serializer.Deserialize<SimpleError>(errorJson);
+            return new ErrorInformation()
+            {
+                Error = simpleError.Message,
+                Message = simpleError.Message
+            };
+        }
+        catch (Exception)
+        {
+            // Continue
+        }
+
+        return null; // Failed to parse error 
     }
 }

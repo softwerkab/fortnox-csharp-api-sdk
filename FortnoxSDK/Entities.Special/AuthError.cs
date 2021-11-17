@@ -4,7 +4,7 @@ namespace Fortnox.SDK.Entities;
 
 public class AuthError
 {
-    [JsonProperty("error")]
+    [JsonProperty("error", Required = Required.Always)]
     public string Error { get; set; }
 
     [JsonProperty("error_description")]
