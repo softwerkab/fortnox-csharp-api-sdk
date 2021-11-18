@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IdentityModel.Tokens.Jwt;
+using Fortnox.SDK.Authorization;
 
 namespace Fortnox.SDK.Utility;
 
@@ -23,5 +25,20 @@ public static class Utils
         }
 
         return value.ToString().ToLower();
+    }
+
+    public static JwtSecurityToken DecodeJwt(string jwtToken)
+    {
+        try
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jsonToken = handler.ReadToken(jwtToken);
+
+            return jsonToken as JwtSecurityToken;
+        }
+        catch(Exception ex)
+        {
+            throw new ArgumentException($"Failed to parse the token.", ex);
+        }
     }
 }
