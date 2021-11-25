@@ -41,6 +41,11 @@ internal class PriceConnector : SearchableEntityConnector<Price, PriceSubset, Pr
         return FindAsync(priceListId, articleId, searchSettings).GetResult();
     }
 
+    public EntityCollection<PriceSubset> Find(PriceSearch searchSettings)
+    {
+        return FindAsync(searchSettings).GetResult();
+    }
+
     public async Task<EntityCollection<PriceSubset>> FindAsync(string priceListId, string articleId, PriceSearch searchSettings)
     {
         var request = new SearchRequest<PriceSubset>()
@@ -51,6 +56,11 @@ internal class PriceConnector : SearchableEntityConnector<Price, PriceSubset, Pr
         };
 
         return await SendAsync(request).ConfigureAwait(false);
+    }
+
+    public Task<EntityCollection<PriceSubset>> FindAsync(PriceSearch searchSettings)
+    {
+        return BaseFind(searchSettings);
     }
 
     public async Task DeleteAsync(string priceListCode, string articleNumber, decimal? fromQuantity = null)
