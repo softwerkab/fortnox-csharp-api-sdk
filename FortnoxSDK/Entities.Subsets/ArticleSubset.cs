@@ -58,6 +58,10 @@ public class ArticleSubset
     [JsonProperty]
     public string Unit { get; set; }
 
+    ///<summary> VAT percent, this is predefined by the VAT for the sales account. </summary>
+    [JsonProperty]
+    public decimal? VAT { get; set; }
+
     ///<summary> If the article is a webshop article. </summary>
     [JsonProperty]
     public bool? WebshopArticle { get; set; }
