@@ -18,6 +18,7 @@ public interface IStandardAuthWorkflow
     /// <param name="clientSecret">Client secret given to you by Fortnox.</param>
     /// <param name="redirectUri">Redirect URI configured at Fortnox.</param>
     /// <returns>OAuth 2 token info.</returns>
+    /// <exception cref="FortnoxApiException">If the Fortnox API returns an error.</exception>
     /// <remarks>
     /// <para>The authorization code is valid for 10 minutes. It can only be used once.</para>
     /// <para>The token is valid for 10 minutes. It can be re-used several times.</para>
@@ -33,6 +34,7 @@ public interface IStandardAuthWorkflow
     /// <param name="clientSecret">Client secret given to you by Fortnox.</param>
     /// <param name="redirectUri">Redirect URI configured at Fortnox.</param>
     /// <returns>OAuth 2 token information.</returns>
+    /// <exception cref="FortnoxApiException">If the Fortnox API returns an error.</exception>
     /// <remarks>
     /// <para>The authorization code is valid for 10 minutes. It can only be used once.</para>
     /// <para>The token is valid for 10 minutes. It can be re-used several times.</para>
