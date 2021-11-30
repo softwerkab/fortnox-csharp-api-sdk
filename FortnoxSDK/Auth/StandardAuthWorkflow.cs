@@ -89,14 +89,10 @@ internal class StandardAuthWorkflow : BaseClient, IStandardAuthWorkflow
     public Uri BuildAuthUri(string clientId, IEnumerable<Scope> scopes, string state, string redirectUri = null)
     {
         if (string.IsNullOrEmpty(clientId))
-        {
             throw new ArgumentException("Argument is null or empty.", nameof(clientId));
-        }
 
         if (string.IsNullOrEmpty(state))
-        {
             throw new ArgumentException("Argument is null or empty.", nameof(state));
-        }
 
         var parameters = new Dictionary<string, string>();
         parameters.Add("client_id", clientId);
