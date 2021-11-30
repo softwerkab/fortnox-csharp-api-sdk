@@ -7,7 +7,7 @@ namespace Fortnox.SDK.Exceptions;
 /// <summary>
 /// Represents error response sent by the server (Fortnox API).
 /// Typically happens if request contain inconsistent data or requested resource does not exist.
-/// Error message is typically in swedish.
+/// Error message is typically in Swedish.
 /// </summary>
 public class FortnoxApiException : Exception //RequestException
 {
