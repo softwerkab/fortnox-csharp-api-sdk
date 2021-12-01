@@ -7,12 +7,18 @@ public class TokenInfo
     /// <summary>
     /// The access token issued by the authorization server.
     /// </summary>
+    /// <remarks>
+    /// The access token contains the claims "userId" and "tenantId".
+    /// </remarks>
     [JsonProperty("access_token")]
     public string AccessToken { get; set; }
 
     /// <summary>
     /// The refresh token, which can be used to obtain new access tokens using the same authorization grant.
     /// </summary>
+    /// <remarks>
+    /// The refresh token is 40 characters long.
+    /// </remarks>
     [JsonProperty("refresh_token")]
     public string RefreshToken { get; set; }
 
