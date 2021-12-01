@@ -29,6 +29,15 @@ internal class StandardAuthWorkflow : BaseClient, IStandardAuthWorkflow
 
     public async Task<TokenInfo> GetTokenAsync(string authCode, string clientId, string clientSecret, string redirectUri = null)
     {
+        if (string.IsNullOrEmpty(authCode))
+            throw new ArgumentException("Argument is null or empty.", nameof(authCode));
+
+        if (string.IsNullOrEmpty(clientId))
+            throw new ArgumentException("Argument is null or empty.", nameof(clientId));
+
+        if (string.IsNullOrEmpty(clientSecret))
+            throw new ArgumentException("Argument is null or empty.", nameof(clientSecret));
+
         var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}"));
 
         var request = new HttpRequestMessage(HttpMethod.Post, AuthTokenUri);
@@ -56,6 +65,15 @@ internal class StandardAuthWorkflow : BaseClient, IStandardAuthWorkflow
 
     public async Task<TokenInfo> RefreshTokenAsync(string refreshToken, string clientId, string clientSecret)
     {
+        if (string.IsNullOrEmpty(refreshToken))
+            throw new ArgumentException("Argument is null or empty.", nameof(refreshToken));
+
+        if (string.IsNullOrEmpty(clientId))
+            throw new ArgumentException("Argument is null or empty.", nameof(clientId));
+
+        if (string.IsNullOrEmpty(clientSecret))
+            throw new ArgumentException("Argument is null or empty.", nameof(clientSecret));
+
         var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}"));
 
         var request = new HttpRequestMessage(HttpMethod.Post, AuthTokenUri);
