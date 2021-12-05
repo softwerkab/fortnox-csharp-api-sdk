@@ -86,7 +86,6 @@ public interface IStandardAuthWorkflow
 
 /// <summary>
 /// Represents methods of a Fortnox legacy auth workflow.
-/// This is deprecated and will be removed.
 /// </summary>
 [Obsolete("2021-12-09: End-of-life for the static authorization. Use StandardAuth.")]
 public interface IStaticTokenAuthWorkflow
