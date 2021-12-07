@@ -6,7 +6,9 @@ using Fortnox.SDK.Search;
 // ReSharper disable UnusedMember.Global
 namespace Fortnox.SDK.Interfaces;
 
-/// <remarks/>
+/// <remarks>
+/// See https://apps.fortnox.se/apidocs#tag/ArticlesResource
+/// </remarks>
 public interface IArticleConnector : IEntityConnector
 {
     [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]

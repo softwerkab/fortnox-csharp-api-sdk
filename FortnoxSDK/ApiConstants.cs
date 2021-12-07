@@ -35,7 +35,7 @@ public class ApiConstants
     /// <summary>
     /// Unlimited page size. This setting is not supported by the server API.
     /// When used, connector will gather all available pages, and return it as a single large page.
-    /// Note that multiple HTTP requests may be send under the hood.
+    /// Note that multiple HTTP requests may be sent under the hood.
     /// </summary>
     public const int Unlimited = -1;
 }

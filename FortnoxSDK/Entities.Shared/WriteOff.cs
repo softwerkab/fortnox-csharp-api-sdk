@@ -7,33 +7,33 @@ namespace Fortnox.SDK.Entities;
 public class WriteOff
 {
 
-    ///<summary> Amount of the writeoff </summary>
+    ///<summary>Amount of the write off.</summary>
     [JsonProperty]
     public decimal? Amount { get; set; }
 
-    ///<summary> Account number of the write off </summary>
+    ///<summary>Account number of the write off.</summary>
     [JsonProperty]
     public long? AccountNumber { get; set; }
 
-    ///<summary> Code of the cost center </summary>
+    ///<summary>Code of the cost center.</summary>
     [JsonProperty]
     public string CostCenter { get; set; }
 
-    ///<summary> Currency of the payment </summary>
+    ///<summary>Currency of the payment.</summary>
     [ReadOnly]
     [JsonProperty]
     public string Currency { get; private set; }
 
-    ///<summary> Description of the write off </summary>
+    ///<summary>Description of the write off.</summary>
     [ReadOnly]
     [JsonProperty]
     public string Description { get; private set; }
 
-    ///<summary> The transaction information </summary>
+    ///<summary>The transaction information.</summary>
     [JsonProperty]
     public string TransactionInformation { get; set; }
 
-    ///<summary> Project number of the write off </summary>
+    ///<summary>Project number of the write off.</summary>
     [JsonProperty]
     public string Project { get; set; }
 }

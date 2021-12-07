@@ -13,13 +13,10 @@ public class EntityCollection<T>
     [JsonProperty]
     internal MetaInformation MetaInformation { get; set; }
 
-    /// <remarks/>
     public int TotalResources => MetaInformation.TotalResources;
 
-    /// <remarks/>
     public int TotalPages => MetaInformation.TotalPages;
 
-    /// <remarks/>
     public int CurrentPage => MetaInformation.CurrentPage;
 }
 

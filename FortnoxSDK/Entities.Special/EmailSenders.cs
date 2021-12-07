@@ -9,6 +9,7 @@ public class EmailSenders
 {
     [JsonProperty]
     public IList<TrustedEmailSender> TrustedSenders { get; set; }
+
     [JsonProperty]
     public IList<TrustedEmailSender> RejectedSenders { get; set; }
 }

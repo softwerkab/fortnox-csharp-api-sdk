@@ -2,6 +2,9 @@
 
 internal static class Endpoints
 {
+    /// <summary>
+    /// Fortnox API version.
+    /// </summary>
     public const string Version = "3";
 
     public const string AbsenceTransactions = $"/{Version}/absencetransactions";

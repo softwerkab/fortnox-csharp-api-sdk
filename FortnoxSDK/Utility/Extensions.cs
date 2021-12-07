@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Fortnox.SDK.Utility;
 
-/// <remarks/>
 public static class Extensions
 {
     internal static bool HasAttribute<T>(this MemberInfo property) where T : Attribute

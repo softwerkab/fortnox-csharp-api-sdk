@@ -7,34 +7,49 @@ public enum Action
 {
     [EnumMember(Value = "print")]
     Print,
+
     [EnumMember(Value = "preview")]
     Preview,
+
     [EnumMember(Value = "eprint")]
     EPrint,
+
     [EnumMember(Value = "externalprint")]
     ExternalPrint,
+
     [EnumMember(Value = "email")]
     Email,
+
     [EnumMember(Value = "finish")]
     Finish,
+
     [EnumMember(Value = "createinvoice")]
     CreateInvoice,
+
     [EnumMember(Value = "increaseinvoicecount")]
     IncreaseInvoiceCount,
+
     [EnumMember(Value = "bookkeep")]
     Bookkeep,
+
     [EnumMember(Value = "cancel")]
     Cancel,
+
     [EnumMember(Value = "credit")]
     Credit,
+
     [EnumMember(Value = "printreminder")]
     PrintReminder,
+
     [EnumMember(Value = "approvalbookkeep")]
     ApprovalBookkeep,
+
     [EnumMember(Value = "approvalpayment")]
     ApprovalPayment,
+
     [EnumMember(Value = "einvoice")]
     EInvoice,
+
     [EnumMember(Value = "createorder")]
     CreateOrder
 }
