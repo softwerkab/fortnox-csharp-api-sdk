@@ -56,14 +56,14 @@ internal class JsonEntitySerializer : ISerializer
             if (hasGenericName)
             {
                 var propertyType = ((PropertyInfo)member).PropertyType;
-                if (propertyType.GetInterfaces().Contains(typeof(IEnumerable))) //is collection
+                if (propertyType.GetInterfaces().Contains(typeof(IEnumerable))) // is collection
                 {
                     var entityType = propertyType.GetGenericArguments()[0];
                     var entityAtt = entityType.GetAttribute<EntityAttribute>();
                     if (entityAtt?.SingularName != null)
                         property.PropertyName = entityAtt.PluralName;
                 }
-                else //single 
+                else // single 
                 {
                     var entityType = propertyType;
 
@@ -80,7 +80,7 @@ internal class JsonEntitySerializer : ISerializer
         {
             var value = member.GetValue(obj);
             var json = JsonConvert.SerializeObject(value, settings);
-            return json.Equals("{}"); //empty object
+            return json.Equals("{}"); // empty object
         }
     }
 }

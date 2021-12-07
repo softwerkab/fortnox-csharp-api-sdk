@@ -12,24 +12,25 @@ namespace Fortnox.SDK;
 public class FortnoxClient
 {
     /// <summary>
-    /// Default HttpClient instance
+    /// Default HttpClient instance.
     /// </summary>
     internal static readonly HttpClient HttpClientSharedInstance = new HttpClient();
 
     /// <summary>
-    /// Http client used under-the-hood for all request
+    /// Http client used under-the-hood for all requests.
     /// </summary>
     public HttpClient HttpClient { get; set; } = HttpClientSharedInstance;
 
     /// <summary>
-    /// Authorization (credentials) for accessing Fortnox API
+    /// Authorization (credentials) for accessing the Fortnox API.
     /// </summary>
     public FortnoxAuthorization Authorization { get; set; }
 
     /// <summary>
-    /// RateLimiter throttles thread for each request, which prevents connection failure due to server side rate limit
+    /// RateLimiter throttles thread for each request, which prevents connection failure due to server-side rate limit
     /// If set to false, TooManyRequest error can occur.
     /// </summary>
+    /// <value>Defaults to <c>true</c>.</value>
     public bool UseRateLimiter { get; set; } = true;
 
     public FortnoxClient()
@@ -51,7 +52,7 @@ public class FortnoxClient
 
     private TConnector Get<TConnector>() where TConnector : BaseConnector, new()
     {
-        return new TConnector()
+        return new TConnector
         {
             Authorization = Authorization,
             HttpClient = HttpClient,

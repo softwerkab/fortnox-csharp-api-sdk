@@ -3,7 +3,7 @@
 namespace Fortnox.SDK.Authorization;
 
 /// <summary>
-/// Represents authorization/credentials for accessing Fortnox API
+/// Represents authorization/credentials for accessing the Fortnox API.
 /// </summary>
 public abstract class FortnoxAuthorization
 {

@@ -8,17 +8,20 @@ public static class Utils
 {
     internal static string GetStringValue(object value, Type type)
     {
-        if (value == null) return null;
+        if (value == null)
+            return null;
 
-        type = Nullable.GetUnderlyingType(type) ?? type; //unwrap nullable type
+        type = Nullable.GetUnderlyingType(type) ?? type; // Unwrap nullable type
 
         if (type == typeof(string))
             return value.ToString();
+
         if (type.IsEnum)
             return ((Enum)value).GetStringValue();
+
         if (type == typeof(DateTime))
         {
-            if (((DateTime)value).Date == (DateTime)value) //Date without hours/minutes/seconds..
+            if (((DateTime)value).Date == (DateTime)value) // Date without hours/minutes/seconds..
                 return ((DateTime)value).ToString(ApiConstants.DateFormat);
 
             return ((DateTime)value).ToString(ApiConstants.DateAndTimeFormat);
@@ -36,7 +39,7 @@ public static class Utils
 
             return jsonToken as JwtSecurityToken;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw new ArgumentException($"Failed to parse the token.", ex);
         }

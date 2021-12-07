@@ -6,6 +6,7 @@ public enum DiscountType
 {
     [EnumMember(Value = "AMOUNT")]
     Amount,
+
     [EnumMember(Value = "PERCENT")]
     Percent,
 }

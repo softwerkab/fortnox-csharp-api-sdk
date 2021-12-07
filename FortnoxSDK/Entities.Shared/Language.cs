@@ -6,6 +6,7 @@ public enum Language
 {
     [EnumMember(Value = "SV")]
     Swedish,
+
     [EnumMember(Value = "EN")]
     English,
 }

@@ -9,12 +9,12 @@ namespace Fortnox.SDK;
 public class FortnoxAuthClient
 {
     /// <summary>
-    /// Default HttpClient instance
+    /// Default HttpClient instance.
     /// </summary>
     internal static readonly HttpClient HttpClientSharedInstance = new HttpClient();
 
     /// <summary>
-    /// Http client used under-the-hood for all request
+    /// Http client used under-the-hood for all request.
     /// </summary>
     public HttpClient HttpClient { get; set; } = HttpClientSharedInstance;
 
@@ -27,6 +27,6 @@ public class FortnoxAuthClient
         HttpClient = httpClient;
     }
 
-    public IStaticTokenAuthWorkflow StaticTokenAuthWorkflow => new StaticTokenAuthWorkflow() { HttpClient = HttpClient };
-    public IStandardAuthWorkflow StandardAuthWorkflow => new StandardAuthWorkflow() { HttpClient = HttpClient };
+    public IStaticTokenAuthWorkflow StaticTokenAuthWorkflow => new StaticTokenAuthWorkflow { HttpClient = HttpClient };
+    public IStandardAuthWorkflow StandardAuthWorkflow => new StandardAuthWorkflow { HttpClient = HttpClient };
 }

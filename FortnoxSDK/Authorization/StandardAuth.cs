@@ -4,7 +4,7 @@ using System.Net.Http;
 namespace Fortnox.SDK.Authorization;
 
 /// <summary>
-/// Handles authorization by standard JWT token obtained by OAuth2 workflow.
+/// Handles authorization by standard JWT token obtained by OAuth 2 workflow.
 /// </summary>
 public class StandardAuth : FortnoxAuthorization
 {

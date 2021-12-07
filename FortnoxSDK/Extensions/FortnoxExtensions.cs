@@ -7,12 +7,12 @@ namespace Fortnox.SDK.Extensions;
 public static class FortnoxExtensions
 {
     /// <summary>
-    /// Check if the authorization has expired or is about to expire
+    /// Check if the authorization has expired or is about to expire.
     /// </summary>
-    /// <param name="authorization">Authorization with token</param>
-    /// <param name="reserve">Minimum time reserve required for the authorization to be still considered valid.</param>
-    /// <returns></returns>
-    /// <exception cref="NotImplementedException"> thrown in case of custom (unknown) auhtorization type</exception>
+    /// <param name="authorization">Authorization with token.</param>
+    /// <param name="reserve">Minimum time reserve required for the authorization to still be considered valid.</param>
+    /// <returns><c>true</c> if valid, else <c>false</c>.</returns>
+    /// <exception cref="NotImplementedException">Thrown in case of custom (unknown) authorization type.</exception>
     public static bool IsExpired(this FortnoxAuthorization authorization, TimeSpan reserve = default)
     {
         switch (authorization)
@@ -25,7 +25,7 @@ public static class FortnoxExtensions
                 return expTimeUtc - reserve < TimeZoneInfo.ConvertTimeToUtc(FortnoxServerInfo.ServerTime);
             }
             default:
-                throw new NotImplementedException("Unknown authorization type");
+                throw new NotImplementedException("Unknown authorization type.");
         }
     }
 }
