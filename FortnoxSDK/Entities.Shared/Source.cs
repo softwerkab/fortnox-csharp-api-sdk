@@ -17,4 +17,6 @@ public enum Source
 
     [EnumMember(Value = "file")]
     File,
+    [EnumMember(Value = "finance")]
+    Finance
 }
