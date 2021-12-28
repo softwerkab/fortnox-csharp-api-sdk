@@ -58,6 +58,8 @@ public enum Scope
     Price,
     [EnumMember(Value = "print")]
     Print,
+    [EnumMember(Value = "profile")]
+    Profile,
     [EnumMember(Value = "project")]
     Project,
     [EnumMember(Value = "salary")]

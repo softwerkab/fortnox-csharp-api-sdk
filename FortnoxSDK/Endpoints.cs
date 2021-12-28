@@ -73,4 +73,6 @@ internal static class Endpoints
     public const string WayOfDelivery = $"/{Version}/wayofdeliveries";
 
     public const string EmailSenders = $"/{Version}/emailsenders";
+
+    public const string Profile = $"/{Version}/me";
 }

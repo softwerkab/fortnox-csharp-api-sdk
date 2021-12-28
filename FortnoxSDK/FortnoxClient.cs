@@ -96,6 +96,7 @@ public class FortnoxClient
     public IPriceConnector PriceConnector => Get<PriceConnector>();
     public IPriceListConnector PriceListConnector => Get<PriceListConnector>();
     public IPrintTemplateConnector PrintTemplateConnector => Get<PrintTemplateConnector>();
+    public IProfileConnector ProfileConnector => Get<ProfileConnector>();
     public IProjectConnector ProjectConnector => Get<ProjectConnector>();
     public ISalaryTransactionConnector SalaryTransactionConnector => Get<SalaryTransactionConnector>();
     public IScheduleTimesConnector ScheduleTimesConnector => Get<ScheduleTimesConnector>();
