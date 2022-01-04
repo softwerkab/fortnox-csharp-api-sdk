@@ -11,8 +11,11 @@ For more information about the API, please visit the official documentation at <
 * Start coding
 
 ```csharp
-var authorization = new StaticTokenAuth("MyAccessToken", "MyClientSecret");
-var fortnoxClient = new FortnoxClient(authorization);
+var fortnoxAuthClient = new FortnoxAuthClient();
+var authWorkflow = fortnoxAuthClient.StandardAuthWorkflow;
+var tokenInfo = await authWorkflow.RefreshTokenAsync("your_refresh_token", "your_client_id", "your_client_secret");
+var authorization = new StandardAuth(tokenInfo.AccessToken);
+var client = new FortnoxClient(authorization);
 
 var customer = new Customer()
 {
@@ -20,7 +23,7 @@ var customer = new Customer()
     Name = "Stefan Andersson"
 };
 
-customer = await fortnoxClient.CustomerConnector.CreateAsync(customer);
+customer = await client.CustomerConnector.CreateAsync(customer);
 ```
 
 ## Get help
