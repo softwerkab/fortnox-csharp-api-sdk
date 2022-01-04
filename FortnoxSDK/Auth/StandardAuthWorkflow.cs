@@ -109,6 +109,12 @@ internal class StandardAuthWorkflow : BaseClient, IStandardAuthWorkflow
         if (string.IsNullOrEmpty(clientId))
             throw new ArgumentException("Argument is null or empty.", nameof(clientId));
 
+        if (scopes == null)
+            throw new ArgumentNullException(nameof(scopes), "Argument is null.");
+
+        if (!scopes.Any())
+            throw new ArgumentException("Collection is empty. No scopes specified.", nameof(scopes));
+
         if (string.IsNullOrEmpty(state))
             throw new ArgumentException("Argument is null or empty.", nameof(state));
 
