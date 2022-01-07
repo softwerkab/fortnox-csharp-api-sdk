@@ -8,23 +8,7 @@ For more information about the API, please visit the official documentation at <
 ## Get started
 * Register as a <a href="https://developer.fortnox.se/" target="_blank">Fortnox developer</a>
 * Install the NuGet package [Fortnox.NET.SDK](https://www.nuget.org/packages/Fortnox.NET.SDK/)
-* Start coding
-
-```csharp
-var fortnoxAuthClient = new FortnoxAuthClient();
-var authWorkflow = fortnoxAuthClient.StandardAuthWorkflow;
-var tokenInfo = await authWorkflow.RefreshTokenAsync("your_refresh_token", "your_client_id", "your_client_secret");
-var authorization = new StandardAuth(tokenInfo.AccessToken);
-var client = new FortnoxClient(authorization);
-
-var customer = new Customer()
-{
-    CustomerNumber = "1",
-    Name = "Stefan Andersson"
-};
-
-customer = await client.CustomerConnector.CreateAsync(customer);
-```
+* Start coding, for examples see the [wiki](https://github.com/FortnoxAB/csharp-api-sdk/wiki)
 
 ## Get help
 * For help regarding this package and more code examples visit our <a href="https://github.com/FortnoxAB/csharp-api-sdk/wiki">wiki</a>.
