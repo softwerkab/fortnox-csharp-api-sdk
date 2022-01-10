@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Fortnox.SDK.Exceptions;
 
 namespace Fortnox.SDK.Auth;
 
@@ -82,6 +83,24 @@ public interface IStandardAuthWorkflow
     /// <param name="redirectUri">URI to redirect back to from Fortnox.</param>
     /// <returns>A URI.</returns>
     Uri BuildAuthUri(string clientId, IEnumerable<Scope> scopes, string state, string redirectUri = null);
+
+    /// <summary>
+    /// Use this function to revoke a refresh token
+    /// </summary>
+    /// <param name="refreshToken">OAuth 2 refresh token to be revoked. </param>
+    /// <param name="clientId">Client id given to you by Fortnox.</param>
+    /// <param name="clientSecret">Client secret given to you by Fortnox.</param>
+    /// <returns>Success of the revocation</returns>
+    /// <exception cref="FortnoxApiException">If the Fortnox API returns an error.</exception>
+    Task<bool> RevokeRefreshTokenAsync(string refreshToken, string clientId, string clientSecret);
+
+    /// <summary>
+    /// Use this function to revoke a non-expirable token issued by the legacy authentication workflow.
+    /// </summary>
+    /// <param name="accessToken">GUID-formatted token to be revoked. </param>
+    /// <returns>Success of the revocation</returns>
+    /// <exception cref="FortnoxApiException">If the Fortnox API returns an error.</exception>
+    Task<bool> RevokeLegacyTokenAsync(string accessToken);
 }
 
 /// <summary>

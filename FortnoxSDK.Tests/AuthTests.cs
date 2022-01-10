@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Auth;
@@ -90,5 +91,31 @@ public class AuthTests
         var isExpired = auth.IsExpired();
 
         Assert.AreEqual(true, isExpired);
+    }
+
+    [TestMethod]
+    public async Task Revoke_RefreshToken()
+    {
+        var authClient = new FortnoxAuthClient();
+        var authWorkflow = authClient.StandardAuthWorkflow;
+
+        var refreshToken = TestUtils.RandomString(40);
+        var clientId = "pTFDdCGfhv9a";
+        var clientSecret = "xcvtLzVjVs";
+
+        var success = await authWorkflow.RevokeRefreshTokenAsync(refreshToken, clientId, clientSecret);
+        Assert.IsTrue(success);
+    }
+
+    [TestMethod]
+    public async Task Revoke_LegacyToken()
+    {
+        var authClient = new FortnoxAuthClient();
+        var authWorkflow = authClient.StandardAuthWorkflow;
+
+        var accessToken = Guid.NewGuid().ToString();
+
+        var success = await authWorkflow.RevokeLegacyTokenAsync(accessToken);
+        Assert.IsTrue(success);
     }
 }
