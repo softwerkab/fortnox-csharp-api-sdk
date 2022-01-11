@@ -11,17 +11,6 @@ namespace Fortnox.SDK.Interfaces;
 /// </remarks>
 public interface ICustomerConnector : IEntityConnector
 {
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    Customer Update(Customer customer);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    Customer Create(Customer customer);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    Customer Get(string id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    void Delete(string id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    EntityCollection<CustomerSubset> Find(CustomerSearch searchSettings);
-
     Task<Customer> UpdateAsync(Customer customer);
     Task<Customer> CreateAsync(Customer customer);
     Task<Customer> GetAsync(string id);

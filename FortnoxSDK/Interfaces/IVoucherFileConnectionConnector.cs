@@ -9,15 +9,6 @@ namespace Fortnox.SDK.Interfaces;
 /// <remarks/>
 public interface IVoucherFileConnectionConnector : IEntityConnector
 {
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    VoucherFileConnection Create(VoucherFileConnection voucherFileConnection, long? financialYearId = null);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    VoucherFileConnection Get(string id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    void Delete(string id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    EntityCollection<VoucherFileConnection> Find(VoucherFileConnectionSearch searchSettings);
-
     Task<VoucherFileConnection> CreateAsync(VoucherFileConnection voucherFileConnection, long? financialYearId = null);
     Task<VoucherFileConnection> GetAsync(string id);
     Task DeleteAsync(string id);

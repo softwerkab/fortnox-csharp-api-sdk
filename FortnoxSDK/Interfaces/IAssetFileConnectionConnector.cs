@@ -8,16 +8,7 @@ namespace Fortnox.SDK.Interfaces;
 
 /// <remarks/>
 public interface IAssetFileConnectionConnector : IEntityConnector
-{
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    AssetFileConnection Create(AssetFileConnection assetFileConnection);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    AssetFileConnection Get(string id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    void Delete(string id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    EntityCollection<AssetFileConnection> Find(AssetFileConnectionSearch searchSettings);
-
+{ 
     Task<AssetFileConnection> CreateAsync(AssetFileConnection assetFileConnection);
     Task<AssetFileConnection> GetAsync(string id);
     Task DeleteAsync(string id);

@@ -9,17 +9,6 @@ namespace Fortnox.SDK.Interfaces;
 /// <remarks/>
 public interface ITermsOfDeliveryConnector : IEntityConnector
 {
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    TermsOfDelivery Update(TermsOfDelivery termsOfDelivery);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    TermsOfDelivery Create(TermsOfDelivery termsOfDelivery);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    TermsOfDelivery Get(string id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    void Delete(string id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    EntityCollection<TermsOfDelivery> Find(TermsOfDeliverySearch searchSettings);
-
     Task<TermsOfDelivery> UpdateAsync(TermsOfDelivery termsOfDelivery);
     Task<TermsOfDelivery> CreateAsync(TermsOfDelivery termsOfDelivery);
     Task<TermsOfDelivery> GetAsync(string id);

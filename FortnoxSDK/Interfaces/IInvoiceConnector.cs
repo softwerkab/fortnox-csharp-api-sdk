@@ -9,33 +9,6 @@ namespace Fortnox.SDK.Interfaces;
 /// <remarks/>
 public interface IInvoiceConnector : IEntityConnector
 {
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    Invoice Update(Invoice invoice);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    Invoice Create(Invoice invoice);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    Invoice Get(long? id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    EntityCollection<InvoiceSubset> Find(InvoiceSearch searchSettings);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    Invoice Bookkeep(long? id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    Invoice Cancel(long? id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    Invoice CreditInvoice(long? id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    Invoice Email(long? id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    Invoice EInvoice(long? id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    byte[] Print(long? id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    byte[] PrintReminder(long? id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    Invoice ExternalPrint(long? id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    byte[] Preview(long? id);
-
     Task<Invoice> UpdateAsync(Invoice invoice);
     Task<Invoice> CreateAsync(Invoice invoice);
     Task<Invoice> GetAsync(long? id);

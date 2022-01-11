@@ -8,8 +8,5 @@ namespace Fortnox.SDK.Interfaces;
 /// <remarks/>
 public interface ILockedPeriodConnector : IEntityConnector
 {
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    LockedPeriod Get();
-
     Task<LockedPeriod> GetAsync();
 }

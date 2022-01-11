@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
@@ -8,25 +7,6 @@ namespace Fortnox.SDK.Interfaces;
 
 public interface IArchiveConnector : IEntityConnector
 {
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    byte[] DownloadFile(string id, IdType idType = IdType.Id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    FileInfo DownloadFile(string id, string localPath, IdType idType = IdType.Id);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    ArchiveFile UploadFile(string name, byte[] data, string folderPathOrId = null);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    ArchiveFile UploadFile(string name, Stream stream, string folderPathOrId = null);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    ArchiveFile UploadFile(string localPath, string folderPathOrId = null);
-    [Obsolete(ApiConstants.ObsoleteSyncMethodWarning)]
-    void DeleteFile(string id);
-
-    ArchiveFolder GetFolder(string pathOrId = null);
-    ArchiveFolder GetRoot();
-    ArchiveFolder CreateFolder(string folderName, string path = null);
-    void DeleteFolder(string pathOrId);
-
-
     Task<byte[]> DownloadFileAsync(string id, IdType idType = IdType.Id);
     Task<FileInfo> DownloadFileAsync(string id, string localPath, IdType idType = IdType.Id);
     Task<ArchiveFile> UploadFileAsync(string name, byte[] data, string folderPathOrId = null);
