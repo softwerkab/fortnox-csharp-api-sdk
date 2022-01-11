@@ -66,7 +66,7 @@ public class ConnectionTests
     }
 
     [TestMethod]
-    public async Task TestConnection_MultipleCredentials_Set()
+    public void TestConnection_MultipleCredentials_Set()
     {
         var auth1 = new StaticTokenAuth("AT1", "CS1");
         var fortnoxClient1 = new FortnoxClient(auth1);
@@ -82,7 +82,7 @@ public class ConnectionTests
     }
 
     [TestMethod]
-    public async Task TestConnection_Config_Set()
+    public void TestConnection_Config_Set()
     {
         var auth = new StaticTokenAuth("AccToken", "Secret");
         var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(10) };

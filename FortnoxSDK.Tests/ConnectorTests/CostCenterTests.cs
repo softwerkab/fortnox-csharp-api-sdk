@@ -55,8 +55,8 @@ public class CostCenterTests
 
         await connector.DeleteAsync(createdCostCenter.Code);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdCostCenter.Code),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdCostCenter.Code),
             "Entity still exists after Delete!");
 
         #endregion DELETE

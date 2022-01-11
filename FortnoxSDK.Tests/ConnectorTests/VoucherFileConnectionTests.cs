@@ -64,8 +64,8 @@ public class VoucherFileConnectionTests
 
         await connector.DeleteAsync(createdVoucherFileConnection.FileId);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdVoucherFileConnection.FileId),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdVoucherFileConnection.FileId),
             "Entity still exists after Delete!");
 
         #endregion DELETE
@@ -77,11 +77,11 @@ public class VoucherFileConnectionTests
     }
 
     [TestMethod]
-    public void Create_NonDefaultYear()
+    public async Task Create_NonDefaultYear()
     {
         #region Arrange
 
-        var tmpVoucher = FortnoxClient.VoucherConnector.Create(new Voucher()
+        var tmpVoucher = await FortnoxClient.VoucherConnector.CreateAsync(new Voucher()
         {
             Description = "TestVoucher",
             Comments = "Some comments",
@@ -93,7 +93,7 @@ public class VoucherFileConnectionTests
                 new VoucherRow() {Account = 1910, Debit = 0, Credit = 1500}
             }
         });
-        var tmpFile = FortnoxClient.ArchiveConnector.UploadFile("tmpImage.png", Resource.fortnox_image);
+        var tmpFile = await FortnoxClient.ArchiveConnector.UploadFileAsync("tmpImage.png", Resource.fortnox_image);
         #endregion Arrange
 
         var connector = FortnoxClient.VoucherFileConnectionConnector;
@@ -105,15 +105,15 @@ public class VoucherFileConnectionTests
             VoucherSeries = tmpVoucher.VoucherSeries
         };
 
-        var createdVoucherFileConnection = connector.Create(newVoucherFileConnection, tmpVoucher.Year);
+        var createdVoucherFileConnection = await connector.CreateAsync(newVoucherFileConnection, tmpVoucher.Year);
 
         Assert.AreEqual(tmpVoucher.Description, createdVoucherFileConnection.VoucherDescription);
         Assert.AreEqual(tmpVoucher.Year, createdVoucherFileConnection.VoucherYear);
 
         #region Clean up
-        connector.Delete(createdVoucherFileConnection.FileId);
-        FortnoxClient.VoucherConnector.Delete(tmpVoucher.VoucherNumber, tmpVoucher.VoucherSeries, tmpVoucher.Year);
-        FortnoxClient.ArchiveConnector.DeleteFile(tmpFile.Id);
+        await connector.DeleteAsync(createdVoucherFileConnection.FileId);
+        await FortnoxClient.VoucherConnector.DeleteAsync(tmpVoucher.VoucherNumber, tmpVoucher.VoucherSeries, tmpVoucher.Year);
+        await FortnoxClient.ArchiveConnector.DeleteFileAsync(tmpFile.Id);
         #endregion Clean up
     }
 }

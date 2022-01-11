@@ -55,8 +55,8 @@ public class UnitTests
 
         await connector.DeleteAsync(createdUnit.Code);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdUnit.Code),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdUnit.Code),
             "Entity still exists after Delete!");
 
         #endregion DELETE

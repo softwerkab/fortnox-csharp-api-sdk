@@ -83,8 +83,8 @@ public class SupplierInvoiceAccrualTests
 
         await connector.DeleteAsync(createdSupplierInvoiceAccrual.SupplierInvoiceNumber);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdSupplierInvoiceAccrual.SupplierInvoiceNumber),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdSupplierInvoiceAccrual.SupplierInvoiceNumber),
             "Entity still exists after Delete!");
         #endregion DELETE
 

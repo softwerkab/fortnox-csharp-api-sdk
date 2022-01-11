@@ -71,8 +71,8 @@ public class SupplierInvoiceExternalURLConnectionTests
 
         await connector.DeleteAsync(createdSupplierInvoiceExternalURLConnection.Id);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdSupplierInvoiceExternalURLConnection.Id),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdSupplierInvoiceExternalURLConnection.Id),
             "Entity still exists after Delete!");
 
         #endregion DELETE

@@ -54,8 +54,8 @@ public class ArticleFileConnectionTests
 
         await connector.DeleteAsync(createdArticleFileConnection.FileId);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdArticleFileConnection.FileId),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdArticleFileConnection.FileId),
             "Entity still exists after Delete!");
 
         #endregion DELETE

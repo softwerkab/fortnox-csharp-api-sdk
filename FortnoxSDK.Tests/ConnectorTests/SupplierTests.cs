@@ -66,8 +66,8 @@ public class SupplierTests
 
         await connector.DeleteAsync(createdSupplier.SupplierNumber);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdSupplier.SupplierNumber),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdSupplier.SupplierNumber),
             "Entity still exists after Delete!");
 
         #endregion DELETE
@@ -138,7 +138,7 @@ public class SupplierTests
     }
 
     [TestMethod]
-    public void VatType_Supported()
+    public async Task VatType_Supported()
     {
         var vatTypes = Enum.GetValues(typeof(SupplierVATType)).Cast<SupplierVATType>().ToList();
 
@@ -149,15 +149,15 @@ public class SupplierTests
             Name = "TestSupplier"
         };
 
-        var supplier = connector.Create(newSupplier);
+        var supplier = await connector.CreateAsync(newSupplier);
 
         foreach (var vat in vatTypes)
         {
             supplier.VATType = vat;
-            supplier = connector.Update(supplier);
+            supplier = await connector.UpdateAsync(supplier);
             Assert.AreEqual(vat, supplier.VATType);
         }
 
-        connector.Delete(supplier.SupplierNumber);
+        await connector.DeleteAsync(supplier.SupplierNumber);
     }
 }

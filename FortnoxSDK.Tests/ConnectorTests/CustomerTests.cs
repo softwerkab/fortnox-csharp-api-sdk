@@ -60,8 +60,8 @@ public class CustomerTests
 
         await connector.DeleteAsync(createdCustomer.CustomerNumber);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdCustomer.CustomerNumber),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdCustomer.CustomerNumber),
             "Entity still exists after Delete!");
 
         #endregion DELETE

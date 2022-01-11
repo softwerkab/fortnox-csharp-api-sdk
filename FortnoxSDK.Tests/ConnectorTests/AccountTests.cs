@@ -54,8 +54,8 @@ public class AccountTests
 
         await connector.DeleteAsync(createdAccount.Number);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdAccount.Number),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdAccount.Number),
             "Entity still exists after Delete!");
 
         #endregion DELETE
@@ -111,8 +111,8 @@ public class AccountTests
 
         await connector.DeleteAsync(createdAccount.Number, specificFinYear.Id);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdAccount.Number, specificFinYear.Id),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdAccount.Number, specificFinYear.Id),
             "Entity still exists after Delete!");
 
         #endregion DELETE

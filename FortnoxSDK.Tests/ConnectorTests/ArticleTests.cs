@@ -60,8 +60,8 @@ public class ArticleTests
 
         await connector.DeleteAsync(createdArticle.ArticleNumber);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdArticle.ArticleNumber),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdArticle.ArticleNumber),
             "Entity still exists after Delete!");
 
         #endregion DELETE
@@ -131,13 +131,13 @@ public class ArticleTests
     }
 
     [TestMethod]
-    public void HouseWorkArticle_AllTypes()
+    public async Task HouseWorkArticle_AllTypes()
     {
         var values = Enum.GetValues(typeof(HouseworkType)).Cast<HouseworkType>().ToList();
         Assert.AreEqual(28, values.Count);
 
         var connector = FortnoxClient.ArticleConnector;
-        var article = connector.Create(new Article() { Description = "HouseworkArticleTest", Housework = true });
+        var article = await connector.CreateAsync(new Article() { Description = "HouseworkArticleTest", Housework = true });
 
         foreach (var houseworkType in values)
         {
@@ -152,19 +152,19 @@ public class ArticleTests
 
             article.HouseworkType = houseworkType;
             Console.Error.WriteLine(article.HouseworkType);
-            article = connector.Update(article);
+            article = await connector.UpdateAsync(article);
 
             Assert.AreEqual(houseworkType, article.HouseworkType);
         }
 
-        connector.Delete(article.ArticleNumber);
+        await connector.DeleteAsync(article.ArticleNumber);
     }
 
     [TestMethod]
-    public void HouseWorkArticle_Blank()
+    public async Task HouseWorkArticle_Blank()
     {
         var connector = FortnoxClient.ArticleConnector;
-        var article = connector.Create(new Article()
+        var article = await connector.CreateAsync(new Article()
         {
             Description = "HouseworkArticleTest",
             Housework = true,
@@ -173,9 +173,9 @@ public class ArticleTests
         Assert.AreEqual(HouseworkType.Cleaning, article.HouseworkType);
 
         article.HouseworkType = HouseworkType.Blank;
-        var updatedArticle = connector.Update(article);
+        var updatedArticle = await connector.UpdateAsync(article);
         Assert.AreEqual(null, updatedArticle.HouseworkType);
 
-        connector.Delete(article.ArticleNumber);
+        await connector.DeleteAsync(article.ArticleNumber);
     }
 }

@@ -53,8 +53,8 @@ public class TermsOfDeliveryTests
 
         await connector.DeleteAsync(createdTermsOfDelivery.Code);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdTermsOfDelivery.Code),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdTermsOfDelivery.Code),
             "Entity still exists after Delete!");
 
         #endregion DELETE

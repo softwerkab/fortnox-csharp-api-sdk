@@ -53,8 +53,8 @@ public class TermsOfPaymentTests
 
         await connector.DeleteAsync(createdTermsOfPayment.Code);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdTermsOfPayment.Code),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdTermsOfPayment.Code),
             "Entity still exists after Delete!");
 
         #endregion DELETE

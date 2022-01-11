@@ -61,8 +61,8 @@ public class AttendanceTransactionsTests
 
         await connector.DeleteAsync(createdAttendanceTransaction.EmployeeId, createdAttendanceTransaction.Date, createdAttendanceTransaction.CauseCode);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdAttendanceTransaction.EmployeeId, createdAttendanceTransaction.Date, createdAttendanceTransaction.CauseCode),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdAttendanceTransaction.EmployeeId, createdAttendanceTransaction.Date, createdAttendanceTransaction.CauseCode),
             "Entity still exists after Delete!");
 
         #endregion DELETE

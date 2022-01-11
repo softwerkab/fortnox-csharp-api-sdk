@@ -43,7 +43,7 @@ public class AuthTests
     }
 
     [TestMethod]
-    public async Task Test_BuildUri_Example()
+    public void Test_BuildUri_Example()
     {
         var clientId = "8VurtMGDTeAI";
         var clientSecret = "yFKwme8LEQ";
@@ -62,7 +62,7 @@ public class AuthTests
     }
 
     [TestMethod]
-    public async Task Test_BuildUri_MultipleScopes()
+    public void Test_BuildUri_MultipleScopes()
     {
         var clientId = "8VurtMGDTeAI";
         var clientSecret = "yFKwme8LEQ";

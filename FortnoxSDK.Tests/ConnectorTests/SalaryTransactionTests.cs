@@ -56,8 +56,8 @@ public class SalaryTransactionTests
 
         await connector.DeleteAsync(createdSalaryTransaction.SalaryRow);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdSalaryTransaction.SalaryRow),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdSalaryTransaction.SalaryRow),
             "Entity still exists after Delete!");
 
         #endregion DELETE

@@ -89,8 +89,8 @@ public class ContractAccrualTests
 
         await connector.DeleteAsync(createdContractAccrual.DocumentNumber);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdContractAccrual.DocumentNumber),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdContractAccrual.DocumentNumber),
             "Entity still exists after Delete!");
 
         #endregion DELETE

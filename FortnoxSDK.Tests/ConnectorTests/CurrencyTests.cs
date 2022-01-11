@@ -68,8 +68,8 @@ public class CurrencyTests
 
         await connector.DeleteAsync(createdCurrency.Code);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdCurrency.Code),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdCurrency.Code),
             "Entity still exists after Delete!");
 
         #endregion DELETE

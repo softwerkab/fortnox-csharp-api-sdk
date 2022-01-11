@@ -54,8 +54,8 @@ public class VoucherTests
 
         #region DELETE
         await connector.DeleteAsync(createdVoucher.VoucherNumber, createdVoucher.VoucherSeries, createdVoucher.Year);
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdVoucher.VoucherNumber, createdVoucher.VoucherSeries, createdVoucher.Year),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdVoucher.VoucherNumber, createdVoucher.VoucherSeries, createdVoucher.Year),
             "Entity still exists after Delete!");
         #endregion DELETE
 

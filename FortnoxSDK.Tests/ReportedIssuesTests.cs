@@ -279,10 +279,10 @@ public class ReportedIssuesTests
 
         var archiveConnector = FortnoxClient.ArchiveConnector;
         var case1 = await archiveConnector.DownloadFileAsync(fortnoxFile.Id, IdType.Id); //no error
-        Assert.ThrowsException<FortnoxApiException>(
-            () => archiveConnector.DownloadFile(fortnoxFile.Id, IdType.FileId)); //has error
-        Assert.ThrowsException<FortnoxApiException>(
-            () => archiveConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.Id)); //has error
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await archiveConnector.DownloadFileAsync(fortnoxFile.Id, IdType.FileId)); //has error
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await archiveConnector.DownloadFileAsync(fortnoxFile.ArchiveFileId, IdType.Id)); //has error
         var case4 = await archiveConnector.DownloadFileAsync(fortnoxFile.ArchiveFileId, IdType.FileId); //no error
 
         Assert.IsNotNull(case1);
@@ -292,8 +292,8 @@ public class ReportedIssuesTests
         var case5 = await inboxConnector.DownloadFileAsync(fortnoxFile.Id, IdType.Id); //no error
         var case6 = await inboxConnector.DownloadFileAsync(fortnoxFile.Id, IdType.FileId); //no error, why?
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => inboxConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.Id)); //has error
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await inboxConnector.DownloadFileAsync(fortnoxFile.ArchiveFileId, IdType.Id)); //has error
         var case8 = await inboxConnector.DownloadFileAsync(fortnoxFile.ArchiveFileId, IdType.FileId); //no error
 
         Assert.IsNotNull(case5);
@@ -319,10 +319,10 @@ public class ReportedIssuesTests
 
         var archiveConnector = FortnoxClient.ArchiveConnector;
         var case1 = await archiveConnector.DownloadFileAsync(fortnoxFile.Id, IdType.Id); //no error
-        Assert.ThrowsException<FortnoxApiException>(
-            () => archiveConnector.DownloadFile(fortnoxFile.Id, IdType.FileId)); //has error
-        Assert.ThrowsException<FortnoxApiException>(
-            () => archiveConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.Id)); //has error
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await archiveConnector.DownloadFileAsync(fortnoxFile.Id, IdType.FileId)); //has error
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await archiveConnector.DownloadFileAsync(fortnoxFile.ArchiveFileId, IdType.Id)); //has error
         var case4 = await archiveConnector.DownloadFileAsync(fortnoxFile.ArchiveFileId, IdType.FileId); //no error
 
         Assert.IsNotNull(case1);
@@ -331,8 +331,8 @@ public class ReportedIssuesTests
         var inboxConnector = FortnoxClient.InboxConnector;
         var case5 = await inboxConnector.DownloadFileAsync(fortnoxFile.Id, IdType.Id); //no error
         var case6 = await inboxConnector.DownloadFileAsync(fortnoxFile.Id, IdType.FileId); //no error, why?
-        Assert.ThrowsException<FortnoxApiException>(
-            () => inboxConnector.DownloadFile(fortnoxFile.ArchiveFileId, IdType.Id)); //has error
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await inboxConnector.DownloadFileAsync(fortnoxFile.ArchiveFileId, IdType.Id)); //has error
         var case8 = await inboxConnector.DownloadFileAsync(fortnoxFile.ArchiveFileId, IdType.FileId); //no error
 
         Assert.IsNotNull(case5);

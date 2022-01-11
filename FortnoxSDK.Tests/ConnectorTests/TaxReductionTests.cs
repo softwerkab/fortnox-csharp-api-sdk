@@ -85,8 +85,8 @@ public class TaxReductionTests
 
         await connector.DeleteAsync(createdTaxReduction.Id);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdTaxReduction.Id),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdTaxReduction.Id),
             "Entity still exists after Delete!");
 
         #endregion DELETE

@@ -108,7 +108,7 @@ public class TestUtils
     {
         try
         {
-            DefaultFortnoxClient.AccountConnector.Get(number);
+            DefaultFortnoxClient.AccountConnector.GetAsync(number).GetResult();
             return true;
         }
         catch (FortnoxApiException)

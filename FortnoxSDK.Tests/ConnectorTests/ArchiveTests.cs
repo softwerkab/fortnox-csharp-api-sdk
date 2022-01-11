@@ -15,10 +15,10 @@ public class ArchiveTests
     private ArchiveFolder testRootFolder;
 
     [TestInitialize]
-    public void Init()
+    public async Task Init()
     {
         var connector = FortnoxClient.ArchiveConnector;
-        testRootFolder = connector.GetFolder("TestArchive");
+        testRootFolder = await connector.GetFolderAsync("TestArchive");
     }
 
     [TestMethod]

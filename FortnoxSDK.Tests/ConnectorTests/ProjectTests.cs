@@ -60,8 +60,8 @@ public class ProjectTests
 
         await connector.DeleteAsync(createdProject.ProjectNumber);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdProject.ProjectNumber),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdProject.ProjectNumber),
             "Entity still exists after Delete!");
 
         #endregion DELETE

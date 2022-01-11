@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Interfaces;
@@ -18,14 +19,14 @@ public class SIEConnectorTests
     public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
     [TestMethod]
-    public void SIE_Get()
+    public async Task SIE_Get()
     {
         var types = Enum.GetValues(typeof(SIEType)).Cast<SIEType>().ToList();
         var connector = FortnoxClient.SIEConnector;
 
         foreach (var sieType in types)
         {
-            var data = connector.Get(sieType);
+            var data = await connector.GetAsync(sieType);
             Assert.IsNotNull(data);
 
             //var content = Decode(data);
@@ -38,15 +39,15 @@ public class SIEConnectorTests
     }
 
     [TestMethod]
-    public void SIE_Get_SpecificYear()
+    public async Task SIE_Get_SpecificYear()
     {
-        var finYears = FortnoxClient.FinancialYearConnector.Find(null).Entities;
+        var finYears = (await FortnoxClient.FinancialYearConnector.FindAsync(null)).Entities;
 
         var connector = FortnoxClient.SIEConnector;
 
         foreach (var finYear in finYears)
         {
-            var data = connector.Get(SIEType.Transactions, finYear.Id);
+            var data = await connector.GetAsync(SIEType.Transactions, finYear.Id);
             Assert.IsNotNull(data);
 
             //var content = Decode(data);
@@ -62,7 +63,7 @@ public class SIEConnectorTests
     }
 
     [TestMethod]
-    public void SIE_Get_ExportOptions_Period()
+    public async Task SIE_Get_ExportOptions_Period()
     {
         var connector = FortnoxClient.SIEConnector;
         var exportOptions = new SIEExportOptions()
@@ -71,7 +72,7 @@ public class SIEConnectorTests
             ToDate = new DateTime(2020, 8, 31)
         };
 
-        var data = connector.Get(SIEType.Transactions, exportOptions: exportOptions);
+        var data = await connector.GetAsync(SIEType.Transactions, exportOptions: exportOptions);
         var sieDocument = Parse(data);
 
         Assert.AreEqual(false, sieDocument.VER.Any(v => v.VoucherDate < exportOptions.FromDate));
@@ -82,7 +83,7 @@ public class SIEConnectorTests
 
 
     [TestMethod]
-    public void SIE_Get_ExportOptions_VoucherSelection()
+    public async Task SIE_Get_ExportOptions_VoucherSelection()
     {
         var connector = FortnoxClient.SIEConnector;
         var exportOptions = new SIEExportOptions()
@@ -104,7 +105,7 @@ public class SIEConnectorTests
             }
         };
 
-        var data = connector.Get(SIEType.Transactions, exportOptions: exportOptions);
+        var data = await connector.GetAsync(SIEType.Transactions, exportOptions: exportOptions);
         var sieDocument = Parse(data);
 
         Assert.AreEqual(5 + 5, sieDocument.VER.Count);
@@ -120,7 +121,7 @@ public class SIEConnectorTests
 
     [ExpectedException(typeof(FortnoxApiException))]
     [TestMethod]
-    public void SIE_Get_ExportOptions_VoucherSelection_IncompleteInterval()
+    public async Task SIE_Get_ExportOptions_VoucherSelection_IncompleteInterval()
     {
         var connector = FortnoxClient.SIEConnector;
         var exportOptions = new SIEExportOptions()
@@ -142,11 +143,11 @@ public class SIEConnectorTests
             }
         };
 
-        connector.Get(SIEType.Transactions, exportOptions: exportOptions);
+        await connector.GetAsync(SIEType.Transactions, exportOptions: exportOptions);
     }
 
     [TestMethod]
-    public void SIE_Get_ExportOptions_ExcludeUnused()
+    public async Task SIE_Get_ExportOptions_ExcludeUnused()
     {
         var connector = FortnoxClient.SIEConnector;
         var exportOptionsAll = new SIEExportOptions()
@@ -158,10 +159,10 @@ public class SIEConnectorTests
             ExportAll = false
         };
 
-        var data = connector.Get(SIEType.PeriodBalance, exportOptions: exportOptionsAll);
+        var data = await connector.GetAsync(SIEType.PeriodBalance, exportOptions: exportOptionsAll);
         var sieDocumentFull = Parse(data);
 
-        data = connector.Get(SIEType.Transactions, exportOptions: exportOptionsExcludeUnused);
+        data = await connector.GetAsync(SIEType.Transactions, exportOptions: exportOptionsExcludeUnused);
         var sieDocumentFiltered = Parse(data);
 
         Assert.AreEqual(true, sieDocumentFull.KONTO.Count > sieDocumentFiltered.KONTO.Count);

@@ -65,8 +65,8 @@ public class AssetTypesTests
 
         await connector.DeleteAsync(createdAssetTypes.Id);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdAssetTypes.Id),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdAssetTypes.Id),
             "Entity still exists after Delete!");
 
         #endregion DELETE

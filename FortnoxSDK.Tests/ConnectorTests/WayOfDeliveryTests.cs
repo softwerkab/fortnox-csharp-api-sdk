@@ -55,8 +55,8 @@ public class WayOfDeliveryTests
 
         await connector.DeleteAsync(createdWayOfDelivery.Code);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdWayOfDelivery.Code),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdWayOfDelivery.Code),
             "Entity still exists after Delete!");
 
         #endregion DELETE

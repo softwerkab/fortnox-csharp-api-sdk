@@ -57,8 +57,8 @@ public class PriceTests
 
         await connector.DeleteAsync(createdPrice.PriceList, createdPrice.ArticleNumber, createdPrice.FromQuantity);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdPrice.PriceList, createdPrice.ArticleNumber, createdPrice.FromQuantity),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdPrice.PriceList, createdPrice.ArticleNumber, createdPrice.FromQuantity),
             "Entity still exists after Delete!");
 
         #endregion DELETE

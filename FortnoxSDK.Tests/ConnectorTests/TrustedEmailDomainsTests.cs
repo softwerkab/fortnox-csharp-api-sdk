@@ -46,8 +46,8 @@ public class TrustedEmailDomainsTests
 
         await connector.DeleteAsync(createdTrustedEmailDomains.Id);
 
-        Assert.ThrowsException<FortnoxApiException>(
-            () => connector.Get(createdTrustedEmailDomains.Id),
+        await Assert.ThrowsExceptionAsync<FortnoxApiException>(
+            async () => await connector.GetAsync(createdTrustedEmailDomains.Id),
             "Entity still exists after Delete!");
 
         #endregion DELETE
