@@ -12,7 +12,7 @@ internal class PriceListConnector : SearchableEntityConnector<PriceList, PriceLi
     {
         Endpoint = Endpoints.PriceLists;
     }
-    
+
     public async Task<EntityCollection<PriceList>> FindAsync(PriceListSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

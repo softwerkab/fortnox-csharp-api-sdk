@@ -7,7 +7,7 @@ namespace Fortnox.SDK.Interfaces;
 
 /// <remarks/>
 public interface IAssetFileConnectionConnector : IEntityConnector
-{ 
+{
     Task<AssetFileConnection> CreateAsync(AssetFileConnection assetFileConnection);
     Task<AssetFileConnection> GetAsync(string id);
     Task DeleteAsync(string id);

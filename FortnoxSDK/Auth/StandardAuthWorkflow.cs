@@ -22,7 +22,7 @@ internal class StandardAuthWorkflow : BaseClient, IStandardAuthWorkflow
     {
         Serializer = new JsonEntitySerializer();
     }
-    
+
     public async Task<TokenInfo> GetTokenAsync(string authCode, string clientId, string clientSecret, string redirectUri = null)
     {
         if (string.IsNullOrEmpty(authCode))
@@ -162,7 +162,7 @@ internal class StandardAuthWorkflow : BaseClient, IStandardAuthWorkflow
 
         var parameters = new Dictionary<string, string>();
         parameters.Add("token", accessToken);
-        
+
         var formData = new MultipartFormDataContent();
 
         foreach (var parameter in parameters)

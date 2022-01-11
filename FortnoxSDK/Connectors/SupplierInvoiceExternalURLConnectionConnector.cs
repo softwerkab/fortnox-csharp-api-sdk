@@ -12,7 +12,7 @@ internal class SupplierInvoiceExternalURLConnectionConnector : SearchableEntityC
     {
         Endpoint = Endpoints.SupplierInvoiceExternalUrlConnections;
     }
-    
+
     public async Task<EntityCollection<SupplierInvoiceExternalURLConnection>> FindAsync(SupplierInvoiceExternalURLConnectionSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

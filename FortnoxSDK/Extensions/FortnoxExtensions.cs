@@ -20,10 +20,8 @@ public static class FortnoxExtensions
             case StaticTokenAuth:
                 return false;
             case StandardAuth:
-            {
                 var expTimeUtc = Utils.DecodeJwt(authorization.AccessToken).ValidTo;
                 return expTimeUtc - reserve < TimeZoneInfo.ConvertTimeToUtc(FortnoxServerInfo.ServerTime);
-            }
             default:
                 throw new NotImplementedException("Unknown authorization type.");
         }

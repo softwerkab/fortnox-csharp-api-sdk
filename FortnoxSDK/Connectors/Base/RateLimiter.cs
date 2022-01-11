@@ -22,7 +22,7 @@ internal class RateLimiter
         var limiter = SelectRateLimiter(token);
         await limiter;
     }
-    
+
     private static TimeLimiter SelectRateLimiter(string accessToken)
     {
         lock (RateLimiters)

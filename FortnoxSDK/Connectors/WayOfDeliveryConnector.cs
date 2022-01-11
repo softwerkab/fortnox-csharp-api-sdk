@@ -12,7 +12,7 @@ internal class WayOfDeliveryConnector : SearchableEntityConnector<WayOfDelivery,
     {
         Endpoint = Endpoints.WayOfDelivery;
     }
-    
+
     public async Task<EntityCollection<WayOfDelivery>> FindAsync(WayOfDeliverySearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

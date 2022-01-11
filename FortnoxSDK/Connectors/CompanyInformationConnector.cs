@@ -11,7 +11,7 @@ internal class CompanyInformationConnector : EntityConnector<CompanyInformation>
     {
         Endpoint = Endpoints.CompanyInformation;
     }
-    
+
     public async Task<CompanyInformation> GetAsync()
     {
         return await BaseGet().ConfigureAwait(false);

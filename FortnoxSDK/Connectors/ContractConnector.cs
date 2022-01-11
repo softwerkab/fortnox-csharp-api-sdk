@@ -12,7 +12,7 @@ internal class ContractConnector : SearchableEntityConnector<Contract, ContractS
     {
         Endpoint = Endpoints.Contracts;
     }
-    
+
     public async Task<EntityCollection<ContractSubset>> FindAsync(ContractSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

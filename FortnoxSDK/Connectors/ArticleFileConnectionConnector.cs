@@ -12,7 +12,7 @@ internal class ArticleFileConnectionConnector : SearchableEntityConnector<Articl
     {
         Endpoint = Endpoints.ArticleFileConnections;
     }
-    
+
     public async Task<EntityCollection<ArticleFileConnection>> FindAsync(ArticleFileConnectionSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

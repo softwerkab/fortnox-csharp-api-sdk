@@ -11,7 +11,7 @@ internal class CompanySettingsConnector : EntityConnector<CompanySettings>, ICom
     {
         Endpoint = Endpoints.CompanySettings;
     }
-    
+
     public async Task<CompanySettings> GetAsync()
     {
         return await BaseGet().ConfigureAwait(false);

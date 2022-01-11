@@ -24,7 +24,7 @@ internal abstract class BaseClient
         try
         {
             Authorization?.ApplyTo(request);
-            
+
             if (UseRateLimiter)
                 await RateLimier.Trottle(Authorization?.AccessToken).ConfigureAwait(false);
 

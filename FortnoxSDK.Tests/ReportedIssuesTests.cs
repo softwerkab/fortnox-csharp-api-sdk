@@ -225,9 +225,9 @@ public class ReportedIssuesTests
         #region Arrange
 
         var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer()
-            { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+        { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
         var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article()
-            { Description = "TmpArticle", PurchasePrice = 100 });
+        { Description = "TmpArticle", PurchasePrice = 100 });
 
         #endregion Arrange
 

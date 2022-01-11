@@ -20,9 +20,9 @@ public class ContractAccrualTests
         #region Arrange
 
         var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer()
-            { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+        { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
         var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article()
-            { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+        { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
         var tmpContract = await FortnoxClient.ContractConnector.CreateAsync(new Contract()
         {
             CustomerNumber = tmpCustomer.CustomerNumber,
