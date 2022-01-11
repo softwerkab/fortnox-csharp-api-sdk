@@ -14,31 +14,6 @@ internal class SupplierConnector : SearchableEntityConnector<Supplier, SupplierS
         Endpoint = Endpoints.Suppliers;
     }
 
-    public Supplier Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public Supplier Update(Supplier supplier)
-    {
-        return UpdateAsync(supplier).GetResult();
-    }
-
-    public Supplier Create(Supplier supplier)
-    {
-        return CreateAsync(supplier).GetResult();
-    }
-
-    public void Delete(string id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<SupplierSubset> Find(SupplierSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<SupplierSubset>> FindAsync(SupplierSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

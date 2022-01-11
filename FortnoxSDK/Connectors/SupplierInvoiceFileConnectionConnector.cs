@@ -14,26 +14,6 @@ internal class SupplierInvoiceFileConnectionConnector : SearchableEntityConnecto
         Endpoint = Endpoints.SupplierFileConnections;
     }
 
-    public SupplierInvoiceFileConnection Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public SupplierInvoiceFileConnection Create(SupplierInvoiceFileConnection supplierInvoiceFileConnection)
-    {
-        return CreateAsync(supplierInvoiceFileConnection).GetResult();
-    }
-
-    public void Delete(string id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<SupplierInvoiceFileConnection> Find(SupplierInvoiceFileConnectionSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<SupplierInvoiceFileConnection>> FindAsync(SupplierInvoiceFileConnectionSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

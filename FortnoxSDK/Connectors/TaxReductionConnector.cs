@@ -14,31 +14,6 @@ internal class TaxReductionConnector : SearchableEntityConnector<TaxReduction, T
         Endpoint = Endpoints.TaxReductions;
     }
 
-    public TaxReduction Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public TaxReduction Update(TaxReduction taxReduction)
-    {
-        return UpdateAsync(taxReduction).GetResult();
-    }
-
-    public TaxReduction Create(TaxReduction taxReduction)
-    {
-        return CreateAsync(taxReduction).GetResult();
-    }
-
-    public void Delete(string id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<TaxReductionSubset> Find(TaxReductionSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<TaxReductionSubset>> FindAsync(TaxReductionSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

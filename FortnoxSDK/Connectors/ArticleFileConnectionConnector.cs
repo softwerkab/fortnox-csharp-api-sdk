@@ -13,27 +13,7 @@ internal class ArticleFileConnectionConnector : SearchableEntityConnector<Articl
     {
         Endpoint = Endpoints.ArticleFileConnections;
     }
-
-    public ArticleFileConnection Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public ArticleFileConnection Create(ArticleFileConnection articleFileConnection)
-    {
-        return CreateAsync(articleFileConnection).GetResult();
-    }
-
-    public void Delete(string id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<ArticleFileConnection> Find(ArticleFileConnectionSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
+    
     public async Task<EntityCollection<ArticleFileConnection>> FindAsync(ArticleFileConnectionSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

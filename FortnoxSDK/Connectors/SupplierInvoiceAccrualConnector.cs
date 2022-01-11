@@ -14,31 +14,6 @@ internal class SupplierInvoiceAccrualConnector : SearchableEntityConnector<Suppl
         Endpoint = Endpoints.SupplierInvoiceAcrruals;
     }
 
-    public SupplierInvoiceAccrual Get(long? id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public SupplierInvoiceAccrual Update(SupplierInvoiceAccrual supplierInvoiceAccrual)
-    {
-        return UpdateAsync(supplierInvoiceAccrual).GetResult();
-    }
-
-    public SupplierInvoiceAccrual Create(SupplierInvoiceAccrual supplierInvoiceAccrual)
-    {
-        return CreateAsync(supplierInvoiceAccrual).GetResult();
-    }
-
-    public void Delete(long? id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<SupplierInvoiceAccrualSubset> Find(SupplierInvoiceAccrualSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<SupplierInvoiceAccrualSubset>> FindAsync(SupplierInvoiceAccrualSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

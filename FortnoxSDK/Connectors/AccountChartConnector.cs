@@ -15,11 +15,6 @@ internal class AccountChartConnector : SearchableEntityConnector<AccountChart, A
         Endpoint = Endpoints.AccountCharts;
     }
 
-    public EntityCollection<AccountChart> Find(AccountChartSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<AccountChart>> FindAsync(AccountChartSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

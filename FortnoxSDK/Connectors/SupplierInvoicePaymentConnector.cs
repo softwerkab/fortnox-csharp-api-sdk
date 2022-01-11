@@ -14,36 +14,6 @@ internal class SupplierInvoicePaymentConnector : SearchableEntityConnector<Suppl
         Endpoint = Endpoints.SupplierInvoicePayments;
     }
 
-    public SupplierInvoicePayment Get(long? id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public SupplierInvoicePayment Update(SupplierInvoicePayment supplierInvoicePayment)
-    {
-        return UpdateAsync(supplierInvoicePayment).GetResult();
-    }
-
-    public SupplierInvoicePayment Create(SupplierInvoicePayment supplierInvoicePayment)
-    {
-        return CreateAsync(supplierInvoicePayment).GetResult();
-    }
-
-    public void Delete(long? id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<SupplierInvoicePaymentSubset> Find(SupplierInvoicePaymentSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
-    public void Bookkeep(long? id)
-    {
-        BookkeepAsync(id).GetResult();
-    }
-
     public async Task<EntityCollection<SupplierInvoicePaymentSubset>> FindAsync(SupplierInvoicePaymentSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

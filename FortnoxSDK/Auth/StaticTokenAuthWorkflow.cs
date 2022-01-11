@@ -19,11 +19,6 @@ internal class StaticTokenAuthWorkflow : BaseClient, IStaticTokenAuthWorkflow
         Serializer = new JsonEntitySerializer();
     }
 
-    public string GetToken(string authCode, string clientSecret)
-    {
-        return GetTokenAsync(authCode, clientSecret).GetResult();
-    }
-
     public async Task<string> GetTokenAsync(string authCode, string clientSecret)
     {
         var httpRequest = new HttpRequestMessage(HttpMethod.Get, ActivationUri);

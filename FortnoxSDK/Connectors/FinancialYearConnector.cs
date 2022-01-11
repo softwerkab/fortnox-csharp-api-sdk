@@ -14,21 +14,6 @@ internal class FinancialYearConnector : SearchableEntityConnector<FinancialYear,
         Endpoint = Endpoints.FinancialYears;
     }
 
-    public FinancialYear Get(long? id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public FinancialYear Create(FinancialYear financialYear)
-    {
-        return CreateAsync(financialYear).GetResult();
-    }
-
-    public EntityCollection<FinancialYearSubset> Find(FinancialYearSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<FinancialYearSubset>> FindAsync(FinancialYearSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

@@ -15,31 +15,6 @@ internal class AbsenceTransactionConnector : SearchableEntityConnector<AbsenceTr
         Endpoint = Endpoints.AbsenceTransactions;
     }
 
-    public AbsenceTransaction Get(string employeeId, DateTime? date, AbsenceCauseCode? code)
-    {
-        return GetAsync(employeeId, date, code).GetResult();
-    }
-
-    public AbsenceTransaction Update(AbsenceTransaction absenceTransaction)
-    {
-        return UpdateAsync(absenceTransaction).GetResult();
-    }
-
-    public AbsenceTransaction Create(AbsenceTransaction absenceTransaction)
-    {
-        return CreateAsync(absenceTransaction).GetResult();
-    }
-
-    public void Delete(string employeeId, DateTime? date, AbsenceCauseCode? code)
-    {
-        DeleteAsync(employeeId, date, code).GetResult();
-    }
-
-    public EntityCollection<AbsenceTransaction> Find(AbsenceTransactionSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<AbsenceTransaction>> FindAsync(AbsenceTransactionSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

@@ -16,36 +16,6 @@ internal class PriceConnector : SearchableEntityConnector<Price, PriceSubset, Pr
         Endpoint = Endpoints.Prices;
     }
 
-    public Price Get(string priceListCode, string articleNumber, decimal? fromQuantity = null)
-    {
-        return GetAsync(priceListCode, articleNumber, fromQuantity).GetResult();
-    }
-
-    public Price Update(Price price)
-    {
-        return UpdateAsync(price).GetResult();
-    }
-
-    public Price Create(Price price)
-    {
-        return CreateAsync(price).GetResult();
-    }
-
-    public void Delete(string priceListCode, string articleNumber, decimal? fromQuantity = null)
-    {
-        DeleteAsync(priceListCode, articleNumber, fromQuantity).GetResult();
-    }
-
-    public EntityCollection<PriceSubset> Find(string priceListId, string articleId, PriceSearch searchSettings)
-    {
-        return FindAsync(priceListId, articleId, searchSettings).GetResult();
-    }
-
-    public EntityCollection<PriceSubset> Find(PriceSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<PriceSubset>> FindAsync(string priceListId, string articleId, PriceSearch searchSettings)
     {
         var request = new SearchRequest<PriceSubset>()

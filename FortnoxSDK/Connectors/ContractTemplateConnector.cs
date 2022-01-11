@@ -14,26 +14,6 @@ internal class ContractTemplateConnector : SearchableEntityConnector<ContractTem
         Endpoint = Endpoints.ContractTemplates;
     }
 
-    public ContractTemplate Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public ContractTemplate Update(ContractTemplate contractTemplate)
-    {
-        return UpdateAsync(contractTemplate).GetResult();
-    }
-
-    public ContractTemplate Create(ContractTemplate contractTemplate)
-    {
-        return CreateAsync(contractTemplate).GetResult();
-    }
-
-    public EntityCollection<ContractTemplateSubset> Find(ContractTemplateSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<ContractTemplateSubset>> FindAsync(ContractTemplateSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

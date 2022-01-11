@@ -15,26 +15,6 @@ internal class ScheduleTimesConnector : SearchableEntityConnector<ScheduleTimes,
         Endpoint = Endpoints.ScheduleTimes;
     }
 
-    public EntityCollection<ScheduleTimes> Find(ScheduleTimesSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
-    public ScheduleTimes Get(string employeeId, DateTime? date)
-    {
-        return GetAsync(employeeId, date).GetResult();
-    }
-
-    public ScheduleTimes Update(ScheduleTimes scheduleTime)
-    {
-        return UpdateAsync(scheduleTime).GetResult();
-    }
-
-    public ScheduleTimes Reset(string employeeId, DateTime? date)
-    {
-        return ResetAsync(employeeId, date).GetResult();
-    }
-
     public async Task<ScheduleTimes> ResetAsync(string employeeId, DateTime? date)
     {
         return await BaseUpdate(null, employeeId, date?.ToString(ApiConstants.DateFormat), "resetday").ConfigureAwait(false);

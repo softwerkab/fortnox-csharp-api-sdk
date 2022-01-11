@@ -17,26 +17,6 @@ internal class InvoiceFileConnectionConnector : EntityConnector<InvoiceFileConne
         Endpoint = Endpoints.InvoiceFileConnections;
     }
 
-    public IList<InvoiceFileConnection> GetConnections(long? entityId, EntityType? entityType)
-    {
-        return GetConnectionsAsync(entityId, entityType).GetResult();
-    }
-
-    public InvoiceFileConnection Update(InvoiceFileConnection invoiceFileConnection)
-    {
-        return UpdateAsync(invoiceFileConnection).GetResult();
-    }
-
-    public InvoiceFileConnection Create(InvoiceFileConnection invoiceFileConnection)
-    {
-        return CreateAsync(invoiceFileConnection).GetResult();
-    }
-
-    public void Delete(string id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
     public async Task DeleteAsync(string id)
     {
         var request = new BaseRequest

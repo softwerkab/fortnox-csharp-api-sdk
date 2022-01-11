@@ -14,26 +14,6 @@ internal class EmployeeConnector : SearchableEntityConnector<Employee, EmployeeS
         Endpoint = Endpoints.Employees;
     }
 
-    public Employee Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public Employee Update(Employee employee)
-    {
-        return UpdateAsync(employee).GetResult();
-    }
-
-    public Employee Create(Employee employee)
-    {
-        return CreateAsync(employee).GetResult();
-    }
-
-    public EntityCollection<EmployeeSubset> Find(EmployeeSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<EmployeeSubset>> FindAsync(EmployeeSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

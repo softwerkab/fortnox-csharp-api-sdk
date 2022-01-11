@@ -13,11 +13,6 @@ internal class LockedPeriodConnector : EntityConnector<LockedPeriod>, ILockedPer
         Endpoint = Endpoints.LockedPeriods;
     }
 
-    public LockedPeriod Get()
-    {
-        return GetAsync().GetResult();
-    }
-
     public async Task<LockedPeriod> GetAsync()
     {
         return await BaseGet().ConfigureAwait(false);

@@ -22,12 +22,7 @@ internal class StandardAuthWorkflow : BaseClient, IStandardAuthWorkflow
     {
         Serializer = new JsonEntitySerializer();
     }
-
-    public TokenInfo GetToken(string authCode, string clientId, string clientSecret, string redirectUri = null)
-    {
-        return GetTokenAsync(authCode, clientId, clientSecret, redirectUri).GetResult();
-    }
-
+    
     public async Task<TokenInfo> GetTokenAsync(string authCode, string clientId, string clientSecret, string redirectUri = null)
     {
         if (string.IsNullOrEmpty(authCode))
@@ -57,11 +52,6 @@ internal class StandardAuthWorkflow : BaseClient, IStandardAuthWorkflow
         var tokenInfo = Serializer.Deserialize<TokenInfo>(responseJson);
 
         return tokenInfo;
-    }
-
-    public TokenInfo RefreshToken(string refreshToken, string clientId, string clientSecret)
-    {
-        return RefreshTokenAsync(refreshToken, clientId, clientSecret).GetResult();
     }
 
     public async Task<TokenInfo> RefreshTokenAsync(string refreshToken, string clientId, string clientSecret)

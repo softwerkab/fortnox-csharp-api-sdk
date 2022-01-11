@@ -17,26 +17,6 @@ internal class VoucherConnector : SearchableEntityConnector<Voucher, VoucherSubs
         Endpoint = Endpoints.Vouchers;
     }
 
-    public Voucher Get(long? id, string seriesId, long? financialYearId)
-    {
-        return GetAsync(id, seriesId, financialYearId).GetResult();
-    }
-
-    public Voucher Create(Voucher voucher)
-    {
-        return CreateAsync(voucher).GetResult();
-    }
-
-    public EntityCollection<VoucherSubset> Find(VoucherSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
-    public void Delete(long? id, string seriesId, long? financialYearId)
-    {
-        DeleteAsync(id, seriesId, financialYearId).GetResult();
-    }
-
     public async Task<EntityCollection<VoucherSubset>> FindAsync(VoucherSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

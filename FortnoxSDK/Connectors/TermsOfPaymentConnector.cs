@@ -14,31 +14,6 @@ internal class TermsOfPaymentConnector : SearchableEntityConnector<TermsOfPaymen
         Endpoint = Endpoints.TermsOfPayments;
     }
 
-    public TermsOfPayment Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public TermsOfPayment Update(TermsOfPayment termsOfPayment)
-    {
-        return UpdateAsync(termsOfPayment).GetResult();
-    }
-
-    public TermsOfPayment Create(TermsOfPayment termsOfPayment)
-    {
-        return CreateAsync(termsOfPayment).GetResult();
-    }
-
-    public void Delete(string id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<TermsOfPayment> Find(TermsOfPaymentSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<TermsOfPayment>> FindAsync(TermsOfPaymentSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

@@ -14,31 +14,6 @@ internal class ContractAccrualConnector : SearchableEntityConnector<ContractAccr
         Endpoint = Endpoints.ContractAccruals;
     }
 
-    public ContractAccrual Get(long? id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public ContractAccrual Update(ContractAccrual contractAccrual)
-    {
-        return UpdateAsync(contractAccrual).GetResult();
-    }
-
-    public ContractAccrual Create(ContractAccrual contractAccrual)
-    {
-        return CreateAsync(contractAccrual).GetResult();
-    }
-
-    public void Delete(long? id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<ContractAccrualSubset> Find(ContractAccrualSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<ContractAccrualSubset>> FindAsync(ContractAccrualSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

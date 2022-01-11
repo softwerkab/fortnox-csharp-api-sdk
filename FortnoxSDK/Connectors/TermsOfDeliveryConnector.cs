@@ -14,31 +14,6 @@ internal class TermsOfDeliveryConnector : SearchableEntityConnector<TermsOfDeliv
         Endpoint = Endpoints.TermsOfDelivery;
     }
 
-    public TermsOfDelivery Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public TermsOfDelivery Update(TermsOfDelivery termsOfDelivery)
-    {
-        return UpdateAsync(termsOfDelivery).GetResult();
-    }
-
-    public TermsOfDelivery Create(TermsOfDelivery termsOfDelivery)
-    {
-        return CreateAsync(termsOfDelivery).GetResult();
-    }
-
-    public void Delete(string id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<TermsOfDelivery> Find(TermsOfDeliverySearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<TermsOfDelivery>> FindAsync(TermsOfDeliverySearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

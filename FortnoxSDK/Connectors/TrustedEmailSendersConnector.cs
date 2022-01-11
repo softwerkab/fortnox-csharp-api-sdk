@@ -15,21 +15,6 @@ internal class TrustedEmailSendersConnector : EntityConnector<TrustedEmailSender
         Endpoint = Endpoints.TrustedEmailSenders;
     }
 
-    public TrustedEmailSender Create(TrustedEmailSender trustedEmailSenders)
-    {
-        return CreateAsync(trustedEmailSenders).GetResult();
-    }
-
-    public void Delete(long? id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EmailSenders GetAll()
-    {
-        return GetAllAsync().GetResult();
-    }
-
     public async Task<TrustedEmailSender> CreateAsync(TrustedEmailSender trustedEmailSenders)
     {
         return await BaseCreate(trustedEmailSenders).ConfigureAwait(false);

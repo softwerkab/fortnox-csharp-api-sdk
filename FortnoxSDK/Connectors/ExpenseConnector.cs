@@ -14,21 +14,6 @@ internal class ExpenseConnector : SearchableEntityConnector<Expense, ExpenseSubs
         Endpoint = Endpoints.Expenses;
     }
 
-    public Expense Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public Expense Create(Expense expense)
-    {
-        return CreateAsync(expense).GetResult();
-    }
-
-    public EntityCollection<ExpenseSubset> Find(ExpenseSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<ExpenseSubset>> FindAsync(ExpenseSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

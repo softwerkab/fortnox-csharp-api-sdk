@@ -14,31 +14,6 @@ internal class UnitConnector : SearchableEntityConnector<Unit, Unit, UnitSearch>
         Endpoint = Endpoints.Units;
     }
 
-    public Unit Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public Unit Update(Unit unit)
-    {
-        return UpdateAsync(unit).GetResult();
-    }
-
-    public Unit Create(Unit unit)
-    {
-        return CreateAsync(unit).GetResult();
-    }
-
-    public void Delete(string id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<Unit> Find(UnitSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<Unit>> FindAsync(UnitSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

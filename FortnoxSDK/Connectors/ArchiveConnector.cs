@@ -20,61 +20,7 @@ internal class ArchiveConnector : EntityConnector<ArchiveFolder>, IArchiveConnec
         Endpoint = Endpoints.Archive;
     }
 
-    #region SYNC Interface Methods
-
-    public byte[] DownloadFile(string id, IdType idType = IdType.Id)
-    {
-        return DownloadFileAsync(id, idType).GetResult();
-    }
-
-    public FileInfo DownloadFile(string id, string localPath, IdType idType = IdType.Id)
-    {
-        return DownloadFileAsync(id, localPath, idType).GetResult();
-    }
-
-    public ArchiveFile UploadFile(string name, byte[] data, string folderPathOrId = null)
-    {
-        return UploadFileAsync(name, data, folderPathOrId).GetResult();
-    }
-
-    public ArchiveFile UploadFile(string name, Stream stream, string folderPathOrId = null)
-    {
-        return UploadFileAsync(name, stream, folderPathOrId).GetResult();
-    }
-
-    public ArchiveFile UploadFile(string localPath, string folderPathOrId = null)
-    {
-        return UploadFileAsync(localPath, folderPathOrId).GetResult();
-    }
-
-    public void DeleteFile(string id)
-    {
-        DeleteFileAsync(id).GetResult();
-    }
-
-    public ArchiveFolder GetFolder(string pathOrId = null)
-    {
-        return GetFolderAsync(pathOrId).GetResult();
-    }
-
-    public ArchiveFolder GetRoot()
-    {
-        return GetRootAsync().GetResult();
-    }
-
-    public ArchiveFolder CreateFolder(string folderName, string path = null)
-    {
-        return CreateFolderAsync(folderName, path).GetResult();
-    }
-
-    public void DeleteFolder(string pathOrId)
-    {
-        DeleteFolderAsync(pathOrId).GetResult();
-    }
-
-    #endregion SYNC Interface Methods
-
-    #region ASYNC Interface Methods
+    #region Interface Methods
 
     public async Task<byte[]> DownloadFileAsync(string id, IdType idType = IdType.Id)
     {
@@ -188,7 +134,7 @@ internal class ArchiveConnector : EntityConnector<ArchiveFolder>, IArchiveConnec
         await SendAsync(request).ConfigureAwait(false);
     }
 
-    #endregion ASYNC Interface Methods
+    #endregion Interface Methods
 
     private async Task<ArchiveFile> BaseUpload(string name, byte[] data, Dictionary<string, string> parameters, params string[] indices)
     {

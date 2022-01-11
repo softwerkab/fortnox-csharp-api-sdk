@@ -14,26 +14,6 @@ internal class LabelConnector : SearchableEntityConnector<Label, Label, LabelSea
         Endpoint = Endpoints.Labels;
     }
 
-    public Label Update(Label label)
-    {
-        return UpdateAsync(label).GetResult();
-    }
-
-    public Label Create(Label label)
-    {
-        return CreateAsync(label).GetResult();
-    }
-
-    public void Delete(long? id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<Label> Find(LabelSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<Label>> FindAsync(LabelSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

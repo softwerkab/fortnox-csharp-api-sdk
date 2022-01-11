@@ -16,26 +16,6 @@ internal class VoucherFileConnectionConnector : SearchableEntityConnector<Vouche
         Endpoint = Endpoints.VoucherFileConnections;
     }
 
-    public VoucherFileConnection Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public VoucherFileConnection Create(VoucherFileConnection voucherFileConnection, long? financialYearId = null)
-    {
-        return CreateAsync(voucherFileConnection, financialYearId).GetResult();
-    }
-
-    public void Delete(string id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<VoucherFileConnection> Find(VoucherFileConnectionSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<VoucherFileConnection>> FindAsync(VoucherFileConnectionSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

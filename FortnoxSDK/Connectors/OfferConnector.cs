@@ -14,56 +14,6 @@ internal class OfferConnector : SearchableEntityConnector<Offer, OfferSubset, Of
         Endpoint = Endpoints.Offers;
     }
 
-    public Offer Get(long? id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public Offer Update(Offer offer)
-    {
-        return UpdateAsync(offer).GetResult();
-    }
-
-    public Offer Create(Offer offer)
-    {
-        return CreateAsync(offer).GetResult();
-    }
-
-    public EntityCollection<OfferSubset> Find(OfferSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
-    public Offer CreateOrder(long? id)
-    {
-        return CreateOrderAsync(id).GetResult();
-    }
-
-    public Offer Cancel(long? id)
-    {
-        return CancelAsync(id).GetResult();
-    }
-
-    public Offer Email(long? id)
-    {
-        return EmailAsync(id).GetResult();
-    }
-
-    public byte[] Print(long? id)
-    {
-        return PrintAsync(id).GetResult();
-    }
-
-    public Offer ExternalPrint(long? id)
-    {
-        return ExternalPrintAsync(id).GetResult();
-    }
-
-    public byte[] Preview(long? id)
-    {
-        return PreviewAsync(id).GetResult();
-    }
-
     public async Task<EntityCollection<OfferSubset>> FindAsync(OfferSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

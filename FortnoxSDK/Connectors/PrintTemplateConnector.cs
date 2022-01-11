@@ -14,11 +14,6 @@ internal class PrintTemplateConnector : SearchableEntityConnector<PrintTemplate,
         Endpoint = Endpoints.PrintTemplates;
     }
 
-    public EntityCollection<PrintTemplate> Find(PrintTemplateSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<PrintTemplate>> FindAsync(PrintTemplateSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

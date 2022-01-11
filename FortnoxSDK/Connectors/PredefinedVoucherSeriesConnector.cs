@@ -14,21 +14,6 @@ internal class PredefinedVoucherSeriesConnector : SearchableEntityConnector<Pred
         Endpoint = Endpoints.PredefinedVoucherSeries;
     }
 
-    public PredefinedVoucherSeries Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public PredefinedVoucherSeries Update(PredefinedVoucherSeries predefinedVoucherSeries)
-    {
-        return UpdateAsync(predefinedVoucherSeries).GetResult();
-    }
-
-    public EntityCollection<PredefinedVoucherSeries> Find(PredefinedVoucherSeriesSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<PredefinedVoucherSeries>> FindAsync(PredefinedVoucherSeriesSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

@@ -14,31 +14,6 @@ internal class SalaryTransactionConnector : SearchableEntityConnector<SalaryTran
         Endpoint = Endpoints.SalaryTransactions;
     }
 
-    public SalaryTransaction Get(long? id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public SalaryTransaction Update(SalaryTransaction salaryTransaction)
-    {
-        return UpdateAsync(salaryTransaction).GetResult();
-    }
-
-    public SalaryTransaction Create(SalaryTransaction salaryTransaction)
-    {
-        return CreateAsync(salaryTransaction).GetResult();
-    }
-
-    public void Delete(long? id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<SalaryTransactionSubset> Find(SalaryTransactionSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<SalaryTransactionSubset>> FindAsync(SalaryTransactionSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

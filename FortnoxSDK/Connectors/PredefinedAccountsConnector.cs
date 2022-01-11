@@ -14,21 +14,6 @@ internal class PredefinedAccountsConnector : SearchableEntityConnector<Predefine
         Endpoint = Endpoints.PredefinedAccounts;
     }
 
-    public PredefinedAccount Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public PredefinedAccount Update(PredefinedAccount predefinedAccount)
-    {
-        return UpdateAsync(predefinedAccount).GetResult();
-    }
-
-    public EntityCollection<PredefinedAccount> Find(PredefinedAccountsSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<PredefinedAccount>> FindAsync(PredefinedAccountsSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

@@ -15,31 +15,6 @@ internal class AttendanceTransactionsConnector : SearchableEntityConnector<Atten
         Endpoint = Endpoints.AttendanceTransactions;
     }
 
-    public AttendanceTransaction Get(string employeeId, DateTime? date, AttendanceCauseCode? code)
-    {
-        return GetAsync(employeeId, date, code).GetResult();
-    }
-
-    public AttendanceTransaction Update(AttendanceTransaction attendanceTransaction)
-    {
-        return UpdateAsync(attendanceTransaction).GetResult();
-    }
-
-    public AttendanceTransaction Create(AttendanceTransaction attendanceTransaction)
-    {
-        return CreateAsync(attendanceTransaction).GetResult();
-    }
-
-    public void Delete(string employeeId, DateTime? date, AttendanceCauseCode? code)
-    {
-        DeleteAsync(employeeId, date, code).GetResult();
-    }
-
-    public EntityCollection<AttendanceTransactionSubset> Find(AttendanceTransactionsSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<AttendanceTransactionSubset>> FindAsync(AttendanceTransactionsSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

@@ -14,31 +14,6 @@ internal class CurrencyConnector : SearchableEntityConnector<Currency, Currency,
         Endpoint = Endpoints.Currencies;
     }
 
-    public Currency Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public Currency Update(Currency currency)
-    {
-        return UpdateAsync(currency).GetResult();
-    }
-
-    public Currency Create(Currency currency)
-    {
-        return CreateAsync(currency).GetResult();
-    }
-
-    public void Delete(string id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<Currency> Find(CurrencySearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<Currency>> FindAsync(CurrencySearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

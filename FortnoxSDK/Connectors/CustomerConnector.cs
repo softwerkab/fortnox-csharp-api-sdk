@@ -14,31 +14,6 @@ internal class CustomerConnector : SearchableEntityConnector<Customer, CustomerS
         Endpoint = Endpoints.Customers;
     }
 
-    public Customer Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public Customer Update(Customer customer)
-    {
-        return UpdateAsync(customer).GetResult();
-    }
-
-    public Customer Create(Customer customer)
-    {
-        return CreateAsync(customer).GetResult();
-    }
-
-    public void Delete(string id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<CustomerSubset> Find(CustomerSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<CustomerSubset>> FindAsync(CustomerSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

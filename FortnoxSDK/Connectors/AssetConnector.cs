@@ -17,31 +17,6 @@ internal class AssetConnector : SearchableEntityConnector<Asset, AssetSubset, As
         Serializer = new AssetSerializer();
     }
 
-    public Asset Get(long? id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public Asset Update(Asset asset)
-    {
-        return UpdateAsync(asset).GetResult();
-    }
-
-    public Asset Create(Asset asset)
-    {
-        return CreateAsync(asset).GetResult();
-    }
-
-    public void Delete(long? id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<AssetSubset> Find(AssetSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<AssetSubset>> FindAsync(AssetSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

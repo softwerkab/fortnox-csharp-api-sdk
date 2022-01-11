@@ -13,32 +13,7 @@ internal class WayOfDeliveryConnector : SearchableEntityConnector<WayOfDelivery,
     {
         Endpoint = Endpoints.WayOfDelivery;
     }
-
-    public WayOfDelivery Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public WayOfDelivery Update(WayOfDelivery wayOfDelivery)
-    {
-        return UpdateAsync(wayOfDelivery).GetResult();
-    }
-
-    public WayOfDelivery Create(WayOfDelivery wayOfDelivery)
-    {
-        return CreateAsync(wayOfDelivery).GetResult();
-    }
-
-    public void Delete(string id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<WayOfDelivery> Find(WayOfDeliverySearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
+    
     public async Task<EntityCollection<WayOfDelivery>> FindAsync(WayOfDeliverySearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

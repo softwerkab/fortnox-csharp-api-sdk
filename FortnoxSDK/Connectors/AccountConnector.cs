@@ -17,58 +17,6 @@ internal class AccountConnector : SearchableEntityConnector<Account, AccountSubs
         Endpoint = Endpoints.Accounts;
     }
 
-    /// <summary>
-    /// Find a account based on id
-    /// </summary>
-    /// <param name="id">Identifier of the account to find</param>
-    /// <param name="finYearID"></param>
-    /// <returns>The found account</returns>
-    public Account Get(long? id, long? finYearID = null)
-    {
-        return GetAsync(id, finYearID).GetResult();
-    }
-
-    /// <summary>
-    /// Updates a account
-    /// </summary>
-    /// <param name="account">The account to update</param>
-    /// <param name="finYearID"></param>
-    /// <returns>The updated account</returns>
-    public Account Update(Account account, long? finYearID = null)
-    {
-        return UpdateAsync(account, finYearID).GetResult();
-    }
-
-    /// <summary>
-    /// Creates a new account
-    /// </summary>
-    /// <param name="account">The account to create</param>
-    /// <param name="finYearID"></param>
-    /// <returns>The created account</returns>
-    public Account Create(Account account, long? finYearID = null)
-    {
-        return CreateAsync(account, finYearID).GetResult();
-    }
-
-    /// <summary>
-    /// Deletes a account
-    /// </summary>
-    /// <param name="id">Identifier of the account to delete</param>
-    /// <param name="finYearID"></param>
-    public void Delete(long? id, long? finYearID = null)
-    {
-        DeleteAsync(id, finYearID).GetResult();
-    }
-
-    /// <summary>
-    /// Gets a list of accounts
-    /// </summary>
-    /// <returns>A list of accounts</returns>
-    public EntityCollection<AccountSubset> Find(AccountSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<AccountSubset>> FindAsync(AccountSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

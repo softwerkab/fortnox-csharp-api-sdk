@@ -14,26 +14,6 @@ internal class AssetFileConnectionConnector : SearchableEntityConnector<AssetFil
         Endpoint = Endpoints.AssetFileConnections;
     }
 
-    public AssetFileConnection Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public AssetFileConnection Create(AssetFileConnection assetFileConnection)
-    {
-        return CreateAsync(assetFileConnection).GetResult();
-    }
-
-    public void Delete(string id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<AssetFileConnection> Find(AssetFileConnectionSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<AssetFileConnection>> FindAsync(AssetFileConnectionSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

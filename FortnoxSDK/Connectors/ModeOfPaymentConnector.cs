@@ -14,31 +14,6 @@ internal class ModeOfPaymentConnector : SearchableEntityConnector<ModeOfPayment,
         Endpoint = Endpoints.ModesOfPayments;
     }
 
-    public ModeOfPayment Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public ModeOfPayment Update(ModeOfPayment modeOfPayment)
-    {
-        return UpdateAsync(modeOfPayment).GetResult();
-    }
-
-    public ModeOfPayment Create(ModeOfPayment modeOfPayment)
-    {
-        return CreateAsync(modeOfPayment).GetResult();
-    }
-
-    public void Delete(string id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<ModeOfPayment> Find(ModeOfPaymentSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<ModeOfPayment>> FindAsync(ModeOfPaymentSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

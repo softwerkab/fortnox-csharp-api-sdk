@@ -14,56 +14,6 @@ internal class OrderConnector : SearchableEntityConnector<Order, OrderSubset, Or
         Endpoint = Endpoints.Orders;
     }
 
-    public Order Get(long? id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public Order Update(Order order)
-    {
-        return UpdateAsync(order).GetResult();
-    }
-
-    public Order Create(Order order)
-    {
-        return CreateAsync(order).GetResult();
-    }
-
-    public EntityCollection<OrderSubset> Find(OrderSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
-    public Order CreateInvoice(long? id)
-    {
-        return CreateInvoiceAsync(id).GetResult();
-    }
-
-    public Order Cancel(long? id)
-    {
-        return CancelAsync(id).GetResult();
-    }
-
-    public Order Email(long? id)
-    {
-        return EmailAsync(id).GetResult();
-    }
-
-    public byte[] Print(long? id)
-    {
-        return PrintAsync(id).GetResult();
-    }
-
-    public Order ExternalPrint(long? id)
-    {
-        return ExternalPrintAsync(id).GetResult();
-    }
-
-    public byte[] Preview(long? id)
-    {
-        return PreviewAsync(id).GetResult();
-    }
-
     public async Task<EntityCollection<OrderSubset>> FindAsync(OrderSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

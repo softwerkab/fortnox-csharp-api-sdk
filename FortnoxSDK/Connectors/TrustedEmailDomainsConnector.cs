@@ -14,26 +14,6 @@ internal class TrustedEmailDomainsConnector : SearchableEntityConnector<TrustedE
         Endpoint = Endpoints.TrustedEmailDomains;
     }
 
-    public TrustedEmailDomain Get(long? id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public TrustedEmailDomain Create(TrustedEmailDomain trustedEmailDomains)
-    {
-        return CreateAsync(trustedEmailDomains).GetResult();
-    }
-
-    public void Delete(long? id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<TrustedEmailDomain> Find(TrustedEmailDomainsSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<TrustedEmailDomain>> FindAsync(TrustedEmailDomainsSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

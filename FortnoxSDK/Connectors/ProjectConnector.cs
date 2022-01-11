@@ -14,31 +14,6 @@ internal class ProjectConnector : SearchableEntityConnector<Project, ProjectSubs
         Endpoint = Endpoints.Projects;
     }
 
-    public Project Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public Project Update(Project project)
-    {
-        return UpdateAsync(project).GetResult();
-    }
-
-    public Project Create(Project project)
-    {
-        return CreateAsync(project).GetResult();
-    }
-
-    public void Delete(string id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<ProjectSubset> Find(ProjectSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<ProjectSubset>> FindAsync(ProjectSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

@@ -14,31 +14,6 @@ internal class CostCenterConnector : SearchableEntityConnector<CostCenter, CostC
         Endpoint = Endpoints.CostCenters;
     }
 
-    public CostCenter Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public CostCenter Update(CostCenter costCenter)
-    {
-        return UpdateAsync(costCenter).GetResult();
-    }
-
-    public CostCenter Create(CostCenter costCenter)
-    {
-        return CreateAsync(costCenter).GetResult();
-    }
-
-    public void Delete(string id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<CostCenter> Find(CostCenterSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<CostCenter>> FindAsync(CostCenterSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

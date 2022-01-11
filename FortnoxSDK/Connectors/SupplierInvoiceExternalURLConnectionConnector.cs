@@ -13,32 +13,7 @@ internal class SupplierInvoiceExternalURLConnectionConnector : SearchableEntityC
     {
         Endpoint = Endpoints.SupplierInvoiceExternalUrlConnections;
     }
-
-    public SupplierInvoiceExternalURLConnection Get(long? id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public SupplierInvoiceExternalURLConnection Update(SupplierInvoiceExternalURLConnection supplierInvoiceExternalURLConnection)
-    {
-        return UpdateAsync(supplierInvoiceExternalURLConnection).GetResult();
-    }
-
-    public SupplierInvoiceExternalURLConnection Create(SupplierInvoiceExternalURLConnection supplierInvoiceExternalURLConnection)
-    {
-        return CreateAsync(supplierInvoiceExternalURLConnection).GetResult();
-    }
-
-    public void Delete(long? id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<SupplierInvoiceExternalURLConnection> Find(SupplierInvoiceExternalURLConnectionSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
+    
     public async Task<EntityCollection<SupplierInvoiceExternalURLConnection>> FindAsync(SupplierInvoiceExternalURLConnectionSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

@@ -14,31 +14,6 @@ internal class ArticleConnector : SearchableEntityConnector<Article, ArticleSubs
         Endpoint = Endpoints.Articles;
     }
 
-    public Article Get(string id)
-    {
-        return GetAsync(id).GetResult();
-    }
-
-    public Article Update(Article article)
-    {
-        return UpdateAsync(article).GetResult();
-    }
-
-    public Article Create(Article article)
-    {
-        return CreateAsync(article).GetResult();
-    }
-
-    public void Delete(string id)
-    {
-        DeleteAsync(id).GetResult();
-    }
-
-    public EntityCollection<ArticleSubset> Find(ArticleSearch searchSettings)
-    {
-        return FindAsync(searchSettings).GetResult();
-    }
-
     public async Task<EntityCollection<ArticleSubset>> FindAsync(ArticleSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);

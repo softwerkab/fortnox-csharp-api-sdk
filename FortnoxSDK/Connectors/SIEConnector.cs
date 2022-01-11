@@ -14,12 +14,7 @@ internal class SIEConnector : BaseConnector, ISIEConnector
     {
         Endpoint = Endpoints.SIE;
     }
-
-    public byte[] Get(SIEType type, long? finYearID = null, SIEExportOptions exportOptions = null)
-    {
-        return GetAsync(type, finYearID, exportOptions).GetResult();
-    }
-
+    
     public async Task<byte[]> GetAsync(SIEType type, long? finYearID = null, SIEExportOptions exportOptions = null)
     {
         var request = new FileDownloadRequest()
