@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
-using Fortnox.SDK.Authorization;
 
 namespace Fortnox.SDK.Utility;
 

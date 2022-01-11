@@ -5,7 +5,6 @@ using Fortnox.SDK.Entities;
 using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Fortnox.SDK.Serialization;
-using Fortnox.SDK.Utility;
 using Newtonsoft.Json.Linq;
 
 namespace Fortnox.SDK.Connectors;

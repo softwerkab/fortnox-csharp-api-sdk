@@ -6,7 +6,6 @@ using Fortnox.SDK.Entities;
 using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Requests;
 using Fortnox.SDK.Search;
-using Fortnox.SDK.Utility;
 
 namespace Fortnox.SDK.Connectors;
 

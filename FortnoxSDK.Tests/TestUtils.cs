@@ -3,7 +3,6 @@ using System.IO;
 using Fortnox.SDK;
 using Fortnox.SDK.Authorization;
 using Fortnox.SDK.Exceptions;
-using TimeZoneConverter;
 
 namespace FortnoxSDK.Tests;
 
