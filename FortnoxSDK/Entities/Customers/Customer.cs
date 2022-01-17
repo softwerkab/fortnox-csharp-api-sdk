@@ -142,6 +142,12 @@ public class Customer
     ///<summary> Specific carbon copy email address used for orders sent to the customer. This must be a valid email address. </summary>
     [JsonProperty]
     public string EmailOrderCC { get; set; }
+    
+    /// <summary>
+    /// External reference for the customer. Free text.
+    /// </summary>
+    [JsonProperty]
+    public string ExternalReference { get; set; }
 
     ///<summary> Fax number for the customer. </summary>
     [JsonProperty]
