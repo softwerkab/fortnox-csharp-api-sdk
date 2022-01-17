@@ -3,9 +3,6 @@ namespace Fortnox.SDK;
 
 public class ApiConstants
 {
-    // TODO: Temporary constant - remove when not needed anymore
-    internal const string ObsoleteSyncMethodWarning = @"Method will be removed. Use async variant. If it doesn't exist, report an issue. See https://github.com/FortnoxAB/csharp-api-sdk/issues/180";
-
     /// <summary>
     /// Base URI of Fortnox API server.
     /// </summary>

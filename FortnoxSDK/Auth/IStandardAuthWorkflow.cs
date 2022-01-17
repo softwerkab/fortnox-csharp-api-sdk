@@ -61,7 +61,7 @@ public interface IStandardAuthWorkflow
     /// <param name="refreshToken">OAuth 2 refresh token to be revoked. </param>
     /// <param name="clientId">Client id given to you by Fortnox.</param>
     /// <param name="clientSecret">Client secret given to you by Fortnox.</param>
-    /// <returns>Success of the revocation</returns>
+    /// <returns>"Revoked" property taken from the API response.</returns>
     /// <exception cref="FortnoxApiException">If the Fortnox API returns an error.</exception>
     Task<bool> RevokeRefreshTokenAsync(string refreshToken, string clientId, string clientSecret);
 
@@ -69,7 +69,7 @@ public interface IStandardAuthWorkflow
     /// Use this function to revoke a non-expirable token issued by the legacy authentication workflow.
     /// </summary>
     /// <param name="accessToken">GUID-formatted token to be revoked. </param>
-    /// <returns>Success of the revocation</returns>
+    /// <returns>"Revoked" property taken from the API response.</returns>
     /// <exception cref="FortnoxApiException">If the Fortnox API returns an error.</exception>
     Task<bool> RevokeLegacyTokenAsync(string accessToken);
 }
