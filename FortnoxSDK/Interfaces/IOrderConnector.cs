@@ -18,4 +18,5 @@ public interface IOrderConnector : IEntityConnector
     Task<byte[]> PrintAsync(long? id);
     Task<Order> ExternalPrintAsync(long? id);
     Task<byte[]> PreviewAsync(long? id);
+    Task<Order> WarehouseReady(long? id);
 }

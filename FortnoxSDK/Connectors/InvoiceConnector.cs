@@ -77,4 +77,9 @@ internal class InvoiceConnector : SearchableEntityConnector<Invoice, InvoiceSubs
     {
         return await DoDownloadActionAsync(id.ToString(), Action.Preview).ConfigureAwait(false);
     }
+
+    public async Task<Invoice> WarehouseReady(long? id)
+    {
+        return await DoActionAsync(id.ToString(), Action.WarehouseReady).ConfigureAwait(false);
+    }
 }

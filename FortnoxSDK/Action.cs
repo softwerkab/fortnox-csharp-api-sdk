@@ -51,7 +51,10 @@ public enum Action
     EInvoice,
 
     [EnumMember(Value = "createorder")]
-    CreateOrder
+    CreateOrder,
+
+    [EnumMember(Value = "warehouseready")]
+    WarehouseReady
 }
 
 public static class ActionExtensions
