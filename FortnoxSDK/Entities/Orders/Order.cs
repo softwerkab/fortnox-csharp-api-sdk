@@ -275,4 +275,24 @@ public class Order
     ///<summary> Order zip code </summary>
     [JsonProperty]
     public string ZipCode { get; set; }
+
+    /// <summary> The stock point that the items are to taken from or has been taken from. </summary>
+    [JsonProperty]
+    public string StockPointCode { get; set; }
+
+    /// <summary> The stock point that the items are to taken from or has been taken from. </summary>
+    [JsonProperty]
+    public string StockPointId { get; set; }
+
+    /// <summary> Used to see if the document has been marked as ready in warehouse. </summary>
+    [ReadOnly]
+    [JsonProperty]
+    public bool? WarehouseReady { get; set; }
+
+    /// <summary> The date that the document was marked as ready in warehouse. </summary>
+    [JsonProperty]
+    public DateTime? OutboundDate { get; set; }
+
+    [JsonProperty]
+    public DeliveryState? DeliveryState { get; set; }
 }
