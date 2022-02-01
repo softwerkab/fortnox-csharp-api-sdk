@@ -86,4 +86,18 @@ public class OrderRow
     /// <remarks> See https://developer.fortnox.se/blog/updating-document-rows-using-rowid/ </remarks>
     [JsonProperty]
     public long? RowId { get; set; }
+
+
+    /// <summary> The stock point that the items are to taken from or has been taken from. </summary>
+    [JsonProperty]
+    public string StockPointCode { get; set; }
+
+    /// <summary> The stock point that the items are to taken from or has been taken from. </summary>
+    [JsonProperty]
+    public string StockPointId { get; set; }
+
+    ///<summary> Ordered quantity </summary>
+    ///<remarks>Can only be modified when the document is in the delivery state. (Invoices are always in the delivery state</remarks>
+    [JsonProperty]
+    public decimal? ReservedQuantity { get; set; }
 }

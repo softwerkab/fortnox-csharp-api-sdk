@@ -381,4 +381,12 @@ public class Invoice
     ///<summary> Zip code of the invoice. </summary>
     [JsonProperty]
     public string ZipCode { get; set; }
+
+    /// <summary> Used to see if the document has been marked as ready in warehouse. </summary>
+    [JsonProperty]
+    public bool? WarehouseReady { get; set; }
+
+    /// <summary> The date that the document was marked as ready in warehouse. </summary>
+    [JsonProperty]
+    public DateTime? OutboundDate { get; set; }
 }

@@ -92,4 +92,8 @@ public class InvoiceRow
     /// <remarks> See https://developer.fortnox.se/blog/updating-document-rows-using-rowid/ </remarks>
     [JsonProperty]
     public long? RowId { get; set; }
+
+    /// <summary> The stock point that the items are to taken from or has been taken from. </summary>
+    [JsonProperty]
+    public string StockPointCode { get; set; }
 }
