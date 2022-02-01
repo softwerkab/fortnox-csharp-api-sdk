@@ -62,4 +62,9 @@ internal class OrderConnector : SearchableEntityConnector<Order, OrderSubset, Or
     {
         return await DoDownloadActionAsync(id.ToString(), Action.Preview).ConfigureAwait(false);
     }
+
+    public async Task<Order> WarehouseReady(long? id)
+    {
+        return await DoActionAsync(id.ToString(), Action.WarehouseReady).ConfigureAwait(false);
+    }
 }

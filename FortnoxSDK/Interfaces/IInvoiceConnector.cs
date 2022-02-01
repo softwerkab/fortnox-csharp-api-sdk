@@ -22,4 +22,5 @@ public interface IInvoiceConnector : IEntityConnector
     Task<byte[]> PrintReminderAsync(long? id);
     Task<Invoice> ExternalPrintAsync(long? id);
     Task<byte[]> PreviewAsync(long? id);
+    Task<Invoice> WarehouseReady(long? id);
 }
