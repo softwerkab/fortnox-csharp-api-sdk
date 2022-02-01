@@ -111,11 +111,11 @@ public class AuthTests
     public async Task Revoke_LegacyToken()
     {
         var authClient = new FortnoxAuthClient();
-        var authWorkflow = authClient.StandardAuthWorkflow;
+        var authWorkflow = authClient.StaticTokenAuthWorkflow;
 
         var accessToken = Guid.NewGuid().ToString();
 
-        var success = await authWorkflow.RevokeLegacyTokenAsync(accessToken);
+        var success = await authWorkflow.RevokeTokenAsync(accessToken);
         Assert.IsTrue(success);
     }
 

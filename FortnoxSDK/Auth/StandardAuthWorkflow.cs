@@ -152,28 +152,4 @@ internal class StandardAuthWorkflow : BaseClient, IStandardAuthWorkflow
 
         return result.Revoked;
     }
-
-    public async Task<bool> RevokeLegacyTokenAsync(string accessToken)
-    {
-        if (string.IsNullOrEmpty(accessToken))
-            throw new ArgumentException("Argument is null or empty.", nameof(accessToken));
-
-        var request = new HttpRequestMessage(HttpMethod.Post, AuthRevokeUri);
-
-        var parameters = new Dictionary<string, string>();
-        parameters.Add("token", accessToken);
-
-        var formData = new MultipartFormDataContent();
-
-        foreach (var parameter in parameters)
-            formData.Add(new StringContent(parameter.Value), parameter.Key);
-
-        request.Content = formData;
-
-        var responseData = await SendAsync(request).ConfigureAwait(false);
-        var responseJson = Encoding.UTF8.GetString(responseData);
-        var result = Serializer.Deserialize<RevokeResult>(responseJson);
-
-        return result.Revoked;
-    }
 }
