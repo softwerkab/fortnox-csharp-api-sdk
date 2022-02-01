@@ -287,7 +287,7 @@ public class Order
     /// <summary> Used to see if the document has been marked as ready in warehouse. </summary>
     [ReadOnly]
     [JsonProperty]
-    public bool? WarehouseReady { get; set; }
+    public bool? WarehouseReady { get; private set; }
 
     /// <summary> The date that the document was marked as ready in warehouse. </summary>
     [JsonProperty]
