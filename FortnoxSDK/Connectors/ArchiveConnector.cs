@@ -71,7 +71,7 @@ internal class ArchiveConnector : EntityConnector<ArchiveFolder>, IArchiveConnec
     public async Task<ArchiveFile> UploadFileAsync(string localPath, string folderPathOrId = null)
     {
         var fileInfo = new FileInfo(localPath);
-        return await UploadFileAsync(fileInfo.Name, fileInfo.ToBytes().GetResult(), folderPathOrId).ConfigureAwait(false);
+        return await UploadFileAsync(fileInfo.Name, await fileInfo.ToBytes(), folderPathOrId).ConfigureAwait(false);
     }
 
     public async Task DeleteFileAsync(string id)
