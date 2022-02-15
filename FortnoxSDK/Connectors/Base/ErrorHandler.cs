@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Serialization;
