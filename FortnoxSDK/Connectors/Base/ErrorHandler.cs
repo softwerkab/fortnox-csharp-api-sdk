@@ -18,9 +18,9 @@ internal class ErrorHandler
         Serializer = new JsonEntitySerializer();
     }
 
-    public void HandleErrorResponse(HttpResponseMessage response)
+    public async Task HandleErrorResponseAsync(HttpResponseMessage response)
     {
-        var content = response.Content.ReadAsStringAsync().GetResult();
+        var content = await response.Content.ReadAsStringAsync();
         var errorInformation = ParseError(content);
 
         var exception = errorInformation?.Message != null
