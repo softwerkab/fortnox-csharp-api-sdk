@@ -33,7 +33,7 @@ internal abstract class BaseClient
             if (response.IsSuccessStatusCode)
                 return await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
 
-            ErrorHandler.HandleErrorResponse(response);
+            await ErrorHandler.HandleErrorResponseAsync(response).ConfigureAwait(false);
             return default;
         }
         catch (HttpRequestException ex)
