@@ -82,4 +82,7 @@ public enum AbsenceCauseCode
     ///<summary> Vård av barn </summary>
     [EnumMember(Value = "VAB")]
     VAB,
+    ///<summary> Flextid- </summary>
+    [EnumMember(Value = "FRX")]
+    FRX
 }

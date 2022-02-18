@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.Serialization;
 
 namespace Fortnox.SDK.Entities;
@@ -17,6 +18,7 @@ public enum AttendanceCauseCode
     [EnumMember(Value = "BE1")]
     BE1,
     ///<summary> Flextid +/- </summary>
+    [Obsolete("Use NVX code for Flextid+ and absence code FRX for Flextid-")]
     [EnumMember(Value = "FLX")]
     FLX,
     ///<summary> HelglÖn </summary>
@@ -127,4 +129,7 @@ public enum AttendanceCauseCode
     ///<summary> Arbetstid </summary>
     [EnumMember(Value = "TID")]
     TID,
+    ///<summary> Flextid+ </summary>
+    [EnumMember(Value = "NVX")]
+    NVX
 }
