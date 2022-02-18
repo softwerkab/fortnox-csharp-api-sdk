@@ -16,8 +16,9 @@ internal class StaticTokenAuthWorkflow : BaseClient, IStaticTokenAuthWorkflow
 
     public ISerializer Serializer { get; internal set; }
 
-    public StaticTokenAuthWorkflow()
+    public StaticTokenAuthWorkflow(HttpClient httpClient)
     {
+        HttpClient = httpClient;
         Serializer = new JsonEntitySerializer();
     }
 

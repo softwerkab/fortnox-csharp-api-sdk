@@ -27,6 +27,6 @@ public class FortnoxAuthClient
         HttpClient = httpClient;
     }
 
-    public IStaticTokenAuthWorkflow StaticTokenAuthWorkflow => new StaticTokenAuthWorkflow { HttpClient = HttpClient};
-    public IStandardAuthWorkflow StandardAuthWorkflow => new StandardAuthWorkflow { HttpClient = HttpClient };
+    public IStaticTokenAuthWorkflow StaticTokenAuthWorkflow => new StaticTokenAuthWorkflow(HttpClient);
+    public IStandardAuthWorkflow StandardAuthWorkflow => new StandardAuthWorkflow(HttpClient);
 }
