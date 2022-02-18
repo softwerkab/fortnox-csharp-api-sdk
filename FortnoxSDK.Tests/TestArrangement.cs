@@ -14,8 +14,16 @@ public class TestArrangement
     {
         try
         {
-            // Delete hanging entities from failed execution
             await FortnoxClient.CostCenterConnector.DeleteAsync("TMP");
+        }
+        catch
+        {
+            // ignored
+        }
+
+        try
+        {
+            await FortnoxClient.WayOfDeliveryConnector.DeleteAsync("TST");
         }
         catch
         {
