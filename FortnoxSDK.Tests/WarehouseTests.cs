@@ -11,7 +11,7 @@ namespace FortnoxSDK.Tests;
 [TestClass]
 public class WarehouseTests
 {
-    public FortnoxClient FortnoxClient = new FortnoxClient(new StaticTokenAuth("006738d2-3698-44af-b6d2-3103f3bf5b89", TestCredentials.Client_Secret));
+    public FortnoxClient FortnoxClient = new FortnoxClient(new StaticTokenAuth("006738d2-3698-44af-b6d2-3103f3bf5b89", TestCredentials.Client_Secret)) { WarehouseEnabled = true };
 
     [TestMethod]
     public async Task Test_Order_WarehouseReady()
@@ -81,6 +81,42 @@ public class WarehouseTests
 
         #region Delete arranged resources
         await FortnoxClient.InvoiceConnector.CancelAsync(invoice.DocumentNumber);
+        await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
+        //client.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+        #endregion Delete arranged resources
+    }
+
+    public async Task Test_Order_DeliveryState_Update()
+    {
+        #region Arrange
+        var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "richard.randak@softwerk.se" });
+        var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+        #endregion Arrange
+
+        var order = new Order()
+        {
+            Comments = "TestOrder",
+            CustomerNumber = tmpCustomer.CustomerNumber,
+            OrderDate = new DateTime(2019, 1, 20), //"2019-01-20",
+            OrderRows = new List<OrderRow>()
+            {
+                new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = 20, DeliveredQuantity = 10},
+                new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = 20, DeliveredQuantity = 20},
+                new OrderRow(){ ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = 20, DeliveredQuantity = 15}
+            },
+            DeliveryState = DeliveryState.Reservation
+        };
+
+        order = await FortnoxClient.OrderConnector.CreateAsync(order);
+        Assert.AreEqual(DeliveryState.Reservation, order.DeliveryState);
+
+        order.DeliveryState = DeliveryState.Delivery;
+
+        order = await FortnoxClient.OrderConnector.UpdateAsync(order);
+        Assert.AreEqual(DeliveryState.Delivery, order.WarehouseReady);
+
+        #region Delete arranged resources
+        await FortnoxClient.OrderConnector.CancelAsync(order.DocumentNumber);
         await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
         //client.ArticleConnector.Delete(tmpArticle.ArticleNumber);
         #endregion Delete arranged resources

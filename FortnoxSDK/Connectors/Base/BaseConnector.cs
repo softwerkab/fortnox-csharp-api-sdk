@@ -10,13 +10,10 @@ namespace Fortnox.SDK.Connectors.Base;
 
 internal abstract class BaseConnector : BaseClient
 {
-    protected ISerializer Serializer { get; set; }
-    protected string Endpoint { get; set; }
+    public bool WarehouseEnabled { get; set; }
+    protected virtual ISerializer Serializer => new JsonEntitySerializer(WarehouseEnabled);
 
-    protected BaseConnector()
-    {
-        Serializer = new JsonEntitySerializer();
-    }
+    protected string Endpoint { get; set; }
 
     protected async Task<byte[]> SendAsync(BaseRequest fortnoxRequest)
     {

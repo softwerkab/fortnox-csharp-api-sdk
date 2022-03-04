@@ -293,6 +293,7 @@ public class Order
     [JsonProperty]
     public DateTime? OutboundDate { get; set; }
 
+    [WarehouseRequired]
     [JsonProperty]
     public DeliveryState? DeliveryState { get; set; }
 }
