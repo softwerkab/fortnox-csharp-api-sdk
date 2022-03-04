@@ -11,10 +11,11 @@ namespace Fortnox.SDK.Connectors;
 
 internal class AssetTypesConnector : SearchableEntityConnector<AssetType, AssetTypesSubset, AssetTypesSearch>, IAssetTypesConnector
 {
+    protected override ISerializer Serializer => new AssetTypeSerializer();
+
     public AssetTypesConnector()
     {
         Endpoint = Endpoints.AssetTypes;
-        Serializer = new AssetTypeSerializer();
     }
 
     public async Task<EntityCollection<AssetTypesSubset>> FindAsync(AssetTypesSearch searchSettings)

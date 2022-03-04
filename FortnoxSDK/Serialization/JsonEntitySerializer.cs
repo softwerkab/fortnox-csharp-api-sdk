@@ -12,14 +12,14 @@ namespace Fortnox.SDK.Serialization;
 internal class JsonEntitySerializer : ISerializer
 {
     private readonly JsonSerializerSettings settings;
-
-    public JsonEntitySerializer()
+    
+    public JsonEntitySerializer(bool warehouseEnabled = false)
     {
         settings = new JsonSerializerSettings();
         settings.DateFormatString = "yyyy-MM-dd";
         settings.Converters.Add(new StringEnumConverter());
         settings.NullValueHandling = NullValueHandling.Ignore;
-        settings.ContractResolver = new MyJsonContractResolver(settings);
+        settings.ContractResolver = new MyJsonContractResolver(settings, warehouseEnabled);
     }
 
     public string Serialize<T>(T entity)
@@ -38,18 +38,23 @@ internal class JsonEntitySerializer : ISerializer
     private class MyJsonContractResolver : DefaultContractResolver
     {
         private readonly JsonSerializerSettings settings;
+        private readonly bool warehouseEnabled;
 
-        public MyJsonContractResolver(JsonSerializerSettings settings)
+        public MyJsonContractResolver(JsonSerializerSettings settings, bool warehouseEnabled)
         {
             this.settings = settings;
+            this.warehouseEnabled = warehouseEnabled;
         }
 
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {
             var property = base.CreateProperty(member, memberSerialization);
 
+            var warehouseRequired = member.HasAttribute<WarehouseRequiredAttribute>();
+            var isDisabled = warehouseRequired && !warehouseEnabled;
+
             var isReadOnly = member.HasAttribute<ReadOnlyAttribute>();
-            property.ShouldSerialize = o => !isReadOnly && !HasEmptyObjectValue(o, (PropertyInfo)member);
+            property.ShouldSerialize = o => !isDisabled && !isReadOnly && !HasEmptyObjectValue(o, (PropertyInfo)member);
 
             var hasGenericName = member.HasAttribute<GenericPropertyNameAttribute>();
 

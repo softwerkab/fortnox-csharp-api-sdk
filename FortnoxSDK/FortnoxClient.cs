@@ -3,6 +3,7 @@ using System.Net.Http;
 using Fortnox.SDK.Authorization;
 using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Interfaces;
+using Fortnox.SDK.Serialization;
 
 namespace Fortnox.SDK;
 
@@ -33,6 +34,12 @@ public class FortnoxClient
     /// <value>Defaults to <c>true</c>.</value>
     public bool UseRateLimiter { get; set; } = true;
 
+    /// <summary>
+    /// Some features require warehouse module to be enabled.
+    /// If not set, some properties in the model may be ignored.
+    /// </summary>
+    public bool WarehouseEnabled { get; set; } = false;
+
     public FortnoxClient()
     {
     }
@@ -52,11 +59,12 @@ public class FortnoxClient
 
     private TConnector Get<TConnector>() where TConnector : BaseConnector, new()
     {
-        return new TConnector
+        return new TConnector()
         {
             Authorization = Authorization,
             HttpClient = HttpClient,
             UseRateLimiter = UseRateLimiter,
+            WarehouseEnabled = WarehouseEnabled
         };
     }
 
