@@ -23,7 +23,7 @@ public class AccountChartTests
 
         var fullCollection = await connector.FindAsync(null);
 
-        Assert.AreEqual(6, fullCollection.Entities.Count);
+        Assert.AreEqual(8, fullCollection.Entities.Count);
         Assert.IsNotNull(fullCollection.Entities.First().Name);
 
         //Limit not supported
