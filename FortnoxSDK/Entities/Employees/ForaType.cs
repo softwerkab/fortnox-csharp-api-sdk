@@ -112,4 +112,77 @@ public enum ForaType
     ///<summary> Salaried employee, Employed CEO </summary>
     [EnumMember(Value = "T6")]
     T6,
+
+    [EnumMember(Value = "A78")]
+    A78,
+    [EnumMember(Value = "A79")]
+    A79,
+    [EnumMember(Value = "A80")]
+    A80,
+    [EnumMember(Value = "A81")]
+    A81,
+    [EnumMember(Value = "A82")]
+    A82,
+    [EnumMember(Value = "A83")]
+    A83,
+    [EnumMember(Value = "A84")]
+    A84,
+    [EnumMember(Value = "A85")]
+    A85,
+    [EnumMember(Value = "A86")]
+    A86,
+    [EnumMember(Value = "A11")]
+    A11,
+    [EnumMember(Value = "A13")]
+    A13,
+    [EnumMember(Value = "A14")]
+    A14,
+    [EnumMember(Value = "A15")]
+    A15,
+    [EnumMember(Value = "A16")]
+    A16,
+    [EnumMember(Value = "A17")]
+    A17,
+    [EnumMember(Value = "A18")]
+    A18,
+    [EnumMember(Value = "A19")]
+    A19,
+    [EnumMember(Value = "A20")]
+    A20,
+    [EnumMember(Value = "A21")]
+    A21,
+    [EnumMember(Value = "A22")]
+    A22,
+    [EnumMember(Value = "A23")]
+    A23,
+    [EnumMember(Value = "A24")]
+    A24,
+    [EnumMember(Value = "A25")]
+    A25,
+    [EnumMember(Value = "A26")]
+    A26,
+    [EnumMember(Value = "A27")]
+    A27,
+    [EnumMember(Value = "A28")]
+    A28,
+    [EnumMember(Value = "A29")]
+    A29,
+    [EnumMember(Value = "A30")]
+    A30,
+    [EnumMember(Value = "A41")]
+    A41,
+    [EnumMember(Value = "A42")]
+    A42,
+    [EnumMember(Value = "A43")]
+    A43,
+    [EnumMember(Value = "A44")]
+    A44,
+    [EnumMember(Value = "A45")]
+    A45,
+    [EnumMember(Value = "A46")]
+    A46,
+    [EnumMember(Value = "A47")]
+    A47,
+    [EnumMember(Value = "A48")]
+    A48,
 }
