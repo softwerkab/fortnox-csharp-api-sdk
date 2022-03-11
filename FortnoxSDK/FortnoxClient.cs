@@ -3,7 +3,6 @@ using System.Net.Http;
 using Fortnox.SDK.Authorization;
 using Fortnox.SDK.Connectors;
 using Fortnox.SDK.Interfaces;
-using Fortnox.SDK.Serialization;
 
 namespace Fortnox.SDK;
 
@@ -125,4 +124,6 @@ public class FortnoxClient
     public IVoucherFileConnectionConnector VoucherFileConnectionConnector => Get<VoucherFileConnectionConnector>();
     public IVoucherSeriesConnector VoucherSeriesConnector => Get<VoucherSeriesConnector>();
     public IWayOfDeliveryConnector WayOfDeliveryConnector => Get<WayOfDeliveryConnector>();
+
+    public ITenantConnector TenantConnector => Get<TenantConnector>();
 }

@@ -75,4 +75,6 @@ internal static class Endpoints
     public const string EmailSenders = $"/{Version}/emailsenders";
 
     public const string Profile = $"/{Version}/me";
+
+    public const string Tenant = "/api/warehouse/tenants-v4";
 }
