@@ -86,6 +86,7 @@ public class WarehouseTests
         #endregion Delete arranged resources
     }
 
+    [TestMethod]
     public async Task Test_Order_DeliveryState_Update()
     {
         #region Arrange
@@ -113,7 +114,7 @@ public class WarehouseTests
         order.DeliveryState = DeliveryState.Delivery;
 
         order = await FortnoxClient.OrderConnector.UpdateAsync(order);
-        Assert.AreEqual(DeliveryState.Delivery, order.WarehouseReady);
+        Assert.AreEqual(DeliveryState.Delivery, order.DeliveryState);
 
         #region Delete arranged resources
         await FortnoxClient.OrderConnector.CancelAsync(order.DocumentNumber);
