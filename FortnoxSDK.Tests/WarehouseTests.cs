@@ -121,4 +121,22 @@ public class WarehouseTests
         //client.ArticleConnector.Delete(tmpArticle.ArticleNumber);
         #endregion Delete arranged resources
     }
+
+    [TestMethod]
+    public async Task Test_Tenant_WarehouseActivated_Get()
+    {
+        var tenant = await FortnoxClient.TenantConnector.GetAsync();
+
+        Assert.AreEqual(true, tenant.WarehouseActivated);
+        Assert.AreEqual(1212851, tenant.TenantId);
+    }
+
+    [TestMethod]
+    public async Task Test_Tenant_WarehouseDisabled_Get()
+    {
+        var tenant = await TestUtils.DefaultFortnoxClient.TenantConnector.GetAsync();
+
+        Assert.AreEqual(false, tenant.WarehouseActivated);
+        Assert.AreEqual(1018318, tenant.TenantId);
+    }
 }
