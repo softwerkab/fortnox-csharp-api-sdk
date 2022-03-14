@@ -24,4 +24,4 @@ jobs:
       run: dotnet test --no-build --verbosity normal
       
     - name: Publish NuGet
-      run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
+      run: nuget push **/*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}} -NoSymbols
