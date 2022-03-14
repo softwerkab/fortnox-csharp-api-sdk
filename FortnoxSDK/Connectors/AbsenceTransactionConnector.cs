@@ -20,9 +20,9 @@ internal class AbsenceTransactionConnector : SearchableEntityConnector<AbsenceTr
         return await BaseFind(searchSettings).ConfigureAwait(false);
     }
 
-    public async Task DeleteAsync(string employeeId, DateTime? date, AbsenceCauseCode? code)
+    public async Task DeleteAsync(string id)
     {
-        await BaseDelete(employeeId, date?.ToString(ApiConstants.DateFormat), code?.GetStringValue()).ConfigureAwait(false);
+        await BaseDelete(id).ConfigureAwait(false);
     }
 
     public async Task<AbsenceTransaction> CreateAsync(AbsenceTransaction absenceTransaction)
@@ -32,11 +32,11 @@ internal class AbsenceTransactionConnector : SearchableEntityConnector<AbsenceTr
 
     public async Task<AbsenceTransaction> UpdateAsync(AbsenceTransaction absenceTransaction)
     {
-        return await BaseUpdate(absenceTransaction, absenceTransaction.EmployeeId, absenceTransaction.Date?.ToString(ApiConstants.DateFormat), absenceTransaction.CauseCode?.GetStringValue()).ConfigureAwait(false);
+        return await BaseUpdate(absenceTransaction, absenceTransaction.Id).ConfigureAwait(false);
     }
 
-    public async Task<AbsenceTransaction> GetAsync(string employeeId, DateTime? date, AbsenceCauseCode? code)
+    public async Task<AbsenceTransaction> GetAsync(string id)
     {
-        return await BaseGet(employeeId, date?.ToString(ApiConstants.DateFormat), code?.GetStringValue()).ConfigureAwait(false);
+        return await BaseGet(id).ConfigureAwait(false);
     }
 }

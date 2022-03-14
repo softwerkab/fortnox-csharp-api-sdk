@@ -9,7 +9,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests;
 
-[Ignore("Tests failure - Get/Update/Delete does not work - server side issue?")]
 [TestClass]
 public class AttendanceTransactionsTests
 {
@@ -41,18 +40,7 @@ public class AttendanceTransactionsTests
         Assert.AreEqual(5.5m, createdAttendanceTransaction.Hours);
 
         #endregion CREATE
-
-        var y = await connector.FindAsync(null);
-        var h = y.Entities
-            .Where(e => e.CauseCode == createdAttendanceTransaction.CauseCode)
-            .Where(e => e.EmployeeId == createdAttendanceTransaction.EmployeeId)
-            .Where(e => e.Date == createdAttendanceTransaction.Date)
-            .ToList();
-
-        //await connector.DeleteAsync(createdAttendanceTransaction.EmployeeId, createdAttendanceTransaction.Date, createdAttendanceTransaction.CauseCode);
-
-        var x = await connector.GetAsync(createdAttendanceTransaction.EmployeeId, createdAttendanceTransaction.Date, createdAttendanceTransaction.CauseCode);
-
+        
         #region UPDATE
 
         createdAttendanceTransaction.Hours = 8;
@@ -64,17 +52,18 @@ public class AttendanceTransactionsTests
 
         #region READ / GET
 
-        var retrievedAttendanceTransaction = await connector.GetAsync(createdAttendanceTransaction.EmployeeId, createdAttendanceTransaction.Date, createdAttendanceTransaction.CauseCode);
+        var retrievedAttendanceTransaction = await connector.GetAsync(createdAttendanceTransaction.Id);
         Assert.AreEqual(8, retrievedAttendanceTransaction.Hours);
+        Assert.IsNotNull(retrievedAttendanceTransaction.Url);
 
         #endregion READ / GET
 
         #region DELETE
 
-        await connector.DeleteAsync(createdAttendanceTransaction.EmployeeId, createdAttendanceTransaction.Date, createdAttendanceTransaction.CauseCode);
+        await connector.DeleteAsync(createdAttendanceTransaction.Id);
 
         await Assert.ThrowsExceptionAsync<FortnoxApiException>(
-            async () => await connector.GetAsync(createdAttendanceTransaction.EmployeeId, createdAttendanceTransaction.Date, createdAttendanceTransaction.CauseCode),
+            async () => await connector.GetAsync(createdAttendanceTransaction.Id),
             "Entity still exists after Delete!");
 
         #endregion DELETE
@@ -122,6 +111,7 @@ public class AttendanceTransactionsTests
         Assert.AreEqual(1, fullCollection.TotalPages);
 
         Assert.AreEqual(tmpEmployee.EmployeeId, fullCollection.Entities.First().EmployeeId);
+        Assert.IsNotNull(fullCollection.Entities.First().Url);
 
         //Apply Limit
         searchSettings.Limit = 2;
@@ -133,7 +123,7 @@ public class AttendanceTransactionsTests
 
         //Delete entries
         foreach (var entry in fullCollection.Entities)
-            await connector.DeleteAsync(entry.EmployeeId, entry.Date, entry.CauseCode);
+            await connector.DeleteAsync(entry.Id);
 
         #region Delete arranged resources
         await FortnoxClient.CostCenterConnector.DeleteAsync(tmpCostCenter.Code);

@@ -7,6 +7,10 @@ namespace Fortnox.SDK.Entities;
 [Entity(SingularName = "AttendanceTransaction", PluralName = "AttendanceTransactions")]
 public class AttendanceTransaction
 {
+    ///<summary> Direct URL to the record </summary>
+    [ReadOnly]
+    [JsonProperty("@url")]
+    public Uri Url { get; private set; }
 
     ///<summary> Unique employee-id </summary>
     [JsonProperty]
@@ -31,4 +35,7 @@ public class AttendanceTransaction
     ///<summary> Project </summary>
     [JsonProperty]
     public string Project { get; set; }
+
+    [JsonProperty("id")]
+    public string Id { get; set; }
 }

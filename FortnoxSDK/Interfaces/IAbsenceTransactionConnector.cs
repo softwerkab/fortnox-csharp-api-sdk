@@ -11,7 +11,7 @@ public interface IAbsenceTransactionConnector : IEntityConnector
 {
     Task<AbsenceTransaction> UpdateAsync(AbsenceTransaction absenceTransaction);
     Task<AbsenceTransaction> CreateAsync(AbsenceTransaction absenceTransaction);
-    Task<AbsenceTransaction> GetAsync(string employeeId, DateTime? date, AbsenceCauseCode? code);
-    Task DeleteAsync(string employeeId, DateTime? date, AbsenceCauseCode? code);
+    Task<AbsenceTransaction> GetAsync(string id);
+    Task DeleteAsync(string id);
     Task<EntityCollection<AbsenceTransaction>> FindAsync(AbsenceTransactionSearch searchSettings);
 }

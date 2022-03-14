@@ -11,7 +11,7 @@ public interface IAttendanceTransactionsConnector : IEntityConnector
 {
     Task<AttendanceTransaction> UpdateAsync(AttendanceTransaction attendanceTransaction);
     Task<AttendanceTransaction> CreateAsync(AttendanceTransaction attendanceTransaction);
-    Task<AttendanceTransaction> GetAsync(string employeeId, DateTime? date, AttendanceCauseCode? code);
-    Task DeleteAsync(string employeeId, DateTime? date, AttendanceCauseCode? code);
-    Task<EntityCollection<AttendanceTransactionSubset>> FindAsync(AttendanceTransactionsSearch searchSettings);
+    Task<AttendanceTransaction> GetAsync(string id);
+    Task DeleteAsync(string id);
+    Task<EntityCollection<AttendanceTransaction>> FindAsync(AttendanceTransactionsSearch searchSettings);
 }

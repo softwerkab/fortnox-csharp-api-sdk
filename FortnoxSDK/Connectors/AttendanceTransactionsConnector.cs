@@ -8,21 +8,21 @@ using Fortnox.SDK.Utility;
 
 namespace Fortnox.SDK.Connectors;
 
-internal class AttendanceTransactionsConnector : SearchableEntityConnector<AttendanceTransaction, AttendanceTransactionSubset, AttendanceTransactionsSearch>, IAttendanceTransactionsConnector
+internal class AttendanceTransactionsConnector : SearchableEntityConnector<AttendanceTransaction, AttendanceTransaction, AttendanceTransactionsSearch>, IAttendanceTransactionsConnector
 {
     public AttendanceTransactionsConnector()
     {
         Endpoint = Endpoints.AttendanceTransactions;
     }
 
-    public async Task<EntityCollection<AttendanceTransactionSubset>> FindAsync(AttendanceTransactionsSearch searchSettings)
+    public async Task<EntityCollection<AttendanceTransaction>> FindAsync(AttendanceTransactionsSearch searchSettings)
     {
         return await BaseFind(searchSettings).ConfigureAwait(false);
     }
 
-    public async Task DeleteAsync(string employeeId, DateTime? date, AttendanceCauseCode? code)
+    public async Task DeleteAsync(string id)
     {
-        await BaseDelete(employeeId, date?.ToString(ApiConstants.DateFormat), code?.GetStringValue()).ConfigureAwait(false);
+        await BaseDelete(id).ConfigureAwait(false);
     }
 
     public async Task<AttendanceTransaction> CreateAsync(AttendanceTransaction attendanceTransaction)
@@ -32,11 +32,11 @@ internal class AttendanceTransactionsConnector : SearchableEntityConnector<Atten
 
     public async Task<AttendanceTransaction> UpdateAsync(AttendanceTransaction attendanceTransaction)
     {
-        return await BaseUpdate(attendanceTransaction, attendanceTransaction.EmployeeId, attendanceTransaction.Date?.ToString(ApiConstants.DateFormat), attendanceTransaction.CauseCode?.GetStringValue()).ConfigureAwait(false);
+        return await BaseUpdate(attendanceTransaction, attendanceTransaction.Id).ConfigureAwait(false);
     }
 
-    public async Task<AttendanceTransaction> GetAsync(string employeeId, DateTime? date, AttendanceCauseCode? code)
+    public async Task<AttendanceTransaction> GetAsync(string id)
     {
-        return await BaseGet(employeeId, date?.ToString(ApiConstants.DateFormat), code?.GetStringValue()).ConfigureAwait(false);
+        return await BaseGet(id).ConfigureAwait(false);
     }
 }

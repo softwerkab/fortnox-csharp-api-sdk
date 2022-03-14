@@ -9,7 +9,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests;
 
-[Ignore("Tests failure - Get/Update/Delete does not work - server side issue?")]
 [TestClass]
 public class AbsenceTransactionTests
 {
@@ -53,17 +52,18 @@ public class AbsenceTransactionTests
 
         #region READ / GET
 
-        var retrievedAbsenceTransaction = await connector.GetAsync(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode);
+        var retrievedAbsenceTransaction = await connector.GetAsync(createdAbsenceTransaction.Id);
         Assert.AreEqual(8, retrievedAbsenceTransaction.Hours);
+        Assert.IsNotNull(retrievedAbsenceTransaction.Url);
 
         #endregion READ / GET
 
         #region DELETE
 
-        await connector.DeleteAsync(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode);
+        await connector.DeleteAsync(createdAbsenceTransaction.Id);
 
         await Assert.ThrowsExceptionAsync<FortnoxApiException>(
-            async () => await connector.GetAsync(createdAbsenceTransaction.EmployeeId, createdAbsenceTransaction.Date, createdAbsenceTransaction.CauseCode),
+            async () => await connector.GetAsync(createdAbsenceTransaction.Id),
             "Entity still exists after Delete!");
 
         #endregion DELETE
@@ -112,6 +112,7 @@ public class AbsenceTransactionTests
         Assert.AreEqual(1, fullCollection.TotalPages);
 
         Assert.AreEqual(tmpEmployee.EmployeeId, fullCollection.Entities.First().EmployeeId);
+        Assert.IsNotNull(fullCollection.Entities.First().Url);
 
         //Apply Limit
         searchSettings.Limit = 2;
@@ -123,7 +124,7 @@ public class AbsenceTransactionTests
 
         //Delete entries
         foreach (var entry in fullCollection.Entities)
-            await connector.DeleteAsync(entry.EmployeeId, entry.Date, entry.CauseCode);
+            await connector.DeleteAsync(entry.Id);
 
         #region Delete arranged resources
         await FortnoxClient.CostCenterConnector.DeleteAsync(tmpCostCenter.Code);
