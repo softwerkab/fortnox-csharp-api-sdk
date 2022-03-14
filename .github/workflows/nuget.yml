@@ -19,4 +19,5 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
+      if: startsWith(github.event.ref, 'refs/tags/v')
       run: dotnet build --no-restore
