@@ -1,9 +1,8 @@
-name: Release
+name: Experiment
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches: [ test ]
 
 jobs:
   build:
