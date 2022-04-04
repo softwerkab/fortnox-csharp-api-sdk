@@ -52,12 +52,12 @@ public class Order
     ///<summary> Contribution in Percent </summary>
     [ReadOnly]
     [JsonProperty]
-    public decimal? ContributionPercent { get; private set; }
+    public string ContributionPercent { get; private set; }
 
     ///<summary> Contribution in amount </summary>
     [ReadOnly]
     [JsonProperty]
-    public decimal? ContributionValue { get; private set; }
+    public string ContributionValue { get; private set; }
 
     ///<summary> If remarks shall be copied from order to invoice </summary>
     [JsonProperty]

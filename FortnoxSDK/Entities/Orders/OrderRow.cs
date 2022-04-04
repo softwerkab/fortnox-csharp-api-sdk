@@ -18,12 +18,12 @@ public class OrderRow
     ///<summary> Contribution Percent </summary>
     [ReadOnly]
     [JsonProperty]
-    public decimal? ContributionPercent { get; private set; }
+    public string ContributionPercent { get; private set; }
 
     ///<summary> Contribution Value </summary>
     [ReadOnly]
     [JsonProperty]
-    public decimal? ContributionValue { get; private set; }
+    public string ContributionValue { get; private set; }
 
     ///<summary> Cost center code </summary>
     [JsonProperty]
