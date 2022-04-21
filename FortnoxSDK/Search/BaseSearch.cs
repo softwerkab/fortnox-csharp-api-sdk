@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Fortnox.SDK.Utility;
 
 namespace Fortnox.SDK.Search;
@@ -73,11 +74,8 @@ public class BaseSearch
     {
         var searchParams = new Dictionary<string, string>();
 
-        foreach (var property in GetType().GetProperties())
+        foreach (var property in GetType().GetProperties().Where(p => p.HasAttribute<SearchParameter>()))
         {
-            var isSearchParameter = property.HasAttribute<SearchParameter>();
-            if (!isSearchParameter) continue;
-
             var value = property.GetValue(this);
             var strValue = Utils.GetStringValue(value, property.PropertyType);
             if (string.IsNullOrWhiteSpace(strValue)) continue;
@@ -88,6 +86,18 @@ public class BaseSearch
             searchParams.Add(paramName.ToLower(), strValue);
         }
 
+        if (CustomParameters != null)
+        {
+            foreach (var parameter in CustomParameters)
+                searchParams.Add(parameter.Key, parameter.Value);
+        }
+
         return searchParams;
     }
+
+    /// <summary>
+    /// Use as a workaround for parameters not defined explicitely.
+    /// Please report the missing parameters on GitHub repository so they can be added.
+    /// </summary>
+    public Dictionary<string, string> CustomParameters { get; set; } = new Dictionary<string, string>();
 }
