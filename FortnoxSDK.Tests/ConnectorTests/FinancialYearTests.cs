@@ -91,20 +91,4 @@ public class FinancialYearTests
         Assert.AreEqual(new DateTime(2022, 1, 1), finYears.Entities.Single().FromDate);
         Assert.AreEqual(new DateTime(2022, 12, 31), finYears.Entities.Single().ToDate);
     }
-
-    [TestMethod]
-    public async Task Test_FinancialYear_Find_By_FinYearDate()
-    {
-        var connector = FortnoxClient.FinancialYearConnector;
-
-        var search = new FinancialYearSearch()
-        {
-            FinancialYearDate = new DateTime(2022, 05, 24)
-        };
-
-        var finYears = await connector.FindAsync(search);
-        Assert.AreEqual(1, finYears.Entities.Count);
-        Assert.AreEqual(new DateTime(2022, 1, 1), finYears.Entities.Single().FromDate);
-        Assert.AreEqual(new DateTime(2022, 12, 31), finYears.Entities.Single().ToDate);
-    }
 }

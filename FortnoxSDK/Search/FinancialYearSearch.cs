@@ -13,10 +13,6 @@ public class FinancialYearSearch : BaseSearch
     [SearchParameter]
     public DateTime? Date { get; set; }
 
-    [Obsolete("Use Date property instead")]
-    public override DateTime? FinancialYearDate
-    {
-        get => Date;
-        set => Date = value;
-    }
+    [Obsolete("DO NOT USE! For filtering based on date, use Date property instead")]
+    public override DateTime? FinancialYearDate { get; set; }
 }
