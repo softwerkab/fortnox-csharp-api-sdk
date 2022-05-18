@@ -389,4 +389,7 @@ public class Invoice
     /// <summary> The date that the document was marked as ready in warehouse. </summary>
     [JsonProperty]
     public DateTime? OutboundDate { get; set; }
+
+    [JsonProperty]
+    public decimal TotalToPay { get; set; }
 }
