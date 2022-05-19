@@ -390,6 +390,7 @@ public class Invoice
     [JsonProperty]
     public DateTime? OutboundDate { get; set; }
 
+    [ReadOnly]
     [JsonProperty]
-    public decimal TotalToPay { get; set; }
+    public decimal TotalToPay { get; private set; }
 }
