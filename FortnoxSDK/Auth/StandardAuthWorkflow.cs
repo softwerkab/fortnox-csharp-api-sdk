@@ -96,7 +96,7 @@ internal class StandardAuthWorkflow : BaseClient, IStandardAuthWorkflow
         return state;
     }
 
-    public Uri BuildAuthUri(string clientId, IEnumerable<Scope> scopes, string state, string redirectUri = null)
+    public Uri BuildAuthUri(string clientId, IEnumerable<Scope> scopes, string state, string redirectUri = null, bool serviceAccount = false)
     {
         if (string.IsNullOrEmpty(clientId))
             throw new ArgumentException("Argument is null or empty.", nameof(clientId));
@@ -118,6 +118,8 @@ internal class StandardAuthWorkflow : BaseClient, IStandardAuthWorkflow
         parameters.Add("state", state);
         parameters.Add("access_type", "offline");
         parameters.Add("response_type", "code");
+        if (serviceAccount)
+            parameters.Add("account_type", "service");
 
         var query = string.Join("&", parameters.Select(p => $"{p.Key}={Uri.EscapeDataString(p.Value)}"));
         var uri = string.Join("?", AuthInitUri, query);

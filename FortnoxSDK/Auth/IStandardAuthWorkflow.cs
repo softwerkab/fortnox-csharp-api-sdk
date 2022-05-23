@@ -52,8 +52,9 @@ public interface IStandardAuthWorkflow
     /// <param name="state">The state parameter is used by the application to store request-specific data and/or
     /// prevent CSRF attacks. The authorization server will return the unmodified state value back to the application.</param>
     /// <param name="redirectUri">URI to redirect back to from Fortnox.</param>
+    /// <param name="serviceAccount">Flag to indicate whether service account should be created. <see href="https://developer.fortnox.se/blog/service-accounts/" /></param>
     /// <returns>A URI.</returns>
-    Uri BuildAuthUri(string clientId, IEnumerable<Scope> scopes, string state, string redirectUri = null);
+    Uri BuildAuthUri(string clientId, IEnumerable<Scope> scopes, string state, string redirectUri = null, bool serviceAccount = false);
 
     /// <summary>
     /// Use this function to revoke a refresh token
