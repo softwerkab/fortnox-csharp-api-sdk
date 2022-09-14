@@ -77,7 +77,7 @@ public class Employee
     [JsonProperty]
     public string JobTitle { get; set; }
 
-    ///<summary> Personel type. Validates against allowed values specified below. </summary>
+    ///<summary> Personnel type. Validates against allowed values specified below. </summary>
     [JsonProperty]
     public PersonelType? PersonelType { get; set; }
 
@@ -138,12 +138,12 @@ public class Employee
 
     [JsonProperty]
     public bool? AutoNonRecurringTax { get; set; }
-
-    [ReadOnly]
+       
+    ///<summary> List of dated wages </summary>
     [JsonProperty]
-    public IList<DatedWage> DatedWages { get; private set; }
+    public IList<DatedWage> DatedWages { get; set; }
 
-    [ReadOnly]
+    ///<summary> List of dated schedules </summary>
     [JsonProperty]
-    public IList<DatedSchedule> DatedSchedules { get; private set; }
+    public IList<DatedSchedule> DatedSchedules { get; set; }
 }

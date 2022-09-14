@@ -96,7 +96,7 @@ public class BaseSearch
     }
 
     /// <summary>
-    /// Use as a workaround for parameters not defined explicitely.
+    /// Use as a workaround for parameters not defined explicitly.
     /// Please report the missing parameters on GitHub repository so they can be added.
     /// </summary>
     public Dictionary<string, string> CustomParameters { get; set; } = new Dictionary<string, string>();
