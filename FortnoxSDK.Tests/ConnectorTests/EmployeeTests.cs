@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Fortnox.SDK;
@@ -16,8 +18,18 @@ public class EmployeeTests
     public async Task Test_Employee_CRUD()
     {
         #region Arrange
+
         var c = FortnoxClient.EmployeeConnector;
-        var alreadyExists = await c.GetAsync("TEST_EMP") != null;
+
+        bool alreadyExists;
+        try
+        {
+            alreadyExists = await c.GetAsync("TEST_EMP") != null;
+        }
+        catch (Exception e)
+        {
+            alreadyExists = false;
+        }
 
         #endregion Arrange
 
@@ -25,28 +37,39 @@ public class EmployeeTests
 
         #region CREATE
 
-        var newEmployee = new Employee()
+        var newEmployee = new Employee
         {
             EmployeeId = "TEST_EMP",
             FirstName = "Test",
             LastName = "Testasson",
             City = "Växjö",
             Country = "Sweden",
+            PersonalIdentityNumber = "8505065899",
+            Email = "test.testasson@test.test",
             ForaType = ForaType.A74,
             JobTitle = "Woodcutter",
-            MonthlySalary = 20000
+            DatedWages = new List<DatedWage>
+            {
+                new()
+                {
+                    EmployeeId = "TEST_EMP",
+                    FirstDay = new DateTime(1970, 1, 1),
+                    MonthlySalary = 20000
+                }
+            }
         };
 
-        var createdEmployee = alreadyExists ? await connector.UpdateAsync(newEmployee) : await connector.CreateAsync(newEmployee);
+        var createdEmployee = alreadyExists
+            ? await connector.UpdateAsync(newEmployee)
+            : await connector.CreateAsync(newEmployee);
         Assert.AreEqual("Test", createdEmployee.FirstName);
 
         #endregion CREATE
 
         #region UPDATE
 
-        createdEmployee.FirstName = "UpdatedTest";
-
-        var updatedEmployee = await connector.UpdateAsync(createdEmployee);
+        newEmployee.FirstName = "UpdatedTest";
+        var updatedEmployee = await connector.UpdateAsync(newEmployee);
         Assert.AreEqual("UpdatedTest", updatedEmployee.FirstName);
 
         #endregion UPDATE
@@ -79,11 +102,13 @@ public class EmployeeTests
         var connector = FortnoxClient.EmployeeConnector;
 
         for (var i = 0; i < 5; i++)
-            await connector.CreateAsync(new Employee() { EmployeeId = TestUtils.RandomString(), City = marks });
+            await connector.CreateAsync(new Employee { EmployeeId = TestUtils.RandomString(), City = marks });
 
-        var searchSettings = new EmployeeSearch();
-        //searchSettings.LastModified = TestUtils.Recently; //parameter is not accepted by server
-        searchSettings.Limit = ApiConstants.Unlimited;
+        var searchSettings = new EmployeeSearch
+        {
+            // LastModified = TestUtils.Recently; //parameter is not accepted by server
+            Limit = ApiConstants.Unlimited
+        };
         var employees = await connector.FindAsync(searchSettings);
 
         var newEmployees = employees.Entities.Where(e => e.City == marks).ToList();
