@@ -20,7 +20,7 @@ internal class BaseRequest
 
     private string BuildUrl()
     {
-        var index = string.Join("/", Indices.Select(Uri.EscapeDataString));
+        var index = string.Join("/", Indices.Where(i => i != null).Select(Uri.EscapeDataString));
 
         var uri = CombineUri(BaseUrl, Endpoint, index);
         var query = BuildQuery(Parameters);
