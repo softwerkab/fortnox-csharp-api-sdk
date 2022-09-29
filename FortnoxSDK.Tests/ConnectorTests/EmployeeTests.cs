@@ -44,7 +44,7 @@ public class EmployeeTests
             LastName = "Testasson",
             City = "Växjö",
             Country = "Sweden",
-            PersonalIdentityNumber = "8505065899",
+            PersonalIdentityNumber = "4504032972",
             Email = "test.testasson@test.test",
             ForaType = ForaType.A74,
             JobTitle = "Woodcutter",
