@@ -54,7 +54,7 @@ public interface IStandardAuthWorkflow
     /// <param name="redirectUri">URI to redirect back to from Fortnox.</param>
     /// <param name="serviceAccount">Flag to indicate whether service account should be created. <see href="https://developer.fortnox.se/blog/service-accounts/" /></param>
     /// <returns>A URI.</returns>
-    Uri BuildAuthUri(string clientId, IEnumerable<Scope> scopes, string state, string redirectUri = null, bool serviceAccount = false);
+    Uri BuildAuthUri(string clientId, ICollection<Scope> scopes, string state, string redirectUri = null, bool serviceAccount = false);
 
     /// <summary>
     /// Use this function to revoke a refresh token

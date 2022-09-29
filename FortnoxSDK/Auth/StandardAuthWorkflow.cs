@@ -96,7 +96,7 @@ internal class StandardAuthWorkflow : BaseClient, IStandardAuthWorkflow
         return state;
     }
 
-    public Uri BuildAuthUri(string clientId, IEnumerable<Scope> scopes, string state, string redirectUri = null, bool serviceAccount = false)
+    public Uri BuildAuthUri(string clientId, ICollection<Scope> scopes, string state, string redirectUri = null, bool serviceAccount = false)
     {
         if (string.IsNullOrEmpty(clientId))
             throw new ArgumentException("Argument is null or empty.", nameof(clientId));
