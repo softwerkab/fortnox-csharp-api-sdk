@@ -77,4 +77,6 @@ internal static class Endpoints
     public const string Profile = $"/{Version}/me";
 
     public const string Tenant = "/api/warehouse/tenants-v4";
+
+    public const string CustomerReferences = $"/{Version}/customerreferences";
 }

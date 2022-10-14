@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -82,5 +83,16 @@ public static class Extensions
         await file.WriteAsync(data, 0, data.Length).ConfigureAwait(false);
 
         return new FileInfo(path);
+    }
+
+    internal static void AddRange<TKey, TValue>(this IDictionary<TKey, TValue> source, IEnumerable<KeyValuePair<TKey, TValue>> entries)
+    {
+        if (entries == null) 
+            return;
+
+        foreach (var pair in entries)
+        {
+            source.Add(pair.Key, pair.Value);
+        }
     }
 }
