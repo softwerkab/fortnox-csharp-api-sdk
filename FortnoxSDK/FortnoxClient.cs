@@ -126,4 +126,6 @@ public class FortnoxClient
     public IWayOfDeliveryConnector WayOfDeliveryConnector => Get<WayOfDeliveryConnector>();
 
     public ITenantConnector TenantConnector => Get<TenantConnector>();
+
+    public ICustomerReferenceConnector CustomerReferenceConnector => Get<CustomerReferenceConnector>();
 }

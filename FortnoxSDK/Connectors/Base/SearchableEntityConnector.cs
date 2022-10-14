@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Requests;
 using Fortnox.SDK.Search;
+using Fortnox.SDK.Utility;
 
 namespace Fortnox.SDK.Connectors.Base;
 
@@ -65,12 +66,7 @@ internal abstract class SearchableEntityConnector<TEntity, TEntitySubset, TSearc
 
     private async Task<EntityCollection<T>> GetSinglePage<T>(SearchRequest<T> request)
     {
-        if (request.SearchSettings != null)
-        {
-            var searchParameters = request.SearchSettings.GetSearchParameters();
-            foreach (var parameter in searchParameters)
-                request.Parameters.Add(parameter.Key, parameter.Value);
-        }
+        request.Parameters.AddRange(request.SearchSettings?.GetSearchParameters());
 
         var responseData = await SendAsync((BaseRequest)request).ConfigureAwait(false);
         var responseJson = Encoding.UTF8.GetString(responseData);
