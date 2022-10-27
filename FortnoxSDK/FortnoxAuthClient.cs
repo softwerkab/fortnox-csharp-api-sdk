@@ -27,6 +27,13 @@ public class FortnoxAuthClient
         HttpClient = httpClient;
     }
 
+    /// <summary>
+    /// Used for the Fortnox legacy auth workflow.
+    /// </summary>
     public IStaticTokenAuthWorkflow StaticTokenAuthWorkflow => new StaticTokenAuthWorkflow(HttpClient);
+    
+    /// <summary>
+    /// Used for the OAuth 2.0 workflow.
+    /// </summary>
     public IStandardAuthWorkflow StandardAuthWorkflow => new StandardAuthWorkflow(HttpClient);
 }
