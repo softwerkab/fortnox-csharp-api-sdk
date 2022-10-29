@@ -112,4 +112,19 @@ public class CustomerReferenceTests
         await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
         #endregion Delete arranged resources
     }
+
+    // Requires 140 customer references to exist in data source
+    [TestMethod]
+    public async Task Test_Find_Unlimited()
+    {
+        var connector = FortnoxClient.CustomerReferenceConnector;
+
+        var searchSettings = new CustomerReferenceSearch()
+        {
+            Limit = ApiConstants.Unlimited
+        };
+
+        var all = await connector.FindAsync(searchSettings);
+        Assert.AreEqual(140, all.Count);
+    }
 }

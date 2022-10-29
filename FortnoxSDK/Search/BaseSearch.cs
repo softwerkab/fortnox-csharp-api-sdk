@@ -9,7 +9,7 @@ namespace Fortnox.SDK.Search;
 /// Base settings for filtering search results.
 /// More info at official <see href="https://developer.fortnox.se/general/parameters/">documentation</see>
 /// </summary>
-public class BaseSearch
+public abstract class BaseSearch
 {
     /// <summary>
     /// Limit search result to entities modified after specified date
@@ -86,11 +86,7 @@ public class BaseSearch
             searchParams.Add(paramName.ToLower(), strValue);
         }
 
-        if (CustomParameters != null)
-        {
-            foreach (var parameter in CustomParameters)
-                searchParams.Add(parameter.Key, parameter.Value);
-        }
+        searchParams.AddRange(CustomParameters);
 
         return searchParams;
     }
