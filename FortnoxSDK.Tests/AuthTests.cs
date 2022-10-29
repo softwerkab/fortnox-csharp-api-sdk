@@ -32,7 +32,7 @@ public class AuthTests
     {
         var clientId = "8VurtMGDTeAI"; //"bhgmY4FYebfj";
         var clientSecret = "yFKwme8LEQ"; //"TestCredentials.Client_Secret;
-        var redirectUri = "https://mysite.org/activation";
+        var redirectUri = "https://mysite.test/activation";
         var authorizationCode = "Placeholder";
 
         var fortnoxAuthClient = new FortnoxAuthClient();
@@ -47,7 +47,7 @@ public class AuthTests
     {
         var clientId = "8VurtMGDTeAI";
         var clientSecret = "yFKwme8LEQ";
-        var redirectUri = "https://mysite.org/activation";
+        var redirectUri = "https://mysite.test/activation";
         var scopes = new List<Scope>()
         {
             Scope.CompanyInformation
@@ -58,7 +58,7 @@ public class AuthTests
         var authWorkflow = fortnoxAuthClient.StandardAuthWorkflow;
 
         var uri = authWorkflow.BuildAuthUri(clientId, scopes, state, redirectUri);
-        Assert.AreEqual(@"https://apps.fortnox.se/oauth-v1/auth?client_id=8VurtMGDTeAI&redirect_uri=https%3A%2F%2Fmysite.org%2Factivation&scope=companyinformation&state=somestate123&access_type=offline&response_type=code", uri.AbsoluteUri);
+        Assert.AreEqual(@"https://apps.fortnox.se/oauth-v1/auth?client_id=8VurtMGDTeAI&redirect_uri=https%3A%2F%2Fmysite.test%2Factivation&scope=companyinformation&state=somestate123&access_type=offline&response_type=code", uri.AbsoluteUri);
     }
 
     [TestMethod]
@@ -66,7 +66,7 @@ public class AuthTests
     {
         var clientId = "8VurtMGDTeAI";
         var clientSecret = "yFKwme8LEQ";
-        var redirectUri = "https://mysite.org/activation";
+        var redirectUri = "https://mysite.test/activation";
         var scopes = new List<Scope>()
         {
             Scope.Article,
@@ -79,7 +79,7 @@ public class AuthTests
         var authWorkflow = fortnoxAuthClient.StandardAuthWorkflow;
 
         var uri = authWorkflow.BuildAuthUri(clientId, scopes, state, redirectUri);
-        Assert.AreEqual(@"https://apps.fortnox.se/oauth-v1/auth?client_id=8VurtMGDTeAI&redirect_uri=https%3A%2F%2Fmysite.org%2Factivation&scope=article%20bookkeeping%20customer&state=somestate123&access_type=offline&response_type=code", uri.AbsoluteUri);
+        Assert.AreEqual(@"https://apps.fortnox.se/oauth-v1/auth?client_id=8VurtMGDTeAI&redirect_uri=https%3A%2F%2Fmysite.test%2Factivation&scope=article%20bookkeeping%20customer&state=somestate123&access_type=offline&response_type=code", uri.AbsoluteUri);
     }
 
     [TestMethod]
