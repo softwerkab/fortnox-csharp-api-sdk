@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Fortnox.SDK.Connectors.Base;
@@ -24,8 +24,33 @@ internal class CustomerReferenceConnector : EntityConnector<CustomerReferenceRow
     public async Task<IList<CustomerReferenceRow>> FindAsync(CustomerReferenceSearch searchSettings)
     {
         if (searchSettings?.Limit == ApiConstants.Unlimited)
-            throw new NotImplementedException("Unlimited page is not supported due to missing paging metadata.");
+            return await GetAllInOnePage(searchSettings);
+        else
+            return await GetSinglePage(searchSettings);
+    }
 
+    private async Task<IList<CustomerReferenceRow>> GetAllInOnePage(CustomerReferenceSearch searchSettings)
+    {
+        searchSettings = Clone(searchSettings);
+        searchSettings.Limit = ApiConstants.MaxLimit;
+        searchSettings.Page = 1;
+
+        var all = new List<CustomerReferenceRow>();
+        while (true)
+        {
+            var page = await GetSinglePage(searchSettings);
+            if (!page.Any())
+                break;
+
+            all.AddRange(page);
+            searchSettings.Page++;
+        }
+
+        return all;
+    }
+
+    private async Task<IList<CustomerReferenceRow>> GetSinglePage(CustomerReferenceSearch searchSettings)
+    {
         var request = new EntityRequest<CustomerReference>()
         {
             Endpoint = Endpoint,
@@ -37,6 +62,13 @@ internal class CustomerReferenceConnector : EntityConnector<CustomerReferenceRow
         var customerReference = await SendAsync(request).ConfigureAwait(false);
         
         return customerReference.CustomerReferenceRows;
+    }
+
+    //Duplicated from SearchableEntityConnector
+    private static T Clone<T>(T obj) where T : BaseSearch
+    {
+        var memberwiseClone = obj?.GetType().GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic);
+        return (T) memberwiseClone?.Invoke(obj, null);
     }
 
     public async Task<CustomerReferenceRow> GetAsync(long? id)
