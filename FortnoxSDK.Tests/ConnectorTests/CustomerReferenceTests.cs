@@ -113,7 +113,7 @@ public class CustomerReferenceTests
         #endregion Delete arranged resources
     }
 
-    // Requires 140 customer references to exist in data source
+    // Requires at least 101 customer references to exist in data source
     [TestMethod]
     public async Task Test_Find_Unlimited()
     {
@@ -125,6 +125,6 @@ public class CustomerReferenceTests
         };
 
         var all = await connector.FindAsync(searchSettings);
-        Assert.AreEqual(140, all.Count);
+        Assert.IsTrue(all.Count > 100);
     }
 }
