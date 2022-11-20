@@ -7,7 +7,7 @@ namespace Fortnox.SDK.Connectors.Base;
 internal abstract class BaseClient
 {
     public ErrorHandler ErrorHandler { get; set; }
-    public RateLimiter RateLimier { get; set; }
+    public RateLimiter RateLimiter { get; set; }
     public HttpClient HttpClient { get; set; }
 
     public bool UseRateLimiter { get; set; } = true;
@@ -15,7 +15,7 @@ internal abstract class BaseClient
 
     protected BaseClient()
     {
-        RateLimier = new RateLimiter();
+        RateLimiter = new RateLimiter();
         ErrorHandler = new ErrorHandler();
     }
 
@@ -26,7 +26,7 @@ internal abstract class BaseClient
             Authorization?.ApplyTo(request);
 
             if (UseRateLimiter)
-                await RateLimier.Trottle(Authorization?.AccessToken).ConfigureAwait(false);
+                await RateLimiter.Trottle(Authorization?.AccessToken).ConfigureAwait(false);
 
             using var response = await HttpClient.SendAsync(request).ConfigureAwait(false);
 

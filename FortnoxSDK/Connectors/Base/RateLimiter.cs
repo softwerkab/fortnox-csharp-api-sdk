@@ -7,7 +7,7 @@ using RateLimiter;
 namespace Fortnox.SDK.Connectors.Base;
 
 /// <summary>
-/// Rate limit - 4 requests per second per token
+/// Rate limit - 25 requests per 5 seconds per token
 /// </summary>
 internal class RateLimiter
 {    
