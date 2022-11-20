@@ -88,7 +88,7 @@ internal class StandardAuthWorkflow : BaseClient, IStandardAuthWorkflow
     {
         var data = new byte[32];
 
-        using var rng = new RNGCryptoServiceProvider();
+        using var rng = RandomNumberGenerator.Create();
         rng.GetBytes(data);
 
         var state = Convert.ToBase64String(data).Replace('+', '-').Replace('/', '_').TrimEnd('=');
