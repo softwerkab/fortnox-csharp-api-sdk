@@ -260,4 +260,12 @@ public class Offer
     ///<summary> Zip code </summary>
     [JsonProperty]
     public string ZipCode { get; set; }
+
+    ///<summary> The properties for the object in this array is listed in the table “Labels” </summary>
+    [JsonProperty]
+    public IList<LabelReference> Labels { get; set; }
+
+    ///<summary> Language code. Can be SV or EN. </summary>
+    [JsonProperty]
+    public Language? Language { get; set; }
 }
