@@ -15,7 +15,6 @@ public class RateLimiterTests
 {
     public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
-    [Ignore("Takes too long")]
     [TestMethod]
     public async Task Test_RateLimiter_NoError()
     {
@@ -23,15 +22,24 @@ public class RateLimiterTests
 
         var watch = new Stopwatch();
         watch.Start();
+
+        var counter = 0;
         for (var i = 0; i < 200; i++)
         {
             var searchSettings = new CustomerSearch();
             searchSettings.City = TestUtils.RandomString(); //Needs to be random to make unique GET request
             await connector.FindAsync(searchSettings);
+            counter++;
         }
 
         watch.Stop();
-        Console.WriteLine(@"Total time: " + watch.ElapsedMilliseconds);
+
+        /*
+         * Given the rate limiter of 4 requests per second,
+         * 200 requests should be executed in 50 seconds.
+         */
+        Assert.AreEqual(200, counter);
+        Assert.AreEqual(50, Math.Floor(watch.Elapsed.TotalSeconds));
     }
 
     [Ignore("Can make other test fail due to exhausting rate limiter")]

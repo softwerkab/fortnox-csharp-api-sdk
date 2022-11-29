@@ -121,7 +121,7 @@ public class ReportedIssuesTests
         watch.Start();
         foreach (var runningTask in runningTasks)
         {
-            var result = runningTask.GetAwaiter().GetResult();
+            var result = await runningTask;
             Assert.IsNotNull(result);
         }
         watch.Stop();
