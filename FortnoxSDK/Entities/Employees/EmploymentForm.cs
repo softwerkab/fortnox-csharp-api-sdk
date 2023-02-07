@@ -31,4 +31,7 @@ public enum EmploymentForm
     ///<summary> Not employed </summary>
     [EnumMember(Value = "NEJ")]
     NEJ,
+    ///<summary> </summary>
+    [EnumMember(Value = "SVT")]
+    SVT
 }
