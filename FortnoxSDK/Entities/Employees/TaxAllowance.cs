@@ -22,4 +22,7 @@ public enum TaxAllowance
     ///<summary> Unknown tax circumstances </summary>
     [EnumMember(Value = "???")]
     Unknown,
+    /// <summary> Not documented </summary>
+    [EnumMember(Value = "SNK")]
+    SNK
 }
