@@ -18,6 +18,7 @@ internal class JsonEntitySerializer : ISerializer
         settings = new JsonSerializerSettings();
         settings.DateFormatString = "yyyy-MM-dd";
         settings.Converters.Add(new StringEnumConverter());
+        settings.Converters.Add(new NoRightValueConverter());
         settings.NullValueHandling = NullValueHandling.Ignore;
         settings.ContractResolver = new MyJsonContractResolver(settings, warehouseEnabled);
     }
