@@ -5,7 +5,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <LangVersion>latest</LangVersion>
     <PackageId>Fortnox.NET.SDK</PackageId>
-    <Version>4.3.10</Version>
+    <Version>4.3.11</Version>
     <Authors>Softwerk AB</Authors>
     <Company>Softwerk AB</Company>
     <Description>SDK package for Fortnox API. This package is developed and maintained by Softwerk AB. For more information please visit the repository on Github.</Description>
