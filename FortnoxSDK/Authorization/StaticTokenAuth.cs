@@ -18,7 +18,7 @@ public class StaticTokenAuth : FortnoxAuthorization
         ClientSecret = clientSecret;
     }
 
-    internal override void ApplyTo(HttpRequestMessage request)
+    public override void ApplyTo(HttpRequestMessage request)
     {
         request.Headers.Add("Access-Token", AccessToken);
         request.Headers.Add("Client-Secret", ClientSecret);

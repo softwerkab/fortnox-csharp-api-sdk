@@ -8,5 +8,9 @@ namespace Fortnox.SDK.Authorization;
 public abstract class FortnoxAuthorization
 {
     public string AccessToken { get; set; }
-    internal abstract void ApplyTo(HttpRequestMessage request);
+
+    /// <summary>
+    /// Applies credentials to the http request, typically sets headers.
+    /// </summary>
+    public abstract void ApplyTo(HttpRequestMessage request);
 }
