@@ -16,7 +16,7 @@ public class StandardAuth : FortnoxAuthorization
         AccessToken = accessToken;
     }
 
-    internal override void ApplyTo(HttpRequestMessage request)
+    public override void ApplyTo(HttpRequestMessage request)
     {
         request.Headers.Add("Authorization", $"Bearer {AccessToken}");
     }
