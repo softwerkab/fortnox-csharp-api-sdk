@@ -22,4 +22,6 @@ public enum ReferenceType
     //Not listed in official documentation
     [EnumMember(Value = "RECEIPT")]
     Receipt,
+    [EnumMember(Value = "PAYROLLBOOKKEEP")]
+    PayrollBookkeep,
 }
