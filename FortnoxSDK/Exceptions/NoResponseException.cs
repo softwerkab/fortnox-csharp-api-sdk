@@ -8,7 +8,7 @@ namespace Fortnox.SDK.Exceptions;
 /// </summary>
 public class NoResponseException : Exception
 {
-    public NoResponseException(string message, Exception innerException) : base(message, innerException)
+    internal NoResponseException(string message, Exception innerException) : base(message, innerException)
     {
 
     }
