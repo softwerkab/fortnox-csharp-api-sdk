@@ -15,7 +15,7 @@ public class FortnoxApiException : Exception //RequestException
     public HttpStatusCode StatusCode { get; set; }
     public string ResponseContent { get; set; }
 
-    public FortnoxApiException(string message, Exception innerException = null) : base(message, innerException)
+    internal FortnoxApiException(string message, Exception innerException = null) : base(message, innerException)
     {
 
     }
