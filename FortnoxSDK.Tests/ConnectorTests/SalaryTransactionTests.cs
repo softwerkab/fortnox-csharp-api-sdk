@@ -16,7 +16,7 @@ public class SalaryTransactionTests
     public async Task Test_SalaryTransaction_CRUD()
     {
         #region Arrange
-        var tmpEmployee = await FortnoxClient.EmployeeConnector.CreateAsync(new Employee() { EmployeeId = TestUtils.RandomString() });
+        var tmpEmployee = await TestUtils.GetBasicTestEmployee();
         #endregion Arrange
 
         var connector = FortnoxClient.SalaryTransactionConnector;

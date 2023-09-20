@@ -17,7 +17,7 @@ public class AssetTests
     public async Task Test_Asset_CRUD()
     {
         #region Arrange
-        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
+        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TEMP", Description = "TempCostCenter" });
         var tmpAssetType = await FortnoxClient.AssetTypesConnector.CreateAsync(new AssetType() { Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
         #endregion Arrange
 
@@ -82,7 +82,7 @@ public class AssetTests
     public async Task Test_Find()
     {
         #region Arrange
-        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
+        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TEMP", Description = "TempCostCenter" });
         var tmpAssetType = await FortnoxClient.AssetTypesConnector.CreateAsync(new AssetType() { Description = "TmpAssetType", Type = "1", Number = TestUtils.RandomString(3), AccountAssetId = 1150, AccountDepreciationId = 7824, AccountValueLossId = 1159 });
         #endregion Arrange
 

@@ -13,14 +13,14 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 public class AbsenceTransactionTests
 {
     public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
-
+    
     [TestMethod]
     public async Task Test_AbsenceTransaction_CRUD()
     {
         #region Arrange
-        var tmpEmployee = await FortnoxClient.EmployeeConnector.CreateAsync(new Employee() { EmployeeId = TestUtils.RandomString() });
+        var tmpEmployee = await TestUtils.GetBasicTestEmployee();
         var tmpProject = await FortnoxClient.ProjectConnector.CreateAsync(new Project() { Description = "TmpProject" });
-        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
+        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TEMP", Description = "TempCostCenter" });
         #endregion Arrange
 
         var connector = FortnoxClient.AbsenceTransactionConnector;
@@ -78,10 +78,9 @@ public class AbsenceTransactionTests
     public async Task Test_Find()
     {
         #region Arrange
-
-        var tmpEmployee = await FortnoxClient.EmployeeConnector.CreateAsync(new Employee() { EmployeeId = TestUtils.RandomString() });
+        var tmpEmployee = await TestUtils.GetBasicTestEmployee();
         var tmpProject = await FortnoxClient.ProjectConnector.CreateAsync(new Project() { Description = "TmpProject" });
-        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TMP", Description = "TmpCostCenter" });
+        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TEMP", Description = "TempCostCenter" });
         #endregion Arrange
 
         var connector = FortnoxClient.AbsenceTransactionConnector;

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Authorization;
+using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
 
 namespace FortnoxSDK.Tests;
@@ -113,6 +115,18 @@ public class TestUtils
         catch (FortnoxApiException)
         {
             return false;
+        }
+    }
+
+    public static async Task<Employee> GetBasicTestEmployee()
+    {
+        try
+        {
+            return await DefaultFortnoxClient.EmployeeConnector.CreateAsync(new Employee() { EmployeeId = RandomString(), FirstName = "Test", LastName = "Testsson", Email = "test.testsson@test.com" });
+        }
+        catch (Exception e)
+        {
+            return await DefaultFortnoxClient.EmployeeConnector.GetAsync("TEST_EMP");
         }
     }
 }

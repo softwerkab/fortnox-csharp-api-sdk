@@ -19,15 +19,16 @@ public class TrustedEmailDomainsTests
         #endregion Arrange
 
         var connector = FortnoxClient.TrustedEmailDomainsConnector;
-
+        const string domainName = "newtestdomain.tst";
+        
         #region CREATE
         var newTrustedEmailDomains = new TrustedEmailDomain()
         {
-            Domain = "testdomain.tst",
+            Domain = domainName,
         };
 
         var createdTrustedEmailDomains = await connector.CreateAsync(newTrustedEmailDomains);
-        Assert.AreEqual("testdomain.tst", createdTrustedEmailDomains.Domain);
+        Assert.AreEqual(domainName, createdTrustedEmailDomains.Domain);
 
         #endregion CREATE
 
@@ -38,7 +39,7 @@ public class TrustedEmailDomainsTests
         #region READ / GET
 
         var retrievedTrustedEmailDomains = await connector.GetAsync(createdTrustedEmailDomains.Id);
-        Assert.AreEqual("testdomain.tst", retrievedTrustedEmailDomains.Domain);
+        Assert.AreEqual(domainName, retrievedTrustedEmailDomains.Domain);
 
         #endregion READ / GET
 
