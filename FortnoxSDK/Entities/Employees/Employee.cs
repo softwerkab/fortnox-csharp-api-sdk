@@ -79,7 +79,7 @@ public class Employee
 
     ///<summary> Personnel type. Validates against allowed values specified below. </summary>
     [JsonProperty]
-    public PersonelType? PersonelType { get; set; }
+    public PersonelType PersonelType { get; set; }
 
     ///<summary> True if employee is inactive </summary>
     [JsonProperty]
