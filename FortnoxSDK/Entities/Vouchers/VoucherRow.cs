@@ -6,7 +6,6 @@ namespace Fortnox.SDK.Entities;
 [Entity(SingularName = "VoucherRow", PluralName = "VoucherRows")]
 public class VoucherRow
 {
-
     ///<summary> Account number. The number must be of an existing active account. </summary>
     [JsonProperty]
     public long? Account { get; set; }
@@ -20,7 +19,6 @@ public class VoucherRow
     public decimal? Credit { get; set; }
 
     ///<summary> The description of the account. </summary>
-    [ReadOnly]
     [JsonProperty]
     public string Description { get; private set; }
 
