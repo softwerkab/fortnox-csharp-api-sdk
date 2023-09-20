@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Fortnox.SDK.Serialization;
 using Newtonsoft.Json;
 
@@ -7,7 +8,6 @@ namespace Fortnox.SDK.Entities;
 [Entity(SingularName = "TaxReduction", PluralName = "TaxReductions")]
 public class TaxReduction
 {
-
     ///<summary> Direct URL to the record </summary>
     [ReadOnly]
     [JsonProperty("@url")]
@@ -80,4 +80,8 @@ public class TaxReduction
     [ReadOnly]
     [JsonProperty]
     public string VoucherYear { get; private set; }
+
+    ///<summary> List of tax reduction amounts </summary>
+    [JsonProperty]
+    public IList<TaxReductionAmount>? TaxReductionAmounts { get; set; }
 }
