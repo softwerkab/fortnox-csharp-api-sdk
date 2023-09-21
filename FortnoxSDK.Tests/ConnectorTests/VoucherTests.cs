@@ -32,8 +32,8 @@ public class VoucherTests
             TransactionDate = new DateTime(2020, 1, 1),
             VoucherRows = new List<VoucherRow>()
             {
-                new VoucherRow(){ Account = 1930, Debit = 1500, Credit = 0 },
-                new VoucherRow(){ Account = 1910, Debit = 0, Credit = 1500 }
+                new (){ Account = 1930, Debit = 1500, Credit = 0, Description = "Desc"},
+                new (){ Account = 1910, Debit = 0, Credit = 1500, Description = "Desc2"}
             }
         };
 

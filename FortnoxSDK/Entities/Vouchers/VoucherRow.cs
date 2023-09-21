@@ -20,7 +20,7 @@ public class VoucherRow
 
     ///<summary> The description of the account. </summary>
     [JsonProperty]
-    public string Description { get; private set; }
+    public string Description { get; set; }
 
     ///<summary> Amount of debit. </summary>
     [JsonProperty]
