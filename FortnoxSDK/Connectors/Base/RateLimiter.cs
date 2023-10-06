@@ -11,8 +11,8 @@ namespace Fortnox.SDK.Connectors.Base;
 /// </summary>
 internal class RateLimiter
 {    
-    private const int MaxCount = 4;
-    private static readonly TimeSpan Period = TimeSpan.FromSeconds(1);
+    private const int MaxCount = 12;
+    private static readonly TimeSpan Period = TimeSpan.FromSeconds(5);
     
     private static readonly Dictionary<string, TimeLimiter> RateLimiters = new();
 
