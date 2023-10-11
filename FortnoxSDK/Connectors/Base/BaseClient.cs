@@ -7,15 +7,19 @@ namespace Fortnox.SDK.Connectors.Base;
 internal abstract class BaseClient
 {
     public ErrorHandler ErrorHandler { get; set; }
-    public RateLimiter RateLimiter { get; set; }
+    public static RateLimiter RateLimiter { get; set; }
     public HttpClient HttpClient { get; set; }
 
     public bool UseRateLimiter { get; set; } = true;
     public FortnoxAuthorization Authorization { get; set; }
 
-    protected BaseClient()
+    static BaseClient()
     {
         RateLimiter = new RateLimiter();
+    }
+
+    protected BaseClient()
+    {
         ErrorHandler = new ErrorHandler();
     }
 
