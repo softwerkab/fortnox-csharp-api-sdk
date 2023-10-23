@@ -96,4 +96,9 @@ public class InvoiceRow
     /// <summary> The stock point that the items are to taken from or has been taken from. </summary>
     [JsonProperty]
     public string StockPointCode { get; set; }
+
+    ///<summary> The VATCode has value based on VAT. </summary>
+    [JsonProperty]
+    public string VATCode { get; set; }
+
 }
