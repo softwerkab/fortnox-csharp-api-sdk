@@ -69,6 +69,36 @@ public class TermsOfPaymentTests
     {
         var connector = FortnoxClient.TermsOfPaymentConnector;
 
+        // delete existing entities becuase due to that exiting records, test not passing for 5.  Assert.AreEqual(5, fullCollection.Entities.Count); // line 100
+        var searchSettingsExits = new TermsOfPaymentSearch();
+        searchSettingsExits.LastModified = TestUtils.Recently;
+        var fullCollectionExists = await connector.FindAsync(searchSettingsExits);
+
+        if (fullCollectionExists.TotalPages == 1)
+        {
+            // Delete already exists entries
+            foreach (var entry in fullCollectionExists.Entities)
+            {
+                await connector.DeleteAsync(entry.Code);
+            }
+        }
+        else
+        {
+            var pages = fullCollectionExists.TotalPages;
+
+            for (int i = 0; i < pages; i++)
+            {
+                foreach (var entry in fullCollectionExists.Entities)
+                {
+                    await connector.DeleteAsync(entry.Code);
+                } 
+
+                searchSettingsExits.Page = fullCollectionExists.CurrentPage + 1;
+                fullCollectionExists = await connector.FindAsync(searchSettingsExits);
+            }
+        }
+       
+
         var newTermsOfPayment = new TermsOfPayment()
         {
             Description = "TestPaymentTerms"
