@@ -14,7 +14,7 @@ public class TestArrangement
     {
         try
         {
-            await FortnoxClient.CostCenterConnector.DeleteAsync("TMP");
+            await FortnoxClient.CostCenterConnector.DeleteAsync("TEMP");
         }
         catch
         {

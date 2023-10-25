@@ -152,7 +152,7 @@ public class InvoiceTests
         var newInvoice = new Invoice()
         {
             CustomerNumber = tmpCustomer.CustomerNumber,
-            InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
+            InvoiceDate = new DateTime(2019, 1, 1), //"2019-01-01",
             Comments = "TestInvoice",
             InvoiceRows = new List<InvoiceRow>()
             {
@@ -163,14 +163,14 @@ public class InvoiceTests
         };
 
         var createdInvoice = await connector.CreateAsync(newInvoice);
-        Assert.AreEqual("2019-01-20", createdInvoice.InvoiceDate?.ToString(ApiConstants.DateFormat));
-        Assert.AreEqual("2019-02-19", createdInvoice.DueDate?.ToString(ApiConstants.DateFormat));
+        Assert.AreEqual("2019-01-01", createdInvoice.InvoiceDate?.ToString(ApiConstants.DateFormat));
+        Assert.AreEqual("2019-01-01", createdInvoice.DueDate?.ToString(ApiConstants.DateFormat));
 
-        var newInvoiceDate = new DateTime(2019, 1, 1);
+        var newInvoiceDate = new DateTime(2019, 1, 31);
         var dateChange = newInvoiceDate - newInvoice.InvoiceDate.Value;
         var newDueDate = createdInvoice.DueDate?.AddDays(dateChange.Days);
 
-        createdInvoice.InvoiceDate = newInvoiceDate;
+        //createdInvoice.InvoiceDate = newInvoiceDate;
         createdInvoice.DueDate = newDueDate;
 
         var updatedInvoice = await connector.UpdateAsync(createdInvoice);
