@@ -1,7 +1,9 @@
-using System.Linq;
-using System.Threading.Tasks;
 using Fortnox.SDK;
+using Fortnox.SDK.Entities.Predefined_Accounts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace FortnoxSDK.Tests.ConnectorTests;
 
@@ -16,10 +18,10 @@ public class PredefinedAccountsTests
         var connector = FortnoxClient.PredefinedAccountsConnector;
 
         //Get
-        var bygAccount = await connector.GetAsync("CONSTRUCTION_DEB");
+        var bygAccount = await connector.GetAsync(PredefinedAccountName.ReverseChargeSEDebit);
         Assert.AreEqual(2647, bygAccount.Account);
 
-        var patentAccount = await connector.GetAsync("PRODUCT_DEB");
+        var patentAccount = await connector.GetAsync(PredefinedAccountName.ReverseChargeGoodsEUDebit);
         Assert.AreEqual(2645, patentAccount.Account);
 
         //Update
@@ -51,5 +53,26 @@ public class PredefinedAccountsTests
         Assert.AreEqual(2, limitedCollection.Entities.Count);
         Assert.AreEqual(42, limitedCollection.TotalResources);
         */
+    }
+
+    /// <summary>
+    /// It looks like that not all the Fortnox account have all accounts
+    /// so this test may fail 
+    /// </summary>
+    /// <returns></returns>
+    [TestMethod]
+    public async Task Test_FindAllAccounts()
+    {
+        var connector = FortnoxClient.PredefinedAccountsConnector;
+
+        var fields = typeof(PredefinedAccountName)
+            .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
+            .Where(fi => fi.IsLiteral && !fi.IsInitOnly);
+
+        foreach (var field in fields)
+        {
+            var predefineradAccount = await connector.GetAsync((string?)field.GetValue(null));
+            Assert.IsNotNull(predefineradAccount);
+        }
     }
 }
