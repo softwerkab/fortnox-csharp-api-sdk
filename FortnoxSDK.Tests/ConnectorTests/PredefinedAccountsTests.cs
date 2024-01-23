@@ -1,5 +1,5 @@
 using Fortnox.SDK;
-using Fortnox.SDK.Entities.Predefined_Accounts;
+using Fortnox.SDK.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Threading.Tasks;
