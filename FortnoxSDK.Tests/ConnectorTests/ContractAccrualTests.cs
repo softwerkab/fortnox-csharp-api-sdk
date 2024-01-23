@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests;
 
+[Ignore("Fails with error 'Feature inte tillgänglig'")]
 [TestClass]
 public class ContractAccrualTests
 {

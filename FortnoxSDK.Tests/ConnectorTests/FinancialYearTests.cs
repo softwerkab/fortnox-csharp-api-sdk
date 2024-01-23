@@ -72,7 +72,8 @@ public class FinancialYearTests
         var connector = FortnoxClient.FinancialYearConnector;
 
         var finYears = await connector.FindAsync(null);
-        Assert.AreEqual(6, finYears.Entities.Count);
+        var expectedYears = DateTime.Today.Year - 2018 + 1; // Years since 2018
+        Assert.AreEqual(expectedYears, finYears.Entities.Count);
         Assert.IsNotNull(finYears.Entities.First().FromDate);
     }
 
