@@ -58,6 +58,11 @@ internal class InvoiceConnector : SearchableEntityConnector<Invoice, InvoiceSubs
         return await DoActionAsync(id.ToString(), Action.EInvoice).ConfigureAwait(false);
     }
 
+    public async Task<byte[]> EPrintAsync(long? id)
+    {
+        return await DoDownloadActionAsync(id.ToString(), Action.EPrint).ConfigureAwait(false);
+    }
+
     public async Task<byte[]> PrintAsync(long? id)
     {
         return await DoDownloadActionAsync(id.ToString(), Action.Print).ConfigureAwait(false);
