@@ -256,8 +256,8 @@ public class InvoiceTests
 
         var createdInvoice = await connector.CreateAsync(newInvoice);
 
-        var fileData = await connector.PrintAsync(createdInvoice.DocumentNumber);
-        MyAssert.IsPDF(fileData);
+        var printedInvoice = await connector.EmailAsync(createdInvoice.DocumentNumber);
+        Assert.AreEqual(printedInvoice.DocumentNumber, createdInvoice.DocumentNumber);
 
         await connector.CancelAsync(createdInvoice.DocumentNumber);
 
