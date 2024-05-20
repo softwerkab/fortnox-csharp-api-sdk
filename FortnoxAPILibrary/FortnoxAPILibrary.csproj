@@ -117,6 +117,7 @@
     <Compile Include="Entities\VoucherSeriesCollection.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="FilterProperty.cs" />
+    <Compile Include="ParseXmlResponseException.cs" />
     <Compile Include="UrlRequestBase.cs" />
     <Compile Include="EntityConnector.cs" />
     <Compile Include="ConnectionCredentials.cs" />
