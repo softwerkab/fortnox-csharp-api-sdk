@@ -12,35 +12,33 @@ namespace FortnoxAPILibrary
     /// <remarks/>
     public class UrlRequestBase
     {
-		string clientSecret;
+        string clientSecret;
 
-		string accessToken;
+        string accessToken;
 
-		/// <summary>
-		/// Optional Fortnox Client Secret, if used it will override the static version.
-		/// </summary>
-		/// <exception cref="Exception">Exception will be thrown if client secret is not set.</exception>
-		public string ClientSecret
-		{
-			get
-			{
-				if (!string.IsNullOrEmpty(this.clientSecret))
-				{
-					return this.clientSecret;
-				}
+        /// <summary>
+        /// Optional Fortnox Client Secret, if used it will override the static version.
+        /// </summary>
+        /// <exception cref="Exception">Exception will be thrown if client secret is not set.</exception>
+        public string ClientSecret
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.clientSecret))
+                {
+                    return this.clientSecret;
+                }
 
-				if (!string.IsNullOrEmpty(ConnectionCredentials.ClientSecret))
-				{
-					return ConnectionCredentials.ClientSecret;
-				}
+                if (!string.IsNullOrEmpty(ConnectionCredentials.ClientSecret))
+                {
+                    return ConnectionCredentials.ClientSecret;
+                }
 
-				throw new Exception("Fortnox Client Secret must be set.");
-			}
-			set
-			{
-				this.clientSecret = value;
-			}
-		}
+                throw new Exception("Fortnox Client Secret must be set.");
+            }
+            set { this.clientSecret = value; }
+        }
+
         public bool UseOAuth2 { get; set; }
 
         /// <summary>
@@ -48,31 +46,28 @@ namespace FortnoxAPILibrary
         /// </summary>
         /// /// <exception cref="Exception">Exception will be thrown if access token is not set.</exception>
         public string AccessToken
-		{
-			get
-			{
-				if (!string.IsNullOrEmpty(this.accessToken))
-				{
-					return this.accessToken;
-				}
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.accessToken))
+                {
+                    return this.accessToken;
+                }
 
-				if (!string.IsNullOrEmpty(ConnectionCredentials.AccessToken))
-				{
-					return ConnectionCredentials.AccessToken;
-				}
+                if (!string.IsNullOrEmpty(ConnectionCredentials.AccessToken))
+                {
+                    return ConnectionCredentials.AccessToken;
+                }
 
-				throw new Exception("Fortnox Access Token must be set.");
-			}
-			set
-			{
-				this.accessToken = value;
-			}
-		}
+                throw new Exception("Fortnox Access Token must be set.");
+            }
+            set { this.accessToken = value; }
+        }
 
-		/// <summary>
-		/// Timeout of requests sent to the Fortnox API in miliseconds
-		/// </summary>
-		public int Timeout { get; set; }
+        /// <summary>
+        /// Timeout of requests sent to the Fortnox API in miliseconds
+        /// </summary>
+        public int Timeout { get; set; }
 
         /// <remarks/>
         public FortnoxError.ErrorInformation Error { get; set; }
@@ -86,6 +81,7 @@ namespace FortnoxAPILibrary
         /// The data sent to Fortnox in Xml-format.
         /// </summary>
         public string RequestXml { get; set; }
+
         /// <summary>
         /// The data returned from Fortnox in Xml-format.
         /// </summary>
@@ -105,6 +101,7 @@ namespace FortnoxAPILibrary
         internal string LocalPath { get; set; }
 
         internal RequestResponseType ResponseType { get; set; }
+
         internal enum RequestResponseType
         {
             XML,
@@ -121,11 +118,12 @@ namespace FortnoxAPILibrary
 
         internal string GetUrl(string index = "")
         {
-            string[] str = new string[]{
-				ConnectionCredentials.FortnoxAPIServer,
-				this.Resource,
-				index
-			};
+            string[] str = new string[]
+            {
+                ConnectionCredentials.FortnoxAPIServer,
+                this.Resource,
+                index
+            };
 
             str = str.Where(s => s != "").ToArray();
 
@@ -180,10 +178,12 @@ namespace FortnoxAPILibrary
             {
                 if (Method != "GET")
                 {
-                    using (wr.GetRequestStream()) { }
+                    using (wr.GetRequestStream())
+                    {
+                    }
                 }
 
-                using (HttpWebResponse response = (HttpWebResponse) wr.GetResponse())
+                using (HttpWebResponse response = (HttpWebResponse)wr.GetResponse())
                 {
                     httpStatusCode = response.StatusCode;
                 }
@@ -210,7 +210,7 @@ namespace FortnoxAPILibrary
 
                 if (Method != "GET")
                 {
-                    using (Stream requestStream = (Stream) wr.GetRequestStream())
+                    using (Stream requestStream = (Stream)wr.GetRequestStream())
                     {
                         xs.Serialize(requestStream, entity);
                     }
@@ -228,7 +228,7 @@ namespace FortnoxAPILibrary
                     }
                 }
 
-                using (HttpWebResponse response = (HttpWebResponse) wr.GetResponse())
+                using (HttpWebResponse response = (HttpWebResponse)wr.GetResponse())
                 {
                     httpStatusCode = response.StatusCode;
                     using (Stream responseStream = response.GetResponseStream())
@@ -239,9 +239,11 @@ namespace FortnoxAPILibrary
                         }
                         else
                         {
-                            if (response.Headers["Content-Disposition"] != null && response.Headers["Content-Disposition"].Split(';')[0] == "attachment")
+                            if (response.Headers["Content-Disposition"] != null &&
+                                response.Headers["Content-Disposition"].Split(';')[0] == "attachment")
                             {
-                                throw new Exception("The specified path is a file. Use DownloadFile() to download the file.");
+                                throw new Exception(
+                                    "The specified path is a file. Use DownloadFile() to download the file.");
                             }
                             else if (this.ResponseType == RequestResponseType.XML)
                             {
@@ -254,7 +256,9 @@ namespace FortnoxAPILibrary
                                     }
                                     catch (Exception e)
                                     {
-                                        throw new Exception("An error occured while deserializing the response. Check ResponseXML.", e.InnerException);
+                                        throw new Exception(
+                                            "An error occured while deserializing the response. Check ResponseXML.",
+                                            e.InnerException);
                                     }
                                 }
                             }
@@ -271,6 +275,7 @@ namespace FortnoxAPILibrary
                                         sw.Write(sr.ReadToEnd());
                                     }
                                 }
+
                                 return default(T);
                             }
                         }
@@ -293,18 +298,21 @@ namespace FortnoxAPILibrary
 
             try
             {
-				// prepp name and data
-				if (fileData == null)
-				{
-					fileName = System.IO.Path.GetFileName(localPath);
-					fileData = System.IO.File.ReadAllBytes(localPath);
-				}
+                // prepp name and data
+                if (fileData == null)
+                {
+                    fileName = System.IO.Path.GetFileName(localPath);
+                    fileData = System.IO.File.ReadAllBytes(localPath);
+                }
 
-				XmlSerializer xs = new XmlSerializer(typeof(T));
+                XmlSerializer xs = new XmlSerializer(typeof(T));
 
                 Random rand = new Random();
                 string boundary = "----boundary" + rand.Next().ToString();
-                byte[] header = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" + fileName + "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
+                byte[] header = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary +
+                                                                    "\r\nContent-Disposition: form-data; name=\"file_path\"; filename=\"" +
+                                                                    fileName +
+                                                                    "\"\r\nContent-Type: application/octet-stream\r\n\r\n");
                 byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
 
                 HttpWebRequest request = this.SetupRequest(this.RequestUriString, "POST");
@@ -326,6 +334,7 @@ namespace FortnoxAPILibrary
                             {
                                 this.ResponseXml = sr.ReadToEnd();
                             }
+
                             using (var sr = new StringReader(this.ResponseXml))
                             {
                                 result = (T)xs.Deserialize(sr);
@@ -364,29 +373,29 @@ namespace FortnoxAPILibrary
 
                 HttpWebRequest request = this.SetupRequest(url, "GET");
 
-                using (HttpWebResponse response = (HttpWebResponse) request.GetResponse())
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
                     httpStatusCode = response.StatusCode;
                     using (Stream responseStream = response.GetResponseStream())
                     {
-						if (file == null)
-						{
-							// hdd
-							WriteStream(responseStream);
-						}
-						else
-						{
-							// memory
-							using (var ms = new System.IO.MemoryStream())
-							{
-								file.ContentType = response.Headers["Content-Type"];
-								responseStream.CopyTo(ms);
-								file.Data = ms.ToArray();
-							}
-						}
-					}
-				}
-			}
+                        if (file == null)
+                        {
+                            // hdd
+                            WriteStream(responseStream);
+                        }
+                        else
+                        {
+                            // memory
+                            using (var ms = new System.IO.MemoryStream())
+                            {
+                                file.ContentType = response.Headers["Content-Type"];
+                                responseStream.CopyTo(ms);
+                                file.Data = ms.ToArray();
+                            }
+                        }
+                    }
+                }
+            }
             catch (WebException we)
             {
                 Error = this.HandleException(we);
@@ -401,7 +410,6 @@ namespace FortnoxAPILibrary
 
             try
             {
-
                 XmlSerializer xs = new XmlSerializer(typeof(File));
 
                 string url = ConnectionCredentials.FortnoxAPIServer + "/" + this.Resource + "/move/" + fileId;
@@ -417,7 +425,7 @@ namespace FortnoxAPILibrary
                 }
 
                 HttpWebRequest request = this.SetupRequest(url, "PUT");
-                using (HttpWebResponse response = (HttpWebResponse) request.GetResponse())
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
                     httpStatusCode = response.StatusCode;
                     using (Stream responseStream = response.GetResponseStream())
@@ -426,9 +434,10 @@ namespace FortnoxAPILibrary
                         {
                             this.ResponseXml = sr.ReadToEnd();
                         }
+
                         using (var sr = new StringReader(this.ResponseXml))
                         {
-                            return (File) xs.Deserialize(sr);
+                            return (File)xs.Deserialize(sr);
                         }
                     }
                 }
@@ -455,6 +464,7 @@ namespace FortnoxAPILibrary
             {
                 throw new Exception("Inget svar från Fortnox API. Kontrollera inre exception.", we);
             }
+
             using (HttpWebResponse response = (HttpWebResponse)we.Response)
             {
                 this.httpStatusCode = response.StatusCode;
@@ -463,6 +473,7 @@ namespace FortnoxAPILibrary
                 {
                     throw we;
                 }
+
                 using (var errorStream = response.GetResponseStream())
                 {
                     XmlSerializer errorSerializer = new XmlSerializer(typeof(FortnoxError.ErrorInformation));
@@ -484,7 +495,8 @@ namespace FortnoxAPILibrary
                         {
                             string text = reader.ReadToEnd();
 
-                            throw new Exception("Kunde inte tolka felmeddelandet från Fortnox API.\n\n" + text, ex.InnerException);
+                            throw new Exception("Kunde inte tolka felmeddelandet från Fortnox API.\n\n" + text,
+                                ex.InnerException);
                         }
                     }
                 }
