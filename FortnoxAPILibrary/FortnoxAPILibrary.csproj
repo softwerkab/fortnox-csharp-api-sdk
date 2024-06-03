@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FortnoxAPILibrary</RootNamespace>
     <AssemblyName>FortnoxAPILibrary</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -117,6 +117,7 @@
     <Compile Include="Entities\VoucherSeriesCollection.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="FilterProperty.cs" />
+    <Compile Include="ParseXmlResponseException.cs" />
     <Compile Include="UrlRequestBase.cs" />
     <Compile Include="EntityConnector.cs" />
     <Compile Include="ConnectionCredentials.cs" />
