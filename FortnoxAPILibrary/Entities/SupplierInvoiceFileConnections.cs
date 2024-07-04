@@ -29,11 +29,11 @@ namespace FortnoxAPILibrary
 
 		private List<SupplierInvoiceFileConnectionSubset> supplierInvoiceFileConnectionSubsetField;
 
-		private byte totalResourcesField;
+		private int totalResourcesField;
 
-		private byte totalPagesField;
+		private int totalPagesField;
 
-		private byte currentPageField;
+		private int currentPageField;
 
 		/// <remarks/>
 		[System.Xml.Serialization.XmlElementAttribute("SupplierInvoiceFileConnectionSubset")]
@@ -51,7 +51,7 @@ namespace FortnoxAPILibrary
 
 		/// <remarks/>
 		[System.Xml.Serialization.XmlAttributeAttribute()]
-		public byte TotalResources
+		public int TotalResources
 		{
 			get
 			{
@@ -65,7 +65,7 @@ namespace FortnoxAPILibrary
 
 		/// <remarks/>
 		[System.Xml.Serialization.XmlAttributeAttribute()]
-		public byte TotalPages
+		public int TotalPages
 		{
 			get
 			{
@@ -79,7 +79,7 @@ namespace FortnoxAPILibrary
 
 		/// <remarks/>
 		[System.Xml.Serialization.XmlAttributeAttribute()]
-		public byte CurrentPage
+		public int CurrentPage
 		{
 			get
 			{
