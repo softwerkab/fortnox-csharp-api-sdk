@@ -17,6 +17,11 @@ public class VoucherFileConnection
     [JsonProperty]
     public string FileId { get; set; }
 
+    ///<summary> Name of the file </summary>
+    [ReadOnly]
+    [JsonProperty]
+    public string Name { get; private set; }
+
     ///<summary> Description of the voucher </summary>
     [ReadOnly]
     [JsonProperty]
