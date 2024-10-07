@@ -18,6 +18,7 @@ public interface IInvoiceConnector : IEntityConnector
     Task<Invoice> CreditInvoiceAsync(long? id);
     Task<Invoice> EmailAsync(long? id);
     Task<Invoice> EInvoiceAsync(long? id);
+    Task<Invoice> EPrintAsync(long? id);
     Task<byte[]> PrintAsync(long? id);
     Task<byte[]> PrintReminderAsync(long? id);
     Task<Invoice> ExternalPrintAsync(long? id);

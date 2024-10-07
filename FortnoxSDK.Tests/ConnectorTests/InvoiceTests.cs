@@ -186,12 +186,54 @@ public class InvoiceTests
     }
 
     [TestMethod]
+    [Ignore("Fails with error 'Kan inte skicka dokument om inte företaget är registrerat'")]
+    public async Task Test_EPrint()
+    {
+        #region Arrange
+        var cc = FortnoxClient.CustomerConnector;
+        var ac = FortnoxClient.ArticleConnector;
+        var tmpCustomer = await cc.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "test@test.test" });
+        var tmpArticle = await ac.CreateAsync(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+        #endregion Arrange
+
+        var connector = FortnoxClient.InvoiceConnector;
+
+        var newInvoice = new Invoice()
+        {
+            CustomerNumber = tmpCustomer.CustomerNumber,
+            InvoiceDate = new DateTime(2019, 1, 20), //"2019-01-20",
+            DueDate = new DateTime(2019, 2, 20), //"2019-02-20",
+            InvoiceType = InvoiceType.CashInvoice,
+            PaymentWay = PaymentWay.Cash,
+            Comments = "TestInvoice",
+            InvoiceRows = new List<InvoiceRow>()
+            {
+                new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, Price = 100},
+                new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, Price = 100},
+                new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, Price = 100}
+            }
+        };
+
+        var createdInvoice = await connector.CreateAsync(newInvoice);
+
+        var printedInvoice = await connector.EPrintAsync(createdInvoice.DocumentNumber);
+        Assert.AreEqual(printedInvoice.DocumentNumber, createdInvoice.DocumentNumber);
+
+        await connector.CancelAsync(createdInvoice.DocumentNumber);
+
+        #region Delete arranged resources
+        await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
+        // await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
+        #endregion Delete arranged resources
+    }
+
+    [TestMethod]
     public async Task Test_Print()
     {
         #region Arrange
         var cc = FortnoxClient.CustomerConnector;
         var ac = FortnoxClient.ArticleConnector;
-        var tmpCustomer = await cc.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+        var tmpCustomer = await cc.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "test@test.test" });
         var tmpArticle = await ac.CreateAsync(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
         #endregion Arrange
 
@@ -222,7 +264,7 @@ public class InvoiceTests
 
         #region Delete arranged resources
         await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
-        //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+        //await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
         #endregion Delete arranged resources
     }
 
@@ -261,7 +303,7 @@ public class InvoiceTests
 
         #region Delete arranged resources
         await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
-        //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+        //await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
         #endregion Delete arranged resources
     }
 

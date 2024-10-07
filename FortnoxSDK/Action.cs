@@ -66,7 +66,6 @@ public static class ActionExtensions
             case Action.Print:
             case Action.PrintReminder:
             case Action.Preview:
-            case Action.EPrint:
                 return true;
             default:
                 return false;
@@ -81,6 +80,7 @@ public static class ActionExtensions
                 return HttpMethod.Put;
             case Action.Email:
             case Action.EInvoice:
+            case Action.EPrint:
                 return HttpMethod.Get;
             default:
                 return HttpMethod.Put;
