@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests;
 
-[Ignore("Fails with error 'Feature inte tillg‰nglig'")]
+[Ignore("Fails with error 'Feature inte tillg√§nglig'")]
 [TestClass]
 public class ContractAccrualTests
 {

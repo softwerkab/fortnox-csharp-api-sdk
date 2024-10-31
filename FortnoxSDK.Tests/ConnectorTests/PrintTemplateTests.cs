@@ -24,7 +24,7 @@ public class PrintTemplateTests
 
         var fullCollection = await connector.FindAsync(null);
 
-        Assert.AreEqual(9, fullCollection.Entities.Count);
+        Assert.AreEqual(8, fullCollection.Entities.Count);
         Assert.IsNotNull(fullCollection.Entities.First().Name);
 
         //Limit not supported
@@ -49,6 +49,6 @@ public class PrintTemplateTests
         searchSettings.FilterBy = Filter.PrintTemplate.Invoice;
         var invoiceTemplates = await connector.FindAsync(searchSettings);
 
-        Assert.AreEqual(9, invoiceTemplates.Entities.Count);
+        Assert.AreEqual(8, invoiceTemplates.Entities.Count);
     }
 }

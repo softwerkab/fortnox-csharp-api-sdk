@@ -13,7 +13,6 @@ public class ContractTemplateTests
 {
     public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
-    [Ignore("Failing on 'Internal error'. Investigation needed")]
     [TestMethod]
     public async Task Test_ContractTemplate_CRUD()
     {

@@ -20,7 +20,7 @@ public class AttendanceTransactionsTests
         #region Arrange
         var tmpEmployee = await TestUtils.GetBasicTestEmployee();
         var tmpProject = await FortnoxClient.ProjectConnector.CreateAsync(new Project() { Description = "TmpProject" });
-        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TEMP", Description = "TempCostCenter" });
+        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TMPCC", Description = "TempCostCenter" });
         #endregion Arrange
 
         var connector = FortnoxClient.AttendanceTransactionsConnector;
@@ -40,7 +40,7 @@ public class AttendanceTransactionsTests
         Assert.AreEqual(5.5m, createdAttendanceTransaction.Hours);
 
         #endregion CREATE
-        
+
         #region UPDATE
 
         createdAttendanceTransaction.Hours = 8;
@@ -80,7 +80,7 @@ public class AttendanceTransactionsTests
         #region Arrange
         var tmpEmployee = await TestUtils.GetBasicTestEmployee();
         var tmpProject = await FortnoxClient.ProjectConnector.CreateAsync(new Project() { Description = "TmpProject" });
-        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TEMP", Description = "TempCostCenter" });
+        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TMPCC", Description = "TempCostCenter" });
         #endregion Arrange
 
         var connector = FortnoxClient.AttendanceTransactionsConnector;

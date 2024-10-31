@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FortnoxSDK.Tests.ConnectorTests;
 
-[Ignore("Failing on 'Internal error'. Investigation needed")]
+[Ignore("Fails with error 'Feature inte tillgänglig'")]
 [TestClass]
 public class ContractTests
 {
