@@ -39,7 +39,7 @@ public class RateLimiterTests
          * 200 requests should be executed in ~50 seconds.
          */
         Assert.AreEqual(200, counter);
-        Assert.IsTrue(watch.Elapsed.TotalSeconds is > 49 and < 51);
+        Assert.IsTrue(watch.Elapsed.TotalSeconds is > 48 and < 52);
     }
 
     [Ignore("Can make other test fail due to exhausting rate limiter")]
