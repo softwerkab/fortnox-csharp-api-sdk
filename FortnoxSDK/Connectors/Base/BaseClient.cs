@@ -26,7 +26,7 @@ internal abstract class BaseClient
             Authorization?.ApplyTo(request);
 
             if (UseRateLimiter)
-                await RateLimiter.Trottle(Authorization?.AccessToken).ConfigureAwait(false);
+                await RateLimiter.Throttle(Authorization?.AccessToken).ConfigureAwait(false);
 
             using var response = await HttpClient.SendAsync(request).ConfigureAwait(false);
 

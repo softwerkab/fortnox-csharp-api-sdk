@@ -10,13 +10,13 @@ namespace Fortnox.SDK.Connectors.Base;
 /// Rate limit - 4 requests per 1 seconds per token
 /// </summary>
 internal class RateLimiter
-{    
+{
     private const int MaxCount = 4;
     private static readonly TimeSpan Period = TimeSpan.FromSeconds(1);
-    
+
     private static readonly Dictionary<string, TimeLimiter> RateLimiters = new();
 
-    public async Task Trottle(string token)
+    public async Task Throttle(string token)
     {
         if (token == null)
             return;
