@@ -67,7 +67,7 @@ public class WayOfDeliveryTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_WayOfDelivery_Find()
     {
         var connector = FortnoxClient.WayOfDeliveryConnector;
 

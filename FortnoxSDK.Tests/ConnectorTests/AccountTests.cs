@@ -123,7 +123,7 @@ public class AccountTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_Account_Find()
     {
         #region Arrange
         //Add code to create required resources

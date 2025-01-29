@@ -65,7 +65,7 @@ public class TermsOfPaymentTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_TermsOfPayment_Find()
     {
         var connector = FortnoxClient.TermsOfPaymentConnector;
 
@@ -91,13 +91,13 @@ public class TermsOfPaymentTests
                 foreach (var entry in fullCollectionExists.Entities)
                 {
                     await connector.DeleteAsync(entry.Code);
-                } 
+                }
 
                 searchSettingsExits.Page = fullCollectionExists.CurrentPage + 1;
                 fullCollectionExists = await connector.FindAsync(searchSettingsExits);
             }
         }
-       
+
 
         var newTermsOfPayment = new TermsOfPayment()
         {

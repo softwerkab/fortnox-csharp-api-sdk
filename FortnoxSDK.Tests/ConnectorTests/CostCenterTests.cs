@@ -67,7 +67,7 @@ public class CostCenterTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_CostCenter_Find()
     {
         #region Arrange
         //Add code to create required resources

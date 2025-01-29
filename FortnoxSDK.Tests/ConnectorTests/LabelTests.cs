@@ -59,7 +59,7 @@ public class LabelTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_Label_Find()
     {
         var connector = FortnoxClient.LabelConnector;
 

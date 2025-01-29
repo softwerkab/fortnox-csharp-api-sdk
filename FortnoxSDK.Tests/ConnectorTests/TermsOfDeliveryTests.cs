@@ -65,7 +65,7 @@ public class TermsOfDeliveryTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_TermsOfDelivery_Find()
     {
         var connector = FortnoxClient.TermsOfDeliveryConnector;
 
@@ -79,7 +79,7 @@ public class TermsOfDeliveryTests
         {
             await connector.DeleteAsync(entry.Code);
         }
-         
+
         var newTermsOfDelivery = new TermsOfDelivery()
         {
             Description = "TestDeliveryTerms"
@@ -102,7 +102,7 @@ public class TermsOfDeliveryTests
 
         //Apply Limit
         //Terms of deleivery not working limit and not returning MetaInformation from fortnox response, so limit will not work as expected
-        searchSettings.Limit = 5; 
+        searchSettings.Limit = 5;
         var limitedCollection = await connector.FindAsync(searchSettings);
 
         Assert.AreEqual(5, limitedCollection.Entities.Count);

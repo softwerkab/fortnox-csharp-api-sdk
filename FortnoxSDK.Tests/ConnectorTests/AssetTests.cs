@@ -79,7 +79,7 @@ public class AssetTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_Asset_Find()
     {
         #region Arrange
         var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TMPCC", Description = "TempCostCenter" });

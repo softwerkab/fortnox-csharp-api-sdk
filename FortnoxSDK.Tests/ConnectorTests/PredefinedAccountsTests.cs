@@ -35,7 +35,7 @@ public class PredefinedAccountsTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_PredefinedAccounts_Find()
     {
         var connector = FortnoxClient.PredefinedAccountsConnector;
 

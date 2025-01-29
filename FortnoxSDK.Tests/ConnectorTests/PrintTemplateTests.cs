@@ -18,7 +18,7 @@ public class PrintTemplateTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_PrintTemplate_Find()
     {
         var connector = FortnoxClient.PrintTemplateConnector;
 
@@ -31,7 +31,7 @@ public class PrintTemplateTests
     }
 
     [TestMethod]
-    public async Task Test_Find_Filter()
+    public async Task Test_PrintTemplate_Find_Filter()
     {
         var connector = FortnoxClient.PrintTemplateConnector;
         var searchSettings = new PrintTemplateSearch();

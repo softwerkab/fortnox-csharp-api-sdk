@@ -17,7 +17,7 @@ public class AccountChartTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_AccountChart_Find()
     {
         var connector = FortnoxClient.AccountChartConnector;
 

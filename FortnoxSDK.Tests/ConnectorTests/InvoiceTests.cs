@@ -81,7 +81,7 @@ public class InvoiceTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_Invoice_Find()
     {
         #region Arrange
         var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
@@ -141,7 +141,7 @@ public class InvoiceTests
     }
 
     [TestMethod]
-    public async Task Test_DueDate()
+    public async Task Test_Invoice_DueDate()
     {
         #region Arrange
         var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
@@ -187,7 +187,7 @@ public class InvoiceTests
 
     [TestMethod]
     [Ignore("Fails with error 'Kan inte skicka dokument om inte företaget är registrerat'")]
-    public async Task Test_EPrint()
+    public async Task Test_Invoice_EPrint()
     {
         #region Arrange
         var cc = FortnoxClient.CustomerConnector;
@@ -229,7 +229,7 @@ public class InvoiceTests
 
     [Ignore("Fails with 'Bankuppgifter saknas'")]
     [TestMethod]
-    public async Task Test_Print()
+    public async Task Test_Invoice_Print()
     {
         #region Arrange
         var cc = FortnoxClient.CustomerConnector;
@@ -271,7 +271,7 @@ public class InvoiceTests
 
     [Ignore("Fails with 'Bankuppgifter saknas'")]
     [TestMethod]
-    public async Task Test_Email()
+    public async Task Test_Invoice_Email()
     {
         #region Arrange
         var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "richard.randak@softwerk.se" });
@@ -310,7 +310,7 @@ public class InvoiceTests
     }
 
     [TestMethod]
-    public async Task Test_Search()
+    public async Task Test_Invoice_Search()
     {
         var connector = FortnoxClient.InvoiceConnector;
         var searchSettings = new InvoiceSearch();
