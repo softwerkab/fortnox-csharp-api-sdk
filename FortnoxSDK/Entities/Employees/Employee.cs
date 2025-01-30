@@ -41,6 +41,10 @@ public class Employee
     [JsonProperty]
     public string PostCode { get; set; }
 
+    ///<summary> Project number. </summary>
+    [JsonProperty]
+    public string Project { get; set; }
+
     ///<summary> City </summary>
     [JsonProperty]
     public string City { get; set; }
@@ -137,8 +141,11 @@ public class Employee
     public DateTime? EmployedTo { get; set; }
 
     [JsonProperty]
+    public IList<EmployeeChild> EmployeeChildren { get; set; }
+
+    [JsonProperty]
     public bool? AutoNonRecurringTax { get; set; }
-       
+
     ///<summary> List of dated wages </summary>
     [JsonProperty]
     public IList<DatedWage> DatedWages { get; set; }
@@ -146,4 +153,148 @@ public class Employee
     ///<summary> List of dated schedules </summary>
     [JsonProperty]
     public IList<DatedSchedule> DatedSchedules { get; set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysPaid { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysPendingPaid { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysPendingPrepaid { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysPendingSaved { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysPendingSavedYear1 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysPendingSavedYear2 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysPendingSavedYear3 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysPendingSavedYear4 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysPendingSavedYear5 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysPendingSavedYear6Plus { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysPendingUnpaid { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysPrepaid { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysRegisteredPaid { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysRegisteredPrepaid { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysRegisteredSaved { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysRegisteredSavedYear1 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysRegisteredSavedYear2 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysRegisteredSavedYear3 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysRegisteredSavedYear4 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysRegisteredSavedYear5 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysRegisteredSavedYear6Plus { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysRegisteredUnpaid { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysSaved { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysSavedEmploymentRateYear1 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysSavedEmploymentRateYear2 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysSavedEmploymentRateYear3 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysSavedEmploymentRateYear4 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysSavedEmploymentRateYear5 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysSavedEmploymentRateYear6Plus { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysSavedYear1 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysSavedYear2 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysSavedYear3 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysSavedYear4 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysSavedYear5 { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysSavedYear6Plus { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public decimal? VacationDaysUnpaid { get; private set; }
 }

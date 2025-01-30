@@ -17,6 +17,10 @@ public class Unit
     [JsonProperty]
     public string Code { get; set; }
 
+    ///<summary> The code of the unit, in English </summary>
+    [JsonProperty]
+    public string CodeEnglish { get; set; }
+
     ///<summary> The description of the unit </summary>
     [JsonProperty]
     public string Description { get; set; }

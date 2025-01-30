@@ -55,4 +55,9 @@ public class SupplierInvoicePaymentSubset
     [ReadOnly]
     [JsonProperty]
     public Source? Source { get; private set; }
+
+    ///<summary> Write-off exist </summary>
+    [ReadOnly]
+    [JsonProperty]
+    public bool? WriteOffExist { get; private set; }
 }

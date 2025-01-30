@@ -1,3 +1,4 @@
+using System;
 using Fortnox.SDK.Serialization;
 using Newtonsoft.Json;
 
@@ -6,6 +7,11 @@ namespace Fortnox.SDK.Entities;
 [Entity(SingularName = "Supplier", PluralName = "Suppliers")]
 public class Supplier
 {
+
+    ///<summary> Direct url to the record </summary>
+    [ReadOnly]
+    [JsonProperty("@url")]
+    public Uri Url { get; private set; }
 
     ///<summary> If active </summary>
     [JsonProperty]

@@ -44,6 +44,8 @@ public class AbsenceTransaction
     [JsonProperty]
     public string Project { get; set; }
 
+    ///<summary> Id </summary>
+    [ReadOnly]
     [JsonProperty("id")]
-    public string Id { get; set; }
+    public string Id { get; private set; }
 }

@@ -152,6 +152,10 @@ public class Contract
     [JsonProperty]
     public string PriceList { get; set; }
 
+    ///<summary> Print template </summary>
+    [JsonProperty]
+    public string PrintTemplate { get; set; }
+
     ///<summary> Project number </summary>
     [JsonProperty]
     public string Project { get; set; }

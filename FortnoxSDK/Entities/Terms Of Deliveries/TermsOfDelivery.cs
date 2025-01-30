@@ -20,4 +20,8 @@ public class TermsOfDelivery
     ///<summary> Description of the term of delivery </summary>
     [JsonProperty]
     public string Description { get; set; }
+
+    ///<summary> Description of the term of delivery, in English </summary>
+    [JsonProperty]
+    public string DescriptionEnglish { get; set; }
 }

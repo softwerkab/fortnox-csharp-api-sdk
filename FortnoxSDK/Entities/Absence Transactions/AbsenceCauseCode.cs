@@ -7,7 +7,7 @@ public enum AbsenceCauseCode
     ///<summary> Arbetsskada </summary>
     [EnumMember(Value = "ASK")]
     ASK,
-    ///<summary> Arbetstidsf�rkortning </summary>
+    ///<summary> Arbetstidsförkortning </summary>
     [EnumMember(Value = "ATF")]
     ATF,
     ///<summary> Föräldraledig </summary>

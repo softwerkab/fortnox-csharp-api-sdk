@@ -14,6 +14,11 @@ public class Order
     [JsonProperty("@url")]
     public Uri Url { get; private set; }
 
+    ///<summary> Direct url to the tax reduction list for the record </summary>
+    [ReadOnly]
+    [JsonProperty("@urlTaxReductionList")]
+    public string urlTaxReductionList { get; private set; }
+
     ///<summary> Administration fee </summary>
     [JsonProperty]
     public decimal? AdministrationFee { get; set; }
@@ -114,7 +119,7 @@ public class Order
     ///<summary> Delivery name </summary>
     [JsonProperty]
     public string DeliveryName { get; set; }
-    
+
     [WarehouseRequired]
     [JsonProperty]
     public DeliveryState? DeliveryState { get; set; }
@@ -162,11 +167,11 @@ public class Order
     [ReadOnly]
     [JsonProperty]
     public long? InvoiceReference { get; private set; }
-    
+
     ///<summary> The properties for the object in this array is listed in the table “Labels” </summary>
     [JsonProperty]
     public IList<LabelReference> Labels { get; set; }
-    
+
     ///<summary> Language code. Can be SV or EN. </summary>
     [JsonProperty]
     public Language? Language { get; set; }
@@ -244,7 +249,7 @@ public class Order
     [ReadOnly]
     [JsonProperty]
     public bool? Sent { get; private set; }
-    
+
     /// <summary> The stock point that the items are to taken from or has been taken from. </summary>
     [JsonProperty]
     public string StockPointCode { get; set; }
@@ -274,7 +279,7 @@ public class Order
     [ReadOnly]
     [JsonProperty]
     public decimal? Total { get; private set; }
-    
+
     ///<summary> Total amount to pay </summary>
     [ReadOnly]
     [JsonProperty]
@@ -292,7 +297,7 @@ public class Order
     ///<summary> Code of delivery </summary>
     [JsonProperty]
     public string WayOfDelivery { get; set; }
-    
+
     /// <summary> Used to see if the document has been marked as ready in warehouse. </summary>
     [ReadOnly]
     [JsonProperty]

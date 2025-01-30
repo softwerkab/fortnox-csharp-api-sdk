@@ -16,6 +16,10 @@ public class SupplierInvoiceSubset
     [JsonProperty("@url")]
     public Uri Url { get; private set; }
 
+    [ReadOnly]
+    [JsonProperty]
+    public string AuthorizerName { get; private set; }
+
     ///<summary> Balance of invoice </summary>
     [ReadOnly]
     [JsonProperty]
