@@ -15,13 +15,34 @@ public class AssetSubset
     [JsonProperty("@url")]
     public Uri Url { get; private set; }
 
-    ///<summary> Id of the asset </summary>
+    ///<summary> AcquisitionDate</summary> 
     [JsonProperty]
-    public long? Id { get; set; }
+    public DateTime? AcquisitionDate { get; set; }
+
+    ///<summary> Acquisition value </summary>
+    [JsonProperty]
+    public decimal? AcquisitionValue { get; set; }
+
+    ///<summary> Asset depreciated until that date or null if no deprecations made </summary>
+    [ReadOnly]
+    [JsonProperty]
+    public DateTime? DepreciatedTo { get; private set; }
+
+    ///<summary> Final date when asset became fully depreciated </summary>
+    [JsonProperty]
+    public DateTime? DepreciationFinal { get; set; }
 
     ///<summary> Description of asset </summary>
     [JsonProperty]
     public string Description { get; set; }
+
+    ///<summary> Id of the asset </summary>
+    [JsonProperty]
+    public long? Id { get; set; }
+
+    ///<summary> Number </summary> 
+    [JsonProperty]
+    public string Number { get; set; }
 
     ///<summary> Current status of asset </summary>
     [ReadOnly]
@@ -42,20 +63,4 @@ public class AssetSubset
     [JsonProperty]
     public long? TypeId { get; set; }
 
-    ///<summary> Acquisition value </summary>
-    [JsonProperty]
-    public decimal? AcquisitionValue { get; set; }
-
-    ///<summary> AcquisitionDate</summary> 
-    [JsonProperty]
-    public DateTime? AcquisitionDate { get; set; }
-
-    ///<summary> Final date when asset became fully depreciated </summary>
-    [JsonProperty]
-    public DateTime? DepreciationFinal { get; set; }
-
-    ///<summary> Asset depreciated until that date or null if no deprecations made </summary>
-    [ReadOnly]
-    [JsonProperty]
-    public DateTime? DepreciatedTo { get; private set; }
 }

@@ -40,6 +40,14 @@ public class ArticleSubset
     [JsonProperty]
     public decimal? PurchasePrice { get; set; }
 
+    ///<summary> Purchase price of the article. </summary>
+    [JsonProperty]
+    public decimal? QuantityInStock { get; set; }
+
+    ///<summary> Purchase price of the article. </summary>
+    [JsonProperty]
+    public string ReservedQuantity { get; set; }
+
     ///<summary> Price of article for its default price list. </summary>
     [ReadOnly]
     [JsonProperty]

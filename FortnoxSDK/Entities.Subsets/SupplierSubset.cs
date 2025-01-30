@@ -1,3 +1,4 @@
+using System;
 using Fortnox.SDK.Serialization;
 using Newtonsoft.Json;
 
@@ -9,6 +10,15 @@ namespace Fortnox.SDK.Entities;
 [Entity(SingularName = "Supplier", PluralName = "Suppliers")]
 public class SupplierSubset
 {
+    ///<summary> Direct url to the record </summary>
+    [ReadOnly]
+    [JsonProperty("@url")]
+    public Uri Url { get; private set; }
+
+    [ReadOnly]
+    [JsonProperty]
+    public bool? Active { get; private set; }
+
     ///<summary> First address field </summary>
     [JsonProperty]
     public string Address1 { get; set; }
@@ -37,9 +47,9 @@ public class SupplierSubset
     [JsonProperty]
     public string CostCenter { get; set; }
 
-    ///<summary> Country of the supplier address </summary>
+    ///<summary> Country code of the supplier address </summary>
     [ReadOnly]
-    [JsonProperty]
+    [JsonProperty("CountryCode")]
     public string Country { get; private set; }
 
     ///<summary> Currency of the supplier </summary>

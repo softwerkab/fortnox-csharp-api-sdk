@@ -1,6 +1,7 @@
 using System;
 using Fortnox.SDK.Serialization;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Fortnox.SDK.Entities;
 
@@ -42,6 +43,10 @@ public class Account
     [JsonProperty]
     public long? Number { get; set; }
 
+    ///<summary> Opening quantities </summary>
+    [JsonProperty]
+    public IList<OpeningQuantity> OpeningQuantities { get; set; }
+
     ///<summary> Number of the proposed project. The number must be of an existing project. </summary>
     [JsonProperty]
     public string Project { get; set; }
@@ -49,6 +54,16 @@ public class Account
     ///<summary> Project settings for the account. Can be ALLOWED MANDATORY or NOTALLOWED </summary>
     [JsonProperty]
     public ProjectSettings? ProjectSettings { get; set; }
+
+    ///<summary> Quantity settings for the account. Can be ALLOWED MANDATORY or NOTALLOWED </summary>
+    [ReadOnly]
+    [JsonProperty]
+    public QuantitySettings? QuantitySettings { get; private set; }
+
+    ///<summary> Quantity unit </summary>
+    [ReadOnly]
+    [JsonProperty]
+    public string QuantityUnit { get; private set; }
 
     ///<summary> SRU code </summary>
     [JsonProperty]

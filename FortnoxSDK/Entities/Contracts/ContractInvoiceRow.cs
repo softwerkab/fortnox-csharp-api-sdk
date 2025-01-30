@@ -49,6 +49,14 @@ public class ContractInvoiceRow
     [JsonProperty]
     public bool? HouseWork { get; set; }
 
+    ///<summary> Housework hours </summary>
+    [JsonProperty]
+    public int? HouseWorkHoursToReport { get; set; }
+
+    ///<summary> Housework type </summary>
+    [JsonProperty]
+    public string HouseWorkType { get; set; }
+
     ///<summary> Unit price </summary>
     [JsonProperty]
     public decimal Price { get; set; }
@@ -61,6 +69,11 @@ public class ContractInvoiceRow
     [ReadOnly]
     [JsonProperty]
     public decimal Total { get; private set; }
+
+    ///<summary> Row amount, excluding VAT </summary>
+    [ReadOnly]
+    [JsonProperty]
+    public decimal TotalExcludingVAT { get; private set; }
 
     ///<summary> Code of unit </summary>
     [JsonProperty]

@@ -15,6 +15,14 @@ public class VoucherSubset
     [JsonProperty("@url")]
     public Uri Url { get; private set; }
 
+    ///<summary> Approval state. </summary>
+    [JsonProperty]
+    public long? ApprovalState { get; set; }
+
+    ///<summary> Comments. </summary>
+    [JsonProperty]
+    public string Comments { get; set; }
+
     ///<summary> Description of the voucher. </summary>
     [JsonProperty]
     public string Description { get; set; }

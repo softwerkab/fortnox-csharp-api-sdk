@@ -13,6 +13,10 @@ public class VoucherSeries
     [JsonProperty("@url")]
     public Uri Url { get; private set; }
 
+    ///<summary> Approver </summary>
+    [JsonProperty]
+    public VoucherSeriesApprover Approver { get; set; }
+
     ///<summary> The code of the voucher series </summary>
     [JsonProperty]
     public string Code { get; set; }

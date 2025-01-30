@@ -54,11 +54,11 @@ public class Asset
 
     ///<summary> AcquisitionDate</summary> 
     [JsonProperty]
-    public DateTime? AcquisitionDate { get; set; } //NOTE: Not in documentated properties, but it is required
+    public DateTime? AcquisitionDate { get; set; }
 
     ///<summary> Number </summary> 
     [JsonProperty]
-    public string Number { get; set; } //NOTE: Not in documentated properties, but it is required
+    public string Number { get; set; }
 
     ///<summary> Depreciations start date </summary>
     [JsonProperty]

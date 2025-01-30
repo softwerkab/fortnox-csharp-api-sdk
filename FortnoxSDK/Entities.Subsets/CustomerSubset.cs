@@ -10,6 +10,11 @@ namespace Fortnox.SDK.Entities;
 [Entity(SingularName = "Customer", PluralName = "Customers")]
 public class CustomerSubset
 {
+    ///<summary> Direct URL to the record </summary>
+    [ReadOnly]
+    [JsonProperty("@url")]
+    public Uri Url { get; private set; }
+
     /// <remarks/>
     [JsonProperty]
     public string Address1 { get; set; }
@@ -45,8 +50,4 @@ public class CustomerSubset
     /// <remarks/>
     [JsonProperty]
     public string ZipCode { get; set; }
-
-    /// <remarks/>
-    [JsonProperty("@url")]
-    public Uri Url { get; set; }
 }

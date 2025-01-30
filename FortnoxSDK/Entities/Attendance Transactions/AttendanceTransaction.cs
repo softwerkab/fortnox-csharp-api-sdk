@@ -36,6 +36,7 @@ public class AttendanceTransaction
     [JsonProperty]
     public string Project { get; set; }
 
+    [ReadOnly]
     [JsonProperty("id")]
-    public string Id { get; set; }
+    public string Id { get; private set; }
 }

@@ -83,5 +83,5 @@ public class TaxReduction
 
     ///<summary> List of tax reduction amounts </summary>
     [JsonProperty]
-    public IList<TaxReductionAmount>? TaxReductionAmounts { get; set; }
+    public IList<TaxReductionAmount> TaxReductionAmounts { get; set; }
 }

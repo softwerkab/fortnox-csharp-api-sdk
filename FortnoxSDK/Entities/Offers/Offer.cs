@@ -14,6 +14,11 @@ public class Offer
     [JsonProperty("@url")]
     public Uri Url { get; private set; }
 
+    ///<summary> Direct url to the tax reduction list for the record </summary>
+    [ReadOnly]
+    [JsonProperty("@urlTaxReductionList")]
+    public string urlTaxReductionList { get; private set; }
+
     ///<summary> Administration fee </summary>
     [JsonProperty]
     public decimal? AdministrationFee { get; set; }

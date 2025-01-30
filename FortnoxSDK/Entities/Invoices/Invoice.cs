@@ -337,6 +337,9 @@ public class Invoice
     [JsonProperty]
     public string TermsOfPayment { get; set; }
 
+    [JsonProperty]
+    public long? TimeBasisReference { get; set; }
+
     ///<summary> The total amount of the invoice. </summary>
     [ReadOnly]
     [JsonProperty]

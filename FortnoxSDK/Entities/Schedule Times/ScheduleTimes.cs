@@ -15,7 +15,7 @@ public class ScheduleTimes
     [JsonProperty]
     public DateTime? Date { get; set; }
 
-    ///<summary> Unique schedule-od </summary>
+    ///<summary> Unique schedule-id </summary>
     [JsonProperty]
     public string ScheduleId { get; set; }
 
@@ -34,4 +34,13 @@ public class ScheduleTimes
     ///<summary> Amount of hours </summary>
     [JsonProperty]
     public decimal? IWH3 { get; set; }
+
+    ///<summary> Amount of hours </summary>
+    [JsonProperty]
+    public decimal? IWH4 { get; set; }
+
+    ///<summary> Amount of hours </summary>
+    [JsonProperty]
+    public decimal? IWH5 { get; set; }
+
 }

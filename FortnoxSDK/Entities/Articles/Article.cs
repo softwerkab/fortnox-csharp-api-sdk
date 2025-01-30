@@ -29,6 +29,14 @@ public class Article
     [JsonProperty]
     public long? ConstructionAccount { get; set; }
 
+    ///<summary> Default stock location. </summary>
+    [JsonProperty]
+    public string DefaultStockLocation { get; set; }
+
+    ///<summary> Default stock point. </summary>
+    [JsonProperty]
+    public string DefaultStockPoint { get; set; }
+
     ///<summary> The depth of the article in millimeters. </summary>
     [JsonProperty]
     public long? Depth { get; set; }
@@ -169,6 +177,10 @@ public class Article
     ///<summary> Custom bookkeeping account used for stock for the article </summary>
     [JsonProperty]
     public long? StockAccount { get; set; }
+
+    ///<summary> Stock change account </summary>
+    [JsonProperty]
+    public int? StockChangeAccount { get; set; }
 
     ///<summary> Purchase price – Direct cost </summary>
     [JsonProperty]
