@@ -69,7 +69,7 @@ public class PriceTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_Price_Find()
     {
         #region Arrange
         var tmpArticleA = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticleA", PurchasePrice = 10 });
@@ -140,7 +140,7 @@ public class PriceTests
     }
 
     [TestMethod]
-    public async Task Test_Find_Args_Specified()
+    public async Task Test_Price_Find_Args_Specified()
     {
         #region Arrange
         var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", PurchasePrice = 10 });

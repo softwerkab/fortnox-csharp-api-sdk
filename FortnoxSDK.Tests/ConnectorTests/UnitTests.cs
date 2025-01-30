@@ -67,7 +67,7 @@ public class UnitTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_Unit_Find()
     {
         var connector = FortnoxClient.UnitConnector;
 

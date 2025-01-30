@@ -78,7 +78,7 @@ public class SupplierTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_Supplier_Find()
     {
         #region Arrange
         //Add code to create required resources
@@ -138,7 +138,7 @@ public class SupplierTests
     }
 
     [TestMethod]
-    public async Task VatType_Supported()
+    public async Task Test_Supplier_VatType_Supported()
     {
         var vatTypes = Enum.GetValues(typeof(SupplierVATType)).Cast<SupplierVATType>().ToList();
 

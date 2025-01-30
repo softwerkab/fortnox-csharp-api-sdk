@@ -68,7 +68,7 @@ public class ModeOfPaymentTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_ModeOfPayment_Find()
     {
         #region Arrange
         var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber() });

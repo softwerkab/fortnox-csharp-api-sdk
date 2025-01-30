@@ -99,7 +99,7 @@ public class TaxReductionTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_TaxReduction_Find()
     {
         #region Arrange
         var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });

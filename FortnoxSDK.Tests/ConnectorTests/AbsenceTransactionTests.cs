@@ -75,7 +75,7 @@ public class AbsenceTransactionTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_AbsenceTransaction_Find()
     {
         #region Arrange
         var tmpEmployee = await TestUtils.GetBasicTestEmployee();

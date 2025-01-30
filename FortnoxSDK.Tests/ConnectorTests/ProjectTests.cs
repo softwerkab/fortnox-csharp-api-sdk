@@ -72,7 +72,7 @@ public class ProjectTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_Project_Find()
     {
         #region Arrange
         //Add code to create required resources
@@ -125,7 +125,7 @@ public class ProjectTests
     }
 
     [TestMethod]
-    public async Task Test_Find_By_Description()
+    public async Task Test_Project_Find_By_Description()
     {
         #region Arrange
         //Add code to create required resources

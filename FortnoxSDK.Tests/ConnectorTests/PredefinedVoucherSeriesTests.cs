@@ -31,7 +31,7 @@ public class PredefinedVoucherSeriesTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_PredefinedVoucherSeries_Find()
     {
         var connector = FortnoxClient.PredefinedVoucherSeriesConnector;
 

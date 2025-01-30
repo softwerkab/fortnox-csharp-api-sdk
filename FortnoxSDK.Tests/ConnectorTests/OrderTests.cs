@@ -73,7 +73,7 @@ public class OrderTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_Order_Find()
     {
         #region Arrange
         var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
@@ -130,7 +130,7 @@ public class OrderTests
     }
 
     [TestMethod]
-    public async Task Test_Print()
+    public async Task Test_Order_Print()
     {
         #region Arrange
         var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
@@ -165,7 +165,7 @@ public class OrderTests
     }
 
     [TestMethod]
-    public async Task Test_Email()
+    public async Task Test_Order_Email()
     {
         #region Arrange
         var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis", Email = "richard.randak@softwerk.se" });

@@ -77,7 +77,7 @@ public class VoucherFileConnectionTests
     }
 
     [TestMethod]
-    public async Task Create_NonDefaultYear()
+    public async Task Create_VoucherFileConnection_NonDefaultYear()
     {
         #region Arrange
 

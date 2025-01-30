@@ -72,7 +72,7 @@ public class ArticleTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_Article_Find()
     {
         #region Arrange
         //Add code to create required resources

@@ -80,7 +80,7 @@ public class SupplierInvoiceTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_SupplierInvoice_Find()
     {
         #region Arrange
         var tmpSupplier = await FortnoxClient.SupplierConnector.CreateAsync(new Supplier() { Name = "TmpSupplier" });
@@ -141,7 +141,7 @@ public class SupplierInvoiceTests
     }
 
     [TestMethod]
-    public async Task Test_Book()
+    public async Task Test_SupplierInvoice_Book()
     {
         #region Arrange
         var tmpSupplier = await FortnoxClient.SupplierConnector.CreateAsync(new Supplier() { Name = "TmpSupplier" });

@@ -75,7 +75,7 @@ public class AttendanceTransactionsTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_AttendanceTransactions_Find()
     {
         #region Arrange
         var tmpEmployee = await TestUtils.GetBasicTestEmployee();

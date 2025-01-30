@@ -60,7 +60,7 @@ public class PriceListTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_PriceList_Find()
     {
         var connector = FortnoxClient.PriceListConnector;
 

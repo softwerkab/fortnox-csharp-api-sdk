@@ -70,7 +70,7 @@ public class CustomerReferenceTests
     }
 
     [TestMethod]
-    public async Task Test_Find()
+    public async Task Test_CustomerReference_Find()
     {
         #region Arrange
         var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TestCustomer" });
@@ -115,7 +115,7 @@ public class CustomerReferenceTests
 
     // Requires at least 101 customer references to exist in data source
     [TestMethod]
-    public async Task Test_Find_Unlimited()
+    public async Task Test_CustomerReference_Find_Unlimited()
     {
         var connector = FortnoxClient.CustomerReferenceConnector;
 
