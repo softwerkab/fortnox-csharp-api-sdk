@@ -12,7 +12,7 @@ namespace Fortnox.SDK.Auth;
 /// to the user in the consent screen, and the access token issued to the
 /// connection will be limited to the scopes granted.
 ///
-/// See https://developer.fortnox.se/general/scopes/
+/// See https://www.fortnox.se/developer/guides-and-good-to-know/scopes
 /// </summary>
 public enum Scope
 {
@@ -20,14 +20,14 @@ public enum Scope
     Archive,
     [EnumMember(Value = "article")]
     Article,
-    [Obsolete("Not listed in https://developer.fortnox.se/general/scopes/")]
+    [Obsolete("Not listed in https://www.fortnox.se/developer/guides-and-good-to-know/scopes")]
     [EnumMember(Value = "assets")]
     Assets,
     [EnumMember(Value = "bookkeeping")]
     Bookkeeping,
     [EnumMember(Value = "companyinformation")]
     CompanyInformation,
-    [Obsolete("Not listed in https://developer.fortnox.se/general/scopes/")]
+    [Obsolete("Not listed in https://www.fortnox.se/developer/guides-and-good-to-know/scopes")]
     [EnumMember(Value = "companylogo")]
     CompanyLogo,
     [EnumMember(Value = "connectfile")]
@@ -38,15 +38,14 @@ public enum Scope
     Currency,
     [EnumMember(Value = "customer")]
     Customer,
-    [Obsolete("Not listed in https://developer.fortnox.se/general/scopes/")]
+    [Obsolete("Not listed in https://www.fortnox.se/developer/guides-and-good-to-know/scopes")]
     [EnumMember(Value = "deletevoucher")]
     DeleteVoucher,
     [EnumMember(Value = "inbox")]
     Inbox,
     [EnumMember(Value = "invoice")]
     Invoice,
-    [Obsolete("Not listed in https://developer.fortnox.se/general/scopes/")]
-    [EnumMember(Value = "noxfinanceinvoice")]
+    [EnumMember(Value = "noxfinansinvoice")]
     NoxFinanceInvoice,
     [EnumMember(Value = "offer")]
     Offer,
@@ -70,10 +69,12 @@ public enum Scope
     Supplier,
     [EnumMember(Value = "supplierinvoice")]
     SupplierInvoice,
-    [Obsolete("Not listed in https://developer.fortnox.se/general/scopes/")]
+    [EnumMember(Value = "timereporting")]
+    TimeReporting,
+    [Obsolete("Not listed in https://www.fortnox.se/developer/guides-and-good-to-know/scopes")]
     [EnumMember(Value = "warehouse")]
     Warehouse,
-    [Obsolete("Not listed in https://developer.fortnox.se/general/scopes/")]
+    [Obsolete("Not listed in https://www.fortnox.se/developer/guides-and-good-to-know/scopes")]
     [EnumMember(Value = "warehousecustomdocument")]
     WarehouseCustomDocument
 }
