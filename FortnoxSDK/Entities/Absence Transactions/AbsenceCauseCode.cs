@@ -49,6 +49,12 @@ public enum AbsenceCauseCode
     ///<summary> Sjuk-OB 5 </summary>
     [EnumMember(Value = "OS5")]
     OS5,
+    ///<summary> Sjuk-OB 6 </summary>
+    [EnumMember(Value = "OS6")]
+    OS6,
+    ///<summary> Sjuk-OB 7 </summary>
+    [EnumMember(Value = "OS7")]
+    OS7,
     ///<summary> Pappadagar </summary>
     [EnumMember(Value = "PAP")]
     PAP,
