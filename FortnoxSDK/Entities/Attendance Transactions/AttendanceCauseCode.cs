@@ -8,6 +8,9 @@ public enum AttendanceCauseCode
     ///<summary> Timlön </summary>
     [EnumMember(Value = "ARB")]
     ARB,
+    ///<summary> Timlön inom schema </summary>
+    [EnumMember(Value = "ARS")]
+    ARS,
     ///<summary> Beredskapstid 2 </summary>
     [EnumMember(Value = "BE2")]
     BE2,
@@ -21,7 +24,7 @@ public enum AttendanceCauseCode
     [Obsolete("Use NVX code for Flextid+ and absence code FRX for Flextid-")]
     [EnumMember(Value = "FLX")]
     FLX,
-    ///<summary> HelglÖn </summary>
+    ///<summary> Helglön </summary>
     [EnumMember(Value = "HLG")]
     HLG,
     ///<summary> Jourtid 2 </summary>
@@ -54,6 +57,12 @@ public enum AttendanceCauseCode
     ///<summary> OB-ersättning 5 </summary>
     [EnumMember(Value = "OB5")]
     OB5,
+    ///<summary> OB-ersättning 6 </summary>
+    [EnumMember(Value = "OB6")]
+    OB6,
+    ///<summary> OB-ersättning 7 </summary>
+    [EnumMember(Value = "OB7")]
+    OB7,
     ///<summary> Extratid - Komptid </summary>
     [EnumMember(Value = "OK0")]
     OK0,
@@ -120,12 +129,24 @@ public enum AttendanceCauseCode
     ///<summary> Övertid 5 - Betalning (used in PAXml) </summary>
     [EnumMember(Value = "ÖT5")]
     ÖT5,
+    ///<summary> Övertid 6 - Betalning </summary>
+    [EnumMember(Value = "OT6")]
+    OT6,
+    ///<summary> Övertid 7 - Betalning </summary>
+    [EnumMember(Value = "OT7")]
+    OT7,
     ///<summary> Restid </summary>
     [EnumMember(Value = "RES")]
     RES,
     ///<summary> Restid (used in PAXml) </summary>
     [EnumMember(Value = "RE1")]
     RE1,
+    ///<summary> Restid 2 </summary>
+    [EnumMember(Value = "RE2")]
+    RE2,
+    ///<summary> Restid 3 </summary>
+    [EnumMember(Value = "RE3")]
+    RE3,
     ///<summary> Arbetstid </summary>
     [EnumMember(Value = "TID")]
     TID,
