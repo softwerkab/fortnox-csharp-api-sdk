@@ -48,6 +48,10 @@ public class Employee
     ///<summary> City </summary>
     [JsonProperty]
     public string City { get; set; }
+    
+    ///<summary> Cost center </summary>
+    [JsonProperty]
+    public string CostCenter { get; set; }
 
     ///<summary> Country </summary>
     [JsonProperty]
