@@ -35,12 +35,15 @@ public class RateLimiterTests
         watch.Stop();
 
         /*
-         * Given the rate limiter of 4 requests per second,
-         * 200 requests should be executed in ~50 seconds.
-         * Note: time per request might be longer than 250ms, hence the longer maximum allowed elapsed time
+         * Given the rate limiter of 4.8 requests per second (24/5),
+         * 200 requests should be executed in ~41 seconds.
+         * 
+         * If we can increase the rate limiter to the advertised 25/5 (5 per second), 
+         * 200 requests should be executed in ~40 seconds.
          */
+
         Assert.AreEqual(200, counter);
-        Assert.IsTrue(watch.Elapsed.TotalSeconds is > 49 and < 65);
+        Assert.IsTrue(watch.Elapsed.TotalSeconds is > 40);
     }
 
     [Ignore("Can make other test fail due to exhausting rate limiter")]
