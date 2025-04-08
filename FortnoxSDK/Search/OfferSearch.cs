@@ -32,4 +32,13 @@ public class OfferSearch : BaseSearch
 
     [SearchParameter]
     public string YourReference { get; set; }
+
+    [SearchParameter]
+    public bool Sent { get; set; }
+
+    [SearchParameter]
+    public bool NotCompleted { get; set; }
+
+    [SearchParameter]
+    public int Label { get; set; }
 }
