@@ -28,5 +28,5 @@ public class ArticleSearch : BaseSearch
     public string SupplierNumber { get; set; }
 
     [SearchParameter]
-    public bool Webshop { get; set; }
+    public bool? Webshop { get; set; }
 }

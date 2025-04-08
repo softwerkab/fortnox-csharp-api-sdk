@@ -37,16 +37,16 @@ public class OrderSearch : BaseSearch
     public string Project { get; set; }
 
     [SearchParameter]
-    public bool Sent { get; set; }
+    public bool? Sent { get; set; }
 
     [SearchParameter]
     public string YourReference { get; set; }
 
     [SearchParameter]
-    public bool NotCompleted { get; set; }
+    public bool? NotCompleted { get; set; }
 
     [SearchParameter]
-    public int Label { get; set; }
+    public int? Label { get; set; }
 
     [SearchParameter]
     public string OrderType { get; set; }
