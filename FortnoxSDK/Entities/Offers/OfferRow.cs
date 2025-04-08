@@ -80,7 +80,7 @@ public class OfferRow
 
     ///<summary> Vat code </summary>
     [JsonProperty]
-    public long? VATCode { get; set; }
+    public string VATCode { get; set; }
 
     /// <summary> Used for updating specific row. If not specified, the row will be handled as a new one. </summary>
     /// <remarks> See https://developer.fortnox.se/blog/updating-document-rows-using-rowid/ </remarks>
