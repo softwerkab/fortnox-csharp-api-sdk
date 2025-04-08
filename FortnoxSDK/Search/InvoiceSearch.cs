@@ -68,4 +68,16 @@ public class InvoiceSearch : BaseSearch
     /// </summary>
     [SearchParameter("Label")]
     public long? LabelReference { get; set; }
+
+    [SearchParameter]
+    public string ArticleNumber { get; set; }
+
+    [SearchParameter]
+    public string ArticleDescription { get; set; }
+
+    [SearchParameter]
+    public System.DateTime? FromFinalPayDate { get; set; }
+
+    [SearchParameter]
+    public System.DateTime? ToFinalPayDate { get; set; }
 }
