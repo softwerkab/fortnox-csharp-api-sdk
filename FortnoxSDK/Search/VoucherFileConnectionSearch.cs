@@ -17,4 +17,7 @@ public class VoucherFileConnectionSearch : BaseSearch
 
     [SearchParameter]
     public string VoucherSeries { get; set; }
+
+    [SearchParameter]
+    public int? VoucherYear { get; set; }
 }
