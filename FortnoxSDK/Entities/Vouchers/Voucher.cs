@@ -60,7 +60,7 @@ public class Voucher
     ///<summary> Id of the year of the voucher. </summary>
     [ReadOnly]
     [JsonProperty]
-    public long? Year { get; private set; }
+    public int? Year { get; private set; }
 
     ///<summary> The approval state f the voucher.  Not for approval: 0  Not ready for approval: 1  Not approved: 2  Approved: 3 </summary>
     [ReadOnly]
