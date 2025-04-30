@@ -11,6 +11,7 @@ internal abstract class BaseClient
     public HttpClient HttpClient { get; set; }
 
     public bool UseRateLimiter { get; set; } = true;
+    public bool UseHttp2 { get; set; } = true;
     public FortnoxAuthorization Authorization { get; set; }
 
     protected BaseClient()
@@ -27,6 +28,9 @@ internal abstract class BaseClient
 
             if (UseRateLimiter)
                 await RateLimiter.Throttle(Authorization?.AccessToken).ConfigureAwait(false);
+
+            if (UseHttp2)
+                request.Version = new System.Version(2, 0);
 
             using var response = await HttpClient.SendAsync(request).ConfigureAwait(false);
 
