@@ -34,6 +34,13 @@ public class FortnoxClient
     public bool UseRateLimiter { get; set; } = true;
 
     /// <summary>
+    /// HTTP/2 will be used for each request.
+    /// If set to false, HTTP/1.1 will be used.
+    /// </summary>
+    /// <value>Defaults to <c>true</c>.</value>
+    public bool UseHttp2 { get; set; } = true;
+
+    /// <summary>
     /// Some features require warehouse module to be enabled.
     /// If not set, some properties in the model may be ignored.
     /// </summary>
@@ -43,17 +50,19 @@ public class FortnoxClient
     {
     }
 
-    public FortnoxClient(FortnoxAuthorization authorization, bool useRateLimiter = true)
+    public FortnoxClient(FortnoxAuthorization authorization, bool useRateLimiter = true, bool useHttp2 = true)
     {
         Authorization = authorization;
         UseRateLimiter = useRateLimiter;
+        UseHttp2 = useHttp2;
     }
 
-    public FortnoxClient(FortnoxAuthorization authorization, HttpClient httpClient, bool useRateLimiter = true)
+    public FortnoxClient(FortnoxAuthorization authorization, HttpClient httpClient, bool useRateLimiter = true, bool useHttp2 = true)
     {
         Authorization = authorization;
         HttpClient = httpClient;
         UseRateLimiter = useRateLimiter;
+        UseHttp2 = useHttp2;
     }
 
     private TConnector Get<TConnector>() where TConnector : BaseConnector, new()
@@ -63,6 +72,7 @@ public class FortnoxClient
             Authorization = Authorization,
             HttpClient = HttpClient,
             UseRateLimiter = UseRateLimiter,
+            UseHttp2 = UseHttp2,
             WarehouseEnabled = WarehouseEnabled
         };
     }

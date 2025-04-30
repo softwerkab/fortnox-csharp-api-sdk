@@ -12,6 +12,7 @@ public interface IConnector
     // Config
     HttpClient HttpClient { get; }
     bool UseRateLimiter { get; }
+    bool UseHttp2 { get; }
 }
 
 public interface IEntityConnector : IConnector
