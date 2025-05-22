@@ -18,10 +18,11 @@ internal class StandardAuthWorkflow : BaseClient, IStandardAuthWorkflow
     public const string AuthRevokeUri = "https://apps.fortnox.se/oauth-v1/revoke";
     public ISerializer Serializer { get; internal set; }
 
-    public StandardAuthWorkflow(HttpClient httpClient)
+    public StandardAuthWorkflow(HttpClient httpClient, bool useHttp2 = true)
     {
         HttpClient = httpClient;
         Serializer = new JsonEntitySerializer();
+        UseHttp2 = useHttp2;
     }
 
     public async Task<TokenInfo> GetTokenAsync(string authCode, string clientId, string clientSecret, string redirectUri = null)
