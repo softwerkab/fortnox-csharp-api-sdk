@@ -16,10 +16,11 @@ internal class StaticTokenAuthWorkflow : BaseClient, IStaticTokenAuthWorkflow
 
     public ISerializer Serializer { get; internal set; }
 
-    public StaticTokenAuthWorkflow(HttpClient httpClient)
+    public StaticTokenAuthWorkflow(HttpClient httpClient, bool useHttp2 = true)
     {
         HttpClient = httpClient;
         Serializer = new JsonEntitySerializer();
+        UseHttp2 = useHttp2;
     }
 
     public async Task<string> GetTokenAsync(string authCode, string clientSecret)
