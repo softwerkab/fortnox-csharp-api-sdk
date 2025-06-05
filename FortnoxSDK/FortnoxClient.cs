@@ -118,6 +118,7 @@ public class FortnoxClient
     public ISalaryTransactionConnector SalaryTransactionConnector => Get<SalaryTransactionConnector>();
     public IScheduleTimesConnector ScheduleTimesConnector => Get<ScheduleTimesConnector>();
     public ISIEConnector SIEConnector => Get<SIEConnector>();
+    public IStockBalanceConnector StockBalanceConnector => Get<StockBalanceConnector>();
     public IStockPointConnector StockPointConnector => Get<StockPointConnector>();
     public ISupplierConnector SupplierConnector => Get<SupplierConnector>();
     public ISupplierInvoiceAccrualConnector SupplierInvoiceAccrualConnector => Get<SupplierInvoiceAccrualConnector>();
