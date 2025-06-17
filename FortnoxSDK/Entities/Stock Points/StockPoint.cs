@@ -8,50 +8,50 @@ namespace Fortnox.SDK.Entities;
 public class StockPoint
 {
     /// <remarks/>
-    [JsonProperty]
+    [JsonProperty("active")]
     public bool Active { get; set; }
     
     /// <remarks/>
-    [JsonProperty]
+    [JsonProperty("code")]
     public string Code { get; set; }
     
     /// <remarks/>
-    [JsonProperty]
+    [JsonProperty("deliveryAddress")]
     public string DeliveryAddress { get; set; }
     
     /// <remarks/>
-    [JsonProperty]
+    [JsonProperty("deliveryAddress2")]
     public string DeliveryAddress2 { get; set; }
     
     /// <remarks/>
-    [JsonProperty]
+    [JsonProperty("deliveryCity")]
     public string DeliveryCity { get; set; }
     
     /// <remarks/>
-    [JsonProperty]
+    [JsonProperty("deliveryName")]
     public string DeliveryName { get; set; }
     
     /// <remarks/>
-    [JsonProperty]
+    [JsonProperty("deliveryPhone")]
     public string DeliveryPhone { get; set; }
     
     /// <remarks/>
-    [JsonProperty]
+    [JsonProperty("deliveryZipCode")]
     public string DeliveryZipCode { get; set; }
     
     /// <remarks/>
-    [JsonProperty]
+    [JsonProperty("id")]
     public string Id { get; set; }
     
     /// <remarks/>
-    [JsonProperty]
+    [JsonProperty("name")]
     public string Name { get; set; }
     
     /// <remarks/>
-    [JsonProperty]
+    [JsonProperty("stockLocations")]
     public IList<StockLocation> StockLocations { get; set; }
     
     /// <remarks/>
-    [JsonProperty]
+    [JsonProperty("usingCompanyAddress")]
     public bool UsingCompanyAddress { get; set; }
 }

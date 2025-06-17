@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Fortnox.SDK.Connectors.Base;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Interfaces;
+using Fortnox.SDK.Requests;
 using Fortnox.SDK.Utility;
 
 namespace Fortnox.SDK.Connectors;
@@ -30,14 +32,30 @@ internal class StockPointConnector : EntityConnector<StockPoint>, IStockPointCon
         return BaseGet(id);
     }
 
-    public Task<StockPoint> UpdateAsync(StockPoint stockPoint)
+    public async Task<StockPoint> UpdateAsync(StockPoint stockPoint)
     {
-        return BaseUpdate(stockPoint, stockPoint.Id);
+        var request = new EntityRequest<StockPoint>
+        {
+            Entity = stockPoint,
+            Indices = new List<string> { stockPoint.Id },
+            Endpoint = Endpoint,
+            Method = HttpMethod.Put,
+            UseEntityWrapper = false
+        };
+        
+        return await SendAsync(request).ConfigureAwait(false);
     }
     
-    public Task<StockPoint> CreateAsync(StockPoint stockPoint)
+    public async Task<StockPoint> CreateAsync(StockPoint stockPoint)
     {
-        return BaseCreate(stockPoint);
+        var request = new EntityRequest<StockPoint>
+        {
+            Entity = stockPoint,
+            Endpoint = Endpoint,
+            Method = HttpMethod.Post,
+            UseEntityWrapper = false
+        };
+        return await SendAsync(request).ConfigureAwait(false);
     }
 
     public Task DeleteAsync(string id)

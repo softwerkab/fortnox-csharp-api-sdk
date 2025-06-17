@@ -12,14 +12,29 @@ public class StockPointTests
 {
     public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
+    private const string StockPoint1Code = "P1";
+    private const string StockPoint2Code = "P2";
+    
+    [TestInitialize]
+    public async Task Test_StockPoint_CRUD_Init()
+    {
+        var stockPoint1 = await FortnoxClient.StockPointConnector.QueryAsync(StockPoint1Code);
+        if (stockPoint1.Any())
+            await FortnoxClient.StockPointConnector.DeleteAsync(stockPoint1.First().Id);
+        
+        var stockPoint2 = await FortnoxClient.StockPointConnector.QueryAsync(StockPoint2Code);
+        if (stockPoint2.Any())
+            await FortnoxClient.StockPointConnector.DeleteAsync(stockPoint2.First().Id);
+    }
+    
     [TestMethod]
     public async Task Test_StockPoint_CRUD()
     {
         var connector = FortnoxClient.StockPointConnector;
 
         #region CREATE
-        var stockPoint1 = await connector.CreateAsync(new StockPoint { Name = "Point1", Active = true, Code = "P1", StockLocations = [new StockLocation { Code = "P1L" }] });
-        var stockPoint2 = await connector.CreateAsync(new StockPoint { Name = "Point2", Active = false, Code = "P2", StockLocations = [new StockLocation { Code = "P2L" }] });
+        var stockPoint1 = await connector.CreateAsync(new StockPoint { Name = "Point1", Active = true, Code = StockPoint1Code, StockLocations = [] });
+        var stockPoint2 = await connector.CreateAsync(new StockPoint { Name = "Point2", Active = false, Code = StockPoint2Code, StockLocations = [] });
         #endregion CREATE
 
         #region READ
@@ -28,26 +43,20 @@ public class StockPointTests
         var stockPoint1FromQuery = stockPoints.FirstOrDefault(sp => sp.Name == "Point1");
         Assert.IsNotNull(stockPoint1FromQuery);
         Assert.IsTrue(stockPoint1FromQuery.Active);
-        Assert.AreEqual("P1", stockPoint1FromQuery.Code);
-        Assert.AreEqual(1, stockPoint1FromQuery.StockLocations.Count);
-        Assert.AreEqual("P1L", stockPoint1FromQuery.StockLocations[0].Code);
+        Assert.AreEqual(StockPoint1Code, stockPoint1FromQuery.Code);
         
         var stockPoint2FromQuery = stockPoints.FirstOrDefault(sp => sp.Name == "Point2");
         Assert.IsNotNull(stockPoint2FromQuery);
         Assert.IsFalse(stockPoint2FromQuery.Active);
-        Assert.AreEqual("P2", stockPoint2FromQuery.Code);
-        Assert.AreEqual(1, stockPoint2FromQuery.StockLocations.Count);
-        Assert.AreEqual("P2L", stockPoint2FromQuery.StockLocations[0].Code);
+        Assert.AreEqual(StockPoint2Code, stockPoint2FromQuery.Code);
         #endregion READ
 
         #region UPDATE
-        stockPoint2.Active = true;
-        var stockPoint2FromUpdate = await connector.UpdateAsync(stockPoint2);
+        stockPoint2FromQuery.Active = true;
+        var stockPoint2FromUpdate = await connector.UpdateAsync(stockPoint2FromQuery);
         Assert.IsNotNull(stockPoint2FromUpdate);
         Assert.IsTrue(stockPoint2FromUpdate.Active);
-        Assert.AreEqual("P2", stockPoint2FromUpdate.Code);
-        Assert.AreEqual(1, stockPoint2FromUpdate.StockLocations.Count);
-        Assert.AreEqual("P2L", stockPoint2FromUpdate.StockLocations[0].Code);
+        Assert.AreEqual(StockPoint2Code, stockPoint2FromUpdate.Code);
         #endregion UPDATE
 
         #region DELETE

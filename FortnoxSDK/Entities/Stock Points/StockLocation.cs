@@ -7,18 +7,18 @@ namespace Fortnox.SDK.Entities;
 public class StockLocation
 {
     /// <remarks/>
-    [JsonProperty]
+    [JsonProperty("code")]
     public string Code { get; set; }
     
     /// <remarks/>
-    [JsonProperty]
+    [JsonProperty("id")]
     public string Id { get; set; }
     
     /// <remarks/>
-    [JsonProperty]
+    [JsonProperty("name")]
     public string Name { get; set; }
     
     /// <remarks/>
-    [JsonProperty]
+    [JsonProperty("stockPointId")]
     public string StockPointId { get; set; }
 }
