@@ -29,6 +29,22 @@ internal abstract class EntityConnector<TEntity> : BaseConnector where TEntity :
             ? Serializer.Deserialize<EntityWrapper<T>>(responseJson).Entity
             : Serializer.Deserialize<T>(responseJson);
     }
+    
+    protected async Task<IList<T>> SendQueryAsync<T>(EntityRequest<T> request)
+    {
+        if (request.Entity != null)
+        {
+            var requestJson = request.UseEntityWrapper
+                ? Serializer.Serialize(new EntityWrapper<T>(request.Entity))
+                : Serializer.Serialize(request.Entity);
+            request.Content = Encoding.UTF8.GetBytes(requestJson);
+        }
+
+        var responseData = await SendAsync((BaseRequest)request).ConfigureAwait(false);
+        var responseJson = Encoding.UTF8.GetString(responseData);
+
+        return Serializer.Deserialize<IList<T>>(responseJson);
+    }
 
     protected async Task<TEntity> BaseCreate(TEntity entity)
     {
@@ -77,6 +93,18 @@ internal abstract class EntityConnector<TEntity> : BaseConnector where TEntity :
         };
 
         return await SendAsync(request).ConfigureAwait(false);
+    }
+    
+    protected async Task<IList<TEntity>> BaseQuery(Dictionary<string, string> queryParameters)
+    {
+        var request = new EntityRequest<TEntity>
+        {
+            Endpoint = Endpoint,
+            Parameters = queryParameters,
+            Method = HttpMethod.Get
+        };
+
+        return await SendQueryAsync(request).ConfigureAwait(false);
     }
 
     protected async Task<byte[]> DoDownloadActionAsync(string documentNumber, Action action)

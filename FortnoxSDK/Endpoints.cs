@@ -53,6 +53,8 @@ internal static class Endpoints
     public const string SalaryTransactions = $"/{Version}/salarytransactions";
     public const string ScheduleTimes = $"/{Version}/scheduletimes";
     public const string SIE = $"/{Version}/sie";
+    public const string StockBalance = "/api/warehouse/status-v1/stockbalance";
+    public const string StockPoints = "/api/warehouse/stockpoints-v1";
     public const string Suppliers = $"/{Version}/suppliers";
     public const string SupplierInvoiceAcrruals = $"/{Version}/supplierinvoiceaccruals";
     public const string SupplierInvoices = $"/{Version}/supplierinvoices";
