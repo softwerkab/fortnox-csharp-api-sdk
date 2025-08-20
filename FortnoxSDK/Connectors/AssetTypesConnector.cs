@@ -58,15 +58,6 @@ internal class AssetTypeSerializer : ISerializer
         //in case of single entity response, fix json root from "Type" to "AssetType"
         content = new Regex("\"Type\":{").Replace(content, "\"AssetType\":{", 1);
 
-        //in case of entity list response, change "Types" to "AssetTypes" and move meta information out of list
-        var structure = JObject.Parse(content);
-        if (structure["Types"] != null)
-        {
-            structure["MetaInformation"] = structure["Types"][0]["MetaInformation"]; //copy meta-info node to root
-            structure["Types"][0].Remove(); //remove the array element with meta-info node
-            content = structure.ToString();
-        }
-
         return serializer.Deserialize<T>(content);
     }
 }
