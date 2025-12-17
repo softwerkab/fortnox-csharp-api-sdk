@@ -34,6 +34,7 @@ public interface IStandardAuthWorkflow
     /// <param name="clientSecret">Client secret given to you by Fortnox.</param>
     /// <param name="tenantId">Tenant id given to you by Fortnox.</param>
     /// <returns>OAuth 2 token information.</returns>
+    /// <exception cref="FortnoxApiException">If the Fortnox API returns an error.</exception>
     /// <remarks>
     /// <para>The access token is valid for 1 hour. It can be re-used several times.</para>
     /// </remarks>
