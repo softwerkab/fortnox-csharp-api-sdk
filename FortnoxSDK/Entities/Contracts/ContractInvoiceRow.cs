@@ -55,7 +55,7 @@ public class ContractInvoiceRow
 
     ///<summary> Housework type </summary>
     [JsonProperty]
-    public string HouseWorkType { get; set; }
+    public HouseworkType? HouseWorkType { get; set; }
 
     ///<summary> Unit price </summary>
     [JsonProperty]
