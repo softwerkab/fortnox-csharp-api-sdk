@@ -55,7 +55,7 @@ public class OrderRow
 
     ///<summary> The type of house work </summary>
     [JsonProperty]
-    public string HouseWorkType { get; set; }
+    public HouseworkType? HouseWorkType { get; set; }
 
     ///<summary> Ordered quantity </summary>
     [JsonProperty]

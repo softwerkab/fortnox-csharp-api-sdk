@@ -51,7 +51,7 @@ public class OfferRow
 
     ///<summary> The type of house work </summary>
     [JsonProperty]
-    public string HouseWorkType { get; set; }
+    public HouseworkType? HouseWorkType { get; set; }
 
     ///<summary> Unit price (If empty Fortnox will use the price from the customers price list) </summary>
     [JsonProperty]
