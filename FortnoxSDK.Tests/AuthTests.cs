@@ -42,6 +42,20 @@ public class AuthTests
         Assert.IsNotNull(token);
     }
 
+    [Ignore("Requires valid authorization code")]
+    [TestMethod]
+    public async Task Test_StandardAuth_GetTokenByClientCredentials()
+    {
+        var clientId = "8VurtMGDTeAI"; //"bhgmY4FYebfj";
+        var clientSecret = "yFKwme8LEQ"; //"TestCredentials.Client_Secret;
+        var tenantId = 1111111; // Insert your tenant id here
+        var fortnoxAuthClient = new FortnoxAuthClient();
+        var authWorkflow = fortnoxAuthClient.StandardAuthWorkflow;
+
+        var token = await authWorkflow.GetTokenByClientCredentialsAsync(clientId, clientSecret, tenantId);
+        Assert.IsNotNull(token);
+    }
+
     [TestMethod]
     public void Test_BuildUri_Example()
     {
