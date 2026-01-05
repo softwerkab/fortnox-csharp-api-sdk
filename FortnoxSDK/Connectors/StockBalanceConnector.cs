@@ -13,10 +13,9 @@ internal class StockBalanceConnector : EntityConnector<StockBalance>, IStockBala
         Endpoint = Endpoints.StockBalance;
     }
 
-    public Task<IList<StockBalance>> QueryAsync(string[] itemIds = null, string[] stockPointCodes = null)
+    public Task<IList<StockBalance>> QueryAsync(string[] itemIds = null, string[] stockPointCodes = null, Dictionary<string, string> queryParameters = null)
     {
-        var queryParameters = new Dictionary<string, string>();
-        
+        queryParameters ??= new Dictionary<string, string>();
         if (itemIds is { Length: > 0 })
             queryParameters.Add("itemIds", string.Join(",", itemIds));
 
