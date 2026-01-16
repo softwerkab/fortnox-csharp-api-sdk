@@ -10,7 +10,7 @@ namespace FortnoxSDK.Tests;
 
 public class TestUtils
 {
-    public static FortnoxAuthorization TestAuth = new StaticTokenAuth(TestCredentials.Access_Token, TestCredentials.Client_Secret);
+    public static FortnoxAuthorization TestAuth = new StandardAuth(TestCredentials.Access_Token);
     public static FortnoxClient DefaultFortnoxClient = new FortnoxClient(TestAuth);
 
     public static long DefaultFinancialYear = 1;
