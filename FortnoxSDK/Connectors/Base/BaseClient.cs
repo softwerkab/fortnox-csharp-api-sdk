@@ -1,13 +1,14 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Fortnox.SDK.Authorization;
+using Fortnox.SDK.Interfaces;
 
 namespace Fortnox.SDK.Connectors.Base;
 
 internal abstract class BaseClient
 {
     public ErrorHandler ErrorHandler { get; set; }
-    public RateLimiter RateLimiter { get; set; }
+    public IRateLimiter RateLimiter { get; set; }
     public HttpClient HttpClient { get; set; }
 
     public bool UseRateLimiter { get; set; } = true;
@@ -26,13 +27,12 @@ internal abstract class BaseClient
         {
             Authorization?.ApplyTo(request);
 
-            if (UseRateLimiter)
-                await RateLimiter.Throttle(Authorization?.AccessToken).ConfigureAwait(false);
-
             if (UseHttp2)
                 request.Version = new System.Version(2, 0);
 
-            using var response = await HttpClient.SendAsync(request).ConfigureAwait(false);
+            using var response = UseRateLimiter
+                ? await RateLimiter.Throttle(Authorization?.AccessToken, () => HttpClient.SendAsync(request)).ConfigureAwait(false)
+                : await HttpClient.SendAsync(request).ConfigureAwait(false);
 
             if (response.IsSuccessStatusCode)
                 return await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);

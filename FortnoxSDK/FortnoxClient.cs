@@ -33,6 +33,8 @@ public class FortnoxClient
     /// <value>Defaults to <c>true</c>.</value>
     public bool UseRateLimiter { get; set; } = true;
 
+    public IRateLimiter RateLimiter { get; set; } = new Connectors.Base.RateLimiter();
+
     /// <summary>
     /// HTTP/2 will be used for each request.
     /// If set to false, HTTP/1.1 will be used.
@@ -72,6 +74,7 @@ public class FortnoxClient
             Authorization = Authorization,
             HttpClient = HttpClient,
             UseRateLimiter = UseRateLimiter,
+            RateLimiter = RateLimiter,
             UseHttp2 = UseHttp2,
             WarehouseEnabled = WarehouseEnabled
         };
