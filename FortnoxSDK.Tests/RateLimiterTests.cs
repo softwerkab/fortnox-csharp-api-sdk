@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Authorization;
 using Fortnox.SDK.Exceptions;
+using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -49,7 +51,7 @@ public class RateLimiterTests
     {
         var fortnoxClient = new FortnoxClient()
         {
-            Authorization = new StaticTokenAuth(TestCredentials.Access_Token, TestCredentials.Client_Secret),
+            Authorization= new StandardAuth(TestCredentials.Access_Token),
             UseRateLimiter = false
         };
 
@@ -80,5 +82,56 @@ public class RateLimiterTests
         Assert.IsTrue(error.Message.Contains("Too Many Requests"));
 
         Thread.Sleep(5 * 1000); //Sleep to cooldown/recover from "debt" (otherwise following tests will fail with TooManyRequests)
+    }
+
+    class CustomRateLimiter : IRateLimiter
+    {
+        public async Task<HttpResponseMessage> Throttle(string token, Func<Task<HttpResponseMessage>> action)
+        {
+            Console.WriteLine("Waiting 1 second...");
+            await Task.Delay(1000).ConfigureAwait(false);
+            Console.WriteLine("Execute request");
+            var res = await action().ConfigureAwait(false);
+            Console.WriteLine("Done execute request");
+            return res;
+        }
+    }
+
+    [TestMethod]
+    public async Task Test_CustomRateLimiter()
+    {
+        var fortnoxClient = new FortnoxClient
+        {
+            Authorization = new StandardAuth(TestCredentials.Access_Token),
+            UseRateLimiter = true,
+            RateLimiter = new CustomRateLimiter()
+        };
+
+        var connector = fortnoxClient.CustomerConnector;
+
+        var watch = new Stopwatch();
+        watch.Start();
+
+        FortnoxApiException error = null;
+        int i;
+        for (i = 0; i < 5; i++)
+        {
+            var searchSettings = new CustomerSearch();
+            searchSettings.City = TestUtils.RandomString();
+            try
+            {
+                await connector.FindAsync(searchSettings);
+            }
+            catch (FortnoxApiException ex)
+            {
+                error = ex;
+                break;
+            }
+        }
+
+        watch.Stop();
+
+        Assert.IsNull(error);
+        Assert.IsTrue(watch.Elapsed.TotalSeconds > 4);
     }
 }
