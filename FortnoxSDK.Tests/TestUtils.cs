@@ -92,24 +92,24 @@ public class TestUtils
         return (10 - (sum % 10)).ToString();
     }
 
-    public static int GetUnusedAccountNumber()
+    public static async Task<int?> GetUnusedAccountNumber()
     {
         for (var j = 0; j < 10; j++) //try 10x times to create unique account number
         {
             var number = TestUtils.RandomInt(0, 9999);
 
-            if (!AccountExists(number))
+            if (!(await AccountExists(number)))
                 return number;
         }
 
         throw new Exception("Could not generate unused account number");
     }
 
-    private static bool AccountExists(int number)
+    private async static Task<bool> AccountExists(int number)
     {
         try
         {
-            DefaultFortnoxClient.AccountConnector.GetAsync(number).GetResult();
+            (await TestClient.GetFortnoxClient()).AccountConnector.GetAsync(number).GetResult();
             return true;
         }
         catch (FortnoxApiException)
@@ -120,13 +120,14 @@ public class TestUtils
 
     public static async Task<Employee> GetBasicTestEmployee()
     {
+
         try
         {
-            return await DefaultFortnoxClient.EmployeeConnector.CreateAsync(new Employee() { EmployeeId = RandomString(), FirstName = "Test", LastName = "Testsson", Email = "test.testsson@test.com" });
+            return await (await TestClient.GetFortnoxClient()).EmployeeConnector.CreateAsync(new Employee() { EmployeeId = RandomString(), FirstName = "Test", LastName = "Testsson", Email = "test.testsson@test.com" });
         }
         catch (Exception)
         {
-            return await DefaultFortnoxClient.EmployeeConnector.GetAsync("TEST_EMP");
+            return await (await TestClient.GetFortnoxClient()).EmployeeConnector.GetAsync("TEST_EMP");
         }
     }
 }

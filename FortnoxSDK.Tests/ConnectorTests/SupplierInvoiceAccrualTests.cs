@@ -11,7 +11,13 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 [TestClass]
 public class SupplierInvoiceAccrualTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [Ignore("Fails due to invoice not being balanced. Investigation needed")]
     [TestMethod]

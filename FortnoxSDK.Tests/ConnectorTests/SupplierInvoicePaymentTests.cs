@@ -11,7 +11,13 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 [TestClass]
 public class SupplierInvoicePaymentTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [TestMethod]
     public async Task Test_SupplierInvoicePayment_CRUD()

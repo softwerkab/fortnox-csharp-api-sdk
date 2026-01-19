@@ -10,13 +10,19 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 [TestClass]
 public class ExpenseTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [TestMethod]
     public async Task Test_Expense_CRUD()
     {
         #region Arrange
-        var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
+        var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Number = await TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
         #endregion Arrange
 
         var connector = FortnoxClient.ExpenseConnector;
@@ -63,7 +69,7 @@ public class ExpenseTests
     public async Task Test_Expense_Find()
     {
         #region Arrange
-        var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Number = TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
+        var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Number = await TestUtils.GetUnusedAccountNumber(), Description = "TmpAccount" });
         #endregion Arrange
 
         var remark = TestUtils.RandomString();

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Fortnox.SDK;
-using Fortnox.SDK.Authorization;
 using Fortnox.SDK.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -11,7 +10,13 @@ namespace FortnoxSDK.Tests;
 [TestClass]
 public class WarehouseTests
 {
-    public FortnoxClient FortnoxClient = new FortnoxClient(new StaticTokenAuth("006738d2-3698-44af-b6d2-3103f3bf5b89", TestCredentials.Client_Secret_OLD)) { WarehouseEnabled = true };
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [TestMethod]
     public async Task Test_Order_WarehouseReady()
@@ -129,7 +134,7 @@ public class WarehouseTests
         var tenant = await FortnoxClient.TenantConnector.GetAsync();
 
         Assert.AreEqual(true, tenant.WarehouseActivated);
-        Assert.AreEqual(1212851, tenant.TenantId);
+        Assert.AreEqual(1643810, tenant.TenantId);
     }
 
     [TestMethod]

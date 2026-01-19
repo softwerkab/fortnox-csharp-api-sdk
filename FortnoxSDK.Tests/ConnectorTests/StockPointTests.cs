@@ -11,13 +11,19 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 [TestClass]
 public class StockPointTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     private const string StockPoint1Code = "P1";
     private const string StockPoint2Code = "P2";
 
     private bool isWarehouseActivated = true;
-    
+
     [TestInitialize]
     public async Task Test_StockPoint_CRUD_Init()
     {
@@ -51,7 +57,7 @@ public class StockPointTests
             }
         }
     }
-    
+
     [TestMethod]
     public async Task Test_StockPoint_CRUD()
     {

@@ -10,7 +10,13 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 [TestClass]
 public class CurrencyTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [TestMethod]
     public async Task Test_Currency_CRUD()
