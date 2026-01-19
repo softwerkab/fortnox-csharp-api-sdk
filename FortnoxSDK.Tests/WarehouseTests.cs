@@ -11,7 +11,7 @@ namespace FortnoxSDK.Tests;
 [TestClass]
 public class WarehouseTests
 {
-    public FortnoxClient FortnoxClient = new FortnoxClient(new StaticTokenAuth("006738d2-3698-44af-b6d2-3103f3bf5b89", TestCredentials.Client_Secret)) { WarehouseEnabled = true };
+    public FortnoxClient FortnoxClient = new FortnoxClient(new StaticTokenAuth("006738d2-3698-44af-b6d2-3103f3bf5b89", TestCredentials.Client_Secret_OLD)) { WarehouseEnabled = true };
 
     [TestMethod]
     public async Task Test_Order_WarehouseReady()

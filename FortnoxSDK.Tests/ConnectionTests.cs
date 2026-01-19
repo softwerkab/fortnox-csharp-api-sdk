@@ -54,7 +54,7 @@ public class ConnectionTests
     public async Task TestConnection_Credentials_Correct()
     {
         //Arrange
-        var auth = new StaticTokenAuth(TestCredentials.Access_Token, TestCredentials.Client_Secret);
+        var auth = new StaticTokenAuth(TestCredentials.Access_Token_OLD, TestCredentials.Client_Secret_OLD);
         var fortnoxClient = new FortnoxClient(auth);
 
         //Act

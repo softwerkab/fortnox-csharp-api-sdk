@@ -49,7 +49,7 @@ public class RateLimiterTests
     {
         var fortnoxClient = new FortnoxClient()
         {
-            Authorization = new StaticTokenAuth(TestCredentials.Access_Token, TestCredentials.Client_Secret),
+            Authorization = new StaticTokenAuth(TestCredentials.Access_Token_OLD, TestCredentials.Client_Secret_OLD),
             UseRateLimiter = false
         };
 
