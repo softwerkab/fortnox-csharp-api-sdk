@@ -124,7 +124,7 @@ public class TestUtils
         {
             return await DefaultFortnoxClient.EmployeeConnector.CreateAsync(new Employee() { EmployeeId = RandomString(), FirstName = "Test", LastName = "Testsson", Email = "test.testsson@test.com" });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return await DefaultFortnoxClient.EmployeeConnector.GetAsync("TEST_EMP");
         }

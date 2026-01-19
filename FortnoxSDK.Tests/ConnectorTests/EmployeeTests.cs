@@ -26,7 +26,7 @@ public class EmployeeTests
         {
             alreadyExists = await c.GetAsync("TEST_EMP") != null;
         }
-        catch (Exception e)
+        catch (Exception)
         {
             alreadyExists = false;
         }

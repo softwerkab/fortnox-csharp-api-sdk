@@ -12,7 +12,7 @@ public class PrintTemplateTests
     public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
     [TestMethod]
-    public async Task Test_PrintTemplate_CRUD()
+    public void Test_PrintTemplate_CRUD()
     {
         //Not supported
     }

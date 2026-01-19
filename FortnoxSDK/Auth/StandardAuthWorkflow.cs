@@ -58,9 +58,6 @@ internal class StandardAuthWorkflow : BaseClient, IStandardAuthWorkflow
 
     public async Task<TokenInfo> GetTokenByClientCredentialsAsync(string clientId, string clientSecret, int? tenantId)
     {
-        FortnoxAuthClient fortnoxAuthClient = new FortnoxAuthClient();
-        IStandardAuthWorkflow authWorkflow = fortnoxAuthClient.StandardAuthWorkflow;
-
         if (string.IsNullOrEmpty(clientId))
             throw new ArgumentException("Argument is null or empty.", nameof(clientId));
 

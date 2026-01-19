@@ -11,7 +11,7 @@ public class AccountChartTests
     public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
     [TestMethod]
-    public async Task Test_AccountChart_CRUD()
+    public void Test_AccountChart_CRUD()
     {
         //Not supported
     }
