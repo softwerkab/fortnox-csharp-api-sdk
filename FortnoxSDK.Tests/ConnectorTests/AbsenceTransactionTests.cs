@@ -26,7 +26,7 @@ public class AbsenceTransactionTests
         #region Arrange
         var tmpEmployee = await TestUtils.GetBasicTestEmployee();
         var tmpProject = await FortnoxClient.ProjectConnector.CreateAsync(new Project() { Description = "TmpProject" });
-        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TMPCC", Description = "TempCostCenter" });
+        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TEMP", Description = "TempCostCenter" });
         #endregion Arrange
 
         var connector = FortnoxClient.AbsenceTransactionConnector;
@@ -86,7 +86,7 @@ public class AbsenceTransactionTests
         #region Arrange
         var tmpEmployee = await TestUtils.GetBasicTestEmployee();
         var tmpProject = await FortnoxClient.ProjectConnector.CreateAsync(new Project() { Description = "TmpProject" });
-        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TMPCC", Description = "TempCostCenter" });
+        var tmpCostCenter = await FortnoxClient.CostCenterConnector.CreateAsync(new CostCenter() { Code = "TEMP", Description = "TempCostCenter" });
         #endregion Arrange
 
         var connector = FortnoxClient.AbsenceTransactionConnector;

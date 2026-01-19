@@ -28,7 +28,7 @@ public class VoucherFileConnectionTests
 
         var tmpVoucher = await FortnoxClient.VoucherConnector.CreateAsync(new Voucher()
         {
-            Description = "TestVoucher",
+            Description = "TestVoucher CRUD",
             Comments = "Some comments",
             VoucherSeries = "A", //predefined series
             TransactionDate = new DateTime(2020, 1, 1),
@@ -52,8 +52,7 @@ public class VoucherFileConnectionTests
         };
 
         var createdVoucherFileConnection = await connector.CreateAsync(newVoucherFileConnection);
-        Assert.AreEqual(tmpVoucher.Description, createdVoucherFileConnection.VoucherDescription);
-        Assert.AreEqual(tmpVoucher.Year, createdVoucherFileConnection.VoucherYear);
+        Assert.AreEqual(tmpVoucher.VoucherNumber, createdVoucherFileConnection.VoucherNumber);
 
         #endregion CREATE
 
@@ -64,7 +63,7 @@ public class VoucherFileConnectionTests
         #region READ / GET
 
         var retrievedVoucherFileConnection = await connector.GetAsync(createdVoucherFileConnection.FileId);
-        Assert.AreEqual(tmpVoucher.Description, retrievedVoucherFileConnection.VoucherDescription);
+        Assert.AreEqual(tmpVoucher.VoucherNumber, retrievedVoucherFileConnection.VoucherNumber);
 
         #endregion READ / GET
 
@@ -125,6 +124,7 @@ public class VoucherFileConnectionTests
         #endregion Clean up
     }
 
+    [Ignore("Fails because the Voucher File Connection's VoucherDescription no longer shows the description from the Voucher, but instead a description of the type. Re-enable when the API endpoint is fixed.")]
     [TestMethod]
     public async Task Test_VoucherFileConnection_Find()
     {

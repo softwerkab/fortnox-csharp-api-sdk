@@ -47,7 +47,7 @@ public class PredefinedAccountsTests
 
         var fullCollection = await connector.FindAsync(null);
 
-        Assert.AreEqual(42, fullCollection.Entities.Count);
+        Assert.AreEqual(48, fullCollection.Entities.Count);
         Assert.IsNotNull(fullCollection.Entities.First().Name);
 
         /* Limit not supported

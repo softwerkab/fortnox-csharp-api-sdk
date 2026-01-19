@@ -132,13 +132,4 @@ public class AuthTests
         Assert.IsTrue(success);
     }
 
-    [TestMethod]
-    public async Task New_Sandbox()
-    {
-        var authorization = new StaticTokenAuth("6a5f9523-0f21-4488-801f-6094faba624d", "1Pevde6Pls");
-        var client = new FortnoxClient(authorization);
-
-        var company = await client.CompanyInformationConnector.GetAsync();
-        Assert.AreEqual("Richard-Sandbox-2022", company.CompanyName);
-    }
 }

@@ -41,6 +41,7 @@ public class SupplierInvoicePaymentTests
                 new SupplierInvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, Quantity = 20, Price = 100}
             }
         });
+        var approvedInvoice = await FortnoxClient.SupplierInvoiceConnector.ApprovalBookkeepAsync(tmpSpplierInvoice.GivenNumber);
         var bookedInvoice = await FortnoxClient.SupplierInvoiceConnector.BookkeepAsync(tmpSpplierInvoice.GivenNumber);
         #endregion Arrange
 

@@ -50,6 +50,7 @@ public class ConnectionTests
         await cc.FindAsync(null);
     }
 
+    [Ignore("StaticTokenAuth is obsolete")]
     [TestMethod]
     public async Task TestConnection_Credentials_Correct()
     {
@@ -86,12 +87,13 @@ public class ConnectionTests
     {
         var auth = new StaticTokenAuth("AccToken", "Secret");
         var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(10) };
-        var fortnoxClient = new FortnoxClient(auth, httpClient, false);
+        var fortnoxClient = new FortnoxClient(auth, httpClient, false, false);
 
         var connector = fortnoxClient.CustomerConnector;
 
         Assert.AreEqual(auth, connector.Authorization);
         Assert.AreEqual(false, connector.UseRateLimiter);
+        Assert.AreEqual(false, connector.UseHttp2);
         Assert.AreEqual(10, connector.HttpClient.Timeout.Seconds);
     }
 }

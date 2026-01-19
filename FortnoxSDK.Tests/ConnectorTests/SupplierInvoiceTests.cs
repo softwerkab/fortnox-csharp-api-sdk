@@ -176,6 +176,7 @@ public class SupplierInvoiceTests
         var createdSupplierInvoice = await connector.CreateAsync(newSupplierInvoice);
 
         //Act
+        await connector.ApprovalBookkeepAsync(createdSupplierInvoice.GivenNumber);
         await connector.BookkeepAsync(createdSupplierInvoice.GivenNumber);
         var bookedInvoice = await connector.GetAsync(createdSupplierInvoice.GivenNumber);
 

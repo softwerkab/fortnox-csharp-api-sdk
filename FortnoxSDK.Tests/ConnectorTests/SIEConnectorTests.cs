@@ -77,7 +77,7 @@ public class SIEConnectorTests
             ToDate = new DateTime(2020, 8, 31)
         };
 
-        var data = await connector.GetAsync(SIEType.Transactions, exportOptions: exportOptions);
+        var data = await connector.GetAsync(SIEType.Transactions, exportOptions: exportOptions, finYearID: 4); // 4: 2020-01-01 -> 2020-12-31
         var sieDocument = Parse(data);
 
         Assert.AreEqual(false, sieDocument.VER.Any(v => v.VoucherDate < exportOptions.FromDate));

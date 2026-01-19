@@ -82,7 +82,7 @@ public class InvoiceTests
 
         #region Delete arranged resources
         await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
-        //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+        //await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
         #endregion Delete arranged resources
     }
 
@@ -142,7 +142,7 @@ public class InvoiceTests
 
         #region Delete arranged resources
         await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
-        //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+        //await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
         #endregion Delete arranged resources
     }
 
@@ -187,7 +187,7 @@ public class InvoiceTests
 
         #region Delete arranged resources
         await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
-        //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+        //await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
         #endregion Delete arranged resources
     }
 
@@ -575,9 +575,9 @@ public class InvoiceTests
             Comments = "TestInvoice",
             InvoiceRows = new List<InvoiceRow>()
             {
-                new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, Price = 100, VAT = 1.23m},
-                new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, Price = 100, VAT = 1.23m},
-                new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, Price = 100, VAT = 1.23m}
+                new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 10, Price = 100, VAT = 1.23m, AccountNumber=1010},
+                new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 20, Price = 100, VAT = 1.23m, AccountNumber=1010},
+                new InvoiceRow(){ ArticleNumber = tmpArticle.ArticleNumber, DeliveredQuantity = 15, Price = 100, VAT = 1.23m, AccountNumber=1010}
             }
         };
 
@@ -588,7 +588,7 @@ public class InvoiceTests
         #region Delete arranged resources
         await FortnoxClient.InvoiceConnector.CancelAsync(createdInvoice.DocumentNumber);
         await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
-        //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+        //await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
         #endregion Delete arranged resources
     }
 
@@ -642,7 +642,7 @@ public class InvoiceTests
         #region Clean up
         await connector.CancelAsync(createdInvoice.DocumentNumber);
         await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
-        //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+        //await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
         #endregion Clean up
     }
 }

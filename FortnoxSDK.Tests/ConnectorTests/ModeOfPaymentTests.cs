@@ -24,7 +24,7 @@ public class ModeOfPaymentTests
     public async Task Test_ModeOfPayment_CRUD()
     {
         #region Arrange
-        var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber() });
+        var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Description = "TestAccount", Number = await TestUtils.GetUnusedAccountNumber() });
         #endregion Arrange
 
         var connector = FortnoxClient.ModeOfPaymentConnector;
@@ -77,7 +77,7 @@ public class ModeOfPaymentTests
     public async Task Test_ModeOfPayment_Find()
     {
         #region Arrange
-        var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Description = "TestAccount", Number = TestUtils.GetUnusedAccountNumber() });
+        var tmpAccount = await FortnoxClient.AccountConnector.CreateAsync(new Account() { Description = "TestAccount", Number = await TestUtils.GetUnusedAccountNumber() });
         #endregion Arrange
 
         var connector = FortnoxClient.ModeOfPaymentConnector;

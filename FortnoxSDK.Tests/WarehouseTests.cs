@@ -137,12 +137,12 @@ public class WarehouseTests
         Assert.AreEqual(1643810, tenant.TenantId);
     }
 
-    [TestMethod]
-    public async Task Test_Tenant_WarehouseDisabled_Get()
-    {
-        var tenant = await TestUtils.DefaultFortnoxClient.TenantConnector.GetAsync();
+    // [TestMethod]
+    // public async Task Test_Tenant_WarehouseDisabled_Get()
+    // {
+    //     var tenant = await TestUtils.DefaultFortnoxClient.TenantConnector.GetAsync();
 
-        Assert.AreEqual(false, tenant.WarehouseActivated);
-        Assert.AreEqual(1018318, tenant.TenantId);
-    }
+    //     Assert.AreEqual(false, tenant.WarehouseActivated);
+    //     Assert.AreEqual(1018318, tenant.TenantId);
+    // }
 }

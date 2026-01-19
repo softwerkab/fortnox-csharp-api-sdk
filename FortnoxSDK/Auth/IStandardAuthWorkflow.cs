@@ -23,7 +23,7 @@ public interface IStandardAuthWorkflow
     /// <remarks>
     /// <para>The authorization code is valid for 10 minutes. It can only be used once.</para>
     /// <para>The access token is valid for 1 hour. It can be re-used several times.</para>
-    /// <para>The refresh token is valid for 1 month (31 days). It can only be used once.</para>
+    /// <para>The refresh token is valid for 1.5 months (45 days). It can only be used once.</para>
     /// </remarks>
     Task<TokenInfo> GetTokenAsync(string authCode, string clientId, string clientSecret, string redirectUri = null);
 
@@ -48,7 +48,7 @@ public interface IStandardAuthWorkflow
     /// <param name="clientId">Client id given to you by Fortnox.</param>
     /// <param name="clientSecret">Client secret given to you by Fortnox.</param>
     /// <returns>OAuth 2 token information.</returns>
-    /// <remarks>The refresh token is valid for 1 month (31 days). It can only be used once.</remarks>
+    /// <remarks>The refresh token is valid for 1.5 months (45 days). It can only be used once.</remarks>
     Task<TokenInfo> RefreshTokenAsync(string refreshToken, string clientId, string clientSecret);
 
     /// <summary>
