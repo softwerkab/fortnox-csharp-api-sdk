@@ -12,11 +12,12 @@ namespace FortnoxSDK.Tests;
 [TestClass]
 public class BaseConnectorTests
 {
-    public FortnoxClient FortnoxClient => TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
 
     [TestInitialize]
-    public void Init()
+    public async Task TestInitialize()
     {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
     }
 
     /*[TestMethod]

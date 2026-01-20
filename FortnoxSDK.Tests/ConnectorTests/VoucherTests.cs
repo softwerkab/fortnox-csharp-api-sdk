@@ -13,7 +13,13 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 [TestClass]
 public class VoucherTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [TestMethod]
     public async Task Test_Voucher_CRUD()
@@ -116,7 +122,8 @@ public class VoucherTests
         var settings = new VoucherSearch()
         {
             LastModified = TestUtils.Recently,
-            VoucherSeries = "TST"
+            VoucherSeries = "TST",
+            FinancialYearID = 4 // 2020-01-01 -> 2020-12-31
         };
 
         //Assert

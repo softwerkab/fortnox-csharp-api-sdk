@@ -7,11 +7,11 @@ namespace FortnoxSDK.Tests;
 [TestClass]
 public class TestArrangement
 {
-    public static FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
 
     [AssemblyInitialize]
     public static async Task ArrangeSandbox(TestContext context)
     {
+        var FortnoxClient = await TestClient.GetFortnoxClient();
         try
         {
             await FortnoxClient.CostCenterConnector.DeleteAsync("TEMP");

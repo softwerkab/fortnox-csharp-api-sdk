@@ -15,7 +15,13 @@ namespace FortnoxSDK.Tests;
 [TestClass]
 public class ReportedIssuesTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [TestMethod]
     public async Task Test_Issue_44() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/44

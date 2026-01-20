@@ -16,7 +16,7 @@ public class AuthTests
     [TestMethod]
     public async Task Test_StaticTokenAuth_GetToken()
     {
-        var clientSecret = TestCredentials.Client_Secret;
+        var clientSecret = TestCredentials.Client_Secret_OLD;
         var authorizationCode = "ca7f0830-ccf1-63f8-f750-1f78f50c0d58";
 
         var fortnoxAuthClient = new FortnoxAuthClient();
@@ -30,8 +30,8 @@ public class AuthTests
     [TestMethod]
     public async Task Test_StandardAuth_GetToken()
     {
-        var clientId = "8VurtMGDTeAI"; //"bhgmY4FYebfj";
-        var clientSecret = "yFKwme8LEQ"; //"TestCredentials.Client_Secret;
+        var clientId = TestCredentials.ClientId;
+        var clientSecret = TestCredentials.ClientId;
         var redirectUri = "https://mysite.test/activation";
         var authorizationCode = "Placeholder";
 
@@ -43,10 +43,23 @@ public class AuthTests
     }
 
     [TestMethod]
+    public async Task Test_StandardAuth_GetTokenByClientCredentials()
+    {
+        var clientId = TestCredentials.ClientId;
+        var clientSecret = TestCredentials.ClientSecret;
+        var tenantId = int.Parse(TestCredentials.TenantId);
+
+        var fortnoxAuthClient = new FortnoxAuthClient();
+        var authWorkflow = fortnoxAuthClient.StandardAuthWorkflow;
+
+        var token = await authWorkflow.GetTokenByClientCredentialsAsync(clientId, clientSecret, tenantId);
+        Assert.IsNotNull(token);
+    }
+
+    [TestMethod]
     public void Test_BuildUri_Example()
     {
         var clientId = "8VurtMGDTeAI";
-        var clientSecret = "yFKwme8LEQ";
         var redirectUri = "https://mysite.test/activation";
         var scopes = new List<Scope>()
         {
@@ -65,7 +78,6 @@ public class AuthTests
     public void Test_BuildUri_MultipleScopes()
     {
         var clientId = "8VurtMGDTeAI";
-        var clientSecret = "yFKwme8LEQ";
         var redirectUri = "https://mysite.test/activation";
         var scopes = new List<Scope>()
         {
@@ -120,13 +132,4 @@ public class AuthTests
         Assert.IsTrue(success);
     }
 
-    [TestMethod]
-    public async Task New_Sandbox()
-    {
-        var authorization = new StaticTokenAuth("6a5f9523-0f21-4488-801f-6094faba624d", "1Pevde6Pls");
-        var client = new FortnoxClient(authorization);
-
-        var company = await client.CompanyInformationConnector.GetAsync();
-        Assert.AreEqual("Richard-Sandbox-2022", company.CompanyName);
-    }
 }

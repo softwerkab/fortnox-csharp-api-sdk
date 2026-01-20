@@ -8,10 +8,16 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 [TestClass]
 public class AccountChartTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [TestMethod]
-    public async Task Test_AccountChart_CRUD()
+    public void Test_AccountChart_CRUD()
     {
         //Not supported
     }

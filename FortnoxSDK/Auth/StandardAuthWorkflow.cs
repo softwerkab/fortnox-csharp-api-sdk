@@ -56,6 +56,35 @@ internal class StandardAuthWorkflow : BaseClient, IStandardAuthWorkflow
         return tokenInfo;
     }
 
+    public async Task<TokenInfo> GetTokenByClientCredentialsAsync(string clientId, string clientSecret, int? tenantId)
+    {
+        if (string.IsNullOrEmpty(clientId))
+            throw new ArgumentException("Argument is null or empty.", nameof(clientId));
+
+        if (string.IsNullOrEmpty(clientSecret))
+            throw new ArgumentException("Argument is null or empty.", nameof(clientSecret));
+
+        if (tenantId == null || tenantId <= 0)
+            throw new ArgumentException("Argument error.", nameof(tenantId));
+
+        var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}"));
+
+        var request = new HttpRequestMessage(HttpMethod.Post, AuthTokenUri);
+        request.Headers.Add("Authorization", $"Basic {credentials}");
+        request.Headers.Add("TenantId", tenantId.ToString());
+
+        var parameters = new Dictionary<string, string>();
+        parameters.Add("grant_type", "client_credentials");
+
+        request.Content = new FormUrlEncodedContent(parameters);
+
+        var responseData = await SendAsync(request).ConfigureAwait(false);
+        var responseJson = Encoding.UTF8.GetString(responseData);
+        var tokenInfo = Serializer.Deserialize<TokenInfo>(responseJson);
+
+        return tokenInfo;
+    }
+
     public async Task<TokenInfo> RefreshTokenAsync(string refreshToken, string clientId, string clientSecret)
     {
         if (string.IsNullOrEmpty(refreshToken))

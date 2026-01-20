@@ -13,7 +13,13 @@ namespace FortnoxSDK.Tests;
 [TestClass]
 public class RateLimiterTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [TestMethod]
     public async Task Test_RateLimiter_NoError()
@@ -49,7 +55,7 @@ public class RateLimiterTests
     {
         var fortnoxClient = new FortnoxClient()
         {
-            Authorization = new StaticTokenAuth(TestCredentials.Access_Token, TestCredentials.Client_Secret),
+            Authorization = new StaticTokenAuth(TestCredentials.Access_Token_OLD, TestCredentials.Client_Secret_OLD),
             UseRateLimiter = false
         };
 
