@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FortnoxSDK.Tests.ConnectorTests;
 
@@ -202,6 +202,41 @@ public class OrderTests
         #region Delete arranged resources
         await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
         //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+        #endregion Delete arranged resources
+    }
+
+    [TestMethod]
+    [DataRow(HouseworkType.Cleaning, TaxReductionType.RUT)]
+    [DataRow(HouseworkType.Construction, TaxReductionType.ROT)]
+    [DataRow(HouseworkType.SolarCells, TaxReductionType.Green)]
+    public async Task Test_Order_OrderRow_HouseWorkType(HouseworkType houseWorkType, TaxReductionType taxReductionType)
+    {
+        #region Arrange
+        var tmpCustomer = await FortnoxClient.CustomerConnector.CreateAsync(new Customer() { Name = "TmpCustomer", CountryCode = "SE", City = "Testopolis" });
+        var tmpArticle = await FortnoxClient.ArticleConnector.CreateAsync(new Article() { Description = "TmpArticle", Type = ArticleType.Stock, PurchasePrice = 100 });
+        #endregion Arrange
+
+        var connector = FortnoxClient.OrderConnector;
+
+        var order = new Order()
+        {
+            Comments = "Test Order with Order Rows specifying House Work types",
+            CustomerNumber = tmpCustomer.CustomerNumber,
+            OrderDate = new DateTime(2026, 1, 20),
+            TaxReductionType = taxReductionType,
+            OrderRows = [new OrderRow() { ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = 20, DeliveredQuantity = 10, HouseWork = true, HouseWorkType = houseWorkType }]
+        };
+
+        order = await connector.CreateAsync(order);
+
+        Assert.AreEqual(1, order.OrderRows.Count);
+        Assert.AreEqual(houseWorkType, order.OrderRows.First().HouseWorkType);
+
+        await connector.CancelAsync(order.DocumentNumber);
+
+        #region Delete arranged resources
+        await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
+        //await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
         #endregion Delete arranged resources
     }
 }
