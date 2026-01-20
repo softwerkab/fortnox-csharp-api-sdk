@@ -11,18 +11,12 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 public class ArchiveTests
 {
     private FortnoxClient FortnoxClient;
+    private ArchiveFolder testRootFolder;
 
     [TestInitialize]
     public async Task TestInitialize()
     {
         FortnoxClient ??= await TestClient.GetFortnoxClient();
-    }
-
-    private ArchiveFolder testRootFolder;
-
-    [TestInitialize]
-    public async Task Init()
-    {
         var connector = FortnoxClient.ArchiveConnector;
         testRootFolder = await connector.GetFolderAsync("TestArchive");
     }

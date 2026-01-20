@@ -13,20 +13,16 @@ public class StockPointTests
 {
     private FortnoxClient FortnoxClient;
 
-    [TestInitialize]
-    public async Task TestInitialize()
-    {
-        FortnoxClient ??= await TestClient.GetFortnoxClient();
-    }
-
     private const string StockPoint1Code = "P1";
     private const string StockPoint2Code = "P2";
 
     private bool isWarehouseActivated = true;
 
     [TestInitialize]
-    public async Task Test_StockPoint_CRUD_Init()
+    public async Task TestInitialize()
     {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+
         isWarehouseActivated = (await FortnoxClient.TenantConnector.GetAsync()).WarehouseActivated;
         if (isWarehouseActivated)
         {
