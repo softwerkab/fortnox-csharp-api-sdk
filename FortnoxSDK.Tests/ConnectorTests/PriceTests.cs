@@ -111,7 +111,8 @@ public class PriceTests
         }
 
         var searchSettings = new PriceSearch();
-        searchSettings.LastModified = TestUtils.Recently;
+        // searchSettings.LastModified = TestUtils.Recently;
+        searchSettings.LastModified = FortnoxServerInfo.ServerTime.AddSeconds(-7); // sometimes fails in pipeline with 5 second cutoff
         var fullCollection = await connector.FindAsync(searchSettings);
 
         Assert.AreEqual((5 + 1) * 2, fullCollection.TotalResources);
