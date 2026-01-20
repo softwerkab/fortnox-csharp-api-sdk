@@ -9,7 +9,13 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 [TestClass]
 public class TrustedEmailDomainsTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [TestMethod]
     public async Task Test_TrustedEmailDomains_CRUD()
@@ -20,7 +26,7 @@ public class TrustedEmailDomainsTests
 
         var connector = FortnoxClient.TrustedEmailDomainsConnector;
         const string domainName = "newtestdomain.tst";
-        
+
         #region CREATE
         var newTrustedEmailDomains = new TrustedEmailDomain()
         {

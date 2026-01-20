@@ -13,7 +13,13 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 [TestClass]
 public class ContractAccrualTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [TestMethod]
     public async Task Test_ContractAccrual_CRUD()

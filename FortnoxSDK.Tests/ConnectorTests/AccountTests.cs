@@ -11,7 +11,13 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 [TestClass]
 public class AccountTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [TestMethod]
     public async Task Test_Account_CRUD()
@@ -23,7 +29,7 @@ public class AccountTests
         {
             Description = "Test Account",
             Active = false,
-            Number = TestUtils.GetUnusedAccountNumber(),
+            Number = await TestUtils.GetUnusedAccountNumber(),
             CostCenterSettings = CostCenterSettings.Allowed,
             ProjectSettings = ProjectSettings.Allowed,
             SRU = 123
@@ -77,7 +83,7 @@ public class AccountTests
         {
             Description = "Test Account",
             Active = false,
-            Number = TestUtils.GetUnusedAccountNumber(),
+            Number = await TestUtils.GetUnusedAccountNumber(),
             CostCenterSettings = CostCenterSettings.Allowed,
             ProjectSettings = ProjectSettings.Allowed,
             SRU = 123
@@ -144,7 +150,7 @@ public class AccountTests
         //Add entries
         for (var i = 0; i < 5; i++)
         {
-            newAccount.Number = TestUtils.GetUnusedAccountNumber();
+            newAccount.Number = await TestUtils.GetUnusedAccountNumber();
             await connector.CreateAsync(newAccount);
         }
 

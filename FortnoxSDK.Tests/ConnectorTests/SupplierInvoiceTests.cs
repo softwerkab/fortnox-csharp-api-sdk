@@ -12,7 +12,13 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 [TestClass]
 public class SupplierInvoiceTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [TestMethod]
     public async Task Test_SupplierInvoice_CRUD()
@@ -170,6 +176,7 @@ public class SupplierInvoiceTests
         var createdSupplierInvoice = await connector.CreateAsync(newSupplierInvoice);
 
         //Act
+        await connector.ApprovalBookkeepAsync(createdSupplierInvoice.GivenNumber);
         await connector.BookkeepAsync(createdSupplierInvoice.GivenNumber);
         var bookedInvoice = await connector.GetAsync(createdSupplierInvoice.GivenNumber);
 

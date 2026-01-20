@@ -8,10 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FortnoxSDK.Tests {
+namespace FortnoxSDK.Tests
+{
     using System;
-    
-    
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -22,59 +23,107 @@ namespace FortnoxSDK.Tests {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class TestCredentials {
-        
+    internal class TestCredentials
+    {
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal TestCredentials() {
+        internal TestCredentials()
+        {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
-            get {
-                if (object.ReferenceEquals(resourceMan, null)) {
+        internal static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if (object.ReferenceEquals(resourceMan, null))
+                {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FortnoxSDK.Tests.TestCredentials", typeof(TestCredentials).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
-            get {
+        internal static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
                 return resourceCulture;
             }
-            set {
+            set
+            {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to 2f7ec48c-d086-4313-b69f-e2377c880df8.
         /// </summary>
-        internal static string Access_Token {
-            get {
-                return ResourceManager.GetString("Access Token", resourceCulture);
+        internal static string Access_Token_OLD
+        {
+            get
+            {
+                return ResourceManager.GetString("Access Token OLD", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to 1Pevde6Pls.
         /// </summary>
-        internal static string Client_Secret {
-            get {
+        internal static string Client_Secret_OLD
+        {
+            get
+            {
+                return ResourceManager.GetString("Client Secret OLD", resourceCulture);
+            }
+        }
+
+
+        /// <summary>
+        ///   Looks up a localized string similar to 1643810.
+        /// </summary>
+        internal static string TenantId
+        {
+            get
+            {
+                return ResourceManager.GetString("Tenant Id", resourceCulture);
+            }
+        }
+
+
+        /// <summary>
+        ///   Looks up a localized string similar to m9ieLg9iVr.
+        /// </summary>
+        internal static string ClientSecret
+        {
+            get
+            {
                 return ResourceManager.GetString("Client Secret", resourceCulture);
+            }
+        }
+
+
+        /// <summary>
+        ///   Looks up a localized string similar to c9dHlT04sZNp.
+        /// </summary>
+        internal static string ClientId
+        {
+            get
+            {
+                return ResourceManager.GetString("Client Id", resourceCulture);
             }
         }
     }
