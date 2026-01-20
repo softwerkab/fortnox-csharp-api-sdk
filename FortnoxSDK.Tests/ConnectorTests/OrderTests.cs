@@ -216,7 +216,7 @@ public class OrderTests
         {
             Comments = "Test Order with Order Rows specifying House Work types",
             CustomerNumber = tmpCustomer.CustomerNumber,
-            OrderDate = new DateTime(2019, 1, 20),
+            OrderDate = new DateTime(2026, 1, 20),
             TaxReductionType = taxReductionType,
             OrderRows = [new OrderRow() { ArticleNumber = tmpArticle.ArticleNumber, OrderedQuantity = 20, DeliveredQuantity = 10, HouseWork = true, HouseWorkType = houseWorkType }]
         };
@@ -230,7 +230,7 @@ public class OrderTests
 
         #region Delete arranged resources
         await FortnoxClient.CustomerConnector.DeleteAsync(tmpCustomer.CustomerNumber);
-        //FortnoxClient.ArticleConnector.Delete(tmpArticle.ArticleNumber);
+        //await FortnoxClient.ArticleConnector.DeleteAsync(tmpArticle.ArticleNumber);
         #endregion Delete arranged resources
     }
 }
