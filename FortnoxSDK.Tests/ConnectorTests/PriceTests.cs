@@ -11,7 +11,13 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 [TestClass]
 public class PriceTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [TestMethod]
     public async Task Test_Price_CRUD()
@@ -105,7 +111,8 @@ public class PriceTests
         }
 
         var searchSettings = new PriceSearch();
-        searchSettings.LastModified = TestUtils.Recently;
+        // searchSettings.LastModified = TestUtils.Recently;
+        searchSettings.LastModified = FortnoxServerInfo.ServerTime.AddSeconds(-7); // sometimes fails in pipeline with 5 second cutoff
         var fullCollection = await connector.FindAsync(searchSettings);
 
         Assert.AreEqual((5 + 1) * 2, fullCollection.TotalResources);

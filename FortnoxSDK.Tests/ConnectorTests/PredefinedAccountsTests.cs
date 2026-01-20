@@ -9,7 +9,13 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 [TestClass]
 public class PredefinedAccountsTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [TestMethod]
     public async Task Test_PredefinedAccounts_CRUD()
@@ -41,7 +47,7 @@ public class PredefinedAccountsTests
 
         var fullCollection = await connector.FindAsync(null);
 
-        Assert.AreEqual(42, fullCollection.Entities.Count);
+        Assert.AreEqual(48, fullCollection.Entities.Count);
         Assert.IsNotNull(fullCollection.Entities.First().Name);
 
         /* Limit not supported

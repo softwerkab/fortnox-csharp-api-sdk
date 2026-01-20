@@ -9,7 +9,13 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 [TestClass]
 public class ScheduleTimesTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [Ignore("Unable to update Hours using test credentials, re-enable after switching from StaticTokenAuth to a service account with StandardAuth")]
     [TestMethod]

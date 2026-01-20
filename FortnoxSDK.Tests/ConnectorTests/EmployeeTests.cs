@@ -12,7 +12,13 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 [TestClass]
 public class EmployeeTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [TestMethod]
     public async Task Test_Employee_CRUD()
@@ -26,7 +32,7 @@ public class EmployeeTests
         {
             alreadyExists = await c.GetAsync("TEST_EMP") != null;
         }
-        catch (Exception e)
+        catch (Exception)
         {
             alreadyExists = false;
         }

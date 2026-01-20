@@ -11,7 +11,13 @@ namespace FortnoxSDK.Tests.ConnectorTests;
 [TestClass]
 public class FinancialYearTests
 {
-    public FortnoxClient FortnoxClient = TestUtils.DefaultFortnoxClient;
+    private FortnoxClient FortnoxClient;
+
+    [TestInitialize]
+    public async Task TestInitialize()
+    {
+        FortnoxClient ??= await TestClient.GetFortnoxClient();
+    }
 
     [Ignore("Does not provide update nor delete")]
     [TestMethod]
