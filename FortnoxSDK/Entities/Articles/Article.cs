@@ -1,6 +1,6 @@
-using System;
 using Fortnox.SDK.Serialization;
 using Newtonsoft.Json;
+using System;
 
 namespace Fortnox.SDK.Entities;
 
@@ -184,13 +184,13 @@ public class Article
 
     ///<summary> Purchase price – Direct cost </summary>
     [JsonProperty]
-    public long? DirectCost { get; set; }
+    public decimal? DirectCost { get; set; }
 
     ///<summary> Purchase price – Freight cost </summary>
     [JsonProperty]
-    public long? FreightCost { get; set; }
+    public decimal? FreightCost { get; set; }
 
     ///<summary> Purchase price – Other cost </summary>
     [JsonProperty]
-    public long? OtherCost { get; set; }
+    public decimal? OtherCost { get; set; }
 }
