@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Fortnox.SDK;
+﻿using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Interfaces;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FortnoxSDK.Tests;
 
@@ -100,10 +100,9 @@ public class ReportedIssuesTests
     public async Task Test_issue61_fixed() // Origins from https://github.com/FortnoxAB/csharp-api-sdk/issues/61
     {
         var connector = FortnoxClient.ArticleConnector;
-        var newArticle = await connector.CreateAsync(new Article() { Description = "TestArticle", FreightCost = 10, OtherCost = 10, CostCalculationMethod = "MANUAL" });
+        var newArticle = await connector.CreateAsync(new Article() { Description = "TestArticle", FreightCost = 10.99m, OtherCost = 10, CostCalculationMethod = "MANUAL", StockGoods = true });
 
-        //NOTE: Server does not create the properties FreightCost, OtherCost and CostCalculationMethod
-        //Assert.AreEqual("10", newArticle.FreightCost); //Always fails
+        Assert.AreEqual(10.99m, newArticle.FreightCost);
         await connector.DeleteAsync(newArticle.ArticleNumber);
     }
 

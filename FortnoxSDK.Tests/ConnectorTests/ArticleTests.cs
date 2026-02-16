@@ -1,11 +1,11 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Fortnox.SDK;
 using Fortnox.SDK.Entities;
 using Fortnox.SDK.Exceptions;
 using Fortnox.SDK.Search;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FortnoxSDK.Tests.ConnectorTests;
 
@@ -37,13 +37,18 @@ public class ArticleTests
             Width = 150,
             Type = ArticleType.Stock,
             PurchasePrice = 2499.50m,
-            FreightCost = 200,
-            OtherCost = 210,
-            Note = "Definitely not worth the price."
+            DirectCost = 100.99m,
+            FreightCost = 200.99m,
+            OtherCost = 210.99m,
+            Note = "Definitely not worth the price.",
+            StockGoods = true
         };
 
         var createdArticle = await connector.CreateAsync(newArticle);
         Assert.AreEqual("Test Article", createdArticle.Description);
+        Assert.AreEqual(100.99m, createdArticle.DirectCost);
+        Assert.AreEqual(200.99m, createdArticle.FreightCost);
+        Assert.AreEqual(210.99m, createdArticle.OtherCost);
         #endregion CREATE
 
         #region UPDATE
