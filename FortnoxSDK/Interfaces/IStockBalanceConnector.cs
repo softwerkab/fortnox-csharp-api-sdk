@@ -4,8 +4,8 @@ using Fortnox.SDK.Entities;
 
 namespace Fortnox.SDK.Interfaces;
 
-/// <remarks/>
+/// <remarks />
 public interface IStockBalanceConnector : IEntityConnector
 {
-    Task<IList<StockBalance>> QueryAsync(string[] itemIds = null, string[] stockPointCodes = null);
+    Task<IList<StockBalance>> QueryAsync(string[] itemIds = null, string[] stockPointCodes = null, Dictionary<string, string> queryParameters = null);
 }
