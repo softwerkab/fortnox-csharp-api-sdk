@@ -21,6 +21,17 @@ internal class VoucherConnector : SearchableEntityConnector<Voucher, VoucherSubs
         return await BaseFind(searchSettings).ConfigureAwait(false);
     }
 
+    public async Task<EntityCollection<VoucherSubset>> FindSublistAsync(VoucherSearch searchSettings)
+    {
+        var request = new SearchRequest<VoucherSubset>()
+        {
+            Endpoint = $"{Endpoint}/sublist",
+            SearchSettings = searchSettings
+        };
+
+        return await SendAsync(request).ConfigureAwait(false);
+    }
+
     public async Task DeleteAsync(long? id, string seriesId, long? financialYearId)
     {
         var request = new BaseRequest()

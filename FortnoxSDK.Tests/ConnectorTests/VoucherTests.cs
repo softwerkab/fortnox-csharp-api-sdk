@@ -135,4 +135,67 @@ public class VoucherTests
         await connector.DeleteAsync(voucher2.VoucherNumber, voucher2.VoucherSeries, voucher2.Year);
         await connector.DeleteAsync(voucher1.VoucherNumber, voucher1.VoucherSeries, voucher1.Year);
     }
+
+    [TestMethod]
+    public async Task Test_Vouchers_FindSublist_By_Series()
+    {
+        Thread.Sleep(2);
+
+        var voucher1 = new Voucher()
+        {
+            Description = "TestVoucher",
+            Comments = "Some comments",
+            VoucherSeries = "TST",
+            TransactionDate = new DateTime(2020, 1, 1),
+            VoucherRows = new List<VoucherRow>()
+            {
+                new VoucherRow(){ Account = 1930, Debit = 1500, Credit = 0 },
+                new VoucherRow(){ Account = 1910, Debit = 0, Credit = 1500 }
+            }
+        };
+        var voucher2 = new Voucher()
+        {
+            Description = "TestVoucher",
+            Comments = "Some comments",
+            VoucherSeries = "TST",
+            TransactionDate = new DateTime(2020, 1, 1),
+            VoucherRows = new List<VoucherRow>()
+            {
+                new VoucherRow(){ Account = 1930, Debit = 1500, Credit = 0 },
+                new VoucherRow(){ Account = 1910, Debit = 0, Credit = 1500 }
+            }
+        };
+        var voucher3 = new Voucher()
+        {
+            Description = "TestVoucher",
+            Comments = "Some comments",
+            VoucherSeries = "A",
+            TransactionDate = new DateTime(2020, 1, 1),
+            VoucherRows = new List<VoucherRow>()
+            {
+                new VoucherRow(){ Account = 1930, Debit = 1500, Credit = 0 },
+                new VoucherRow(){ Account = 1910, Debit = 0, Credit = 1500 }
+            }
+        };
+
+        var connector = FortnoxClient.VoucherConnector;
+        voucher1 = await connector.CreateAsync(voucher1);
+        voucher2 = await connector.CreateAsync(voucher2);
+        voucher3 = await connector.CreateAsync(voucher3);
+
+        var settings = new VoucherSearch()
+        {
+            LastModified = TestUtils.Recently,
+            VoucherSeries = "TST",
+            FromDate = new DateTime(2020, 1, 1),
+            ToDate = new DateTime(2020, 12, 31)
+        };
+
+        var vouchers = await connector.FindSublistAsync(settings);
+        Assert.AreEqual(2, vouchers.TotalResources);
+
+        await connector.DeleteAsync(voucher3.VoucherNumber, voucher3.VoucherSeries, voucher3.Year);
+        await connector.DeleteAsync(voucher2.VoucherNumber, voucher2.VoucherSeries, voucher2.Year);
+        await connector.DeleteAsync(voucher1.VoucherNumber, voucher1.VoucherSeries, voucher1.Year);
+    }
 }

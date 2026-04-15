@@ -11,5 +11,6 @@ public interface IVoucherConnector : IEntityConnector
     Task<Voucher> CreateAsync(Voucher voucher);
     Task<Voucher> GetAsync(long? id, string seriesId, long? financialYearId);
     Task<EntityCollection<VoucherSubset>> FindAsync(VoucherSearch searchSettings);
+    Task<EntityCollection<VoucherSubset>> FindSublistAsync(VoucherSearch searchSettings);
     Task DeleteAsync(long? id, string seriesId, long? financialYearId);
 }
