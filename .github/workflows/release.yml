@@ -28,7 +28,7 @@ jobs:
   #     run: dotnet nuget push **/*.nupkg --source 'https://api.nuget.org/v3/index.json' --api-key ${{secrets.NUGET_API_KEY}} --no-symbols
 
   release-github:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/update-release-workflow'
     runs-on: ubuntu-latest
     steps:
       - name: Create GitHub release
