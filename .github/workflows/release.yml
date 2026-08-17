@@ -41,4 +41,5 @@ jobs:
               --title="${tag#xv}" \
               --draft \
               --latest \
+              --notes="https://www.nuget.org/packages/Fortnox.NET.SDK/${tag#xv}" \
               --generate-notes
