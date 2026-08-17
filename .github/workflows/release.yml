@@ -38,4 +38,5 @@ jobs:
               --repo="$GITHUB_REPOSITORY" \
               --title="${tag#v}" \
               --latest \
+              --notes="https://www.nuget.org/packages/Fortnox.NET.SDK/${tag#xv}" \
               --generate-notes
